@@ -1,6 +1,6 @@
 /*
  * This file is part of the KDE Baloo Project
- * Copyright (C) 2012  Vishesh Handa <me@vhanda.in>
+ * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,37 @@
  *
  */
 
-#ifndef BALOO_PIM_CONTACT_SEARCHSTORE_H
-#define BALOO_PIM_CONTACT_SEARCHSTORE_H
+#ifndef NOTEQUERY_H
+#define NOTEQUERY_H
 
-#include "../pimsearchstore.h"
+#include "pim_export.h"
+#include <QString>
+#include "query.h"
 
 namespace Baloo {
-
-class ContactSearchStore : public PIMSearchStore
+namespace PIM {
+/**
+ * Query for a list of contacts matching a criteria
+ */
+class BALOO_PIM_EXPORT NoteQuery : public Query
 {
-    Q_OBJECT
-    Q_INTERFACES(Baloo::SearchStore)
 public:
-    ContactSearchStore(QObject* parent = 0);
+    NoteQuery();
+    ~NoteQuery();
 
-    virtual QStringList types();
+    void matchTitle(const QString& title);
+    void matchNote(const QString& note);
+
+    void setLimit(int limit);
+    int limit() const;
+
+    ResultIterator exec();
+
+private:
+    class Private;
+    Private* d;
 };
-
 }
-#endif // BALOO_PIM_CONTACT_SEARCHSTORE_H
+}
+
+#endif // NOTEQUERY_H

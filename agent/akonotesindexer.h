@@ -1,6 +1,6 @@
 /*
  * This file is part of the KDE Baloo Project
- * Copyright (C) 2012  Vishesh Handa <me@vhanda.in>
+ * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,40 @@
  *
  */
 
-#ifndef BALOO_PIM_CONTACT_SEARCHSTORE_H
-#define BALOO_PIM_CONTACT_SEARCHSTORE_H
+#ifndef AKONOTESINDEXER_H
+#define AKONOTESINDEXER_H
 
-#include "../pimsearchstore.h"
+#include "abstractindexer.h"
 
-namespace Baloo {
+#include <KMime/Message>
+#include <Akonadi/Collection>
+#include <Akonadi/Item>
 
-class ContactSearchStore : public PIMSearchStore
+#include <xapian.h>
+
+class AkonotesIndexer : public AbstractIndexer
 {
-    Q_OBJECT
-    Q_INTERFACES(Baloo::SearchStore)
 public:
-    ContactSearchStore(QObject* parent = 0);
+    /**
+     * You must provide the path where the indexed information
+     * should be stored
+     */
+    AkonotesIndexer(const QString& path);
+    ~AkonotesIndexer();
 
-    virtual QStringList types();
+    QStringList mimeTypes() const;
+
+    void index(const Akonadi::Item &item);
+    void commit();
+
+    void remove(const Akonadi::Item &item);
+    void remove(const Akonadi::Collection &collection);
+private:
+    void processPart(KMime::Content *content, KMime::Content *mainContent);
+    void process(const KMime::Message::Ptr &msg);
+    Xapian::WritableDatabase *m_db;
+    Xapian::Document *m_doc;
+    Xapian::TermGenerator *m_termGen;
 };
 
-}
-#endif // BALOO_PIM_CONTACT_SEARCHSTORE_H
+#endif // AKONOTESINDEXER_H

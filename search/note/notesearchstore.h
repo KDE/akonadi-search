@@ -1,6 +1,6 @@
 /*
  * This file is part of the KDE Baloo Project
- * Copyright (C) 2012  Vishesh Handa <me@vhanda.in>
+ * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,22 @@
  *
  */
 
-#ifndef BALOO_PIM_CONTACT_SEARCHSTORE_H
-#define BALOO_PIM_CONTACT_SEARCHSTORE_H
+#ifndef BALOO_PIM_NOTES_SEARCHSTORE_H
+#define BALOO_PIM_NOTES_SEARCHSTORE_H
 
 #include "../pimsearchstore.h"
 
 namespace Baloo {
 
-class ContactSearchStore : public PIMSearchStore
+class NoteSearchStore : public PIMSearchStore
 {
     Q_OBJECT
     Q_INTERFACES(Baloo::SearchStore)
 public:
-    ContactSearchStore(QObject* parent = 0);
+    NoteSearchStore(QObject* parent = 0);
 
     virtual QStringList types();
 };
 
 }
-#endif // BALOO_PIM_CONTACT_SEARCHSTORE_H
+#endif // BALOO_PIM_NOTES_SEARCHSTORE_H

@@ -1,6 +1,6 @@
 /*
  * This file is part of the KDE Baloo Project
- * Copyright (C) 2012  Vishesh Handa <me@vhanda.in>
+ * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,22 +20,26 @@
  *
  */
 
-#ifndef BALOO_PIM_CONTACT_SEARCHSTORE_H
-#define BALOO_PIM_CONTACT_SEARCHSTORE_H
+#include "notesearchstore.h"
 
-#include "../pimsearchstore.h"
+#include <KStandardDirs>
+#include <KDebug>
 
-namespace Baloo {
+using namespace Baloo;
 
-class ContactSearchStore : public PIMSearchStore
+NoteSearchStore::NoteSearchStore(QObject* parent)
+    : PIMSearchStore(parent)
 {
-    Q_OBJECT
-    Q_INTERFACES(Baloo::SearchStore)
-public:
-    ContactSearchStore(QObject* parent = 0);
+    m_prefix.insert("subject", "S");
+    m_prefix.insert("collection", "C");
+    m_prefix.insert("body", "BO");
 
-    virtual QStringList types();
-};
-
+    setDbPath(findDatabase("notes"));
 }
-#endif // BALOO_PIM_CONTACT_SEARCHSTORE_H
+
+QStringList NoteSearchStore::types()
+{
+    return QStringList() << "Akonadi" << "Note";
+}
+
+BALOO_EXPORT_SEARCHSTORE(Baloo::NoteSearchStore, "baloo_notesearchstore")
