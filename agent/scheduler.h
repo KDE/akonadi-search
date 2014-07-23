@@ -74,6 +74,7 @@ private Q_SLOTS:
     void processNext();
     void slotIndexingFinished(KJob*);
     void slotRootCollectionsFetched(KJob*);
+    void slotCollectionsToIndexFetched(KJob*);
 
 private:
     void collectDirtyCollections();

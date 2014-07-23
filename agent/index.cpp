@@ -32,34 +32,9 @@
 #include <xapian/query.h>
 #include <xapian/enquire.h>
 
-
-namespace {
-    QString dbPath(const QString& dbName) {
-        QString basePath = QLatin1String("baloo");
-        if (Akonadi::ServerManager::hasInstanceIdentifier()) {
-            basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
-        }
-        return KGlobal::dirs()->localxdgdatadir() + QString::fromLatin1("%1/%2/").arg(basePath, dbName);
-    }
-    QString emailIndexingPath() {
-        return dbPath(QLatin1String("email"));
-    }
-    QString contactIndexingPath() {
-        return dbPath(QLatin1String("contacts"));
-    }
-    QString emailContactsIndexingPath() {
-        return dbPath(QLatin1String("emailContacts"));
-    }
-    QString akonotesIndexingPath() {
-        return dbPath(QLatin1String("notes"));
-    }
-    QString calendarIndexingPath() {
-        return dbPath(QLatin1String("calendars"));
-    }
-}
-
 Index::Index(QObject* parent)
-: QObject(parent)
+: QObject(parent),
+  m_collectionIndexer(Q_NULLPTR)
 {
     m_commitTimer.setInterval(1000);
     m_commitTimer.setSingleShot(true);
@@ -69,6 +44,8 @@ Index::Index(QObject* parent)
 
 Index::~Index()
 {
+    delete m_collectionIndexer;
+    m_collectionIndexer = Q_NULLPTR;
     qDeleteAll(m_indexer.values().toSet());
     m_indexer.clear();
 }
@@ -91,12 +68,18 @@ static void removeDir(const QString& dirName)
 
 void Index::removeDatabase()
 {
+    delete m_collectionIndexer;
+    m_collectionIndexer = Q_NULLPTR;
+    qDeleteAll(m_indexer.values().toSet());
+    m_indexer.clear();
+
     qDebug() << "Removing database";
     removeDir(emailIndexingPath());
     removeDir(contactIndexingPath());
     removeDir(emailContactsIndexingPath());
     removeDir(akonotesIndexingPath());
     removeDir(calendarIndexingPath());
+    removeDir(collectionIndexingPath());
 }
 
 AbstractIndexer* Index::indexerForItem(const Akonadi::Item& item) const
@@ -196,14 +179,47 @@ void Index::remove(const Akonadi::Item::List& items)
     }
 }
 
+void Index::index(const Akonadi::Collection& collection)
+{
+    if (m_collectionIndexer) {
+        m_collectionIndexer->index(collection);
+        m_collectionIndexer->commit();
+    }
+    qDebug() << "indexed " << collection.id();
+}
+
+void Index::change(const Akonadi::Collection& col)
+{
+    if (m_collectionIndexer) {
+        m_collectionIndexer->change(col);
+        m_collectionIndexer->commit();
+    }
+}
+
 void Index::remove(const Akonadi::Collection& col)
 {
+    //Remove items
     Q_FOREACH (AbstractIndexer *indexer, indexersForMimetypes(col.contentMimeTypes())) {
         try {
             indexer->remove(col);
         } catch (const Xapian::Error &e) {
             qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
         }
+    }
+
+    if (m_collectionIndexer) {
+        m_collectionIndexer->remove(col);
+        m_collectionIndexer->commit();
+    }
+}
+
+void Index::move(const Akonadi::Collection& collection,
+            const Akonadi::Collection& from,
+            const Akonadi::Collection& to)
+{
+    if (m_collectionIndexer) {
+        m_collectionIndexer->move(collection, from, to);
+        m_collectionIndexer->commit();
     }
 }
 
@@ -217,7 +233,7 @@ void Index::addIndexer(AbstractIndexer* indexer)
 
 bool Index::createIndexers()
 {
-    AbstractIndexer *indexer = 0;
+    AbstractIndexer *indexer = Q_NULLPTR;
     try {
         QDir().mkpath(emailIndexingPath());
         QDir().mkpath(emailContactsIndexingPath());
@@ -272,6 +288,21 @@ bool Index::createIndexers()
     }
     catch (...) {
         delete indexer;
+        qCritical() << "Random exception, but we do not want to crash";
+    }
+
+    try {
+        QDir().mkpath(collectionIndexingPath());
+        m_collectionIndexer = new CollectionIndexer(collectionIndexingPath());
+    }
+    catch (const Xapian::DatabaseError &e) {
+        delete m_collectionIndexer;
+        m_collectionIndexer = Q_NULLPTR;
+        qCritical() << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
+    }
+    catch (...) {
+        delete m_collectionIndexer;
+        m_collectionIndexer = Q_NULLPTR;
         qCritical() << "Random exception, but we do not want to crash";
     }
 
@@ -346,3 +377,51 @@ qlonglong Index::indexedItemsInDatabase(const std::string& term, const QString& 
     }
     return db.get_termfreq(term);
 }
+
+void Index::setOverrideDbPrefixPath(const QString& path)
+{
+    m_overridePrefixPath = path;
+}
+
+QString Index::dbPath(const QString& dbName) const
+{
+    if (!m_overridePrefixPath.isEmpty()) {
+        return QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);
+    }
+    QString basePath = QLatin1String("baloo");
+    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+        basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+    }
+    return KGlobal::dirs()->localxdgdatadir() + QString::fromLatin1("%1/%2/").arg(basePath, dbName);
+}
+
+QString Index::emailIndexingPath() const
+{
+    return dbPath(QLatin1String("email"));
+}
+
+QString Index::contactIndexingPath() const
+{
+    return dbPath(QLatin1String("contacts"));
+}
+
+QString Index::emailContactsIndexingPath() const
+{
+    return dbPath(QLatin1String("emailContacts"));
+}
+
+QString Index::akonotesIndexingPath() const
+{
+    return dbPath(QLatin1String("notes"));
+}
+
+QString Index::calendarIndexingPath() const
+{
+    return dbPath(QLatin1String("calendars"));
+}
+
+QString Index::collectionIndexingPath() const
+{
+    return dbPath(QLatin1String("collections"));
+}
+

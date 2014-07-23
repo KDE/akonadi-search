@@ -48,6 +48,7 @@ public:
     BalooIndexingAgent(const QString& id);
     ~BalooIndexingAgent();
 
+    void reindexAll();
     void reindexCollection(const qlonglong id);
     qlonglong indexedItems(const qlonglong id);
 
@@ -61,7 +62,11 @@ public:
                             const Akonadi::Collection& sourceCollection,
                             const Akonadi::Collection& destinationCollection);
 
+    virtual void collectionAdded(const Akonadi::Collection& collection, const Akonadi::Collection& parent);
+    virtual void collectionChanged(const Akonadi::Collection& collection);
     virtual void collectionRemoved(const Akonadi::Collection& collection);
+    virtual void collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
+                                     const Akonadi::Collection &collectionDestination);
 
     // Remove the entire db
     virtual void cleanup();

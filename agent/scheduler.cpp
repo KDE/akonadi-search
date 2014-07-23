@@ -22,6 +22,7 @@
 #include "scheduler.h"
 #include "collectionindexingjob.h"
 #include <AkonadiCore/CollectionFetchJob>
+#include <AkonadiCore/CollectionFetchScope>
 #include <AkonadiAgentBase/AgentBase>
 #include <AkonadiCore/ServerManager>
 #include <KLocalizedString>
@@ -126,10 +127,24 @@ void Scheduler::addItem(const Akonadi::Item &item)
 void Scheduler::scheduleCompleteSync()
 {
     qDebug();
-    Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                                                                        Akonadi::CollectionFetchJob::Recursive);
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotRootCollectionsFetched(KJob*)));
-    job->start();
+    {
+        Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
+                                                                            Akonadi::CollectionFetchJob::Recursive);
+        job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
+        job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
+        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotRootCollectionsFetched(KJob*)));
+        job->start();
+    }
+
+    //We want to index all collections, even if we don't index their content
+    {
+        Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
+                                                                            Akonadi::CollectionFetchJob::Recursive);
+        job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
+        job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
+        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotCollectionsToIndexFetched(KJob*)));
+        job->start();
+    }
 }
 
 void Scheduler::slotRootCollectionsFetched(KJob* kjob)
@@ -144,6 +159,21 @@ void Scheduler::slotRootCollectionsFetched(KJob* kjob)
             continue;
         }
         scheduleCollection(c, true);
+    }
+}
+
+void Scheduler::slotCollectionsToIndexFetched(KJob* kjob)
+{
+    Akonadi::CollectionFetchJob* cjob = static_cast<Akonadi::CollectionFetchJob*>(kjob);
+    Q_FOREACH (const Akonadi::Collection& c, cjob->collections()) {
+        //For skipping search collections
+        if (c.isVirtual()) {
+            continue;
+        }
+        if (c == Akonadi::Collection::root()) {
+            continue;
+        }
+        m_index.index(c);
     }
 }
 
@@ -202,4 +232,3 @@ void Scheduler::slotIndexingFinished(KJob *job)
     m_currentJob = 0;
     m_processTimer.start();
 }
-

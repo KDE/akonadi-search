@@ -8,6 +8,7 @@ set(indexer_SRCS
     ../akonotesindexer.cpp
     ../calendarindexer.cpp
     ../abstractindexer.cpp
+    ../collectionindexer.cpp
     ../../search/pimsearchstore.cpp
     ../../search/email/emailsearchstore.cpp
     ../../search/email/agepostingsource.cpp
@@ -52,3 +53,17 @@ set(scheduler_SRCS
 
 add_akonadi_isolated_test_advanced(schedulertest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
 add_akonadi_isolated_test_advanced(collectionindexingjobtest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
+
+set(query_SRCS
+    ../../lib/query.cpp
+    ../../lib/collectionquery.cpp
+    ../../lib/contactquery.cpp
+    ../../lib/resultiterator.cpp
+)
+
+kde4_add_unit_test(collectionquerytest NOGUI collectionquerytest.cpp ../../lib/collectionquery.cpp ${query_SRCS} ${indexer_SRCS} ${scheduler_SRCS})
+target_link_libraries(collectionquerytest
+    ${indexer_LIBS}
+    ${QJSON_LIBRARIES}
+)
+

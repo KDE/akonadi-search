@@ -1,6 +1,6 @@
 /*
  * This file is part of the KDE Baloo Project
- * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
+ * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,40 +20,57 @@
  *
  */
 
-#ifndef RESULT_ITERATOR_H
-#define RESULT_ITERATOR_H
+#ifndef _COLLECTION_QUERY_H
+#define _COLLECTION_QUERY_H
 
 #include "pim_export.h"
+#include "query.h"
+#include "resultiterator.h"
 
-#include <Item>
+#include <QStringList>
+#include <AkonadiCore/Collection>
 
 namespace Baloo {
 namespace PIM {
 
-class ContactQuery;
-class EmailQuery;
-class NoteQuery;
-
-class BALOO_PIM_EXPORT ResultIterator
+class BALOO_PIM_EXPORT CollectionQuery : public Query
 {
 public:
-    ResultIterator();
-    ResultIterator(const ResultIterator& ri);
-    ~ResultIterator();
+    CollectionQuery();
+    virtual ~CollectionQuery();
 
-    Akonadi::Item::Id id();
-    bool next();
+    void setNamespace(const QStringList &ns);
+    void setMimetype(const QStringList &mt);
+
+    /**
+     * Matches the string \p match in the name.
+     */
+    void nameMatches(const QString& match);
+    void identifierMatches(const QString& match);
+    void pathMatches(const QString& match);
+
+    void setLimit(int limit);
+    int limit() const;
+
+    /**
+     * Execute the query and return an iterator to fetch
+     * the results
+     */
+    ResultIterator exec();
+
+    /**
+     * For testing
+     */
+    void setDatabaseDir(const QString &dir);
 
 private:
-    friend class ContactQuery;
-    friend class EmailQuery;
-    friend class NoteQuery;
-    friend class CollectionQuery;
-
+    //@cond PRIVATE
     class Private;
-    Private* d;
+    Private * const d;
+    //@endcond
 };
 
 }
 }
-#endif // RESULT_ITERATOR_H
+
+#endif // _COLLECTION_QUERY_H

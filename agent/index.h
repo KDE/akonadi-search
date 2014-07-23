@@ -21,11 +21,13 @@
 
 #ifndef INDEX_H
 #define INDEX_H
+
 #include <QObject>
 #include <QTimer>
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/item.h>
 #include "abstractindexer.h"
+#include "collectionindexer.h"
 
 /**
  * Maintains the variuous indexers and databases
@@ -39,6 +41,7 @@ public:
 
     virtual void removeDatabase();
     virtual bool createIndexers();
+
     virtual void index(const Akonadi::Item& item);
     virtual void move(const Akonadi::Item::List& items,
               const Akonadi::Collection& from,
@@ -48,11 +51,21 @@ public:
                      const QSet<QByteArray>& removed);
     virtual void remove(const QSet<Akonadi::Item::Id>& ids, const QStringList& mimeTypes);
     virtual void remove(const Akonadi::Item::List& items);
+
+    virtual void index(const Akonadi::Collection& collection);
+    virtual void change(const Akonadi::Collection& collection);
     virtual void remove(const Akonadi::Collection& col);
+    virtual void move(const Akonadi::Collection& collection,
+            const Akonadi::Collection& from,
+            const Akonadi::Collection& to);
+
     virtual bool haveIndexerForMimeTypes(const QStringList &);
     virtual qlonglong indexedItems(const qlonglong id);
     virtual void findIndexed(QSet<Akonadi::Item::Id>& indexed, Akonadi::Collection::Id);
     virtual void scheduleCommit();
+
+    /// For testing
+    void setOverrideDbPrefixPath(const QString& path);
 
 public Q_SLOTS:
     virtual void commit();
@@ -64,9 +77,19 @@ private:
     virtual qlonglong indexedItemsInDatabase(const std::string& term, const QString& dbPath) const;
     virtual void findIndexedInDatabase(QSet<Akonadi::Entity::Id>& indexed, Akonadi::Entity::Id collectionId, const QString& dbPath);
 
+    QString dbPath(const QString& dbName) const;
+    QString emailIndexingPath() const;
+    QString contactIndexingPath() const;
+    QString emailContactsIndexingPath() const;
+    QString akonotesIndexingPath() const;
+    QString calendarIndexingPath() const;
+    QString collectionIndexingPath() const;
+    QString m_overridePrefixPath;
+
     QList<AbstractIndexer*> m_listIndexer;
     QHash<QString, AbstractIndexer*> m_indexer;
     QTimer m_commitTimer;
+    CollectionIndexer *m_collectionIndexer;
 };
 
 #endif

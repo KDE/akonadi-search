@@ -28,15 +28,13 @@
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
 #include "balooindexeradaptor.h"
+#include "collectionupdatejob.h"
 
 #include "priority.h"
 
-#include <ItemFetchJob>
-#include <ItemFetchScope>
 #include <ChangeRecorder>
-#include <CollectionFetchJob>
 #include <AkonadiCore/CollectionFetchScope>
-#include <AkonadiCore/CollectionStatistics>
+#include <AkonadiCore/ItemFetchScope>
 
 #include <AgentManager>
 #include <ServerManager>
@@ -89,7 +87,9 @@ BalooIndexingAgent::BalooIndexingAgent(const QString& id)
     changeRecorder()->itemFetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
     changeRecorder()->itemFetchScope().setFetchRemoteIdentification(false);
     changeRecorder()->itemFetchScope().setFetchModificationTime(false);
+    changeRecorder()->collectionFetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
     changeRecorder()->setChangeRecordingEnabled(false);
+    changeRecorder()->fetchCollection(true);
 
     new BalooIndexerAdaptor(this);
 
@@ -108,6 +108,15 @@ BalooIndexingAgent::BalooIndexingAgent(const QString& id)
 
 BalooIndexingAgent::~BalooIndexingAgent()
 {
+}
+
+void BalooIndexingAgent::reindexAll()
+{
+    kDebug() << "Reindexing everything";
+    m_scheduler.abort();
+    m_index.removeDatabase();
+    m_index.createIndexers();
+    QTimer::singleShot(0, &m_scheduler, SLOT(scheduleCompleteSync()));
 }
 
 void BalooIndexingAgent::reindexCollection(const qlonglong id)
@@ -160,18 +169,38 @@ void BalooIndexingAgent::itemsRemoved(const Akonadi::Item::List& items)
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::collectionRemoved(const Akonadi::Collection& collection)
-{
-    m_index.remove(collection);
-    m_index.scheduleCommit();
-}
-
 void BalooIndexingAgent::itemsMoved(const Akonadi::Item::List& items,
                                     const Akonadi::Collection& sourceCollection,
                                     const Akonadi::Collection& destinationCollection)
 {
     m_index.move(items, sourceCollection, destinationCollection);
     m_index.scheduleCommit();
+}
+
+void BalooIndexingAgent::collectionAdded(const Akonadi::Collection& collection, const Akonadi::Collection& parent)
+{
+    m_index.index(collection);
+    m_index.scheduleCommit();
+}
+
+void BalooIndexingAgent::collectionChanged(const Akonadi::Collection& collection)
+{
+    CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
+    job->start();
+}
+
+void BalooIndexingAgent::collectionRemoved(const Akonadi::Collection& collection)
+{
+    m_index.remove(collection);
+    m_index.scheduleCommit();
+}
+
+void BalooIndexingAgent::collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
+                                     const Akonadi::Collection &collectionDestination)
+{
+    m_index.remove(collection);
+    CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
+    job->start();
 }
 
 void BalooIndexingAgent::cleanup()
