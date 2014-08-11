@@ -40,7 +40,7 @@ void CollectionUpdateJob::start()
     //Fetch children to update the path accordingly
     Akonadi::CollectionFetchJob *fetchJob = new Akonadi::CollectionFetchJob(mCol, Akonadi::CollectionFetchJob::Recursive, this);
     fetchJob->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
-    fetchJob->fetchScope().fetchAncestorAttribute<Akonadi::EntityDisplayAttribute>();
+    fetchJob->fetchScope().ancestorFetchScope().fetchAttribute<Akonadi::EntityDisplayAttribute>();
     fetchJob->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
     connect(fetchJob, SIGNAL(collectionsReceived(Akonadi::Collection::List)), this, SLOT(onCollectionsReceived(Akonadi::Collection::List)));
     connect(fetchJob, SIGNAL(result(KJob*)), this, SLOT(onCollectionsFetched(KJob*)));
