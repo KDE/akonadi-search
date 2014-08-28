@@ -12,6 +12,7 @@ set(searchplugintest_SRCS
     searchplugintest.cpp
     ../searchplugin.cpp
     ../../agent/emailindexer.cpp
+    ../../agent/calendarindexer.cpp
     ../../agent/contactindexer.cpp
     ../../agent/abstractindexer.cpp
     ../../agent/akonotesindexer.cpp
@@ -19,6 +20,7 @@ set(searchplugintest_SRCS
     ../../search/email/emailsearchstore.cpp
     ../../search/email/agepostingsource.cpp
     ../../search/contact/contactsearchstore.cpp
+    ../../search/calendar/calendarsearchstore.cpp
     ../../search/note/notesearchstore.cpp
 )
 
@@ -35,6 +37,7 @@ target_link_libraries(searchplugintest
     KF5::Mime
     KF5::Contacts
     ${XAPIAN_LIBRARIES}
+    KF5::CalendarCore
     BalooPimCore
     BalooPimXapian
 )

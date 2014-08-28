@@ -24,6 +24,7 @@
 #define CALENDARINDEXER_H
 
 #include "abstractindexer.h"
+#include "xapiandatabase.h"
 
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/Item>
@@ -57,7 +58,7 @@ private:
     void indexTodoItem(const Akonadi::Item &item, const KCalCore::Todo::Ptr &todo);
     void updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc);
 
-    Xapian::WritableDatabase *m_db;
+    Baloo::XapianDatabase *m_db;
     Xapian::Document *m_doc;
     Xapian::TermGenerator *m_termGen;
 };

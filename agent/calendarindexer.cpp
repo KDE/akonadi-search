@@ -21,15 +21,17 @@
  */
 
 #include "calendarindexer.h"
+#include "xapiandocument.h"
 
 #include <QTextDocument>
-
+#include <KCalCore/Attendee>
+#include <KCalCore/Event>
 
 CalendarIndexer::CalendarIndexer(const QString& path)
     : AbstractIndexer(), m_db( 0 ), m_termGen( 0 )
 {
     try {
-        m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
+        m_db = new Baloo::XapianDatabase(path, true);
     }
     catch (const Xapian::DatabaseCorruptError& err) {
         qWarning() << "Database Corrupted - What did you do?";
@@ -82,7 +84,7 @@ void CalendarIndexer::remove(const Akonadi::Item &item)
     if (!m_db)
         return;
     try {
-        m_db->delete_document(item.id());
+        m_db->deleteDocument(item.id());
     }
     catch (const Xapian::DocNotFoundError&) {
         return;
@@ -95,10 +97,10 @@ void CalendarIndexer::remove(const Akonadi::Collection& collection)
         return;
     try {
         Xapian::Query query('C'+ QString::number(collection.id()).toStdString());
-        Xapian::Enquire enquire(*m_db);
+        Xapian::Enquire enquire(*(m_db->db()));
         enquire.set_query(query);
 
-        Xapian::MSet mset = enquire.get_mset(0, m_db->get_doccount());
+        Xapian::MSet mset = enquire.get_mset(0, m_db->db()->get_doccount());
         Xapian::MSetIterator end(mset.end());
         for (Xapian::MSetIterator it = mset.begin(); it != end; ++it) {
             const qint64 id = *it;
@@ -118,7 +120,7 @@ void CalendarIndexer::move(const Akonadi::Item::Id& itemId,
         return;
     Xapian::Document doc;
     try {
-        doc = m_db->get_document(itemId);
+        doc = m_db->db()->get_document(itemId);
     }
     catch (const Xapian::DocNotFoundError&) {
         return;
@@ -129,12 +131,31 @@ void CalendarIndexer::move(const Akonadi::Item::Id& itemId,
 
     doc.remove_term(ft.data());
     doc.add_boolean_term(tt.data());
-    m_db->replace_document(doc.get_docid(), doc);
+    m_db->replaceDocument(doc.get_docid(), doc);
 }
 
 void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::Event::Ptr &event)
 {
-    //TODO
+    Baloo::XapianDocument doc;
+
+    doc.indexText(event->organizer()->email(), "O");
+    doc.indexText(event->summary(), "S");
+    doc.indexText(event->location(), "L");
+    KCalCore::Attendee::List attendees = event->attendees();
+    KCalCore::Attendee::List::ConstIterator it;
+    KCalCore::Attendee::List::ConstIterator end(attendees.constEnd());
+    for ( it = attendees.constBegin(); it != end; ++it ) {
+        doc.addBoolTerm((*it)->email()+QString::number((*it)->status()), "PS");
+    }
+
+    // Parent collection
+    Q_ASSERT_X(item.parentCollection().isValid(), "Baloo::CalenderIndexer::index",
+        "Item does not have a valid parent collection");
+
+    const Akonadi::Entity::Id colId = item.parentCollection().id();
+    doc.addBoolTerm(colId, "C");
+
+    m_db->replaceDocument(item.id(), doc);
 }
 
 void CalendarIndexer::indexJournalItem(const Akonadi::Item &item, const KCalCore::Journal::Ptr &journal)

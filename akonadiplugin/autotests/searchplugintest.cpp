@@ -29,9 +29,11 @@
 #include "searchplugin.h"
 #include <../agent/emailindexer.h>
 #include <../agent/contactindexer.h>
+#include <../agent/calendarindexer.h>
 #include <../agent/akonotesindexer.h>
 #include <../search/email/emailsearchstore.h>
 #include <../search/contact/contactsearchstore.h>
+#include <../search/calendar/calendarsearchstore.h>
 #include <../search/note/notesearchstore.h>
 #include <AkonadiCore/searchquery.h>
 #include <Akonadi/KMime/MessageFlags>
@@ -48,6 +50,7 @@ private:
     QString emailContactsDir;
     QString contactsDir;
     QString noteDir;
+    QString calendarDir;
 
     bool removeDir(const QString & dirName)
     {
@@ -91,6 +94,7 @@ private Q_SLOTS:
         emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/emailcontacts/");
         contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/contacts/");
         noteDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/notes/");
+        calendarDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/calendar/");
 
         QDir dir;
         QVERIFY(removeDir(emailDir));
@@ -101,15 +105,19 @@ private Q_SLOTS:
         QVERIFY(dir.mkpath(contactsDir));
         QVERIFY(removeDir(noteDir));
         QVERIFY(dir.mkpath(noteDir));
+        QVERIFY(removeDir(calendarDir));
+        QVERIFY(dir.mkpath(calendarDir));
 
         qDebug() << "indexing sample data";
         qDebug() << emailDir;
         qDebug() << emailContactsDir;
         qDebug() << noteDir;
+        qDebug() << calendarDir;
 
         EmailIndexer emailIndexer(emailDir, emailContactsDir);
         ContactIndexer contactIndexer(contactsDir);
         AkonotesIndexer noteIndexer(noteDir);
+        CalendarIndexer calendarIndexer(calendarDir);
 
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -388,6 +396,31 @@ private Q_SLOTS:
             noteIndexer.index(item);
         }
 
+        // Calendar item
+        {
+            KCalCore::Event::Ptr event(new KCalCore::Event);
+            KCalCore::Attendee::Ptr attendee(new KCalCore::Attendee(QLatin1String("attendee1"), QLatin1String("attendee1@example.com"), false, KCalCore::Attendee::NeedsAction));
+            event->setOrganizer(QLatin1String("organizer@example.com"));
+            event->addAttendee(attendee);
+            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QLatin1String("attendee2"), QLatin1String("attendee2@example.com"), false, KCalCore::Attendee::Accepted));
+            event->addAttendee(attendee);
+            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QLatin1String("attendee3"), QLatin1String("attendee3@example.com"), false, KCalCore::Attendee::Declined));
+            event->addAttendee(attendee);
+            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QLatin1String("attendee4"), QLatin1String("attendee4@example.com"), false, KCalCore::Attendee::Tentative));
+            event->addAttendee(attendee);
+            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QLatin1String("attendee5"), QLatin1String("attendee5@example.com"), false, KCalCore::Attendee::Delegated));
+            event->addAttendee(attendee);
+
+            event->setSummary(QLatin1String("title"));
+            event->setLocation(QLatin1String("here"));
+
+            Akonadi::Item item(KCalCore::Event::eventMimeType());
+            item.setId(2001);
+            item.setPayload<KCalCore::Event::Ptr>(event);
+            item.setParentCollection(Akonadi::Collection(6));
+            calendarIndexer.index(item);
+
+        }
 
 
         Baloo::EmailSearchStore *emailSearchStore = new Baloo::EmailSearchStore();
@@ -396,9 +429,96 @@ private Q_SLOTS:
         contactSearchStore->setDbPath(contactsDir);
         Baloo::NoteSearchStore *noteSearchStore = new Baloo::NoteSearchStore();
         noteSearchStore->setDbPath(noteDir);
+        Baloo::CalendarSearchStore *calendarSearchStore = new Baloo::CalendarSearchStore();
+        calendarSearchStore->setDbPath(calendarDir);
 
-        Baloo::SearchStore::overrideSearchStores(QList<Baloo::SearchStore*>() << emailSearchStore << contactSearchStore << noteSearchStore);
+        Baloo::SearchStore::overrideSearchStores(QList<Baloo::SearchStore*>() << emailSearchStore << contactSearchStore << noteSearchStore <<  calendarSearchStore);
     }
+
+    void testCalendarSearch_data() {
+        QTest::addColumn<QString>("query");
+        QTest::addColumn<QList<qint64> >("collections");
+        QTest::addColumn<QStringList>("mimeTypes");
+        QTest::addColumn<QSet<qint64> >("expectedResult");
+        const QStringList calendarMimeTypes = QStringList() << KCalCore::Event::eventMimeType();
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, "organizer@example.com", Akonadi::SearchTerm::CondEqual));
+
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find organizer") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, "organizer2@example.com", Akonadi::SearchTerm::CondEqual));
+
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result;
+            QTest::newRow("find no organizer") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee1@example.com0", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find events needsAction") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee2@example.com1", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find events accepted") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee3@example.com2", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find events declined") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee4@example.com3", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find events tentative") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee5@example.com4", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find events delegated") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee5@example.com5", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result;
+            QTest::newRow("unknown partstatus") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Summary, "title", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find event summary") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Location, "here", Akonadi::SearchTerm::CondEqual));
+            QList<qint64> collections = QList<qint64>() << 6;
+            QSet<qint64> result = QSet<qint64>() << 2001;
+            QTest::newRow("find events location") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
+        }
+    }
+
+    void testCalendarSearch() {
+        resultSearch();
+    }
+
 #if 1
     void testNoteSearch_data() {
         QTest::addColumn<QString>("query");

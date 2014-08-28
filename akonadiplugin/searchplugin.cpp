@@ -205,17 +205,22 @@ Baloo::Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
         return t;
     } else {
         qDebug() << term.key() << term.value();
-#if 0
-        const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
+        const Akonadi::IncidenceSearchTerm::IncidenceSearchField field = Akonadi::IncidenceSearchTerm::fromKey(term.key());
         switch (field) {
-        case Akonadi::EmailSearchTerm::Subject:
-            return getTerm(term, QLatin1String("subject");
-        case Akonadi::EmailSearchTerm::Body:
-            return getTerm(term, QLatin1String("body");
-        default:
-            kWarning() << "unknown term " << term.key();
+        case Akonadi::IncidenceSearchTerm::Organizer:
+            return getTerm(term, "organizer");
+        case Akonadi::IncidenceSearchTerm::Summary:
+            return getTerm(term, "summary");
+        case Akonadi::IncidenceSearchTerm::Location:
+            return getTerm(term, "location");
+        case Akonadi::IncidenceSearchTerm::PartStatus: {
+            Baloo::Term t("partstatus", term.value().toString(), Baloo::Term::Equal);
+            t.setNegation(term.isNegated());
+            return t;
         }
-#endif
+        default:
+            qWarning() << "unknown term " << term.key();
+        }
     }
     return Baloo::Term();
 }
@@ -326,7 +331,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
         Baloo::Term parentTerm(Baloo::Term::And);
         Baloo::Term collectionTerm(Baloo::Term::Or);
         Q_FOREACH (const qint64 col, collections) {
-            collectionTerm.addSubTerm(Baloo::Term(QLatin1String("collection"), QString::number(col)));
+            collectionTerm.addSubTerm(Baloo::Term(QLatin1String("collection"), QString::number(col), Baloo::Term::Equal));
         }
         parentTerm.addSubTerm(collectionTerm);
         parentTerm.addSubTerm(t);
