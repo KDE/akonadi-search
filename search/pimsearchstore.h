@@ -49,7 +49,18 @@ protected:
     virtual QUrl constructUrl(const Xapian::docid& docid);
 
     QHash<QString, QString> m_prefix;
+
+    /* Simple boolean value
+     * value == true -> search for B<name>
+     * value == false -> search for BN<name>
+     */
     QSet<QString> m_boolProperties;
+
+    /*Search for a boolean value with appended value in name
+     * (<name>+<value>) without prefixed B
+     */
+    QSet<QString> m_boolWithValue;
+
     QHash<QString, int> m_valueProperties;
 };
 

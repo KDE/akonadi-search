@@ -80,6 +80,12 @@ Xapian::Query PIMSearchStore::constructQuery(const QString& property, const QVar
         return Xapian::Query(term);
     }
 
+    if (m_boolWithValue.contains(prop)) {
+        std::string term(m_prefix.value(prop).toStdString());
+        std::string val(value.toString().toUtf8().constData());
+        return Xapian::Query(term+val);
+    }
+
     if (m_valueProperties.contains(prop) && (com == Term::Equal || com == Term::Greater || com == Term::GreaterEqual || com == Term::Less || com == Term::LessEqual)) {
         qlonglong numVal = value.toLongLong();
         qDebug() << value << numVal;
@@ -113,7 +119,6 @@ Xapian::Query PIMSearchStore::constructQuery(const QString& property, const QVar
         }
         return parser.parse_query(str, flags, p);
     }
-
     return Xapian::Query(value.toString().toStdString());
 }
 
