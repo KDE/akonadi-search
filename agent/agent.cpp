@@ -29,7 +29,7 @@
 #include "calendarindexer.h"
 #include "balooindexeradaptor.h"
 
-#include "src/file/priority.h"
+#include "priority.h"
 
 #include <ItemFetchJob>
 #include <ItemFetchScope>

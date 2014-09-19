@@ -27,12 +27,12 @@
 #include <QDir>
 
 #include "searchplugin.h"
-#include <../pim/agent/emailindexer.h>
-#include <../pim/agent/contactindexer.h>
-#include <../pim/agent/akonotesindexer.h>
-#include <../pim/search/email/emailsearchstore.h>
-#include <../pim/search/contact/contactsearchstore.h>
-#include <../pim/search/note/notesearchstore.h>
+#include <../agent/emailindexer.h>
+#include <../agent/contactindexer.h>
+#include <../agent/akonotesindexer.h>
+#include <../search/email/emailsearchstore.h>
+#include <../search/contact/contactsearchstore.h>
+#include <../search/note/notesearchstore.h>
 #include <AkonadiCore/searchquery.h>
 #include <Akonadi/KMime/MessageFlags>
 

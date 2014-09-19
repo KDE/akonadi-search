@@ -36,6 +36,6 @@ target_link_libraries(searchplugintest
     KF5::Abc
     ${XAPIAN_LIBRARIES}
     KF5::PimUtils
-    KF5::BalooCore
-    KF5::BalooXapian
+    BalooPimCore
+    BalooPimXapian
 )

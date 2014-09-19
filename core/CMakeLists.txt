@@ -7,54 +7,35 @@ set(CORE_SRCS
     queryrunnable.cpp
     resultiterator.cpp
     result.cpp
-    advancedqueryparser.cpp
 )
 
-add_library(KF5BalooCore ${CORE_SRCS})
+add_library(BalooPimCore ${CORE_SRCS})
 
-add_library(KF5::BalooCore ALIAS KF5BalooCore)
-
-target_link_libraries(KF5BalooCore
+target_link_libraries(BalooPimCore
     PUBLIC
     Qt5::Core
 )
 
-set_target_properties(KF5BalooCore PROPERTIES
+set_target_properties(BalooPimCore PROPERTIES
     VERSION ${BALOO_VERSION_STRING}
     SOVERSION ${BALOO_SOVERSION}
-    EXPORT_NAME BalooCore
+    EXPORT_NAME BalooPimCore
 )
-target_include_directories(KF5BalooCore INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/Baloo>")
+#target_include_directories(KF5BalooCore INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/Baloo>")
 
-generate_export_header(KF5BalooCore BASE_NAME BALOO_CORE EXPORT_FILE_NAME core_export.h)
+generate_export_header(BalooPimCore BASE_NAME BALOO_CORE EXPORT_FILE_NAME core_export.h)
 
-ecm_generate_headers(KF5BalooCore_CamelCase_HEADERS
-    HEADER_NAMES
-    Term
-    Query
-    QueryRunnable
-    Result
-    ResultIterator
-    SearchStore
+install(TARGETS BalooPimCore EXPORT BalooPimTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
-    PREFIX baloo
-    REQUIRED_HEADERS KF5BalooCore_HEADERS
-)
-
-install(TARGETS KF5BalooCore EXPORT KF5BalooTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
-
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/core_export.h
-    ${KF5BalooCore_HEADERS}
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/Baloo/baloo
-    COMPONENT Devel
-)
-
-install(FILES
-    ${KF5BalooCore_CamelCase_HEADERS}
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/Baloo/Baloo
-    COMPONENT Devel
-)
-
-add_subdirectory(tests)
-add_subdirectory(autotests)
+#install(FILES
+#    ${CMAKE_CURRENT_BINARY_DIR}/core_export.h
+#    ${KF5BalooCore_HEADERS}
+#    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/Baloo/baloo
+#    COMPONENT Devel
+#)
+#
+#install(FILES
+#    ${KF5BalooCore_CamelCase_HEADERS}
+#    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/Baloo/Baloo
+#    COMPONENT Devel
+#)

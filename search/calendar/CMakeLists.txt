@@ -3,8 +3,8 @@ add_library(calendarsearchstore MODULE calendarsearchstore.cpp ../pimsearchstore
 target_link_libraries(calendarsearchstore
     Qt5::Core
     ${XAPIAN_LIBRARIES}
-    KF5::BalooCore
-    KF5::BalooXapian
+    BalooPimCore
+    BalooPimXapian
 )
 
 install(TARGETS calendarsearchstore DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/baloo)

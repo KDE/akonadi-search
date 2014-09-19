@@ -14,7 +14,7 @@ set(akonadi_baloo_indexer_SRCS
     contactindexer.cpp
     akonotesindexer.cpp
     calendarindexer.cpp
-    ../../file/priority.cpp
+    priority.cpp
     scheduler.cpp
     collectionindexingjob.cpp
     index.cpp
@@ -34,9 +34,9 @@ target_link_libraries(akonadi_baloo_indexer
     KF5::AkonadiAgentBase
     KF5::PimUtils
     KF5::ItemModels
-    KF5::BalooXapian
     KF5::PimUtils
     KF5::CalendarCore
+    BalooPimXapian
 )
 
 install(TARGETS akonadi_baloo_indexer ${INSTALL_TARGETS_DEFAULT_ARGS})

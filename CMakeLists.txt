@@ -1,21 +1,102 @@
-if (KDEPIM_SUPPORT_BUILD)
-  set(KF5AkonadiServer_MIN_VERSION "5.0.40")
-  find_package(KF5AkonadiServer ${KF5AkonadiServer_MIN_VERSION} CONFIG REQUIRED)
+cmake_minimum_required(VERSION 2.8.12)
 
+project(AkonadiSearch)
 
-  set(KDEPIMLIBS_LIB_VERSION "4.70.0")
+# ECM setup
+find_package(ECM 1.0.0 REQUIRED NO_MODULE)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-  find_package(KF5KDELibs4Support ${KF5_VERSION} CONFIG REQUIRED)
+include(GenerateExportHeader)
+include(ECMGenerateHeaders)
+include(ECMPackageConfigHelpers)
+include(ECMSetupVersion)
+include(FeatureSummary)
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDEFrameworkCompilerSettings)
+include(ECMInstallIcons)
+include(ECMAddTests)
 
-  find_package(KF5Abc ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
-  find_package(KF5Mime ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
-  find_package(KF5PimUtils ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
-  find_package(KF5AkonadiMime ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
-  find_package(KF5CalendarCore ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
+find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash KDELibs4Support)
 
+find_package(KF5Akonadi CONFIG)
+set_package_properties(KF5Akonadi PROPERTIES
+    DESCRIPTION "The KDEPIM libraries"
+    URL "http://www.kde.org"
+    TYPE REQUIRED
+)
 
-  add_subdirectory(agent)
-  add_subdirectory(lib)
-  add_subdirectory(akonadiplugin)
-endif()
+find_package(Xapian CONFIG)
+set_package_properties(Xapian PROPERTIES
+    DESCRIPTION "The Xapian search engine library"
+    URL "http://xapian.org"
+    TYPE REQUIRED
+)
+
+set(KF5AkonadiServer_MIN_VERSION "5.0.40")
+find_package(KF5AkonadiServer ${KF5AkonadiServer_MIN_VERSION} CONFIG REQUIRED)
+
+set(KDEPIMLIBS_LIB_VERSION "4.70.0")
+
+find_package(KF5Abc ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5Mime ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5PimUtils ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5AkonadiMime ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
+find_package(KF5CalendarCore ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
+
+# Compiler flags
+add_definitions(-DQT_NO_KEYWORDS)
+
+# Turn exceptions on
+kde_enable_exceptions()
+
+include_directories(
+  ${XAPIAN_INCLUDE_DIR}
+  ${CMAKE_SOURCE_DIR}
+  ${CMAKE_SOURCE_DIR}/core
+  ${CMAKE_BINARY_DIR}/core
+  ${CMAKE_SOURCE_DIR}/xapian
+  ${CMAKE_BINARY_DIR}/xapian
+)
+
+# Targets
+add_subdirectory(xapian)
+add_subdirectory(core)
+add_subdirectory(agent)
+add_subdirectory(lib)
+add_subdirectory(akonadiplugin)
 add_subdirectory(search)
+
+# Config files
+# set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Baloo")
+#
+# ecm_configure_package_config_file(
+#     "${CMAKE_CURRENT_SOURCE_DIR}/KF5BalooConfig.cmake.in"
+#     "${CMAKE_CURRENT_BINARY_DIR}/KF5BalooConfig.cmake"
+#     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+# )
+#
+# install(FILES
+#     "${CMAKE_CURRENT_BINARY_DIR}/KF5BalooConfig.cmake"
+#     "${CMAKE_CURRENT_BINARY_DIR}/KF5BalooConfigVersion.cmake"
+#     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+#     COMPONENT devel
+# )
+#
+# install(EXPORT KF5BalooTargets
+#         NAMESPACE KF5::
+#         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+#         FILE KF5BalooTargets.cmake)
+#
+# install(FILES
+#     "${CMAKE_CURRENT_BINARY_DIR}/baloo_version.h"
+#     DESTINATION ${KF5_INCLUDE_INSTALL_DIR}
+#     COMPONENT Devel
+# )
+
+feature_summary(WHAT ALL
+    INCLUDE_QUIET_PACKAGES
+    FATAL_ON_MISSING_REQUIRED_PACKAGES
+)
+
