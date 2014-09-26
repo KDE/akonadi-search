@@ -22,7 +22,6 @@
 
 #include "resultiterator.h"
 #include "searchstore.h"
-#include "result.h"
 #include <QDebug>
 
 using namespace Baloo;
@@ -102,15 +101,4 @@ QString ResultIterator::icon() const
         return d->store->icon(d->queryId);
     else
         return QString();
-}
-
-Result ResultIterator::result() const
-{
-    Result res;
-    res.setId(id());
-    res.setText(text());
-    res.setIcon(icon());
-    res.setUrl(url());
-
-    return res;
 }

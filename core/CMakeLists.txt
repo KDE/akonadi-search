@@ -5,7 +5,6 @@ set(CORE_SRCS
     term.cpp
     query.cpp
     resultiterator.cpp
-    result.cpp
 )
 
 add_library(BalooPimCore ${CORE_SRCS})

@@ -52,7 +52,6 @@ public:
     QString text() const;
     QString icon() const;
 
-    Result result() const;
 private:
     QExplicitlySharedDataPointer<ResultIteratorPrivate> d;
 };
