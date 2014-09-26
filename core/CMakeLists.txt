@@ -4,7 +4,6 @@ set(CORE_SRCS
     searchstore.cpp
     term.cpp
     query.cpp
-    queryrunnable.cpp
     resultiterator.cpp
     result.cpp
 )
