@@ -69,31 +69,31 @@ add_subdirectory(akonadiplugin)
 add_subdirectory(search)
 
 # Config files
-# set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Baloo")
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/AkonadiSearch")
+
+ecm_configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/AkonadiSearchConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfig.cmake"
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfig.cmake"
+#    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfigVersion.cmake"
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+    COMPONENT devel
+)
+
+#install(EXPORT AkonadiSearchTargets
+#        NAMESPACE KF5::
+#        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+#        FILE AkonadiSearchTargets.cmake)
 #
-# ecm_configure_package_config_file(
-#     "${CMAKE_CURRENT_SOURCE_DIR}/KF5BalooConfig.cmake.in"
-#     "${CMAKE_CURRENT_BINARY_DIR}/KF5BalooConfig.cmake"
-#     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-# )
-#
-# install(FILES
-#     "${CMAKE_CURRENT_BINARY_DIR}/KF5BalooConfig.cmake"
-#     "${CMAKE_CURRENT_BINARY_DIR}/KF5BalooConfigVersion.cmake"
-#     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-#     COMPONENT devel
-# )
-#
-# install(EXPORT KF5BalooTargets
-#         NAMESPACE KF5::
-#         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-#         FILE KF5BalooTargets.cmake)
-#
-# install(FILES
-#     "${CMAKE_CURRENT_BINARY_DIR}/baloo_version.h"
-#     DESTINATION ${KF5_INCLUDE_INSTALL_DIR}
-#     COMPONENT Devel
-# )
+#install(FILES
+#    "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
+#    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}
+#    COMPONENT Devel
+#)
 
 feature_summary(WHAT ALL
     INCLUDE_QUIET_PACKAGES
