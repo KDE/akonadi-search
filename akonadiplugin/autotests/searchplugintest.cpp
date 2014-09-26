@@ -390,11 +390,11 @@ private Q_SLOTS:
 
 
 
-        Baloo::EmailSearchStore *emailSearchStore = new Baloo::EmailSearchStore(this);
+        Baloo::EmailSearchStore *emailSearchStore = new Baloo::EmailSearchStore();
         emailSearchStore->setDbPath(emailDir);
-        Baloo::ContactSearchStore *contactSearchStore = new Baloo::ContactSearchStore(this);
+        Baloo::ContactSearchStore *contactSearchStore = new Baloo::ContactSearchStore();
         contactSearchStore->setDbPath(contactsDir);
-        Baloo::NoteSearchStore *noteSearchStore = new Baloo::NoteSearchStore(this);
+        Baloo::NoteSearchStore *noteSearchStore = new Baloo::NoteSearchStore();
         noteSearchStore->setDbPath(noteDir);
 
         Baloo::SearchStore::overrideSearchStores(QList<Baloo::SearchStore*>() << emailSearchStore << contactSearchStore << noteSearchStore);
