@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 
 project(AkonadiSearch)
+set(PROJECT_VERSION "5.0.0")
 
 # ECM setup
 find_package(ECM 1.0.0 REQUIRED NO_MODULE)
@@ -45,6 +46,13 @@ find_package(KF5PimUtils ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiMime ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5CalendarCore ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
 
+ecm_setup_version(${PROJECT_VERSION}
+    VARIABLE_PREFIX AKONADISEARCH
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfigVersion.cmake"
+    SOVERSION 5
+)
+
 # Compiler flags
 add_definitions(-DQT_NO_KEYWORDS)
 
@@ -79,21 +87,21 @@ ecm_configure_package_config_file(
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfig.cmake"
-#    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfigVersion.cmake"
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     COMPONENT devel
 )
 
-#install(EXPORT AkonadiSearchTargets
-#        NAMESPACE KF5::
-#        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-#        FILE AkonadiSearchTargets.cmake)
-#
-#install(FILES
-#    "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
-#    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}
-#    COMPONENT Devel
-#)
+install(EXPORT AkonadiSearchTargets
+        NAMESPACE KF5::
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        FILE AkonadiSearchTargets.cmake)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}
+    COMPONENT Devel
+)
 
 feature_summary(WHAT ALL
     INCLUDE_QUIET_PACKAGES

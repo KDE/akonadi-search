@@ -15,8 +15,6 @@ set(BALOO_PIM_LIB_SRCS
 )
 
 add_library(KF5BalooPim ${BALOO_PIM_LIB_SRCS})
-
-
 add_library(KF5::BalooPim ALIAS KF5BalooPim)
 
 generate_export_header(KF5BalooPim BASE_NAME BALOO_PIM EXPORT_FILE_NAME pim_export.h)
@@ -33,15 +31,14 @@ target_link_libraries(KF5BalooPim
 )
 
 set_target_properties(KF5BalooPim PROPERTIES
-    VERSION ${BALOO_VERSION_STRING}
-    SOVERSION ${BALOO_SOVERSION}
+    VERSION ${AKONADISEARCH_VERSION_STRING}
+    SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME BalooPim
 )
 
 target_include_directories(KF5BalooPim INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/Baloo>")
 
-install(TARGETS KF5BalooPim EXPORT KF5BalooTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
-
+install(TARGETS KF5BalooPim EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     query.h

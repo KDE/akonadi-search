@@ -15,15 +15,15 @@ target_link_libraries(BalooPimCore
 )
 
 set_target_properties(BalooPimCore PROPERTIES
-    VERSION ${BALOO_VERSION_STRING}
-    SOVERSION ${BALOO_SOVERSION}
+    VERSION ${AKONADISEARCH_VERSION_STRING}
+    SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME BalooPimCore
 )
-#target_include_directories(KF5BalooCore INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/Baloo>")
+target_include_directories(BalooPimCore INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/Baloo>")
 
 generate_export_header(BalooPimCore BASE_NAME BALOO_CORE EXPORT_FILE_NAME core_export.h)
 
-install(TARGETS BalooPimCore EXPORT BalooPimTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS BalooPimCore EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 #install(FILES
 #    ${CMAKE_CURRENT_BINARY_DIR}/core_export.h
