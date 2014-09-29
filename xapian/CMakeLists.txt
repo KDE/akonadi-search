@@ -16,11 +16,11 @@ target_link_libraries(BalooPimXapian PUBLIC
     ${XAPIAN_LIBRARIES}
 )
 
-#set_target_properties(KF5BalooXapian PROPERTIES
-#    VERSION ${BALOO_VERSION_STRING}
-#    SOVERSION ${BALOO_SOVERSION}
-#    EXPORT_NAME BalooXapian
-#)
+set_target_properties(BalooPimXapian PROPERTIES
+    VERSION ${AKONADISEARCH_VERSION_STRING}
+    SOVERSION ${AKONADISEARCH_SOVERSION}
+    EXPORT_NAME BalooPimXapian
+)
 
 generate_export_header(BalooPimXapian BASE_NAME BALOO_XAPIAN EXPORT_FILE_NAME xapian_export.h)
 
