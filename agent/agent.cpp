@@ -186,11 +186,25 @@ void BalooIndexingAgent::collectionAdded(const Akonadi::Collection& collection, 
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::collectionChanged(const Akonadi::Collection& collection)
+void BalooIndexingAgent::collectionChanged(const Akonadi::Collection& collection, const QSet<QByteArray>& changedAttributes)
 {
-    //FIXME this is only required if the collections name changed
-    CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
-    job->start();
+    QSet<QByteArray> changes = changedAttributes;
+    changes.remove("collectionquota");
+    changes.remove("timestamp");
+    changes.remove("imapquota");
+
+    if (changes.isEmpty()) {
+        return;
+    }
+
+    if (changes.contains("ENTITYDISPLAY")) {
+        //If the name changed we have to reindex all subcollections
+        CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
+        job->start();
+    } else {
+        m_index.index(collection);
+        m_index.scheduleCommit();
+    }
 }
 
 void BalooIndexingAgent::collectionRemoved(const Akonadi::Collection& collection)
