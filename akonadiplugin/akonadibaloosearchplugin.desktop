@@ -2,6 +2,7 @@
 Type=AkonadiSearchPlugin
 Name=Akonadi Baloo Search Plugin
 Name[ca]=Connector de cerca Baloo de l'Akonadi
+Name[cs]=Modul pro hledání pomocí Baloo v Akonadi
 Name[de]=Akonadi-Suchmodul für Baloo
 Name[es]=Complemento de búsqueda Baloo de Akonadi
 Name[it]=Estensione di ricerca Baloo di Akonadi
