@@ -1,19 +1,6 @@
 [Desktop Entry]
 Type=AkonadiSearchPlugin
 Name=Akonadi Baloo Search Plugin
-Name[ca]=Connector de cerca Baloo de l'Akonadi
-Name[cs]=Modul pro hledání pomocí Baloo v Akonadi
-Name[de]=Akonadi-Suchmodul für Baloo
-Name[es]=Complemento de búsqueda Baloo de Akonadi
-Name[it]=Estensione di ricerca Baloo di Akonadi
-Name[nl]=Akonadi-plug-in voor Baloo zoeken
-Name[pl]=Wtyczka wyszukiwania Baloo dla Akonadi
-Name[pt]=Agente de Pesquisa do Baloo para o Akonadi
-Name[pt_BR]=Plugin de pesquisa do Baloo no Akonadi
-Name[sk]=Plugin hľadania Akonadi Baloo
-Name[sv]=Akonadi Baloo-sökinsticksprogram
-Name[uk]=Агент пошуку Baloo для Akonadi
-Name[x-test]=xxAkonadi Baloo Search Pluginxx
 X-Akonadi-Library=akonadi_baloo_searchplugin
 X-Akonadi-ClassName=SearchPlugin
 X-Akonadi-LoadByDefault=true
