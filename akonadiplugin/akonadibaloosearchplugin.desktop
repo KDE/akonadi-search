@@ -1,6 +1,10 @@
 [Desktop Entry]
 Type=AkonadiSearchPlugin
 Name=Akonadi Baloo Search Plugin
+Name[cs]=Modul pro hledání pomocí Baloo v Akonadi
+Name[de]=Akonadi-Suchmodul für Baloo
+Name[pt]=Agente de Pesquisa do Baloo para o Akonadi
+Name[x-test]=xxAkonadi Baloo Search Pluginxx
 X-Akonadi-Library=akonadi_baloo_searchplugin
 X-Akonadi-ClassName=SearchPlugin
 X-Akonadi-LoadByDefault=true
