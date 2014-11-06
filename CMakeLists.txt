@@ -4,7 +4,7 @@ project(AkonadiSearch)
 set(PROJECT_VERSION "5.0.0")
 
 # ECM setup
-find_package(ECM 1.0.0 REQUIRED NO_MODULE)
+find_package(ECM 1.3.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
