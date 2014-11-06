@@ -209,6 +209,7 @@ void Index::remove(const Akonadi::Collection& col)
 
 void Index::addIndexer(AbstractIndexer* indexer)
 {
+    m_listIndexer.append(indexer);
     Q_FOREACH (const QString& mimeType, indexer->mimeTypes()) {
         m_indexer.insert(mimeType, indexer);
     }
@@ -287,7 +288,7 @@ void Index::scheduleCommit()
 void Index::commit()
 {
     m_commitTimer.stop();
-    Q_FOREACH (AbstractIndexer *indexer, m_indexer) {
+    Q_FOREACH (AbstractIndexer *indexer, m_listIndexer) {
         try {
             indexer->commit();
         } catch (const Xapian::Error &e) {

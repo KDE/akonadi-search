@@ -64,6 +64,7 @@ private:
     virtual qlonglong indexedItemsInDatabase(const std::string& term, const QString& dbPath) const;
     virtual void findIndexedInDatabase(QSet<Akonadi::Entity::Id>& indexed, Akonadi::Entity::Id collectionId, const QString& dbPath);
 
+    QList<AbstractIndexer*> m_listIndexer;
     QHash<QString, AbstractIndexer*> m_indexer;
     QTimer m_commitTimer;
 };
