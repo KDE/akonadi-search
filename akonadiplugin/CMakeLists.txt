@@ -14,7 +14,7 @@ target_link_libraries(akonadi_baloo_searchplugin
     KF5::BalooPim
     KF5::KDELibs4Support
     KF5::ItemModels
-    KF5::Abc
+    KF5::Contacts
     )
 
 install(TARGETS akonadi_baloo_searchplugin DESTINATION ${PLUGIN_INSTALL_DIR}/akonadi)

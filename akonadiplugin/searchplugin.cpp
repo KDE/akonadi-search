@@ -31,8 +31,8 @@
 #include <QDebug>
 #include <Akonadi/KMime/MessageFlags>
 #include <KDateTime>
-#include <KABC/Addressee>
-#include <KABC/ContactGroup>
+#include <KContacts/Addressee>
+#include <KContacts/ContactGroup>
 #include <QtPlugin>
 #include <QStringList>
 #include <QDateTime>
@@ -298,7 +298,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
         qDebug() << "mail query";
         query.setType(QLatin1String("Email"));
         t = recursiveEmailTermMapping(term);
-    } else if (mimeTypes.contains(KABC::Addressee::mimeType()) || mimeTypes.contains(KABC::ContactGroup::mimeType())) {
+    } else if (mimeTypes.contains(KContacts::Addressee::mimeType()) || mimeTypes.contains(KContacts::ContactGroup::mimeType())) {
         query.setType(QLatin1String("Contact"));
         t = recursiveContactTermMapping(term);
     } else if (mimeTypes.contains(QLatin1String("text/x-vnd.akonadi.note"))) {

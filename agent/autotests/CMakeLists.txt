@@ -18,7 +18,7 @@ set(indexer_LIBS
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::KMime
-    KF5::Abc
+    KF5::Contacts
     ${XAPIAN_LIBRARIES}
     KF5::PimUtils
     KF5::BalooCore

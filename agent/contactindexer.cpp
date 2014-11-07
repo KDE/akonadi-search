@@ -23,8 +23,8 @@
 #include "contactindexer.h"
 #include "xapiandocument.h"
 
-#include <KABC/Addressee>
-#include <KABC/ContactGroup>
+#include <KContacts/Addressee>
+#include <KContacts/ContactGroup>
 #include <Collection>
 
 ContactIndexer::ContactIndexer(const QString& path):
@@ -54,16 +54,16 @@ ContactIndexer::~ContactIndexer()
 
 QStringList ContactIndexer::mimeTypes() const
 {
-    return QStringList() << KABC::Addressee::mimeType() << KABC::ContactGroup::mimeType();
+    return QStringList() << KContacts::Addressee::mimeType() << KContacts::ContactGroup::mimeType();
 }
 
 bool ContactIndexer::indexContact(const Akonadi::Item& item)
 {
     if (!m_db)
         return false;
-    KABC::Addressee addresse;
+    KContacts::Addressee addresse;
     try {
-        addresse = item.payload<KABC::Addressee>();
+        addresse = item.payload<KContacts::Addressee>();
     } catch (const Akonadi::PayloadException&) {
         return false;
     }
@@ -116,9 +116,9 @@ void ContactIndexer::indexContactGroup(const Akonadi::Item& item)
 {
     if (!m_db)
         return;
-    KABC::ContactGroup group;
+    KContacts::ContactGroup group;
     try {
-        group = item.payload<KABC::ContactGroup>();
+        group = item.payload<KContacts::ContactGroup>();
     } catch (const Akonadi::PayloadException&) {
         return;
     }

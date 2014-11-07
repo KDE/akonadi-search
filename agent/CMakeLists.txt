@@ -30,7 +30,7 @@ target_link_libraries(akonadi_baloo_indexer
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime
-    KF5::Abc
+    KF5::Contacts
     KF5::AkonadiAgentBase
     KF5::PimUtils
     KF5::ItemModels

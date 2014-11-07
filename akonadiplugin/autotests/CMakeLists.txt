@@ -33,7 +33,7 @@ target_link_libraries(searchplugintest
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime
-    KF5::Abc
+    KF5::Contacts
     ${XAPIAN_LIBRARIES}
     KF5::PimUtils
     BalooPimCore

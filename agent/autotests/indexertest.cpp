@@ -22,7 +22,7 @@
 
 #include <QTest>
 #include <AkonadiCore/Collection>
-#include <KABC/Addressee>
+#include <KContacts/Addressee>
 #include <QDir>
 
 #include "emailindexer.h"

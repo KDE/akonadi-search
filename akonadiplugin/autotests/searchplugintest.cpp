@@ -22,8 +22,8 @@
 
 #include <QTest>
 #include <AkonadiCore/Collection>
-#include <KABC/Addressee>
-#include <KABC/ContactGroup>
+#include <KContacts/Addressee>
+#include <KContacts/ContactGroup>
 #include <QDir>
 
 #include "searchplugin.h"
@@ -272,56 +272,56 @@ private Q_SLOTS:
         }
         //Contact item
         {
-            KABC::Addressee addressee;
+            KContacts::Addressee addressee;
             addressee.setUid(QLatin1String("uid1"));
             addressee.setName(QLatin1String("John Doe"));
             addressee.setFormattedName(QLatin1String("John Doe"));
             addressee.setNickName(QLatin1String("JD"));
             addressee.setEmails(QStringList() << QLatin1String("john@test.com"));
             addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
-            Akonadi::Item item(KABC::Addressee::mimeType());
+            Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(100);
             item.setPayload(addressee);
             item.setParentCollection(Akonadi::Collection(3));
             contactIndexer.index(item);
         }
         {
-            KABC::Addressee addressee;
+            KContacts::Addressee addressee;
             addressee.setUid(QLatin1String("uid2"));
             addressee.setName(QLatin1String("Jane Doe"));
             addressee.setEmails(QStringList() << QLatin1String("jane@test.com"));
             addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
-            Akonadi::Item item(KABC::Addressee::mimeType());
+            Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(101);
             item.setPayload(addressee);
             item.setParentCollection(Akonadi::Collection(3));
             contactIndexer.index(item);
         }
         {
-            KABC::Addressee addressee;
+            KContacts::Addressee addressee;
             addressee.setUid(QLatin1String("uid2"));
             addressee.setName(QLatin1String("Jane Doe"));
             addressee.setEmails(QStringList() << QLatin1String("JANE@TEST.COM"));
             addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
-            Akonadi::Item item(KABC::Addressee::mimeType());
+            Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(102);
             item.setPayload(addressee);
             item.setParentCollection(Akonadi::Collection(3));
             contactIndexer.index(item);
         }
         {
-            KABC::ContactGroup group;
+            KContacts::ContactGroup group;
             group.setName(QLatin1String("group1"));
-            Akonadi::Item item(KABC::ContactGroup::mimeType());
+            Akonadi::Item item(KContacts::ContactGroup::mimeType());
             item.setId(103);
             item.setPayload(group);
             item.setParentCollection(Akonadi::Collection(3));
             contactIndexer.index(item);
         }
         {
-            KABC::ContactGroup group;
+            KContacts::ContactGroup group;
             group.setName(QLatin1String("group3"));
-            Akonadi::Item item(KABC::ContactGroup::mimeType());
+            Akonadi::Item item(KContacts::ContactGroup::mimeType());
             item.setId(104);
             item.setPayload(group);
             item.setParentCollection(Akonadi::Collection(4));
@@ -463,8 +463,8 @@ private Q_SLOTS:
         QTest::addColumn<QList<qint64> >("collections");
         QTest::addColumn<QStringList>("mimeTypes");
         QTest::addColumn<QSet<qint64> >("expectedResult");
-        const QStringList contactMimeTypes = QStringList() << KABC::Addressee::mimeType();
-        const QStringList contactGroupMimeTypes = QStringList() << KABC::ContactGroup::mimeType();
+        const QStringList contactMimeTypes = QStringList() << KContacts::Addressee::mimeType();
+        const QStringList contactGroupMimeTypes = QStringList() << KContacts::ContactGroup::mimeType();
 #if 1
         {
             Akonadi::SearchQuery query;
