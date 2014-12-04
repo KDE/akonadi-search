@@ -10,7 +10,6 @@ target_link_libraries(emailindexer
   KF5::AkonadiCore
   KF5::AkonadiMime
   KF5::KMime
-  KF5::PimUtils
   KF5::ItemModels
   KF5::KDELibs4Support
   ${XAPIAN_LIBRARIES}

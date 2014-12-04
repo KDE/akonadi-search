@@ -26,7 +26,7 @@
 #include <Akonadi/KMime/MessageFlags>
 
 #include <QTextDocument>
-#include <kpimutils/email.h>
+#include <KEmailAddress>
 
 
 EmailIndexer::EmailIndexer(const QString& path, const QString& contactDbPath):
@@ -148,7 +148,7 @@ namespace {
     QString prettyAddress(const KMime::Types::Mailbox& mbox) {
         const QString name = mbox.name().simplified();
         const QByteArray email = mbox.address().simplified().toLower();
-        return KPIMUtils::normalizedAddress(name, QString::fromUtf8(email));
+        return KEmailAddress::normalizedAddress(name, QString::fromUtf8(email));
     }
 }
 

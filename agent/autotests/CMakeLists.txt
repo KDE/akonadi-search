@@ -20,7 +20,6 @@ set(indexer_LIBS
     KF5::KMime
     KF5::Contacts
     ${XAPIAN_LIBRARIES}
-    KF5::PimUtils
     KF5::BalooCore
     KF5::BalooXapian
     Qt5::Test

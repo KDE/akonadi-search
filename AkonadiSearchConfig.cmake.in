@@ -6,7 +6,6 @@ find_dependency(KF5Akonadi)
 find_dependency(KF5AkonadiServer)
 find_dependency(KF5Contacts)
 find_dependency(KF5Mime)
-find_dependency(KF5PimUtils)
 find_dependency(KF5AkonadiMime)
 find_dependency(KF5CalendarCore)
 

@@ -35,7 +35,6 @@ target_link_libraries(searchplugintest
     KF5::Mime
     KF5::Contacts
     ${XAPIAN_LIBRARIES}
-    KF5::PimUtils
     BalooPimCore
     BalooPimXapian
 )

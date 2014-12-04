@@ -32,9 +32,7 @@ target_link_libraries(akonadi_baloo_indexer
     KF5::Mime
     KF5::Contacts
     KF5::AkonadiAgentBase
-    KF5::PimUtils
     KF5::ItemModels
-    KF5::PimUtils
     KF5::CalendarCore
     BalooPimXapian
 )
