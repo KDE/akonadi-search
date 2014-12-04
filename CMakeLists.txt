@@ -38,7 +38,7 @@ set_package_properties(Xapian PROPERTIES
 set(KF5AkonadiServer_MIN_VERSION "5.0.40")
 find_package(KF5AkonadiServer ${KF5AkonadiServer_MIN_VERSION} CONFIG REQUIRED)
 
-set(KDEPIMLIBS_LIB_VERSION "4.74.0")
+set(KDEPIMLIBS_LIB_VERSION "4.77.0")
 
 find_package(KF5Contacts ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
