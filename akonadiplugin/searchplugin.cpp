@@ -84,7 +84,7 @@ Baloo::Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        qDebug() << term.key() << term.value();
+        // qDebug() << term.key() << term.value();
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
             case Akonadi::EmailSearchTerm::Message: {
@@ -204,7 +204,7 @@ Baloo::Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        qDebug() << term.key() << term.value();
+        // qDebug() << term.key() << term.value();
         const Akonadi::IncidenceSearchTerm::IncidenceSearchField field = Akonadi::IncidenceSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::IncidenceSearchTerm::Organizer:
@@ -237,7 +237,7 @@ Baloo::Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        qDebug() << term.key() << term.value();
+        // qDebug() << term.key() << term.value();
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::EmailSearchTerm::Subject:
@@ -263,7 +263,7 @@ Baloo::Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        qDebug() << term.key() << term.value();
+        // qDebug() << term.key() << term.value();
         const Akonadi::ContactSearchTerm::ContactSearchField field = Akonadi::ContactSearchTerm::fromKey(term.key());
         switch (field) {
             case Akonadi::ContactSearchTerm::Name:
@@ -300,7 +300,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
     Baloo::Term t;
 
     if (mimeTypes.contains(QLatin1String("message/rfc822"))) {
-        qDebug() << "mail query";
+        // qDebug() << "mail query";
         query.setType(QLatin1String("Email"));
         t = recursiveEmailTermMapping(term);
     } else if (mimeTypes.contains(KContacts::Addressee::mimeType()) || mimeTypes.contains(KContacts::ContactGroup::mimeType())) {
@@ -342,7 +342,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
     }
 
     QSet<qint64> resultSet;
-    qDebug() << query.toJSON();
+    // qDebug() << query.toJSON();
     Baloo::ResultIterator iter = query.exec();
     while (iter.next()) {
         const QByteArray id = iter.id();
