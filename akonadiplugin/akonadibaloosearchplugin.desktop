@@ -18,6 +18,7 @@ Name[sk]=Plugin hľadania Akonadi Baloo
 Name[sv]=Akonadi Baloo-sökinsticksprogram
 Name[uk]=Додаток пошуку Baloo для Akonadi
 Name[x-test]=xxAkonadi Baloo Search Pluginxx
+Name[zh_CN]=Akonadi Baloo 搜索插件
 X-Akonadi-Library=akonadi_baloo_searchplugin
 X-Akonadi-ClassName=SearchPlugin
 X-Akonadi-LoadByDefault=true
