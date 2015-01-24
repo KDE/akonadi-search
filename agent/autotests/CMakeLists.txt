@@ -61,9 +61,10 @@ set(query_SRCS
     ../../lib/resultiterator.cpp
 )
 
+if(NOT WIN32)
 kde4_add_unit_test(collectionquerytest NOGUI collectionquerytest.cpp ../../lib/collectionquery.cpp ${query_SRCS} ${indexer_SRCS} ${scheduler_SRCS})
 target_link_libraries(collectionquerytest
     ${indexer_LIBS}
     ${QJSON_LIBRARIES}
 )
-
+endif()
