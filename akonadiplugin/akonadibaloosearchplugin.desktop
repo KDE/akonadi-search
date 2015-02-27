@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=AkonadiSearchPlugin
 Name=Akonadi Baloo Search Plugin
+Name[ast]=Complementu de gueta Baloon Akonadi
 Name[ca]=Connector de cerca Baloo de l'Akonadi
 Name[cs]=Modul pro hledání pomocí Baloo v Akonadi
 Name[de]=Akonadi-Suchmodul für Baloo
