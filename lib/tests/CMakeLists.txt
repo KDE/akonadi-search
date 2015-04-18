@@ -7,29 +7,31 @@ add_executable(contactsearch contactsearchtest.cpp)
 target_link_libraries(contactsearch
   Qt5::Core
 
-  ${KDEPIMLIBS_AKONADI_LIBS}
-  ${KDEPIMLIBS_AKONADI_KMIME_LIBS}
-  ${KDEPIMLIBS_AKONADI_CONTACT_LIBS}
-  ${KDEPIMLIBS_KMIME_LIBS}
+  KF5::AkonadiCore
+  KF5::AkonadiMime
+  KF5::Mime
+  KF5::Contacts
 
-  baloopim
+  KF5::BalooPim
 )
 
 add_executable(emailquery emailquerytest.cpp)
 
 target_link_libraries(emailquery
   Qt5::Core
+  KF5::KDELibs4Support
 
-  ${KDEPIMLIBS_AKONADI_LIBS}
-  ${KDEPIMLIBS_KMIME_LIBS}
+  KF5::AkonadiCore
+  KF5::Mime
 
-  KF5::BalooCore
-  baloopim
+  KF5::BalooPim
 )
 
 add_executable(contactcompleter contactcompletiontest.cpp)
 
 target_link_libraries(contactcompleter
   Qt5::Core
-  baloopim
+  KF5::AkonadiCore
+  KF5::Mime
+  KF5::BalooPim
 )

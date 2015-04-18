@@ -27,8 +27,8 @@
 #include <QTimer>
 #include <QDebug>
 
-#include <Akonadi/ItemFetchJob>
-#include <Akonadi/ItemFetchScope>
+#include <AkonadiCore/ItemFetchJob>
+#include <AkonadiCore/ItemFetchScope>
 
 #include <KMime/Message>
 
@@ -97,8 +97,8 @@ void App::itemsReceived(const Akonadi::Item::List& itemList)
 {
     Q_FOREACH (const Akonadi::Item& item, itemList) {
         KMime::Message::Ptr message = item.payload<KMime::Message::Ptr>();
-        KDateTime date = message->date()->dateTime().toUtc();
-        qDebug() << date.toString(KDateTime::ISODate) << message->subject()->asUnicodeString();
+        QDateTime date = message->date()->dateTime();
+        qDebug() << date.toString(Qt::ISODate) << message->subject()->asUnicodeString();
     }
 }
 

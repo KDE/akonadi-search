@@ -27,8 +27,8 @@
 #include <QTimer>
 #include <QDebug>
 
-#include <Akonadi/ItemFetchJob>
-#include <Akonadi/ItemFetchScope>
+#include <AkonadiCore/ItemFetchJob>
+#include <AkonadiCore/ItemFetchScope>
 
 #include <KMime/Message>
 
@@ -77,4 +77,4 @@ void App::main()
     quit();
 }
 
-#include "contactcompleter.moc"
+#include "contactcompletiontest.moc"

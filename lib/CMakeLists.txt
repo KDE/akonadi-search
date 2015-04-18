@@ -56,5 +56,4 @@ install(FILES
     COMPONENT Devel
 )
 
-#REACTIVATE it
-#add_subdirectory(tests)
+add_subdirectory(tests)
