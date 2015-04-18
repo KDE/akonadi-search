@@ -19,16 +19,14 @@
  * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-#undef QT_NO_KEYWORDS //qtest_akonadi.h requires keywords
 #include <collectionindexingjob.h>
 
 #include <QTest>
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/ServerManager>
 #include <AkonadiCore/CollectionFetchJob>
-#include <akonadi/qtest_akonadi.h>
+#include <AkonadiCore/qtest_akonadi.h>
 #include <KConfigGroup>
-#define QT_NO_KEYWORDS
 
 class TestIndex : public Index {
 public:
