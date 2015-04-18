@@ -79,6 +79,7 @@ private Q_SLOTS:
         Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QLatin1String("akonadi_knut_resource_0"));
         QVERIFY(agent.isValid());
         agent.setIsOnline(true);
+        QTRY_VERIFY(agent.isOnline());
     }
 
     void testInitialIndexing()
@@ -89,7 +90,7 @@ private Q_SLOTS:
         QSignalSpy statusSpy(&scheduler, SIGNAL(status(int, QString)));
         scheduler.setBusyTimeout(0);
         //Wait for ready signal (indicates that indexing is complete)
-        QTRY_VERIFY(statusSpy.count() == 1);
+        QTRY_COMPARE(statusSpy.count(), 1);
         QTRY_COMPARE(factory->indexedCollections.size(), 2);
         QVERIFY(factory->fullSyncs.at(0));
         QVERIFY(factory->fullSyncs.at(1));
@@ -113,7 +114,7 @@ private Q_SLOTS:
         scheduler.scheduleCollection(col2, true);
 
         //Wait for ready signal (indicates that indexing is complete)
-        QTRY_VERIFY(statusSpy.count() == 1);
+        QTRY_COMPARE(statusSpy.count(), 1);
         QCOMPARE(factory->indexedCollections.size(), 2);
         QCOMPARE(factory->indexedCollections.at(0).id(), col1.id());
         QVERIFY(!factory->fullSyncs.at(0));
