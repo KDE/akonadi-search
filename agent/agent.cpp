@@ -45,7 +45,7 @@
 #include <KLocalizedString>
 #include <KGlobal>
 #include <KStandardDirs>
-#include <KDebug>
+#include <QDebug>
 
 #include <QFile>
 
@@ -116,7 +116,7 @@ BalooIndexingAgent::~BalooIndexingAgent()
 
 void BalooIndexingAgent::reindexAll()
 {
-    kDebug() << "Reindexing everything";
+    //qDebug() << "Reindexing everything";
     m_scheduler.abort();
     m_index.removeDatabase();
     m_index.createIndexers();
@@ -126,7 +126,7 @@ void BalooIndexingAgent::reindexAll()
 void BalooIndexingAgent::reindexCollection(const qlonglong id)
 {
     
-    kDebug() << "Reindexing collection " << id;
+    //qDebug() << "Reindexing collection " << id;
     m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
 }
 

@@ -27,8 +27,8 @@
 
 #include "emailindexer.h"
 #include "contactindexer.h"
-#include <../pim/search/email/emailsearchstore.h>
-#include <../pim/search/contact/contactsearchstore.h>
+#include <../search/email/emailsearchstore.h>
+#include <../search/contact/contactsearchstore.h>
 #include <query.h>
 
 Q_DECLARE_METATYPE(QSet<qint64>)

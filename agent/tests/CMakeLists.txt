@@ -5,12 +5,10 @@ include_directories(
 add_executable(emailindexer emailtest.cpp ../emailindexer.cpp ../abstractindexer.cpp)
 
 target_link_libraries(emailindexer
-  Qt5::Core
   Qt5::Test
   KF5::AkonadiCore
   KF5::AkonadiMime
-  KF5::KMime
-  KF5::ItemModels
-  KF5::KDELibs4Support
-  ${XAPIAN_LIBRARIES}
+  KF5::Mime
+  BalooPimCore
+  BalooPimXapian
 )

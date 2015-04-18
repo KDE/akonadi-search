@@ -24,8 +24,8 @@
 #include <collectionindexingjob.h>
 
 #include <QTest>
-#include <Akonadi/Collection>
-#include <Akonadi/ServerManager>
+#include <AkonadiCore/Collection>
+#include <AkonadiCore/ServerManager>
 #include <akonadi/qtest_akonadi.h>
 #include <KConfigGroup>
 #define QT_NO_KEYWORDS
