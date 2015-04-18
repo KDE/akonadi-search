@@ -160,6 +160,12 @@ void Scheduler::slotRootCollectionsFetched(KJob* kjob)
         }
         scheduleCollection(c, true);
     }
+
+    // If we did not schedule any collection
+    if (m_collectionQueue.isEmpty()) {
+        qDebug() << "No collections scheduled";
+        status(Akonadi::AgentBase::Idle, i18n("Ready"));
+    }
 }
 
 void Scheduler::slotCollectionsToIndexFetched(KJob* kjob)
