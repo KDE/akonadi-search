@@ -278,6 +278,8 @@ private Q_SLOTS:
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
             emailIndexer.index(item);
         }
+        emailIndexer.commit();
+
         //Contact item
         {
             KContacts::Addressee addressee;
@@ -335,6 +337,7 @@ private Q_SLOTS:
             item.setParentCollection(Akonadi::Collection(4));
             contactIndexer.index(item);
         }
+        contactIndexer.commit();
 
 
         //Note item
@@ -419,8 +422,8 @@ private Q_SLOTS:
             item.setPayload<KCalCore::Event::Ptr>(event);
             item.setParentCollection(Akonadi::Collection(6));
             calendarIndexer.index(item);
-
         }
+        calendarIndexer.commit();
 
 
         Baloo::EmailSearchStore *emailSearchStore = new Baloo::EmailSearchStore();
