@@ -34,7 +34,8 @@
 
 using namespace Baloo::PIM;
 
-class ContactQuery::Private {
+class ContactQuery::Private
+{
 public:
     QString name;
     QString nick;
@@ -58,27 +59,27 @@ ContactQuery::~ContactQuery()
     delete d;
 }
 
-void ContactQuery::matchName(const QString& name)
+void ContactQuery::matchName(const QString &name)
 {
     d->name = name;
 }
 
-void ContactQuery::matchNickname(const QString& nick)
+void ContactQuery::matchNickname(const QString &nick)
 {
     d->nick = nick;
 }
 
-void ContactQuery::matchEmail(const QString& email)
+void ContactQuery::matchEmail(const QString &email)
 {
     d->email = email;
 }
 
-void ContactQuery::matchUID(const QString& uid)
+void ContactQuery::matchUID(const QString &uid)
 {
     d->uid = uid;
 }
 
-void ContactQuery::match(const QString& str)
+void ContactQuery::match(const QString &str)
 {
     d->any = str;
 }
@@ -110,13 +111,13 @@ ResultIterator ContactQuery::exec()
 
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());
-    } catch (const Xapian::DatabaseOpeningError&) {
+    } catch (const Xapian::DatabaseOpeningError &) {
         qWarning() << "Xapian Database does not exist at " << dir;
         return ResultIterator();
-    } catch (const Xapian::DatabaseCorruptError&) {
+    } catch (const Xapian::DatabaseCorruptError &) {
         qWarning() << "Xapian Database corrupted";
         return ResultIterator();
-    } catch (const Xapian::DatabaseError& e) {
+    } catch (const Xapian::DatabaseError &e) {
         qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     } catch (...) {
@@ -150,8 +151,7 @@ ResultIterator ContactQuery::exec()
         if (!d->uid.isEmpty()) {
             m_queries << Xapian::Query(d->uid.toStdString());
         }
-    }
-    else if (d->criteria == StartsWithMatch) {
+    } else if (d->criteria == StartsWithMatch) {
         if (!d->any.isEmpty()) {
             Xapian::QueryParser parser;
             parser.set_database(db);
@@ -197,16 +197,16 @@ ResultIterator ContactQuery::exec()
         Xapian::Enquire enquire(db);
         enquire.set_query(query);
 
-        if (d->limit == 0)
+        if (d->limit == 0) {
             d->limit = 10000;
+        }
 
         Xapian::MSet matches = enquire.get_mset(0, d->limit);
 
         ResultIterator iter;
         iter.d->init(matches);
         return iter;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         return ResultIterator();
     }

@@ -40,17 +40,16 @@ class CollectionQueryTest : public QObject
 private:
     QString collectionsDir;
 
-    bool removeDir(const QString & dirName)
+    bool removeDir(const QString &dirName)
     {
         bool result = true;
         QDir dir(dirName);
 
         if (dir.exists(dirName)) {
-            Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+            Q_FOREACH (QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
                 if (info.isDir()) {
                     result = removeDir(info.absoluteFilePath());
-                }
-                else {
+                } else {
                     result = QFile::remove(info.absoluteFilePath());
                 }
 
@@ -67,18 +66,21 @@ private:
     Index index;
 
 private Q_SLOTS:
-    void init() {
+    void init()
+    {
         dbPrefix = QDir::tempPath() + QLatin1String("/collectiontest");
         index.setOverrideDbPrefixPath(dbPrefix);
         index.createIndexers();
 
     }
 
-    void cleanup() {
+    void cleanup()
+    {
         removeDir(dbPrefix);
     }
 
-    void searchByName() {
+    void searchByName()
+    {
         Akonadi::Collection col1(3);
         col1.setName(QLatin1String("col3"));
         index.index(col1);
@@ -89,7 +91,7 @@ private Q_SLOTS:
         index.index(col2);
 
         Baloo::PIM::CollectionQuery query;
-        query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+        query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
         query.nameMatches(col1.name());
         Baloo::PIM::ResultIterator it = query.exec();
         QList<qint64> results;
@@ -101,7 +103,8 @@ private Q_SLOTS:
         QCOMPARE(results.at(0), col1.id());
     }
 
-    void searchHierarchy() {
+    void searchHierarchy()
+    {
         Akonadi::Collection col1(1);
         col1.setName(QLatin1String("col1"));
         index.index(col1);
@@ -113,7 +116,7 @@ private Q_SLOTS:
 
         {
             Baloo::PIM::CollectionQuery query;
-            query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+            query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(col1.name());
             Baloo::PIM::ResultIterator it = query.exec();
             QList<qint64> results;
@@ -128,7 +131,7 @@ private Q_SLOTS:
         }
         {
             Baloo::PIM::CollectionQuery query;
-            query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+            query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/col1/col2"));
             Baloo::PIM::ResultIterator it = query.exec();
             QList<qint64> results;
@@ -153,7 +156,8 @@ private Q_SLOTS:
         return results;
     }
 
-    void collectionChanged() {
+    void collectionChanged()
+    {
         Akonadi::Collection col1(1);
         col1.setName(QLatin1String("col1"));
         index.index(col1);
@@ -178,7 +182,7 @@ private Q_SLOTS:
         //Old name gone
         {
             Baloo::PIM::CollectionQuery query;
-            query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+            query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.nameMatches(QLatin1String("col1"));
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 0);
@@ -186,7 +190,7 @@ private Q_SLOTS:
         //New name
         {
             Baloo::PIM::CollectionQuery query;
-            query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+            query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.nameMatches(QLatin1String("colX"));
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 1);
@@ -195,7 +199,7 @@ private Q_SLOTS:
         //Old path gone
         {
             Baloo::PIM::CollectionQuery query;
-            query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+            query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/col1/col2"));
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 0);
@@ -203,7 +207,7 @@ private Q_SLOTS:
         //New paths
         {
             Baloo::PIM::CollectionQuery query;
-            query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+            query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/colX/col2"));
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 2);
@@ -212,7 +216,7 @@ private Q_SLOTS:
         }
         {
             Baloo::PIM::CollectionQuery query;
-            query.setDatabaseDir(dbPrefix+QLatin1String("/collections/"));
+            query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/colX/col2/col3"));
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 1);

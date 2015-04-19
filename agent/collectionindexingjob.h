@@ -38,7 +38,7 @@ class CollectionIndexingJob : public KJob
 {
     Q_OBJECT
 public:
-    explicit CollectionIndexingJob(Index& index, const Akonadi::Collection& col, const QList<Akonadi::Item::Id>& pending, QObject* parent = 0);
+    explicit CollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, QObject *parent = 0);
     void setFullSync(bool);
     virtual void start();
 
@@ -47,21 +47,21 @@ Q_SIGNALS:
     void percent(int);
 
 private Q_SLOTS:
-    void slotOnCollectionFetched(KJob*);
-    void slotPendingItemsReceived(const Akonadi::Item::List& items);
-    void slotPendingIndexed(KJob*);
-    void slotUnindexedItemsReceived(const Akonadi::Item::List& items);
-    void slotFoundUnindexed(KJob*);
+    void slotOnCollectionFetched(KJob *);
+    void slotPendingItemsReceived(const Akonadi::Item::List &items);
+    void slotPendingIndexed(KJob *);
+    void slotUnindexedItemsReceived(const Akonadi::Item::List &items);
+    void slotFoundUnindexed(KJob *);
 
 private:
     void findUnindexed();
-    void indexItems(const QList<Akonadi::Item::Id>&itemIds);
+    void indexItems(const QList<Akonadi::Item::Id> &itemIds);
 
     Akonadi::Collection m_collection;
     QList<Akonadi::Item::Id> m_pending;
     QSet<Akonadi::Item::Id> m_indexedItems;
     QList<Akonadi::Item::Id> m_needsIndexing;
-    Index& m_index;
+    Index &m_index;
     QTime m_time;
     bool m_reindexingLock;
     bool m_fullSync;

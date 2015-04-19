@@ -30,7 +30,7 @@ ResultIterator::ResultIterator()
     d->m_firstElement = false;
 }
 
-ResultIterator::ResultIterator(const ResultIterator& ri)
+ResultIterator::ResultIterator(const ResultIterator &ri)
     : d(new Private(*ri.d))
 {
 }
@@ -42,8 +42,9 @@ ResultIterator::~ResultIterator()
 
 bool ResultIterator::next()
 {
-    if (d->m_iter == d->m_end)
+    if (d->m_iter == d->m_end) {
         return false;
+    }
 
     if (d->m_firstElement) {
         d->m_iter = d->m_mset.begin();

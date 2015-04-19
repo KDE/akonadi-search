@@ -33,17 +33,18 @@
 #include <ItemFetchScope>
 #include <Item>
 
-class App : public QApplication {
+class App : public QApplication
+{
     Q_OBJECT
 public:
-    App(int& argc, char** argv, int flags = ApplicationFlags);
+    App(int &argc, char **argv, int flags = ApplicationFlags);
 
 private Q_SLOTS:
     void main();
 
-    void slotRootCollectionsFetched(KJob* job);
+    void slotRootCollectionsFetched(KJob *job);
     void indexNextCollection();
-    void itemReceived(const Akonadi::Item::List& item);
+    void itemReceived(const Akonadi::Item::List &item);
     void slotIndexed();
     void slotCommitTimerElapsed();
 
@@ -58,13 +59,13 @@ private:
     QTimer m_commitTimer;
 };
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     App app(argc, argv);
     return app.exec();
 }
 
-App::App(int& argc, char** argv, int flags)
+App::App(int &argc, char **argv, int flags)
     : QApplication(argc, argv, flags)
     , m_indexer(QLatin1String("/tmp/xap"), QLatin1String("/tmp/xapC"))
 {
@@ -77,8 +78,8 @@ void App::main()
     connect(&m_commitTimer, SIGNAL(timeout()), this, SLOT(slotCommitTimerElapsed()));
     m_commitTimer.start();
 
-    Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                                                                       Akonadi::CollectionFetchJob::Recursive);
+    Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
+            Akonadi::CollectionFetchJob::Recursive);
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotRootCollectionsFetched(KJob*)));
     job->start();
 
@@ -87,23 +88,23 @@ void App::main()
     m_totalTime.start();
 }
 
-void App::slotRootCollectionsFetched(KJob* kjob)
+void App::slotRootCollectionsFetched(KJob *kjob)
 {
-    Akonadi::CollectionFetchJob* job = qobject_cast<Akonadi::CollectionFetchJob*>(kjob);
+    Akonadi::CollectionFetchJob *job = qobject_cast<Akonadi::CollectionFetchJob *>(kjob);
     m_collections = job->collections();
 
     QMutableListIterator<Akonadi::Collection> it(m_collections);
     while (it.hasNext()) {
-        const Akonadi::Collection& c = it.next();
+        const Akonadi::Collection &c = it.next();
         const QStringList mimeTypes = c.contentMimeTypes();
-        if (!c.contentMimeTypes().contains(QLatin1String("message/rfc822")))
+        if (!c.contentMimeTypes().contains(QLatin1String("message/rfc822"))) {
             it.remove();
+        }
     }
 
     if (m_collections.size()) {
         indexNextCollection();
-    }
-    else {
+    } else {
         qDebug() << "No collections to index";
     }
 }
@@ -121,12 +122,12 @@ void App::indexNextCollection()
     connect(fetchJob, SIGNAL(result(KJob*)), this, SLOT(slotIndexed()));
 }
 
-void App::itemReceived(const Akonadi::Item::List& itemList)
+void App::itemReceived(const Akonadi::Item::List &itemList)
 {
     QTime timer;
     timer.start();
 
-    Q_FOREACH (const Akonadi::Item& item, itemList) {
+    Q_FOREACH (const Akonadi::Item &item, itemList) {
         m_indexer.index(item);
     }
 
@@ -143,8 +144,8 @@ void App::slotCommitTimerElapsed()
     m_indexTime += timer.elapsed();
 
     qDebug() << "Emails:" << m_numEmails;
-    qDebug() << "Total Time:" << m_totalTime.elapsed()/1000.0 << " seconds";
-    qDebug() << "Index Time:" << m_indexTime/1000.0 << " seconds";
+    qDebug() << "Total Time:" << m_totalTime.elapsed() / 1000.0 << " seconds";
+    qDebug() << "Index Time:" << m_indexTime / 1000.0 << " seconds";
 }
 
 void App::slotIndexed()
@@ -157,8 +158,8 @@ void App::slotIndexed()
     m_indexer.commit();
 
     qDebug() << "Emails:" << m_numEmails;
-    qDebug() << "Total Time:" << m_totalTime.elapsed()/1000.0 << " seconds";
-    qDebug() << "Index Time:" << m_indexTime/1000.0 << " seconds";
+    qDebug() << "Total Time:" << m_totalTime.elapsed() / 1000.0 << " seconds";
+    qDebug() << "Index Time:" << m_indexTime / 1000.0 << " seconds";
 
     // Print the io usage
     QFile file(QLatin1String("/proc/self/io"));
@@ -200,6 +201,5 @@ void App::slotIndexed()
              << "cache and /tmp being memory mapped";
     quit();
 }
-
 
 #include "emailtest.moc"

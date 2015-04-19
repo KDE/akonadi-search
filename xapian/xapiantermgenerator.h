@@ -25,24 +25,25 @@
 #include <xapian.h>
 #include "xapian_export.h"
 
-namespace Baloo {
+namespace Baloo
+{
 
 class BALOO_XAPIAN_EXPORT XapianTermGenerator
 {
 public:
-    XapianTermGenerator(Xapian::Document* doc);
+    XapianTermGenerator(Xapian::Document *doc);
 
-    void indexText(const QString& text);
-    void indexText(const QString& text, const QString& prefix, int wdfInc = 1);
+    void indexText(const QString &text);
+    void indexText(const QString &text, const QString &prefix, int wdfInc = 1);
 
     void setPosition(int position);
     int position() const;
 
-    void setDocument(Xapian::Document* doc);
+    void setDocument(Xapian::Document *doc);
 
-    static QStringList termList(const QString& text);
+    static QStringList termList(const QString &text);
 private:
-    Xapian::Document* m_doc;
+    Xapian::Document *m_doc;
     Xapian::TermGenerator m_termGen;
 
     int m_position;

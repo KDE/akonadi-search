@@ -30,14 +30,13 @@
 #include <AkonadiCore/CollectionStatistics>
 #include <KLocalizedString>
 
-
-CollectionIndexingJob::CollectionIndexingJob(Index& index, const Akonadi::Collection& col, const QList< Akonadi::Entity::Id >& pending, QObject* parent)
-:   KJob(parent),
-    m_collection(col),
-    m_pending(pending),
-    m_index(index),
-    m_reindexingLock(false),
-    m_fullSync(true)
+CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList< Akonadi::Entity::Id > &pending, QObject *parent)
+    :   KJob(parent),
+        m_collection(col),
+        m_pending(pending),
+        m_index(index),
+        m_reindexingLock(false),
+        m_fullSync(true)
 {
 
 }
@@ -53,7 +52,7 @@ void CollectionIndexingJob::start()
     m_time.start();
 
     //Fetch collection for statistics
-    Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(m_collection, Akonadi::CollectionFetchJob::Base);
+    Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(m_collection, Akonadi::CollectionFetchJob::Base);
     job->fetchScope().setIncludeStatistics(true);
     job->fetchScope().setIncludeUnsubscribed(true);
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotOnCollectionFetched(KJob*)));
@@ -68,7 +67,7 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
         emitResult();
         return;
     }
-    m_collection = static_cast<Akonadi::CollectionFetchJob*>(job)->collections().first();
+    m_collection = static_cast<Akonadi::CollectionFetchJob *>(job)->collections().first();
     Q_EMIT status(Akonadi::AgentBase::Running, i18n("Indexing collection: %1", m_collection.displayName()));
     Q_EMIT percent(0);
 
@@ -90,14 +89,14 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
     indexItems(m_pending);
 }
 
-void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id>& itemIds)
+void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds)
 {
     Akonadi::Item::List items;
     Q_FOREACH (const Akonadi::Item::Id id, itemIds) {
         items << Akonadi::Item(id);
     }
 
-    Akonadi::ItemFetchJob* fetchJob = new Akonadi::ItemFetchJob(items);
+    Akonadi::ItemFetchJob *fetchJob = new Akonadi::ItemFetchJob(items);
     fetchJob->fetchScope().fetchFullPayload(true);
     fetchJob->fetchScope().setCacheOnly(true);
     fetchJob->fetchScope().setIgnoreRetrievalErrors(true);
@@ -116,9 +115,9 @@ void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id>& itemIds)
     fetchJob->start();
 }
 
-void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List& items)
+void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List &items)
 {
-    Q_FOREACH (const Akonadi::Item& item, items) {
+    Q_FOREACH (const Akonadi::Item &item, items) {
         m_index.index(item);
     }
     m_progressCounter++;
@@ -167,7 +166,7 @@ void CollectionIndexingJob::findUnindexed()
     m_index.findIndexed(m_indexedItems, m_collection.id());
     qDebug() << "Found " << m_indexedItems.size() << " indexed items. Took (ms): " << m_time.elapsed() - start;
 
-    Akonadi::ItemFetchJob* job = new Akonadi::ItemFetchJob(m_collection, this);
+    Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(m_collection, this);
     job->fetchScope().fetchFullPayload(false);
     job->fetchScope().setCacheOnly(true);
     job->fetchScope().setIgnoreRetrievalErrors(true);
@@ -182,9 +181,9 @@ void CollectionIndexingJob::findUnindexed()
     job->start();
 }
 
-void CollectionIndexingJob::slotUnindexedItemsReceived(const Akonadi::Item::List& items)
+void CollectionIndexingJob::slotUnindexedItemsReceived(const Akonadi::Item::List &items)
 {
-    Q_FOREACH (const Akonadi::Item& item, items) {
+    Q_FOREACH (const Akonadi::Item &item, items) {
         if (!m_indexedItems.remove(item.id())) {
             m_needsIndexing << item.id();
         }

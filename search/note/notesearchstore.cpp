@@ -26,7 +26,7 @@
 
 using namespace Baloo;
 
-NoteSearchStore::NoteSearchStore(QObject* parent)
+NoteSearchStore::NoteSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
     m_prefix.insert(QLatin1String("subject"), QLatin1String("SU"));

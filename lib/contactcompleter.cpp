@@ -30,7 +30,7 @@
 
 using namespace Baloo::PIM;
 
-ContactCompleter::ContactCompleter(const QString& prefix, int limit)
+ContactCompleter::ContactCompleter(const QString &prefix, int limit)
     : m_prefix(prefix.toLower())
     , m_limit(limit)
 {
@@ -43,20 +43,19 @@ QStringList ContactCompleter::complete()
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());
-    } catch (const Xapian::DatabaseOpeningError&) {
+    } catch (const Xapian::DatabaseOpeningError &) {
         qWarning() << "Xapian Database does not exist at " << dir;
         return QStringList();
-    } catch (const Xapian::DatabaseCorruptError&) {
+    } catch (const Xapian::DatabaseCorruptError &) {
         qWarning() << "Xapian Database corrupted";
         return QStringList();
-    } catch (const Xapian::DatabaseError& e) {
+    } catch (const Xapian::DatabaseError &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         return QStringList();
     } catch (...) {
         qWarning() << "Random exception, but we do not want to crash";
         return QStringList();
     }
-
 
     Xapian::QueryParser parser;
     parser.set_database(db);

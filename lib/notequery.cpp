@@ -30,10 +30,10 @@
 #include <QFile>
 #include <QDebug>
 
-
 using namespace Baloo::PIM;
 
-class NoteQuery::Private {
+class NoteQuery::Private
+{
 public:
     Private()
         : limit(0)
@@ -84,13 +84,13 @@ ResultIterator NoteQuery::exec()
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());
-    } catch (const Xapian::DatabaseOpeningError&) {
+    } catch (const Xapian::DatabaseOpeningError &) {
         qWarning() << "Xapian Database does not exist at " << dir;
         return ResultIterator();
-    } catch (const Xapian::DatabaseCorruptError&) {
+    } catch (const Xapian::DatabaseCorruptError &) {
         qWarning() << "Xapian Database corrupted";
         return ResultIterator();
-    } catch (const Xapian::DatabaseError& e) {
+    } catch (const Xapian::DatabaseError &e) {
         qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     } catch (...) {
@@ -125,16 +125,16 @@ ResultIterator NoteQuery::exec()
         Xapian::Enquire enquire(db);
         enquire.set_query(query);
 
-        if (d->limit == 0)
+        if (d->limit == 0) {
             d->limit = 10000;
+        }
 
         Xapian::MSet matches = enquire.get_mset(0, d->limit);
 
         ResultIterator iter;
         iter.d->init(matches);
         return iter;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         return ResultIterator();
     }

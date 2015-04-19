@@ -27,7 +27,8 @@
 #include <akonadi/abstractsearchplugin.h>
 #include <QObject>
 
-namespace Baloo {
+namespace Baloo
+{
 class Query;
 }
 
@@ -37,7 +38,7 @@ class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
     Q_INTERFACES(Akonadi::AbstractSearchPlugin)
     Q_PLUGIN_METADATA(IID "org.kde.akonadi.SearchPlugin");
 public:
-    virtual QSet<qint64> search( const QString &query, const QList<qint64> &collections, const QStringList &mimeTypes );
+    virtual QSet<qint64> search(const QString &query, const QList<qint64> &collections, const QStringList &mimeTypes);
 private:
     Baloo::Query fromAkonadiQuery(const QString &akonadiQuery, const QList<qint64> &collections, const QStringList &mimeTypes);
 };

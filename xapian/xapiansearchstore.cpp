@@ -34,7 +34,7 @@
 
 using namespace Baloo;
 
-XapianSearchStore::XapianSearchStore(QObject* parent)
+XapianSearchStore::XapianSearchStore(QObject *parent)
     : SearchStore(parent)
     , m_mutex(QMutex::Recursive)
     , m_nextId(1)
@@ -47,7 +47,7 @@ XapianSearchStore::~XapianSearchStore()
     delete m_db;
 }
 
-void XapianSearchStore::setDbPath(const QString& path)
+void XapianSearchStore::setDbPath(const QString &path)
 {
     m_dbPath = path;
 
@@ -56,14 +56,11 @@ void XapianSearchStore::setDbPath(const QString& path)
 
     try {
         m_db = new Xapian::Database(m_dbPath.toUtf8().constData());
-    }
-    catch (const Xapian::DatabaseOpeningError&) {
+    } catch (const Xapian::DatabaseOpeningError &) {
         qWarning() << "Xapian Database does not exist at " << m_dbPath;
-    }
-    catch (const Xapian::DatabaseCorruptError&) {
+    } catch (const Xapian::DatabaseCorruptError &) {
         qWarning() << "Xapian Database corrupted at " << m_dbPath;
-    }
-    catch (...) {
+    } catch (...) {
         qWarning() << "Random exception, but we do not want to crash";
     }
 }
@@ -73,7 +70,7 @@ QString XapianSearchStore::dbPath()
     return m_dbPath;
 }
 
-Xapian::Query XapianSearchStore::toXapianQuery(Xapian::Query::op op, const QList<Term>& terms)
+Xapian::Query XapianSearchStore::toXapianQuery(Xapian::Query::op op, const QList<Term> &terms)
 {
     Q_ASSERT_X(op == Xapian::Query::OP_AND || op == Xapian::Query::OP_OR,
                "XapianSearchStore::toXapianQuery", "The op must be AND / OR");
@@ -81,7 +78,7 @@ Xapian::Query XapianSearchStore::toXapianQuery(Xapian::Query::op op, const QList
     QVector<Xapian::Query> queries;
     queries.reserve(terms.size());
 
-    Q_FOREACH (const Term& term, terms) {
+    Q_FOREACH (const Term &term, terms) {
         Xapian::Query q = toXapianQuery(term);
         queries << q;
     }
@@ -97,7 +94,7 @@ static Xapian::Query negate(bool shouldNegate, const Xapian::Query &query)
     return query;
 }
 
-Xapian::Query XapianSearchStore::toXapianQuery(const Term& term)
+Xapian::Query XapianSearchStore::toXapianQuery(const Term &term)
 {
     if (term.operation() == Term::And) {
         return negate(term.isNegated(), toXapianQuery(Xapian::Query::OP_AND, term.subTerms()));
@@ -109,37 +106,40 @@ Xapian::Query XapianSearchStore::toXapianQuery(const Term& term)
     return negate(term.isNegated(), constructQuery(term.property(), term.value(), term.comparator()));
 }
 
-Xapian::Query XapianSearchStore::andQuery(const Xapian::Query& a, const Xapian::Query& b)
+Xapian::Query XapianSearchStore::andQuery(const Xapian::Query &a, const Xapian::Query &b)
 {
-    if (a.empty() && !b.empty())
+    if (a.empty() && !b.empty()) {
         return b;
-    if (!a.empty() && b.empty())
+    }
+    if (!a.empty() && b.empty()) {
         return a;
-    if (a.empty() && b.empty())
+    }
+    if (a.empty() && b.empty()) {
         return Xapian::Query();
-    else
+    } else {
         return Xapian::Query(Xapian::Query::OP_AND, a, b);
+    }
 }
 
-
-Xapian::Query XapianSearchStore::constructSearchQuery(const QString& str)
+Xapian::Query XapianSearchStore::constructSearchQuery(const QString &str)
 {
     XapianQueryParser parser;
     parser.setDatabase(m_db);
     return parser.parseQuery(str);
 }
 
-int XapianSearchStore::exec(const Query& query)
+int XapianSearchStore::exec(const Query &query)
 {
-    if (!m_db)
+    if (!m_db) {
         return 0;
+    }
 
     while (1) {
         try {
             QMutexLocker lock(&m_mutex);
             try {
                 m_db->reopen();
-            } catch (Xapian::DatabaseError& e) {
+            } catch (Xapian::DatabaseError &e) {
                 qDebug() << "Failed to reopen database" << dbPath() << ":" <<  QString::fromStdString(e.get_msg());
                 return 0;
             }
@@ -173,16 +173,14 @@ int XapianSearchStore::exec(const Query& query)
                 enquire.set_weighting_scheme(Xapian::BoolWeight());
             }
 
-            Result& res = m_queryMap[m_nextId++];
+            Result &res = m_queryMap[m_nextId++];
             res.mset = enquire.get_mset(query.offset(), query.limit());
             res.it = res.mset.begin();
 
-            return m_nextId-1;
-        }
-        catch (const Xapian::DatabaseModifiedError&) {
+            return m_nextId - 1;
+        } catch (const Xapian::DatabaseModifiedError &) {
             continue;
-        }
-        catch (const Xapian::Error&) {
+        } catch (const Xapian::Error &) {
             return 0;
         }
     }
@@ -203,8 +201,9 @@ QByteArray XapianSearchStore::id(int queryId)
                "Passed a queryId which does not exist");
 
     const Result res = m_queryMap.value(queryId);
-    if (!res.lastId)
+    if (!res.lastId) {
         return QByteArray();
+    }
 
     return serialize(idPrefix(), res.lastId);
 }
@@ -212,13 +211,15 @@ QByteArray XapianSearchStore::id(int queryId)
 QUrl XapianSearchStore::url(int queryId)
 {
     QMutexLocker lock(&m_mutex);
-    Result& res = m_queryMap[queryId];
+    Result &res = m_queryMap[queryId];
 
-    if (!res.lastId)
+    if (!res.lastId) {
         return QUrl();
+    }
 
-    if (!res.lastUrl.isEmpty())
+    if (!res.lastUrl.isEmpty()) {
         return res.lastUrl;
+    }
 
     res.lastUrl = constructUrl(res.lastId);
     return res.lastUrl;
@@ -226,18 +227,18 @@ QUrl XapianSearchStore::url(int queryId)
 
 bool XapianSearchStore::next(int queryId)
 {
-    if (!m_db)
+    if (!m_db) {
         return false;
+    }
 
     QMutexLocker lock(&m_mutex);
-    Result& res = m_queryMap[queryId];
+    Result &res = m_queryMap[queryId];
 
     bool atEnd = (res.it == res.mset.end());
     if (atEnd) {
         res.lastId = 0;
         res.lastUrl.clear();
-    }
-    else {
+    } else {
         res.lastId = *res.it;
         res.lastUrl.clear();
         ++res.it;
@@ -248,31 +249,30 @@ bool XapianSearchStore::next(int queryId)
 
 Xapian::Document XapianSearchStore::docForQuery(int queryId)
 {
-    if (!m_db)
+    if (!m_db) {
         return Xapian::Document();
+    }
 
     QMutexLocker lock(&m_mutex);
 
     try {
-        const Result& res = m_queryMap.value(queryId);
-        if (!res.lastId)
+        const Result &res = m_queryMap.value(queryId);
+        if (!res.lastId) {
             return Xapian::Document();
+        }
 
         return m_db->get_document(res.lastId);
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return Xapian::Document();
-    }
-    catch (const Xapian::DatabaseModifiedError&) {
+    } catch (const Xapian::DatabaseModifiedError &) {
         m_db->reopen();
         return docForQuery(queryId);
-    }
-    catch (const Xapian::Error&) {
+    } catch (const Xapian::Error &) {
         return Xapian::Document();
     }
 }
 
-Xapian::Database* XapianSearchStore::xapianDb()
+Xapian::Database *XapianSearchStore::xapianDb()
 {
     return m_db;
 }
@@ -285,12 +285,12 @@ Xapian::Query XapianSearchStore::constructFilterQuery(int year, int month, int d
     return Xapian::Query();
 }
 
-Xapian::Query XapianSearchStore::finalizeQuery(const Xapian::Query& query)
+Xapian::Query XapianSearchStore::finalizeQuery(const Xapian::Query &query)
 {
     return query;
 }
 
-Xapian::Query XapianSearchStore::applyCustomOptions(const Xapian::Query& q, const QVariantMap& options)
+Xapian::Query XapianSearchStore::applyCustomOptions(const Xapian::Query &q, const QVariantMap &options)
 {
     Q_UNUSED(options);
     return q;

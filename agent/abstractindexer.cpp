@@ -29,18 +29,18 @@ AbstractIndexer::~AbstractIndexer()
 {
 }
 
-void AbstractIndexer::move(const Akonadi::Item::Id& item,
-                           const Akonadi::Entity::Id& from,
-                           const Akonadi::Entity::Id& to)
+void AbstractIndexer::move(const Akonadi::Item::Id &item,
+                           const Akonadi::Entity::Id &from,
+                           const Akonadi::Entity::Id &to)
 {
     Q_UNUSED(item);
     Q_UNUSED(from);
     Q_UNUSED(to);
 }
 
-void AbstractIndexer::updateFlags(const Akonadi::Item& item,
-                                  const QSet<QByteArray>& addedFlags,
-                                  const QSet<QByteArray>& removed)
+void AbstractIndexer::updateFlags(const Akonadi::Item &item,
+                                  const QSet<QByteArray> &addedFlags,
+                                  const QSet<QByteArray> &removed)
 {
     Q_UNUSED(item);
     Q_UNUSED(addedFlags);

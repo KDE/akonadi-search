@@ -34,19 +34,20 @@
 
 using namespace Baloo::PIM;
 
-class App : public QCoreApplication {
+class App : public QCoreApplication
+{
     Q_OBJECT
 public:
-    App(int& argc, char** argv, int flags = ApplicationFlags);
+    App(int &argc, char **argv, int flags = ApplicationFlags);
 
     QString m_query;
 
 private Q_SLOTS:
     void main();
-    void itemsReceived(const Akonadi::Item::List& item);
+    void itemsReceived(const Akonadi::Item::List &item);
 };
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     App app(argc, argv);
 
@@ -58,7 +59,7 @@ int main(int argc, char** argv)
     return app.exec();
 }
 
-App::App(int& argc, char** argv, int flags): QCoreApplication(argc, argv, flags)
+App::App(int &argc, char **argv, int flags): QCoreApplication(argc, argv, flags)
 {
     QTimer::singleShot(0, this, SLOT(main()));
 }
@@ -82,7 +83,7 @@ void App::main()
         return;
     }
 
-    Akonadi::ItemFetchJob* job = new Akonadi::ItemFetchJob(m_akonadiIds);
+    Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(m_akonadiIds);
     job->fetchScope().fetchFullPayload(true);
 
     connect(job, SIGNAL(itemsReceived(Akonadi::Item::List)),
@@ -93,14 +94,13 @@ void App::main()
     job->start();
 }
 
-void App::itemsReceived(const Akonadi::Item::List& itemList)
+void App::itemsReceived(const Akonadi::Item::List &itemList)
 {
-    Q_FOREACH (const Akonadi::Item& item, itemList) {
+    Q_FOREACH (const Akonadi::Item &item, itemList) {
         KMime::Message::Ptr message = item.payload<KMime::Message::Ptr>();
         QDateTime date = message->date()->dateTime();
         qDebug() << date.toString(Qt::ISODate) << message->subject()->asUnicodeString();
     }
 }
-
 
 #include "emailquerytest.moc"

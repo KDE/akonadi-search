@@ -29,8 +29,10 @@
 #include <QStringList>
 #include <Collection>
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 
 class BALOO_PIM_EXPORT EmailQuery : public Query
 {
@@ -47,22 +49,22 @@ public:
 
     void setSearchType(OpType op);
 
-    void setInvolves(const QStringList& involves);
-    void addInvolves(const QString& email);
+    void setInvolves(const QStringList &involves);
+    void addInvolves(const QString &email);
 
-    void setTo(const QStringList& to);
-    void addTo(const QString& to);
+    void setTo(const QStringList &to);
+    void addTo(const QString &to);
 
-    void setFrom(const QString& from);
-    void addFrom(const QString& from);
+    void setFrom(const QString &from);
+    void addFrom(const QString &from);
 
-    void setCc(const QStringList& cc);
-    void addCc(const QString& cc);
+    void setCc(const QStringList &cc);
+    void addCc(const QString &cc);
 
-    void setBcc(const QStringList& bcc);
-    void addBcc(const QString& bcc);
+    void setBcc(const QStringList &bcc);
+    void addBcc(const QString &bcc);
 
-    void setCollection(const QList<Akonadi::Collection::Id>& collections);
+    void setCollection(const QList<Akonadi::Collection::Id> &collections);
     void addCollection(Akonadi::Collection::Id id);
 
     /**
@@ -84,19 +86,18 @@ public:
      * Matches the string \p match anywhere in the entire email
      * body
      */
-    void matches(const QString& match);
+    void matches(const QString &match);
 
     /**
      * Matches the string \p subjectMatch specifically in the
      * email subject
      */
-    void subjectMatches(const QString& subjectMatch);
+    void subjectMatches(const QString &subjectMatch);
 
     /**
      * Matches the string \p bodyMatch specifically in the body email
      */
-    void bodyMatches(const QString& bodyMatch);
-
+    void bodyMatches(const QString &bodyMatch);
 
     void setLimit(int limit);
     int limit() const;
@@ -110,7 +111,7 @@ public:
 private:
     //@cond PRIVATE
     class Private;
-    Private * const d;
+    Private *const d;
     //@endcond
 };
 

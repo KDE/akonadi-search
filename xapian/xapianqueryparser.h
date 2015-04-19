@@ -25,20 +25,21 @@
 #include <xapian.h>
 #include "xapian_export.h"
 
-namespace Baloo {
+namespace Baloo
+{
 
 class BALOO_XAPIAN_EXPORT XapianQueryParser
 {
 public:
     XapianQueryParser();
 
-    void setDatabase(Xapian::Database* db);
-    Xapian::Query parseQuery(const QString& str, const QString& prefix = QString());
+    void setDatabase(Xapian::Database *db);
+    Xapian::Query parseQuery(const QString &str, const QString &prefix = QString());
 
     /**
      * Expands word to every possible option which it can be expanded to.
      */
-    Xapian::Query expandWord(const QString& word, const QString& prefix = QString());
+    Xapian::Query expandWord(const QString &word, const QString &prefix = QString());
 
     /**
      * Set if each word in the string should be treated as a partial word
@@ -47,7 +48,7 @@ public:
     void setAutoExapand(bool autoexpand);
 
 private:
-    Xapian::Database* m_db;
+    Xapian::Database *m_db;
     bool m_autoExpand;
 };
 

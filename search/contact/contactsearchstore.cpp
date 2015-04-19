@@ -26,14 +26,13 @@
 
 using namespace Baloo;
 
-ContactSearchStore::ContactSearchStore(QObject* parent)
+ContactSearchStore::ContactSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
     m_prefix.insert(QLatin1String("name"), QLatin1String("NA"));
     m_prefix.insert(QLatin1String("nick"), QLatin1String("NI"));
     m_prefix.insert(QLatin1String("email"), QLatin1String("")); // Email currently doesn't map to anything
     m_prefix.insert(QLatin1String("collection"), QLatin1String("C"));
-
 
     m_valueProperties.insert(QLatin1String("birthday"), 0);
     m_valueProperties.insert(QLatin1String("anniversary"), 1);

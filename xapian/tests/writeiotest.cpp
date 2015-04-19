@@ -34,13 +34,13 @@
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
 
     QCommandLineParser parser;
     parser.addPositionalArgument(QLatin1String("num"), QLatin1String("The number of terms. Each term is of length 10"));
-    parser.addOption(QCommandLineOption(QStringList () << "p" << "position", QStringLiteral("Add positional information")));
+    parser.addOption(QCommandLineOption(QStringList() << "p" << "position", QStringLiteral("Add positional information")));
     parser.addHelpOption();
     parser.process(app);
 
@@ -66,8 +66,7 @@ int main(int argc, char** argv)
         if (parser.isSet("p")) {
             std::string stdString(term.constData(), term.length());
             doc.doc().add_posting(stdString, i);
-        }
-        else {
+        } else {
             doc.addTerm(QString::fromUtf8(term));
         }
     }
@@ -77,7 +76,7 @@ int main(int argc, char** argv)
 
     int dbSize = 0;
     QDir dbDir(tempDir.path());
-    for (const QFileInfo& file : dbDir.entryInfoList(QDir::Files)) {
+    for (const QFileInfo &file : dbDir.entryInfoList(QDir::Files)) {
         qDebug() << file.fileName() << file.size() / 1024 << "kb";
         dbSize += file.size();
 

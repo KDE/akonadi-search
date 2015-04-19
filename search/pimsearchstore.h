@@ -28,25 +28,32 @@
 
 #include <QSet>
 
-namespace Baloo {
+namespace Baloo
+{
 
 class PIMSearchStore : public XapianSearchStore
 {
     Q_OBJECT
 public:
-    PIMSearchStore(QObject* parent = 0);
+    PIMSearchStore(QObject *parent = 0);
 
     virtual QStringList types();
 
 protected:
-    QString findDatabase(const QString& databasePath) const;
+    QString findDatabase(const QString &databasePath) const;
 
-    virtual Xapian::Query convertTypes(const QStringList&) { return Xapian::Query(); }
-    virtual QByteArray idPrefix() { return QByteArray("akonadi"); }
+    virtual Xapian::Query convertTypes(const QStringList &)
+    {
+        return Xapian::Query();
+    }
+    virtual QByteArray idPrefix()
+    {
+        return QByteArray("akonadi");
+    }
 
-    virtual Xapian::Query constructQuery(const QString& property, const QVariant& value,
+    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value,
                                          Term::Comparator com);
-    virtual QUrl constructUrl(const Xapian::docid& docid);
+    virtual QUrl constructUrl(const Xapian::docid &docid);
 
     QHash<QString, QString> m_prefix;
 

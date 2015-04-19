@@ -26,13 +26,16 @@
 #include "resultiterator.h"
 #include "xapian.h"
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 
 class ResultIterator::Private
 {
 public:
-    void init(const Xapian::MSet& mset) {
+    void init(const Xapian::MSet &mset)
+    {
         m_mset = mset;
         m_end = m_mset.end();
         m_iter = m_mset.begin();

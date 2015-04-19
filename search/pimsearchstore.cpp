@@ -32,7 +32,7 @@
 
 using namespace Baloo;
 
-PIMSearchStore::PIMSearchStore(QObject* parent) : XapianSearchStore(parent)
+PIMSearchStore::PIMSearchStore(QObject *parent) : XapianSearchStore(parent)
 {
 }
 
@@ -41,7 +41,7 @@ QStringList PIMSearchStore::types()
     return QStringList() << QLatin1String("Akonadi");
 }
 
-QString PIMSearchStore::findDatabase(const QString& dbName) const
+QString PIMSearchStore::findDatabase(const QString &dbName) const
 {
     QString basePath = QLatin1String("baloo");
 //    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
@@ -50,32 +50,36 @@ QString PIMSearchStore::findDatabase(const QString& dbName) const
     return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QString::fromLatin1("/%1/%2/").arg(basePath, dbName);
 }
 
-Xapian::Query PIMSearchStore::constructQuery(const QString& property, const QVariant& value,
-                                               Term::Comparator com)
+Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVariant &value,
+        Term::Comparator com)
 {
-    if (value.isNull())
+    if (value.isNull()) {
         return Xapian::Query();
+    }
 
     QString prop = property.toLower();
     if (m_boolProperties.contains(prop)) {
         QString p = m_prefix.value(prop);
-        if (p.isEmpty())
+        if (p.isEmpty()) {
             return Xapian::Query();
+        }
 
         std::string term("B");
         bool isTrue = false;
 
-        if (value.isNull() )
+        if (value.isNull()) {
             isTrue = true;
+        }
 
         if (value.type() == QVariant::Bool) {
             isTrue = value.toBool();
         }
 
-        if (isTrue)
+        if (isTrue) {
             term += p.toStdString();
-        else
+        } else {
             term += 'N' + p.toStdString();
+        }
 
         return Xapian::Query(term);
     }
@@ -83,7 +87,7 @@ Xapian::Query PIMSearchStore::constructQuery(const QString& property, const QVar
     if (m_boolWithValue.contains(prop)) {
         std::string term(m_prefix.value(prop).toStdString());
         std::string val(value.toString().toUtf8().constData());
-        return Xapian::Query(term+val);
+        return Xapian::Query(term + val);
     }
 
     if (m_valueProperties.contains(prop) && (com == Term::Equal || com == Term::Greater || com == Term::GreaterEqual || com == Term::Less || com == Term::LessEqual)) {
@@ -98,11 +102,9 @@ Xapian::Query PIMSearchStore::constructQuery(const QString& property, const QVar
         int valueNumber = m_valueProperties.value(prop);
         if (com == Term::GreaterEqual || com == Term::Greater) {
             return Xapian::Query(Xapian::Query::OP_VALUE_GE, valueNumber, QString::number(numVal).toStdString());
-        }
-        else if (com == Term::LessEqual || com == Term::Less) {
+        } else if (com == Term::LessEqual || com == Term::Less) {
             return Xapian::Query(Xapian::Query::OP_VALUE_LE, valueNumber, QString::number(numVal).toStdString());
-        }
-        else if (com == Term::Equal) {
+        } else if (com == Term::Equal) {
             const Xapian::Query gtQuery(Xapian::Query::OP_VALUE_GE, valueNumber, QString::number(numVal).toStdString());
             const Xapian::Query ltQuery(Xapian::Query::OP_VALUE_LE, valueNumber, QString::number(numVal).toStdString());
             return Xapian::Query(Xapian::Query::OP_AND, gtQuery, ltQuery);
@@ -122,7 +124,7 @@ Xapian::Query PIMSearchStore::constructQuery(const QString& property, const QVar
     return Xapian::Query(value.toString().toStdString());
 }
 
-QUrl PIMSearchStore::constructUrl(const Xapian::docid& docid)
+QUrl PIMSearchStore::constructUrl(const Xapian::docid &docid)
 {
     QUrl url;
     url.setScheme(QLatin1String("akonadi"));

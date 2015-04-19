@@ -25,7 +25,8 @@
 
 #include "../pimsearchstore.h"
 
-namespace Baloo {
+namespace Baloo
+{
 
 class NoteSearchStore : public PIMSearchStore
 {
@@ -35,7 +36,7 @@ class NoteSearchStore : public PIMSearchStore
     Q_PLUGIN_METADATA(IID "org.kde.Baloo.SearchStore")
 #endif
 public:
-    NoteSearchStore(QObject* parent = 0);
+    NoteSearchStore(QObject *parent = 0);
 
     virtual QStringList types();
 };

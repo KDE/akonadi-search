@@ -27,13 +27,13 @@ XapianDocument::XapianDocument()
 {
 }
 
-XapianDocument::XapianDocument(const Xapian::Document& doc)
+XapianDocument::XapianDocument(const Xapian::Document &doc)
     : m_doc(doc)
     , m_termGen(&m_doc)
 {
 }
 
-void XapianDocument::addTerm(const QString& term, const QString& prefix)
+void XapianDocument::addTerm(const QString &term, const QString &prefix)
 {
     QByteArray arr = prefix.toUtf8();
     arr += term.toUtf8();
@@ -41,12 +41,12 @@ void XapianDocument::addTerm(const QString& term, const QString& prefix)
     m_doc.add_term(arr.constData());
 }
 
-void XapianDocument::addBoolTerm(int term, const QString& prefix)
+void XapianDocument::addBoolTerm(int term, const QString &prefix)
 {
     addBoolTerm(QString::number(term), prefix);
 }
 
-void XapianDocument::addBoolTerm(const QString& term, const QString& prefix)
+void XapianDocument::addBoolTerm(const QString &term, const QString &prefix)
 {
     QByteArray arr = prefix.toUtf8();
     arr += term.toUtf8();
@@ -54,12 +54,12 @@ void XapianDocument::addBoolTerm(const QString& term, const QString& prefix)
     m_doc.add_boolean_term(arr.constData());
 }
 
-void XapianDocument::indexText(const QString& text, const QString& prefix, int wdfInc)
+void XapianDocument::indexText(const QString &text, const QString &prefix, int wdfInc)
 {
     m_termGen.indexText(text, prefix, wdfInc);
 }
 
-void XapianDocument::indexText(const QString& text, int wdfInc)
+void XapianDocument::indexText(const QString &text, int wdfInc)
 {
     indexText(text, QString(), wdfInc);
 }
@@ -69,12 +69,12 @@ Xapian::Document XapianDocument::doc() const
     return m_doc;
 }
 
-void XapianDocument::addValue(int pos, const QString& value)
+void XapianDocument::addValue(int pos, const QString &value)
 {
     m_doc.add_value(pos, value.toUtf8().constData());
 }
 
-QString XapianDocument::fetchTermStartsWith(const QByteArray& term)
+QString XapianDocument::fetchTermStartsWith(const QByteArray &term)
 {
     try {
         Xapian::TermIterator it = m_doc.termlist_begin();
@@ -85,19 +85,18 @@ QString XapianDocument::fetchTermStartsWith(const QByteArray& term)
         }
         std::string str = *it;
         return QString::fromUtf8(str.c_str(), str.length());
-    }
-    catch (const Xapian::Error&) {
+    } catch (const Xapian::Error &) {
         return QString();
     }
 }
 
-bool XapianDocument::removeTermStartsWith(const QByteArray& prefix)
+bool XapianDocument::removeTermStartsWith(const QByteArray &prefix)
 {
     bool modified = false;
 
     Xapian::TermIterator it = m_doc.termlist_begin();
     it.skip_to(prefix.constData());
-    while (it != m_doc.termlist_end()){
+    while (it != m_doc.termlist_end()) {
         const std::string t = *it;
         const QByteArray term = QByteArray::fromRawData(t.c_str(), t.size());
         if (!term.startsWith(prefix)) {

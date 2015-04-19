@@ -32,7 +32,7 @@
 
 using namespace Baloo;
 
-SearchStore::SearchStore(QObject* parent)
+SearchStore::SearchStore(QObject *parent)
     : QObject(parent)
 {
 }
@@ -56,19 +56,19 @@ QString SearchStore::text(int)
     return QString();
 }
 
-QString SearchStore::property(int, const QString&)
+QString SearchStore::property(int, const QString &)
 {
     return QString();
 }
 
 Q_GLOBAL_STATIC(SearchStore::List, s_overrideSearchStores)
 
-void SearchStore::overrideSearchStores(const QList<SearchStore*> &overrideSearchStores)
+void SearchStore::overrideSearchStores(const QList<SearchStore *> &overrideSearchStores)
 {
-    List* list = &(*s_overrideSearchStores);
+    List *list = &(*s_overrideSearchStores);
     list->clear();
 
-    Q_FOREACH (SearchStore* store, overrideSearchStores) {
+    Q_FOREACH (SearchStore *store, overrideSearchStores) {
         list->append(QSharedPointer<SearchStore>(store));
     }
 }
@@ -92,7 +92,7 @@ SearchStore::List SearchStore::searchStores()
     QStringList pluginPaths;
 
     QStringList paths = QCoreApplication::libraryPaths();
-    Q_FOREACH (const QString& libraryPath, paths) {
+    Q_FOREACH (const QString &libraryPath, paths) {
         QString path(libraryPath + QStringLiteral("/kf5/baloo"));
         QDir dir(path);
 
@@ -101,9 +101,10 @@ SearchStore::List SearchStore::searchStores()
         }
 
         QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-        Q_FOREACH (const QString& fileName, entryList) {
-            if (plugins.contains(fileName))
+        Q_FOREACH (const QString &fileName, entryList) {
+            if (plugins.contains(fileName)) {
                 continue;
+            }
 
             plugins << fileName;
             pluginPaths << dir.absoluteFilePath(fileName);
@@ -112,7 +113,7 @@ SearchStore::List SearchStore::searchStores()
     plugins.clear();
 
     SearchStore::List stores;
-    Q_FOREACH (const QString& pluginPath, pluginPaths) {
+    Q_FOREACH (const QString &pluginPath, pluginPaths) {
         QPluginLoader loader(pluginPath);
 
         if (!loader.load()) {
@@ -121,17 +122,16 @@ SearchStore::List SearchStore::searchStores()
             continue;
         }
 
-        QObject* obj = loader.instance();
+        QObject *obj = loader.instance();
         if (obj) {
-            SearchStore* ex = qobject_cast<SearchStore*>(obj);
+            SearchStore *ex = qobject_cast<SearchStore *>(obj);
             if (ex) {
                 stores << QSharedPointer<SearchStore>(ex);
             } else {
                 qDebug() << "Plugin could not be converted to an Baloo::SearchStore";
                 qDebug() << pluginPath;
             }
-        }
-        else {
+        } else {
             qDebug() << "Plugin could not create instance" << pluginPath;
         }
     }

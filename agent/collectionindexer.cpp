@@ -38,13 +38,11 @@ CollectionIndexer::CollectionIndexer(const QString &path)
 
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
-    }
-    catch (const Xapian::DatabaseCorruptError& err) {
+    } catch (const Xapian::DatabaseCorruptError &err) {
         qCritical() << "Database Corrupted - What did you do?";
         qCritical() << err.get_error_string();
         m_db = 0;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qCritical() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = 0;
     }
@@ -56,7 +54,7 @@ CollectionIndexer::~CollectionIndexer()
     delete m_db;
 }
 
-static QByteArray getPath(const Akonadi::Collection& collection)
+static QByteArray getPath(const Akonadi::Collection &collection)
 {
     QStringList pathParts;
     pathParts << collection.displayName();
@@ -68,7 +66,7 @@ static QByteArray getPath(const Akonadi::Collection& collection)
     return "/" + pathParts.join(QLatin1String("/")).toUtf8();
 }
 
-void CollectionIndexer::index(const Akonadi::Collection& collection)
+void CollectionIndexer::index(const Akonadi::Collection &collection)
 {
     if (!m_db) {
         return;
@@ -111,7 +109,7 @@ void CollectionIndexer::index(const Akonadi::Collection& collection)
             const QByteArray term = "NS" + ns;
             doc.add_boolean_term(term.constData());
         }
-        Q_FOREACH(const QString &mt, collection.contentMimeTypes()) {
+        Q_FOREACH (const QString &mt, collection.contentMimeTypes()) {
             const QByteArray term = "M" + mt.toUtf8();
             doc.add_boolean_term(term.constData());
         }
@@ -122,12 +120,12 @@ void CollectionIndexer::index(const Akonadi::Collection& collection)
     }
 }
 
-void CollectionIndexer::change(const Akonadi::Collection& col)
+void CollectionIndexer::change(const Akonadi::Collection &col)
 {
     index(col);
 }
 
-void CollectionIndexer::remove(const Akonadi::Collection& col)
+void CollectionIndexer::remove(const Akonadi::Collection &col)
 {
     if (!m_db) {
         return;
@@ -142,7 +140,7 @@ void CollectionIndexer::remove(const Akonadi::Collection& col)
 
     //Remove subcollections
     try {
-        Xapian::Query query('C'+ QString::number(col.id()).toStdString());
+        Xapian::Query query('C' + QString::number(col.id()).toStdString());
         Xapian::Enquire enquire(*m_db);
         enquire.set_query(query);
 
@@ -152,15 +150,14 @@ void CollectionIndexer::remove(const Akonadi::Collection& col)
             const qint64 id = *it;
             remove(Akonadi::Collection(id));
         }
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
-void CollectionIndexer::move(const Akonadi::Collection& collection,
-            const Akonadi::Collection& from,
-            const Akonadi::Collection& to)
+void CollectionIndexer::move(const Akonadi::Collection &collection,
+                             const Akonadi::Collection &from,
+                             const Akonadi::Collection &to)
 {
     index(collection);
 }

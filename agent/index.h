@@ -36,48 +36,48 @@ class Index : public QObject
 {
     Q_OBJECT
 public:
-    explicit Index(QObject* parent = 0);
+    explicit Index(QObject *parent = 0);
     virtual ~Index();
 
     virtual void removeDatabase();
     virtual bool createIndexers();
 
-    virtual void index(const Akonadi::Item& item);
-    virtual void move(const Akonadi::Item::List& items,
-              const Akonadi::Collection& from,
-              const Akonadi::Collection& to);
-    virtual void updateFlags(const Akonadi::Item::List& items,
-                     const QSet<QByteArray>& addedFlags,
-                     const QSet<QByteArray>& removed);
-    virtual void remove(const QSet<Akonadi::Item::Id>& ids, const QStringList& mimeTypes);
-    virtual void remove(const Akonadi::Item::List& items);
+    virtual void index(const Akonadi::Item &item);
+    virtual void move(const Akonadi::Item::List &items,
+                      const Akonadi::Collection &from,
+                      const Akonadi::Collection &to);
+    virtual void updateFlags(const Akonadi::Item::List &items,
+                             const QSet<QByteArray> &addedFlags,
+                             const QSet<QByteArray> &removed);
+    virtual void remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTypes);
+    virtual void remove(const Akonadi::Item::List &items);
 
-    virtual void index(const Akonadi::Collection& collection);
-    virtual void change(const Akonadi::Collection& collection);
-    virtual void remove(const Akonadi::Collection& col);
-    virtual void move(const Akonadi::Collection& collection,
-            const Akonadi::Collection& from,
-            const Akonadi::Collection& to);
+    virtual void index(const Akonadi::Collection &collection);
+    virtual void change(const Akonadi::Collection &collection);
+    virtual void remove(const Akonadi::Collection &col);
+    virtual void move(const Akonadi::Collection &collection,
+                      const Akonadi::Collection &from,
+                      const Akonadi::Collection &to);
 
     virtual bool haveIndexerForMimeTypes(const QStringList &);
     virtual qlonglong indexedItems(const qlonglong id);
-    virtual void findIndexed(QSet<Akonadi::Item::Id>& indexed, Akonadi::Collection::Id);
+    virtual void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id);
     virtual void scheduleCommit();
 
     /// For testing
-    void setOverrideDbPrefixPath(const QString& path);
+    void setOverrideDbPrefixPath(const QString &path);
 
 public Q_SLOTS:
     virtual void commit();
 
 private:
-    void addIndexer(AbstractIndexer* indexer);
-    AbstractIndexer* indexerForItem(const Akonadi::Item& item) const;
-    QList<AbstractIndexer*> indexersForMimetypes(const QStringList& mimeTypes) const;
-    virtual qlonglong indexedItemsInDatabase(const std::string& term, const QString& dbPath) const;
-    virtual void findIndexedInDatabase(QSet<Akonadi::Entity::Id>& indexed, Akonadi::Entity::Id collectionId, const QString& dbPath);
+    void addIndexer(AbstractIndexer *indexer);
+    AbstractIndexer *indexerForItem(const Akonadi::Item &item) const;
+    QList<AbstractIndexer *> indexersForMimetypes(const QStringList &mimeTypes) const;
+    virtual qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
+    virtual void findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::Entity::Id collectionId, const QString &dbPath);
 
-    QString dbPath(const QString& dbName) const;
+    QString dbPath(const QString &dbName) const;
     QString emailIndexingPath() const;
     QString contactIndexingPath() const;
     QString emailContactsIndexingPath() const;
@@ -86,8 +86,8 @@ private:
     QString collectionIndexingPath() const;
     QString m_overridePrefixPath;
 
-    QList<AbstractIndexer*> m_listIndexer;
-    QHash<QString, AbstractIndexer*> m_indexer;
+    QList<AbstractIndexer *> m_listIndexer;
+    QHash<QString, AbstractIndexer *> m_indexer;
     QTimer m_commitTimer;
     CollectionIndexer *m_collectionIndexer;
 };

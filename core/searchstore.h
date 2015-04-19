@@ -30,7 +30,8 @@
 
 #include "core_export.h"
 
-namespace Baloo {
+namespace Baloo
+{
 
 class Query;
 
@@ -38,13 +39,13 @@ class BALOO_CORE_EXPORT SearchStore : public QObject
 {
     Q_OBJECT
 public:
-    explicit SearchStore(QObject* parent = 0);
+    explicit SearchStore(QObject *parent = 0);
     virtual ~SearchStore();
 
     /**
      * Override search stores for testing
      */
-    static void overrideSearchStores(const QList<SearchStore*> &overrideSearchStores);
+    static void overrideSearchStores(const QList<SearchStore *> &overrideSearchStores);
 
     typedef QList< QSharedPointer<SearchStore> > List;
 
@@ -65,7 +66,7 @@ public:
      *
      * \return Returns a integer representating the integer
      */
-    virtual int exec(const Query& query) = 0;
+    virtual int exec(const Query &query) = 0;
     virtual bool next(int queryId) = 0;
     virtual void close(int queryId) = 0;
 
@@ -74,17 +75,19 @@ public:
     virtual QUrl url(int queryId);
     virtual QString text(int queryId);
     virtual QString icon(int queryId);
-    virtual QString property(int queryId, const QString& propName);
+    virtual QString property(int queryId, const QString &propName);
 };
 
 //
 // Convenience functions
 //
-inline QByteArray serialize(const QByteArray& namespace_, int id) {
+inline QByteArray serialize(const QByteArray &namespace_, int id)
+{
     return namespace_ + ':' + QByteArray::number(id);
 }
 
-inline int deserialize(const QByteArray& namespace_, const QByteArray& str) {
+inline int deserialize(const QByteArray &namespace_, const QByteArray &str)
+{
     // The +1 is for the ':'
     return str.mid(namespace_.size() + 1).toInt();
 }

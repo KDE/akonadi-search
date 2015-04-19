@@ -41,7 +41,7 @@ Query::~Query()
 
 }
 
-Query* Query::fromJSON(const QByteArray& json)
+Query *Query::fromJSON(const QByteArray &json)
 {
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson(json, &error);
@@ -57,7 +57,7 @@ Query* Query::fromJSON(const QByteArray& json)
         return 0;
     }
 
-    ContactQuery* cq = new ContactQuery();
+    ContactQuery *cq = new ContactQuery();
     cq->matchName(result[QLatin1String("name")].toString());
     cq->matchNickname(result[QLatin1String("nick")].toString());
     cq->matchEmail(result[QLatin1String("email")].toString());
@@ -65,10 +65,11 @@ Query* Query::fromJSON(const QByteArray& json)
     cq->match(result[QLatin1String("$")].toString());
 
     const QString criteria = result[QLatin1String("matchCriteria")].toString().toLower();
-    if (criteria == QLatin1String("exact"))
+    if (criteria == QLatin1String("exact")) {
         cq->setMatchCriteria(ContactQuery::ExactMatch);
-    else if (criteria == QLatin1String("startswith"))
+    } else if (criteria == QLatin1String("startswith")) {
         cq->setMatchCriteria(ContactQuery::StartsWithMatch);
+    }
 
     cq->setLimit(result[QLatin1String("limit")].toInt());
 

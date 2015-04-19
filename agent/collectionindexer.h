@@ -25,27 +25,28 @@
 #include <AkonadiCore/collection.h>
 #include <QString>
 
-namespace Xapian {
-    class WritableDatabase;
+namespace Xapian
+{
+class WritableDatabase;
 }
 
 class CollectionIndexer : public QObject
 {
 public:
-    CollectionIndexer(const QString& path);
+    CollectionIndexer(const QString &path);
     ~CollectionIndexer();
 
-    void index(const Akonadi::Collection& collection);
-    void change(const Akonadi::Collection& collection);
-    void remove(const Akonadi::Collection& col);
-    void move(const Akonadi::Collection& collection,
-            const Akonadi::Collection& from,
-            const Akonadi::Collection& to);
+    void index(const Akonadi::Collection &collection);
+    void change(const Akonadi::Collection &collection);
+    void remove(const Akonadi::Collection &col);
+    void move(const Akonadi::Collection &collection,
+              const Akonadi::Collection &from,
+              const Akonadi::Collection &to);
     void commit();
 
 private:
-    void adjustPath(const Akonadi::Collection& col, int level, const QString &name);
-    Xapian::WritableDatabase* m_db;
+    void adjustPath(const Akonadi::Collection &col, int level, const QString &name);
+    Xapian::WritableDatabase *m_db;
 };
 
 #endif

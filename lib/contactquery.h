@@ -27,8 +27,10 @@
 #include <QString>
 #include "query.h"
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 
 /**
  * Query for a list of contacts matching a criteria
@@ -39,11 +41,11 @@ public:
     ContactQuery();
     ~ContactQuery();
 
-    void matchName(const QString& name);
-    void matchNickname(const QString& nick);
-    void matchEmail(const QString& email);
-    void matchUID(const QString& uid);
-    void match(const QString& str);
+    void matchName(const QString &name);
+    void matchNickname(const QString &nick);
+    void matchEmail(const QString &email);
+    void matchUID(const QString &uid);
+    void match(const QString &str);
 
     enum MatchCriteria {
         ExactMatch,
@@ -60,7 +62,7 @@ public:
 
 private:
     class Private;
-    Private* d;
+    Private *d;
 };
 
 }

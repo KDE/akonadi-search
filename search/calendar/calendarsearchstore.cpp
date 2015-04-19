@@ -24,7 +24,7 @@
 
 using namespace Baloo;
 
-CalendarSearchStore::CalendarSearchStore(QObject* parent)
+CalendarSearchStore::CalendarSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
     m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));

@@ -160,7 +160,6 @@ void QueryParserTest::testUnderscoreSplitting()
     QCOMPARE(query.serialise(), q.serialise());
 }
 
-
 void QueryParserTest::testWordExpansion()
 {
     QTemporaryDir dir;
@@ -174,7 +173,7 @@ void QueryParserTest::testWordExpansion()
     doc.add_term("hibrid");
 
     db.replaceDocument(1, doc);
-    Xapian::Database* xap = db.db();
+    Xapian::Database *xap = db.db();
 
     XapianQueryParser parser;
     parser.setDatabase(xap);
@@ -229,7 +228,5 @@ void QueryParserTest::testWordExpansion()
         QCOMPARE(query.serialise(), q.serialise());
     }
 }
-
-
 
 QTEST_MAIN(QueryParserTest)

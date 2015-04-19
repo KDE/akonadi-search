@@ -30,8 +30,10 @@
 #include <QStringList>
 #include <AkonadiCore/Collection>
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 
 class BALOO_PIM_EXPORT CollectionQuery : public Query
 {
@@ -45,9 +47,9 @@ public:
     /**
      * Matches the string \p match in the name.
      */
-    void nameMatches(const QString& match);
-    void identifierMatches(const QString& match);
-    void pathMatches(const QString& match);
+    void nameMatches(const QString &match);
+    void identifierMatches(const QString &match);
+    void pathMatches(const QString &match);
 
     void setLimit(int limit);
     int limit() const;
@@ -66,7 +68,7 @@ public:
 private:
     //@cond PRIVATE
     class Private;
-    Private * const d;
+    Private *const d;
     //@endcond
 };
 

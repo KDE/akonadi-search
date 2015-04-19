@@ -25,17 +25,18 @@
 
 #include "../pimsearchstore.h"
 
-namespace Baloo {
+namespace Baloo
+{
 
 class CalendarSearchStore : public PIMSearchStore
 {
     Q_OBJECT
     Q_INTERFACES(Baloo::SearchStore)
-#ifndef BALOO_NO_PLUGINS 
+#ifndef BALOO_NO_PLUGINS
     Q_PLUGIN_METADATA(IID "org.kde.Baloo.SearchStore")
 #endif
 public:
-    CalendarSearchStore(QObject* parent = 0);
+    CalendarSearchStore(QObject *parent = 0);
 
     virtual QStringList types();
 };

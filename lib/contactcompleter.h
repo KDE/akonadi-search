@@ -26,14 +26,16 @@
 #include <QString>
 #include "pim_export.h"
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 
 // FIXME: Make this async!!
 class BALOO_PIM_EXPORT ContactCompleter
 {
 public:
-    ContactCompleter(const QString& prefix, int limit = 10);
+    ContactCompleter(const QString &prefix, int limit = 10);
 
     QStringList complete();
 

@@ -29,7 +29,7 @@
 
 using namespace Baloo;
 
-EmailSearchStore::EmailSearchStore(QObject* parent)
+EmailSearchStore::EmailSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
     m_prefix.insert(QLatin1String("from"), QLatin1String("F"));
@@ -85,8 +85,8 @@ QStringList EmailSearchStore::types()
     return QStringList() << QLatin1String("Akonadi") << QLatin1String("Email");
 }
 
-Xapian::Query EmailSearchStore::constructQuery(const QString& property, const QVariant& value,
-                                               Term::Comparator com)
+Xapian::Query EmailSearchStore::constructQuery(const QString &property, const QVariant &value,
+        Term::Comparator com)
 {
     //TODO is this special case necessary? maybe we can also move it to PIM
     if (com == Term::Contains) {
@@ -105,19 +105,19 @@ QString EmailSearchStore::text(int queryId)
     std::string data;
     try {
         data = doc.get_data();
-    }
-    catch (const Xapian::Error&) {
+    } catch (const Xapian::Error &) {
         // Nothing to do, move along
     }
 
     QString subject = QString::fromUtf8(data.c_str(), data.length());
-    if (subject.isEmpty())
+    if (subject.isEmpty()) {
         return QLatin1String("No Subject");
+    }
 
     return subject;
 }
 
-Xapian::Query EmailSearchStore::finalizeQuery(const Xapian::Query& query)
+Xapian::Query EmailSearchStore::finalizeQuery(const Xapian::Query &query)
 {
     AgePostingSource ps(0);
     return Xapian::Query(Xapian::Query::OP_AND_MAYBE, query, Xapian::Query(&ps));

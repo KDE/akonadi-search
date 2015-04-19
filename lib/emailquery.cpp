@@ -33,7 +33,7 @@ using namespace Baloo::PIM;
 
 class EmailQuery::Private
 {
-  public:
+public:
     Private();
 
     QStringList involves;
@@ -88,52 +88,52 @@ void EmailQuery::setSearchType(EmailQuery::OpType op)
     d->opType = op;
 }
 
-void EmailQuery::addInvolves(const QString& email)
+void EmailQuery::addInvolves(const QString &email)
 {
     d->involves << email;
 }
 
-void EmailQuery::setInvolves(const QStringList& involves)
+void EmailQuery::setInvolves(const QStringList &involves)
 {
     d->involves = involves;
 }
 
-void EmailQuery::addBcc(const QString& bcc)
+void EmailQuery::addBcc(const QString &bcc)
 {
     d->bcc << bcc;
 }
 
-void EmailQuery::setBcc(const QStringList& bcc)
+void EmailQuery::setBcc(const QStringList &bcc)
 {
     d->bcc = bcc;
 }
 
-void EmailQuery::setCc(const QStringList& cc)
+void EmailQuery::setCc(const QStringList &cc)
 {
     d->cc = cc;
 }
 
-void EmailQuery::setFrom(const QString& from)
+void EmailQuery::setFrom(const QString &from)
 {
     d->from = from;
 }
 
-void EmailQuery::addTo(const QString& to)
+void EmailQuery::addTo(const QString &to)
 {
     d->to << to;
 }
 
-void EmailQuery::setTo(const QStringList& to)
+void EmailQuery::setTo(const QStringList &to)
 {
     d->to = to;
 }
 
-void EmailQuery::addCc(const QString& cc)
+void EmailQuery::addCc(const QString &cc)
 {
     d->cc << cc;
 }
 
-void EmailQuery::addFrom(const QString& from)
+void EmailQuery::addFrom(const QString &from)
 {
     d->from = from;
 }
@@ -143,7 +143,7 @@ void EmailQuery::addCollection(Akonadi::Collection::Id id)
     d->collections << id;
 }
 
-void EmailQuery::setCollection(const QList< Akonadi::Entity::Id >& collections)
+void EmailQuery::setCollection(const QList< Akonadi::Entity::Id > &collections)
 {
     d->collections = collections;
 }
@@ -158,12 +158,12 @@ void EmailQuery::setLimit(int limit)
     d->limit = limit;
 }
 
-void EmailQuery::matches(const QString& match)
+void EmailQuery::matches(const QString &match)
 {
     d->matchString = match;
 }
 
-void EmailQuery::subjectMatches(const QString& subjectMatch)
+void EmailQuery::subjectMatches(const QString &subjectMatch)
 {
     d->subjectMatchString = subjectMatch;
 }
@@ -194,13 +194,13 @@ ResultIterator EmailQuery::exec()
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());
-    } catch (const Xapian::DatabaseOpeningError&) {
+    } catch (const Xapian::DatabaseOpeningError &) {
         qWarning() << "Xapian Database does not exist at " << dir;
         return ResultIterator();
-    } catch (const Xapian::DatabaseCorruptError&) {
+    } catch (const Xapian::DatabaseCorruptError &) {
         qWarning() << "Xapian Database corrupted";
         return ResultIterator();
-    } catch (const Xapian::DatabaseError& e) {
+    } catch (const Xapian::DatabaseError &e) {
         qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     } catch (...) {
@@ -219,7 +219,7 @@ ResultIterator EmailQuery::exec()
         parser.add_prefix("", "BCC");
 
         // vHanda: Do we really need the query parser over here?
-        Q_FOREACH (const QString& str, d->involves) {
+        Q_FOREACH (const QString &str, d->involves) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -238,7 +238,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "T");
 
-        Q_FOREACH (const QString& str, d->to) {
+        Q_FOREACH (const QString &str, d->to) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -249,7 +249,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "CC");
 
-        Q_FOREACH (const QString& str, d->cc) {
+        Q_FOREACH (const QString &str, d->cc) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -260,7 +260,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "BC");
 
-        Q_FOREACH (const QString& str, d->bcc) {
+        Q_FOREACH (const QString &str, d->bcc) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -278,7 +278,7 @@ ResultIterator EmailQuery::exec()
 
     if (!d->collections.isEmpty()) {
         Xapian::Query query;
-        Q_FOREACH (const Akonadi::Collection::Id& id, d->collections) {
+        Q_FOREACH (const Akonadi::Collection::Id &id, d->collections) {
             QString c = QString::number(id);
             Xapian::Query q = Xapian::Query('C' + c.toStdString());
 
@@ -297,20 +297,23 @@ ResultIterator EmailQuery::exec()
         m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
     }
 
-    if (d->important == 'T')
+    if (d->important == 'T') {
         m_queries << Xapian::Query("BI");
-    else if (d->important == 'F')
+    } else if (d->important == 'F') {
         m_queries << Xapian::Query("BNI");
+    }
 
-    if (d->read == 'T')
+    if (d->read == 'T') {
         m_queries << Xapian::Query("BR");
-    else if (d->read == 'F')
+    } else if (d->read == 'F') {
         m_queries << Xapian::Query("BNR");
+    }
 
-    if (d->attachment == 'T')
+    if (d->attachment == 'T') {
         m_queries << Xapian::Query("BA");
-    else if (d->attachment == 'F')
+    } else if (d->attachment == 'F') {
         m_queries << Xapian::Query("BNA");
+    }
 
     if (!d->matchString.isEmpty()) {
         Xapian::QueryParser parser;
@@ -318,7 +321,7 @@ ResultIterator EmailQuery::exec()
         parser.set_default_op(Xapian::Query::OP_AND);
         if (d->splitSearchMatchString) {
             const QStringList list = d->matchString.split(QRegExp(QLatin1String("\\s")), QString::SkipEmptyParts);
-            Q_FOREACH (const QString& s, list) {
+            Q_FOREACH (const QString &s, list) {
                 const QByteArray ba = s.toUtf8();
                 m_queries << parser.parse_query(ba.constData(),
                                                 Xapian::QueryParser::FLAG_PARTIAL);
@@ -330,7 +333,7 @@ ResultIterator EmailQuery::exec()
         }
     }
     Xapian::Query query;
-    switch(d->opType) {
+    switch (d->opType) {
     case OpAnd:
         query = Xapian::Query(Xapian::Query::OP_AND, m_queries.begin(), m_queries.end());
         break;
@@ -346,16 +349,16 @@ ResultIterator EmailQuery::exec()
         Xapian::Enquire enquire(db);
         enquire.set_query(query);
 
-        if (d->limit == 0)
+        if (d->limit == 0) {
             d->limit = 1000000;
+        }
 
         Xapian::MSet mset = enquire.get_mset(0, d->limit);
 
         ResultIterator iter;
         iter.d->init(mset);
         return iter;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         return ResultIterator();
     }

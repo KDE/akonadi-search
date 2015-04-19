@@ -34,10 +34,11 @@
 
 using namespace Baloo::PIM;
 
-class App : public QCoreApplication {
+class App : public QCoreApplication
+{
     Q_OBJECT
 public:
-    App(int& argc, char** argv, int flags = ApplicationFlags);
+    App(int &argc, char **argv, int flags = ApplicationFlags);
 
     QString m_query;
 
@@ -45,7 +46,7 @@ private Q_SLOTS:
     void main();
 };
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     App app(argc, argv);
 
@@ -57,7 +58,7 @@ int main(int argc, char** argv)
     return app.exec();
 }
 
-App::App(int& argc, char** argv, int flags): QCoreApplication(argc, argv, flags)
+App::App(int &argc, char **argv, int flags): QCoreApplication(argc, argv, flags)
 {
     QTimer::singleShot(0, this, SLOT(main()));
 }
@@ -70,8 +71,9 @@ void App::main()
     timer.start();
 
     QStringList emails = com.complete();
-    Q_FOREACH (const QString& em, emails)
+    Q_FOREACH (const QString &em, emails) {
         std::cout << em.toUtf8().data() << std::endl;
+    }
 
     qDebug() << timer.elapsed();
     quit();

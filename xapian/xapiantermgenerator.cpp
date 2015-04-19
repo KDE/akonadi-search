@@ -25,7 +25,7 @@
 
 using namespace Baloo;
 
-XapianTermGenerator::XapianTermGenerator(Xapian::Document* doc)
+XapianTermGenerator::XapianTermGenerator(Xapian::Document *doc)
     : m_doc(doc)
     , m_position(1)
 {
@@ -34,18 +34,17 @@ XapianTermGenerator::XapianTermGenerator(Xapian::Document* doc)
     }
 }
 
-void XapianTermGenerator::indexText(const QString& text)
+void XapianTermGenerator::indexText(const QString &text)
 {
     indexText(text, QString());
 }
 
-void XapianTermGenerator::setDocument(Xapian::Document* doc)
+void XapianTermGenerator::setDocument(Xapian::Document *doc)
 {
     m_doc = doc;
 }
 
-
-QStringList XapianTermGenerator::termList(const QString& text)
+QStringList XapianTermGenerator::termList(const QString &text)
 {
     int start = 0;
     int end = 0;
@@ -56,8 +55,7 @@ QStringList XapianTermGenerator::termList(const QString& text)
         if (bf.boundaryReasons() & QTextBoundaryFinder::StartOfItem) {
             start = bf.position();
             continue;
-        }
-        else if (bf.boundaryReasons() & QTextBoundaryFinder::EndOfItem) {
+        } else if (bf.boundaryReasons() & QTextBoundaryFinder::EndOfItem) {
             end = bf.position();
 
             QString str = text.mid(start, end - start);
@@ -70,7 +68,7 @@ QStringList XapianTermGenerator::termList(const QString& text)
 
             QString cleanString;
             cleanString.reserve(denormalized.size());
-            Q_FOREACH (const QChar& ch, denormalized) {
+            Q_FOREACH (const QChar &ch, denormalized) {
                 auto cat = ch.category();
                 if (cat != QChar::Mark_NonSpacing && cat != QChar::Mark_SpacingCombining && cat != QChar::Mark_Enclosing) {
                     cleanString.append(ch);
@@ -85,14 +83,14 @@ QStringList XapianTermGenerator::termList(const QString& text)
     return list;
 }
 
-void XapianTermGenerator::indexText(const QString& text, const QString& prefix, int wdfInc)
+void XapianTermGenerator::indexText(const QString &text, const QString &prefix, int wdfInc)
 {
     const QByteArray par = prefix.toUtf8();
     //const QByteArray ta = text.toUtf8();
     //m_termGen.index_text(ta.constData(), wdfInc, par.constData());
 
     QStringList terms = termList(text);
-    for (const QString& term : terms) {
+    for (const QString &term : terms) {
         QByteArray arr = term.toUtf8();
 
         QByteArray finalArr = par + arr;

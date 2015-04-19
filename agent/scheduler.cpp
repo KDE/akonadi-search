@@ -33,20 +33,19 @@ JobFactory::~JobFactory()
 {
 }
 
-CollectionIndexingJob* JobFactory::createCollectionIndexingJob(Index& index, const Akonadi::Collection& col, const QList< Akonadi::Entity::Id >& pending, bool fullSync, QObject* parent)
+CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList< Akonadi::Entity::Id > &pending, bool fullSync, QObject *parent)
 {
     CollectionIndexingJob *job = new CollectionIndexingJob(index, col, pending, parent);
     job->setFullSync(fullSync);
     return job;
 }
 
-
-Scheduler::Scheduler(Index& index, const QSharedPointer<JobFactory> &jobFactory, QObject* parent)
-:   QObject(parent),
-    m_index(index),
-    m_currentJob(0),
-    m_jobFactory(jobFactory),
-    m_busyTimeout(5000)
+Scheduler::Scheduler(Index &index, const QSharedPointer<JobFactory> &jobFactory, QObject *parent)
+    :   QObject(parent),
+        m_index(index),
+        m_currentJob(0),
+        m_jobFactory(jobFactory),
+        m_busyTimeout(5000)
 {
     if (!m_jobFactory) {
         m_jobFactory = QSharedPointer<JobFactory>(new JobFactory);
@@ -90,7 +89,7 @@ void Scheduler::collectDirtyCollections()
     KConfigGroup group = config.group("Akonadi");
     //Store collections where we did not manage to index all, we'll need to do a full sync for them the next time
     QHash <Akonadi::Entity::Id, QQueue <Akonadi::Entity::Id > >::iterator it = m_queues.begin();
-    for (;it != m_queues.end(); it++) {
+    for (; it != m_queues.end(); it++) {
         if (!it.value().isEmpty()) {
             m_dirtyCollections.insert(it.key());
         }
@@ -128,8 +127,8 @@ void Scheduler::scheduleCompleteSync()
 {
     qDebug();
     {
-        Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                                                                            Akonadi::CollectionFetchJob::Recursive);
+        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
+                Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
         connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotRootCollectionsFetched(KJob*)));
@@ -138,8 +137,8 @@ void Scheduler::scheduleCompleteSync()
 
     //We want to index all collections, even if we don't index their content
     {
-        Akonadi::CollectionFetchJob* job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                                                                            Akonadi::CollectionFetchJob::Recursive);
+        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
+                Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
         connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotCollectionsToIndexFetched(KJob*)));
@@ -147,10 +146,10 @@ void Scheduler::scheduleCompleteSync()
     }
 }
 
-void Scheduler::slotRootCollectionsFetched(KJob* kjob)
+void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 {
-    Akonadi::CollectionFetchJob* cjob = static_cast<Akonadi::CollectionFetchJob*>(kjob);
-    Q_FOREACH (const Akonadi::Collection& c, cjob->collections()) {
+    Akonadi::CollectionFetchJob *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
+    Q_FOREACH (const Akonadi::Collection &c, cjob->collections()) {
         //For skipping search collections
         if (c.isVirtual()) {
             continue;
@@ -168,10 +167,10 @@ void Scheduler::slotRootCollectionsFetched(KJob* kjob)
     }
 }
 
-void Scheduler::slotCollectionsToIndexFetched(KJob* kjob)
+void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
 {
-    Akonadi::CollectionFetchJob* cjob = static_cast<Akonadi::CollectionFetchJob*>(kjob);
-    Q_FOREACH (const Akonadi::Collection& c, cjob->collections()) {
+    Akonadi::CollectionFetchJob *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
+    Q_FOREACH (const Akonadi::Collection &c, cjob->collections()) {
         //For skipping search collections
         if (c.isVirtual()) {
             continue;
@@ -222,7 +221,7 @@ void Scheduler::processNext()
     itemQueue.clear();
     job->setProperty("collection", col.id());
     connect(job, SIGNAL(result(KJob*)), this, SLOT(slotIndexingFinished(KJob*)));
-    connect(job, SIGNAL(status(int, QString)), this, SIGNAL(status(int, QString)));
+    connect(job, SIGNAL(status(int,QString)), this, SIGNAL(status(int,QString)));
     connect(job, SIGNAL(percent(int)), this, SIGNAL(percent(int)));
     m_currentJob = job;
     job->start();

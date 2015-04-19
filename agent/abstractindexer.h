@@ -25,29 +25,29 @@
 #include <AkonadiCore/Item>
 #include <QStringList>
 
-namespace Akonadi {
+namespace Akonadi
+{
 class Collection;
 }
 
 class AbstractIndexer
 {
-  public:
+public:
     AbstractIndexer();
     virtual ~AbstractIndexer();
 
     virtual QStringList mimeTypes() const = 0;
-    virtual void index(const Akonadi::Item& item) = 0;
-    virtual void remove(const Akonadi::Item& item) = 0;
-    virtual void remove(const Akonadi::Collection& item) = 0;
+    virtual void index(const Akonadi::Item &item) = 0;
+    virtual void remove(const Akonadi::Item &item) = 0;
+    virtual void remove(const Akonadi::Collection &item) = 0;
     virtual void commit() = 0;
 
-
-    virtual void move(const Akonadi::Item::Id& item,
-                      const Akonadi::Entity::Id& from,
-                      const Akonadi::Entity::Id& to);
-    virtual void updateFlags(const Akonadi::Item& item,
-                             const QSet<QByteArray>& addedFlags,
-                             const QSet<QByteArray>& removed);
+    virtual void move(const Akonadi::Item::Id &item,
+                      const Akonadi::Entity::Id &from,
+                      const Akonadi::Entity::Id &to);
+    virtual void updateFlags(const Akonadi::Item &item,
+                             const QSet<QByteArray> &addedFlags,
+                             const QSet<QByteArray> &removed);
 };
 
 #endif // ABSTRACTINDEXER_H

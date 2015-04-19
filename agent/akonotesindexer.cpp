@@ -24,19 +24,16 @@
 
 #include <QTextDocument>
 
-
-AkonotesIndexer::AkonotesIndexer(const QString& path)
-    : AbstractIndexer(), m_db(0), m_termGen( 0 )
+AkonotesIndexer::AkonotesIndexer(const QString &path)
+    : AbstractIndexer(), m_db(0), m_termGen(0)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
-    }
-    catch (const Xapian::DatabaseCorruptError& err) {
+    } catch (const Xapian::DatabaseCorruptError &err) {
         qWarning() << "Database Corrupted - What did you do?";
         qWarning() << err.get_error_string();
         m_db = 0;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = 0;
     }
@@ -52,17 +49,18 @@ AkonotesIndexer::~AkonotesIndexer()
 
 QStringList AkonotesIndexer::mimeTypes() const
 {
-    return QStringList() << QString::fromLatin1( "text/x-vnd.akonadi.note" );
+    return QStringList() << QString::fromLatin1("text/x-vnd.akonadi.note");
 }
 
 void AkonotesIndexer::index(const Akonadi::Item &item)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     KMime::Message::Ptr msg;
     try {
         msg = item.payload<KMime::Message::Ptr>();
-    } catch (const Akonadi::PayloadException&) {
+    } catch (const Akonadi::PayloadException &) {
         return;
     }
     m_doc = new Xapian::Document();
@@ -90,7 +88,7 @@ void AkonotesIndexer::process(const KMime::Message::Ptr &msg)
     //
     // Process Headers
     // (Give the subject a higher priority)
-    KMime::Headers::Subject* subject = msg->subject(false);
+    KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
         std::string str(subject->asUnicodeString().toUtf8().constData());
         qDebug() << "Indexing" << str.c_str();
@@ -99,29 +97,30 @@ void AkonotesIndexer::process(const KMime::Message::Ptr &msg)
         m_doc->set_data(str);
     }
 
-    KMime::Content* mainBody = msg->mainBodyPart("text/plain");
+    KMime::Content *mainBody = msg->mainBodyPart("text/plain");
     if (mainBody) {
-       const std::string text(mainBody->decodedText().toUtf8().constData());
-       m_termGen->index_text_without_positions(text);
-       m_termGen->index_text_without_positions(text, 1, "BO");
+        const std::string text(mainBody->decodedText().toUtf8().constData());
+        m_termGen->index_text_without_positions(text);
+        m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
         processPart(msg.get(), 0);
     }
 }
 
-void AkonotesIndexer::processPart(KMime::Content* content, KMime::Content* mainContent)
+void AkonotesIndexer::processPart(KMime::Content *content, KMime::Content *mainContent)
 {
     if (content == mainContent) {
         return;
     }
 
-    KMime::Headers::ContentType* type = content->contentType(false);
+    KMime::Headers::ContentType *type = content->contentType(false);
     if (type) {
         if (type->isMultipart()) {
-            if (type->isSubtype("encrypted"))
+            if (type->isSubtype("encrypted")) {
                 return;
+            }
 
-            Q_FOREACH (KMime::Content* c, content->contents()) {
+            Q_FOREACH (KMime::Content *c, content->contents()) {
                 processPart(c, mainContent);
             }
         }
@@ -137,31 +136,32 @@ void AkonotesIndexer::processPart(KMime::Content* content, KMime::Content* mainC
     }
 }
 
-
 void AkonotesIndexer::commit()
 {
-    if (m_db)
+    if (m_db) {
         m_db->commit();
+    }
 }
 
 void AkonotesIndexer::remove(const Akonadi::Item &item)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     try {
         m_db->delete_document(item.id());
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
-void AkonotesIndexer::remove(const Akonadi::Collection& collection)
+void AkonotesIndexer::remove(const Akonadi::Collection &collection)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     try {
-        Xapian::Query query('C'+ QString::number(collection.id()).toStdString());
+        Xapian::Query query('C' + QString::number(collection.id()).toStdString());
         Xapian::Enquire enquire(*m_db);
         enquire.set_query(query);
 
@@ -171,23 +171,22 @@ void AkonotesIndexer::remove(const Akonadi::Collection& collection)
             const qint64 id = *it;
             remove(Akonadi::Item(id));
         }
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
-void AkonotesIndexer::move(const Akonadi::Item::Id& itemId,
-                        const Akonadi::Entity::Id& from,
-                        const Akonadi::Entity::Id& to)
+void AkonotesIndexer::move(const Akonadi::Item::Id &itemId,
+                           const Akonadi::Entity::Id &from,
+                           const Akonadi::Entity::Id &to)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     Xapian::Document doc;
     try {
         doc = m_db->get_document(itemId);
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 

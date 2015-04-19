@@ -37,39 +37,39 @@ public:
      * You must provide the path where the indexed information
      * should be stored
      */
-    EmailIndexer(const QString& path, const QString& contactDbPath);
+    EmailIndexer(const QString &path, const QString &contactDbPath);
     ~EmailIndexer();
 
     QStringList mimeTypes() const;
 
-    void index(const Akonadi::Item& item);
-    void updateFlags(const Akonadi::Item& item, const QSet<QByteArray>& added,
-                     const QSet<QByteArray>& removed);
-    void remove(const Akonadi::Item& item);
-    void remove(const Akonadi::Collection& item);
-    void move(const Akonadi::Item::Id& itemId,
-              const Akonadi::Entity::Id& from,
-              const Akonadi::Entity::Id& to);
+    void index(const Akonadi::Item &item);
+    void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &added,
+                     const QSet<QByteArray> &removed);
+    void remove(const Akonadi::Item &item);
+    void remove(const Akonadi::Collection &item);
+    void move(const Akonadi::Item::Id &itemId,
+              const Akonadi::Entity::Id &from,
+              const Akonadi::Entity::Id &to);
 
     void commit();
 
 private:
-    Xapian::WritableDatabase* m_db;
-    Xapian::Document* m_doc;
-    Xapian::TermGenerator* m_termGen;
+    Xapian::WritableDatabase *m_db;
+    Xapian::Document *m_doc;
+    Xapian::TermGenerator *m_termGen;
 
-    Xapian::WritableDatabase* m_contactDb;
+    Xapian::WritableDatabase *m_contactDb;
 
-    void toggleFlag(Xapian::Document& doc, const char* remove, const char* add);
+    void toggleFlag(Xapian::Document &doc, const char *remove, const char *add);
 
-    void process(const KMime::Message::Ptr& msg);
-    void processPart(KMime::Content* content, KMime::Content* mainContent);
-    void processMessageStatus(const Akonadi::MessageStatus& status);
+    void process(const KMime::Message::Ptr &msg);
+    void processPart(KMime::Content *content, KMime::Content *mainContent);
+    void processMessageStatus(const Akonadi::MessageStatus &status);
 
-    void insert(const QByteArray& key, KMime::Headers::Base* base);
-    void insert(const QByteArray& key, KMime::Headers::Generics::MailboxList* mlist);
-    void insert(const QByteArray& key, KMime::Headers::Generics::AddressList* alist);
-    void insert(const QByteArray& key, const KMime::Types::Mailbox::List& list);
+    void insert(const QByteArray &key, KMime::Headers::Base *base);
+    void insert(const QByteArray &key, KMime::Headers::Generics::MailboxList *mlist);
+    void insert(const QByteArray &key, KMime::Headers::Generics::AddressList *alist);
+    void insert(const QByteArray &key, const KMime::Types::Mailbox::List &list);
 
     void insertBool(char key, bool value);
 };

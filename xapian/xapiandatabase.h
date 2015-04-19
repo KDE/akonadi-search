@@ -27,7 +27,8 @@
 #include <QPair>
 #include <QVector>
 
-namespace Baloo {
+namespace Baloo
+{
 
 class XapianDocument;
 
@@ -39,11 +40,11 @@ public:
      * writeOnly locks the database as long as this object is
      * valid
      */
-    XapianDatabase(const QString& path, bool writeOnly = false);
+    XapianDatabase(const QString &path, bool writeOnly = false);
     ~XapianDatabase();
 
-    void replaceDocument(uint id, const Xapian::Document& doc);
-    void replaceDocument(uint id, const XapianDocument& doc);
+    void replaceDocument(uint id, const Xapian::Document &doc);
+    void replaceDocument(uint id, const XapianDocument &doc);
     void deleteDocument(uint id);
 
     /**
@@ -58,7 +59,8 @@ public:
     /**
      * A pointer to the actual db. Only use this when doing queries
      */
-    Xapian::Database* db() {
+    Xapian::Database *db()
+    {
         if (m_db) {
             m_db->reopen();
             return m_db;
@@ -73,7 +75,7 @@ public:
     bool haveChanges() const;
 
 private:
-    Xapian::Database* m_db;
+    Xapian::Database *m_db;
     Xapian::WritableDatabase m_wDb;
 
     typedef QPair<Xapian::docid, Xapian::Document> DocIdPair;

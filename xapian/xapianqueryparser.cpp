@@ -32,82 +32,85 @@ XapianQueryParser::XapianQueryParser()
 {
 }
 
-void XapianQueryParser::setDatabase(Xapian::Database* db)
+void XapianQueryParser::setDatabase(Xapian::Database *db)
 {
     m_db = db;
 }
 
-namespace {
-    struct Term {
-        std::string t;
-        uint count;
+namespace
+{
+struct Term {
+    std::string t;
+    uint count;
 
-        // pop_heap pops the largest element, we want the smallest to be popped
-        bool operator < (const Term& rhs) const {
-            return count > rhs.count;
-        }
-    };
-
-    Xapian::Query makeQuery(const QString& string, int position, Xapian::Database* db)
+    // pop_heap pops the largest element, we want the smallest to be popped
+    bool operator < (const Term &rhs) const
     {
-        if (!db) {
-            QByteArray arr = string.toUtf8();
-            std::string stdString(arr.constData(), arr.size());
-            return Xapian::Query(stdString, 1, position);
-        }
+        return count > rhs.count;
+    }
+};
 
-        // Lets just keep the top x (+1 for push_heap)
-        static const int MaxTerms = 100;
-        QList<Term> topTerms;
-        topTerms.reserve(MaxTerms + 1);
-
-        const std::string stdString(string.toUtf8().constData());
-        Xapian::TermIterator it = db->allterms_begin(stdString);
-        Xapian::TermIterator end = db->allterms_end(stdString);
-        for (; it != end; ++it) {
-            Term term;
-            term.t = *it;
-            term.count = db->get_collection_freq(term.t);
-
-            if (topTerms.size() < MaxTerms) {
-                topTerms.push_back(term);
-                std::push_heap(topTerms.begin(), topTerms.end());
-            }
-            else {
-                // Remove the term with the min count
-                topTerms.push_back(term);
-                std::push_heap(topTerms.begin(), topTerms.end());
-
-                std::pop_heap(topTerms.begin(), topTerms.end());
-                topTerms.pop_back();
-            }
-        }
-
-        QVector<Xapian::Query> queries;
-        queries.reserve(topTerms.size());
-
-        Q_FOREACH (const Term& term, topTerms) {
-            queries << Xapian::Query(term.t, 1, position);
-        }
-
-        if (queries.isEmpty()) {
-            return Xapian::Query(string.toUtf8().constData(), 1, position);
-        }
-        Xapian::Query finalQ(Xapian::Query::OP_SYNONYM, queries.begin(), queries.end());
-        return finalQ;
+Xapian::Query makeQuery(const QString &string, int position, Xapian::Database *db)
+{
+    if (!db) {
+        QByteArray arr = string.toUtf8();
+        std::string stdString(arr.constData(), arr.size());
+        return Xapian::Query(stdString, 1, position);
     }
 
-    bool containsSpace(const QString& string) {
-        Q_FOREACH (const QChar& ch, string) {
-            if (ch.isSpace())
-                return true;
-        }
+    // Lets just keep the top x (+1 for push_heap)
+    static const int MaxTerms = 100;
+    QList<Term> topTerms;
+    topTerms.reserve(MaxTerms + 1);
 
-        return false;
+    const std::string stdString(string.toUtf8().constData());
+    Xapian::TermIterator it = db->allterms_begin(stdString);
+    Xapian::TermIterator end = db->allterms_end(stdString);
+    for (; it != end; ++it) {
+        Term term;
+        term.t = *it;
+        term.count = db->get_collection_freq(term.t);
+
+        if (topTerms.size() < MaxTerms) {
+            topTerms.push_back(term);
+            std::push_heap(topTerms.begin(), topTerms.end());
+        } else {
+            // Remove the term with the min count
+            topTerms.push_back(term);
+            std::push_heap(topTerms.begin(), topTerms.end());
+
+            std::pop_heap(topTerms.begin(), topTerms.end());
+            topTerms.pop_back();
+        }
     }
+
+    QVector<Xapian::Query> queries;
+    queries.reserve(topTerms.size());
+
+    Q_FOREACH (const Term &term, topTerms) {
+        queries << Xapian::Query(term.t, 1, position);
+    }
+
+    if (queries.isEmpty()) {
+        return Xapian::Query(string.toUtf8().constData(), 1, position);
+    }
+    Xapian::Query finalQ(Xapian::Query::OP_SYNONYM, queries.begin(), queries.end());
+    return finalQ;
 }
 
-Xapian::Query XapianQueryParser::parseQuery(const QString& text, const QString& prefix)
+bool containsSpace(const QString &string)
+{
+    Q_FOREACH (const QChar &ch, string) {
+        if (ch.isSpace()) {
+            return true;
+        }
+    }
+
+    return false;
+}
+}
+
+Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &prefix)
 {
     /*
     Xapian::QueryParser parser;
@@ -144,34 +147,29 @@ Xapian::Query XapianQueryParser::parseQuery(const QString& text, const QString& 
             // Check the previous delimiter
             int pos = bf.position();
             if (pos != end) {
-                QString delim = text.mid(end, pos-end);
+                QString delim = text.mid(end, pos - end);
                 if (delim.contains(QLatin1Char('"'))) {
                     if (inDoubleQuotes) {
                         queries << Xapian::Query(Xapian::Query::OP_PHRASE, phraseQueries.begin(), phraseQueries.end());
                         phraseQueries.clear();
                         inDoubleQuotes = false;
-                    }
-                    else {
+                    } else {
                         inDoubleQuotes = true;
                     }
-                }
-                else if (delim.contains(QLatin1Char('\''))) {
+                } else if (delim.contains(QLatin1Char('\''))) {
                     if (inSingleQuotes) {
                         queries << Xapian::Query(Xapian::Query::OP_PHRASE, phraseQueries.begin(), phraseQueries.end());
                         phraseQueries.clear();
                         inSingleQuotes = false;
-                    }
-                    else {
+                    } else {
                         inSingleQuotes = true;
                     }
-                }
-                else if (!containsSpace(delim)) {
+                } else if (!containsSpace(delim)) {
                     if (!inPhrase && !queries.isEmpty()) {
                         phraseQueries << queries.takeLast();
                     }
                     inPhrase = true;
-                }
-                else if (inPhrase && !phraseQueries.isEmpty()) {
+                } else if (inPhrase && !phraseQueries.isEmpty()) {
                     queries << Xapian::Query(Xapian::Query::OP_PHRASE, phraseQueries.begin(), phraseQueries.end());
                     phraseQueries.clear();
                     inPhrase = false;
@@ -180,8 +178,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString& text, const QString& 
 
             start = bf.position();
             continue;
-        }
-        else if (bf.boundaryReasons() & QTextBoundaryFinder::EndOfItem) {
+        } else if (bf.boundaryReasons() & QTextBoundaryFinder::EndOfItem) {
             end = bf.position();
 
             QString str = text.mid(start, end - start);
@@ -192,7 +189,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString& text, const QString& 
             // Remove all accents
             const QString denormalized = str.normalized(QString::NormalizationForm_KD);
             QString cleanString;
-            Q_FOREACH (const QChar& ch, denormalized) {
+            Q_FOREACH (const QChar &ch, denormalized) {
                 auto cat = ch.category();
                 if (cat != QChar::Mark_NonSpacing && cat != QChar::Mark_SpacingCombining && cat != QChar::Mark_Enclosing) {
                     cleanString.append(ch);
@@ -200,7 +197,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString& text, const QString& 
             }
 
             str = cleanString.normalized(QString::NormalizationForm_KC);
-            Q_FOREACH (const QString& t, str.split(QLatin1Char('_'), QString::SkipEmptyParts)) {
+            Q_FOREACH (const QString &t, str.split(QLatin1Char('_'), QString::SkipEmptyParts)) {
                 const QString term = prefix + t;
 
                 position++;
@@ -208,8 +205,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString& text, const QString& 
                     const QByteArray arr = term.toUtf8();
                     const std::string str(arr.constData(), arr.length());
                     phraseQueries << Xapian::Query(str, 1, position);
-                }
-                else {
+                } else {
                     if (m_autoExpand) {
                         queries << makeQuery(term, position, m_db);
                     } else {
@@ -242,7 +238,7 @@ void XapianQueryParser::setAutoExapand(bool autoexpand)
     m_autoExpand = autoexpand;
 }
 
-Xapian::Query XapianQueryParser::expandWord(const QString& word, const QString& prefix)
+Xapian::Query XapianQueryParser::expandWord(const QString &word, const QString &prefix)
 {
     const std::string stdString((prefix + word).toUtf8().constData());
     Xapian::TermIterator it = m_db->allterms_begin(stdString);

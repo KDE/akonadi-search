@@ -28,15 +28,15 @@
 
 class ContactIndexer: public AbstractIndexer
 {
-  public:
-    ContactIndexer(const QString& path);
+public:
+    ContactIndexer(const QString &path);
     ~ContactIndexer();
 
     QStringList mimeTypes() const;
 
-    void index(const Akonadi::Item& item);
-    void remove(const Akonadi::Item& item);
-    void remove(const Akonadi::Collection& item);
+    void index(const Akonadi::Item &item);
+    void remove(const Akonadi::Item &item);
+    void remove(const Akonadi::Collection &item);
 
     void commit();
 
@@ -45,7 +45,7 @@ private:
     bool indexContact(const Akonadi::Item &item);
     void indexContactGroup(const Akonadi::Item &item);
 
-    Baloo::XapianDatabase* m_db;
+    Baloo::XapianDatabase *m_db;
 };
 
 #endif // CONTACTINDEXER_H

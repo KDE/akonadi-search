@@ -26,8 +26,10 @@
 #include "pim_export.h"
 #include <QByteArray>
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 
 class ResultIterator;
 
@@ -38,7 +40,7 @@ public:
     virtual ~Query();
     virtual ResultIterator exec() = 0;
 
-    static Query* fromJSON(const QByteArray& json);
+    static Query *fromJSON(const QByteArray &json);
 };
 
 }

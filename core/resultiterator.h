@@ -28,7 +28,8 @@
 
 #include <QExplicitlySharedDataPointer>
 
-namespace Baloo {
+namespace Baloo
+{
 
 class SearchStore;
 class Result;
@@ -38,11 +39,11 @@ class BALOO_CORE_EXPORT ResultIterator
 {
 public:
     ResultIterator();
-    ResultIterator(const ResultIterator& rhs);
+    ResultIterator(const ResultIterator &rhs);
     ~ResultIterator();
 
     // internal
-    ResultIterator(int id, SearchStore* store);
+    ResultIterator(int id, SearchStore *store);
 
     bool next();
 

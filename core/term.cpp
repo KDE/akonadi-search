@@ -26,7 +26,8 @@
 
 using namespace Baloo;
 
-class Baloo::Term::Private {
+class Baloo::Term::Private
+{
 public:
     Operation m_op;
     Comparator m_comp;
@@ -39,7 +40,8 @@ public:
     QList<Term> m_subTerms;
     QVariantHash m_userData;
 
-    Private() {
+    Private()
+    {
         m_op = None;
         m_comp = Auto;
         m_isNegated = false;
@@ -51,32 +53,32 @@ Term::Term()
 {
 }
 
-Term::Term(const Term& t)
+Term::Term(const Term &t)
     : d(new Private(*t.d))
 {
 }
 
-Term::Term(const QString& property)
+Term::Term(const QString &property)
     : d(new Private)
 {
     d->m_property = property;
 }
 
-Term::Term(const QString& property, const QVariant& value, Term::Comparator c)
+Term::Term(const QString &property, const QVariant &value, Term::Comparator c)
     : d(new Private)
 {
     d->m_property = property;
     d->m_value = value;
 
     if (c == Auto) {
-        if (value.type() == QVariant::String)
+        if (value.type() == QVariant::String) {
             d->m_comp = Contains;
-        else if (value.type() == QVariant::DateTime)
+        } else if (value.type() == QVariant::DateTime) {
             d->m_comp = Contains;
-        else
+        } else {
             d->m_comp = Equal;
-    }
-    else {
+        }
+    } else {
         d->m_comp = c;
     }
 }
@@ -98,21 +100,21 @@ Term::Term(Term::Operation op)
     d->m_op = op;
 }
 
-Term::Term(Term::Operation op, const Term& t)
+Term::Term(Term::Operation op, const Term &t)
     : d(new Private)
 {
     d->m_op = op;
     d->m_subTerms << t;
 }
 
-Term::Term(Term::Operation op, const QList<Term>& t)
+Term::Term(Term::Operation op, const QList<Term> &t)
     : d(new Private)
 {
     d->m_op = op;
     d->m_subTerms = t;
 }
 
-Term::Term(const Term& lhs, Term::Operation op, const Term& rhs)
+Term::Term(const Term &lhs, Term::Operation op, const Term &rhs)
     : d(new Private)
 {
     d->m_op = op;
@@ -128,8 +130,9 @@ Term::~Term()
 bool Term::isValid() const
 {
     if (d->m_property.isEmpty()) {
-        if (d->m_op == Term::None)
+        if (d->m_op == Term::None) {
             return false;
+        }
 
         return d->m_property.isEmpty() && d->m_value.isNull();
     }
@@ -152,20 +155,21 @@ bool Term::negated() const
     return d->m_isNegated;
 }
 
-void Term::addSubTerm(const Term& term)
+void Term::addSubTerm(const Term &term)
 {
     d->m_subTerms << term;
 }
 
-void Term::setSubTerms(const QList<Term>& terms)
+void Term::setSubTerms(const QList<Term> &terms)
 {
     d->m_subTerms = terms;
 }
 
 Term Term::subTerm() const
 {
-    if (d->m_subTerms.size())
+    if (d->m_subTerms.size()) {
         return d->m_subTerms.first();
+    }
 
     return Term();
 }
@@ -200,12 +204,12 @@ QString Term::property() const
     return d->m_property;
 }
 
-void Term::setProperty(const QString& property)
+void Term::setProperty(const QString &property)
 {
     d->m_property = property;
 }
 
-void Term::setValue(const QVariant& value)
+void Term::setValue(const QVariant &value)
 {
     d->m_value = value;
 }
@@ -225,12 +229,12 @@ void Term::setComparator(Term::Comparator c)
     d->m_comp = c;
 }
 
-void Term::setUserData(const QString& name, const QVariant& value)
+void Term::setUserData(const QString &name, const QVariant &value)
 {
     d->m_userData.insert(name, value);
 }
 
-QVariant Term::userData(const QString& name) const
+QVariant Term::userData(const QString &name) const
 {
     return d->m_userData.value(name);
 }
@@ -240,14 +244,15 @@ QVariantMap Term::toVariantMap() const
     QVariantMap map;
     if (d->m_op != None) {
         QVariantList variantList;
-        Q_FOREACH (const Term& term, d->m_subTerms) {
+        Q_FOREACH (const Term &term, d->m_subTerms) {
             variantList << QVariant(term.toVariantMap());
         }
 
-        if (d->m_op == And)
+        if (d->m_op == And) {
             map[QLatin1String("$and")] = variantList;
-        else
+        } else {
             map[QLatin1String("$or")] = variantList;
+        }
 
         return map;
     }
@@ -289,28 +294,32 @@ QVariantMap Term::toVariantMap() const
     return map;
 }
 
-namespace {
-    // QJson does not recognize QDate/QDateTime parameters. We try to guess
-    // and see if they can be converted into date/datetime.
-    QVariant tryConvert(const QVariant& var) {
-        if (var.canConvert(QVariant::DateTime)) {
-            QDateTime dt = var.toDateTime();
-            if (!dt.isValid())
-                return var;
-
-            if (!var.toString().contains(QLatin1String("T"))) {
-                return QVariant(var.toDate());
-            }
-            return dt;
+namespace
+{
+// QJson does not recognize QDate/QDateTime parameters. We try to guess
+// and see if they can be converted into date/datetime.
+QVariant tryConvert(const QVariant &var)
+{
+    if (var.canConvert(QVariant::DateTime)) {
+        QDateTime dt = var.toDateTime();
+        if (!dt.isValid()) {
+            return var;
         }
-        return var;
+
+        if (!var.toString().contains(QLatin1String("T"))) {
+            return QVariant(var.toDate());
+        }
+        return dt;
     }
+    return var;
+}
 }
 
-Term Term::fromVariantMap(const QVariantMap& map)
+Term Term::fromVariantMap(const QVariantMap &map)
 {
-    if (map.size() != 1)
+    if (map.size() != 1) {
         return Term();
+    }
 
     Term term;
 
@@ -318,8 +327,7 @@ Term Term::fromVariantMap(const QVariantMap& map)
     if (map.contains(QLatin1String("$and"))) {
         andOrString = QLatin1String("$and");
         term.setOperation(And);
-    }
-    else if (map.contains(QLatin1String("$or"))) {
+    } else if (map.contains(QLatin1String("$or"))) {
         andOrString = QLatin1String("$or");
         term.setOperation(Or);
     }
@@ -328,8 +336,9 @@ Term Term::fromVariantMap(const QVariantMap& map)
         QList<Term> subTerms;
 
         QVariantList list = map[andOrString].toList();
-        Q_FOREACH (const QVariant& var, list)
+        Q_FOREACH (const QVariant &var, list) {
             subTerms << Term::fromVariantMap(var.toMap());
+        }
 
         term.setSubTerms(subTerms);
         return term;
@@ -341,23 +350,25 @@ Term Term::fromVariantMap(const QVariantMap& map)
     QVariant value = map.value(prop);
     if (value.type() == QVariant::Map) {
         QVariantMap map = value.toMap();
-        if (map.size() != 1)
+        if (map.size() != 1) {
             return term;
+        }
 
         QString op = map.keys().first();
         Term::Comparator com;
-        if (op == QLatin1String("$ct"))
+        if (op == QLatin1String("$ct")) {
             com = Contains;
-        else if (op == QLatin1String("$gt"))
+        } else if (op == QLatin1String("$gt")) {
             com = Greater;
-        else if (op == QLatin1String("$gte"))
+        } else if (op == QLatin1String("$gte")) {
             com = GreaterEqual;
-        else if (op == QLatin1String("$lt"))
+        } else if (op == QLatin1String("$lt")) {
             com = Less;
-        else if (op == QLatin1String("$lte"))
+        } else if (op == QLatin1String("$lte")) {
             com = LessEqual;
-        else
+        } else {
             return term;
+        }
 
         term.setComparator(com);
         term.setValue(tryConvert(map.value(op)));
@@ -371,82 +382,86 @@ Term Term::fromVariantMap(const QVariantMap& map)
     return term;
 }
 
-bool Term::operator==(const Term& rhs) const
+bool Term::operator==(const Term &rhs) const
 {
     if (d->m_op != rhs.d->m_op || d->m_comp != rhs.d->m_comp ||
-        d->m_isNegated != rhs.d->m_isNegated || d->m_property != rhs.d->m_property ||
-        d->m_value != rhs.d->m_value)
-    {
+            d->m_isNegated != rhs.d->m_isNegated || d->m_property != rhs.d->m_property ||
+            d->m_value != rhs.d->m_value) {
         return false;
     }
 
-    if (d->m_subTerms.size() != rhs.d->m_subTerms.size())
+    if (d->m_subTerms.size() != rhs.d->m_subTerms.size()) {
         return false;
+    }
 
-    if (d->m_subTerms.isEmpty())
+    if (d->m_subTerms.isEmpty()) {
         return true;
+    }
 
-    Q_FOREACH (const Term& t, d->m_subTerms) {
-        if (!rhs.d->m_subTerms.contains(t))
+    Q_FOREACH (const Term &t, d->m_subTerms) {
+        if (!rhs.d->m_subTerms.contains(t)) {
             return false;
+        }
     }
 
     return true;
 }
 
-Term& Term::operator=(const Term& rhs)
+Term &Term::operator=(const Term &rhs)
 {
     *d = *rhs.d;
     return *this;
 }
 
-namespace {
-    QString comparatorToString(Baloo::Term::Comparator c) {
-        switch (c) {
-        case Baloo::Term::Auto:
-            return "Auto";
-        case Baloo::Term::Equal:
-            return "=";
-        case Baloo::Term::Contains:
-            return ":";
-        case Baloo::Term::Less:
-            return "<";
-        case Baloo::Term::LessEqual:
-            return "<=";
-        case Baloo::Term::Greater:
-            return ">";
-        case Baloo::Term::GreaterEqual:
-            return ">=";
-        }
-
-        return QString();
+namespace
+{
+QString comparatorToString(Baloo::Term::Comparator c)
+{
+    switch (c) {
+    case Baloo::Term::Auto:
+        return "Auto";
+    case Baloo::Term::Equal:
+        return "=";
+    case Baloo::Term::Contains:
+        return ":";
+    case Baloo::Term::Less:
+        return "<";
+    case Baloo::Term::LessEqual:
+        return "<=";
+    case Baloo::Term::Greater:
+        return ">";
+    case Baloo::Term::GreaterEqual:
+        return ">=";
     }
 
-    QString operationToString(Baloo::Term::Operation op) {
-        switch (op) {
-        case Baloo::Term::None:
-            return "NONE";
-        case Baloo::Term::And:
-            return "AND";
-        case Baloo::Term::Or:
-            return "OR";
-        }
-
-        return QString();
-    }
+    return QString();
 }
 
-QDebug operator <<(QDebug d, const Baloo::Term& t)
+QString operationToString(Baloo::Term::Operation op)
+{
+    switch (op) {
+    case Baloo::Term::None:
+        return "NONE";
+    case Baloo::Term::And:
+        return "AND";
+    case Baloo::Term::Or:
+        return "OR";
+    }
+
+    return QString();
+}
+}
+
+QDebug operator <<(QDebug d, const Baloo::Term &t)
 {
     if (t.subTerms().isEmpty()) {
         d << QString::fromLatin1("(%1 %2 %3 (%4))").arg(t.property(),
-                                                        comparatorToString(t.comparator()),
-                                                        t.value().toString(),
-                                                        t.value().typeName()).toUtf8().constData();
-    }
-    else {
+                comparatorToString(t.comparator()),
+                t.value().toString(),
+                t.value().typeName()).toUtf8().constData();
+    } else {
         d << "(" << operationToString(t.operation()).toUtf8().constData();
-        for (const Term& term : t.subTerms()) {
+        for (const Term &term : t.subTerms()) {
             d << term;
         }
         d << ")";

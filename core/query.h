@@ -28,7 +28,8 @@
 
 #include <QVariant>
 
-namespace Baloo {
+namespace Baloo
+{
 
 class Term;
 
@@ -36,11 +37,11 @@ class BALOO_CORE_EXPORT Query
 {
 public:
     Query();
-    Query(const Term& t);
-    Query(const Query& rhs);
+    Query(const Term &t);
+    Query(const Query &rhs);
     ~Query();
 
-    void setTerm(const Term& t);
+    void setTerm(const Term &t);
     Term term() const;
 
     /**
@@ -56,10 +57,10 @@ public:
      * and "Video" will probably never return any results. Have a look at
      * KFileMetaData::TypeInfo for a list of type names.
      */
-    void addType(const QString& type);
-    void addTypes(const QStringList& typeList);
-    void setType(const QString& type);
-    void setTypes(const QStringList& types);
+    void addType(const QString &type);
+    void addTypes(const QStringList &typeList);
+    void setType(const QString &type);
+    void setTypes(const QStringList &types);
 
     QStringList types() const;
 
@@ -70,7 +71,7 @@ public:
      * Each search backend will interpret it in its own way, and try
      * to give the best possible results.
      */
-    void setSearchString(const QString& str);
+    void setSearchString(const QString &str);
     QString searchString() const;
 
     /**
@@ -122,7 +123,7 @@ public:
      * Sets the property that should be used for sorting. This automatically
      * set the sorting mechanism to SortProperty
      */
-    void setSortingProperty(const QString& property);
+    void setSortingProperty(const QString &property);
     QString sortingProperty() const;
 
     /**
@@ -132,27 +133,27 @@ public:
      * Each backend has their own custom options which should be
      * looked up in their corresponding documentation
      */
-    void addCustomOption(const QString& option, const QVariant& value);
-    void removeCustomOption(const QString& option);
-    QVariant customOption(const QString& option) const;
+    void addCustomOption(const QString &option, const QVariant &value);
+    void removeCustomOption(const QString &option);
+    QVariant customOption(const QString &option) const;
     QVariantMap customOptions() const;
 
     ResultIterator exec();
 
     QByteArray toJSON();
-    static Query fromJSON(const QByteArray& arr);
+    static Query fromJSON(const QByteArray &arr);
 
-    QUrl toSearchUrl(const QString& title = QString());
-    static Query fromSearchUrl(const QUrl& url);
-    static QString titleFromQueryUrl(const QUrl& url);
+    QUrl toSearchUrl(const QString &title = QString());
+    static Query fromSearchUrl(const QUrl &url);
+    static QString titleFromQueryUrl(const QUrl &url);
 
-    bool operator == (const Query& rhs) const;
+    bool operator == (const Query &rhs) const;
 
-    Query& operator=(const Query& rhs);
+    Query &operator=(const Query &rhs);
 
 private:
     class Private;
-    Private* d;
+    Private *d;
 };
 
 }

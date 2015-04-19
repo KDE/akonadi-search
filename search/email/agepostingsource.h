@@ -26,7 +26,8 @@
 #include <xapian.h>
 #include <QString>
 
-namespace Baloo {
+namespace Baloo
+{
 
 class AgePostingSource : public Xapian::ValuePostingSource
 {
@@ -34,13 +35,14 @@ public:
     AgePostingSource(Xapian::valueno slot_);
 
     virtual Xapian::weight get_weight() const;
-    virtual Xapian::PostingSource* clone() const;
+    virtual Xapian::PostingSource *clone() const;
 
-    virtual std::string name() const {
+    virtual std::string name() const
+    {
         return "AgePostingSource";
     }
 
-    virtual void init(const Xapian::Database& db_);
+    virtual void init(const Xapian::Database &db_);
 
 private:
     uint m_currentTime_t;

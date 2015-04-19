@@ -31,8 +31,7 @@
 
 using namespace Baloo::PIM;
 
-struct CollectionQuery::Private
-{
+struct CollectionQuery::Private {
     QStringList ns;
     QStringList mimeType;
     QString nameString;
@@ -43,8 +42,8 @@ struct CollectionQuery::Private
 };
 
 CollectionQuery::CollectionQuery()
-    :Query(),
-    d(new Private)
+    : Query(),
+      d(new Private)
 {
     d->databaseDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("baloo/collections/");
     d->limit = 0;
@@ -60,22 +59,22 @@ void CollectionQuery::setDatabaseDir(const QString &dir)
     d->databaseDir = dir;
 }
 
-void CollectionQuery::nameMatches(const QString& match)
+void CollectionQuery::nameMatches(const QString &match)
 {
     d->nameString = match;
 }
 
-void CollectionQuery::identifierMatches(const QString& match)
+void CollectionQuery::identifierMatches(const QString &match)
 {
     d->identifierString = match;
 }
 
-void CollectionQuery::pathMatches(const QString& match)
+void CollectionQuery::pathMatches(const QString &match)
 {
     d->pathString = match;
 }
 
-void CollectionQuery::setNamespace(const QStringList& ns)
+void CollectionQuery::setNamespace(const QStringList &ns)
 {
     d->ns = ns;
 }
@@ -95,7 +94,7 @@ ResultIterator CollectionQuery::exec()
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(d->databaseDir).constData());
-    } catch (const Xapian::DatabaseError& e) {
+    } catch (const Xapian::DatabaseError &e) {
         kWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     }
@@ -109,7 +108,7 @@ ResultIterator CollectionQuery::exec()
         parser.add_prefix("", "N");
         parser.set_default_op(Xapian::Query::OP_AND);
         queries << parser.parse_query(d->nameString.toUtf8().constData(),
-                                        Xapian::QueryParser::FLAG_PARTIAL);
+                                      Xapian::QueryParser::FLAG_PARTIAL);
     }
 
     if (!d->identifierString.isEmpty()) {
@@ -118,16 +117,16 @@ ResultIterator CollectionQuery::exec()
         parser.add_prefix("", "I");
         parser.set_default_op(Xapian::Query::OP_AND);
         queries << parser.parse_query(d->identifierString.toUtf8().constData(),
-                                        Xapian::QueryParser::FLAG_PARTIAL);
+                                      Xapian::QueryParser::FLAG_PARTIAL);
     }
-    
+
     if (!d->pathString.isEmpty()) {
         Xapian::QueryParser parser;
         parser.set_database(db);
         parser.add_prefix("", "P");
         parser.set_default_op(Xapian::Query::OP_AND);
         queries << parser.parse_query(d->pathString.toUtf8().constData(),
-                                        Xapian::QueryParser::FLAG_PARTIAL|Xapian::QueryParser::FLAG_PHRASE);
+                                      Xapian::QueryParser::FLAG_PARTIAL | Xapian::QueryParser::FLAG_PHRASE);
     }
 
     if (!d->ns.isEmpty()) {

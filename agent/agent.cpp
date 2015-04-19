@@ -51,9 +51,9 @@
 
 #define INDEXING_AGENT_VERSION 4
 
-BalooIndexingAgent::BalooIndexingAgent(const QString& id)
+BalooIndexingAgent::BalooIndexingAgent(const QString &id)
     : AgentBase(id),
-    m_scheduler(m_index, QSharedPointer<JobFactory>(new JobFactory))
+      m_scheduler(m_index, QSharedPointer<JobFactory>(new JobFactory))
 {
     lowerIOPriority();
     lowerSchedulingPriority();
@@ -62,7 +62,7 @@ BalooIndexingAgent::BalooIndexingAgent(const QString& id)
     KConfig config(QLatin1String("baloorc"));
     KConfigGroup group = config.group("Akonadi");
     const int agentIndexingVersion = group.readEntry("agentIndexingVersion", 0);
-    if (agentIndexingVersion<INDEXING_AGENT_VERSION) {
+    if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
         m_index.removeDatabase();
         QTimer::singleShot(0, &m_scheduler, SLOT(scheduleCompleteSync()));
         group.writeEntry("agentIndexingVersion", INDEXING_AGENT_VERSION);
@@ -98,14 +98,14 @@ BalooIndexingAgent::BalooIndexingAgent(const QString& id)
     new BalooIndexerAdaptor(this);
 
     // Cleanup agentsrc after migration to 4.13
-    Akonadi::AgentManager* agentManager = Akonadi::AgentManager::self();
+    Akonadi::AgentManager *agentManager = Akonadi::AgentManager::self();
     const Akonadi::AgentInstance::List allAgents = agentManager->instances();
     const QStringList oldFeeders = QStringList() << QLatin1String("akonadi_nepomuk_feeder");
     // Cannot use agentManager->instance(oldInstanceName) here, it wouldn't find broken instances.
-    Q_FOREACH( const Akonadi::AgentInstance& inst, allAgents ) {
-        if ( oldFeeders.contains( inst.identifier() ) ) {
+    Q_FOREACH (const Akonadi::AgentInstance &inst, allAgents) {
+        if (oldFeeders.contains(inst.identifier())) {
             qDebug() << "Removing old nepomuk feeder" << inst.identifier();
-            agentManager->removeInstance( inst );
+            agentManager->removeInstance(inst);
         }
     }
 }
@@ -125,7 +125,7 @@ void BalooIndexingAgent::reindexAll()
 
 void BalooIndexingAgent::reindexCollection(const qlonglong id)
 {
-    
+
     //qDebug() << "Reindexing collection " << id;
     m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
 }
@@ -135,21 +135,22 @@ qlonglong BalooIndexingAgent::indexedItems(const qlonglong id)
     return m_index.indexedItems(id);
 }
 
-void BalooIndexingAgent::itemAdded(const Akonadi::Item& item, const Akonadi::Collection& collection)
+void BalooIndexingAgent::itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection)
 {
     Q_UNUSED(collection);
     m_scheduler.addItem(item);
 }
 
-void BalooIndexingAgent::itemChanged(const Akonadi::Item& item, const QSet<QByteArray>& partIdentifiers)
+void BalooIndexingAgent::itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers)
 {
     // We don't index certain parts so we don't care when they change
     QSet<QByteArray> pi = partIdentifiers;
     QMutableSetIterator<QByteArray> it(pi);
     while (it.hasNext()) {
         it.next();
-        if (!it.value().startsWith("PLD:"))
+        if (!it.value().startsWith("PLD:")) {
             it.remove();
+        }
     }
 
     if (pi.isEmpty()) {
@@ -158,36 +159,36 @@ void BalooIndexingAgent::itemChanged(const Akonadi::Item& item, const QSet<QByte
     m_scheduler.addItem(item);
 }
 
-void BalooIndexingAgent::itemsFlagsChanged(const Akonadi::Item::List& items,
-                                           const QSet<QByteArray>& addedFlags,
-                                           const QSet<QByteArray>& removedFlags)
+void BalooIndexingAgent::itemsFlagsChanged(const Akonadi::Item::List &items,
+        const QSet<QByteArray> &addedFlags,
+        const QSet<QByteArray> &removedFlags)
 {
     // Akonadi always sends batch of items of the same type
     m_index.updateFlags(items, addedFlags, removedFlags);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::itemsRemoved(const Akonadi::Item::List& items)
+void BalooIndexingAgent::itemsRemoved(const Akonadi::Item::List &items)
 {
     m_index.remove(items);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::itemsMoved(const Akonadi::Item::List& items,
-                                    const Akonadi::Collection& sourceCollection,
-                                    const Akonadi::Collection& destinationCollection)
+void BalooIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
+                                    const Akonadi::Collection &sourceCollection,
+                                    const Akonadi::Collection &destinationCollection)
 {
     m_index.move(items, sourceCollection, destinationCollection);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::collectionAdded(const Akonadi::Collection& collection, const Akonadi::Collection& parent)
+void BalooIndexingAgent::collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent)
 {
     m_index.index(collection);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::collectionChanged(const Akonadi::Collection& collection, const QSet<QByteArray>& changedAttributes)
+void BalooIndexingAgent::collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes)
 {
     QSet<QByteArray> changes = changedAttributes;
     changes.remove("collectionquota");
@@ -208,14 +209,14 @@ void BalooIndexingAgent::collectionChanged(const Akonadi::Collection& collection
     }
 }
 
-void BalooIndexingAgent::collectionRemoved(const Akonadi::Collection& collection)
+void BalooIndexingAgent::collectionRemoved(const Akonadi::Collection &collection)
 {
     m_index.remove(collection);
     m_index.scheduleCommit();
 }
 
 void BalooIndexingAgent::collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
-                                     const Akonadi::Collection &collectionDestination)
+        const Akonadi::Collection &collectionDestination)
 {
     m_index.remove(collection);
     CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);

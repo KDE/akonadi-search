@@ -26,23 +26,27 @@
 
 using namespace Baloo;
 
-class Baloo::ResultIteratorPrivate : public QSharedData {
+class Baloo::ResultIteratorPrivate : public QSharedData
+{
 public:
     ResultIteratorPrivate()
         : queryId(0)
-        , store(0) {
+        , store(0)
+    {
     }
 
-    ~ResultIteratorPrivate() {
-        if (store)
+    ~ResultIteratorPrivate()
+    {
+        if (store) {
             store->close(queryId);
+        }
     }
 
     int queryId;
-    SearchStore* store;
+    SearchStore *store;
 };
 
-ResultIterator::ResultIterator(int id, SearchStore* store)
+ResultIterator::ResultIterator(int id, SearchStore *store)
     : d(new ResultIteratorPrivate)
 {
     d->queryId = id;
@@ -54,7 +58,7 @@ ResultIterator::ResultIterator()
 {
 }
 
-ResultIterator::ResultIterator(const ResultIterator& rhs)
+ResultIterator::ResultIterator(const ResultIterator &rhs)
     : d(rhs.d)
 {
 }
@@ -65,40 +69,45 @@ ResultIterator::~ResultIterator()
 
 bool ResultIterator::next()
 {
-    if (d->store)
+    if (d->store) {
         return d->store->next(d->queryId);
-    else
+    } else {
         return false;
+    }
 }
 
 QByteArray ResultIterator::id() const
 {
-    if (d->store)
+    if (d->store) {
         return d->store->id(d->queryId);
-    else
+    } else {
         return QByteArray();
+    }
 }
 
 QUrl ResultIterator::url() const
 {
-    if (d->store)
+    if (d->store) {
         return d->store->url(d->queryId);
-    else
+    } else {
         return QUrl();
+    }
 }
 
 QString ResultIterator::text() const
 {
-    if (d->store)
+    if (d->store) {
         return d->store->text(d->queryId);
-    else
+    } else {
         return QString();
+    }
 }
 
 QString ResultIterator::icon() const
 {
-    if (d->store)
+    if (d->store) {
         return d->store->icon(d->queryId);
-    else
+    } else {
         return QString();
+    }
 }

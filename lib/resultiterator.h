@@ -27,8 +27,10 @@
 
 #include <Item>
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 
 class ContactQuery;
 class EmailQuery;
@@ -38,7 +40,7 @@ class BALOO_PIM_EXPORT ResultIterator
 {
 public:
     ResultIterator();
-    ResultIterator(const ResultIterator& ri);
+    ResultIterator(const ResultIterator &ri);
     ~ResultIterator();
 
     Akonadi::Item::Id id();
@@ -51,7 +53,7 @@ private:
     friend class CollectionQuery;
 
     class Private;
-    Private* d;
+    Private *d;
 };
 
 }

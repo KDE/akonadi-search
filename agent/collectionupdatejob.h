@@ -34,7 +34,7 @@ class CollectionUpdateJob : public KJob
 {
     Q_OBJECT
 public:
-    explicit CollectionUpdateJob(Index &index, const Akonadi::Collection &col, QObject* parent = Q_NULLPTR);
+    explicit CollectionUpdateJob(Index &index, const Akonadi::Collection &col, QObject *parent = Q_NULLPTR);
 
     virtual void start();
 

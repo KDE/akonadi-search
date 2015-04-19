@@ -27,18 +27,16 @@
 #include <KCalCore/Attendee>
 #include <KCalCore/Event>
 
-CalendarIndexer::CalendarIndexer(const QString& path)
-    : AbstractIndexer(), m_db( 0 ), m_termGen( 0 )
+CalendarIndexer::CalendarIndexer(const QString &path)
+    : AbstractIndexer(), m_db(0), m_termGen(0)
 {
     try {
         m_db = new Baloo::XapianDatabase(path, true);
-    }
-    catch (const Xapian::DatabaseCorruptError& err) {
+    } catch (const Xapian::DatabaseCorruptError &err) {
         qWarning() << "Database Corrupted - What did you do?";
         qWarning() << err.get_error_string();
         m_db = 0;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = 0;
     }
@@ -55,19 +53,19 @@ CalendarIndexer::~CalendarIndexer()
 QStringList CalendarIndexer::mimeTypes() const
 {
     return QStringList() << QString::fromLatin1("application/x-vnd.akonadi.calendar.event")
-                         << QString::fromLatin1("application/x-vnd.akonadi.calendar.todo")
-                         << QString::fromLatin1("application/x-vnd.akonadi.calendar.journal")
-                         << QString::fromLatin1("application/x-vnd.akonadi.calendar.freebusy");
+           << QString::fromLatin1("application/x-vnd.akonadi.calendar.todo")
+           << QString::fromLatin1("application/x-vnd.akonadi.calendar.journal")
+           << QString::fromLatin1("application/x-vnd.akonadi.calendar.freebusy");
 }
 
 void CalendarIndexer::index(const Akonadi::Item &item)
 {
-    if ( item.hasPayload<KCalCore::Event::Ptr>() ) {
-        indexEventItem( item, item.payload<KCalCore::Event::Ptr>() );
-    } else if ( item.hasPayload<KCalCore::Journal::Ptr>() ) {
-        indexJournalItem( item, item.payload<KCalCore::Journal::Ptr>() );
-    } else if ( item.hasPayload<KCalCore::Todo::Ptr>() ) {
-        indexTodoItem( item, item.payload<KCalCore::Todo::Ptr>() );
+    if (item.hasPayload<KCalCore::Event::Ptr>()) {
+        indexEventItem(item, item.payload<KCalCore::Event::Ptr>());
+    } else if (item.hasPayload<KCalCore::Journal::Ptr>()) {
+        indexJournalItem(item, item.payload<KCalCore::Journal::Ptr>());
+    } else if (item.hasPayload<KCalCore::Todo::Ptr>()) {
+        indexTodoItem(item, item.payload<KCalCore::Todo::Ptr>());
     } else {
         return;
     }
@@ -75,28 +73,30 @@ void CalendarIndexer::index(const Akonadi::Item &item)
 
 void CalendarIndexer::commit()
 {
-    if (m_db)
+    if (m_db) {
         m_db->commit();
+    }
 }
 
 void CalendarIndexer::remove(const Akonadi::Item &item)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     try {
         m_db->deleteDocument(item.id());
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
-void CalendarIndexer::remove(const Akonadi::Collection& collection)
+void CalendarIndexer::remove(const Akonadi::Collection &collection)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     try {
-        Xapian::Query query('C'+ QString::number(collection.id()).toStdString());
+        Xapian::Query query('C' + QString::number(collection.id()).toStdString());
         Xapian::Enquire enquire(*(m_db->db()));
         enquire.set_query(query);
 
@@ -106,23 +106,22 @@ void CalendarIndexer::remove(const Akonadi::Collection& collection)
             const qint64 id = *it;
             remove(Akonadi::Item(id));
         }
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
-void CalendarIndexer::move(const Akonadi::Item::Id& itemId,
-                        const Akonadi::Entity::Id& from,
-                        const Akonadi::Entity::Id& to)
+void CalendarIndexer::move(const Akonadi::Item::Id &itemId,
+                           const Akonadi::Entity::Id &from,
+                           const Akonadi::Entity::Id &to)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     Xapian::Document doc;
     try {
         doc = m_db->db()->get_document(itemId);
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 
@@ -144,13 +143,13 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::
     KCalCore::Attendee::List attendees = event->attendees();
     KCalCore::Attendee::List::ConstIterator it;
     KCalCore::Attendee::List::ConstIterator end(attendees.constEnd());
-    for ( it = attendees.constBegin(); it != end; ++it ) {
-        doc.addBoolTerm((*it)->email()+QString::number((*it)->status()), "PS");
+    for (it = attendees.constBegin(); it != end; ++it) {
+        doc.addBoolTerm((*it)->email() + QString::number((*it)->status()), "PS");
     }
 
     // Parent collection
     Q_ASSERT_X(item.parentCollection().isValid(), "Baloo::CalenderIndexer::index",
-        "Item does not have a valid parent collection");
+               "Item does not have a valid parent collection");
 
     const Akonadi::Entity::Id colId = item.parentCollection().id();
     doc.addBoolTerm(colId, "C");
@@ -168,7 +167,7 @@ void CalendarIndexer::indexTodoItem(const Akonadi::Item &item, const KCalCore::T
     //TODO
 }
 
-void CalendarIndexer::updateIncidenceItem( const KCalCore::Incidence::Ptr &calInc )
+void CalendarIndexer::updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc)
 {
     //TODO
 }

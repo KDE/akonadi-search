@@ -29,7 +29,8 @@
 #include <QVariant>
 #include <QDebug>
 
-namespace Baloo {
+namespace Baloo
+{
 
 class BALOO_CORE_EXPORT Term
 {
@@ -51,12 +52,12 @@ public:
     };
 
     Term();
-    Term(const Term& t);
+    Term(const Term &t);
 
     /**
      * The Item must contain the property \p property
      */
-    Term(const QString& property);
+    Term(const QString &property);
 
     /**
      * The Item must contain the property \p property with
@@ -67,15 +68,15 @@ public:
      * For DateTime - Contains
      * For any other type - Equals
      */
-    Term(const QString& property, const QVariant& value, Comparator c = Auto);
+    Term(const QString &property, const QVariant &value, Comparator c = Auto);
 
     /**
      * This term is a combination of other terms
      */
     Term(Operation op);
-    Term(Operation op, const Term& t);
-    Term(Operation op, const QList<Term>& t);
-    Term(const Term& lhs, Operation op, const Term& rhs);
+    Term(Operation op, const Term &t);
+    Term(Operation op, const QList<Term> &t);
+    Term(const Term &lhs, Operation op, const Term &rhs);
     ~Term();
 
     bool isValid() const;
@@ -89,8 +90,8 @@ public:
     bool negated() const;
     bool isNegated() const;
 
-    void addSubTerm(const Term& term);
-    void setSubTerms(const QList<Term>& terms);
+    void addSubTerm(const Term &term);
+    void setSubTerms(const QList<Term> &terms);
 
     /**
      * Returns the first subTerm in the list of subTerms
@@ -108,44 +109,47 @@ public:
      * Return the property this term is targetting
      */
     QString property() const;
-    void setProperty(const QString& property);
+    void setProperty(const QString &property);
 
     QVariant value() const;
-    void setValue(const QVariant& value);
+    void setValue(const QVariant &value);
 
     Comparator comparator() const;
     void setComparator(Comparator c);
 
-    void setUserData(const QString& name, const QVariant& value);
-    QVariant userData(const QString& name) const;
+    void setUserData(const QString &name, const QVariant &value);
+    QVariant userData(const QString &name) const;
 
     QVariantMap toVariantMap() const;
-    static Term fromVariantMap(const QVariantMap& map);
+    static Term fromVariantMap(const QVariantMap &map);
 
-    bool operator == (const Term& rhs) const;
+    bool operator == (const Term &rhs) const;
 
-    Term& operator=(const Term& rhs);
+    Term &operator=(const Term &rhs);
 
 private:
     class Private;
-    Private* d;
+    Private *d;
 };
 
-inline Term operator &&(const Term& lhs, const Term& rhs) {
+inline Term operator &&(const Term &lhs, const Term &rhs)
+{
     Term t(Term::And);
     t.addSubTerm(lhs);
     t.addSubTerm(rhs);
     return t;
 }
 
-inline Term operator ||(const Term& lhs, const Term& rhs) {
+inline Term operator ||(const Term &lhs, const Term &rhs)
+{
     Term t(Term::Or);
     t.addSubTerm(lhs);
     t.addSubTerm(rhs);
     return t;
 }
 
-inline Term operator !(const Term& rhs) {
+inline Term operator !(const Term &rhs)
+{
     Term t(rhs);
     t.setNegation(!rhs.isNegated());
     return t;
@@ -153,6 +157,6 @@ inline Term operator !(const Term& rhs) {
 
 }
 
-BALOO_CORE_EXPORT QDebug operator <<(QDebug d, const Baloo::Term& t);
+BALOO_CORE_EXPORT QDebug operator <<(QDebug d, const Baloo::Term &t);
 
 #endif // TERM_H

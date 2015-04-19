@@ -29,22 +29,23 @@
 #include <KConfig>
 #include <KConfigGroup>
 
-
 class DummyIndexingJob : public CollectionIndexingJob
 {
     Q_OBJECT
 public:
-    DummyIndexingJob(Index& index, const Akonadi::Collection& col, const QList< Akonadi::Entity::Id >& pending, QObject* parent = 0)
-    :   CollectionIndexingJob(index, col, pending, parent)
+    DummyIndexingJob(Index &index, const Akonadi::Collection &col, const QList< Akonadi::Entity::Id > &pending, QObject *parent = 0)
+        :   CollectionIndexingJob(index, col, pending, parent)
     {
     }
 
-    virtual void start() {
+    virtual void start()
+    {
         QMetaObject::invokeMethod(this, "finish", Qt::QueuedConnection);
     }
 
 private Q_SLOTS:
-    void finish() {
+    void finish()
+    {
         emitResult();
     }
 };
@@ -56,9 +57,9 @@ public:
     Akonadi::Item::List indexedItems;
     QList<bool> fullSyncs;
 
-    virtual CollectionIndexingJob* createCollectionIndexingJob(Index& index, const Akonadi::Collection& col, const QList< Akonadi::Entity::Id >& pending, bool fullSync, QObject* parent = 0)
+    virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList< Akonadi::Entity::Id > &pending, bool fullSync, QObject *parent = 0)
     {
-        Q_FOREACH(qint64 id, pending) {
+        Q_FOREACH (qint64 id, pending) {
             indexedItems << Akonadi::Item(id);
         }
         indexedCollections << col;
@@ -73,7 +74,8 @@ class SchedulerTest : public QObject
 
 private Q_SLOTS:
 
-    void init() {
+    void init()
+    {
         AkonadiTest::checkTestIsIsolated();
         AkonadiTest::setAllResourcesOffline();
         Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QLatin1String("akonadi_knut_resource_0"));
@@ -87,7 +89,7 @@ private Q_SLOTS:
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int, QString)));
+        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
         //Wait for ready signal (indicates that indexing is complete)
         QTRY_COMPARE(statusSpy.count(), 1);
@@ -105,7 +107,7 @@ private Q_SLOTS:
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int, QString)));
+        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
 
         Akonadi::Collection col1(3);
@@ -131,7 +133,7 @@ private Q_SLOTS:
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int, QString)));
+        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
 
         Akonadi::Collection parent1(3);
@@ -179,7 +181,7 @@ private Q_SLOTS:
 
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int, QString)));
+        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
 
         QTRY_COMPARE(statusSpy.count(), 1);

@@ -39,9 +39,11 @@ using namespace Baloo;
 
 const int defaultLimit = 100000;
 
-class Baloo::Query::Private {
+class Baloo::Query::Private
+{
 public:
-    Private() {
+    Private()
+    {
         m_limit = defaultLimit;
         m_offset = 0;
         m_yearFilter = -1;
@@ -70,13 +72,13 @@ Query::Query()
 {
 }
 
-Query::Query(const Term& t)
+Query::Query(const Term &t)
     : d(new Private)
 {
     d->m_term = t;
 }
 
-Query::Query(const Query& rhs)
+Query::Query(const Query &rhs)
     : d(new Private(*rhs.d))
 {
 }
@@ -86,7 +88,7 @@ Query::~Query()
     delete d;
 }
 
-void Query::setTerm(const Term& t)
+void Query::setTerm(const Term &t)
 {
     d->m_term = t;
 }
@@ -96,25 +98,25 @@ Term Query::term() const
     return d->m_term;
 }
 
-void Query::addType(const QString& type)
+void Query::addType(const QString &type)
 {
     d->m_types << type.split(QLatin1Char('/'), QString::SkipEmptyParts);
 }
 
-void Query::addTypes(const QStringList& typeList)
+void Query::addTypes(const QStringList &typeList)
 {
-    Q_FOREACH (const QString& type, typeList) {
+    Q_FOREACH (const QString &type, typeList) {
         addType(type);
     }
 }
 
-void Query::setType(const QString& type)
+void Query::setType(const QString &type)
 {
     d->m_types.clear();
     addType(type);
 }
 
-void Query::setTypes(const QStringList& types)
+void Query::setTypes(const QStringList &types)
 {
     d->m_types = types;
 }
@@ -129,7 +131,7 @@ QString Query::searchString() const
     return d->m_searchString;
 }
 
-void Query::setSearchString(const QString& str)
+void Query::setSearchString(const QString &str)
 {
     d->m_searchString = str;
 }
@@ -186,7 +188,7 @@ Query::SortingOption Query::sortingOption() const
     return d->m_sortingOption;
 }
 
-void Query::setSortingProperty(const QString& property)
+void Query::setSortingProperty(const QString &property)
 {
     d->m_sortingOption = SortProperty;
     d->m_sortingProperty = property;
@@ -197,12 +199,12 @@ QString Query::sortingProperty() const
     return d->m_sortingProperty;
 }
 
-void Query::addCustomOption(const QString& option, const QVariant& value)
+void Query::addCustomOption(const QString &option, const QVariant &value)
 {
     d->m_customOptions.insert(option, value);
 }
 
-QVariant Query::customOption(const QString& option) const
+QVariant Query::customOption(const QString &option) const
 {
     return d->m_customOptions.value(option);
 }
@@ -212,7 +214,7 @@ QVariantMap Query::customOptions() const
     return d->m_customOptions;
 }
 
-void Query::removeCustomOption(const QString& option)
+void Query::removeCustomOption(const QString &option)
 {
     d->m_customOptions.remove(option);
 }
@@ -223,13 +225,14 @@ ResultIterator Query::exec()
 {
     // vHanda: Maybe this should default to allow searches on all search stores?
     Q_ASSERT_X(!types().isEmpty(), "Baloo::Query::exec", "A query is being initialized without a type");
-    if (types().isEmpty())
+    if (types().isEmpty()) {
         return ResultIterator();
+    }
 
-    SearchStore* storeMatch = 0;
+    SearchStore *storeMatch = 0;
     Q_FOREACH (QSharedPointer<SearchStore> store, *s_searchStores) {
         bool matches = true;
-        Q_FOREACH (const QString& type, types()) {
+        Q_FOREACH (const QString &type, types()) {
             if (!store->types().contains(type)) {
                 matches = false;
                 break;
@@ -242,8 +245,9 @@ ResultIterator Query::exec()
         }
     }
 
-    if (!storeMatch)
+    if (!storeMatch) {
         return ResultIterator();
+    }
 
     int id = storeMatch->exec(*this);
     return ResultIterator(id, storeMatch);
@@ -253,35 +257,46 @@ QByteArray Query::toJSON()
 {
     QVariantMap map;
 
-    if (!d->m_types.isEmpty())
+    if (!d->m_types.isEmpty()) {
         map[QLatin1String("type")] = d->m_types;
+    }
 
-    if (d->m_limit != defaultLimit)
+    if (d->m_limit != defaultLimit) {
         map[QLatin1String("limit")] = d->m_limit;
+    }
 
-    if (d->m_offset)
+    if (d->m_offset) {
         map[QLatin1String("offset")] = d->m_offset;
+    }
 
-    if (!d->m_searchString.isEmpty())
+    if (!d->m_searchString.isEmpty()) {
         map[QLatin1String("searchString")] = d->m_searchString;
+    }
 
-    if (d->m_term.isValid())
+    if (d->m_term.isValid()) {
         map[QLatin1String("term")] = QVariant(d->m_term.toVariantMap());
+    }
 
-    if (d->m_yearFilter >= 0)
+    if (d->m_yearFilter >= 0) {
         map[QLatin1String("yearFilter")] = d->m_yearFilter;
-    if (d->m_monthFilter >= 0)
+    }
+    if (d->m_monthFilter >= 0) {
         map[QLatin1String("monthFilter")] = d->m_monthFilter;
-    if (d->m_dayFilter >= 0)
+    }
+    if (d->m_dayFilter >= 0) {
         map[QLatin1String("dayFilter")] = d->m_dayFilter;
+    }
 
-    if (d->m_sortingOption != SortAuto)
+    if (d->m_sortingOption != SortAuto) {
         map[QLatin1String("sortingOption")] = static_cast<int>(d->m_sortingOption);
-    if (!d->m_sortingProperty.isEmpty())
+    }
+    if (!d->m_sortingProperty.isEmpty()) {
         map[QLatin1String("sortingProperty")] = d->m_sortingProperty;
+    }
 
-    if (d->m_customOptions.size())
+    if (d->m_customOptions.size()) {
         map[QLatin1String("customOptions")] = d->m_customOptions;
+    }
 
     QJsonObject jo = QJsonObject::fromVariantMap(map);
     QJsonDocument jdoc;
@@ -290,7 +305,7 @@ QByteArray Query::toJSON()
 }
 
 // static
-Query Query::fromJSON(const QByteArray& arr)
+Query Query::fromJSON(const QByteArray &arr)
 {
     QJsonDocument jdoc = QJsonDocument::fromJson(arr);
     const QVariantMap map = jdoc.object().toVariantMap();
@@ -298,21 +313,25 @@ Query Query::fromJSON(const QByteArray& arr)
     Query query;
     query.d->m_types = map[QLatin1String("type")].toStringList();
 
-    if (map.contains(QLatin1String("limit")))
+    if (map.contains(QLatin1String("limit"))) {
         query.d->m_limit = map[QLatin1String("limit")].toUInt();
-    else
+    } else {
         query.d->m_limit = defaultLimit;
+    }
 
     query.d->m_offset = map[QLatin1String("offset")].toUInt();
     query.d->m_searchString = map[QLatin1String("searchString")].toString();
     query.d->m_term = Term::fromVariantMap(map[QLatin1String("term")].toMap());
 
-    if (map.contains(QLatin1String("yearFilter")))
+    if (map.contains(QLatin1String("yearFilter"))) {
         query.d->m_yearFilter = map[QLatin1String("yearFilter")].toInt();
-    if (map.contains(QLatin1String("monthFilter")))
+    }
+    if (map.contains(QLatin1String("monthFilter"))) {
         query.d->m_monthFilter = map[QLatin1String("monthFilter")].toInt();
-    if (map.contains(QLatin1String("dayFilter")))
+    }
+    if (map.contains(QLatin1String("dayFilter"))) {
         query.d->m_dayFilter = map[QLatin1String("dayFilter")].toInt();
+    }
 
     if (map.contains(QLatin1String("sortingOption"))) {
         int option = map.value("sortingOption").toInt();
@@ -327,20 +346,20 @@ Query Query::fromJSON(const QByteArray& arr)
         QVariant var = map[QLatin1String("customOptions")];
         if (var.type() == QVariant::Map) {
             query.d->m_customOptions = map[QLatin1String("customOptions")].toMap();
-        }
-        else if (var.type() == QVariant::Hash) {
+        } else if (var.type() == QVariant::Hash) {
             QVariantHash hash = var.toHash();
 
             QHash<QString, QVariant>::const_iterator it = hash.constBegin();
-            for (; it != hash.constEnd(); ++it)
+            for (; it != hash.constEnd(); ++it) {
                 query.d->m_customOptions.insert(it.key(), it.value());
+            }
         }
     }
 
     return query;
 }
 
-QUrl Query::toSearchUrl(const QString& title)
+QUrl Query::toSearchUrl(const QString &title)
 {
     QUrl url;
     url.setScheme(QLatin1String("baloosearch"));
@@ -348,52 +367,55 @@ QUrl Query::toSearchUrl(const QString& title)
     QUrlQuery urlQuery;
     urlQuery.addQueryItem(QLatin1String("json"), QString::fromUtf8(toJSON()));
 
-    if (title.size())
+    if (title.size()) {
         urlQuery.addQueryItem(QLatin1String("title"), title);
+    }
 
     url.setQuery(urlQuery);
     return url;
 }
 
-Query Query::fromSearchUrl(const QUrl& url)
+Query Query::fromSearchUrl(const QUrl &url)
 {
-    if (url.scheme() != QLatin1String("baloosearch"))
+    if (url.scheme() != QLatin1String("baloosearch")) {
         return Query();
+    }
 
     QUrlQuery urlQuery(url);
     QString jsonString = urlQuery.queryItemValue(QLatin1String("json"), QUrl::FullyDecoded);
     return Query::fromJSON(jsonString.toUtf8());
 }
 
-QString Query::titleFromQueryUrl(const QUrl& url)
+QString Query::titleFromQueryUrl(const QUrl &url)
 {
     QUrlQuery urlQuery(url);
     return urlQuery.queryItemValue(QLatin1String("title"), QUrl::FullyDecoded);
 }
 
-bool Query::operator==(const Query& rhs) const
+bool Query::operator==(const Query &rhs) const
 {
     if (rhs.d->m_limit != d->m_limit || rhs.d->m_offset != d->m_offset ||
-        rhs.d->m_dayFilter != d->m_dayFilter || rhs.d->m_monthFilter != d->m_monthFilter ||
-        rhs.d->m_yearFilter != d->m_yearFilter || rhs.d->m_customOptions != d->m_customOptions ||
-        rhs.d->m_searchString != d->m_searchString || rhs.d->m_sortingProperty != d->m_sortingProperty ||
-        rhs.d->m_sortingOption != d->m_sortingOption)
-    {
+            rhs.d->m_dayFilter != d->m_dayFilter || rhs.d->m_monthFilter != d->m_monthFilter ||
+            rhs.d->m_yearFilter != d->m_yearFilter || rhs.d->m_customOptions != d->m_customOptions ||
+            rhs.d->m_searchString != d->m_searchString || rhs.d->m_sortingProperty != d->m_sortingProperty ||
+            rhs.d->m_sortingOption != d->m_sortingOption) {
         return false;
     }
 
-    if (rhs.d->m_types.size() != d->m_types.size())
+    if (rhs.d->m_types.size() != d->m_types.size()) {
         return false;
+    }
 
-    Q_FOREACH (const QString& type, rhs.d->m_types) {
-        if (!d->m_types.contains(type))
+    Q_FOREACH (const QString &type, rhs.d->m_types) {
+        if (!d->m_types.contains(type)) {
             return false;
+        }
     }
 
     return d->m_term == rhs.d->m_term;
 }
 
-Query& Query::operator=(const Query& rhs)
+Query &Query::operator=(const Query &rhs)
 {
     *d = *rhs.d;
     return *this;

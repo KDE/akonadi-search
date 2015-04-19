@@ -34,8 +34,8 @@ class JobFactory
 {
 public:
     virtual ~JobFactory();
-    virtual CollectionIndexingJob* createCollectionIndexingJob(Index& index, const Akonadi::Collection& col,
-            const QList<Akonadi::Item::Id>& pending, bool fullSync, QObject* parent = 0);
+    virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col,
+            const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = 0);
 };
 
 /**
@@ -50,10 +50,10 @@ class Scheduler : public QObject
 {
     Q_OBJECT
 public:
-    explicit Scheduler(Index& index, const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(), QObject* parent = 0);
+    explicit Scheduler(Index &index, const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(), QObject *parent = 0);
     virtual ~Scheduler();
-    void addItem(const Akonadi::Item&);
-    void scheduleCollection(const Akonadi::Collection&, bool fullSync = false);
+    void addItem(const Akonadi::Item &);
+    void scheduleCollection(const Akonadi::Collection &, bool fullSync = false);
 
     void abort();
 
@@ -64,7 +64,7 @@ public:
     void setBusyTimeout(int);
 
 Q_SIGNALS:
-    void status(int status, const QString& message = QString());
+    void status(int status, const QString &message = QString());
     void percent(int);
 
 public Q_SLOTS:
@@ -72,16 +72,16 @@ public Q_SLOTS:
 
 private Q_SLOTS:
     void processNext();
-    void slotIndexingFinished(KJob*);
-    void slotRootCollectionsFetched(KJob*);
-    void slotCollectionsToIndexFetched(KJob*);
+    void slotIndexingFinished(KJob *);
+    void slotRootCollectionsFetched(KJob *);
+    void slotCollectionsToIndexFetched(KJob *);
 
 private:
     void collectDirtyCollections();
 
     QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> > m_queues;
     QQueue<Akonadi::Collection::Id> m_collectionQueue;
-    Index& m_index;
+    Index &m_index;
     KJob *m_currentJob;
     QTimer m_processTimer;
     QHash<Akonadi::Collection::Id, qint64> m_lastModifiedTimestamps;

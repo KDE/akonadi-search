@@ -44,28 +44,30 @@ Xapian::weight AgePostingSource::get_weight() const
     bool ok = false;
     uint time = str.toUInt(&ok);
 
-    if (!ok)
+    if (!ok) {
         return 0.0;
+    }
 
     QDateTime dt = QDateTime::fromTime_t(time);
     uint diff = m_currentTime_t - time;
 
     // Each day is given a penalty of penalty of 1.0
-    double penalty = 1.0 / (24*60*60);
-    double result = 1000.0 - (diff*penalty);
+    double penalty = 1.0 / (24 * 60 * 60);
+    double result = 1000.0 - (diff * penalty);
 
-    if (result < 0.0)
+    if (result < 0.0) {
         return 0.0;
+    }
 
     return result;
 }
 
-Xapian::PostingSource* AgePostingSource::clone() const
+Xapian::PostingSource *AgePostingSource::clone() const
 {
     return new AgePostingSource(slot);
 }
 
-void AgePostingSource::init(const Xapian::Database& db_)
+void AgePostingSource::init(const Xapian::Database &db_)
 {
     Xapian::ValuePostingSource::init(db_);
     set_maxweight(1000.0);

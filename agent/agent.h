@@ -45,28 +45,28 @@ class BalooIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase:
 {
     Q_OBJECT
 public:
-    BalooIndexingAgent(const QString& id);
+    BalooIndexingAgent(const QString &id);
     ~BalooIndexingAgent();
 
     void reindexAll();
     void reindexCollection(const qlonglong id);
     qlonglong indexedItems(const qlonglong id);
 
-    virtual void itemAdded(const Akonadi::Item& item, const Akonadi::Collection& collection);
-    virtual void itemChanged(const Akonadi::Item& item, const QSet<QByteArray>& partIdentifiers);
-    virtual void itemsFlagsChanged(const Akonadi::Item::List& items,
-                                   const QSet<QByteArray>& addedFlags,
-                                   const QSet<QByteArray>& removedFlags);
-    virtual void itemsRemoved(const Akonadi::Item::List& items);
-    virtual void itemsMoved(const Akonadi::Item::List& items,
-                            const Akonadi::Collection& sourceCollection,
-                            const Akonadi::Collection& destinationCollection);
+    virtual void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection);
+    virtual void itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers);
+    virtual void itemsFlagsChanged(const Akonadi::Item::List &items,
+                                   const QSet<QByteArray> &addedFlags,
+                                   const QSet<QByteArray> &removedFlags);
+    virtual void itemsRemoved(const Akonadi::Item::List &items);
+    virtual void itemsMoved(const Akonadi::Item::List &items,
+                            const Akonadi::Collection &sourceCollection,
+                            const Akonadi::Collection &destinationCollection);
 
-    virtual void collectionAdded(const Akonadi::Collection& collection, const Akonadi::Collection& parent);
-    virtual void collectionChanged(const Akonadi::Collection& collection, const QSet<QByteArray>& changedAttributes);
-    virtual void collectionRemoved(const Akonadi::Collection& collection);
+    virtual void collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent);
+    virtual void collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes);
+    virtual void collectionRemoved(const Akonadi::Collection &collection);
     virtual void collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
-                                     const Akonadi::Collection &collectionDestination);
+                                 const Akonadi::Collection &collectionDestination);
 
     // Remove the entire db
     virtual void cleanup();

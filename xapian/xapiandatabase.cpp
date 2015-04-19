@@ -35,7 +35,7 @@
 
 using namespace Baloo;
 
-XapianDatabase::XapianDatabase(const QString& path, bool writeOnly)
+XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)
     : m_db(0)
     , m_writeOnly(writeOnly)
 {
@@ -46,16 +46,14 @@ XapianDatabase::XapianDatabase(const QString& path, bool writeOnly)
         try {
             createWritableDb();
             m_db = new Xapian::Database(m_path);
-        }
-        catch (const Xapian::DatabaseError& err) {
+        } catch (const Xapian::DatabaseError &err) {
             qWarning() << "Serious Error: " << err.get_error_string();
             qWarning() << err.get_msg().c_str() << err.get_context().c_str() << err.get_description().c_str();
         }
 
         // Possible errors - DatabaseLock error
         // Corrupt and InvalidID error
-    }
-    else {
+    } else {
         m_wDb = createWritableDb();
     }
 }
@@ -65,18 +63,17 @@ XapianDatabase::~XapianDatabase()
     delete m_db;
 }
 
-void XapianDatabase::replaceDocument(uint id, const XapianDocument& doc)
+void XapianDatabase::replaceDocument(uint id, const XapianDocument &doc)
 {
     replaceDocument(id, doc.doc());
 }
 
-void XapianDatabase::replaceDocument(uint id, const Xapian::Document& doc)
+void XapianDatabase::replaceDocument(uint id, const Xapian::Document &doc)
 {
     if (m_writeOnly) {
         try {
             m_wDb.replace_document(id, doc);
-        }
-        catch (const Xapian::Error&) {
+        } catch (const Xapian::Error &) {
         }
         return;
     }
@@ -85,14 +82,14 @@ void XapianDatabase::replaceDocument(uint id, const Xapian::Document& doc)
 
 void XapianDatabase::deleteDocument(uint id)
 {
-    if (id == 0)
+    if (id == 0) {
         return;
+    }
 
     if (m_writeOnly) {
         try {
             m_wDb.delete_document(id);
-        }
-        catch (const Xapian::Error&) {
+        } catch (const Xapian::Error &) {
         }
         return;
     }
@@ -109,8 +106,7 @@ void XapianDatabase::commit()
     if (m_writeOnly) {
         try {
             m_wDb.commit();
-        }
-        catch (const Xapian::Error& err) {
+        } catch (const Xapian::Error &err) {
             qWarning() << err.get_error_string();
         }
         return;
@@ -123,11 +119,10 @@ void XapianDatabase::commit()
     Xapian::WritableDatabase wdb = createWritableDb();
 
     qDebug() << "Adding:" << m_docsToAdd.size() << "docs";
-    Q_FOREACH (const DocIdPair& doc, m_docsToAdd) {
+    Q_FOREACH (const DocIdPair &doc, m_docsToAdd) {
         try {
             wdb.replace_document(doc.first, doc.second);
-        }
-        catch (const Xapian::Error&) {
+        } catch (const Xapian::Error &) {
         }
     }
 
@@ -135,16 +130,14 @@ void XapianDatabase::commit()
     Q_FOREACH (Xapian::docid id, m_docsToRemove) {
         try {
             wdb.delete_document(id);
-        }
-        catch (const Xapian::Error&) {
+        } catch (const Xapian::Error &) {
         }
     }
 
     try {
         wdb.commit();
         m_db->reopen();
-    }
-    catch (const Xapian::Error& err) {
+    } catch (const Xapian::Error &err) {
         qWarning() << err.get_error_string();
     }
     qDebug() << "Xapian Committed";
@@ -167,12 +160,10 @@ XapianDocument XapianDatabase::document(uint id)
             xdoc = m_db->get_document(id);
         }
         return XapianDocument(xdoc);
-    }
-    catch (const Xapian::DatabaseModifiedError&) {
+    } catch (const Xapian::DatabaseModifiedError &) {
         m_db->reopen();
         return document(id);
-    }
-    catch (const Xapian::Error&) {
+    } catch (const Xapian::Error &) {
         return XapianDocument();
     }
 }
@@ -185,23 +176,18 @@ Xapian::WritableDatabase XapianDatabase::createWritableDb()
         try {
             Xapian::WritableDatabase wdb(m_path, Xapian::DB_CREATE_OR_OPEN);
             return wdb;
-        }
-        catch (const Xapian::DatabaseLockError&) {
+        } catch (const Xapian::DatabaseLockError &) {
             usleep(i * 50 * 1000);
-        }
-        catch (const Xapian::DatabaseModifiedError&) {
+        } catch (const Xapian::DatabaseModifiedError &) {
             usleep(i * 50 * 1000);
-        }
-        catch (const Xapian::DatabaseCreateError& err) {
+        } catch (const Xapian::DatabaseCreateError &err) {
             qDebug() << err.get_error_string();
             return Xapian::WritableDatabase();
-        }
-        catch (const Xapian::DatabaseCorruptError& err) {
+        } catch (const Xapian::DatabaseCorruptError &err) {
             qWarning() << "Database Corrupted - What did you do?";
             qWarning() << err.get_error_string();
             return Xapian::WritableDatabase();
-        }
-        catch (...) {
+        } catch (...) {
             qWarning() << "Bananana Error";
             return Xapian::WritableDatabase();
         }

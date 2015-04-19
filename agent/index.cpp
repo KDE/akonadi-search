@@ -32,15 +32,14 @@
 #include <xapian/query.h>
 #include <xapian/enquire.h>
 
-Index::Index(QObject* parent)
-: QObject(parent),
-  m_collectionIndexer(Q_NULLPTR)
+Index::Index(QObject *parent)
+    : QObject(parent),
+      m_collectionIndexer(Q_NULLPTR)
 {
     m_commitTimer.setInterval(1000);
     m_commitTimer.setSingleShot(true);
     connect(&m_commitTimer, SIGNAL(timeout()), this, SLOT(commit()));
 }
-
 
 Index::~Index()
 {
@@ -50,15 +49,14 @@ Index::~Index()
     m_indexer.clear();
 }
 
-static void removeDir(const QString& dirName)
+static void removeDir(const QString &dirName)
 {
     QDir dir(dirName);
     if (dir.exists(dirName)) {
-        Q_FOREACH(const QFileInfo &info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+        Q_FOREACH (const QFileInfo &info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
             if (info.isDir()) {
                 removeDir(info.absoluteFilePath());
-            }
-            else {
+            } else {
                 QFile::remove(info.absoluteFilePath());
             }
         }
@@ -82,15 +80,15 @@ void Index::removeDatabase()
     removeDir(collectionIndexingPath());
 }
 
-AbstractIndexer* Index::indexerForItem(const Akonadi::Item& item) const
+AbstractIndexer *Index::indexerForItem(const Akonadi::Item &item) const
 {
     return m_indexer.value(item.mimeType());
 }
 
-QList<AbstractIndexer*> Index::indexersForMimetypes(const QStringList& mimeTypes) const
+QList<AbstractIndexer *> Index::indexersForMimetypes(const QStringList &mimeTypes) const
 {
-    QList<AbstractIndexer*> indexers;
-    Q_FOREACH (const QString& mimeType, mimeTypes) {
+    QList<AbstractIndexer *> indexers;
+    Q_FOREACH (const QString &mimeType, mimeTypes) {
         AbstractIndexer *i = m_indexer.value(mimeType);
         if (i) {
             indexers.append(i);
@@ -104,7 +102,7 @@ bool Index::haveIndexerForMimeTypes(const QStringList &mimeTypes)
     return !indexersForMimetypes(mimeTypes).isEmpty();
 }
 
-void Index::index(const Akonadi::Item& item)
+void Index::index(const Akonadi::Item &item)
 {
     AbstractIndexer *indexer = indexerForItem(item);
     if (!indexer) {
@@ -118,14 +116,14 @@ void Index::index(const Akonadi::Item& item)
     }
 }
 
-void Index::move(const Akonadi::Item::List& items, const Akonadi::Collection& from, const Akonadi::Collection& to)
+void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &from, const Akonadi::Collection &to)
 {
     //We always get items of the same type
     AbstractIndexer *indexer = indexerForItem(items.first());
     if (!indexer) {
-       return;
+        return;
     }
-    Q_FOREACH (const Akonadi::Item& item, items) {
+    Q_FOREACH (const Akonadi::Item &item, items) {
         try {
             indexer->move(item.id(), from.id(), to.id());
         } catch (const Xapian::Error &e) {
@@ -134,14 +132,14 @@ void Index::move(const Akonadi::Item::List& items, const Akonadi::Collection& fr
     }
 }
 
-void Index::updateFlags(const Akonadi::Item::List& items, const QSet<QByteArray>& addedFlags, const QSet<QByteArray>& removedFlags)
+void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removedFlags)
 {
     //We always get items of the same type
     AbstractIndexer *indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
     }
-    Q_FOREACH (const Akonadi::Item& item, items) {
+    Q_FOREACH (const Akonadi::Item &item, items) {
         try {
             indexer->updateFlags(item, addedFlags, removedFlags);
         } catch (const Xapian::Error &e) {
@@ -150,10 +148,10 @@ void Index::updateFlags(const Akonadi::Item::List& items, const QSet<QByteArray>
     }
 }
 
-void Index::remove(const QSet< Akonadi::Entity::Id >& ids, const QStringList& mimeTypes)
+void Index::remove(const QSet< Akonadi::Entity::Id > &ids, const QStringList &mimeTypes)
 {
-    const QList<AbstractIndexer*> indexers = indexersForMimetypes(mimeTypes);
-    Q_FOREACH (const Akonadi::Item::Id& id, ids) {
+    const QList<AbstractIndexer *> indexers = indexersForMimetypes(mimeTypes);
+    Q_FOREACH (const Akonadi::Item::Id &id, ids) {
         Q_FOREACH (AbstractIndexer *indexer, indexers) {
             try {
                 indexer->remove(Akonadi::Item(id));
@@ -164,13 +162,13 @@ void Index::remove(const QSet< Akonadi::Entity::Id >& ids, const QStringList& mi
     }
 }
 
-void Index::remove(const Akonadi::Item::List& items)
+void Index::remove(const Akonadi::Item::List &items)
 {
     AbstractIndexer *indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
     }
-    Q_FOREACH (const Akonadi::Item& item, items) {
+    Q_FOREACH (const Akonadi::Item &item, items) {
         try {
             indexer->remove(item);
         } catch (const Xapian::Error &e) {
@@ -179,7 +177,7 @@ void Index::remove(const Akonadi::Item::List& items)
     }
 }
 
-void Index::index(const Akonadi::Collection& collection)
+void Index::index(const Akonadi::Collection &collection)
 {
     if (m_collectionIndexer) {
         m_collectionIndexer->index(collection);
@@ -188,7 +186,7 @@ void Index::index(const Akonadi::Collection& collection)
     qDebug() << "indexed " << collection.id();
 }
 
-void Index::change(const Akonadi::Collection& col)
+void Index::change(const Akonadi::Collection &col)
 {
     if (m_collectionIndexer) {
         m_collectionIndexer->change(col);
@@ -196,7 +194,7 @@ void Index::change(const Akonadi::Collection& col)
     }
 }
 
-void Index::remove(const Akonadi::Collection& col)
+void Index::remove(const Akonadi::Collection &col)
 {
     //Remove items
     Q_FOREACH (AbstractIndexer *indexer, indexersForMimetypes(col.contentMimeTypes())) {
@@ -213,9 +211,9 @@ void Index::remove(const Akonadi::Collection& col)
     }
 }
 
-void Index::move(const Akonadi::Collection& collection,
-            const Akonadi::Collection& from,
-            const Akonadi::Collection& to)
+void Index::move(const Akonadi::Collection &collection,
+                 const Akonadi::Collection &from,
+                 const Akonadi::Collection &to)
 {
     if (m_collectionIndexer) {
         m_collectionIndexer->move(collection, from, to);
@@ -223,10 +221,10 @@ void Index::move(const Akonadi::Collection& collection,
     }
 }
 
-void Index::addIndexer(AbstractIndexer* indexer)
+void Index::addIndexer(AbstractIndexer *indexer)
 {
     m_listIndexer.append(indexer);
-    Q_FOREACH (const QString& mimeType, indexer->mimeTypes()) {
+    Q_FOREACH (const QString &mimeType, indexer->mimeTypes()) {
         m_indexer.insert(mimeType, indexer);
     }
 }
@@ -239,12 +237,10 @@ bool Index::createIndexers()
         QDir().mkpath(emailContactsIndexingPath());
         indexer = new EmailIndexer(emailIndexingPath(), emailContactsIndexingPath());
         addIndexer(indexer);
-    }
-    catch (const Xapian::DatabaseError &e) {
+    } catch (const Xapian::DatabaseError &e) {
         delete indexer;
         qCritical() << "Failed to create email indexer:" << QString::fromStdString(e.get_msg());
-    }
-    catch (...) {
+    } catch (...) {
         delete indexer;
         qCritical() << "Random exception, but we do not want to crash";
     }
@@ -253,12 +249,10 @@ bool Index::createIndexers()
         QDir().mkpath(contactIndexingPath());
         indexer = new ContactIndexer(contactIndexingPath());
         addIndexer(indexer);
-    }
-    catch (const Xapian::DatabaseError &e) {
+    } catch (const Xapian::DatabaseError &e) {
         delete indexer;
         qCritical() << "Failed to create contact indexer:" << QString::fromStdString(e.get_msg());
-    }
-    catch (...) {
+    } catch (...) {
         delete indexer;
         qCritical() << "Random exception, but we do not want to crash";
     }
@@ -267,12 +261,10 @@ bool Index::createIndexers()
         QDir().mkpath(akonotesIndexingPath());
         indexer = new AkonotesIndexer(akonotesIndexingPath());
         addIndexer(indexer);
-    }
-    catch (const Xapian::DatabaseError &e) {
+    } catch (const Xapian::DatabaseError &e) {
         delete indexer;
         qCritical() << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
-    }
-    catch (...) {
+    } catch (...) {
         delete indexer;
         qCritical() << "Random exception, but we do not want to crash";
     }
@@ -281,12 +273,10 @@ bool Index::createIndexers()
         QDir().mkpath(calendarIndexingPath());
         indexer = new CalendarIndexer(calendarIndexingPath());
         addIndexer(indexer);
-    }
-    catch (const Xapian::DatabaseError &e) {
+    } catch (const Xapian::DatabaseError &e) {
         delete indexer;
         qCritical() << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
-    }
-    catch (...) {
+    } catch (...) {
         delete indexer;
         qCritical() << "Random exception, but we do not want to crash";
     }
@@ -294,13 +284,11 @@ bool Index::createIndexers()
     try {
         QDir().mkpath(collectionIndexingPath());
         m_collectionIndexer = new CollectionIndexer(collectionIndexingPath());
-    }
-    catch (const Xapian::DatabaseError &e) {
+    } catch (const Xapian::DatabaseError &e) {
         delete m_collectionIndexer;
         m_collectionIndexer = Q_NULLPTR;
         qCritical() << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
-    }
-    catch (...) {
+    } catch (...) {
         delete m_collectionIndexer;
         m_collectionIndexer = Q_NULLPTR;
         qCritical() << "Random exception, but we do not want to crash";
@@ -328,12 +316,12 @@ void Index::commit()
     }
 }
 
-void Index::findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::Entity::Id collectionId, const QString& dbPath)
+void Index::findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::Entity::Id collectionId, const QString &dbPath)
 {
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dbPath).constData());
-    } catch (const Xapian::DatabaseError& e) {
+    } catch (const Xapian::DatabaseError &e) {
         qCritical() << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return;
     }
@@ -344,12 +332,12 @@ void Index::findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::E
 
     Xapian::MSet mset = enquire.get_mset(0, UINT_MAX);
     Xapian::MSetIterator it = mset.begin();
-    for (;it != mset.end(); it++) {
+    for (; it != mset.end(); it++) {
         indexed << *it;
     }
 }
 
-void Index::findIndexed(QSet<Akonadi::Entity::Id>& indexed, Akonadi::Entity::Id collectionId)
+void Index::findIndexed(QSet<Akonadi::Entity::Id> &indexed, Akonadi::Entity::Id collectionId)
 {
     findIndexedInDatabase(indexed, collectionId, emailIndexingPath());
     findIndexedInDatabase(indexed, collectionId, contactIndexingPath());
@@ -361,29 +349,29 @@ qlonglong Index::indexedItems(const qlonglong id)
 {
     const std::string term = QString::fromLatin1("C%1").arg(id).toStdString();
     return indexedItemsInDatabase(term, emailIndexingPath())
-            + indexedItemsInDatabase(term, contactIndexingPath())
-            + indexedItemsInDatabase(term, akonotesIndexingPath())
-            + indexedItemsInDatabase(term, calendarIndexingPath());
+           + indexedItemsInDatabase(term, contactIndexingPath())
+           + indexedItemsInDatabase(term, akonotesIndexingPath())
+           + indexedItemsInDatabase(term, calendarIndexingPath());
 }
 
-qlonglong Index::indexedItemsInDatabase(const std::string& term, const QString& dbPath) const
+qlonglong Index::indexedItemsInDatabase(const std::string &term, const QString &dbPath) const
 {
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dbPath).constData());
-    } catch (const Xapian::DatabaseError& e) {
+    } catch (const Xapian::DatabaseError &e) {
         qCritical() << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return 0;
     }
     return db.get_termfreq(term);
 }
 
-void Index::setOverrideDbPrefixPath(const QString& path)
+void Index::setOverrideDbPrefixPath(const QString &path)
 {
     m_overridePrefixPath = path;
 }
 
-QString Index::dbPath(const QString& dbName) const
+QString Index::dbPath(const QString &dbName) const
 {
     if (!m_overridePrefixPath.isEmpty()) {
         return QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);

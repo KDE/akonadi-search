@@ -28,32 +28,27 @@
 #include <QTextDocument>
 #include <KEmailAddress>
 
-
-EmailIndexer::EmailIndexer(const QString& path, const QString& contactDbPath):
-    AbstractIndexer(), m_doc( 0 ), m_termGen( 0 ), m_contactDb( 0 )
+EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath):
+    AbstractIndexer(), m_doc(0), m_termGen(0), m_contactDb(0)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
-    }
-    catch (const Xapian::DatabaseCorruptError& err) {
+    } catch (const Xapian::DatabaseCorruptError &err) {
         qWarning() << "Database Corrupted - What did you do?";
         qWarning() << err.get_error_string();
         m_db = 0;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = 0;
     }
 
     try {
         m_contactDb = new Xapian::WritableDatabase(contactDbPath.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
-    }
-    catch (const Xapian::DatabaseCorruptError& err) {
+    } catch (const Xapian::DatabaseCorruptError &err) {
         qWarning() << "Database Corrupted - What did you do?";
         qWarning() << err.get_error_string();
         m_contactDb = 0;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_contactDb = 0;
     }
@@ -77,19 +72,21 @@ QStringList EmailIndexer::mimeTypes() const
     return QStringList() << KMime::Message::mimeType();
 }
 
-void EmailIndexer::index(const Akonadi::Item& item)
+void EmailIndexer::index(const Akonadi::Item &item)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     Akonadi::MessageStatus status;
     status.setStatusFromFlags(item.flags());
-    if (status.isSpam())
+    if (status.isSpam()) {
         return;
+    }
 
     KMime::Message::Ptr msg;
     try {
         msg = item.payload<KMime::Message::Ptr>();
-    } catch (const Akonadi::PayloadException&) {
+    } catch (const Akonadi::PayloadException &) {
         return;
     }
 
@@ -121,43 +118,48 @@ void EmailIndexer::index(const Akonadi::Item& item)
     m_termGen = 0;
 }
 
-void EmailIndexer::insert(const QByteArray& key, KMime::Headers::Base* unstructured)
+void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Base *unstructured)
 {
     if (unstructured) {
         m_termGen->index_text_without_positions(unstructured->asUnicodeString().toUtf8().constData(), 1, key.data());
     }
 }
 
-void EmailIndexer::insert(const QByteArray& key, KMime::Headers::Generics::MailboxList* mlist)
+void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Generics::MailboxList *mlist)
 {
-    if (mlist)
+    if (mlist) {
         insert(key, mlist->mailboxes());
-}
-
-void EmailIndexer::insert(const QByteArray& key, KMime::Headers::Generics::AddressList* alist)
-{
-    if (alist)
-        insert(key, alist->mailboxes());
-}
-
-namespace {
-    // Does some extra stuff such as lower casing the email, removing all quotes
-    // and removing extra spaces
-    // TODO: Move this into KMime?
-    // TODO: If name is all upper/lower then try to captialize it?
-    QString prettyAddress(const KMime::Types::Mailbox& mbox) {
-        const QString name = mbox.name().simplified();
-        const QByteArray email = mbox.address().simplified().toLower();
-        return KEmailAddress::normalizedAddress(name, QString::fromUtf8(email));
     }
 }
 
-// Add once with a prefix and once without
-void EmailIndexer::insert(const QByteArray& key, const KMime::Types::Mailbox::List& list)
+void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Generics::AddressList *alist)
 {
-    if (!m_contactDb)
+    if (alist) {
+        insert(key, alist->mailboxes());
+    }
+}
+
+namespace
+{
+// Does some extra stuff such as lower casing the email, removing all quotes
+// and removing extra spaces
+// TODO: Move this into KMime?
+// TODO: If name is all upper/lower then try to captialize it?
+QString prettyAddress(const KMime::Types::Mailbox &mbox)
+{
+    const QString name = mbox.name().simplified();
+    const QByteArray email = mbox.address().simplified().toLower();
+    return KEmailAddress::normalizedAddress(name, QString::fromUtf8(email));
+}
+}
+
+// Add once with a prefix and once without
+void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::List &list)
+{
+    if (!m_contactDb) {
         return;
-    Q_FOREACH (const KMime::Types::Mailbox& mbox, list) {
+    }
+    Q_FOREACH (const KMime::Types::Mailbox &mbox, list) {
         std::string name(mbox.name().toUtf8().constData());
         m_termGen->index_text_without_positions(name, 1, key.data());
         m_termGen->index_text_without_positions(name, 1);
@@ -175,8 +177,7 @@ void EmailIndexer::insert(const QByteArray& key, const KMime::Types::Mailbox::Li
         try {
             Xapian::Document doc = m_contactDb->get_document(id);
             continue;
-        }
-        catch (const Xapian::DocNotFoundError&) {
+        } catch (const Xapian::DocNotFoundError &) {
             Xapian::Document doc;
             std::string pretty(pa.toUtf8().constData());
             doc.set_data(pretty);
@@ -192,12 +193,12 @@ void EmailIndexer::insert(const QByteArray& key, const KMime::Types::Mailbox::Li
 }
 
 // FIXME: Only index properties that are actually searched!
-void EmailIndexer::process(const KMime::Message::Ptr& msg)
+void EmailIndexer::process(const KMime::Message::Ptr &msg)
 {
     //
     // Process Headers
     // (Give the subject a higher priority)
-    KMime::Headers::Subject* subject = msg->subject(false);
+    KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
         std::string str(subject->asUnicodeString().toUtf8().constData());
         qDebug() << "Indexing" << str.c_str();
@@ -206,7 +207,7 @@ void EmailIndexer::process(const KMime::Message::Ptr& msg)
         m_doc->set_data(str);
     }
 
-    KMime::Headers::Date* date = msg->date(false);
+    KMime::Headers::Date *date = msg->date(false);
     if (date) {
         const QString str = QString::number(date->dateTime().toTime_t());
         m_doc->add_value(0, str.toStdString());
@@ -233,30 +234,30 @@ void EmailIndexer::process(const KMime::Message::Ptr& msg)
     //Index all headers
     m_termGen->index_text_without_positions(std::string(msg->head().constData()), 1, "HE");
 
-    KMime::Content* mainBody = msg->mainBodyPart("text/plain");
+    KMime::Content *mainBody = msg->mainBodyPart("text/plain");
     if (mainBody) {
         const std::string text(mainBody->decodedText().toUtf8().constData());
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
-    }
-    else {
+    } else {
         processPart(msg.get(), 0);
     }
 }
 
-void EmailIndexer::processPart(KMime::Content* content, KMime::Content* mainContent)
+void EmailIndexer::processPart(KMime::Content *content, KMime::Content *mainContent)
 {
     if (content == mainContent) {
         return;
     }
 
-    KMime::Headers::ContentType* type = content->contentType(false);
+    KMime::Headers::ContentType *type = content->contentType(false);
     if (type) {
         if (type->isMultipart()) {
-            if (type->isSubtype("encrypted"))
+            if (type->isSubtype("encrypted")) {
                 return;
+            }
 
-            Q_FOREACH (KMime::Content* c, content->contents()) {
+            Q_FOREACH (KMime::Content *c, content->contents()) {
                 processPart(c, mainContent);
             }
         }
@@ -274,7 +275,7 @@ void EmailIndexer::processPart(KMime::Content* content, KMime::Content* mainCont
     // FIXME: Handle attachments?
 }
 
-void EmailIndexer::processMessageStatus(const Akonadi::MessageStatus& status)
+void EmailIndexer::processMessageStatus(const Akonadi::MessageStatus &status)
 {
     insertBool('R', status.isRead());
     insertBool('A', status.hasAttachment());
@@ -298,8 +299,7 @@ void EmailIndexer::insertBool(char key, bool value)
     QByteArray term("B");
     if (value) {
         term.append(key);
-    }
-    else {
+    } else {
         term.append('N');
         term.append(key);
     }
@@ -307,53 +307,47 @@ void EmailIndexer::insertBool(char key, bool value)
     m_doc->add_boolean_term(term.data());
 }
 
-void EmailIndexer::toggleFlag(Xapian::Document& doc, const char* remove, const char* add)
+void EmailIndexer::toggleFlag(Xapian::Document &doc, const char *remove, const char *add)
 {
     try {
         doc.remove_term(remove);
-    }
-    catch (const Xapian::InvalidArgumentError &e) {
+    } catch (const Xapian::InvalidArgumentError &e) {
         // The previous flag state was not indexed, continue
     }
 
     doc.add_term(add);
 }
 
-
-void EmailIndexer::updateFlags(const Akonadi::Item& item,
-                               const QSet<QByteArray>& added,
-                               const QSet<QByteArray>& removed)
+void EmailIndexer::updateFlags(const Akonadi::Item &item,
+                               const QSet<QByteArray> &added,
+                               const QSet<QByteArray> &removed)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     Xapian::Document doc;
     try {
         doc = m_db->get_document(item.id());
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 
-    Q_FOREACH (const QByteArray& flag, removed) {
+    Q_FOREACH (const QByteArray &flag, removed) {
         if (flag == Akonadi::MessageFlags::Seen) {
             toggleFlag(doc, "BR", "BNR");
-        }
-        else if (flag == Akonadi::MessageFlags::Flagged) {
+        } else if (flag == Akonadi::MessageFlags::Flagged) {
             toggleFlag(doc, "BI", "BNI");
-        }
-        else if (flag == Akonadi::MessageFlags::Watched) {
+        } else if (flag == Akonadi::MessageFlags::Watched) {
             toggleFlag(doc, "BW", "BNW");
         }
     }
 
-    Q_FOREACH (const QByteArray& flag, added) {
+    Q_FOREACH (const QByteArray &flag, added) {
         if (flag == Akonadi::MessageFlags::Seen) {
             toggleFlag(doc, "BNR", "BR");
-        }
-        else if (flag == Akonadi::MessageFlags::Flagged) {
+        } else if (flag == Akonadi::MessageFlags::Flagged) {
             toggleFlag(doc, "BNI", "BI");
-        }
-        else if (flag == Akonadi::MessageFlags::Watched) {
+        } else if (flag == Akonadi::MessageFlags::Watched) {
             toggleFlag(doc, "BNW", "BW");
         }
     }
@@ -361,25 +355,26 @@ void EmailIndexer::updateFlags(const Akonadi::Item& item,
     m_db->replace_document(doc.get_docid(), doc);
 }
 
-void EmailIndexer::remove(const Akonadi::Item& item)
+void EmailIndexer::remove(const Akonadi::Item &item)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     try {
         m_db->delete_document(item.id());
         //TODO remove contacts from contact db?
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
-void EmailIndexer::remove(const Akonadi::Collection& collection)
+void EmailIndexer::remove(const Akonadi::Collection &collection)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     try {
-        Xapian::Query query('C'+ QString::number(collection.id()).toStdString());
+        Xapian::Query query('C' + QString::number(collection.id()).toStdString());
         Xapian::Enquire enquire(*m_db);
         enquire.set_query(query);
 
@@ -389,23 +384,22 @@ void EmailIndexer::remove(const Akonadi::Collection& collection)
             const qint64 id = *it;
             remove(Akonadi::Item(id));
         }
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
-void EmailIndexer::move(const Akonadi::Item::Id& itemId,
-                        const Akonadi::Entity::Id& from,
-                        const Akonadi::Entity::Id& to)
+void EmailIndexer::move(const Akonadi::Item::Id &itemId,
+                        const Akonadi::Entity::Id &from,
+                        const Akonadi::Entity::Id &to)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     Xapian::Document doc;
     try {
         doc = m_db->get_document(itemId);
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 
@@ -417,11 +411,12 @@ void EmailIndexer::move(const Akonadi::Item::Id& itemId,
     m_db->replace_document(doc.get_docid(), doc);
 }
 
-
 void EmailIndexer::commit()
 {
-    if (m_db)
+    if (m_db) {
         m_db->commit();
-    if (m_contactDb)
+    }
+    if (m_contactDb) {
         m_contactDb->commit();
+    }
 }

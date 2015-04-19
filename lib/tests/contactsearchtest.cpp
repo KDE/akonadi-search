@@ -31,24 +31,25 @@
 
 using namespace Baloo::PIM;
 
-class App : public QApplication {
+class App : public QApplication
+{
     Q_OBJECT
 public:
-    App(int& argc, char** argv, int flags = ApplicationFlags);
+    App(int &argc, char **argv, int flags = ApplicationFlags);
 
 private Q_SLOTS:
     void main();
-    void slotItemsReceived(const Akonadi::Item::List& list);
+    void slotItemsReceived(const Akonadi::Item::List &list);
 private:
 };
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
     App app(argc, argv);
     return app.exec();
 }
 
-App::App(int& argc, char** argv, int flags)
+App::App(int &argc, char **argv, int flags)
     : QApplication(argc, argv, flags)
 {
     QTimer::singleShot(0, this, SLOT(main()));
@@ -57,7 +58,7 @@ App::App(int& argc, char** argv, int flags)
 void App::main()
 {
 #if 0
-    Akonadi::ContactSearchJob* job = new Akonadi::ContactSearchJob();
+    Akonadi::ContactSearchJob *job = new Akonadi::ContactSearchJob();
     job->setQuery(Akonadi::ContactSearchJob::NameOrEmail, "to", Akonadi::ContactSearchJob::StartsWithMatch);
 
     connect(job, SIGNAL(itemsReceived(Akonadi::Item::List)),
@@ -78,13 +79,12 @@ void App::main()
     }
 }
 
-void App::slotItemsReceived(const Akonadi::Item::List& list)
+void App::slotItemsReceived(const Akonadi::Item::List &list)
 {
     qDebug() << list.size();
-    Q_FOREACH (const Akonadi::Item& item, list) {
+    Q_FOREACH (const Akonadi::Item &item, list) {
         qDebug() << item.id() << item.mimeType();
     }
 }
-
 
 #include "contactsearchtest.moc"

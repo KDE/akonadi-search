@@ -25,7 +25,8 @@
 
 #include "../pimsearchstore.h"
 
-namespace Baloo {
+namespace Baloo
+{
 
 class EmailSearchStore : public PIMSearchStore
 {
@@ -35,18 +36,19 @@ class EmailSearchStore : public PIMSearchStore
     Q_PLUGIN_METADATA(IID "org.kde.Baloo.SearchStore")
 #endif
 public:
-    EmailSearchStore(QObject* parent = 0);
+    EmailSearchStore(QObject *parent = 0);
 
     virtual QStringList types();
     virtual QString text(int queryId);
-    virtual QString icon(int) {
+    virtual QString icon(int)
+    {
         return QLatin1String("internet-mail");
     }
 
 protected:
-    virtual Xapian::Query constructQuery(const QString& property, const QVariant& value,
+    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value,
                                          Term::Comparator com);
-    virtual Xapian::Query finalizeQuery(const Xapian::Query& query);
+    virtual Xapian::Query finalizeQuery(const Xapian::Query &query);
 };
 
 }

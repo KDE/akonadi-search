@@ -27,8 +27,10 @@
 #include <QString>
 #include "query.h"
 
-namespace Baloo {
-namespace PIM {
+namespace Baloo
+{
+namespace PIM
+{
 /**
  * Query for a list of contacts matching a criteria
  */
@@ -38,8 +40,8 @@ public:
     NoteQuery();
     ~NoteQuery();
 
-    void matchTitle(const QString& title);
-    void matchNote(const QString& note);
+    void matchTitle(const QString &title);
+    void matchNote(const QString &note);
 
     void setLimit(int limit);
     int limit() const;
@@ -48,7 +50,7 @@ public:
 
 private:
     class Private;
-    Private* d;
+    Private *d;
 };
 }
 }

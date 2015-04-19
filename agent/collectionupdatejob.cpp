@@ -25,10 +25,10 @@
 #include <AkonadiCore/CollectionFetchScope>
 #include <AkonadiCore/EntityDisplayAttribute>
 
-CollectionUpdateJob::CollectionUpdateJob(Index &index, const Akonadi::Collection &col, QObject* parent)
+CollectionUpdateJob::CollectionUpdateJob(Index &index, const Akonadi::Collection &col, QObject *parent)
     : KJob(parent),
-    mCol(col),
-    mIndex(index)
+      mCol(col),
+      mIndex(index)
 {
 
 }

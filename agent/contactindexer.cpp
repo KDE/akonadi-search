@@ -27,18 +27,16 @@
 #include <KContacts/ContactGroup>
 #include <Collection>
 
-ContactIndexer::ContactIndexer(const QString& path):
-    AbstractIndexer(), m_db( 0 )
+ContactIndexer::ContactIndexer(const QString &path):
+    AbstractIndexer(), m_db(0)
 {
     try {
         m_db = new Baloo::XapianDatabase(path, true);
-    }
-    catch (const Xapian::DatabaseCorruptError& err) {
+    } catch (const Xapian::DatabaseCorruptError &err) {
         qWarning() << "Database Corrupted - What did you do?";
         qWarning() << err.get_error_string();
         m_db = 0;
-    }
-    catch (const Xapian::Error &e) {
+    } catch (const Xapian::Error &e) {
         qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = 0;
     }
@@ -57,14 +55,15 @@ QStringList ContactIndexer::mimeTypes() const
     return QStringList() << KContacts::Addressee::mimeType() << KContacts::ContactGroup::mimeType();
 }
 
-bool ContactIndexer::indexContact(const Akonadi::Item& item)
+bool ContactIndexer::indexContact(const Akonadi::Item &item)
 {
-    if (!m_db)
+    if (!m_db) {
         return false;
+    }
     KContacts::Addressee addresse;
     try {
         addresse = item.payload<KContacts::Addressee>();
-    } catch (const Akonadi::PayloadException&) {
+    } catch (const Akonadi::PayloadException &) {
         return false;
     }
 
@@ -73,11 +72,9 @@ bool ContactIndexer::indexContact(const Akonadi::Item& item)
     QString name;
     if (!addresse.formattedName().isEmpty()) {
         name = addresse.formattedName();
-    }
-    else if (!addresse.assembledName().isEmpty()) {
+    } else if (!addresse.assembledName().isEmpty()) {
         name = addresse.assembledName();
-    }
-    else {
+    } else {
         name = addresse.name();
     }
 
@@ -90,7 +87,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item& item)
     doc.indexText(name, QLatin1String("NA"));
     doc.indexText(addresse.nickName(), QLatin1String("NI"));
 
-    Q_FOREACH (const QString& email, addresse.emails()) {
+    Q_FOREACH (const QString &email, addresse.emails()) {
         doc.addTerm(email);
         doc.indexText(email);
     }
@@ -112,14 +109,15 @@ bool ContactIndexer::indexContact(const Akonadi::Item& item)
     return true;
 }
 
-void ContactIndexer::indexContactGroup(const Akonadi::Item& item)
+void ContactIndexer::indexContactGroup(const Akonadi::Item &item)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     KContacts::ContactGroup group;
     try {
         group = item.payload<KContacts::ContactGroup>();
-    } catch (const Akonadi::PayloadException&) {
+    } catch (const Akonadi::PayloadException &) {
         return;
     }
 
@@ -128,7 +126,6 @@ void ContactIndexer::indexContactGroup(const Akonadi::Item& item)
     const QString name = group.name();
     doc.indexText(name);
     doc.indexText(name, QLatin1String("NA"));
-
 
     // Parent collection
     Q_ASSERT_X(item.parentCollection().isValid(), "Baloo::ContactIndexer::index",
@@ -139,27 +136,28 @@ void ContactIndexer::indexContactGroup(const Akonadi::Item& item)
     m_db->replaceDocument(item.id(), doc);
 }
 
-
-void ContactIndexer::index(const Akonadi::Item& item)
+void ContactIndexer::index(const Akonadi::Item &item)
 {
     if (!indexContact(item)) {
         indexContactGroup(item);
     }
 }
 
-void ContactIndexer::remove(const Akonadi::Item& item)
+void ContactIndexer::remove(const Akonadi::Item &item)
 {
-    if (m_db)
+    if (m_db) {
         m_db->deleteDocument(item.id());
+    }
 }
 
-void ContactIndexer::remove(const Akonadi::Collection& collection)
+void ContactIndexer::remove(const Akonadi::Collection &collection)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     try {
-        Xapian::Database* db = m_db->db();
-        Xapian::Query query('C'+ QString::number(collection.id()).toStdString());
+        Xapian::Database *db = m_db->db();
+        Xapian::Query query('C' + QString::number(collection.id()).toStdString());
         Xapian::Enquire enquire(*db);
         enquire.set_query(query);
 
@@ -169,29 +167,29 @@ void ContactIndexer::remove(const Akonadi::Collection& collection)
             const qint64 id = *it;
             remove(Akonadi::Item(id));
         }
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 }
 
 void ContactIndexer::commit()
 {
-    if (m_db)
+    if (m_db) {
         m_db->commit();
+    }
 }
 
-void ContactIndexer::move(const Akonadi::Item::Id& itemId,
-                        const Akonadi::Entity::Id& from,
-                        const Akonadi::Entity::Id& to)
+void ContactIndexer::move(const Akonadi::Item::Id &itemId,
+                          const Akonadi::Entity::Id &from,
+                          const Akonadi::Entity::Id &to)
 {
-    if (!m_db)
+    if (!m_db) {
         return;
+    }
     Baloo::XapianDocument doc;
     try {
         doc = m_db->document(itemId);
-    }
-    catch (const Xapian::DocNotFoundError&) {
+    } catch (const Xapian::DocNotFoundError &) {
         return;
     }
 

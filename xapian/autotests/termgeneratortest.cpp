@@ -28,17 +28,18 @@
 
 using namespace Baloo;
 
-namespace {
-    QStringList allWords(const Xapian::Document& doc)
-    {
-        QStringList words;
-        for (auto it = doc.termlist_begin(); it != doc.termlist_end(); it++) {
-            std::string str = *it;
-            words << QString::fromUtf8(str.c_str(), str.length());
-        }
-
-        return words;
+namespace
+{
+QStringList allWords(const Xapian::Document &doc)
+{
+    QStringList words;
+    for (auto it = doc.termlist_begin(); it != doc.termlist_end(); it++) {
+        std::string str = *it;
+        words << QString::fromUtf8(str.c_str(), str.length());
     }
+
+    return words;
+}
 }
 void TermGeneratorTest::testWordBoundaries()
 {
@@ -136,7 +137,7 @@ void TermGeneratorTest::testWordPositions()
 
     db.replaceDocument(1, doc);
 
-    Xapian::Database* xap = db.db();
+    Xapian::Database *xap = db.db();
 
     Xapian::PositionIterator it = xap->positionlist_begin(1, "hello");
     Xapian::PositionIterator end = xap->positionlist_end(1, "hello");

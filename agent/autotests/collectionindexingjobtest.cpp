@@ -28,24 +28,43 @@
 #include <AkonadiCore/qtest_akonadi.h>
 #include <KConfigGroup>
 
-class TestIndex : public Index {
+class TestIndex : public Index
+{
 public:
     QList<Akonadi::Item::Id> itemsIndexed;
     QList<Akonadi::Item::Id> alreadyIndexed;
     QList<Akonadi::Item::Id> itemsRemoved;
 
-    virtual void commit(){};
-    virtual bool createIndexers(){ return true; };
-    virtual void findIndexed(QSet< Akonadi::Entity::Id >& indexed, Akonadi::Entity::Id){ indexed = alreadyIndexed.toSet(); };
-    virtual void index(const Akonadi::Item& item){ itemsIndexed << item.id(); };
-    virtual qlonglong indexedItems(const qlonglong /* id */){ return alreadyIndexed.size();};
-    virtual void move(const Akonadi::Item::List& /* items */, const Akonadi::Collection& /* from */, const Akonadi::Collection& /* to */){};
-    virtual void reindex(const Akonadi::Item& /* item */){};
-    virtual void remove(const Akonadi::Collection& /* col */){};
-    virtual void remove(const QSet< Akonadi::Entity::Id >& ids, const QStringList& /* mimeTypes */){ itemsRemoved += ids.toList(); };
-    virtual void remove(const Akonadi::Item::List& /* items */){};
-    virtual void removeDatabase(){};
-    virtual bool haveIndexerForMimeTypes(const QStringList&){ return true; };
+    virtual void commit() {};
+    virtual bool createIndexers()
+    {
+        return true;
+    };
+    virtual void findIndexed(QSet< Akonadi::Entity::Id > &indexed, Akonadi::Entity::Id)
+    {
+        indexed = alreadyIndexed.toSet();
+    };
+    virtual void index(const Akonadi::Item &item)
+    {
+        itemsIndexed << item.id();
+    };
+    virtual qlonglong indexedItems(const qlonglong /* id */)
+    {
+        return alreadyIndexed.size();
+    };
+    virtual void move(const Akonadi::Item::List & /* items */, const Akonadi::Collection & /* from */, const Akonadi::Collection & /* to */) {};
+    virtual void reindex(const Akonadi::Item & /* item */) {};
+    virtual void remove(const Akonadi::Collection & /* col */) {};
+    virtual void remove(const QSet< Akonadi::Entity::Id > &ids, const QStringList & /* mimeTypes */)
+    {
+        itemsRemoved += ids.toList();
+    };
+    virtual void remove(const Akonadi::Item::List & /* items */) {};
+    virtual void removeDatabase() {};
+    virtual bool haveIndexerForMimeTypes(const QStringList &)
+    {
+        return true;
+    };
 };
 
 class CollectionIndexingJobTest : public QObject
@@ -57,7 +76,8 @@ private:
 
 private Q_SLOTS:
 
-    void init() {
+    void init()
+    {
         AkonadiTest::checkTestIsIsolated();
         AkonadiTest::setAllResourcesOffline();
         Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QLatin1String("akonadi_knut_resource_0"));
@@ -66,7 +86,7 @@ private Q_SLOTS:
 
         Akonadi::CollectionFetchJob *fetchJob = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         fetchJob->exec();
-        Q_FOREACH(const Akonadi::Collection &col, fetchJob->collections()) {
+        Q_FOREACH (const Akonadi::Collection &col, fetchJob->collections()) {
             if (col.name() == QLatin1String("foo")) {
                 itemCollection = col;
             }

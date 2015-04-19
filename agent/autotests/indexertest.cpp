@@ -43,17 +43,16 @@ private:
     QString contactsDir;
     QString notesDir;
 
-    bool removeDir(const QString & dirName)
+    bool removeDir(const QString &dirName)
     {
         bool result = true;
         QDir dir(dirName);
 
         if (dir.exists(dirName)) {
-            Q_FOREACH(QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+            Q_FOREACH (QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
                 if (info.isDir()) {
                     result = removeDir(info.absoluteFilePath());
-                }
-                else {
+                } else {
                     result = QFile::remove(info.absoluteFilePath());
                 }
 
@@ -67,7 +66,8 @@ private:
     }
 
 private Q_SLOTS:
-    void init() {
+    void init()
+    {
         emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/email/");
         emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/emailcontacts/");
         contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/contacts/");
@@ -98,7 +98,8 @@ private Q_SLOTS:
 //         Baloo::SearchStore::overrideSearchStores(QList<Baloo::SearchStore*>() << emailSearchStore << contactSearchStore);
     }
 
-    QSet<qint64> getAllItems() {
+    QSet<qint64> getAllItems()
+    {
         QSet<qint64> resultSet;
 
         Baloo::Term term(Baloo::Term::Or);
@@ -119,7 +120,8 @@ private Q_SLOTS:
         return resultSet;
     }
 
-    void testEmailRemoveByCollection() {
+    void testEmailRemoveByCollection()
+    {
         EmailIndexer emailIndexer(emailDir, emailContactsDir);
         {
             KMime::Message::Ptr msg(new KMime::Message);
