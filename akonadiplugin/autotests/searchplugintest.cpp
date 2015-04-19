@@ -243,12 +243,12 @@ private Q_SLOTS:
                           << Akonadi::MessageFlags::HasAttachment
                           << Akonadi::MessageFlags::HasInvitation
                           << Akonadi::MessageFlags::Sent
-                          << Akonadi::MessageFlags::Queued
+                          //<< Akonadi::MessageFlags::Queued    //can't have Sent and Queued at the same time
                           << Akonadi::MessageFlags::Replied
                           << Akonadi::MessageFlags::Forwarded
                           << Akonadi::MessageFlags::ToAct
                           << Akonadi::MessageFlags::Watched
-                          << Akonadi::MessageFlags::Ignored
+                          //<< Akonadi::MessageFlags::Ignored   // can't have Watched and Ignored at the same time
                           << Akonadi::MessageFlags::Encrypted
                           /*<< Akonadi::MessageFlags::Spam*/
                           << Akonadi::MessageFlags::Ham);
@@ -815,8 +815,8 @@ private Q_SLOTS:
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Replied), Akonadi::SearchTerm::CondContains));
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Forwarded), Akonadi::SearchTerm::CondContains));
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::ToAct), Akonadi::SearchTerm::CondContains));
-            //query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Watched), Akonadi::SearchTerm::CondContains));
-            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Ignored), Akonadi::SearchTerm::CondContains));
+            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Watched), Akonadi::SearchTerm::CondContains));
+            //query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Ignored), Akonadi::SearchTerm::CondContains));
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Encrypted), Akonadi::SearchTerm::CondContains));
             //Spam is exclude from indexer.
             //query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QString::fromLatin1(Akonadi::MessageFlags::Spam), Akonadi::SearchTerm::CondContains));
