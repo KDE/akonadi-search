@@ -37,7 +37,7 @@ set_target_properties(KF5BalooPim PROPERTIES
     EXPORT_NAME BalooPim
 )
 
-target_include_directories(KF5BalooPim INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/Baloo>")
+target_include_directories(KF5BalooPim INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/Baloo>")
 
 install(TARGETS KF5BalooPim EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -52,7 +52,7 @@ install(FILES
     resultiterator.h
     ${CMAKE_CURRENT_BINARY_DIR}/pim_export.h
 
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/Baloo/baloo/pim
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/Baloo/baloo/pim
     COMPONENT Devel
 )
 

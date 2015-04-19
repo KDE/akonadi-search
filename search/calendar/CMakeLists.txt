@@ -7,4 +7,4 @@ target_link_libraries(calendarsearchstore
     BalooPimXapian
 )
 
-install(TARGETS calendarsearchstore DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/baloo)
+install(TARGETS calendarsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/baloo)

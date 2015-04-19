@@ -4,7 +4,7 @@ project(AkonadiSearch)
 set(PROJECT_VERSION "5.0.0")
 
 # ECM setup
-find_package(ECM 1.3.0 REQUIRED NO_MODULE)
+find_package(ECM 5.9.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -76,7 +76,7 @@ add_subdirectory(akonadiplugin)
 add_subdirectory(search)
 
 # Config files
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/AkonadiSearch")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/AkonadiSearch")
 
 ecm_configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/AkonadiSearchConfig.cmake.in"
@@ -98,7 +98,7 @@ install(EXPORT AkonadiSearchTargets
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}
     COMPONENT Devel
 )
 

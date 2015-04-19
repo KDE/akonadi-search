@@ -17,9 +17,9 @@ target_link_libraries(akonadi_baloo_searchplugin
     KF5::Contacts
     )
 
-install(TARGETS akonadi_baloo_searchplugin DESTINATION ${PLUGIN_INSTALL_DIR}/akonadi)
+install(TARGETS akonadi_baloo_searchplugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
 install(FILES akonadibaloosearchplugin.desktop
-        DESTINATION ${PLUGIN_INSTALL_DIR}/akonadi)
+        DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
 
 
 #REACTIVATE

@@ -7,4 +7,4 @@ target_link_libraries(emailsearchstore
     BalooPimXapian
 )
 
-install(TARGETS emailsearchstore DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/baloo)
+install(TARGETS emailsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/baloo)

@@ -7,4 +7,4 @@ target_link_libraries(notesearchstore
     BalooPimXapian
 )
 
-install(TARGETS notesearchstore DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/baloo)
+install(TARGETS notesearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/baloo)

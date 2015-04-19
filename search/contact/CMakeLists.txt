@@ -7,4 +7,4 @@ target_link_libraries(contactsearchstore
     BalooPimXapian
 )
 
-install(TARGETS contactsearchstore DESTINATION ${PLUGIN_INSTALL_DIR}/kf5/baloo)
+install(TARGETS contactsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/baloo)

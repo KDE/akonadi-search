@@ -19,7 +19,7 @@ set_target_properties(BalooPimCore PROPERTIES
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME BalooPimCore
 )
-target_include_directories(BalooPimCore INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/Baloo>")
+target_include_directories(BalooPimCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/Baloo>")
 
 generate_export_header(BalooPimCore BASE_NAME BALOO_CORE EXPORT_FILE_NAME core_export.h)
 
@@ -28,12 +28,12 @@ install(TARGETS BalooPimCore EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_D
 #install(FILES
 #    ${CMAKE_CURRENT_BINARY_DIR}/core_export.h
 #    ${KF5BalooCore_HEADERS}
-#    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/Baloo/baloo
+#    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/Baloo/baloo
 #    COMPONENT Devel
 #)
 #
 #install(FILES
 #    ${KF5BalooCore_CamelCase_HEADERS}
-#    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/Baloo/Baloo
+#    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/Baloo/Baloo
 #    COMPONENT Devel
 #)
