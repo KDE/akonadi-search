@@ -48,7 +48,7 @@ find_package(KF5CalendarCore ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
 ecm_setup_version(${PROJECT_VERSION}
     VARIABLE_PREFIX AKONADISEARCH
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfigVersion.cmake"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfigVersion.cmake"
     SOVERSION 5
 )
 
@@ -76,25 +76,25 @@ add_subdirectory(akonadiplugin)
 add_subdirectory(search)
 
 # Config files
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/AkonadiSearch")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
 
 ecm_configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/AkonadiSearchConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfig.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KF5AkonadiSearchConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
 install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/AkonadiSearchConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfigVersion.cmake"
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     COMPONENT devel
 )
 
-install(EXPORT AkonadiSearchTargets
+install(EXPORT KF5AkonadiSearchTargets
         NAMESPACE KF5::
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        FILE AkonadiSearchTargets.cmake)
+        FILE KF5AkonadiSearchTargets.cmake)
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"

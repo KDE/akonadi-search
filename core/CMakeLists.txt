@@ -24,4 +24,4 @@ target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:$
 
 generate_export_header(KF5AkonadiSearchCore BASE_NAME AKONADI_SEARCH_CORE EXPORT_FILE_NAME search_core_export.h)
 
-install(TARGETS KF5AkonadiSearchCore EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchCore EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

@@ -38,7 +38,7 @@ set_target_properties(KF5AkonadiSearchPIM PROPERTIES
 
 target_include_directories(KF5AkonadiSearchPIM INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch>")
 
-install(TARGETS KF5AkonadiSearchPIM EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchPIM EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     query.h
