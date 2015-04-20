@@ -26,7 +26,6 @@
 #include <QList>
 #include <QFile>
 
-#include <KDebug>
 #include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
@@ -95,14 +94,14 @@ ResultIterator CollectionQuery::exec()
     try {
         db = Xapian::Database(QFile::encodeName(d->databaseDir).constData());
     } catch (const Xapian::DatabaseError &e) {
-        kWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
+        qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     }
 
     QList<Xapian::Query> queries;
 
     if (!d->nameString.isEmpty()) {
-        kDebug() << "searching by name";
+        qDebug() << "searching by name";
         Xapian::QueryParser parser;
         parser.set_database(db);
         parser.add_prefix("", "N");

@@ -2,6 +2,7 @@ add_library(notesearchstore MODULE notesearchstore.cpp ../pimsearchstore.cpp)
 
 target_link_libraries(notesearchstore
     Qt5::Core
+    KF5::AkonadiCore
     ${XAPIAN_LIBRARIES}
     KF5AkonadiSearchCore
     KF5AkonadiSearchXapian

@@ -28,7 +28,6 @@ add_executable(akonadi_indexing_agent ${akonadi_indexing_agent_SRCS})
 
 target_link_libraries(akonadi_indexing_agent
     Qt5::Core
-    KF5::KDELibs4Support
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime

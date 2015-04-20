@@ -12,10 +12,9 @@ target_link_libraries(akonadi_search_plugin
     KF5::AkonadiSearchCore
     KF5::AkonadiSearchPIM
     KF5::AkonadiSearchXapian
-    KF5::KDELibs4Support
     KF5::ItemModels
     KF5::Contacts
-    )
+)
 
 install(TARGETS akonadi_search_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
 install(FILES akonadisearchplugin.desktop

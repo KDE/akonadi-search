@@ -43,8 +43,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <KGlobal>
-#include <KStandardDirs>
 #include <QDebug>
 
 #include <QFile>

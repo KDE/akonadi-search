@@ -25,7 +25,6 @@ target_link_libraries(KF5AkonadiSearchPIM
     Qt5::Core
 
     PRIVATE
-    KF5::KDELibs4Support
     KF5::AkonadiCore
     KF5::ItemModels
     ${XAPIAN_LIBRARIES}

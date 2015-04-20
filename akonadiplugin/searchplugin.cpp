@@ -30,10 +30,8 @@
 
 #include <QDebug>
 #include <Akonadi/KMime/MessageFlags>
-#include <KDateTime>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
-#include <QtPlugin>
 #include <QStringList>
 #include <QDateTime>
 

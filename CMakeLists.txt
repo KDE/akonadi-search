@@ -19,7 +19,7 @@ include(ECMInstallIcons)
 include(ECMAddTests)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
-find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash KDELibs4Support)
+find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash)
 
 find_package(KF5Akonadi CONFIG)
 set_package_properties(KF5Akonadi PROPERTIES

@@ -2,6 +2,7 @@ add_library(calendarsearchstore MODULE calendarsearchstore.cpp ../pimsearchstore
 
 target_link_libraries(calendarsearchstore
     Qt5::Core
+    KF5::AkonadiCore
     ${XAPIAN_LIBRARIES}
     KF5AkonadiSearchCore
     KF5AkonadiSearchXapian
