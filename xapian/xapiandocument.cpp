@@ -20,7 +20,7 @@
 
 #include "xapiandocument.h"
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 XapianDocument::XapianDocument()
     : m_termGen(&m_doc)

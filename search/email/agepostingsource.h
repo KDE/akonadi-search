@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,13 +20,15 @@
  *
  */
 
-#ifndef AGEPOSTINGSOURCE_H
-#define AGEPOSTINGSOURCE_H
+#ifndef AKONADI_SEARCH_PIM_AGEPOSTINGSOURCE_H
+#define AKONADI_SEARCH_PIM_AGEPOSTINGSOURCE_H
 
 #include <xapian.h>
 #include <QString>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 class AgePostingSource : public Xapian::ValuePostingSource
@@ -49,5 +51,6 @@ private:
 };
 
 }
+}
 
-#endif // AGEPOSTINGSOURCE_H
+#endif // AKONADI_SEARCH_PIM_AGEPOSTINGSOURCE_H

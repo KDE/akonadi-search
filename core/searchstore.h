@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,22 +20,24 @@
  *
  */
 
-#ifndef _BALOO_SEARCHSTORE_H
-#define _BALOO_SEARCHSTORE_H
+#ifndef AKONADI_SEARCH_CORE_SEARCHSTORE_H
+#define AKONADI_SEARCH_CORE_SEARCHSTORE_H
 
 #include <QObject>
 #include <QString>
 #include <QHash>
 #include <QUrl>
 
-#include "core_export.h"
+#include "search_core_export.h"
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 class Query;
 
-class BALOO_CORE_EXPORT SearchStore : public QObject
+class AKONADI_SEARCH_CORE_EXPORT SearchStore : public QObject
 {
     Q_OBJECT
 public:
@@ -92,8 +94,9 @@ inline int deserialize(const QByteArray &namespace_, const QByteArray &str)
     return str.mid(namespace_.size() + 1).toInt();
 }
 
-}
+} // namespace Search
+} // namespace Akonadi
 
-Q_DECLARE_INTERFACE(Baloo::SearchStore, "org.kde.Baloo.SearchStore")
+Q_DECLARE_INTERFACE(Akonadi::Search::SearchStore, "org.kde.Akonadi.Search.SearchStore")
 
-#endif // _BALOO_SEARCHSTORE_H
+#endif // AKONADI_SEARCH_CORE_SEARCHSTORE_H

@@ -8,23 +8,24 @@ set(XAPIAN_SRCS
     xapianqueryparser.cpp
 )
 
-add_library(BalooPimXapian ${XAPIAN_SRCS})
+add_library(KF5AkonadiSearchXapian ${XAPIAN_SRCS})
+add_library(KF5::AkonadiSearchXapian ALIAS KF5AkonadiSearchXapian)
 
-target_link_libraries(BalooPimXapian PUBLIC
+target_link_libraries(KF5AkonadiSearchXapian PUBLIC
     Qt5::Core
-    BalooPimCore
+    KF5::AkonadiSearchCore
     ${XAPIAN_LIBRARIES}
 )
 
-set_target_properties(BalooPimXapian PROPERTIES
+set_target_properties(KF5AkonadiSearchXapian PROPERTIES
     VERSION ${AKONADISEARCH_VERSION_STRING}
     SOVERSION ${AKONADISEARCH_SOVERSION}
-    EXPORT_NAME BalooPimXapian
+    EXPORT_NAME AkonadiSearchXapian
 )
 
-generate_export_header(BalooPimXapian BASE_NAME BALOO_XAPIAN EXPORT_FILE_NAME xapian_export.h)
+generate_export_header(KF5AkonadiSearchXapian BASE_NAME AKONADI_SEARCH_XAPIAN EXPORT_FILE_NAME search_xapian_export.h)
 
-install(TARGETS BalooPimXapian EXPORT BalooPimXapian ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchXapian EXPORT AkonadiSearchXapian ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 add_subdirectory(autotests)
 add_subdirectory(tests)

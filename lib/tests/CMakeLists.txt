@@ -2,36 +2,14 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
 
-add_executable(contactsearch contactsearchtest.cpp)
+macro(add_search_test name)
+    ecm_add_test("${name}test.cpp"
+                TEST_NAME "${test}"
+                LINK_LIBRARIES Qt5::Core KF5::AkonadiCore KF5::AkonadiMime KF5::Mime KF5::Contacts KF5::AkonadiSearchPIM KF5::KDELibs4Support
+    )
+endmacro()
 
-target_link_libraries(contactsearch
-  Qt5::Core
-
-  KF5::AkonadiCore
-  KF5::AkonadiMime
-  KF5::Mime
-  KF5::Contacts
-
-  KF5::BalooPim
-)
-
-add_executable(emailquery emailquerytest.cpp)
-
-target_link_libraries(emailquery
-  Qt5::Core
-  KF5::KDELibs4Support
-
-  KF5::AkonadiCore
-  KF5::Mime
-
-  KF5::BalooPim
-)
-
-add_executable(contactcompleter contactcompletiontest.cpp)
-
-target_link_libraries(contactcompleter
-  Qt5::Core
-  KF5::AkonadiCore
-  KF5::Mime
-  KF5::BalooPim
-)
+# FIXME: isolated test
+#add_search_test(contactsearch)
+add_search_test(emailquery)
+add_search_test(contactcompletion)

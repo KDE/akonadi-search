@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
@@ -28,9 +28,9 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QStandardPaths>
-//#include <Akonadi/ServerManager>
+#include <AkonadiCore/ServerManager>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 PIMSearchStore::PIMSearchStore(QObject *parent) : XapianSearchStore(parent)
 {
@@ -44,9 +44,9 @@ QStringList PIMSearchStore::types()
 QString PIMSearchStore::findDatabase(const QString &dbName) const
 {
     QString basePath = QLatin1String("baloo");
-//    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
-//        basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
-//    }
+    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+        basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+    }
     return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QString::fromLatin1("/%1/%2/").arg(basePath, dbName);
 }
 

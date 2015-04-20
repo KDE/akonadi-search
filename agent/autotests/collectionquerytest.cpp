@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -90,10 +90,10 @@ private Q_SLOTS:
         col2.setParentCollection(col1);
         index.index(col2);
 
-        Baloo::PIM::CollectionQuery query;
+        Akonadi::Search::PIM::CollectionQuery query;
         query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
         query.nameMatches(col1.name());
-        Baloo::PIM::ResultIterator it = query.exec();
+        Akonadi::Search::PIM::ResultIterator it = query.exec();
         QList<qint64> results;
         while (it.next()) {
             //qDebug() << "result " << it.id();
@@ -115,10 +115,10 @@ private Q_SLOTS:
         index.index(col2);
 
         {
-            Baloo::PIM::CollectionQuery query;
+            Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(col1.name());
-            Baloo::PIM::ResultIterator it = query.exec();
+            Akonadi::Search::PIM::ResultIterator it = query.exec();
             QList<qint64> results;
             while (it.next()) {
                 //qDebug() << "result " << it.id();
@@ -130,10 +130,10 @@ private Q_SLOTS:
             QCOMPARE(results.at(1), col2.id());
         }
         {
-            Baloo::PIM::CollectionQuery query;
+            Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/col1/col2"));
-            Baloo::PIM::ResultIterator it = query.exec();
+            Akonadi::Search::PIM::ResultIterator it = query.exec();
             QList<qint64> results;
             while (it.next()) {
                 //qDebug() << "result " << it.id();
@@ -146,7 +146,7 @@ private Q_SLOTS:
 
     }
 
-    QList<qint64> getResults(Baloo::PIM::ResultIterator it)
+    QList<qint64> getResults(Akonadi::Search::PIM::ResultIterator it)
     {
         QList<qint64> results;
         while (it.next()) {
@@ -181,7 +181,7 @@ private Q_SLOTS:
 
         //Old name gone
         {
-            Baloo::PIM::CollectionQuery query;
+            Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.nameMatches(QLatin1String("col1"));
             QList<qint64> results = getResults(query.exec());
@@ -189,7 +189,7 @@ private Q_SLOTS:
         }
         //New name
         {
-            Baloo::PIM::CollectionQuery query;
+            Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.nameMatches(QLatin1String("colX"));
             QList<qint64> results = getResults(query.exec());
@@ -198,7 +198,7 @@ private Q_SLOTS:
         }
         //Old path gone
         {
-            Baloo::PIM::CollectionQuery query;
+            Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/col1/col2"));
             QList<qint64> results = getResults(query.exec());
@@ -206,7 +206,7 @@ private Q_SLOTS:
         }
         //New paths
         {
-            Baloo::PIM::CollectionQuery query;
+            Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/colX/col2"));
             QList<qint64> results = getResults(query.exec());
@@ -215,7 +215,7 @@ private Q_SLOTS:
             QCOMPARE(results.at(1), col3.id());
         }
         {
-            Baloo::PIM::CollectionQuery query;
+            Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
             query.pathMatches(QLatin1String("/colX/col2/col3"));
             QList<qint64> results = getResults(query.exec());

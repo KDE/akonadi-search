@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -37,50 +37,51 @@
 #include <QStringList>
 #include <QDateTime>
 
-static Baloo::Term::Operation mapRelation(Akonadi::SearchTerm::Relation relation)
+using namespace Akonadi::Search;
+
+static Term::Operation mapRelation(Akonadi::SearchTerm::Relation relation)
 {
-    if (relation == Akonadi::SearchTerm::RelAnd) {
-        return Baloo::Term::And;
+    if (relation == Akonadi::SearchTerm::RelAnd){
+        return Term::And;
     }
-    return Baloo::Term::Or;
+    return Term::Or;
 }
 
-static Baloo::Term::Comparator mapComparator(Akonadi::SearchTerm::Condition comparator)
-{
-    if (comparator == Akonadi::SearchTerm::CondContains) {
-        return Baloo::Term::Contains;
+static Term::Comparator mapComparator(Akonadi::SearchTerm::Condition comparator) {
+    if (comparator == Akonadi::SearchTerm::CondContains){
+        return Term::Contains;
     }
-    if (comparator == Akonadi::SearchTerm::CondGreaterOrEqual) {
-        return Baloo::Term::GreaterEqual;
+    if (comparator == Akonadi::SearchTerm::CondGreaterOrEqual){
+        return Term::GreaterEqual;
     }
-    if (comparator == Akonadi::SearchTerm::CondGreaterThan) {
-        return Baloo::Term::Greater;
+    if (comparator == Akonadi::SearchTerm::CondGreaterThan){
+        return Term::Greater;
     }
-    if (comparator == Akonadi::SearchTerm::CondEqual) {
-        return Baloo::Term::Equal;
+    if (comparator == Akonadi::SearchTerm::CondEqual){
+        return Term::Equal;
     }
-    if (comparator == Akonadi::SearchTerm::CondLessOrEqual) {
-        return Baloo::Term::LessEqual;
+    if (comparator == Akonadi::SearchTerm::CondLessOrEqual){
+        return Term::LessEqual;
     }
-    if (comparator == Akonadi::SearchTerm::CondLessThan) {
-        return Baloo::Term::Less;
+    if (comparator == Akonadi::SearchTerm::CondLessThan){
+        return Term::Less;
     }
-    return Baloo::Term::Auto;
+    return Term::Auto;
 }
 
-static Baloo::Term getTerm(const Akonadi::SearchTerm &term, const QString &property)
+static Term getTerm(const Akonadi::SearchTerm &term, const QString &property)
 {
-    Baloo::Term t(property, term.value().toString(), mapComparator(term.condition()));
+    Term t(property, term.value().toString(), mapComparator(term.condition()));
     t.setNegation(term.isNegated());
     return t;
 }
 
-Baloo::Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
+Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
 {
     if (!term.subTerms().isEmpty()) {
-        Baloo::Term t(mapRelation(term.relation()));
+        Term t(mapRelation(term.relation()));
         Q_FOREACH (const Akonadi::SearchTerm &subterm, term.subTerms()) {
-            const Baloo::Term newTerm = recursiveEmailTermMapping(subterm);
+            const Term newTerm = recursiveEmailTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);
             }
@@ -91,10 +92,10 @@ Baloo::Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::EmailSearchTerm::Message: {
-            Baloo::Term s(Baloo::Term::Or);
+            Term s(Term::Or);
             s.setNegation(term.isNegated());
-            s.addSubTerm(Baloo::Term(QLatin1String("body"), term.value(), mapComparator(term.condition())));
-            s.addSubTerm(Baloo::Term(QLatin1String("headers"), term.value(), mapComparator(term.condition())));
+            s.addSubTerm(Term(QLatin1String("body"), term.value(), mapComparator(term.condition())));
+            s.addSubTerm(Term(QLatin1String("headers"), term.value(), mapComparator(term.condition())));
             return s;
         }
         case Akonadi::EmailSearchTerm::Body:
@@ -104,12 +105,12 @@ Baloo::Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::EmailSearchTerm::ByteSize:
             return getTerm(term, QLatin1String("size"));
         case Akonadi::EmailSearchTerm::HeaderDate: {
-            Baloo::Term s(QLatin1String("date"), QString::number(term.value().toDateTime().toTime_t()), mapComparator(term.condition()));
+            Term s(QLatin1String("date"), QString::number(term.value().toDateTime().toTime_t()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
         }
         case Akonadi::EmailSearchTerm::HeaderOnlyDate: {
-            Baloo::Term s(QLatin1String("onlydate"), QString::number(term.value().toDate().toJulianDay()), mapComparator(term.condition()));
+            Term s(QLatin1String("onlydate"), QString::number(term.value().toDate().toJulianDay()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
         }
@@ -125,49 +126,49 @@ Baloo::Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QLatin1String("bcc"));
         case Akonadi::EmailSearchTerm::MessageStatus:
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Flagged)) {
-                return Baloo::Term(QLatin1String("isimportant"), !term.isNegated());
+                return Term(QLatin1String("isimportant"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::ToAct)) {
-                return Baloo::Term(QLatin1String("istoact"), !term.isNegated());
+                return Term(QLatin1String("istoact"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Watched)) {
-                return Baloo::Term(QLatin1String("iswatched"), !term.isNegated());
+                return Term(QLatin1String("iswatched"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Deleted)) {
-                return Baloo::Term(QLatin1String("isdeleted"), !term.isNegated());
+                return Term(QLatin1String("isdeleted"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Spam)) {
-                return Baloo::Term(QLatin1String("isspam"), !term.isNegated());
+                return Term(QLatin1String("isspam"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Replied)) {
-                return Baloo::Term(QLatin1String("isreplied"), !term.isNegated());
+                return Term(QLatin1String("isreplied"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Ignored)) {
-                return Baloo::Term(QLatin1String("isignored"), !term.isNegated());
+                return Term(QLatin1String("isignored"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Forwarded)) {
-                return Baloo::Term(QLatin1String("isforwarded"), !term.isNegated());
+                return Term(QLatin1String("isforwarded"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Sent)) {
-                return Baloo::Term(QLatin1String("issent"), !term.isNegated());
+                return Term(QLatin1String("issent"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Queued)) {
-                return Baloo::Term(QLatin1String("isqueued"), !term.isNegated());
+                return Term(QLatin1String("isqueued"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Ham)) {
-                return Baloo::Term(QLatin1String("isham"), !term.isNegated());
+                return Term(QLatin1String("isham"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Seen)) {
-                return Baloo::Term(QLatin1String("isread"), !term.isNegated());
+                return Term(QLatin1String("isread"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::HasAttachment)) {
-                return Baloo::Term(QLatin1String("hasattachment"), !term.isNegated());
+                return Term(QLatin1String("hasattachment"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Encrypted)) {
-                return Baloo::Term(QLatin1String("isencrypted"), !term.isNegated());
+                return Term(QLatin1String("isencrypted"), !term.isNegated());
             }
             if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::HasInvitation)) {
-                return Baloo::Term(QLatin1String("hasinvitation"), !term.isNegated());
+                return Term(QLatin1String("hasinvitation"), !term.isNegated());
             }
             break;
         case Akonadi::EmailSearchTerm::MessageTag:
@@ -192,15 +193,15 @@ Baloo::Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             qWarning() << "unknown term " << term.key();
         }
     }
-    return Baloo::Term();
+    return Term();
 }
 
-Baloo::Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
+Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
 {
     if (!term.subTerms().isEmpty()) {
-        Baloo::Term t(mapRelation(term.relation()));
+        Term t(mapRelation(term.relation()));
         Q_FOREACH (const Akonadi::SearchTerm &subterm, term.subTerms()) {
-            const Baloo::Term newTerm = recursiveCalendarTermMapping(subterm);
+            const Term newTerm = recursiveCalendarTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);
             }
@@ -217,7 +218,7 @@ Baloo::Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::IncidenceSearchTerm::Location:
             return getTerm(term, "location");
         case Akonadi::IncidenceSearchTerm::PartStatus: {
-            Baloo::Term t("partstatus", term.value().toString(), Baloo::Term::Equal);
+            Term t("partstatus", term.value().toString(), Term::Equal);
             t.setNegation(term.isNegated());
             return t;
         }
@@ -225,15 +226,15 @@ Baloo::Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
             qWarning() << "unknown term " << term.key();
         }
     }
-    return Baloo::Term();
+    return Term();
 }
 
-Baloo::Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
+Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
 {
     if (!term.subTerms().isEmpty()) {
-        Baloo::Term t(mapRelation(term.relation()));
+        Term t(mapRelation(term.relation()));
         Q_FOREACH (const Akonadi::SearchTerm &subterm, term.subTerms()) {
-            const Baloo::Term newTerm = recursiveNoteTermMapping(subterm);
+            const Term newTerm = recursiveNoteTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);
             }
@@ -251,15 +252,15 @@ Baloo::Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
             qWarning() << "unknown term " << term.key();
         }
     }
-    return Baloo::Term();
+    return Term();
 }
 
-Baloo::Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
+Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
 {
     if (!term.subTerms().isEmpty()) {
-        Baloo::Term t(mapRelation(term.relation()));
+        Term t(mapRelation(term.relation()));
         Q_FOREACH (const Akonadi::SearchTerm &subterm, term.subTerms()) {
-            const Baloo::Term newTerm = recursiveContactTermMapping(subterm);
+            const Term newTerm = recursiveContactTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);
             }
@@ -282,7 +283,7 @@ Baloo::Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
             qWarning() << "unknown term " << term.key();
         }
     }
-    return Baloo::Term();
+    return Term();
 }
 
 QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint64> &collections, const QStringList &mimeTypes)
@@ -294,13 +295,13 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
     }
     const Akonadi::SearchTerm term = searchQuery.term();
 
-    Baloo::Query query;
+    Query query;
     if (term.subTerms().isEmpty()) {
         qWarning() << "empty query";
         return QSet<qint64>();
     }
 
-    Baloo::Term t;
+    Term t;
 
     if (mimeTypes.contains(QLatin1String("message/rfc822"))) {
         // qDebug() << "mail query";
@@ -331,10 +332,10 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
 
     //Filter by collection if not empty
     if (!collections.isEmpty()) {
-        Baloo::Term parentTerm(Baloo::Term::And);
-        Baloo::Term collectionTerm(Baloo::Term::Or);
+        Term parentTerm(Term::And);
+        Term collectionTerm(Term::Or);
         Q_FOREACH (const qint64 col, collections) {
-            collectionTerm.addSubTerm(Baloo::Term(QLatin1String("collection"), QString::number(col), Baloo::Term::Equal));
+            collectionTerm.addSubTerm(Term(QLatin1String("collection"), QString::number(col), Term::Equal));
         }
         parentTerm.addSubTerm(collectionTerm);
         parentTerm.addSubTerm(t);
@@ -346,10 +347,10 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
 
     QSet<qint64> resultSet;
     // qDebug() << query.toJSON();
-    Baloo::ResultIterator iter = query.exec();
+    ResultIterator iter = query.exec();
     while (iter.next()) {
         const QByteArray id = iter.id();
-        const int fid = Baloo::deserialize("akonadi", id);
+        const int fid = deserialize("akonadi", id);
         resultSet << fid;
     }
     qDebug() << "Got" << resultSet.count() << "results";

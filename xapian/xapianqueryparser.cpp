@@ -24,7 +24,7 @@
 #include <QStringList>
 #include <QDebug>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 XapianQueryParser::XapianQueryParser()
     : m_db(0)

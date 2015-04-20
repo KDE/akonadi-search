@@ -3,8 +3,8 @@ add_library(emailsearchstore MODULE agepostingsource.cpp emailsearchstore.cpp ..
 target_link_libraries(emailsearchstore
     Qt5::Core
     ${XAPIAN_LIBRARIES}
-    BalooPimCore
-    BalooPimXapian
+    KF5AkonadiSearchCore
+    KF5AkonadiSearchXapian
 )
 
-install(TARGETS emailsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/baloo)
+install(TARGETS emailsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)

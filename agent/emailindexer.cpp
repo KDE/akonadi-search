@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -102,7 +102,7 @@ void EmailIndexer::index(const Akonadi::Item &item)
     m_doc->add_value(1, QString::number(item.size()).toStdString());
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Baloo::EmailIndexer::index",
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index",
                "Item does not have a valid parent collection");
 
     Akonadi::Entity::Id colId = item.parentCollection().id();

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 
 project(AkonadiSearch)
-set(PROJECT_VERSION "5.0.0")
+set(PROJECT_VERSION "5.0.1")
 
 # ECM setup
 find_package(ECM 5.9.0 REQUIRED NO_MODULE)

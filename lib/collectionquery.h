@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,22 +20,24 @@
  *
  */
 
-#ifndef _COLLECTION_QUERY_H
-#define _COLLECTION_QUERY_H
+#ifndef AKONADI_SEARCH_PIM_COLLECTION_QUERY_H
+#define AKONADI_SEARCH_PIM_COLLECTION_QUERY_H
 
-#include "pim_export.h"
+#include "search_pim_export.h"
 #include "query.h"
 #include "resultiterator.h"
 
 #include <QStringList>
 #include <AkonadiCore/Collection>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 namespace PIM
 {
 
-class BALOO_PIM_EXPORT CollectionQuery : public Query
+class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
 public:
     CollectionQuery();
@@ -74,5 +76,6 @@ private:
 
 }
 }
+}
 
-#endif // _COLLECTION_QUERY_H
+#endif // AKONADI_SEARCH_PIM_COLLECTION_QUERY_H

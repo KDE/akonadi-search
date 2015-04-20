@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,19 +20,21 @@
  *
  */
 
-#ifndef CONTACTCOMPLETER_H
-#define CONTACTCOMPLETER_H
+#ifndef AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H
+#define AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H
 
 #include <QString>
-#include "pim_export.h"
+#include "search_pim_export.h"
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 namespace PIM
 {
 
 // FIXME: Make this async!!
-class BALOO_PIM_EXPORT ContactCompleter
+class AKONADI_SEARCH_PIM_EXPORT ContactCompleter
 {
 public:
     ContactCompleter(const QString &prefix, int limit = 10);
@@ -46,4 +48,5 @@ private:
 
 }
 }
-#endif // CONTACTCOMPLETER_H
+}
+#endif // AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H

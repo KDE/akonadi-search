@@ -380,7 +380,7 @@ QString Index::dbPath(const QString &dbName) const
     if (Akonadi::ServerManager::hasInstanceIdentifier()) {
         basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
     }
-    return KGlobal::dirs()->localxdgdatadir() + QString::fromLatin1("%1/%2/").arg(basePath, dbName);
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QString::fromLatin1("/%1/%2/").arg(basePath, dbName);
 }
 
 QString Index::emailIndexingPath() const
@@ -412,4 +412,3 @@ QString Index::collectionIndexingPath() const
 {
     return dbPath(QLatin1String("collections"));
 }
-

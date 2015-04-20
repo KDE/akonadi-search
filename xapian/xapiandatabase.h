@@ -17,22 +17,24 @@
  *
  */
 
-#ifndef BALOO_XAPIANDATABASE_H
-#define BALOO_XAPIANDATABASE_H
+#ifndef AKONADI_SEARCH_XAPIANDATABASE_H
+#define AKONADI_SEARCH_XAPIANDATABASE_H
 
 #include <xapian.h>
-#include "xapian_export.h"
+#include "search_xapian_export.h"
 
 #include <QString>
 #include <QPair>
 #include <QVector>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 class XapianDocument;
 
-class BALOO_XAPIAN_EXPORT XapianDatabase
+class AKONADI_SEARCH_XAPIAN_EXPORT XapianDatabase
 {
 public:
     /**
@@ -89,5 +91,6 @@ private:
 };
 
 }
+}
 
-#endif // BALOO_XAPIANDATABASE_H
+#endif // AKONADI_SEARCH_XAPIANDATABASE_H

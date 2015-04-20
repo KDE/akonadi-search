@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
@@ -27,7 +27,7 @@
 #include "emailindexer.h"
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
-#include "balooindexeradaptor.h"
+#include "indexeradaptor.h"
 #include "collectionupdatejob.h"
 
 #include "priority.h"
@@ -51,7 +51,7 @@
 
 #define INDEXING_AGENT_VERSION 4
 
-BalooIndexingAgent::BalooIndexingAgent(const QString &id)
+AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     : AgentBase(id),
       m_scheduler(m_index, QSharedPointer<JobFactory>(new JobFactory))
 {
@@ -59,6 +59,7 @@ BalooIndexingAgent::BalooIndexingAgent(const QString &id)
     lowerSchedulingPriority();
     lowerPriority();
 
+    // TODO: Migrate from baloorc to custom config file
     KConfig config(QLatin1String("baloorc"));
     KConfigGroup group = config.group("Akonadi");
     const int agentIndexingVersion = group.readEntry("agentIndexingVersion", 0);
@@ -95,26 +96,28 @@ BalooIndexingAgent::BalooIndexingAgent(const QString &id)
     changeRecorder()->fetchCollection(true);
     changeRecorder()->setExclusive(true);
 
-    new BalooIndexerAdaptor(this);
+    new IndexerAdaptor(this);
 
-    // Cleanup agentsrc after migration to 4.13
+    // Cleanup agentsrc after migration to 4.13/KF5
     Akonadi::AgentManager *agentManager = Akonadi::AgentManager::self();
     const Akonadi::AgentInstance::List allAgents = agentManager->instances();
-    const QStringList oldFeeders = QStringList() << QLatin1String("akonadi_nepomuk_feeder");
     // Cannot use agentManager->instance(oldInstanceName) here, it wouldn't find broken instances.
     Q_FOREACH (const Akonadi::AgentInstance &inst, allAgents) {
-        if (oldFeeders.contains(inst.identifier())) {
+        if (inst.identifier() == QLatin1String("akonadi_nepomuk_feeder")) {
             qDebug() << "Removing old nepomuk feeder" << inst.identifier();
+            agentManager->removeInstance( inst );
+        } else if (inst.identifier() == QLatin1String("akonadi_baloo_indexer")) {
+            qDebug() << "Removing old Baloo indexer" << inst.identifier();
             agentManager->removeInstance(inst);
         }
     }
 }
 
-BalooIndexingAgent::~BalooIndexingAgent()
+AkonadiIndexingAgent::~AkonadiIndexingAgent()
 {
 }
 
-void BalooIndexingAgent::reindexAll()
+void AkonadiIndexingAgent::reindexAll()
 {
     //qDebug() << "Reindexing everything";
     m_scheduler.abort();
@@ -123,25 +126,25 @@ void BalooIndexingAgent::reindexAll()
     QTimer::singleShot(0, &m_scheduler, SLOT(scheduleCompleteSync()));
 }
 
-void BalooIndexingAgent::reindexCollection(const qlonglong id)
+void AkonadiIndexingAgent::reindexCollection(const qlonglong id)
 {
 
     //qDebug() << "Reindexing collection " << id;
     m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
 }
 
-qlonglong BalooIndexingAgent::indexedItems(const qlonglong id)
+qlonglong AkonadiIndexingAgent::indexedItems(const qlonglong id)
 {
     return m_index.indexedItems(id);
 }
 
-void BalooIndexingAgent::itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection)
+void AkonadiIndexingAgent::itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection)
 {
     Q_UNUSED(collection);
     m_scheduler.addItem(item);
 }
 
-void BalooIndexingAgent::itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers)
+void AkonadiIndexingAgent::itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers)
 {
     // We don't index certain parts so we don't care when they change
     QSet<QByteArray> pi = partIdentifiers;
@@ -159,36 +162,38 @@ void BalooIndexingAgent::itemChanged(const Akonadi::Item &item, const QSet<QByte
     m_scheduler.addItem(item);
 }
 
-void BalooIndexingAgent::itemsFlagsChanged(const Akonadi::Item::List &items,
-        const QSet<QByteArray> &addedFlags,
-        const QSet<QByteArray> &removedFlags)
+void AkonadiIndexingAgent::itemsFlagsChanged(const Akonadi::Item::List &items,
+                                             const QSet<QByteArray> &addedFlags,
+                                             const QSet<QByteArray> &removedFlags)
 {
     // Akonadi always sends batch of items of the same type
     m_index.updateFlags(items, addedFlags, removedFlags);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::itemsRemoved(const Akonadi::Item::List &items)
+void AkonadiIndexingAgent::itemsRemoved(const Akonadi::Item::List &items)
 {
     m_index.remove(items);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
-                                    const Akonadi::Collection &sourceCollection,
-                                    const Akonadi::Collection &destinationCollection)
+void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
+                                      const Akonadi::Collection &sourceCollection,
+                                      const Akonadi::Collection &destinationCollection)
 {
     m_index.move(items, sourceCollection, destinationCollection);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent)
+void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection,
+                                           const Akonadi::Collection &parent)
 {
     m_index.index(collection);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes)
+void AkonadiIndexingAgent::collectionChanged(const Akonadi::Collection &collection,
+                                             const QSet<QByteArray> &changedAttributes)
 {
     QSet<QByteArray> changes = changedAttributes;
     changes.remove("collectionquota");
@@ -209,27 +214,28 @@ void BalooIndexingAgent::collectionChanged(const Akonadi::Collection &collection
     }
 }
 
-void BalooIndexingAgent::collectionRemoved(const Akonadi::Collection &collection)
+void AkonadiIndexingAgent::collectionRemoved(const Akonadi::Collection &collection)
 {
     m_index.remove(collection);
     m_index.scheduleCommit();
 }
 
-void BalooIndexingAgent::collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
-        const Akonadi::Collection &collectionDestination)
+void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection,
+                                           const Akonadi::Collection &collectionSource,
+                                           const Akonadi::Collection &collectionDestination)
 {
     m_index.remove(collection);
     CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
     job->start();
 }
 
-void BalooIndexingAgent::cleanup()
+void AkonadiIndexingAgent::cleanup()
 {
     // Remove all the databases
     Akonadi::AgentBase::cleanup();
 }
 
-void BalooIndexingAgent::onAbortRequested()
+void AkonadiIndexingAgent::onAbortRequested()
 {
     KConfig config(QLatin1String("baloorc"));
     KConfigGroup group = config.group("Akonadi");
@@ -238,7 +244,7 @@ void BalooIndexingAgent::onAbortRequested()
     m_scheduler.abort();
 }
 
-void BalooIndexingAgent::onOnlineChanged(bool online)
+void AkonadiIndexingAgent::onOnlineChanged(bool online)
 {
     // Ignore everything when offline
     changeRecorder()->setAllMonitored(online);
@@ -260,4 +266,4 @@ void BalooIndexingAgent::onOnlineChanged(bool online)
     }
 }
 
-AKONADI_AGENT_MAIN(BalooIndexingAgent)
+AKONADI_AGENT_MAIN(AkonadiIndexingAgent)

@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -24,7 +24,7 @@
 
 #include <QDebug>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 ContactSearchStore::ContactSearchStore(QObject *parent)
     : PIMSearchStore(parent)

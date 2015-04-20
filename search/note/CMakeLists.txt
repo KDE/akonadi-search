@@ -3,8 +3,8 @@ add_library(notesearchstore MODULE notesearchstore.cpp ../pimsearchstore.cpp)
 target_link_libraries(notesearchstore
     Qt5::Core
     ${XAPIAN_LIBRARIES}
-    BalooPimCore
-    BalooPimXapian
+    KF5AkonadiSearchCore
+    KF5AkonadiSearchXapian
 )
 
-install(TARGETS notesearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/baloo)
+install(TARGETS notesearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)

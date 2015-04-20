@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,20 +20,22 @@
  *
  */
 
-#ifndef BALOO_PIM_NOTES_SEARCHSTORE_H
-#define BALOO_PIM_NOTES_SEARCHSTORE_H
+#ifndef AKONADI_SEARCH_PIM_NOTES_SEARCHSTORE_H
+#define AKONADI_SEARCH_PIM_NOTES_SEARCHSTORE_H
 
 #include "../pimsearchstore.h"
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 class NoteSearchStore : public PIMSearchStore
 {
     Q_OBJECT
-    Q_INTERFACES(Baloo::SearchStore)
-#ifndef BALOO_NO_PLUGINS
-    Q_PLUGIN_METADATA(IID "org.kde.Baloo.SearchStore")
+    Q_INTERFACES(Akonadi::Search::SearchStore)
+#ifndef AKONADI_SEARCH_NO_PLUGINS
+    Q_PLUGIN_METADATA(IID "org.kde.Akonadi.Search.SearchStore")
 #endif
 public:
     NoteSearchStore(QObject *parent = 0);
@@ -42,4 +44,5 @@ public:
 };
 
 }
-#endif // BALOO_PIM_NOTES_SEARCHSTORE_H
+}
+#endif // AKONADI_SEARCH_PIM_NOTES_SEARCHSTORE_H

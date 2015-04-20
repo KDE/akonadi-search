@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,21 +20,23 @@
  *
  */
 
-#ifndef _EMAIL_QUERY_H
-#define _EMAIL_QUERY_H
+#ifndef AKONADI_SEARCH_PIM_EMAIL_QUERY_H
+#define AKONADI_SEARCH_PIM_EMAIL_QUERY_H
 
-#include "pim_export.h"
+#include "search_pim_export.h"
 #include "query.h"
 
 #include <QStringList>
 #include <Collection>
 
-namespace Baloo
+namespace Akonadi
 {
-namespace PIM
+namespace Search
+{
+namespace PIM 
 {
 
-class BALOO_PIM_EXPORT EmailQuery : public Query
+class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
 public:
     EmailQuery();
@@ -117,5 +119,6 @@ private:
 
 }
 }
+}
 
-#endif // _EMAIL_QUERY_H
+#endif // AKONADI_SEARCH_PIM_EMAIL_QUERY_H

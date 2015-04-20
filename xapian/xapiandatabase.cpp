@@ -33,7 +33,7 @@
 #include <unistd.h>
 #endif
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)
     : m_db(0)

@@ -3,7 +3,7 @@ include_directories(
     ${XAPIAN_INCLUDE_DIR}
 )
 
-set(BALOO_PIM_LIB_SRCS
+set(AKONADI_SEARCH_PIM_LIB_SRCS
     query.cpp
     resultiterator.cpp
     contactquery.cpp
@@ -15,12 +15,12 @@ set(BALOO_PIM_LIB_SRCS
     ../search/email/agepostingsource.cpp
 )
 
-add_library(KF5BalooPim ${BALOO_PIM_LIB_SRCS})
-add_library(KF5::BalooPim ALIAS KF5BalooPim)
+add_library(KF5AkonadiSearchPIM ${AKONADI_SEARCH_PIM_LIB_SRCS})
+add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)
 
-generate_export_header(KF5BalooPim BASE_NAME BALOO_PIM EXPORT_FILE_NAME pim_export.h)
+generate_export_header(KF5AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_FILE_NAME search_pim_export.h)
 
-target_link_libraries(KF5BalooPim
+target_link_libraries(KF5AkonadiSearchPIM
     PUBLIC
     Qt5::Core
 
@@ -31,15 +31,15 @@ target_link_libraries(KF5BalooPim
     ${XAPIAN_LIBRARIES}
 )
 
-set_target_properties(KF5BalooPim PROPERTIES
+set_target_properties(KF5AkonadiSearchPIM PROPERTIES
     VERSION ${AKONADISEARCH_VERSION_STRING}
     SOVERSION ${AKONADISEARCH_SOVERSION}
-    EXPORT_NAME BalooPim
+    EXPORT_NAME AkonadiSearchPIM
 )
 
-target_include_directories(KF5BalooPim INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/Baloo>")
+target_include_directories(KF5AkonadiSearchPIM INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch>")
 
-install(TARGETS KF5BalooPim EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchPIM EXPORT AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     query.h
@@ -50,9 +50,9 @@ install(FILES
     collectionquery.h
 
     resultiterator.h
-    ${CMAKE_CURRENT_BINARY_DIR}/pim_export.h
+    ${CMAKE_CURRENT_BINARY_DIR}/search_pim_export.h
 
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/Baloo/baloo/pim
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/PIM
     COMPONENT Devel
 )
 

@@ -9,6 +9,6 @@ target_link_libraries(emailindexer
   KF5::AkonadiCore
   KF5::AkonadiMime
   KF5::Mime
-  BalooPimCore
-  BalooPimXapian
+  KF5::AkonadiSearchPIM
+  KF5::AkonadiSearchXapian
 )

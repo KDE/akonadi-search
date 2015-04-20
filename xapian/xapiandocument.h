@@ -18,23 +18,25 @@
  *
  */
 
-#ifndef BALOO_XAPIANDOCUMENT_H
-#define BALOO_XAPIANDOCUMENT_H
+#ifndef AKONADI_SEARCH_XAPIANDOCUMENT_H
+#define AKONADI_SEARCH_XAPIANDOCUMENT_H
 
 #include <xapian.h>
 #include <QString>
 
-#include "xapian_export.h"
+#include "search_xapian_export.h"
 #include "xapiantermgenerator.h"
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 /**
  * This class is just a light wrapper over Xapian::Document
  * which provides nice Qt apis.
  */
-class BALOO_XAPIAN_EXPORT XapianDocument
+class AKONADI_SEARCH_XAPIAN_EXPORT XapianDocument
 {
 public:
     XapianDocument();
@@ -64,5 +66,6 @@ private:
     XapianTermGenerator m_termGen;
 };
 }
+}
 
-#endif // BALOO_XAPIANDOCUMENT_H
+#endif // AKONADI_SEARCH_XAPIANDOCUMENT_H

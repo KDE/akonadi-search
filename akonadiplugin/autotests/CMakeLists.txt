@@ -24,7 +24,7 @@ set(searchplugintest_SRCS
     ../../search/note/notesearchstore.cpp
 )
 
-add_definitions(-DBALOO_NO_PLUGINS=TRUE)
+add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 
 add_executable( searchplugintest ${searchplugintest_SRCS} )
 add_test( searchplugintest searchplugintest )
@@ -38,6 +38,6 @@ target_link_libraries(searchplugintest
     KF5::Contacts
     ${XAPIAN_LIBRARIES}
     KF5::CalendarCore
-    BalooPimCore
-    BalooPimXapian
+    KF5::AkonadiSearchPIM
+    KF5::AkonadiSearchXapian
 )

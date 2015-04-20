@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@
 #include <QPluginLoader>
 #include <QDir>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 SearchStore::SearchStore(QObject *parent)
     : QObject(parent)
@@ -93,7 +93,7 @@ SearchStore::List SearchStore::searchStores()
 
     QStringList paths = QCoreApplication::libraryPaths();
     Q_FOREACH (const QString &libraryPath, paths) {
-        QString path(libraryPath + QStringLiteral("/kf5/baloo"));
+        QString path(libraryPath + QStringLiteral("/akonadi"));
         QDir dir(path);
 
         if (!dir.exists()) {
@@ -117,7 +117,7 @@ SearchStore::List SearchStore::searchStores()
         QPluginLoader loader(pluginPath);
 
         if (!loader.load()) {
-            qWarning() << "Could not create Baloo Search Store: " << pluginPath;
+            qWarning() << "Could not create Akonadi Search Store: " << pluginPath;
             qWarning() << loader.errorString();
             continue;
         }
@@ -128,7 +128,7 @@ SearchStore::List SearchStore::searchStores()
             if (ex) {
                 stores << QSharedPointer<SearchStore>(ex);
             } else {
-                qDebug() << "Plugin could not be converted to an Baloo::SearchStore";
+                qDebug() << "Plugin could not be converted to an Akonadi::Search::SearchStore";
                 qDebug() << pluginPath;
             }
         } else {

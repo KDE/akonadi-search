@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -24,9 +24,9 @@
 #include <QVariant>
 #include <QDateTime>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
-class Baloo::Term::Private
+class Akonadi::Search::Term::Private
 {
 public:
     Operation m_op;
@@ -415,44 +415,44 @@ Term &Term::operator=(const Term &rhs)
 
 namespace
 {
-QString comparatorToString(Baloo::Term::Comparator c)
+QString comparatorToString(Term::Comparator c)
 {
     switch (c) {
-    case Baloo::Term::Auto:
+    case Term::Auto:
         return "Auto";
-    case Baloo::Term::Equal:
+    case Term::Equal:
         return "=";
-    case Baloo::Term::Contains:
+    case Term::Contains:
         return ":";
-    case Baloo::Term::Less:
+    case Term::Less:
         return "<";
-    case Baloo::Term::LessEqual:
+    case Term::LessEqual:
         return "<=";
-    case Baloo::Term::Greater:
+    case Term::Greater:
         return ">";
-    case Baloo::Term::GreaterEqual:
+    case Term::GreaterEqual:
         return ">=";
     }
 
     return QString();
 }
 
-QString operationToString(Baloo::Term::Operation op)
+QString operationToString(Term::Operation op)
 {
     switch (op) {
-    case Baloo::Term::None:
+    case Term::None:
         return "NONE";
-    case Baloo::Term::And:
+    case Term::And:
         return "AND";
-    case Baloo::Term::Or:
+    case Term::Or:
         return "OR";
     }
 
     return QString();
 }
-}
+} // namespace
 
-QDebug operator <<(QDebug d, const Baloo::Term &t)
+QDebug operator <<(QDebug d, const Term &t)
 {
     if (t.subTerms().isEmpty()) {
         d << QString::fromLatin1("(%1 %2 %3 (%4))").arg(t.property(),

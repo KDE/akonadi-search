@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -29,7 +29,7 @@
 #include <KDebug>
 #include <QStandardPaths>
 
-using namespace Baloo::PIM;
+using namespace Akonadi::Search::PIM;
 
 struct CollectionQuery::Private {
     QStringList ns;

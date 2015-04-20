@@ -3,8 +3,8 @@ add_library(contactsearchstore MODULE contactsearchstore.cpp ../pimsearchstore.c
 target_link_libraries(contactsearchstore
     Qt5::Core
     ${XAPIAN_LIBRARIES}
-    BalooPimCore
-    BalooPimXapian
+    KF5AkonadiSearchCore
+    KF5AkonadiSearchXapian
 )
 
-install(TARGETS contactsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/baloo)
+install(TARGETS contactsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)

@@ -1,6 +1,6 @@
 
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -52,12 +52,12 @@ int main(int argc, char **argv)
     QTemporaryDir tempDir;
     tempDir.setAutoRemove(false);
 
-    Baloo::XapianDatabase db(tempDir.path(), true);
+    Akonadi::Search::XapianDatabase db(tempDir.path(), true);
 
     qDebug() << tempDir.path();
     qDebug() << "Creating the document";
 
-    Baloo::XapianDocument doc;
+    Akonadi::Search::XapianDocument doc;
     int size = args.first().toInt();
 
     for (int i = 0; i < size; i++) {

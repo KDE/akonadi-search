@@ -45,7 +45,7 @@ private:
     bool indexContact(const Akonadi::Item &item);
     void indexContactGroup(const Akonadi::Item &item);
 
-    Baloo::XapianDatabase *m_db;
+    Akonadi::Search::XapianDatabase *m_db;
 };
 
 #endif // CONTACTINDEXER_H

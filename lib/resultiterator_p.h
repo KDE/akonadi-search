@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,13 +20,15 @@
  *
  */
 
-#ifndef QUERYITERATOR_H
-#define QUERYITERATOR_H
+#ifndef AKONADI_SEARCH_PIM_QUERYITERATOR_P_H
+#define AKONADI_SEARCH_PIM_QUERYITERATOR_P_H
 
 #include "resultiterator.h"
 #include "xapian.h"
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 namespace PIM
 {
@@ -51,5 +53,6 @@ public:
 
 }
 }
+}
 
-#endif // QUERYITERATOR_H
+#endif // AKONADI_SEARCH_PIM_QUERYITERATOR_P_H

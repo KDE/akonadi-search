@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,20 +20,22 @@
  *
  */
 
-#ifndef QUERY_H
-#define QUERY_H
+#ifndef AKONADI_SEARCH_CORE_QUERY_H
+#define AKONADI_SEARCH_CORE_QUERY_H
 
-#include "core_export.h"
+#include "search_core_export.h"
 #include "resultiterator.h"
 
 #include <QVariant>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 class Term;
 
-class BALOO_CORE_EXPORT Query
+class AKONADI_SEARCH_CORE_EXPORT Query
 {
 public:
     Query();
@@ -157,4 +159,6 @@ private:
 };
 
 }
-#endif // QUERY_H
+}
+
+#endif // AKONADI_SEARCH_CORE_QUERY_H

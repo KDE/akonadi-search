@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,22 +20,24 @@
  *
  */
 
-#ifndef BALOO_XAPIANSEARCHSTORE_H
-#define BALOO_XAPIANSEARCHSTORE_H
+#ifndef AKONADI_SEARCH_XAPIANSEARCHSTORE_H
+#define AKONADI_SEARCH_XAPIANSEARCHSTORE_H
 
 #include "searchstore.h"
 #include "term.h"
-#include "xapian_export.h"
+#include "search_xapian_export.h"
 #include <xapian.h>
 #include <QMutex>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 /**
  * Implements a search store using Xapian
  */
-class BALOO_XAPIAN_EXPORT XapianSearchStore : public SearchStore
+class AKONADI_SEARCH_XAPIAN_EXPORT XapianSearchStore : public SearchStore
 {
 public:
     explicit XapianSearchStore(QObject *parent = 0);
@@ -128,5 +130,6 @@ private:
 };
 
 }
+}
 
-#endif // BALOO_XAPIANSEARCHSTORE_H
+#endif // AKONADI_SEARCH_XAPIANSEARCHSTORE_H

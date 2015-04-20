@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -68,10 +68,10 @@ private:
 private Q_SLOTS:
     void init()
     {
-        emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/email/");
-        emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/emailcontacts/");
-        contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/contacts/");
-        notesDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/notes/");
+        emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/email/");
+        emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
+        contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/contacts/");
+        notesDir = QDir::tempPath() + QLatin1String("/searchplugintest/notes/");
 
         QDir dir;
         removeDir(emailDir);
@@ -91,29 +91,29 @@ private Q_SLOTS:
 //         EmailIndexer emailIndexer(emailDir, emailContactsDir);
 //         ContactIndexer contactIndexer(contactsDir);
 
-//         Baloo::EmailSearchStore *emailSearchStore = new Baloo::EmailSearchStore(this);
+//         Akonadi::Search::EmailSearchStore *emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
 //         emailSearchStore->setDbPath(emailDir);
-//         Baloo::ContactSearchStore *contactSearchStore = new Baloo::ContactSearchStore(this);
+//         Akonadi::Search::ContactSearchStore *contactSearchStore = new Akonadi::Search::ContactSearchStore(this);
 //         contactSearchStore->setDbPath(contactsDir);
-//         Baloo::SearchStore::overrideSearchStores(QList<Baloo::SearchStore*>() << emailSearchStore << contactSearchStore);
+//         Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore*>() << emailSearchStore << contactSearchStore);
     }
 
     QSet<qint64> getAllItems()
     {
         QSet<qint64> resultSet;
 
-        Baloo::Term term(Baloo::Term::Or);
-        term.addSubTerm(Baloo::Term(QLatin1String("collection"), QLatin1String("1"), Baloo::Term::Equal));
-        term.addSubTerm(Baloo::Term(QLatin1String("collection"), QLatin1String("2"), Baloo::Term::Equal));
-        Baloo::Query query(term);
+        Akonadi::Search::Term term(Akonadi::Search::Term::Or);
+        term.addSubTerm(Akonadi::Search::Term(QLatin1String("collection"), QLatin1String("1"), Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(QLatin1String("collection"), QLatin1String("2"), Akonadi::Search::Term::Equal));
+        Akonadi::Search::Query query(term);
         query.setType(QLatin1String("Email"));
 
-        Baloo::EmailSearchStore *emailSearchStore = new Baloo::EmailSearchStore(this);
+        Akonadi::Search::EmailSearchStore *emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
         emailSearchStore->setDbPath(emailDir);
         int res = emailSearchStore->exec(query);
         qDebug() << res;
         while (emailSearchStore->next(res)) {
-            const int fid = Baloo::deserialize("akonadi", emailSearchStore->id(res));
+            const int fid = Akonadi::Search::deserialize("akonadi", emailSearchStore->id(res));
             resultSet << fid;
         }
         qDebug() << resultSet;

@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,22 +20,24 @@
  *
  */
 
-#ifndef _BALOO_CORE_RESULT_ITERATOR_H
-#define _BALOO_CORE_RESULT_ITERATOR_H
+#ifndef AKONADI_SEARCH_CORE_RESULT_ITERATOR_H
+#define AKONADI_SEARCH_CORE_RESULT_ITERATOR_H
 
-#include "core_export.h"
+#include "search_core_export.h"
 #include "searchstore.h"
 
 #include <QExplicitlySharedDataPointer>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 class SearchStore;
 class Result;
 class ResultIteratorPrivate;
 
-class BALOO_CORE_EXPORT ResultIterator
+class AKONADI_SEARCH_CORE_EXPORT ResultIterator
 {
 public:
     ResultIterator();
@@ -58,4 +60,6 @@ private:
 };
 
 }
-#endif // _BALOO_CORE_RESULT_ITERATOR_H
+}
+
+#endif // AKONADI_SEARCH_CORE_RESULT_ITERATOR_H

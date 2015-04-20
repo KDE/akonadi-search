@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -89,11 +89,11 @@ private:
 private Q_SLOTS:
     void init()
     {
-        emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/email/");
-        emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/emailcontacts/");
-        contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/contacts/");
-        noteDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/notes/");
-        calendarDir = QDir::tempPath() + QLatin1String("/searchplugintest/baloo/calendar/");
+        emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/email/");
+        emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
+        contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/contacts/");
+        noteDir = QDir::tempPath() + QLatin1String("/searchplugintest/notes/");
+        calendarDir = QDir::tempPath() + QLatin1String("/searchplugintest/calendar/");
 
         QDir dir;
         QVERIFY(removeDir(emailDir));
@@ -423,16 +423,16 @@ private Q_SLOTS:
         }
         calendarIndexer.commit();
 
-        Baloo::EmailSearchStore *emailSearchStore = new Baloo::EmailSearchStore();
+        Akonadi::Search::EmailSearchStore *emailSearchStore = new Akonadi::Search::EmailSearchStore();
         emailSearchStore->setDbPath(emailDir);
-        Baloo::ContactSearchStore *contactSearchStore = new Baloo::ContactSearchStore();
+        Akonadi::Search::ContactSearchStore *contactSearchStore = new Akonadi::Search::ContactSearchStore();
         contactSearchStore->setDbPath(contactsDir);
-        Baloo::NoteSearchStore *noteSearchStore = new Baloo::NoteSearchStore();
+        Akonadi::Search::NoteSearchStore *noteSearchStore = new Akonadi::Search::NoteSearchStore();
         noteSearchStore->setDbPath(noteDir);
-        Baloo::CalendarSearchStore *calendarSearchStore = new Baloo::CalendarSearchStore();
+        Akonadi::Search::CalendarSearchStore *calendarSearchStore = new Akonadi::Search::CalendarSearchStore();
         calendarSearchStore->setDbPath(calendarDir);
 
-        Baloo::SearchStore::overrideSearchStores(QList<Baloo::SearchStore *>() << emailSearchStore << contactSearchStore << noteSearchStore <<  calendarSearchStore);
+        Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore *>() << emailSearchStore << contactSearchStore << noteSearchStore << calendarSearchStore);
     }
 
     void testCalendarSearch_data()

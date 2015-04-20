@@ -7,7 +7,7 @@ include_directories(
 )
 
 
-set(akonadi_baloo_indexer_SRCS
+set(akonadi_indexing_agent_SRCS
     abstractindexer.cpp
     agent.cpp
     emailindexer.cpp
@@ -22,11 +22,11 @@ set(akonadi_baloo_indexer_SRCS
     collectionupdatejob.cpp
 )
 
-qt5_add_dbus_adaptor(akonadi_baloo_indexer_SRCS org.freedesktop.Akonadi.BalooIndexer.xml agent.h BalooIndexingAgent)
+qt5_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
 
-add_executable(akonadi_baloo_indexer ${akonadi_baloo_indexer_SRCS})
+add_executable(akonadi_indexing_agent ${akonadi_indexing_agent_SRCS})
 
-target_link_libraries(akonadi_baloo_indexer
+target_link_libraries(akonadi_indexing_agent
     Qt5::Core
     KF5::KDELibs4Support
     KF5::AkonadiCore
@@ -36,11 +36,11 @@ target_link_libraries(akonadi_baloo_indexer
     KF5::AkonadiAgentBase
     KF5::ItemModels
     KF5::CalendarCore
-    BalooPimXapian
+    KF5::AkonadiSearchXapian
 )
 
-install(TARGETS akonadi_baloo_indexer ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
-install(FILES akonadibalooindexingagent.desktop
+install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES akonadiindexingagent.desktop
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/akonadi/agents")
 
 add_subdirectory(tests)

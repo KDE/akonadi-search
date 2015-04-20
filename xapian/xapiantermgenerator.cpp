@@ -23,7 +23,7 @@
 #include <QTextBoundaryFinder>
 #include <QDebug>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 XapianTermGenerator::XapianTermGenerator(Xapian::Document *doc)
     : m_doc(doc)

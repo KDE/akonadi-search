@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2012  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
@@ -41,12 +41,12 @@ namespace Akonadi
 class ItemFetchJob;
 }
 
-class BalooIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
+class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
 {
     Q_OBJECT
 public:
-    BalooIndexingAgent(const QString &id);
-    ~BalooIndexingAgent();
+    AkonadiIndexingAgent(const QString &id);
+    ~AkonadiIndexingAgent();
 
     void reindexAll();
     void reindexCollection(const qlonglong id);

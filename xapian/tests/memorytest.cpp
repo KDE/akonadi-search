@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
         parser.showHelp(1);
     }
 
-    Baloo::XapianDocument doc;
+    Akonadi::Search::XapianDocument doc;
     int size = args.first().toInt();
 
     for (int i = 0; i < size; i++) {

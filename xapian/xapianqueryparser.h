@@ -18,17 +18,19 @@
  *
  */
 
-#ifndef BALOO_QUERYPARSER_H
-#define BALOO_QUERYPARSER_H
+#ifndef AKONADI_SEARCH_QUERYPARSER_H
+#define AKONADI_SEARCH_QUERYPARSER_H
 
 #include <QString>
 #include <xapian.h>
-#include "xapian_export.h"
+#include "search_xapian_export.h"
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
-class BALOO_XAPIAN_EXPORT XapianQueryParser
+class AKONADI_SEARCH_XAPIAN_EXPORT XapianQueryParser
 {
 public:
     XapianQueryParser();
@@ -53,5 +55,6 @@ private:
 };
 
 }
+}
 
-#endif // BALOO_QUERYPARSER_H
+#endif // AKONADI_SEARCH_QUERYPARSER_H

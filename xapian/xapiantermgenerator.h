@@ -18,17 +18,19 @@
  *
  */
 
-#ifndef BALOO_TOKENIZER_H
-#define BALOO_TOKENIZER_H
+#ifndef AKONADI_SEARCH_TOKENIZER_H
+#define AKONADI_SEARCH_TOKENIZER_H
 
 #include <QString>
 #include <xapian.h>
-#include "xapian_export.h"
+#include "search_xapian_export.h"
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
-class BALOO_XAPIAN_EXPORT XapianTermGenerator
+class AKONADI_SEARCH_XAPIAN_EXPORT XapianTermGenerator
 {
 public:
     XapianTermGenerator(Xapian::Document *doc);
@@ -49,5 +51,6 @@ private:
     int m_position;
 };
 }
+}
 
-#endif // BALOO_TOKENIZER_H
+#endif // AKONADI_SEARCH_TOKENIZER_H

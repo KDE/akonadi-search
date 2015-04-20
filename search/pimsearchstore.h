@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
@@ -21,14 +21,16 @@
  *
  */
 
-#ifndef BALOO_PIM_SEARCHSTORE_H
-#define BALOO_PIM_SEARCHSTORE_H
+#ifndef AKONADI_SEARCH_PIM_SEARCHSTORE_H
+#define AKONADI_SEARCH_PIM_SEARCHSTORE_H
 
 #include "xapiansearchstore.h"
 
 #include <QSet>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 
 class PIMSearchStore : public XapianSearchStore
@@ -72,4 +74,6 @@ protected:
 };
 
 }
-#endif // BALOO_PIM_SEARCHSTORE_H
+}
+
+#endif // AKONADI_SEARCH_PIM_SEARCHSTORE_H

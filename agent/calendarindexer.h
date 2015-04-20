@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -58,7 +58,7 @@ private:
     void indexTodoItem(const Akonadi::Item &item, const KCalCore::Todo::Ptr &todo);
     void updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc);
 
-    Baloo::XapianDatabase *m_db;
+    Akonadi::Search::XapianDatabase *m_db;
     Xapian::Document *m_doc;
     Xapian::TermGenerator *m_termGen;
 };

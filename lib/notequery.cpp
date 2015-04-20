@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -30,7 +30,7 @@
 #include <QFile>
 #include <QDebug>
 
-using namespace Baloo::PIM;
+using namespace Akonadi::Search::PIM;
 
 class NoteQuery::Private
 {

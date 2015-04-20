@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -24,9 +24,9 @@
 #include "searchstore.h"
 #include <QDebug>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
-class Baloo::ResultIteratorPrivate : public QSharedData
+class Akonadi::Search::ResultIteratorPrivate : public QSharedData
 {
 public:
     ResultIteratorPrivate()

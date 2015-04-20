@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,21 +20,24 @@
  *
  */
 
-#ifndef NOTEQUERY_H
-#define NOTEQUERY_H
+#ifndef AKONADI_SEARCH_PIM_NOTEQUERY_H
+#define AKONADI_SEARCH_PIM_NOTEQUERY_H
 
-#include "pim_export.h"
+#include "search_pim_export.h"
 #include <QString>
 #include "query.h"
 
-namespace Baloo
+namespace Akonadi
 {
-namespace PIM
+namespace Search 
 {
+namespace PIM 
+{
+
 /**
  * Query for a list of contacts matching a criteria
  */
-class BALOO_PIM_EXPORT NoteQuery : public Query
+class AKONADI_SEARCH_PIM_EXPORT NoteQuery : public Query
 {
 public:
     NoteQuery();
@@ -52,7 +55,9 @@ private:
     class Private;
     Private *d;
 };
+
+}
 }
 }
 
-#endif // NOTEQUERY_H
+#endif // AKONADI_SEARCH_PIM_NOTEQUERY_H

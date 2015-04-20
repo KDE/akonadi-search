@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -35,11 +35,11 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 const int defaultLimit = 100000;
 
-class Baloo::Query::Private
+class Akonadi::Search::Query::Private
 {
 public:
     Private()
@@ -224,7 +224,7 @@ Q_GLOBAL_STATIC_WITH_ARGS(SearchStore::List, s_searchStores, (SearchStore::searc
 ResultIterator Query::exec()
 {
     // vHanda: Maybe this should default to allow searches on all search stores?
-    Q_ASSERT_X(!types().isEmpty(), "Baloo::Query::exec", "A query is being initialized without a type");
+    Q_ASSERT_X(!types().isEmpty(), "Akonadi::Search::Query::exec", "A query is being initialized without a type");
     if (types().isEmpty()) {
         return ResultIterator();
     }
@@ -362,7 +362,7 @@ Query Query::fromJSON(const QByteArray &arr)
 QUrl Query::toSearchUrl(const QString &title)
 {
     QUrl url;
-    url.setScheme(QLatin1String("baloosearch"));
+    url.setScheme(QLatin1String("akonadisearch"));
 
     QUrlQuery urlQuery;
     urlQuery.addQueryItem(QLatin1String("json"), QString::fromUtf8(toJSON()));
@@ -377,7 +377,7 @@ QUrl Query::toSearchUrl(const QString &title)
 
 Query Query::fromSearchUrl(const QUrl &url)
 {
-    if (url.scheme() != QLatin1String("baloosearch")) {
+    if (url.scheme() != QLatin1String("akonadisearch")) {
         return Query();
     }
 

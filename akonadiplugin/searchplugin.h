@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,16 +20,19 @@
  *
  */
 
-#ifndef BALOO_PIM_SEARCHPLUGIN_H
-#define BALOO_PIM_SEARCHPLUGIN_H
+#ifndef AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
+#define AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
 
 #include <QStringList>
 #include <akonadi/abstractsearchplugin.h>
 #include <QObject>
 
-namespace Baloo
+namespace Akonadi
+{
+namespace Search
 {
 class Query;
+}
 }
 
 class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
@@ -40,7 +43,7 @@ class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
 public:
     virtual QSet<qint64> search(const QString &query, const QList<qint64> &collections, const QStringList &mimeTypes);
 private:
-    Baloo::Query fromAkonadiQuery(const QString &akonadiQuery, const QList<qint64> &collections, const QStringList &mimeTypes);
+    Akonadi::Search::Query fromAkonadiQuery(const QString &akonadiQuery, const QList<qint64> &collections, const QStringList &mimeTypes);
 };
 
 #endif

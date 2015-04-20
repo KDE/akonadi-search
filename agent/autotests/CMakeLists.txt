@@ -22,8 +22,8 @@ set(indexer_LIBS
     KF5::Mime
     KF5::Contacts
     KF5::CalendarCore
-    KF5::BalooPim
-    BalooPimXapian
+    KF5::AkonadiSearchPIM
+    KF5::AkonadiSearchXapian
 )
 
 set(indexertest_SRCS
@@ -31,7 +31,7 @@ set(indexertest_SRCS
     ${indexer_SRCS}
 )
 
-add_definitions(-DBALOO_NO_PLUGINS=TRUE)
+add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 
 add_executable(indexertest ${indexertest_SRCS})
 add_test(indexertest indexertest)

@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  *
  * This library is free software; you can redistribute it and/or
@@ -31,8 +31,9 @@ ContactIndexer::ContactIndexer(const QString &path):
     AbstractIndexer(), m_db(0)
 {
     try {
-        m_db = new Baloo::XapianDatabase(path, true);
-    } catch (const Xapian::DatabaseCorruptError &err) {
+        m_db = new Akonadi::Search::XapianDatabase(path, true);
+    }
+    catch (const Xapian::DatabaseCorruptError &err) {
         qWarning() << "Database Corrupted - What did you do?";
         qWarning() << err.get_error_string();
         m_db = 0;
@@ -67,7 +68,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
         return false;
     }
 
-    Baloo::XapianDocument doc;
+    Akonadi::Search::XapianDocument doc;
 
     QString name;
     if (!addresse.formattedName().isEmpty()) {
@@ -93,7 +94,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     }
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Baloo::ContactIndexer::index",
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
                "Item does not have a valid parent collection");
 
     const Akonadi::Entity::Id colId = item.parentCollection().id();
@@ -121,14 +122,14 @@ void ContactIndexer::indexContactGroup(const Akonadi::Item &item)
         return;
     }
 
-    Baloo::XapianDocument doc;
+    Akonadi::Search::XapianDocument doc;
 
     const QString name = group.name();
     doc.indexText(name);
     doc.indexText(name, QLatin1String("NA"));
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Baloo::ContactIndexer::index",
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
                "Item does not have a valid parent collection");
 
     const Akonadi::Entity::Id colId = item.parentCollection().id();
@@ -186,7 +187,8 @@ void ContactIndexer::move(const Akonadi::Item::Id &itemId,
     if (!m_db) {
         return;
     }
-    Baloo::XapianDocument doc;
+
+    Akonadi::Search::XapianDocument doc;
     try {
         doc = m_db->document(itemId);
     } catch (const Xapian::DocNotFoundError &) {

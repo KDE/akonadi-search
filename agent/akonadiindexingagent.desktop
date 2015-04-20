@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=Akonadi Baloo Indexing Agent
+Name=Akonadi Indexing Agent
 Name[ca]=Agent d'indexació Baloo de l'Akonadi
 Name[cs]=Indexovací agent Akonadi pro Baloo
 Name[de]=Akonadi-Indizierungsagent für Baloo
@@ -22,9 +22,9 @@ Name[x-test]=xxAkonadi Baloo Indexing Agentxx
 Name[zh_CN]=Akonadi Baloo 索引器
 
 Type=AkonadiAgent
-Exec=akonadi_baloo_indexer
+Exec=akonadi_indexing_agent
 Icon=baloo
 
 X-Akonadi-MimeTypes=text/directory
 X-Akonadi-Capabilities=Unique,Autostart
-X-Akonadi-Identifier=akonadi_baloo_indexer
+X-Akonadi-Identifier=akonadi_indexing_agent

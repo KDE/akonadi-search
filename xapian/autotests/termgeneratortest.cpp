@@ -26,7 +26,7 @@
 #include <QDebug>
 #include <QTemporaryDir>
 
-using namespace Baloo;
+using namespace Akonadi::Search;
 
 namespace
 {

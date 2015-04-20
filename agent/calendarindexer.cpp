@@ -1,5 +1,5 @@
 /*
- * This file is part of the KDE Baloo Project
+ * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014 Laurent Montel <montel@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -31,8 +31,9 @@ CalendarIndexer::CalendarIndexer(const QString &path)
     : AbstractIndexer(), m_db(0), m_termGen(0)
 {
     try {
-        m_db = new Baloo::XapianDatabase(path, true);
-    } catch (const Xapian::DatabaseCorruptError &err) {
+        m_db = new Akonadi::Search::XapianDatabase(path, true);
+    }
+    catch (const Xapian::DatabaseCorruptError &err) {
         qWarning() << "Database Corrupted - What did you do?";
         qWarning() << err.get_error_string();
         m_db = 0;
@@ -135,7 +136,7 @@ void CalendarIndexer::move(const Akonadi::Item::Id &itemId,
 
 void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::Event::Ptr &event)
 {
-    Baloo::XapianDocument doc;
+    Akonadi::Search::XapianDocument doc;
 
     doc.indexText(event->organizer()->email(), "O");
     doc.indexText(event->summary(), "S");
@@ -148,7 +149,7 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::
     }
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Baloo::CalenderIndexer::index",
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::CalenderIndexer::index",
                "Item does not have a valid parent collection");
 
     const Akonadi::Entity::Id colId = item.parentCollection().id();
