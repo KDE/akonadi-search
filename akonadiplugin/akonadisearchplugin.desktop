@@ -3,6 +3,7 @@ Type=AkonadiSearchPlugin
 Name=Akonadi Search Plugin
 Name[ca]=Connector de cerca de l'Akonadi
 Name[nl]=Akonadi-plug-in voor zoeken
+Name[pl]=Wtyczka wyszukiwania Akonadi
 Name[pt]=Agente de Pesquisa do Akonadi
 Name[pt_BR]=Plugin de Pesquisa do Akonadi
 Name[sv]=Akonadi sökinsticksprogram
