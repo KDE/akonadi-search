@@ -9,6 +9,7 @@ Name[pt_BR]=Agente de Indexação do Akonadi
 Name[sv]=Akonadi indexeringsmodul
 Name[uk]=Агент індексування для Akonadi
 Name[x-test]=xxAkonadi Indexing Agentxx
+Name[zh_CN]=Akonadi 索引器
 
 Type=AkonadiAgent
 Exec=akonadi_indexing_agent

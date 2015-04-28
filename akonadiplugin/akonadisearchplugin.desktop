@@ -10,6 +10,7 @@ Name[pt_BR]=Plugin de Pesquisa do Akonadi
 Name[sv]=Akonadi sökinsticksprogram
 Name[uk]=Додаток пошуку для Akonadi
 Name[x-test]=xxAkonadi Search Pluginxx
+Name[zh_CN]=Akonadi 搜索插件
 X-Akonadi-Library=akonadi_search_plugin
 X-Akonadi-ClassName=SearchPlugin
 X-Akonadi-LoadByDefault=true
