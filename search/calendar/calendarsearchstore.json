@@ -1,0 +1,6 @@
+{
+    "X-Akonadi-PluginType": "SearchStore",
+    "X-Akonadi-Library": "calendarsearchstore",
+
+    "X-Akonadi-PluginName": "Akonadi Calendar Search Store"
+}

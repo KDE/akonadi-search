@@ -35,7 +35,7 @@ class CalendarSearchStore : public PIMSearchStore
     Q_OBJECT
     Q_INTERFACES(Akonadi::Search::SearchStore)
 #ifndef AKONADI_SEARCH_NO_PLUGINS
-    Q_PLUGIN_METADATA(IID "org.kde.Akonadi.Search.SearchStore")
+    Q_PLUGIN_METADATA(IID "org.kde.Akonadi.Search.SearchStore" FILE "calendarsearchstore.json") 
 #endif
 public:
     CalendarSearchStore(QObject *parent = 0);

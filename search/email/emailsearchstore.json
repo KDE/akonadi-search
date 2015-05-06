@@ -1,0 +1,6 @@
+{
+    "X-Akonadi-PluginType": "SearchStore",
+    "X-Akonadi-Library": "emailsearchstore",
+
+    "X-Akonadi-PluginName": "Akonadi Emails Search Store"
+}

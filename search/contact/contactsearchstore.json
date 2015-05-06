@@ -1,0 +1,6 @@
+{
+    "X-Akonadi-PluginType": "SearchStore",
+    "X-Akonadi-Library": "contactsearchstore",
+
+    "X-Akonadi-PluginName": "Akonadi Contacts Search Store"
+}
