@@ -1,7 +1,7 @@
 kde_enable_exceptions()
 
 add_library(akonadi_search_plugin
- MODULE 
+ MODULE
     searchplugin.cpp
 )
 
@@ -17,7 +17,5 @@ target_link_libraries(akonadi_search_plugin
 )
 
 install(TARGETS akonadi_search_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
-install(FILES akonadisearchplugin.desktop
-        DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
 
 add_subdirectory(autotests)
