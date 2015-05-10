@@ -67,7 +67,7 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
         emitResult();
         return;
     }
-    m_collection = static_cast<Akonadi::CollectionFetchJob *>(job)->collections().first();
+    m_collection = static_cast<Akonadi::CollectionFetchJob *>(job)->collections().at(0);
     Q_EMIT status(Akonadi::AgentBase::Running, i18n("Indexing collection: %1", m_collection.displayName()));
     Q_EMIT percent(0);
 
