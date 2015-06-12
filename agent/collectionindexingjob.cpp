@@ -92,6 +92,7 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
 void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds)
 {
     Akonadi::Item::List items;
+    items.reserve(itemIds.size());
     Q_FOREACH (const Akonadi::Item::Id id, itemIds) {
         items << Akonadi::Item(id);
     }

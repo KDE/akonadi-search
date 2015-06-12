@@ -72,6 +72,7 @@ QStringList ContactCompleter::complete()
 
     QStringList list;
     Xapian::MSetIterator end = mset.end();
+    list.reserve(mset.size());
     for (; mit != end; ++mit) {
         std::string str = mit.get_document().get_data();
         const QString entry = QString::fromUtf8(str.c_str(), str.length());

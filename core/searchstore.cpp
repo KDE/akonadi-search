@@ -67,6 +67,7 @@ void SearchStore::overrideSearchStores(const QList<SearchStore *> &overrideSearc
 {
     List *list = &(*s_overrideSearchStores);
     list->clear();
+    list->reserve(overrideSearchStores.count());
 
     Q_FOREACH (SearchStore *store, overrideSearchStores) {
         list->append(QSharedPointer<SearchStore>(store));
