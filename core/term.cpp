@@ -346,7 +346,7 @@ Term Term::fromVariantMap(const QVariantMap &map)
         return term;
     }
 
-    QString prop = map.keys().at(0);
+    QString prop = map.cbegin().key();
     term.setProperty(prop);
 
     QVariant value = map.value(prop);
@@ -356,7 +356,7 @@ Term Term::fromVariantMap(const QVariantMap &map)
             return term;
         }
 
-        QString op = map.keys().at(0);
+        QString op = map.cbegin().key();
         Term::Comparator com;
         if (op == QStringLiteral("$ct")) {
             com = Contains;
