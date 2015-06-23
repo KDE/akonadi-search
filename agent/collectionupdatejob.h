@@ -36,7 +36,7 @@ class CollectionUpdateJob : public KJob
 public:
     explicit CollectionUpdateJob(Index &index, const Akonadi::Collection &col, QObject *parent = Q_NULLPTR);
 
-    virtual void start();
+    void start() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void onCollectionsReceived(const Akonadi::Collection::List &);

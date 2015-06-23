@@ -38,13 +38,13 @@ class EmailSearchStore : public PIMSearchStore
     Q_PLUGIN_METADATA(IID "org.kde.Akonadi.Search.SearchStore" FILE "emailsearchstore.json")
 #endif
 public:
-    EmailSearchStore(QObject *parent = 0);
+    explicit EmailSearchStore(QObject *parent = Q_NULLPTR);
 
-    virtual QStringList types();
-    virtual QString text(int queryId);
-    virtual QString icon(int)
+    QStringList types() Q_DECL_OVERRIDE;
+    QString text(int queryId) Q_DECL_OVERRIDE;
+    QString icon(int) Q_DECL_OVERRIDE
     {
-        return QLatin1String("internet-mail");
+        return QStringLiteral("internet-mail");
     }
 
 protected:

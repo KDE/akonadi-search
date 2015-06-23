@@ -49,7 +49,7 @@ public:
     void setLimit(int limit);
     int limit() const;
 
-    ResultIterator exec();
+    ResultIterator exec() Q_DECL_OVERRIDE;
 
 private:
     class Private;

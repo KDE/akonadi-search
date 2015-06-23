@@ -41,7 +41,7 @@ class AKONADI_SEARCH_CORE_EXPORT SearchStore : public QObject
 {
     Q_OBJECT
 public:
-    explicit SearchStore(QObject *parent = 0);
+    explicit SearchStore(QObject *parent = Q_NULLPTR);
     virtual ~SearchStore();
 
     /**

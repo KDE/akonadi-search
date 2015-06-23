@@ -60,7 +60,7 @@ public:
      * Execute the query and return an iterator to fetch
      * the results
      */
-    ResultIterator exec();
+    ResultIterator exec() Q_DECL_OVERRIDE;
 
     /**
      * For testing

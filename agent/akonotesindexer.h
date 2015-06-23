@@ -41,14 +41,14 @@ public:
     AkonotesIndexer(const QString &path);
     ~AkonotesIndexer();
 
-    QStringList mimeTypes() const;
+    QStringList mimeTypes() const Q_DECL_OVERRIDE;
 
-    void index(const Akonadi::Item &item);
-    void commit();
+    void index(const Akonadi::Item &item) Q_DECL_OVERRIDE;
+    void commit() Q_DECL_OVERRIDE;
 
-    void remove(const Akonadi::Item &item);
-    void remove(const Akonadi::Collection &collection);
-    void move(const Akonadi::Item::Id &itemId, const Akonadi::Entity::Id &from, const Akonadi::Entity::Id &to);
+    void remove(const Akonadi::Item &item) Q_DECL_OVERRIDE;
+    void remove(const Akonadi::Collection &collection) Q_DECL_OVERRIDE;
+    void move(const Akonadi::Item::Id &itemId, const Akonadi::Entity::Id &from, const Akonadi::Entity::Id &to) Q_DECL_OVERRIDE;
 private:
     void processPart(KMime::Content *content, KMime::Content *mainContent);
     void process(const KMime::Message::Ptr &msg);

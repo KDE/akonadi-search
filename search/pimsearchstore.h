@@ -44,7 +44,7 @@ public:
 protected:
     QString findDatabase(const QString &databasePath) const;
 
-    virtual Xapian::Query convertTypes(const QStringList &)
+    Xapian::Query convertTypes(const QStringList &) Q_DECL_OVERRIDE
     {
         return Xapian::Query();
     }
