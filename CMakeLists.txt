@@ -35,7 +35,7 @@ set_package_properties(Xapian PROPERTIES
     TYPE REQUIRED
 )
 
-set(KF5AkonadiServer_MIN_VERSION "5.0.40")
+set(KF5AkonadiServer_MIN_VERSION "5.0.50")
 find_package(KF5AkonadiServer ${KF5AkonadiServer_MIN_VERSION} CONFIG REQUIRED)
 
 set(KDEPIMLIBS_LIB_VERSION "4.77.0")
