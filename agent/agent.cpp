@@ -43,7 +43,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <QDebug>
+#include "akonadi_indexer_agent_debug.h"
 
 #include <QFile>
 
@@ -102,10 +102,10 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     // Cannot use agentManager->instance(oldInstanceName) here, it wouldn't find broken instances.
     Q_FOREACH (const Akonadi::AgentInstance &inst, allAgents) {
         if (inst.identifier() == QLatin1String("akonadi_nepomuk_feeder")) {
-            qDebug() << "Removing old nepomuk feeder" << inst.identifier();
+            qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing old nepomuk feeder" << inst.identifier();
             agentManager->removeInstance( inst );
         } else if (inst.identifier() == QLatin1String("akonadi_baloo_indexer")) {
-            qDebug() << "Removing old Baloo indexer" << inst.identifier();
+            qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing old Baloo indexer" << inst.identifier();
             agentManager->removeInstance(inst);
         }
     }
@@ -117,7 +117,7 @@ AkonadiIndexingAgent::~AkonadiIndexingAgent()
 
 void AkonadiIndexingAgent::reindexAll()
 {
-    //qDebug() << "Reindexing everything";
+    //qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing everything";
     m_scheduler.abort();
     m_index.removeDatabase();
     m_index.createIndexers();
@@ -127,7 +127,7 @@ void AkonadiIndexingAgent::reindexAll()
 void AkonadiIndexingAgent::reindexCollection(const qlonglong id)
 {
 
-    //qDebug() << "Reindexing collection " << id;
+    //qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing collection " << id;
     m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
 }
 

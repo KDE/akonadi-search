@@ -102,6 +102,8 @@ install(FILES
     COMPONENT Devel
 )
 
+install( FILES akonadi-search.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
+
 feature_summary(WHAT ALL
     INCLUDE_QUIET_PACKAGES
     FATAL_ON_MISSING_REQUIRED_PACKAGES

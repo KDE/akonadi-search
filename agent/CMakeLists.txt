@@ -20,6 +20,7 @@ set(akonadi_indexing_agent_SRCS
     collectionindexingjob.cpp
     index.cpp
     collectionupdatejob.cpp
+    akonadi_indexer_agent_debug.cpp
 )
 
 qt5_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)

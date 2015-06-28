@@ -22,6 +22,7 @@ set(searchplugintest_SRCS
     ../../search/contact/contactsearchstore.cpp
     ../../search/calendar/calendarsearchstore.cpp
     ../../search/note/notesearchstore.cpp
+    ../../agent/akonadi_indexer_agent_debug.cpp
 )
 
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)

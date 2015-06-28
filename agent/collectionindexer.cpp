@@ -30,7 +30,7 @@
 #include <AkonadiCore/collectionidentificationattribute.h>
 #include <AkonadiCore/AttributeFactory>
 #include <xapiandocument.h>
-#include <QDebug>
+#include "akonadi_indexer_agent_debug.h"
 
 CollectionIndexer::CollectionIndexer(const QString &path)
 {
@@ -39,11 +39,11 @@ CollectionIndexer::CollectionIndexer(const QString &path)
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
     } catch (const Xapian::DatabaseCorruptError &err) {
-        qCritical() << "Database Corrupted - What did you do?";
-        qCritical() << err.get_error_string();
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
         m_db = 0;
     } catch (const Xapian::Error &e) {
-        qCritical() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = 0;
     }
 }
@@ -71,7 +71,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
     if (!m_db) {
         return;
     }
-    //qDebug() << "Indexing " << collection.id() << collection.displayName() << collection.name();
+    //qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing " << collection.id() << collection.displayName() << collection.name();
 
     try {
         Xapian::Document doc;
@@ -116,7 +116,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
 
         m_db->replace_document(collection.id(), doc);
     } catch (const Xapian::Error &e) {
-        qWarning() << "Xapian error in indexer:" << e.get_msg().c_str();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer:" << e.get_msg().c_str();
     }
 }
 
@@ -135,7 +135,7 @@ void CollectionIndexer::remove(const Akonadi::Collection &col)
     try {
         m_db->delete_document(col.id());
     } catch (const Xapian::Error &e) {
-        qWarning() << "Xapian error in indexer:" << e.get_msg().c_str();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer:" << e.get_msg().c_str();
     }
 
     //Remove subcollections

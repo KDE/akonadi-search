@@ -19,6 +19,7 @@
  *
  */
 #include "index.h"
+#include "akonadi_indexer_agent_debug.h"
 #include "emailindexer.h"
 #include "contactindexer.h"
 #include "akonotesindexer.h"
@@ -71,7 +72,7 @@ void Index::removeDatabase()
     qDeleteAll(m_indexer.values().toSet());
     m_indexer.clear();
 
-    qDebug() << "Removing database";
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing database";
     removeDir(emailIndexingPath());
     removeDir(contactIndexingPath());
     removeDir(emailContactsIndexingPath());
@@ -112,7 +113,7 @@ void Index::index(const Akonadi::Item &item)
     try {
         indexer->index(item);
     } catch (const Xapian::Error &e) {
-        qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
     }
 }
 
@@ -127,7 +128,7 @@ void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &fr
         try {
             indexer->move(item.id(), from.id(), to.id());
         } catch (const Xapian::Error &e) {
-            qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
         }
     }
 }
@@ -143,7 +144,7 @@ void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray>
         try {
             indexer->updateFlags(item, addedFlags, removedFlags);
         } catch (const Xapian::Error &e) {
-            qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
         }
     }
 }
@@ -156,7 +157,7 @@ void Index::remove(const QSet< Akonadi::Entity::Id > &ids, const QStringList &mi
             try {
                 indexer->remove(Akonadi::Item(id));
             } catch (const Xapian::Error &e) {
-                qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+                qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
             }
         }
     }
@@ -172,7 +173,7 @@ void Index::remove(const Akonadi::Item::List &items)
         try {
             indexer->remove(item);
         } catch (const Xapian::Error &e) {
-            qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
         }
     }
 }
@@ -183,7 +184,7 @@ void Index::index(const Akonadi::Collection &collection)
         m_collectionIndexer->index(collection);
         m_collectionIndexer->commit();
     }
-    qDebug() << "indexed " << collection.id();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "indexed " << collection.id();
 }
 
 void Index::change(const Akonadi::Collection &col)
@@ -201,7 +202,7 @@ void Index::remove(const Akonadi::Collection &col)
         try {
             indexer->remove(col);
         } catch (const Xapian::Error &e) {
-            qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
         }
     }
 
@@ -239,10 +240,10 @@ bool Index::createIndexers()
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
-        qCritical() << "Failed to create email indexer:" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create email indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         delete indexer;
-        qCritical() << "Random exception, but we do not want to crash";
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
@@ -251,10 +252,10 @@ bool Index::createIndexers()
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
-        qCritical() << "Failed to create contact indexer:" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create contact indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         delete indexer;
-        qCritical() << "Random exception, but we do not want to crash";
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
@@ -263,10 +264,10 @@ bool Index::createIndexers()
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
-        qCritical() << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         delete indexer;
-        qCritical() << "Random exception, but we do not want to crash";
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
@@ -275,10 +276,10 @@ bool Index::createIndexers()
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
-        qCritical() << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         delete indexer;
-        qCritical() << "Random exception, but we do not want to crash";
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
@@ -287,11 +288,11 @@ bool Index::createIndexers()
     } catch (const Xapian::DatabaseError &e) {
         delete m_collectionIndexer;
         m_collectionIndexer = Q_NULLPTR;
-        qCritical() << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         delete m_collectionIndexer;
         m_collectionIndexer = Q_NULLPTR;
-        qCritical() << "Random exception, but we do not want to crash";
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     return !m_indexer.isEmpty();
@@ -311,7 +312,7 @@ void Index::commit()
         try {
             indexer->commit();
         } catch (const Xapian::Error &e) {
-            qWarning() << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
         }
     }
 }
@@ -322,7 +323,7 @@ void Index::findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::E
     try {
         db = Xapian::Database(QFile::encodeName(dbPath).constData());
     } catch (const Xapian::DatabaseError &e) {
-        qCritical() << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return;
     }
     const std::string term = QString::fromLatin1("C%1").arg(collectionId).toStdString();
@@ -360,7 +361,7 @@ qlonglong Index::indexedItemsInDatabase(const std::string &term, const QString &
     try {
         db = Xapian::Database(QFile::encodeName(dbPath).constData());
     } catch (const Xapian::DatabaseError &e) {
-        qCritical() << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return 0;
     }
     return db.get_termfreq(term);

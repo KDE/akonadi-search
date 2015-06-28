@@ -22,6 +22,7 @@
 
 #include "contactindexer.h"
 #include "xapiandocument.h"
+#include "akonadi_indexer_agent_debug.h"
 
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
@@ -34,11 +35,11 @@ ContactIndexer::ContactIndexer(const QString &path):
         m_db = new Akonadi::Search::XapianDatabase(path, true);
     }
     catch (const Xapian::DatabaseCorruptError &err) {
-        qWarning() << "Database Corrupted - What did you do?";
-        qWarning() << err.get_error_string();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
         m_db = 0;
     } catch (const Xapian::Error &e) {
-        qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = 0;
     }
 }
@@ -79,7 +80,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
         name = addresse.name();
     }
 
-    qDebug() << "Indexing" << name << addresse.nickName();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << name << addresse.nickName();
 
     doc.indexText(name);
     doc.indexText(addresse.nickName());

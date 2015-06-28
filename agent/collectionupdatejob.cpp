@@ -19,6 +19,7 @@
  *
  */
 #include "collectionupdatejob.h"
+#include "akonadi_indexer_agent_debug.h"
 
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/CollectionFetchJob>
@@ -57,7 +58,7 @@ void CollectionUpdateJob::onCollectionsReceived(const Akonadi::Collection::List 
 void CollectionUpdateJob::onCollectionsFetched(KJob *job)
 {
     if (job->error()) {
-        qWarning() << job->errorString();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << job->errorString();
     }
     emitResult();
 }

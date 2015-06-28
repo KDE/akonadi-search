@@ -20,6 +20,7 @@
  */
 
 #include "scheduler.h"
+#include "akonadi_indexer_agent_debug.h"
 #include "collectionindexingjob.h"
 #include <AkonadiCore/CollectionFetchJob>
 #include <AkonadiCore/CollectionFetchScope>
@@ -59,14 +60,14 @@ Scheduler::Scheduler(Index &index, const QSharedPointer<JobFactory> &jobFactory,
 
     //Schedule collections we know have missing items from last time
     m_dirtyCollections = group.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>()).toSet();
-    qDebug() << "Dirty collections " << m_dirtyCollections;
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Dirty collections " << m_dirtyCollections;
     Q_FOREACH (Akonadi::Collection::Id col, m_dirtyCollections) {
         scheduleCollection(Akonadi::Collection(col), true);
     }
 
     //Trigger a full sync initially
     if (!group.readEntry("initialIndexingDone", false)) {
-        qDebug() << "initial indexing";
+        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "initial indexing";
         QMetaObject::invokeMethod(this, "scheduleCompleteSync", Qt::QueuedConnection);
     }
     group.writeEntry("initialIndexingDone", true);
@@ -94,7 +95,7 @@ void Scheduler::collectDirtyCollections()
             m_dirtyCollections.insert(it.key());
         }
     }
-    qDebug() << m_dirtyCollections;
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << m_dirtyCollections;
     group.writeEntry("dirtyCollections", m_dirtyCollections.toList());
     group.sync();
 }
@@ -125,7 +126,7 @@ void Scheduler::addItem(const Akonadi::Item &item)
 
 void Scheduler::scheduleCompleteSync()
 {
-    qDebug();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG);
     {
         Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
                 Akonadi::CollectionFetchJob::Recursive);
@@ -162,7 +163,7 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 
     // If we did not schedule any collection
     if (m_collectionQueue.isEmpty()) {
-        qDebug() << "No collections scheduled";
+        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "No collections scheduled";
         status(Akonadi::AgentBase::Idle, i18n("Ready"));
     }
 }
@@ -200,7 +201,7 @@ void Scheduler::processNext()
         return;
     }
     if (m_collectionQueue.isEmpty()) {
-        qDebug() << "Processing done";
+        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Processing done";
         status(Akonadi::AgentBase::Idle, i18n("Ready"));
         return;
     }
@@ -214,7 +215,7 @@ void Scheduler::processNext()
     }
 
     const Akonadi::Collection col(m_collectionQueue.takeFirst());
-    qDebug() << "Processing collection: " << col.id();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Processing collection: " << col.id();
     QQueue<Akonadi::Item::Id> &itemQueue = m_queues[col.id()];
     const bool fullSync = m_dirtyCollections.contains(col.id());
     CollectionIndexingJob *job = m_jobFactory->createCollectionIndexingJob(m_index, col, itemQueue, fullSync, this);
@@ -230,7 +231,7 @@ void Scheduler::processNext()
 void Scheduler::slotIndexingFinished(KJob *job)
 {
     if (job->error()) {
-        qWarning() << "Indexing failed: " << job->errorString();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Indexing failed: " << job->errorString();
     } else {
         m_dirtyCollections.remove(job->property("collection").value<Akonadi::Collection::Id>());
     }
