@@ -53,6 +53,7 @@ int main(int argc, char **argv)
 
     if (argc != 2) {
         qWarning() << "Proper args required";
+        exit(0);
     }
     app.m_query = QString::fromUtf8(argv[1]);
 
