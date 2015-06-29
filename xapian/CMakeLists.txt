@@ -6,6 +6,7 @@ set(XAPIAN_SRCS
     xapiandatabase.cpp
     xapiantermgenerator.cpp
     xapianqueryparser.cpp
+    akonadi_search_xapian_debug.cpp
 )
 
 add_library(KF5AkonadiSearchXapian ${XAPIAN_SRCS})

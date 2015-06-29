@@ -22,7 +22,7 @@
 
 #include <QTextBoundaryFinder>
 #include <QStringList>
-#include <QDebug>
+#include "akonadi_search_xapian_debug.h"
 
 using namespace Akonadi::Search;
 

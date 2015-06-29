@@ -25,8 +25,6 @@
 #include "query.h"
 #include "agepostingsource.h"
 
-#include <QDebug>
-
 using namespace Akonadi::Search;
 
 EmailSearchStore::EmailSearchStore(QObject *parent)

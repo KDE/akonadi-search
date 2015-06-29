@@ -22,7 +22,7 @@
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
 
-#include <QDebug>
+#include "akonadi_search_xapian_debug.h"
 #include <QTimer>
 #include <QDir>
 
@@ -47,8 +47,8 @@ XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)
             createWritableDb();
             m_db = new Xapian::Database(m_path);
         } catch (const Xapian::DatabaseError &err) {
-            qWarning() << "Serious Error: " << err.get_error_string();
-            qWarning() << err.get_msg().c_str() << err.get_context().c_str() << err.get_description().c_str();
+            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Serious Error: " << err.get_error_string();
+            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << err.get_msg().c_str() << err.get_context().c_str() << err.get_description().c_str();
         }
 
         // Possible errors - DatabaseLock error
@@ -107,7 +107,7 @@ void XapianDatabase::commit()
         try {
             m_wDb.commit();
         } catch (const Xapian::Error &err) {
-            qWarning() << err.get_error_string();
+            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << err.get_error_string();
         }
         return;
     }
@@ -118,7 +118,7 @@ void XapianDatabase::commit()
 
     Xapian::WritableDatabase wdb = createWritableDb();
 
-    qDebug() << "Adding:" << m_docsToAdd.size() << "docs";
+    qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Adding:" << m_docsToAdd.size() << "docs";
     Q_FOREACH (const DocIdPair &doc, m_docsToAdd) {
         try {
             wdb.replace_document(doc.first, doc.second);
@@ -126,7 +126,7 @@ void XapianDatabase::commit()
         }
     }
 
-    qDebug() << "Removing:" << m_docsToRemove.size() << "docs";
+    qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Removing:" << m_docsToRemove.size() << "docs";
     Q_FOREACH (Xapian::docid id, m_docsToRemove) {
         try {
             wdb.delete_document(id);
@@ -138,9 +138,9 @@ void XapianDatabase::commit()
         wdb.commit();
         m_db->reopen();
     } catch (const Xapian::Error &err) {
-        qWarning() << err.get_error_string();
+        qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << err.get_error_string();
     }
-    qDebug() << "Xapian Committed";
+    qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Xapian Committed";
 
     m_docsToAdd.clear();
     m_docsToRemove.clear();
@@ -181,19 +181,19 @@ Xapian::WritableDatabase XapianDatabase::createWritableDb()
         } catch (const Xapian::DatabaseModifiedError &) {
             usleep(i * 50 * 1000);
         } catch (const Xapian::DatabaseCreateError &err) {
-            qDebug() << err.get_error_string();
+            qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << err.get_error_string();
             return Xapian::WritableDatabase();
         } catch (const Xapian::DatabaseCorruptError &err) {
-            qWarning() << "Database Corrupted - What did you do?";
-            qWarning() << err.get_error_string();
+            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Database Corrupted - What did you do?";
+            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << err.get_error_string();
             return Xapian::WritableDatabase();
         } catch (...) {
-            qWarning() << "Bananana Error";
+            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Bananana Error";
             return Xapian::WritableDatabase();
         }
     }
 
-    qWarning() << "Could not obtain lock for Xapian Database. This is bad";
+    qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Could not obtain lock for Xapian Database. This is bad";
     return Xapian::WritableDatabase();
 }
 

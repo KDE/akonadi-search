@@ -24,7 +24,6 @@
 
 #include <QString>
 #include <QDateTime>
-#include <QDebug>
 
 #include <cmath>
 

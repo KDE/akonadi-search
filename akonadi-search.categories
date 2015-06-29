@@ -1,2 +1,3 @@
 log_akonadi_indexer_agent (akonadi indexer agent)
 log_akonadiplugin_indexer (akonadi plugin indexer)
+log_akonadi_search_xapian (akonadi indexer xapian)

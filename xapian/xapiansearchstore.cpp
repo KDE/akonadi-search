@@ -28,7 +28,7 @@
 #include <QVector>
 #include <QStringList>
 #include <QTime>
-#include <QDebug>
+#include "akonadi_search_xapian_debug.h"
 
 #include <algorithm>
 
@@ -57,11 +57,11 @@ void XapianSearchStore::setDbPath(const QString &path)
     try {
         m_db = new Xapian::Database(m_dbPath.toUtf8().constData());
     } catch (const Xapian::DatabaseOpeningError &) {
-        qWarning() << "Xapian Database does not exist at " << m_dbPath;
+        qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Xapian Database does not exist at " << m_dbPath;
     } catch (const Xapian::DatabaseCorruptError &) {
-        qWarning() << "Xapian Database corrupted at " << m_dbPath;
+        qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Xapian Database corrupted at " << m_dbPath;
     } catch (...) {
-        qWarning() << "Random exception, but we do not want to crash";
+        qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Random exception, but we do not want to crash";
     }
 }
 
@@ -140,7 +140,7 @@ int XapianSearchStore::exec(const Query &query)
             try {
                 m_db->reopen();
             } catch (Xapian::DatabaseError &e) {
-                qDebug() << "Failed to reopen database" << dbPath() << ":" <<  QString::fromStdString(e.get_msg());
+                qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Failed to reopen database" << dbPath() << ":" <<  QString::fromStdString(e.get_msg());
                 return 0;
             }
 
@@ -148,7 +148,7 @@ int XapianSearchStore::exec(const Query &query)
             // The term was not properly converted. Lets abort. The properties
             // must not exist
             if (!query.term().empty() && xapQ.empty()) {
-                qDebug() << query.term() << "could not be processed. Aborting";
+                qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.term() << "could not be processed. Aborting";
                 return 0;
             }
             if (query.searchString().size()) {

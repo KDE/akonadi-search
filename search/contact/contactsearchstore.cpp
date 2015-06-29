@@ -22,8 +22,6 @@
 
 #include "contactsearchstore.h"
 
-#include <QDebug>
-
 using namespace Akonadi::Search;
 
 ContactSearchStore::ContactSearchStore(QObject *parent)

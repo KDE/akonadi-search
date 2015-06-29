@@ -22,8 +22,6 @@
 
 #include "notesearchstore.h"
 
-#include <QDebug>
-
 using namespace Akonadi::Search;
 
 NoteSearchStore::NoteSearchStore(QObject *parent)

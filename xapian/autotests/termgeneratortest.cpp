@@ -23,7 +23,7 @@
 #include "../xapiandatabase.h"
 
 #include <QTest>
-#include <QDebug>
+#include "akonadi_search_xapian_debug.h"
 #include <QTemporaryDir>
 
 using namespace Akonadi::Search;
