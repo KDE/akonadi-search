@@ -377,7 +377,7 @@ QString Index::dbPath(const QString &dbName) const
     if (!m_overridePrefixPath.isEmpty()) {
         return QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);
     }
-    QString basePath = QLatin1String("baloo");
+    QString basePath = QStringLiteral("baloo");
     if (Akonadi::ServerManager::hasInstanceIdentifier()) {
         basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
     }
@@ -388,30 +388,30 @@ QString Index::dbPath(const QString &dbName) const
 
 QString Index::emailIndexingPath() const
 {
-    return dbPath(QLatin1String("email"));
+    return dbPath(QStringLiteral("email"));
 }
 
 QString Index::contactIndexingPath() const
 {
-    return dbPath(QLatin1String("contacts"));
+    return dbPath(QStringLiteral("contacts"));
 }
 
 QString Index::emailContactsIndexingPath() const
 {
-    return dbPath(QLatin1String("emailContacts"));
+    return dbPath(QStringLiteral("emailContacts"));
 }
 
 QString Index::akonotesIndexingPath() const
 {
-    return dbPath(QLatin1String("notes"));
+    return dbPath(QStringLiteral("notes"));
 }
 
 QString Index::calendarIndexingPath() const
 {
-    return dbPath(QLatin1String("calendars"));
+    return dbPath(QStringLiteral("calendars"));
 }
 
 QString Index::collectionIndexingPath() const
 {
-    return dbPath(QLatin1String("collections"));
+    return dbPath(QStringLiteral("collections"));
 }

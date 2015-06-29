@@ -32,57 +32,57 @@ using namespace Akonadi::Search;
 EmailSearchStore::EmailSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
-    m_prefix.insert(QLatin1String("from"), QLatin1String("F"));
-    m_prefix.insert(QLatin1String("to"), QLatin1String("T"));
-    m_prefix.insert(QLatin1String("cc"), QLatin1String("CC"));
-    m_prefix.insert(QLatin1String("bcc"), QLatin1String("BC"));
-    m_prefix.insert(QLatin1String("subject"), QLatin1String("SU"));
-    m_prefix.insert(QLatin1String("collection"), QLatin1String("C"));
-    m_prefix.insert(QLatin1String("replyto"), QLatin1String("RT"));
-    m_prefix.insert(QLatin1String("organization"), QLatin1String("O"));
-    m_prefix.insert(QLatin1String("listid"), QLatin1String("LI"));
-    m_prefix.insert(QLatin1String("resentfrom"), QLatin1String("RF"));
-    m_prefix.insert(QLatin1String("xloop"), QLatin1String("XL"));
-    m_prefix.insert(QLatin1String("xmailinglist"), QLatin1String("XML"));
-    m_prefix.insert(QLatin1String("xspamflag"), QLatin1String("XSF"));
+    m_prefix.insert(QStringLiteral("from"), QStringLiteral("F"));
+    m_prefix.insert(QStringLiteral("to"), QStringLiteral("T"));
+    m_prefix.insert(QStringLiteral("cc"), QStringLiteral("CC"));
+    m_prefix.insert(QStringLiteral("bcc"), QStringLiteral("BC"));
+    m_prefix.insert(QStringLiteral("subject"), QStringLiteral("SU"));
+    m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
+    m_prefix.insert(QStringLiteral("replyto"), QStringLiteral("RT"));
+    m_prefix.insert(QStringLiteral("organization"), QStringLiteral("O"));
+    m_prefix.insert(QStringLiteral("listid"), QStringLiteral("LI"));
+    m_prefix.insert(QStringLiteral("resentfrom"), QStringLiteral("RF"));
+    m_prefix.insert(QStringLiteral("xloop"), QStringLiteral("XL"));
+    m_prefix.insert(QStringLiteral("xmailinglist"), QStringLiteral("XML"));
+    m_prefix.insert(QStringLiteral("xspamflag"), QStringLiteral("XSF"));
 
-    m_prefix.insert(QLatin1String("body"), QLatin1String("BO"));
-    m_prefix.insert(QLatin1String("headers"), QLatin1String("HE"));
+    m_prefix.insert(QStringLiteral("body"), QStringLiteral("BO"));
+    m_prefix.insert(QStringLiteral("headers"), QStringLiteral("HE"));
 
     // TODO: Add body flag?
     // TODO: Add tags?
 
     // Boolean Flags
-    m_prefix.insert(QLatin1String("isimportant"), QLatin1String("I"));
-    m_prefix.insert(QLatin1String("istoact"), QLatin1String("T"));
-    m_prefix.insert(QLatin1String("iswatched"), QLatin1String("W"));
-    m_prefix.insert(QLatin1String("isdeleted"), QLatin1String("D"));
-    m_prefix.insert(QLatin1String("isspam"), QLatin1String("S"));
-    m_prefix.insert(QLatin1String("isreplied"), QLatin1String("E"));
-    m_prefix.insert(QLatin1String("isignored"), QLatin1String("G"));
-    m_prefix.insert(QLatin1String("isforwarded"), QLatin1String("F"));
-    m_prefix.insert(QLatin1String("issent"), QLatin1String("N"));
-    m_prefix.insert(QLatin1String("isqueued"), QLatin1String("Q"));
-    m_prefix.insert(QLatin1String("isham"), QLatin1String("H"));
-    m_prefix.insert(QLatin1String("isread"), QLatin1String("R"));
-    m_prefix.insert(QLatin1String("hasattachment"), QLatin1String("A"));
-    m_prefix.insert(QLatin1String("isencrypted"), QLatin1String("C"));
-    m_prefix.insert(QLatin1String("hasinvitation"), QLatin1String("V"));
+    m_prefix.insert(QStringLiteral("isimportant"), QStringLiteral("I"));
+    m_prefix.insert(QStringLiteral("istoact"), QStringLiteral("T"));
+    m_prefix.insert(QStringLiteral("iswatched"), QStringLiteral("W"));
+    m_prefix.insert(QStringLiteral("isdeleted"), QStringLiteral("D"));
+    m_prefix.insert(QStringLiteral("isspam"), QStringLiteral("S"));
+    m_prefix.insert(QStringLiteral("isreplied"), QStringLiteral("E"));
+    m_prefix.insert(QStringLiteral("isignored"), QStringLiteral("G"));
+    m_prefix.insert(QStringLiteral("isforwarded"), QStringLiteral("F"));
+    m_prefix.insert(QStringLiteral("issent"), QStringLiteral("N"));
+    m_prefix.insert(QStringLiteral("isqueued"), QStringLiteral("Q"));
+    m_prefix.insert(QStringLiteral("isham"), QStringLiteral("H"));
+    m_prefix.insert(QStringLiteral("isread"), QStringLiteral("R"));
+    m_prefix.insert(QStringLiteral("hasattachment"), QStringLiteral("A"));
+    m_prefix.insert(QStringLiteral("isencrypted"), QStringLiteral("C"));
+    m_prefix.insert(QStringLiteral("hasinvitation"), QStringLiteral("V"));
 
-    m_boolProperties << QLatin1String("isimportant") << QLatin1String("istoact") << QLatin1String("iswatched") << QLatin1String("isdeleted") << QLatin1String("isspam")
-                     << QLatin1String("isreplied") << QLatin1String("isignored") << QLatin1String("isforwarded") << QLatin1String("issent") << QLatin1String("isqueued")
-                     << QLatin1String("isham") << QLatin1String("isread") << QLatin1String("hasattachment") << QLatin1String("isencrypted") << QLatin1String("hasinvitation");
+    m_boolProperties << QStringLiteral("isimportant") << QStringLiteral("istoact") << QStringLiteral("iswatched") << QStringLiteral("isdeleted") << QStringLiteral("isspam")
+                     << QStringLiteral("isreplied") << QStringLiteral("isignored") << QStringLiteral("isforwarded") << QStringLiteral("issent") << QStringLiteral("isqueued")
+                     << QStringLiteral("isham") << QStringLiteral("isread") << QStringLiteral("hasattachment") << QStringLiteral("isencrypted") << QStringLiteral("hasinvitation");
 
-    m_valueProperties.insert(QLatin1String("date"), 0);
-    m_valueProperties.insert(QLatin1String("size"), 1);
-    m_valueProperties.insert(QLatin1String("onlydate"), 2);
+    m_valueProperties.insert(QStringLiteral("date"), 0);
+    m_valueProperties.insert(QStringLiteral("size"), 1);
+    m_valueProperties.insert(QStringLiteral("onlydate"), 2);
 
-    setDbPath(findDatabase(QLatin1String("email")));
+    setDbPath(findDatabase(QStringLiteral("email")));
 }
 
 QStringList EmailSearchStore::types()
 {
-    return QStringList() << QLatin1String("Akonadi") << QLatin1String("Email");
+    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Email");
 }
 
 Xapian::Query EmailSearchStore::constructQuery(const QString &property, const QVariant &value,
@@ -111,7 +111,7 @@ QString EmailSearchStore::text(int queryId)
 
     QString subject = QString::fromUtf8(data.c_str(), data.length());
     if (subject.isEmpty()) {
-        return QLatin1String("No Subject");
+        return QStringLiteral("No Subject");
     }
 
     return subject;

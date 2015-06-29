@@ -80,7 +80,7 @@ private Q_SLOTS:
     {
         AkonadiTest::checkTestIsIsolated();
         AkonadiTest::setAllResourcesOffline();
-        Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QLatin1String("akonadi_knut_resource_0"));
+        Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QStringLiteral("akonadi_knut_resource_0"));
         QVERIFY(agent.isValid());
         agent.setIsOnline(true);
 

@@ -35,11 +35,11 @@ CalendarSearchStore::CalendarSearchStore(QObject *parent)
 
     m_boolWithValue <<  QStringLiteral("partstatus");
 
-    setDbPath(findDatabase(QLatin1String("calendars")));
+    setDbPath(findDatabase(QStringLiteral("calendars")));
 }
 
 QStringList CalendarSearchStore::types()
 {
-    return QStringList() << QLatin1String("Akonadi") << QLatin1String("Calendar");
+    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Calendar");
 }
 

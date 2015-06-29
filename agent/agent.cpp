@@ -58,7 +58,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     lowerPriority();
 
     // TODO: Migrate from baloorc to custom config file
-    KConfig config(QLatin1String("baloorc"));
+    KConfig config(QStringLiteral("baloorc"));
     KConfigGroup group = config.group("Akonadi");
     const int agentIndexingVersion = group.readEntry("agentIndexingVersion", 0);
     if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
@@ -235,7 +235,7 @@ void AkonadiIndexingAgent::cleanup()
 
 void AkonadiIndexingAgent::onAbortRequested()
 {
-    KConfig config(QLatin1String("baloorc"));
+    KConfig config(QStringLiteral("baloorc"));
     KConfigGroup group = config.group("Akonadi");
     group.writeEntry("aborted", true);
     group.sync();
@@ -250,7 +250,7 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
     // Index items that might have changed while we were offline
     if (online) {
         //We only reindex if this is not a regular start
-        KConfig config(QLatin1String("baloorc"));
+        KConfig config(QStringLiteral("baloorc"));
         KConfigGroup group = config.group("Akonadi");
         const bool aborted = group.readEntry("aborted", false);
         if (aborted) {

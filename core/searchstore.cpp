@@ -117,7 +117,7 @@ SearchStore::List SearchStore::searchStores()
     Q_FOREACH (const QString &pluginPath, pluginPaths) {
         QPluginLoader loader(pluginPath);
 
-        const QVariantMap metadata = loader.metaData().toVariantMap()[QLatin1String("MetaData")].toMap();
+        const QVariantMap metadata = loader.metaData().toVariantMap()[QStringLiteral("MetaData")].toMap();
         if (metadata[QLatin1String("X-Akonadi-PluginType")].toString() != QLatin1String("SearchStore")) {
             continue;
         }

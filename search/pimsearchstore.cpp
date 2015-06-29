@@ -38,12 +38,12 @@ PIMSearchStore::PIMSearchStore(QObject *parent) : XapianSearchStore(parent)
 
 QStringList PIMSearchStore::types()
 {
-    return QStringList() << QLatin1String("Akonadi");
+    return QStringList() << QStringLiteral("Akonadi");
 }
 
 QString PIMSearchStore::findDatabase(const QString &dbName) const
 {
-    QString basePath = QLatin1String("baloo");
+    QString basePath = QStringLiteral("baloo");
     if (Akonadi::ServerManager::hasInstanceIdentifier()) {
         basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
     }
@@ -127,10 +127,10 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
 QUrl PIMSearchStore::constructUrl(const Xapian::docid &docid)
 {
     QUrl url;
-    url.setScheme(QLatin1String("akonadi"));
+    url.setScheme(QStringLiteral("akonadi"));
 
     QUrlQuery query;
-    query.addQueryItem(QLatin1String("item"), QString::number(docid));
+    query.addQueryItem(QStringLiteral("item"), QString::number(docid));
     url.setQuery(query);
 
     return url;

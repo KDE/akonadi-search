@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     QCoreApplication app(argc, argv);
 
     QCommandLineParser parser;
-    parser.addPositionalArgument(QLatin1String("num"), QLatin1String("The number of terms. Each term is of length 10"));
+    parser.addPositionalArgument(QStringLiteral("num"), QStringLiteral("The number of terms. Each term is of length 10"));
     parser.addOption(QCommandLineOption(QStringList() << "p" << "position", QStringLiteral("Add positional information")));
     parser.addHelpOption();
     parser.process(app);

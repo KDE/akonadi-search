@@ -250,9 +250,9 @@ QVariantMap Term::toVariantMap() const
         }
 
         if (d->m_op == And) {
-            map[QLatin1String("$and")] = variantList;
+            map[QStringLiteral("$and")] = variantList;
         } else {
-            map[QLatin1String("$or")] = variantList;
+            map[QStringLiteral("$or")] = variantList;
         }
 
         return map;
@@ -307,7 +307,7 @@ QVariant tryConvert(const QVariant &var)
             return var;
         }
 
-        if (!var.toString().contains(QLatin1String("T"))) {
+        if (!var.toString().contains(QStringLiteral("T"))) {
             return QVariant(var.toDate());
         }
         return dt;
@@ -325,10 +325,10 @@ Term Term::fromVariantMap(const QVariantMap &map)
     Term term;
 
     QString andOrString;
-    if (map.contains(QLatin1String("$and"))) {
+    if (map.contains(QStringLiteral("$and"))) {
         andOrString = QStringLiteral("$and");
         term.setOperation(And);
-    } else if (map.contains(QLatin1String("$or"))) {
+    } else if (map.contains(QStringLiteral("$or"))) {
         andOrString = QStringLiteral("$or");
         term.setOperation(Or);
     }
@@ -358,15 +358,15 @@ Term Term::fromVariantMap(const QVariantMap &map)
 
         QString op = map.keys().at(0);
         Term::Comparator com;
-        if (op == QLatin1String("$ct")) {
+        if (op == QStringLiteral("$ct")) {
             com = Contains;
-        } else if (op == QLatin1String("$gt")) {
+        } else if (op == QStringLiteral("$gt")) {
             com = Greater;
-        } else if (op == QLatin1String("$gte")) {
+        } else if (op == QStringLiteral("$gte")) {
             com = GreaterEqual;
-        } else if (op == QLatin1String("$lt")) {
+        } else if (op == QStringLiteral("$lt")) {
             com = Less;
-        } else if (op == QLatin1String("$lte")) {
+        } else if (op == QStringLiteral("$lte")) {
             com = LessEqual;
         } else {
             return term;

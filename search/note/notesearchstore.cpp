@@ -29,15 +29,15 @@ using namespace Akonadi::Search;
 NoteSearchStore::NoteSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
-    m_prefix.insert(QLatin1String("subject"), QLatin1String("SU"));
-    m_prefix.insert(QLatin1String("collection"), QLatin1String("C"));
-    m_prefix.insert(QLatin1String("body"), QLatin1String("BO"));
+    m_prefix.insert(QStringLiteral("subject"), QStringLiteral("SU"));
+    m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
+    m_prefix.insert(QStringLiteral("body"), QStringLiteral("BO"));
 
-    setDbPath(findDatabase(QLatin1String("notes")));
+    setDbPath(findDatabase(QStringLiteral("notes")));
 }
 
 QStringList NoteSearchStore::types()
 {
-    return QStringList() << QLatin1String("Akonadi") << QLatin1String("Note");
+    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Note");
 }
 

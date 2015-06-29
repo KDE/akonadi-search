@@ -29,19 +29,19 @@ using namespace Akonadi::Search;
 ContactSearchStore::ContactSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
-    m_prefix.insert(QLatin1String("name"), QLatin1String("NA"));
-    m_prefix.insert(QLatin1String("nick"), QLatin1String("NI"));
-    m_prefix.insert(QLatin1String("email"), QLatin1String("")); // Email currently doesn't map to anything
-    m_prefix.insert(QLatin1String("collection"), QLatin1String("C"));
+    m_prefix.insert(QStringLiteral("name"), QStringLiteral("NA"));
+    m_prefix.insert(QStringLiteral("nick"), QStringLiteral("NI"));
+    m_prefix.insert(QStringLiteral("email"), QStringLiteral("")); // Email currently doesn't map to anything
+    m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
 
-    m_valueProperties.insert(QLatin1String("birthday"), 0);
-    m_valueProperties.insert(QLatin1String("anniversary"), 1);
+    m_valueProperties.insert(QStringLiteral("birthday"), 0);
+    m_valueProperties.insert(QStringLiteral("anniversary"), 1);
 
-    setDbPath(findDatabase(QLatin1String("contacts")));
+    setDbPath(findDatabase(QStringLiteral("contacts")));
 }
 
 QStringList ContactSearchStore::types()
 {
-    return QStringList() << QLatin1String("Akonadi") << QLatin1String("Contact");
+    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Contact");
 }
 

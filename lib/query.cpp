@@ -51,20 +51,20 @@ Query *Query::fromJSON(const QByteArray &json)
     }
 
     QVariantMap result = doc.toVariant().toMap();
-    const QString type = result[QLatin1String("type")].toString().toLower();
+    const QString type = result[QStringLiteral("type")].toString().toLower();
     if (type != QLatin1String("contact")) {
         qWarning() << "Can only handle contact queries";
         return 0;
     }
 
     ContactQuery *cq = new ContactQuery();
-    cq->matchName(result[QLatin1String("name")].toString());
-    cq->matchNickname(result[QLatin1String("nick")].toString());
-    cq->matchEmail(result[QLatin1String("email")].toString());
-    cq->matchUID(result[QLatin1String("uid")].toString());
-    cq->match(result[QLatin1String("$")].toString());
+    cq->matchName(result[QStringLiteral("name")].toString());
+    cq->matchNickname(result[QStringLiteral("nick")].toString());
+    cq->matchEmail(result[QStringLiteral("email")].toString());
+    cq->matchUID(result[QStringLiteral("uid")].toString());
+    cq->match(result[QStringLiteral("$")].toString());
 
-    const QString criteria = result[QLatin1String("matchCriteria")].toString().toLower();
+    const QString criteria = result[QStringLiteral("matchCriteria")].toString().toLower();
     if (criteria == QLatin1String("exact")) {
         cq->setMatchCriteria(ContactQuery::ExactMatch);
     } else if (criteria == QLatin1String("startswith")) {

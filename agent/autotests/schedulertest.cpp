@@ -78,7 +78,7 @@ private Q_SLOTS:
     {
         AkonadiTest::checkTestIsIsolated();
         AkonadiTest::setAllResourcesOffline();
-        Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QLatin1String("akonadi_knut_resource_0"));
+        Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QStringLiteral("akonadi_knut_resource_0"));
         QVERIFY(agent.isValid());
         agent.setIsOnline(true);
         QTRY_VERIFY(agent.isOnline());
@@ -100,7 +100,7 @@ private Q_SLOTS:
 
     void testIndexCollections()
     {
-        KConfig config(Akonadi::ServerManager::addNamespace(QLatin1String("baloorc")));
+        KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
         KConfigGroup group = config.group("Akonadi");
         group.writeEntry("initialIndexingComplete", true);
 
@@ -126,7 +126,7 @@ private Q_SLOTS:
 
     void testIndexItems()
     {
-        KConfig config(Akonadi::ServerManager::addNamespace(QLatin1String("baloorc")));
+        KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
         KConfigGroup group = config.group("Akonadi");
         group.writeEntry("initialIndexingComplete", true);
 
@@ -165,7 +165,7 @@ private Q_SLOTS:
 
     void testDirtyCollections()
     {
-        KConfig config(Akonadi::ServerManager::addNamespace(QLatin1String("baloorc")));
+        KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
         KConfigGroup group = config.group("Akonadi");
         group.writeEntry("initialIndexingComplete", true);
         Akonadi::Collection col1(1);

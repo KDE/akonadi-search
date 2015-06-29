@@ -55,7 +55,7 @@ Scheduler::Scheduler(Index &index, const QSharedPointer<JobFactory> &jobFactory,
     m_processTimer.setInterval(100);
     connect(&m_processTimer, SIGNAL(timeout()), this, SLOT(processNext()));
 
-    KConfig config(Akonadi::ServerManager::addNamespace(QLatin1String("baloorc")));
+    KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
     KConfigGroup group = config.group("Akonadi");
 
     //Schedule collections we know have missing items from last time
@@ -86,7 +86,7 @@ void Scheduler::setBusyTimeout(int timeout)
 
 void Scheduler::collectDirtyCollections()
 {
-    KConfig config(Akonadi::ServerManager::addNamespace(QLatin1String("baloorc")));
+    KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
     KConfigGroup group = config.group("Akonadi");
     //Store collections where we did not manage to index all, we'll need to do a full sync for them the next time
     QHash <Akonadi::Entity::Id, QQueue <Akonadi::Entity::Id > >::iterator it = m_queues.begin();

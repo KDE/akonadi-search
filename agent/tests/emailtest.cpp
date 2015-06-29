@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 
 App::App(int &argc, char **argv, int flags)
     : QApplication(argc, argv, flags)
-    , m_indexer(QLatin1String("/tmp/xap"), QLatin1String("/tmp/xapC"))
+    , m_indexer(QStringLiteral("/tmp/xap"), QStringLiteral("/tmp/xapC"))
 {
     QTimer::singleShot(0, this, SLOT(main()));
 }
@@ -97,7 +97,7 @@ void App::slotRootCollectionsFetched(KJob *kjob)
     while (it.hasNext()) {
         const Akonadi::Collection &c = it.next();
         const QStringList mimeTypes = c.contentMimeTypes();
-        if (!c.contentMimeTypes().contains(QLatin1String("message/rfc822"))) {
+        if (!c.contentMimeTypes().contains(QStringLiteral("message/rfc822"))) {
             it.remove();
         }
     }
@@ -162,7 +162,7 @@ void App::slotIndexed()
     qDebug() << "Index Time:" << m_indexTime / 1000.0 << " seconds";
 
     // Print the io usage
-    QFile file(QLatin1String("/proc/self/io"));
+    QFile file(QStringLiteral("/proc/self/io"));
     file.open(QIODevice::ReadOnly | QIODevice::Text);
 
     QTextStream fs(&file);
@@ -173,25 +173,25 @@ void App::slotIndexed()
     while (!stream.atEnd()) {
         QString str = stream.readLine();
 
-        QString rchar(QLatin1String("rchar: "));
+        QString rchar(QStringLiteral("rchar: "));
         if (str.startsWith(rchar)) {
             ulong amt = str.mid(rchar.size()).toULong();
             qDebug() << "Read:" << amt / 1024  << "kb";
         }
 
-        QString wchar(QLatin1String("wchar: "));
+        QString wchar(QStringLiteral("wchar: "));
         if (str.startsWith(wchar)) {
             ulong amt = str.mid(wchar.size()).toULong();
             qDebug() << "Write:" << amt / 1024  << "kb";
         }
 
-        QString read(QLatin1String("read_bytes: "));
+        QString read(QStringLiteral("read_bytes: "));
         if (str.startsWith(read)) {
             ulong amt = str.mid(read.size()).toULong();
             qDebug() << "Actual Reads:" << amt / 1024  << "kb";
         }
 
-        QString write(QLatin1String("write_bytes: "));
+        QString write(QStringLiteral("write_bytes: "));
         if (str.startsWith(write)) {
             ulong amt = str.mid(write.size()).toULong();
             qDebug() << "Actual Writes:" << amt / 1024  << "kb";

@@ -71,7 +71,7 @@ private Q_SLOTS:
         emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/email/");
         emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
         contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/contacts/");
-        notesDir = QDir::tempPath() + QLatin1String("/searchplugintest/notes/");
+        notesDir = QDir::tempPath() + QStringLiteral("/searchplugintest/notes/");
 
         QDir dir;
         removeDir(emailDir);
@@ -103,10 +103,10 @@ private Q_SLOTS:
         QSet<qint64> resultSet;
 
         Akonadi::Search::Term term(Akonadi::Search::Term::Or);
-        term.addSubTerm(Akonadi::Search::Term(QLatin1String("collection"), QLatin1String("1"), Akonadi::Search::Term::Equal));
-        term.addSubTerm(Akonadi::Search::Term(QLatin1String("collection"), QLatin1String("2"), Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("1"), Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("2"), Akonadi::Search::Term::Equal));
         Akonadi::Search::Query query(term);
-        query.setType(QLatin1String("Email"));
+        query.setType(QStringLiteral("Email"));
 
         Akonadi::Search::EmailSearchStore *emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
         emailSearchStore->setDbPath(emailDir);
@@ -128,7 +128,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject1");
             msg->assemble();
 
-            Akonadi::Item item(QLatin1String("message/rfc822"));
+            Akonadi::Item item(QStringLiteral("message/rfc822"));
             item.setId(1);
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(1));
@@ -139,7 +139,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject2");
             msg->assemble();
 
-            Akonadi::Item item(QLatin1String("message/rfc822"));
+            Akonadi::Item item(QStringLiteral("message/rfc822"));
             item.setId(2);
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(2));
