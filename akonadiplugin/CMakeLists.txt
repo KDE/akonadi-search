@@ -3,6 +3,7 @@ kde_enable_exceptions()
 add_library(akonadi_search_plugin
  MODULE
     searchplugin.cpp
+    akonadiplugin_indexer_debug.cpp
 )
 
 target_link_libraries(akonadi_search_plugin
