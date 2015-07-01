@@ -9,11 +9,7 @@ add_library(akonadi_search_plugin
 target_link_libraries(akonadi_search_plugin
     KF5::AkonadiCore
     KF5::AkonadiMime
-    ${XAPIAN_LIBRARIES}
     KF5::AkonadiSearchCore
-    KF5::AkonadiSearchPIM
-    KF5::AkonadiSearchXapian
-    KF5::ItemModels
     KF5::Contacts
 )
 

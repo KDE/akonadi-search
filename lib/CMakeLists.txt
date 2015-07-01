@@ -26,7 +26,6 @@ target_link_libraries(KF5AkonadiSearchPIM
 
     PRIVATE
     KF5::AkonadiCore
-    KF5::ItemModels
     ${XAPIAN_LIBRARIES}
 )
 

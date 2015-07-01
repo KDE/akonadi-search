@@ -34,7 +34,6 @@ target_link_libraries(akonadi_indexing_agent
     KF5::Mime
     KF5::Contacts
     KF5::AkonadiAgentBase
-    KF5::ItemModels
     KF5::CalendarCore
     KF5::AkonadiSearchXapian
 )
