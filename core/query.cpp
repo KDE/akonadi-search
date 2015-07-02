@@ -230,7 +230,7 @@ ResultIterator Query::exec()
     }
 
     SearchStore *storeMatch = 0;
-    Q_FOREACH (QSharedPointer<SearchStore> store, *s_searchStores) {
+    Q_FOREACH (const QSharedPointer<SearchStore> &store, *s_searchStores) {
         bool matches = true;
         Q_FOREACH (const QString &type, types()) {
             if (!store->types().contains(type)) {
