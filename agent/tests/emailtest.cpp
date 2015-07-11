@@ -93,7 +93,7 @@ void App::slotRootCollectionsFetched(KJob *kjob)
     Akonadi::CollectionFetchJob *job = qobject_cast<Akonadi::CollectionFetchJob *>(kjob);
     m_collections = job->collections();
 
-    QMutableListIterator<Akonadi::Collection> it(m_collections);
+    QMutableVectorIterator<Akonadi::Collection> it(m_collections);
     while (it.hasNext()) {
         const Akonadi::Collection &c = it.next();
         const QStringList mimeTypes = c.contentMimeTypes();

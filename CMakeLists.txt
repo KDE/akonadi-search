@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 
 project(AkonadiSearch)
-set(PROJECT_VERSION "5.0.3")
+set(PROJECT_VERSION "5.0.4")
 
 # ECM setup
 find_package(ECM 5.12.0 REQUIRED NO_MODULE)
@@ -38,7 +38,7 @@ set_package_properties(Xapian PROPERTIES
 set(KF5AkonadiServer_MIN_VERSION "5.0.51")
 find_package(KF5AkonadiServer ${KF5AkonadiServer_MIN_VERSION} CONFIG REQUIRED)
 
-set(KDEPIMLIBS_LIB_VERSION "4.86.0")
+set(KDEPIMLIBS_LIB_VERSION "4.87.0")
 
 set(KCONTACTS_LIB_VERSION "4.87.0")
 set(KCALENDARCORE_LIB_VERSION "4.81.0")
