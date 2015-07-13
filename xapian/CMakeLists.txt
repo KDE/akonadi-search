@@ -28,5 +28,7 @@ generate_export_header(KF5AkonadiSearchXapian BASE_NAME AKONADI_SEARCH_XAPIAN EX
 
 install(TARGETS KF5AkonadiSearchXapian EXPORT AkonadiSearchXapian ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
-add_subdirectory(autotests)
-add_subdirectory(tests)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+    add_subdirectory(autotests)
+endif()

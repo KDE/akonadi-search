@@ -42,5 +42,7 @@ install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES akonadiindexingagent.desktop
         DESTINATION "${CMAKE_INSTALL_PREFIX}/share/akonadi/agents")
 
-add_subdirectory(tests)
-add_subdirectory(autotests)
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+    add_subdirectory(autotests)
+endif()
