@@ -253,7 +253,7 @@ ResultIterator Query::exec()
     return ResultIterator(id, storeMatch);
 }
 
-QByteArray Query::toJSON()
+QByteArray Query::toJSON() const
 {
     QVariantMap map;
 

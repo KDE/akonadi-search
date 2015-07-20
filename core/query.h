@@ -142,7 +142,7 @@ public:
 
     ResultIterator exec();
 
-    QByteArray toJSON();
+    QByteArray toJSON() const;
     static Query fromJSON(const QByteArray &arr);
 
     QUrl toSearchUrl(const QString &title = QString());
