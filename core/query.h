@@ -26,7 +26,7 @@
 #include "search_core_export.h"
 #include "resultiterator.h"
 
-#include <QVariant>
+class QVariant;
 
 namespace Akonadi
 {

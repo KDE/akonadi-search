@@ -29,7 +29,7 @@
 #include <QSharedPointer>
 #include <QList>
 #include <QUrlQuery>
-
+#include <QVariant>
 #include <QDebug>
 
 #include <QJsonDocument>
