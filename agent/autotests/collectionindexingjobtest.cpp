@@ -31,6 +31,8 @@
 class TestIndex : public Index
 {
 public:
+    using Index::move; // So we don't trigger -Woverloaded-virtual
+    using Index::index; // So we don't trigger -Woverloaded-virtual
     QList<Akonadi::Item::Id> itemsIndexed;
     QList<Akonadi::Item::Id> alreadyIndexed;
     QList<Akonadi::Item::Id> itemsRemoved;
