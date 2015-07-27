@@ -54,7 +54,7 @@ void CollectionIndexingJob::start()
     //Fetch collection for statistics
     Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(m_collection, Akonadi::CollectionFetchJob::Base);
     job->fetchScope().setIncludeStatistics(true);
-    job->fetchScope().setIncludeUnsubscribed(true);
+    job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
     connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotOnCollectionFetched(KJob*)));
     job->start();
 }
