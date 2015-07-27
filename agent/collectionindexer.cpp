@@ -34,7 +34,7 @@
 
 CollectionIndexer::CollectionIndexer(const QString &path)
 {
-    Akonadi::AttributeFactory::registerAttribute<CollectionIdentificationAttribute>();
+    Akonadi::AttributeFactory::registerAttribute<Akonadi::CollectionIdentificationAttribute>();
 
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
@@ -95,7 +95,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
         doc.add_boolean_term(term.constData());
 
         QByteArray ns;
-        if (CollectionIdentificationAttribute *folderAttribute = collection.attribute<CollectionIdentificationAttribute>()) {
+        if (Akonadi::CollectionIdentificationAttribute *folderAttribute = collection.attribute<Akonadi::CollectionIdentificationAttribute>()) {
             if (!folderAttribute->collectionNamespace().isEmpty()) {
                 ns = folderAttribute->collectionNamespace();
             }
