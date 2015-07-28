@@ -25,9 +25,8 @@
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
 #include <AkonadiCore/ServerManager>
-#include <KGlobal>
-#include <KStandardDirs>
 #include <QDir>
+#include <QStandardPaths>
 #include <xapian/error.h>
 #include <xapian/database.h>
 #include <xapian/query.h>
