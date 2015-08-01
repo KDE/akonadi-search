@@ -122,6 +122,7 @@ private Q_SLOTS:
             KMime::Message::Ptr msg(new KMime::Message);
             msg->subject()->from7BitString("subject1");
             msg->contentType()->setMimeType("text/plain");
+            msg->contentType()->setCharset("utf-8");
             msg->setBody("body1 mälmöö");
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
