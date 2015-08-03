@@ -240,7 +240,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
-        processPart(msg.get(), 0);
+        processPart(msg.data(), 0);
     }
 }
 
