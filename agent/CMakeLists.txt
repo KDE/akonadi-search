@@ -40,7 +40,7 @@ target_link_libraries(akonadi_indexing_agent
 
 install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES akonadiindexingagent.desktop
-        DESTINATION "${CMAKE_INSTALL_PREFIX}/share/akonadi/agents")
+        DESTINATION "${KDE_INSTALL_DATAROOTDIR}/akonadi/agents")
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
