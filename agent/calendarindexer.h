@@ -32,7 +32,6 @@
 #include <KCalCore/Event>
 #include <KCalCore/Todo>
 
-#include <xapian.h>
 
 class CalendarIndexer : public AbstractIndexer
 {
@@ -59,8 +58,6 @@ private:
     void updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc);
 
     Akonadi::Search::XapianDatabase *m_db;
-    Xapian::Document *m_doc;
-    Xapian::TermGenerator *m_termGen;
 };
 
 #endif // CALENDARINDEXER_H

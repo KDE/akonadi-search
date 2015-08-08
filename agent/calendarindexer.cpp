@@ -24,12 +24,13 @@
 #include "xapiandocument.h"
 #include "akonadi_indexer_agent_debug.h"
 
-#include <QTextDocument>
 #include <KCalCore/Attendee>
 #include <KCalCore/Event>
 
+#include <QTextDocument>
+
 CalendarIndexer::CalendarIndexer(const QString &path)
-    : AbstractIndexer(), m_db(0), m_termGen(0)
+    : AbstractIndexer(), m_db(0)
 {
     try {
         m_db = new Akonadi::Search::XapianDatabase(path, true);
