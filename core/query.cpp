@@ -39,7 +39,7 @@ using namespace Akonadi::Search;
 
 const int defaultLimit = 100000;
 
-class Akonadi::Search::Query::Private
+class Q_DECL_HIDDEN Akonadi::Search::Query::Private
 {
 public:
     Private()

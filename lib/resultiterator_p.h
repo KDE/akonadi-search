@@ -33,7 +33,7 @@ namespace Search
 namespace PIM
 {
 
-class ResultIterator::Private
+class Q_DECL_HIDDEN ResultIterator::Private
 {
 public:
     void init(const Xapian::MSet &mset)

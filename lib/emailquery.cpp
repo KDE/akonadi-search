@@ -31,7 +31,7 @@
 
 using namespace Akonadi::Search::PIM;
 
-class EmailQuery::Private
+class Q_DECL_HIDDEN EmailQuery::Private
 {
 public:
     Private();

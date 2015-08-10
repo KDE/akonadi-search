@@ -26,7 +26,7 @@
 
 using namespace Akonadi::Search;
 
-class Akonadi::Search::Term::Private
+class Q_DECL_HIDDEN Akonadi::Search::Term::Private
 {
 public:
     Operation m_op;

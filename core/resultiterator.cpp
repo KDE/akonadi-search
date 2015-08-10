@@ -26,7 +26,7 @@
 
 using namespace Akonadi::Search;
 
-class Akonadi::Search::ResultIteratorPrivate : public QSharedData
+class Q_DECL_HIDDEN Akonadi::Search::ResultIteratorPrivate : public QSharedData
 {
 public:
     ResultIteratorPrivate()

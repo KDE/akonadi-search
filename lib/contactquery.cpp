@@ -34,7 +34,7 @@
 
 using namespace Akonadi::Search::PIM;
 
-class ContactQuery::Private
+class Q_DECL_HIDDEN ContactQuery::Private
 {
 public:
     QString name;

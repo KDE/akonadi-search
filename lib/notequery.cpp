@@ -32,7 +32,7 @@
 
 using namespace Akonadi::Search::PIM;
 
-class NoteQuery::Private
+class Q_DECL_HIDDEN NoteQuery::Private
 {
 public:
     Private()
