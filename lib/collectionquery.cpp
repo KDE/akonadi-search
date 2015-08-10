@@ -44,7 +44,7 @@ CollectionQuery::CollectionQuery()
     : Query(),
       d(new Private)
 {
-    d->databaseDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("baloo/collections/");
+    d->databaseDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/baloo/collections/");
     d->limit = 0;
 }
 
