@@ -201,10 +201,10 @@ private Q_SLOTS:
             msg->bcc()->addAddress("bcc@test.com", QStringLiteral("Jane Doe"));
             msg->date()->setDateTime(QDateTime(QDate(2014, 11, 11), QTime(13, 0, 0)));
             msg->replyTo()->from7BitString("test@kde.org");
-            KMime::Headers::Generic *header = new KMime::Headers::Generic("Resent-From", msg.data());
+            KMime::Headers::Generic *header = new KMime::Headers::Generic("Resent-From");
             header->fromUnicodeString(QStringLiteral("resent@kde.org"), "utf-8");
             msg->setHeader(header);
-            header = new KMime::Headers::Generic("List-Id", msg.data());
+            header = new KMime::Headers::Generic("List-Id");
             header->fromUnicodeString(QStringLiteral("KDE PIM <kde-pim.kde.org>"), "utf-8");
             msg->setHeader(header);
 
