@@ -44,7 +44,7 @@ CollectionQuery::CollectionQuery()
     : Query(),
       d(new Private)
 {
-    d->databaseDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("baloo/collections/");
+    d->databaseDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/baloo/collections/");
     d->limit = 0;
 }
 
@@ -94,7 +94,8 @@ ResultIterator CollectionQuery::exec()
     try {
         db = Xapian::Database(QFile::encodeName(d->databaseDir).constData());
     } catch (const Xapian::DatabaseError &e) {
-        qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
+        qWarning() << "Failed to open Xapian database:" << d->databaseDir
+                   << "; error:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     }
 
