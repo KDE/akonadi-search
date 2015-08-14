@@ -71,7 +71,7 @@ Query *Query::fromJSON(const QByteArray &json)
         cq->setMatchCriteria(ContactQuery::StartsWithMatch);
     }
 
-    cq->setLimit(result[QLatin1String("limit")].toInt());
+    cq->setLimit(result[QStringLiteral("limit")].toInt());
 
     return cq;
 }
