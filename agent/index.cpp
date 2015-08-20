@@ -376,13 +376,30 @@ QString Index::dbPath(const QString &dbName) const
     if (!m_overridePrefixPath.isEmpty()) {
         return QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);
     }
-    QString basePath = QStringLiteral("baloo");
+
+    // First look into the old location from Baloo times in ~/.local/share/baloo,
+    // because we don't migrate the database files automatically.
+    QString basePath;
     if (Akonadi::ServerManager::hasInstanceIdentifier()) {
-        basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+    } else {
+        basePath = QStringLiteral("baloo");
     }
-    const QString path = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QString::fromLatin1("/%1/%2/").arg(basePath, dbName);
-    QDir().mkpath(path);
-    return path;
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    if (QDir(dbPath).exists()) {
+        return dbPath;
+    }
+
+    // If the database does not exist in old Baloo folders, than use the new
+    // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
+    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+        basePath = QStringLiteral("akonadi/instances/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+    } else {
+        basePath = QStringLiteral("akonadi/search_db");
+    }
+    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    QDir().mkpath(dbPath);
+    return dbPath;
 }
 
 QString Index::emailIndexingPath() const

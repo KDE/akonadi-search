@@ -28,6 +28,7 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QStandardPaths>
+#include <QDir>
 #include <AkonadiCore/ServerManager>
 
 using namespace Akonadi::Search;
@@ -43,11 +44,27 @@ QStringList PIMSearchStore::types()
 
 QString PIMSearchStore::findDatabase(const QString &dbName) const
 {
-    QString basePath = QStringLiteral("baloo");
+    // First look into the old location from Baloo times in ~/.local/share/baloo,
+    // because we don't migrate the database files automatically.
+    QString basePath;
     if (Akonadi::ServerManager::hasInstanceIdentifier()) {
-        basePath = QString::fromLatin1("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+    } else {
+        basePath = QStringLiteral("baloo");
     }
-    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QString::fromLatin1("/%1/%2/").arg(basePath, dbName);
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    if (QDir(dbPath).exists()) {
+        return dbPath;
+    }
+
+    // If the database does not exist in old Baloo folders, than use the new
+    // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
+    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+        basePath = QStringLiteral("akonadi/instances/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+    } else {
+        basePath = QStringLiteral("akonadi/search_db");
+    }
+    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
 }
 
 Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVariant &value,
