@@ -60,7 +60,7 @@ QString PIMSearchStore::findDatabase(const QString &dbName) const
     // If the database does not exist in old Baloo folders, than use the new
     // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
     if (Akonadi::ServerManager::hasInstanceIdentifier()) {
-        basePath = QStringLiteral("akonadi/instances/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
         basePath = QStringLiteral("akonadi/search_db");
     }
