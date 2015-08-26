@@ -20,8 +20,9 @@ set(akonadi_indexing_agent_SRCS
     collectionindexingjob.cpp
     index.cpp
     collectionupdatejob.cpp
-    akonadi_indexer_agent_debug.cpp
 )
+
+ecm_qt_declare_logging_category(akonadi_indexing_agent_SRCS HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME log_akonadi_indexer_agent)
 
 qt5_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
 

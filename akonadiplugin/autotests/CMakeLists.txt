@@ -6,6 +6,8 @@ find_package(Qt5Test ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/..
+  ${CMAKE_CURRENT_BINARY_DIR}/../../agent/
+  ${CMAKE_CURRENT_BINARY_DIR}/..
 )
 
 set(searchplugintest_SRCS
@@ -22,8 +24,8 @@ set(searchplugintest_SRCS
     ../../search/contact/contactsearchstore.cpp
     ../../search/calendar/calendarsearchstore.cpp
     ../../search/note/notesearchstore.cpp
-    ../../agent/akonadi_indexer_agent_debug.cpp
-    ../akonadiplugin_indexer_debug.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_debug.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/../akonadiplugin_indexer_debug.cpp
 )
 
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)

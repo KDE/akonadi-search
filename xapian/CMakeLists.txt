@@ -6,8 +6,9 @@ set(XAPIAN_SRCS
     xapiandatabase.cpp
     xapiantermgenerator.cpp
     xapianqueryparser.cpp
-    akonadi_search_xapian_debug.cpp
 )
+
+ecm_qt_declare_logging_category(XAPIAN_SRCS HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME log_akonadi_search_xapian)
 
 add_library(KF5AkonadiSearchXapian ${XAPIAN_SRCS})
 add_library(KF5::AkonadiSearchXapian ALIAS KF5AkonadiSearchXapian)

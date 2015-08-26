@@ -4,7 +4,7 @@ project(AkonadiSearch)
 set(PROJECT_VERSION "5.0.4")
 
 # ECM setup
-find_package(ECM 5.12.0 REQUIRED NO_MODULE)
+find_package(ECM 5.14.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -17,6 +17,7 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 include(ECMInstallIcons)
 include(ECMAddTests)
+include(ECMQtDeclareLoggingCategory)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
 find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash)
