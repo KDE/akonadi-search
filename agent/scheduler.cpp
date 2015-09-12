@@ -53,7 +53,7 @@ Scheduler::Scheduler(Index &index, const QSharedPointer<JobFactory> &jobFactory,
     }
     m_processTimer.setSingleShot(true);
     m_processTimer.setInterval(100);
-    connect(&m_processTimer, SIGNAL(timeout()), this, SLOT(processNext()));
+    connect(&m_processTimer, &QTimer::timeout, this, &Scheduler::processNext);
 
     KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
     KConfigGroup group = config.group("Akonadi");
@@ -132,7 +132,7 @@ void Scheduler::scheduleCompleteSync()
                 Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
-        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotRootCollectionsFetched(KJob*)));
+        connect(job, &KJob::finished, this, &Scheduler::slotRootCollectionsFetched);
         job->start();
     }
 
@@ -142,7 +142,7 @@ void Scheduler::scheduleCompleteSync()
                 Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
-        connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotCollectionsToIndexFetched(KJob*)));
+        connect(job, &KJob::finished, this, &Scheduler::slotCollectionsToIndexFetched);
         job->start();
     }
 }
@@ -221,8 +221,8 @@ void Scheduler::processNext()
     CollectionIndexingJob *job = m_jobFactory->createCollectionIndexingJob(m_index, col, itemQueue, fullSync, this);
     itemQueue.clear();
     job->setProperty("collection", col.id());
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(slotIndexingFinished(KJob*)));
-    connect(job, SIGNAL(status(int,QString)), this, SIGNAL(status(int,QString)));
+    connect(job, &KJob::result, this, &Scheduler::slotIndexingFinished);
+    connect(job, &CollectionIndexingJob::status, this, &Scheduler::status);
     connect(job, SIGNAL(percent(int)), this, SIGNAL(percent(int)));
     m_currentJob = job;
     job->start();

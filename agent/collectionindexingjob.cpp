@@ -55,7 +55,7 @@ void CollectionIndexingJob::start()
     Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(m_collection, Akonadi::CollectionFetchJob::Base);
     job->fetchScope().setIncludeStatistics(true);
     job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotOnCollectionFetched(KJob*)));
+    connect(job, &KJob::finished, this, &CollectionIndexingJob::slotOnCollectionFetched);
     job->start();
 }
 
@@ -110,9 +110,9 @@ void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds)
     m_progressTotal = items.size();
     m_progressCounter = 0;
 
-    connect(fetchJob, SIGNAL(itemsReceived(Akonadi::Item::List)),
-            this, SLOT(slotPendingItemsReceived(Akonadi::Item::List)));
-    connect(fetchJob, SIGNAL(result(KJob*)), this, SLOT(slotPendingIndexed(KJob*)));
+    connect(fetchJob, &Akonadi::ItemFetchJob::itemsReceived,
+            this, &CollectionIndexingJob::slotPendingItemsReceived);
+    connect(fetchJob, &KJob::result, this, &CollectionIndexingJob::slotPendingIndexed);
     fetchJob->start();
 }
 
@@ -176,9 +176,9 @@ void CollectionIndexingJob::findUnindexed()
     job->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::None);
     job->setDeliveryOption(Akonadi::ItemFetchJob::EmitItemsIndividually);
 
-    connect(job, SIGNAL(itemsReceived(Akonadi::Item::List)),
-            this, SLOT(slotUnindexedItemsReceived(Akonadi::Item::List)));
-    connect(job, SIGNAL(result(KJob*)), this, SLOT(slotFoundUnindexed(KJob*)));
+    connect(job, &Akonadi::ItemFetchJob::itemsReceived,
+            this, &CollectionIndexingJob::slotUnindexedItemsReceived);
+    connect(job, &KJob::result, this, &CollectionIndexingJob::slotFoundUnindexed);
     job->start();
 }
 

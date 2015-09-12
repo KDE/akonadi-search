@@ -63,7 +63,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     const int agentIndexingVersion = group.readEntry("agentIndexingVersion", 0);
     if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
         m_index.removeDatabase();
-        QTimer::singleShot(0, &m_scheduler, SLOT(scheduleCompleteSync()));
+        QTimer::singleShot(0, &m_scheduler, &Scheduler::scheduleCompleteSync);
         group.writeEntry("agentIndexingVersion", INDEXING_AGENT_VERSION);
         group.sync();
     }
@@ -74,13 +74,13 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     } else {
         setOnline(true);
     }
-    connect(this, SIGNAL(abortRequested()),
-            this, SLOT(onAbortRequested()));
-    connect(this, SIGNAL(onlineChanged(bool)),
-            this, SLOT(onOnlineChanged(bool)));
+    connect(this, &Akonadi::AgentBase::abortRequested,
+            this, &AkonadiIndexingAgent::onAbortRequested);
+    connect(this, &Akonadi::AgentBase::onlineChanged,
+            this, &AkonadiIndexingAgent::onOnlineChanged);
 
     connect(&m_scheduler, SIGNAL(status(int,QString)), this, SIGNAL(status(int,QString)));
-    connect(&m_scheduler, SIGNAL(percent(int)), this, SIGNAL(percent(int)));
+    connect(&m_scheduler, &Scheduler::percent, this, &Akonadi::AgentBase::percent);
 
     changeRecorder()->setAllMonitored(true);
     changeRecorder()->itemFetchScope().setCacheOnly(true);
@@ -121,7 +121,7 @@ void AkonadiIndexingAgent::reindexAll()
     m_scheduler.abort();
     m_index.removeDatabase();
     m_index.createIndexers();
-    QTimer::singleShot(0, &m_scheduler, SLOT(scheduleCompleteSync()));
+    QTimer::singleShot(0, &m_scheduler, &Scheduler::scheduleCompleteSync);
 }
 
 void AkonadiIndexingAgent::reindexCollection(const qlonglong id)

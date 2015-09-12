@@ -38,7 +38,7 @@ Index::Index(QObject *parent)
 {
     m_commitTimer.setInterval(1000);
     m_commitTimer.setSingleShot(true);
-    connect(&m_commitTimer, SIGNAL(timeout()), this, SLOT(commit()));
+    connect(&m_commitTimer, &QTimer::timeout, this, &Index::commit);
 }
 
 Index::~Index()

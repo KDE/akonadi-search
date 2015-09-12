@@ -43,8 +43,8 @@ void CollectionUpdateJob::start()
     fetchJob->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
     fetchJob->fetchScope().ancestorFetchScope().fetchAttribute<Akonadi::EntityDisplayAttribute>();
     fetchJob->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
-    connect(fetchJob, SIGNAL(collectionsReceived(Akonadi::Collection::List)), this, SLOT(onCollectionsReceived(Akonadi::Collection::List)));
-    connect(fetchJob, SIGNAL(result(KJob*)), this, SLOT(onCollectionsFetched(KJob*)));
+    connect(fetchJob, &Akonadi::CollectionFetchJob::collectionsReceived, this, &CollectionUpdateJob::onCollectionsReceived);
+    connect(fetchJob, &KJob::result, this, &CollectionUpdateJob::onCollectionsFetched);
 }
 
 void CollectionUpdateJob::onCollectionsReceived(const Akonadi::Collection::List &list)
