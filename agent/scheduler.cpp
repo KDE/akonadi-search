@@ -34,7 +34,10 @@ JobFactory::~JobFactory()
 {
 }
 
-CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList< Akonadi::Entity::Id > &pending, bool fullSync, QObject *parent)
+CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col,
+                                                               const QList<Akonadi::Item::Id> &pending,
+                                                               bool fullSync,
+                                                               QObject *parent)
 {
     CollectionIndexingJob *job = new CollectionIndexingJob(index, col, pending, parent);
     job->setFullSync(fullSync);
@@ -89,7 +92,7 @@ void Scheduler::collectDirtyCollections()
     KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
     KConfigGroup group = config.group("Akonadi");
     //Store collections where we did not manage to index all, we'll need to do a full sync for them the next time
-    QHash <Akonadi::Entity::Id, QQueue <Akonadi::Entity::Id > >::iterator it = m_queues.begin();
+    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>>::iterator it = m_queues.begin();
     for (; it != m_queues.end(); it++) {
         if (!it.value().isEmpty()) {
             m_dirtyCollections.insert(it.key());

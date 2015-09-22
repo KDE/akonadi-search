@@ -56,7 +56,7 @@ bool ResultIterator::next()
     return (d->m_iter != d->m_end);
 }
 
-Akonadi::Entity::Id ResultIterator::id()
+Akonadi::Item::Id ResultIterator::id()
 {
     //qDebug() << d->m_iter.get_rank() << d->m_iter.get_weight();
     return *(d->m_iter);

@@ -37,33 +37,34 @@ public:
     QList<Akonadi::Item::Id> alreadyIndexed;
     QList<Akonadi::Item::Id> itemsRemoved;
 
-    virtual void commit() {};
-    virtual bool createIndexers()
+    void commit() Q_DECL_OVERRIDE {};
+    bool createIndexers() Q_DECL_OVERRIDE
     {
         return true;
     };
-    virtual void findIndexed(QSet< Akonadi::Entity::Id > &indexed, Akonadi::Entity::Id)
+    void findIndexed(QSet< Akonadi::Item::Id> &indexed, Akonadi::Collection::Id) Q_DECL_OVERRIDE
     {
         indexed = alreadyIndexed.toSet();
     };
-    virtual void index(const Akonadi::Item &item)
+    void index(const Akonadi::Item &item) Q_DECL_OVERRIDE
     {
         itemsIndexed << item.id();
     };
-    virtual qlonglong indexedItems(const qlonglong /* id */)
+    qlonglong indexedItems(Akonadi::Collection::Id) Q_DECL_OVERRIDE
     {
         return alreadyIndexed.size();
     };
-    virtual void move(const Akonadi::Item::List & /* items */, const Akonadi::Collection & /* from */, const Akonadi::Collection & /* to */) {};
-    virtual void reindex(const Akonadi::Item & /* item */) {};
-    virtual void remove(const Akonadi::Collection & /* col */) {};
-    virtual void remove(const QSet< Akonadi::Entity::Id > &ids, const QStringList & /* mimeTypes */)
+    void move(const Akonadi::Item::List & /* items */,
+              const Akonadi::Collection & /* from */,
+              const Akonadi::Collection & /* to */) Q_DECL_OVERRIDE {};
+    void remove(const Akonadi::Collection & /* col */) Q_DECL_OVERRIDE {};
+    void remove(const QSet<Akonadi::Item::Id> &ids, const QStringList & /* mimeTypes */) Q_DECL_OVERRIDE
     {
         itemsRemoved += ids.toList();
     };
-    virtual void remove(const Akonadi::Item::List & /* items */) {};
-    virtual void removeDatabase() {};
-    virtual bool haveIndexerForMimeTypes(const QStringList &)
+    void remove(const Akonadi::Item::List & /* items */) Q_DECL_OVERRIDE {};
+    void removeDatabase() Q_DECL_OVERRIDE {};
+    bool haveIndexerForMimeTypes(const QStringList &) Q_DECL_OVERRIDE
     {
         return true;
     };
@@ -99,7 +100,7 @@ private Q_SLOTS:
     void testFullSync()
     {
         TestIndex index;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Entity::Id>());
+        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(true);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 3);
@@ -108,7 +109,7 @@ private Q_SLOTS:
     void testNoFullSync()
     {
         TestIndex index;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Entity::Id>());
+        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(false);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 0);
@@ -117,7 +118,7 @@ private Q_SLOTS:
     void testNoFullSyncWithPending()
     {
         TestIndex index;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Entity::Id>() << 1);
+        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>() << 1);
         job->setFullSync(false);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 1);
@@ -127,7 +128,7 @@ private Q_SLOTS:
     {
         TestIndex index;
         index.alreadyIndexed << 1 << 2 << 3;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Entity::Id>());
+        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(true);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 0);
@@ -137,7 +138,7 @@ private Q_SLOTS:
     {
         TestIndex index;
         index.alreadyIndexed << 15 << 16 << 17;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Entity::Id>());
+        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(true);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 3);

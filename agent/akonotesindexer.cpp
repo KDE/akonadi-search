@@ -70,7 +70,7 @@ void AkonotesIndexer::index(const Akonadi::Item &item)
 
     process(msg);
 
-    Akonadi::Entity::Id colId = item.parentCollection().id();
+    Akonadi::Collection::Id colId = item.parentCollection().id();
     QByteArray term = 'C' + QByteArray::number(colId);
     m_doc->add_boolean_term(term.data());
 
@@ -177,8 +177,8 @@ void AkonotesIndexer::remove(const Akonadi::Collection &collection)
 }
 
 void AkonotesIndexer::move(const Akonadi::Item::Id &itemId,
-                           const Akonadi::Entity::Id &from,
-                           const Akonadi::Entity::Id &to)
+                           const Akonadi::Collection::Id &from,
+                           const Akonadi::Collection::Id &to)
 {
     if (!m_db) {
         return;

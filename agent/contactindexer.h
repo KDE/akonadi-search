@@ -40,7 +40,9 @@ public:
 
     void commit() Q_DECL_OVERRIDE;
 
-    void move(const Akonadi::Item::Id &itemId, const Akonadi::Entity::Id &from, const Akonadi::Entity::Id &to) Q_DECL_OVERRIDE;
+    void move(const Akonadi::Item::Id &itemId,
+              const Akonadi::Collection::Id &from,
+              const Akonadi::Collection::Id &to) Q_DECL_OVERRIDE;
 private:
     bool indexContact(const Akonadi::Item &item);
     void indexContactGroup(const Akonadi::Item &item);

@@ -43,8 +43,8 @@ public:
     virtual void commit() = 0;
 
     virtual void move(const Akonadi::Item::Id &item,
-                      const Akonadi::Entity::Id &from,
-                      const Akonadi::Entity::Id &to);
+                      const Akonadi::Collection::Id &from,
+                      const Akonadi::Collection::Id &to);
     virtual void updateFlags(const Akonadi::Item &item,
                              const QSet<QByteArray> &addedFlags,
                              const QSet<QByteArray> &removed);

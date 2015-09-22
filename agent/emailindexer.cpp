@@ -105,7 +105,7 @@ void EmailIndexer::index(const Akonadi::Item &item)
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index",
                "Item does not have a valid parent collection");
 
-    Akonadi::Entity::Id colId = item.parentCollection().id();
+    Akonadi::Collection::Id colId = item.parentCollection().id();
     QByteArray term = 'C' + QByteArray::number(colId);
     m_doc->add_boolean_term(term.data());
 
@@ -390,8 +390,8 @@ void EmailIndexer::remove(const Akonadi::Collection &collection)
 }
 
 void EmailIndexer::move(const Akonadi::Item::Id &itemId,
-                        const Akonadi::Entity::Id &from,
-                        const Akonadi::Entity::Id &to)
+                        const Akonadi::Collection::Id &from,
+                        const Akonadi::Collection::Id &to)
 {
     if (!m_db) {
         return;

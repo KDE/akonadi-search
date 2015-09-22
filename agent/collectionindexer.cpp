@@ -90,7 +90,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
             doc.add_term(term.constData());
         }
 
-        Akonadi::Entity::Id colId = collection.parentCollection().id();
+        Akonadi::Collection::Id colId = collection.parentCollection().id();
         const QByteArray term = 'C' + QByteArray::number(colId);
         doc.add_boolean_term(term.constData());
 

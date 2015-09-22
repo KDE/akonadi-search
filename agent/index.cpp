@@ -148,7 +148,7 @@ void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray>
     }
 }
 
-void Index::remove(const QSet< Akonadi::Entity::Id > &ids, const QStringList &mimeTypes)
+void Index::remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTypes)
 {
     const QList<AbstractIndexer *> indexers = indexersForMimetypes(mimeTypes);
     Q_FOREACH (const Akonadi::Item::Id &id, ids) {
@@ -316,7 +316,7 @@ void Index::commit()
     }
 }
 
-void Index::findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::Entity::Id collectionId, const QString &dbPath)
+void Index::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath)
 {
     Xapian::Database db;
     try {
@@ -337,7 +337,7 @@ void Index::findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::E
     }
 }
 
-void Index::findIndexed(QSet<Akonadi::Entity::Id> &indexed, Akonadi::Entity::Id collectionId)
+void Index::findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId)
 {
     findIndexedInDatabase(indexed, collectionId, emailIndexingPath());
     findIndexedInDatabase(indexed, collectionId, contactIndexingPath());

@@ -75,7 +75,7 @@ private:
     AbstractIndexer *indexerForItem(const Akonadi::Item &item) const;
     QList<AbstractIndexer *> indexersForMimetypes(const QStringList &mimeTypes) const;
     virtual qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
-    virtual void findIndexedInDatabase(QSet<Akonadi::Entity::Id> &indexed, Akonadi::Entity::Id collectionId, const QString &dbPath);
+    virtual void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
 
     QString dbPath(const QString &dbName) const;
     QString emailIndexingPath() const;

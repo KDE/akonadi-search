@@ -98,7 +98,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
                "Item does not have a valid parent collection");
 
-    const Akonadi::Entity::Id colId = item.parentCollection().id();
+    const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addBoolTerm(colId, QStringLiteral("C"));
 
     if (addresse.birthday().isValid()) {
@@ -133,7 +133,7 @@ void ContactIndexer::indexContactGroup(const Akonadi::Item &item)
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
                "Item does not have a valid parent collection");
 
-    const Akonadi::Entity::Id colId = item.parentCollection().id();
+    const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addBoolTerm(colId, QStringLiteral("C"));
     m_db->replaceDocument(item.id(), doc);
 }
@@ -182,8 +182,8 @@ void ContactIndexer::commit()
 }
 
 void ContactIndexer::move(const Akonadi::Item::Id &itemId,
-                          const Akonadi::Entity::Id &from,
-                          const Akonadi::Entity::Id &to)
+                          const Akonadi::Collection::Id &from,
+                          const Akonadi::Collection::Id &to)
 {
     if (!m_db) {
         return;

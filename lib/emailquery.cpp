@@ -143,7 +143,7 @@ void EmailQuery::addCollection(Akonadi::Collection::Id id)
     d->collections << id;
 }
 
-void EmailQuery::setCollection(const QList< Akonadi::Entity::Id > &collections)
+void EmailQuery::setCollection(const QList<Akonadi::Collection::Id> &collections)
 {
     d->collections = collections;
 }

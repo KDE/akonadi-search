@@ -30,8 +30,8 @@ AbstractIndexer::~AbstractIndexer()
 }
 
 void AbstractIndexer::move(const Akonadi::Item::Id &item,
-                           const Akonadi::Entity::Id &from,
-                           const Akonadi::Entity::Id &to)
+                           const Akonadi::Collection::Id &from,
+                           const Akonadi::Collection::Id &to)
 {
     Q_UNUSED(item);
     Q_UNUSED(from);

@@ -30,13 +30,15 @@
 #include <AkonadiCore/CollectionStatistics>
 #include <KLocalizedString>
 
-CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList< Akonadi::Entity::Id > &pending, QObject *parent)
-    :   KJob(parent),
-        m_collection(col),
-        m_pending(pending),
-        m_index(index),
-        m_reindexingLock(false),
-        m_fullSync(true)
+CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col,
+                                             const QList<Akonadi::Item::Id> &pending,
+                                             QObject *parent)
+    :KJob(parent),
+     m_collection(col),
+     m_pending(pending),
+     m_index(index),
+     m_reindexingLock(false),
+     m_fullSync(true)
 {
 
 }

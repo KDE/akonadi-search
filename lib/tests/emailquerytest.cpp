@@ -71,7 +71,7 @@ void App::main()
     query.matches(m_query);
     query.setLimit(100);
 
-    QList<Akonadi::Entity::Id> m_akonadiIds;
+    QList<Akonadi::Item::Id> m_akonadiIds;
 
     ResultIterator it = query.exec();
     while (it.next()) {

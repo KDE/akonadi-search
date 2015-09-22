@@ -50,7 +50,9 @@ public:
 
     void remove(const Akonadi::Item &item) Q_DECL_OVERRIDE;
     void remove(const Akonadi::Collection &collection) Q_DECL_OVERRIDE;
-    void move(const Akonadi::Item::Id &itemId, const Akonadi::Entity::Id &from, const Akonadi::Entity::Id &to) Q_DECL_OVERRIDE;
+    void move(const Akonadi::Item::Id &itemId,
+              const Akonadi::Collection::Id &from,
+              const Akonadi::Collection::Id &to) Q_DECL_OVERRIDE;
 private:
     void indexEventItem(const Akonadi::Item &item, const KCalCore::Event::Ptr &event);
     void indexJournalItem(const Akonadi::Item &item, const KCalCore::Journal::Ptr &journal);
