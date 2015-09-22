@@ -46,8 +46,7 @@ Index::~Index()
 {
     delete m_collectionIndexer;
     m_collectionIndexer = Q_NULLPTR;
-    qDeleteAll(m_indexer.values().toSet());
-    m_indexer.clear();
+    qDeleteAll(m_listIndexer);
 }
 
 static void removeDir(const QString &dirName)
@@ -69,7 +68,8 @@ void Index::removeDatabase()
 {
     delete m_collectionIndexer;
     m_collectionIndexer = Q_NULLPTR;
-    qDeleteAll(m_indexer.values().toSet());
+    qDeleteAll(m_listIndexer);
+    m_listIndexer.clear();
     m_indexer.clear();
 
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing database";
