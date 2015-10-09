@@ -463,7 +463,8 @@ QDebug operator <<(QDebug d, const Term &t)
                 t.value().typeName()).toUtf8().constData();
     } else {
         d << "(" << operationToString(t.operation()).toUtf8().constData();
-        for (const Term &term : t.subTerms()) {
+        const QList<Term> subterms = t.subTerms();
+        Q_FOREACH (const Term &term, subterms) {
             d << term;
         }
         d << ")";
