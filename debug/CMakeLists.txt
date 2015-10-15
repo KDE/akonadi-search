@@ -35,6 +35,7 @@ install(TARGETS KF5AkonadiSearchDebug EXPORT KF5AkonadiSearchTargets ${KF5_INSTA
 
 install(FILES
     akonadisearchdebugdialog.h
+    akonadisearchdebugsearchpathcombobox.h
     ${CMAKE_CURRENT_BINARY_DIR}/search_debug_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Debug
     COMPONENT Devel
