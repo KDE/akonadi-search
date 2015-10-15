@@ -1,0 +1,15 @@
+include_directories(
+  ${CMAKE_CURRENT_BINARY_DIR}/..
+)
+
+macro(add_akonadisearchdebug_unittest _source)
+    ecm_add_test(${_source}
+        NAME_PREFIX "akonadisearchdebug-"
+        LINK_LIBRARIES Qt5::Test Qt5::Gui KF5::Completion KF5::CoreAddons KF5::AkonadiSearchDebug
+        GUI
+    )
+endmacro ()
+
+add_akonadisearchdebug_unittest(akonadisearchdebugdialogtest.cpp)
+add_akonadisearchdebug_unittest(akonadisearchdebugwidgettest.cpp)
+add_akonadisearchdebug_unittest(akonadisearchdebugsearchpathcomboboxtest.cpp)
