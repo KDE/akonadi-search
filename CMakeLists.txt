@@ -20,7 +20,7 @@ include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
-find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash)
+find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash KCMUtils Runner)
 
 find_package(KF5Akonadi CONFIG)
 set_package_properties(KF5Akonadi PROPERTIES
@@ -81,6 +81,7 @@ add_subdirectory(lib)
 add_subdirectory(akonadiplugin)
 add_subdirectory(search)
 add_subdirectory(debug)
+add_subdirectory(runner)
 
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
