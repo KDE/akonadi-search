@@ -10,9 +10,9 @@ set(pimcontactsrunner_SRCS
 
 add_library(krunner_pimcontacts MODULE ${pimcontactsrunner_SRCS})
 target_link_libraries(krunner_pimcontacts
-    KF5AkonadiSearchPIM
-    KF5::AkonadiCore
     KF5::Runner
+    KF5::AkonadiCore
+    KF5AkonadiSearchPIM
     KF5::I18n
     KF5::Contacts
     KF5::Codecs
@@ -26,7 +26,6 @@ set(pimcontactsrunnerconfig_SRCS
 add_library(kcm_krunner_pimcontacts MODULE ${pimcontactsrunnerconfig_SRCS})
 target_link_libraries(kcm_krunner_pimcontacts
     Qt5::Gui
-    KF5::Runner
     KF5::KCMUtils
     KF5::I18n
 )
