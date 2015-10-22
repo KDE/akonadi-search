@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=PIM Contacts Search
+Name[ca]=Cerca de contactes PIM
+Name[nl]=PIM in contactpersonen zoeken
+Name[pt]=Pesquisa de Contactos PIM
+Name[uk]=Пошук у записах контактів PIM
+Name[x-test]=xxPIM Contacts Searchxx
 Type=Service
 
 X-KDE-ServiceTypes=KCModule
