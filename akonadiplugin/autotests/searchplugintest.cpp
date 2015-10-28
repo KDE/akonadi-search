@@ -38,6 +38,8 @@
 #include <AkonadiCore/searchquery.h>
 #include <Akonadi/KMime/MessageFlags>
 
+#include <QElapsedTimer>
+
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)
 
@@ -80,9 +82,11 @@ private:
         QFETCH(QSet<qint64>, expectedResult);
 
         qDebug() << "starting search";
+        QElapsedTimer t;
+        t.start();
         SearchPlugin plugin;
         const QSet<qint64> result = plugin.search(query, collections, mimeTypes);
-        qDebug() << result;
+        qDebug() << "result:" << result << "(in" << t.elapsed() << "ms)";
         QCOMPARE(result, expectedResult);
     }
 
