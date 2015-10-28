@@ -216,7 +216,7 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::IncidenceSearchTerm::Location:
             return getTerm(term, QStringLiteral("location"));
         case Akonadi::IncidenceSearchTerm::PartStatus: {
-            Term t("partstatus", term.value().toString(), Term::Equal);
+            Term t(QStringLiteral("partstatus"), term.value().toString(), Term::Equal);
             t.setNegation(term.isNegated());
             return t;
         }

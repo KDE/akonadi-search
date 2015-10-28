@@ -457,7 +457,7 @@ QString operationToString(Term::Operation op)
 QDebug operator <<(QDebug d, const Term &t)
 {
     if (t.subTerms().isEmpty()) {
-        d << QString::fromLatin1("(%1 %2 %3 (%4))").arg(t.property(),
+        d << QStringLiteral("(%1 %2 %3 (%4))").arg(t.property(),
                 comparatorToString(t.comparator()),
                 t.value().toString(),
                 t.value().typeName()).toUtf8().constData();

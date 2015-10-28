@@ -334,12 +334,12 @@ Query Query::fromJSON(const QByteArray &arr)
     }
 
     if (map.contains(QStringLiteral("sortingOption"))) {
-        int option = map.value("sortingOption").toInt();
+        int option = map.value(QStringLiteral("sortingOption")).toInt();
         query.d->m_sortingOption = static_cast<SortingOption>(option);
     }
 
     if (map.contains(QStringLiteral("sortingProperty"))) {
-        query.d->m_sortingProperty = map.value("sortingProperty").toString();
+        query.d->m_sortingProperty = map.value(QStringLiteral("sortingProperty")).toString();
     }
 
     if (map.contains(QStringLiteral("customOptions"))) {
