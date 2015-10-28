@@ -70,7 +70,7 @@ private:
     }
 
 private Q_SLOTS:
-    void init()
+    void initTestCase()
     {
         emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/email/");
         emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
