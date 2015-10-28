@@ -53,27 +53,6 @@ private:
     QString noteDir;
     QString calendarDir;
 
-    bool removeDir(const QString &dirName)
-    {
-        bool result = true;
-        QDir dir(dirName);
-
-        if (dir.exists(dirName)) {
-            Q_FOREACH (QFileInfo info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
-                if (info.isDir()) {
-                    result = removeDir(info.absoluteFilePath());
-                } else {
-                    result = QFile::remove(info.absoluteFilePath());
-                }
-
-                if (!result) {
-                    return result;
-                }
-            }
-            result = dir.rmdir(dirName);
-        }
-        return result;
-    }
     void resultSearch()
     {
         QFETCH(QString, query);
@@ -100,15 +79,11 @@ private Q_SLOTS:
         calendarDir = QDir::tempPath() + QLatin1String("/searchplugintest/calendar/");
 
         QDir dir;
-        QVERIFY(removeDir(emailDir));
+        QVERIFY(QDir(QDir::tempPath() + QStringLiteral("/searchplugintest")).removeRecursively());
         QVERIFY(dir.mkpath(emailDir));
-        QVERIFY(removeDir(emailContactsDir));
         QVERIFY(dir.mkpath(emailContactsDir));
-        QVERIFY(removeDir(contactsDir));
         QVERIFY(dir.mkpath(contactsDir));
-        QVERIFY(removeDir(noteDir));
         QVERIFY(dir.mkpath(noteDir));
-        QVERIFY(removeDir(calendarDir));
         QVERIFY(dir.mkpath(calendarDir));
 
         qDebug() << "indexing sample data";
@@ -440,6 +415,11 @@ private Q_SLOTS:
         calendarSearchStore->setDbPath(calendarDir);
 
         Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore *>() << emailSearchStore << contactSearchStore << noteSearchStore << calendarSearchStore);
+    }
+
+    void cleanupTestCase()
+    {
+        QVERIFY(QDir(QDir::tempPath() + QStringLiteral("/searchplugintest")).removeRecursively());
     }
 
     void testCalendarSearch_data()
