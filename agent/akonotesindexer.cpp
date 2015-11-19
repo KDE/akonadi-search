@@ -176,9 +176,9 @@ void AkonotesIndexer::remove(const Akonadi::Collection &collection)
     }
 }
 
-void AkonotesIndexer::move(const Akonadi::Item::Id &itemId,
-                           const Akonadi::Collection::Id &from,
-                           const Akonadi::Collection::Id &to)
+void AkonotesIndexer::move(Akonadi::Item::Id itemId,
+                           Akonadi::Collection::Id from,
+                           Akonadi::Collection::Id to)
 {
     if (!m_db) {
         return;

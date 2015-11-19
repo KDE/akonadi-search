@@ -389,9 +389,9 @@ void EmailIndexer::remove(const Akonadi::Collection &collection)
     }
 }
 
-void EmailIndexer::move(const Akonadi::Item::Id &itemId,
-                        const Akonadi::Collection::Id &from,
-                        const Akonadi::Collection::Id &to)
+void EmailIndexer::move(Akonadi::Item::Id itemId,
+                        Akonadi::Collection::Id from,
+                        Akonadi::Collection::Id to)
 {
     if (!m_db) {
         return;

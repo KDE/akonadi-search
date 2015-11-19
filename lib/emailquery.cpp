@@ -278,7 +278,7 @@ ResultIterator EmailQuery::exec()
 
     if (!d->collections.isEmpty()) {
         Xapian::Query query;
-        Q_FOREACH (const Akonadi::Collection::Id &id, d->collections) {
+        Q_FOREACH (Akonadi::Collection::Id id, d->collections) {
             QString c = QString::number(id);
             Xapian::Query q = Xapian::Query('C' + c.toStdString());
 

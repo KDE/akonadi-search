@@ -181,9 +181,9 @@ void ContactIndexer::commit()
     }
 }
 
-void ContactIndexer::move(const Akonadi::Item::Id &itemId,
-                          const Akonadi::Collection::Id &from,
-                          const Akonadi::Collection::Id &to)
+void ContactIndexer::move(Akonadi::Item::Id itemId,
+                          Akonadi::Collection::Id from,
+                          Akonadi::Collection::Id to)
 {
     if (!m_db) {
         return;

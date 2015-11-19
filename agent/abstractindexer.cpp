@@ -29,9 +29,9 @@ AbstractIndexer::~AbstractIndexer()
 {
 }
 
-void AbstractIndexer::move(const Akonadi::Item::Id &item,
-                           const Akonadi::Collection::Id &from,
-                           const Akonadi::Collection::Id &to)
+void AbstractIndexer::move(Akonadi::Item::Id item,
+                           Akonadi::Collection::Id from,
+                           Akonadi::Collection::Id to)
 {
     Q_UNUSED(item);
     Q_UNUSED(from);

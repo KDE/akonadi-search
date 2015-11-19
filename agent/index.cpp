@@ -151,7 +151,7 @@ void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray>
 void Index::remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTypes)
 {
     const QList<AbstractIndexer *> indexers = indexersForMimetypes(mimeTypes);
-    Q_FOREACH (const Akonadi::Item::Id &id, ids) {
+    Q_FOREACH (Akonadi::Item::Id id, ids) {
         Q_FOREACH (AbstractIndexer *indexer, indexers) {
             try {
                 indexer->remove(Akonadi::Item(id));
