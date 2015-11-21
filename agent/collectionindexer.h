@@ -34,7 +34,7 @@ class CollectionIndexer : public QObject
 {
     Q_OBJECT
 public:
-    CollectionIndexer(const QString &path);
+    explicit CollectionIndexer(const QString &path);
     ~CollectionIndexer();
 
     void index(const Akonadi::Collection &collection);
