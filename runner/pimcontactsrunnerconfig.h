@@ -26,6 +26,7 @@ class QCheckBox;
 
 class PIMContactsRunnerConfig : public KCModule
 {
+    Q_OBJECT
 public:
     explicit PIMContactsRunnerConfig(QWidget *parent = Q_NULLPTR,
                                      const QVariantList &args = QVariantList());

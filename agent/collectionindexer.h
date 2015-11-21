@@ -32,6 +32,7 @@ class WritableDatabase;
 
 class CollectionIndexer : public QObject
 {
+    Q_OBJECT
 public:
     CollectionIndexer(const QString &path);
     ~CollectionIndexer();

@@ -39,6 +39,7 @@ namespace Search
  */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianSearchStore : public SearchStore
 {
+    Q_OBJECT
 public:
     explicit XapianSearchStore(QObject *parent = Q_NULLPTR);
     virtual ~XapianSearchStore();
