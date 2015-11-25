@@ -21,6 +21,7 @@ Name[sr@latin]=Pretraga PIM kontakata
 Name[sv]=Kontaktsökning i personlig informationshantering
 Name[uk]=Пошук у записах контактів PIM
 Name[x-test]=xxPIM Contacts Searchxx
+Name[zh_TW]=PIM 聯絡人搜尋
 Comment=Runner which searches through your contacts
 Comment[ca]=Executor que cerca a través dels vostres contactes
 Comment[ca@valencia]=Executor que cerca a través dels vostres contactes
@@ -42,6 +43,7 @@ Comment[sr@latin]=Izvođač koji traži kroz vaše kontakte
 Comment[sv]=Körprogram som söker igenom kontakter
 Comment[uk]=Засіб запуску для пошуку у записах ваших контактів
 Comment[x-test]=xxRunner which searches through your contactsxx
+Comment[zh_TW]=搜尋您的聯絡人的執行器
 Type=Service
 Icon=view-pim-contacts
 
