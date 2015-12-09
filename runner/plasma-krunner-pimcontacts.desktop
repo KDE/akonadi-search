@@ -2,6 +2,7 @@
 Name=PIM Contacts Search
 Name[ca]=Cerca de contactes PIM
 Name[ca@valencia]=Cerca de contactes PIM
+Name[da]=Søgning i PIM-kontakter
 Name[de]=PIM-Kontaktsuche
 Name[en_GB]=PIM Contacts Search
 Name[es]=Búsqueda de contactos PIM
@@ -24,6 +25,7 @@ Name[x-test]=xxPIM Contacts Searchxx
 Comment=Runner which searches through your contacts
 Comment[ca]=Executor que cerca a través dels vostres contactes
 Comment[ca@valencia]=Executor que cerca a través dels vostres contactes
+Comment[da]=Runner som søger efter dine kontakter
 Comment[en_GB]=Runner which searches through your contacts
 Comment[es]=Lanzador que busca por sus contactos
 Comment[fi]=Suoritusohjelma, joka etsii yhteystiedoista
