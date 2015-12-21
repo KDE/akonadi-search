@@ -15,8 +15,8 @@
   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef BALOODEBUGDIALOG_H
-#define BALOODEBUGDIALOG_H
+#ifndef AKONADISEACHDEBUGDIALOG_H
+#define AKONADISEACHDEBUGDIALOG_H
 
 #include <QDialog>
 #include "search_debug_export.h"
@@ -49,5 +49,5 @@ private:
 };
 }
 }
-#endif // BALOODEBUGDIALOG_H
+#endif // AKONADISEACHDEBUGDIALOG_H
 

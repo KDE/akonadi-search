@@ -34,12 +34,12 @@ class Akonadi::Search::AkonadiSearchDebugDialogPrivate
 {
 public:
     AkonadiSearchDebugDialogPrivate()
-        : mBalooDebugWidget(Q_NULLPTR)
+        : mAkonadiSearchDebugWidget(Q_NULLPTR)
     {
 
     }
 
-    AkonadiSearchDebugWidget *mBalooDebugWidget;
+    AkonadiSearchDebugWidget *mAkonadiSearchDebugWidget;
 };
 
 AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
@@ -58,9 +58,9 @@ AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
     QVBoxLayout *mainLayout = new QVBoxLayout;
     setLayout(mainLayout);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &AkonadiSearchDebugDialog::reject);
-    d->mBalooDebugWidget = new AkonadiSearchDebugWidget(this);
-    d->mBalooDebugWidget->setObjectName(QStringLiteral("akonadisearchdebugwidget"));
-    mainLayout->addWidget(d->mBalooDebugWidget);
+    d->mAkonadiSearchDebugWidget = new AkonadiSearchDebugWidget(this);
+    d->mAkonadiSearchDebugWidget->setObjectName(QStringLiteral("akonadisearchdebugwidget"));
+    mainLayout->addWidget(d->mAkonadiSearchDebugWidget);
     mainLayout->addWidget(buttonBox);
     readConfig();
 }
@@ -88,23 +88,23 @@ void AkonadiSearchDebugDialog::writeConfig()
 
 void AkonadiSearchDebugDialog::setAkonadiId(Akonadi::Item::Id akonadiId)
 {
-    d->mBalooDebugWidget->setAkonadiId(akonadiId);
+    d->mAkonadiSearchDebugWidget->setAkonadiId(akonadiId);
 }
 
 void AkonadiSearchDebugDialog::setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type)
 {
-    d->mBalooDebugWidget->setSearchType(type);
+    d->mAkonadiSearchDebugWidget->setSearchType(type);
 }
 
 void AkonadiSearchDebugDialog::doSearch()
 {
-    d->mBalooDebugWidget->doSearch();
+    d->mAkonadiSearchDebugWidget->doSearch();
 }
 
 void AkonadiSearchDebugDialog::slotSaveAs()
 {
     const QString filter = i18n("Text Files (*.txt);;All Files (*)");
-    saveTextAs(d->mBalooDebugWidget->plainText(), filter);
+    saveTextAs(d->mAkonadiSearchDebugWidget->plainText(), filter);
 }
 
 void AkonadiSearchDebugDialog::saveTextAs(const QString &text, const QString &filter)
