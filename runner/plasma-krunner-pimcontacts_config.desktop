@@ -23,7 +23,6 @@ Name[sr@latin]=Pretraga PIM kontakata
 Name[sv]=Kontaktsökning i personlig informationshantering
 Name[uk]=Пошук у записах контактів PIM
 Name[x-test]=xxPIM Contacts Searchxx
-Name[zh_TW]=PIM 聯絡人搜尋
 Type=Service
 
 X-KDE-ServiceTypes=KCModule
