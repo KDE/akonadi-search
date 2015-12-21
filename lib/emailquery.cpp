@@ -190,7 +190,7 @@ void EmailQuery::setRead(bool read)
 
 ResultIterator EmailQuery::exec()
 {
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/baloo/email/");
+    const QString dir = defaultLocation(QStringLiteral("email"));
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());

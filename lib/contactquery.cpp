@@ -106,7 +106,7 @@ void ContactQuery::setMatchCriteria(ContactQuery::MatchCriteria m)
 
 ResultIterator ContactQuery::exec()
 {
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/baloo/contacts/");
+    const QString dir = defaultLocation(QStringLiteral("contacts"));
     Xapian::Database db;
 
     try {

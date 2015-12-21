@@ -21,6 +21,7 @@
  */
 
 #include "contactcompleter.h"
+#include "query.h"
 #include <xapian.h>
 
 #include <QStandardPaths>
@@ -39,7 +40,7 @@ ContactCompleter::ContactCompleter(const QString &prefix, int limit)
 
 QStringList ContactCompleter::complete()
 {
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/baloo/emailContacts/");
+    const QString dir = Query::defaultLocation(QStringLiteral("emailContacts"));
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());

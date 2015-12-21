@@ -43,6 +43,7 @@ public:
     virtual ResultIterator exec() = 0;
 
     static Query *fromJSON(const QByteArray &json);
+    static QString defaultLocation(const QString &dbName);
 };
 
 }

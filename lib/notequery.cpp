@@ -79,7 +79,7 @@ int NoteQuery::limit() const
 
 ResultIterator NoteQuery::exec()
 {
-    const QString dir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/baloo/notes/");
+    const QString dir = defaultLocation(QStringLiteral("notes"));
 
     Xapian::Database db;
     try {
