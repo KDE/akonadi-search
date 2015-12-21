@@ -17,6 +17,8 @@
 
 #include "akonadisearchdebugsearchpathcombobox.h"
 #include <QStandardPaths>
+#include <QDir>
+#include <AkonadiCore/ServerManager>
 
 using namespace Akonadi::Search;
 AkonadiSearchDebugSearchPathComboBox::AkonadiSearchDebugSearchPathComboBox(QWidget *parent)
@@ -30,7 +32,7 @@ AkonadiSearchDebugSearchPathComboBox::~AkonadiSearchDebugSearchPathComboBox()
 
 }
 
-QString AkonadiSearchDebugSearchPathComboBox::searchPath() const
+QString AkonadiSearchDebugSearchPathComboBox::searchPath()
 {
     const int currentPathIndex = currentIndex();
     if (currentPathIndex > -1) {
@@ -50,20 +52,19 @@ void AkonadiSearchDebugSearchPathComboBox::initialize()
     addItem(QStringLiteral("Calendars"), Calendars);
 }
 
-QString AkonadiSearchDebugSearchPathComboBox::pathFromEnum(SearchType type) const
+QString AkonadiSearchDebugSearchPathComboBox::pathFromEnum(SearchType type)
 {
-    const QString xdgpath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/');
     switch (type) {
     case Contacts:
-        return QString(xdgpath + QLatin1String("baloo/contacts/"));
+        return defaultLocations(QStringLiteral("contacts"));
     case ContactCompleter:
-        return QString(xdgpath + QLatin1String("baloo/emailContacts/"));
+        return defaultLocations(QStringLiteral("emailContacts"));
     case Emails:
-        return QString(xdgpath + QLatin1String("baloo/email/"));
+        return defaultLocations(QStringLiteral("email"));
     case Notes:
-        return QString(xdgpath + QLatin1String("baloo/notes/"));
+        return defaultLocations(QStringLiteral("notes"));
     case Calendars:
-        return QString(xdgpath + QLatin1String("baloo/calendars/"));
+        return defaultLocations(QStringLiteral("calendars"));
     }
     return QString();
 }
@@ -74,4 +75,31 @@ void AkonadiSearchDebugSearchPathComboBox::setSearchType(AkonadiSearchDebugSearc
     if (indexType >= 0) {
         setCurrentIndex(indexType);
     }
+}
+
+QString AkonadiSearchDebugSearchPathComboBox::defaultLocations(const QString &dbName)
+{
+    // First look into the old location from Baloo times in ~/.local/share/baloo,
+    // because we don't migrate the database files automatically.
+    QString basePath;
+    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+    } else {
+        basePath = QStringLiteral("baloo");
+    }
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    if (QDir(dbPath).exists()) {
+        return dbPath;
+    }
+
+    // If the database does not exist in old Baloo folders, than use the new
+    // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
+    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+        basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+    } else {
+        basePath = QStringLiteral("akonadi/search_db");
+    }
+    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    QDir().mkpath(dbPath);
+    return dbPath;
 }

@@ -39,11 +39,12 @@ public:
     };
     ~AkonadiSearchDebugSearchPathComboBox();
 
-    QString searchPath() const;
+    QString searchPath();
 
-    QString pathFromEnum(SearchType type) const;
+    QString pathFromEnum(SearchType type);
     void setSearchType(SearchType type);
 private:
+    QString defaultLocations(const QString &dbname);
     void initialize();
 };
 }
