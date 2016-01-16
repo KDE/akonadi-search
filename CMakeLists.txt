@@ -2,9 +2,9 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(AkonadiSearch)
 set(PROJECT_VERSION "5.1.41")
-set(KF5_VERSION "5.16.0")
+set(KF5_VERSION "5.17.0")
 # ECM setup
-find_package(ECM 5.16.0 REQUIRED NO_MODULE)
+find_package(ECM 5.17.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -39,11 +39,11 @@ set_package_properties(Xapian PROPERTIES
 set(KF5AkonadiServer_MIN_VERSION "5.0.51")
 find_package(KF5AkonadiServer ${KF5AkonadiServer_MIN_VERSION} CONFIG REQUIRED)
 
-set(KDEPIMLIBS_LIB_VERSION "4.87.0")
+set(KDEPIMLIBS_LIB_VERSION "5.1.40")
 
-set(KCONTACTS_LIB_VERSION "4.87.0")
-set(KCALENDARCORE_LIB_VERSION "4.81.0")
-set(KMIME_LIB_VERSION "4.85.0")
+set(KCONTACTS_LIB_VERSION "5.1.40")
+set(KCALENDARCORE_LIB_VERSION "5.1.40")
+set(KMIME_LIB_VERSION "5.1.40")
 
 
 find_package(KF5Contacts ${KCONTACTS_LIB_VERSION} CONFIG REQUIRED)
