@@ -1,8 +1,7 @@
 cmake_minimum_required(VERSION 2.8.12)
 
 project(AkonadiSearch)
-set(PROJECT_VERSION "5.1.41")
-set(KF5_VERSION "5.17.0")
+
 # ECM setup
 find_package(ECM 5.17.0 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -19,15 +18,20 @@ include(ECMInstallIcons)
 include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 
+
+set(AKONADISEARCH_VERSION "5.1.41")
+set(KF5_VERSION "5.17.0")
+
+set(AKONADI_VERSION "5.1.52")
+set(KDEPIMLIBS_LIB_VERSION "5.1.40")
+set(KCONTACTS_LIB_VERSION "5.1.40")
+set(KCALENDARCORE_LIB_VERSION "5.1.40")
+set(KMIME_LIB_VERSION "5.1.40")
+
+
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Test)
 find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash KCMUtils Runner)
 
-find_package(KF5Akonadi CONFIG)
-set_package_properties(KF5Akonadi PROPERTIES
-    DESCRIPTION "The KDEPIM libraries"
-    URL "http://www.kde.org"
-    TYPE REQUIRED
-)
 
 find_package(Xapian CONFIG)
 set_package_properties(Xapian PROPERTIES
@@ -36,22 +40,13 @@ set_package_properties(Xapian PROPERTIES
     TYPE REQUIRED
 )
 
-set(KF5AkonadiServer_MIN_VERSION "5.0.51")
-find_package(KF5AkonadiServer ${KF5AkonadiServer_MIN_VERSION} CONFIG REQUIRED)
-
-set(KDEPIMLIBS_LIB_VERSION "5.1.40")
-
-set(KCONTACTS_LIB_VERSION "5.1.40")
-set(KCALENDARCORE_LIB_VERSION "5.1.40")
-set(KMIME_LIB_VERSION "5.1.40")
-
-
+find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
 find_package(KF5Contacts ${KCONTACTS_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KMIME_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiMime ${KDEPIMLIBS_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
 
-ecm_setup_version(${PROJECT_VERSION}
+ecm_setup_version(${AKONADISEARCH_VERSION}
     VARIABLE_PREFIX AKONADISEARCH
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfigVersion.cmake"
