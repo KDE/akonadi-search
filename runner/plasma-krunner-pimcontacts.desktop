@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=PIM Contacts Search
+Name[ar]=بحث في متراسلي PIM
 Name[ca]=Cerca de contactes PIM
 Name[ca@valencia]=Cerca de contactes PIM
 Name[da]=Søgning i PIM-kontakter
@@ -24,6 +25,7 @@ Name[sv]=Kontaktsökning i personlig informationshantering
 Name[uk]=Пошук у записах контактів PIM
 Name[x-test]=xxPIM Contacts Searchxx
 Comment=Runner which searches through your contacts
+Comment[ar]=مشغّل يبحث في متراسليك
 Comment[ca]=Executor que cerca a través dels vostres contactes
 Comment[ca@valencia]=Executor que cerca a través dels vostres contactes
 Comment[da]=Runner som søger efter dine kontakter
