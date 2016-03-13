@@ -20,7 +20,7 @@ include(ECMQtDeclareLoggingCategory)
 
 
 set(AKONADISEARCH_VERSION "5.1.41")
-set(KF5_VERSION "5.17.0")
+set(KF5_VERSION "5.19.0")
 
 set(AKONADI_VERSION "5.1.52")
 set(KDEPIMLIBS_LIB_VERSION "5.1.40")
