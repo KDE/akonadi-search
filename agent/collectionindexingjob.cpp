@@ -38,7 +38,8 @@ CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collec
      m_pending(pending),
      m_index(index),
      m_reindexingLock(false),
-     m_fullSync(true)
+     m_fullSync(true),
+     m_progressTotal(0)
 {
 
 }
