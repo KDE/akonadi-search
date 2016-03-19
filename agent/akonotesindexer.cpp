@@ -25,7 +25,7 @@
 #include <QTextDocument>
 
 AkonotesIndexer::AkonotesIndexer(const QString &path)
-    : AbstractIndexer(), m_db(0), m_termGen(0)
+    : AbstractIndexer(), m_db(Q_NULLPTR), m_doc(Q_NULLPTR), m_termGen(Q_NULLPTR)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
