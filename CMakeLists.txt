@@ -19,7 +19,7 @@ include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 
 
-set(AKONADISEARCH_VERSION "5.2.0")
+set(AKONADISEARCH_VERSION "5.2.1")
 set(KF5_VERSION "5.19.0")
 
 set(AKONADI_VERSION "5.2.0")
