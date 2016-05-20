@@ -186,6 +186,7 @@ void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
 void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection,
                                            const Akonadi::Collection &parent)
 {
+    Q_UNUSED(parent);
     m_index.index(collection);
     m_index.scheduleCommit();
 }
@@ -222,6 +223,9 @@ void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection
                                            const Akonadi::Collection &collectionSource,
                                            const Akonadi::Collection &collectionDestination)
 {
+    Q_UNUSED(collectionSource);
+    Q_UNUSED(collectionDestination);
+
     m_index.remove(collection);
     CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
     job->start();

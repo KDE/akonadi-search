@@ -163,14 +163,19 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::
 void CalendarIndexer::indexJournalItem(const Akonadi::Item &item, const KCalCore::Journal::Ptr &journal)
 {
     //TODO
+    Q_UNUSED(item);
+    Q_UNUSED(journal);
 }
 
 void CalendarIndexer::indexTodoItem(const Akonadi::Item &item, const KCalCore::Todo::Ptr &todo)
 {
     //TODO
+    Q_UNUSED(item);
+    Q_UNUSED(todo);
 }
 
 void CalendarIndexer::updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc)
 {
     //TODO
+    Q_UNUSED(calInc);
 }
