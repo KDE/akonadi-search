@@ -3,7 +3,8 @@ cmake_minimum_required(VERSION 2.8.12)
 project(AkonadiSearch)
 
 # ECM setup
-find_package(ECM 5.17.0 REQUIRED NO_MODULE)
+set(KF5_VERSION "5.19.0")
+find_package(ECM ${KF5_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -22,7 +23,6 @@ include(ECMQtDeclareLoggingCategory)
 set(PIM_VERSION "5.2.40")
 
 set(AKONADISEARCH_VERSION ${PIM_VERSION})
-set(KF5_VERSION "5.19.0")
 
 set(AKONADI_VERSION "5.2.40")
 set(KDEPIMLIBS_LIB_VERSION "5.2.40")
