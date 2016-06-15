@@ -126,7 +126,6 @@ void AkonadiIndexingAgent::reindexAll()
 
 void AkonadiIndexingAgent::reindexCollection(const qlonglong id)
 {
-
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing collection " << id;
     m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
 }

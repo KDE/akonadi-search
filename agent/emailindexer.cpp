@@ -74,6 +74,7 @@ QStringList EmailIndexer::mimeTypes() const
 
 void EmailIndexer::index(const Akonadi::Item &item)
 {
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing item" << item.id();
     if (!m_db) {
         return;
     }
@@ -116,6 +117,7 @@ void EmailIndexer::index(const Akonadi::Item &item)
 
     m_doc = 0;
     m_termGen = 0;
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "DONE Indexing item" << item.id();
 }
 
 void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Base *unstructured)
