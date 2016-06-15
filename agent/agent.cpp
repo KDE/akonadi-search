@@ -117,7 +117,7 @@ AkonadiIndexingAgent::~AkonadiIndexingAgent()
 
 void AkonadiIndexingAgent::reindexAll()
 {
-    //qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing everything";
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing everything";
     m_scheduler.abort();
     m_index.removeDatabase();
     m_index.createIndexers();
@@ -127,7 +127,7 @@ void AkonadiIndexingAgent::reindexAll()
 void AkonadiIndexingAgent::reindexCollection(const qlonglong id)
 {
 
-    //qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing collection " << id;
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing collection " << id;
     m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
 }
 
