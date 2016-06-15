@@ -237,7 +237,9 @@ void Scheduler::slotIndexingFinished(KJob *job)
     if (job->error()) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Indexing failed: " << job->errorString();
     } else {
-        m_dirtyCollections.remove(job->property("collection").value<Akonadi::Collection::Id>());
+        const Akonadi::Collection::Id collectionId = job->property("collection").value<Akonadi::Collection::Id>();
+        m_dirtyCollections.remove(collectionId);
+        status(Akonadi::AgentBase::Idle, i18n("Collection \"%1\" indexed", collectionId));
     }
     m_currentJob = 0;
     m_processTimer.start();
