@@ -236,6 +236,11 @@ void AkonadiIndexingAgent::cleanup()
     Akonadi::AgentBase::cleanup();
 }
 
+int AkonadiIndexingAgent::numberOfCollectionQueued()
+{
+    return m_scheduler.numberOfCollectionQueued();
+}
+
 void AkonadiIndexingAgent::onAbortRequested()
 {
     KConfig config(QStringLiteral("baloorc"));

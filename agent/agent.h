@@ -52,6 +52,7 @@ public:
     void reindexAll();
     void reindexCollection(const qlonglong id);
     qlonglong indexedItems(const qlonglong id);
+    int numberOfCollectionQueued();
 
     void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection) Q_DECL_OVERRIDE;
     void itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers) Q_DECL_OVERRIDE;
@@ -71,6 +72,7 @@ public:
 
     // Remove the entire db
     void cleanup() Q_DECL_OVERRIDE;
+
 
 private Q_SLOTS:
     void onAbortRequested();

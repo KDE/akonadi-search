@@ -10,5 +10,8 @@
             <arg name="item" type="x" direction="in"/>
             <arg type="x" direction="out"/>
         </method>
+        <method name="numberOfCollectionQueued" >
+           <arg type="i" direction="out"/>
+        </method>
     </interface>
 </node>

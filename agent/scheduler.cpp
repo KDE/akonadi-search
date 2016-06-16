@@ -87,6 +87,11 @@ void Scheduler::setBusyTimeout(int timeout)
     m_busyTimeout = timeout;
 }
 
+int Scheduler::numberOfCollectionQueued() const
+{
+    return m_collectionQueue.count();
+}
+
 void Scheduler::collectDirtyCollections()
 {
     KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
