@@ -130,6 +130,14 @@ void AkonadiIndexingAgent::reindexCollection(const qlonglong id)
     m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
 }
 
+void AkonadiIndexingAgent::reindexCollections(const QList<qlonglong> &ids)
+{
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing collections " << ids;
+    Q_FOREACH(qlonglong id, ids) {
+        m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
+    }
+}
+
 qlonglong AkonadiIndexingAgent::indexedItems(const qlonglong id)
 {
     return m_index.indexedItems(id);

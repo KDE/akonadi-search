@@ -51,6 +51,7 @@ public:
 
     void reindexAll();
     void reindexCollection(const qlonglong id);
+    void reindexCollections(const QList<qlonglong> &ids);
     qlonglong indexedItems(const qlonglong id);
     int numberOfCollectionQueued();
 

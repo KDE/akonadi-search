@@ -13,5 +13,10 @@
         <method name="numberOfCollectionQueued" >
            <arg type="i" direction="out"/>
         </method>
+        <method name="reindexCollections">
+          <arg name="ids" type="ax" direction="in"/>
+          <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const QList&lt;qlonglong&gt; &amp;"/>
+        </method>
+
     </interface>
 </node>
