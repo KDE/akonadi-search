@@ -11,9 +11,12 @@ set(AKONADI_SEARCH_PIM_LIB_SRCS
     notequery.cpp
     contactcompleter.cpp
     collectionquery.cpp
+    indexeditems.cpp
 
     ../search/email/agepostingsource.cpp
 )
+
+ecm_qt_declare_logging_category(AKONADI_SEARCH_PIM_LIB_SRCS HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME log_akonadi_search_pim)
 
 add_library(KF5AkonadiSearchPIM ${AKONADI_SEARCH_PIM_LIB_SRCS})
 add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)
