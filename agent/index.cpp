@@ -24,6 +24,8 @@
 #include "contactindexer.h"
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
+
+#include "indexeditems.h"
 #include <AkonadiCore/ServerManager>
 #include <QDir>
 #include <QStandardPaths>
@@ -32,10 +34,12 @@
 #include <xapian/query.h>
 #include <xapian/enquire.h>
 
+using namespace Akonadi::Search::PIM;
 Index::Index(QObject *parent)
     : QObject(parent),
       m_collectionIndexer(Q_NULLPTR)
 {
+    m_indexedItems = new IndexedItems(this);
     m_commitTimer.setInterval(1000);
     m_commitTimer.setSingleShot(true);
     connect(&m_commitTimer, &QTimer::timeout, this, &Index::commit);
@@ -72,12 +76,12 @@ void Index::removeDatabase()
     m_indexer.clear();
 
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing database";
-    removeDir(emailIndexingPath());
-    removeDir(contactIndexingPath());
-    removeDir(emailContactsIndexingPath());
-    removeDir(akonotesIndexingPath());
-    removeDir(calendarIndexingPath());
-    removeDir(collectionIndexingPath());
+    removeDir(m_indexedItems->emailIndexingPath());
+    removeDir(m_indexedItems->contactIndexingPath());
+    removeDir(m_indexedItems->emailContactsIndexingPath());
+    removeDir(m_indexedItems->akonotesIndexingPath());
+    removeDir(m_indexedItems->calendarIndexingPath());
+    removeDir(m_indexedItems->collectionIndexingPath());
 }
 
 AbstractIndexer *Index::indexerForItem(const Akonadi::Item &item) const
@@ -234,9 +238,9 @@ bool Index::createIndexers()
 {
     AbstractIndexer *indexer = Q_NULLPTR;
     try {
-        QDir().mkpath(emailIndexingPath());
-        QDir().mkpath(emailContactsIndexingPath());
-        indexer = new EmailIndexer(emailIndexingPath(), emailContactsIndexingPath());
+        QDir().mkpath(m_indexedItems->emailIndexingPath());
+        QDir().mkpath(m_indexedItems->emailContactsIndexingPath());
+        indexer = new EmailIndexer(m_indexedItems->emailIndexingPath(), m_indexedItems->emailContactsIndexingPath());
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -247,8 +251,8 @@ bool Index::createIndexers()
     }
 
     try {
-        QDir().mkpath(contactIndexingPath());
-        indexer = new ContactIndexer(contactIndexingPath());
+        QDir().mkpath(m_indexedItems->contactIndexingPath());
+        indexer = new ContactIndexer(m_indexedItems->contactIndexingPath());
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -259,8 +263,8 @@ bool Index::createIndexers()
     }
 
     try {
-        QDir().mkpath(akonotesIndexingPath());
-        indexer = new AkonotesIndexer(akonotesIndexingPath());
+        QDir().mkpath(m_indexedItems->akonotesIndexingPath());
+        indexer = new AkonotesIndexer(m_indexedItems->akonotesIndexingPath());
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -271,8 +275,8 @@ bool Index::createIndexers()
     }
 
     try {
-        QDir().mkpath(calendarIndexingPath());
-        indexer = new CalendarIndexer(calendarIndexingPath());
+        QDir().mkpath(m_indexedItems->calendarIndexingPath());
+        indexer = new CalendarIndexer(m_indexedItems->calendarIndexingPath());
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -283,8 +287,8 @@ bool Index::createIndexers()
     }
 
     try {
-        QDir().mkpath(collectionIndexingPath());
-        m_collectionIndexer = new CollectionIndexer(collectionIndexingPath());
+        QDir().mkpath(m_indexedItems->collectionIndexingPath());
+        m_collectionIndexer = new CollectionIndexer(m_indexedItems->collectionIndexingPath());
     } catch (const Xapian::DatabaseError &e) {
         delete m_collectionIndexer;
         m_collectionIndexer = Q_NULLPTR;
@@ -317,126 +321,17 @@ void Index::commit()
     }
 }
 
-void Index::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath)
-{
-    Xapian::Database db;
-    try {
-        db = Xapian::Database(QFile::encodeName(dbPath).constData());
-    } catch (const Xapian::DatabaseError &e) {
-        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
-        return;
-    }
-    const std::string term = QString::fromLatin1("C%1").arg(collectionId).toStdString();
-    Xapian::Query query(term);
-    Xapian::Enquire enquire(db);
-    enquire.set_query(query);
-
-    Xapian::MSet mset = enquire.get_mset(0, UINT_MAX);
-    Xapian::MSetIterator it = mset.begin();
-    for (; it != mset.end(); it++) {
-        indexed << *it;
-    }
-}
-
 void Index::findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId)
 {
-    findIndexedInDatabase(indexed, collectionId, emailIndexingPath());
-    findIndexedInDatabase(indexed, collectionId, contactIndexingPath());
-    findIndexedInDatabase(indexed, collectionId, akonotesIndexingPath());
-    findIndexedInDatabase(indexed, collectionId, calendarIndexingPath());
+    m_indexedItems->findIndexed(indexed, collectionId);
 }
 
 qlonglong Index::indexedItems(const qlonglong id)
 {
-    const std::string term = QString::fromLatin1("C%1").arg(id).toStdString();
-    return indexedItemsInDatabase(term, emailIndexingPath())
-           + indexedItemsInDatabase(term, contactIndexingPath())
-           + indexedItemsInDatabase(term, akonotesIndexingPath())
-           + indexedItemsInDatabase(term, calendarIndexingPath());
-}
-
-qlonglong Index::indexedItemsInDatabase(const std::string &term, const QString &dbPath) const
-{
-    Xapian::Database db;
-    try {
-        db = Xapian::Database(QFile::encodeName(dbPath).constData());
-    } catch (const Xapian::DatabaseError &e) {
-        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
-        return 0;
-    }
-    return db.get_termfreq(term);
+    return m_indexedItems->indexedItems(id);
 }
 
 void Index::setOverrideDbPrefixPath(const QString &path)
 {
-    m_overridePrefixPath = path;
-}
-
-QString Index::dbPath(const QString &dbName) const
-{
-    const QString cachedPath = m_cachePath.value(dbName);
-    if (!cachedPath.isEmpty()) {
-        return cachedPath;
-    }
-    if (!m_overridePrefixPath.isEmpty()) {
-        const QString path = QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);
-        m_cachePath.insert(dbName, path);
-        return path;
-    }
-
-    // First look into the old location from Baloo times in ~/.local/share/baloo,
-    // because we don't migrate the database files automatically.
-    QString basePath;
-    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
-        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
-    } else {
-        basePath = QStringLiteral("baloo");
-    }
-    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
-    if (QDir(dbPath).exists()) {
-        m_cachePath.insert(dbName, dbPath);
-        return dbPath;
-    }
-
-    // If the database does not exist in old Baloo folders, than use the new
-    // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
-    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
-        basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
-    } else {
-        basePath = QStringLiteral("akonadi/search_db");
-    }
-    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
-    QDir().mkpath(dbPath);
-    m_cachePath.insert(dbName, dbPath);
-    return dbPath;
-}
-
-QString Index::emailIndexingPath() const
-{
-    return dbPath(QStringLiteral("email"));
-}
-
-QString Index::contactIndexingPath() const
-{
-    return dbPath(QStringLiteral("contacts"));
-}
-
-QString Index::emailContactsIndexingPath() const
-{
-    return dbPath(QStringLiteral("emailContacts"));
-}
-
-QString Index::akonotesIndexingPath() const
-{
-    return dbPath(QStringLiteral("notes"));
-}
-
-QString Index::calendarIndexingPath() const
-{
-    return dbPath(QStringLiteral("calendars"));
-}
-
-QString Index::collectionIndexingPath() const
-{
-    return dbPath(QStringLiteral("collections"));
+    m_indexedItems->setOverrideDbPrefixPath(path);
 }

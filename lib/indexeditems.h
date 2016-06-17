@@ -45,6 +45,14 @@ public:
     qlonglong indexedItems(const qlonglong id);
 
     void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
+    void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId);
+
+    QString emailIndexingPath() const;
+    QString collectionIndexingPath() const;
+    QString calendarIndexingPath() const;
+    QString akonotesIndexingPath() const;
+    QString emailContactsIndexingPath() const;
+    QString contactIndexingPath() const;
 
 private:
     IndexedItemsPrivate *const d;

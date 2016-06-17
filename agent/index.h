@@ -28,7 +28,16 @@
 #include <AkonadiCore/item.h>
 #include "abstractindexer.h"
 #include "collectionindexer.h"
-
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
+class IndexedItems;
+}
+}
+}
 /**
  * Maintains the variuous indexers and databases
  */
@@ -74,20 +83,10 @@ private:
     void addIndexer(AbstractIndexer *indexer);
     AbstractIndexer *indexerForItem(const Akonadi::Item &item) const;
     QList<AbstractIndexer *> indexersForMimetypes(const QStringList &mimeTypes) const;
-    virtual qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
-    virtual void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
-
-    QString dbPath(const QString &dbName) const;
-    QString emailIndexingPath() const;
-    QString contactIndexingPath() const;
-    QString emailContactsIndexingPath() const;
-    QString akonotesIndexingPath() const;
-    QString calendarIndexingPath() const;
-    QString collectionIndexingPath() const;
-    QString m_overridePrefixPath;
 
     QList<AbstractIndexer *> m_listIndexer;
     QHash<QString, AbstractIndexer *> m_indexer;
+    Akonadi::Search::PIM::IndexedItems *m_indexedItems;
     mutable QHash<QString, QString> m_cachePath;
     QTimer m_commitTimer;
     CollectionIndexer *m_collectionIndexer;

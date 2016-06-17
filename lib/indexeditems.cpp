@@ -191,6 +191,7 @@ IndexedItems::~IndexedItems()
 void IndexedItems::setOverrideDbPrefixPath(const QString &path)
 {
     d->m_overridePrefixPath = path;
+    d->m_cachePath.clear();
 }
 
 qlonglong IndexedItems::indexedItems(const qlonglong id)
@@ -201,4 +202,39 @@ qlonglong IndexedItems::indexedItems(const qlonglong id)
 void IndexedItems::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath)
 {
     d->findIndexedInDatabase(indexed, collectionId, dbPath);
+}
+
+void IndexedItems::findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId)
+{
+    d->findIndexed(indexed, collectionId);
+}
+
+QString IndexedItems::emailIndexingPath() const
+{
+    return d->emailIndexingPath();
+}
+
+QString IndexedItems::collectionIndexingPath() const
+{
+    return d->collectionIndexingPath();
+}
+
+QString IndexedItems::calendarIndexingPath() const
+{
+    return d->calendarIndexingPath();
+}
+
+QString IndexedItems::akonotesIndexingPath() const
+{
+    return d->akonotesIndexingPath();
+}
+
+QString IndexedItems::emailContactsIndexingPath() const
+{
+    return d->emailContactsIndexingPath();
+}
+
+QString IndexedItems::contactIndexingPath() const
+{
+    return d->contactIndexingPath();
 }
