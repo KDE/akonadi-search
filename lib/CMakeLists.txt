@@ -49,6 +49,7 @@ install(FILES
     contactcompleter.h
     notequery.h
     collectionquery.h
+    indexeditems.h
 
     resultiterator.h
     ${CMAKE_CURRENT_BINARY_DIR}/search_pim_export.h
