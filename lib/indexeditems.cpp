@@ -52,6 +52,8 @@ public:
     QString m_overridePrefixPath;
     qlonglong indexedItems(const qlonglong id);
     qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
+    void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
+    void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId);
 };
 
 
@@ -145,6 +147,35 @@ qlonglong IndexedItemsPrivate::indexedItems(const qlonglong id)
            + indexedItemsInDatabase(term, calendarIndexingPath());
 }
 
+void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath)
+{
+    Xapian::Database db;
+    try {
+        db = Xapian::Database(QFile::encodeName(dbPath).constData());
+    } catch (const Xapian::DatabaseError &e) {
+        qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
+        return;
+    }
+    const std::string term = QString::fromLatin1("C%1").arg(collectionId).toStdString();
+    Xapian::Query query(term);
+    Xapian::Enquire enquire(db);
+    enquire.set_query(query);
+
+    Xapian::MSet mset = enquire.get_mset(0, UINT_MAX);
+    Xapian::MSetIterator it = mset.begin();
+    for (; it != mset.end(); it++) {
+        indexed << *it;
+    }
+}
+
+void IndexedItemsPrivate::findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId)
+{
+    findIndexedInDatabase(indexed, collectionId, emailIndexingPath());
+    findIndexedInDatabase(indexed, collectionId, contactIndexingPath());
+    findIndexedInDatabase(indexed, collectionId, akonotesIndexingPath());
+    findIndexedInDatabase(indexed, collectionId, calendarIndexingPath());
+}
+
 IndexedItems::IndexedItems(QObject *parent)
     : QObject(parent),
       d(new Akonadi::Search::PIM::IndexedItemsPrivate())
@@ -165,4 +196,9 @@ void IndexedItems::setOverrideDbPrefixPath(const QString &path)
 qlonglong IndexedItems::indexedItems(const qlonglong id)
 {
     return d->indexedItems(id);
+}
+
+void IndexedItems::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath)
+{
+    d->findIndexedInDatabase(indexed, collectionId, dbPath);
 }

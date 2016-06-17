@@ -24,6 +24,7 @@
 
 #include <QObject>
 #include "search_pim_export.h"
+#include <AkonadiCore/Item>
 
 namespace Akonadi
 {
@@ -42,6 +43,8 @@ public:
     void setOverrideDbPrefixPath(const QString &path);
 
     qlonglong indexedItems(const qlonglong id);
+
+    void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
 
 private:
     IndexedItemsPrivate *const d;
