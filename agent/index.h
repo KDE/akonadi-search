@@ -87,7 +87,6 @@ private:
     QList<AbstractIndexer *> m_listIndexer;
     QHash<QString, AbstractIndexer *> m_indexer;
     Akonadi::Search::PIM::IndexedItems *m_indexedItems;
-    mutable QHash<QString, QString> m_cachePath;
     QTimer m_commitTimer;
     CollectionIndexer *m_collectionIndexer;
 };
