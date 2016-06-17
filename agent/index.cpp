@@ -374,8 +374,14 @@ void Index::setOverrideDbPrefixPath(const QString &path)
 
 QString Index::dbPath(const QString &dbName) const
 {
+    const QString cachedPath = m_cachePath.value(dbName);
+    if (!cachedPath.isEmpty()) {
+        return cachedPath;
+    }
     if (!m_overridePrefixPath.isEmpty()) {
-        return QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);
+        const QString path = QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);
+        m_cachePath.insert(dbName, path);
+        return path;
     }
 
     // First look into the old location from Baloo times in ~/.local/share/baloo,
@@ -388,6 +394,7 @@ QString Index::dbPath(const QString &dbName) const
     }
     QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
     if (QDir(dbPath).exists()) {
+        m_cachePath.insert(dbName, dbPath);
         return dbPath;
     }
 
@@ -400,6 +407,7 @@ QString Index::dbPath(const QString &dbName) const
     }
     dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
     QDir().mkpath(dbPath);
+    m_cachePath.insert(dbName, dbPath);
     return dbPath;
 }
 
