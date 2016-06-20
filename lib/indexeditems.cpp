@@ -25,10 +25,7 @@
 #include <QHash>
 #include <QDir>
 #include <AkonadiCore/ServerManager>
-#include <xapian/error.h>
-#include <xapian/database.h>
-#include <xapian/query.h>
-#include <xapian/enquire.h>
+#include <xapian.h>
 
 
 using namespace Akonadi::Search::PIM;

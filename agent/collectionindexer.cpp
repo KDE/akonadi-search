@@ -23,10 +23,6 @@
 #include <QString>
 #include <QStringList>
 #include <xapian.h>
-#include <xapian/database.h>
-#include <xapian/query.h>
-#include <xapian/enquire.h>
-#include <xapian/termgenerator.h>
 #include <AkonadiCore/collectionidentificationattribute.h>
 #include <AkonadiCore/AttributeFactory>
 #include <xapiandocument.h>
