@@ -90,9 +90,10 @@ private Q_SLOTS:
 
     void testInitialIndexing()
     {
+        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
-        Scheduler scheduler(index, factory);
+        Scheduler scheduler(index, config, factory);
         QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
         //Wait for ready signal (indicates that indexing is complete)
@@ -104,13 +105,13 @@ private Q_SLOTS:
 
     void testIndexCollections()
     {
-        KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
-        KConfigGroup group = config.group("Akonadi");
+        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
+        KConfigGroup group = config->group("General");
         group.writeEntry("initialIndexingComplete", true);
 
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
-        Scheduler scheduler(index, factory);
+        Scheduler scheduler(index, config, factory);
         QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
 
@@ -121,7 +122,7 @@ private Q_SLOTS:
 
         //Wait for ready signal (indicates that indexing is complete)
         QTRY_COMPARE(statusSpy.count(), 1);
-        QCOMPARE(factory->indexedCollections.size(), 2);
+        QTRY_COMPARE(factory->indexedCollections.size(), 2);
         QCOMPARE(factory->indexedCollections.at(0).id(), col1.id());
         QVERIFY(!factory->fullSyncs.at(0));
         QCOMPARE(factory->indexedCollections.at(1).id(), col2.id());
@@ -130,13 +131,13 @@ private Q_SLOTS:
 
     void testIndexItems()
     {
-        KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
-        KConfigGroup group = config.group("Akonadi");
+        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
+        KConfigGroup group = config->group("General");
         group.writeEntry("initialIndexingComplete", true);
 
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
-        Scheduler scheduler(index, factory);
+        Scheduler scheduler(index, config, factory);
         QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
 
@@ -156,7 +157,7 @@ private Q_SLOTS:
 
         //Wait for ready signal (indicates that indexing is complete)
         QTRY_COMPARE(statusSpy.count(), 1);
-        QCOMPARE(factory->indexedCollections.size(), 2);
+        QTRY_COMPARE(factory->indexedCollections.size(), 2);
         QCOMPARE(factory->indexedCollections.at(0).id(), parent1.id());
         QVERIFY(!factory->fullSyncs.at(0));
         QCOMPARE(factory->indexedCollections.at(1).id(), parent2.id());
@@ -169,8 +170,8 @@ private Q_SLOTS:
 
     void testDirtyCollections()
     {
-        KConfig config(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
-        KConfigGroup group = config.group("Akonadi");
+        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
+        KConfigGroup group = config->group("General");
         group.writeEntry("initialIndexingComplete", true);
         Akonadi::Collection col1(1);
 
@@ -179,12 +180,12 @@ private Q_SLOTS:
         //Populate dirty collections
         {
             QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
-            Scheduler scheduler(index, factory);
+            Scheduler scheduler(index, config, factory);
             scheduler.scheduleCollection(col1, true);
         }
 
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
-        Scheduler scheduler(index, factory);
+        Scheduler scheduler(index, config, factory);
         QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
         scheduler.setBusyTimeout(0);
 

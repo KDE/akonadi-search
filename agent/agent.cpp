@@ -51,21 +51,28 @@
 
 AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     : AgentBase(id),
-      m_scheduler(m_index, QSharedPointer<JobFactory>(new JobFactory))
+      m_scheduler(m_index, config(), QSharedPointer<JobFactory>(new JobFactory))
 {
     lowerIOPriority();
     lowerSchedulingPriority();
     lowerPriority();
 
-    // TODO: Migrate from baloorc to custom config file
-    KConfig config(QStringLiteral("baloorc"));
-    KConfigGroup group = config.group("Akonadi");
-    const int agentIndexingVersion = group.readEntry("agentIndexingVersion", 0);
+    KConfigGroup cfg = config()->group("General");
+    int agentIndexingVersion = cfg.readEntry("agentIndexingVersion", 0);
+    if (agentIndexingVersion == 0) {
+        // Check for value in baloorc, which we used historically, and migrate
+        // to the native config file
+        KConfig baloorc(QStringLiteral("baloorc"));
+        KConfigGroup baloorcGroup = baloorc.group("Akonadi");
+        agentIndexingVersion = baloorcGroup.readEntry("agentIndexingVersion", 0);
+        cfg.writeEntry("agentIndexingVersion", agentIndexingVersion);
+    }
+
     if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
         m_index.removeDatabase();
         QTimer::singleShot(0, &m_scheduler, &Scheduler::scheduleCompleteSync);
-        group.writeEntry("agentIndexingVersion", INDEXING_AGENT_VERSION);
-        group.sync();
+        cfg.writeEntry("agentIndexingVersion", INDEXING_AGENT_VERSION);
+        cfg.sync();
     }
 
     if (!m_index.createIndexers()) {
@@ -251,8 +258,7 @@ int AkonadiIndexingAgent::numberOfCollectionQueued()
 
 void AkonadiIndexingAgent::onAbortRequested()
 {
-    KConfig config(QStringLiteral("baloorc"));
-    KConfigGroup group = config.group("Akonadi");
+    KConfigGroup group = config()->group("General");
     group.writeEntry("aborted", true);
     group.sync();
     m_scheduler.abort();
@@ -266,12 +272,19 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
     // Index items that might have changed while we were offline
     if (online) {
         //We only reindex if this is not a regular start
-        KConfig config(QStringLiteral("baloorc"));
-        KConfigGroup group = config.group("Akonadi");
-        const bool aborted = group.readEntry("aborted", false);
+        KConfigGroup cfg = config()->group("General");
+        bool aborted = cfg.readEntry("aborted", false);
+        if (!aborted) {
+            // Check baloorc which we used historically to make sure we don't
+            // miss the value
+            // TODO: Unfortunatelly we will hit this path in most cases
+            KConfig baloorc(QStringLiteral("baloorc"));
+            KConfigGroup baloorcgroup = baloorc.group("Akonadi");
+            aborted = baloorcgroup.readEntry("aborted", false);
+        }
         if (aborted) {
-            group.writeEntry("aborted", false);
-            group.sync();
+            cfg.writeEntry("aborted", false);
+            cfg.sync();
             m_scheduler.scheduleCompleteSync();
         }
     } else {

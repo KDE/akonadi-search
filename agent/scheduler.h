@@ -27,6 +27,7 @@
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/Item>
 #include "index.h"
+#include <KSharedConfig>
 
 class CollectionIndexingJob;
 
@@ -50,7 +51,7 @@ class Scheduler : public QObject
 {
     Q_OBJECT
 public:
-    explicit Scheduler(Index &index, const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(), QObject *parent = 0);
+    explicit Scheduler(Index &index, const KSharedConfigPtr &config, const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(), QObject *parent = 0);
     virtual ~Scheduler();
     void addItem(const Akonadi::Item &);
     void scheduleCollection(const Akonadi::Collection &, bool fullSync = false);
@@ -81,6 +82,7 @@ private Q_SLOTS:
 private:
     void collectDirtyCollections();
 
+    KSharedConfigPtr m_config;
     QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> > m_queues;
     QQueue<Akonadi::Collection::Id> m_collectionQueue;
     Index &m_index;
