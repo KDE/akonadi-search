@@ -1,6 +1,6 @@
 ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_debug.h
     IDENTIFIER AKONADI_KRUNNER_LOG
-    CATEGORY_NAME log_akonadi_krunner_plugin
+    CATEGORY_NAME org.kde.pim.akonadi_krunner_plugin
 )
 
 set(pimcontactsrunner_SRCS

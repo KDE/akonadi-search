@@ -16,7 +16,7 @@ set(AKONADI_SEARCH_PIM_LIB_SRCS
     ../search/email/agepostingsource.cpp
 )
 
-ecm_qt_declare_logging_category(AKONADI_SEARCH_PIM_LIB_SRCS HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME log_akonadi_search_pim)
+ecm_qt_declare_logging_category(AKONADI_SEARCH_PIM_LIB_SRCS HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME org.kde.pim.akonadi_search_pim)
 
 add_library(KF5AkonadiSearchPIM ${AKONADI_SEARCH_PIM_LIB_SRCS})
 add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)

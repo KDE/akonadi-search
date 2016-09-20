@@ -107,7 +107,7 @@ install(FILES
     COMPONENT Devel
 )
 
-install( FILES akonadi-search.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
+install( FILES akonadi-search.renamecategories akonadi-search.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
 
 feature_summary(WHAT ALL
     INCLUDE_QUIET_PACKAGES

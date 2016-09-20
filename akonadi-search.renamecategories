@@ -1,0 +1,5 @@
+log_akonadi_indexer_agent org.kde.pim.akonadi_indexer_agent
+log_akonadiplugin_indexer org.kde.pim.akonadiplugin_indexer
+log_akonadi_search_xapian org.kde.pim.akonadi_search_xapian
+log_akonadi_krunner_plugin org.kde.pim.akonadi_krunner_plugin
+log_akonadi_search_pim org.kde.pim.akonadi_search_pim
