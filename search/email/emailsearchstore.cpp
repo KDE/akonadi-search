@@ -117,7 +117,6 @@ QString EmailSearchStore::text(int queryId)
 
 Xapian::Query EmailSearchStore::finalizeQuery(const Xapian::Query &query)
 {
-    AgePostingSource ps(0);
-    return Xapian::Query(Xapian::Query::OP_AND_MAYBE, query, Xapian::Query(&ps));
+    return Xapian::Query(Xapian::Query::OP_AND_MAYBE, query, Xapian::Query(new AgePostingSource(0)));
 }
 
