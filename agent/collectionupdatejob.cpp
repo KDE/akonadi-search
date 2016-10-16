@@ -25,6 +25,7 @@
 #include <AkonadiCore/CollectionFetchJob>
 #include <AkonadiCore/CollectionFetchScope>
 #include <AkonadiCore/EntityDisplayAttribute>
+#include <AkonadiCore/IndexPolicyAttribute>
 
 CollectionUpdateJob::CollectionUpdateJob(Index &index, const Akonadi::Collection &col, QObject *parent)
     : KJob(parent),
@@ -36,13 +37,16 @@ CollectionUpdateJob::CollectionUpdateJob(Index &index, const Akonadi::Collection
 
 void CollectionUpdateJob::start()
 {
-    mIndex.change(mCol);
+    if (shouldIndex(mCol)) {
+        mIndex.change(mCol);
+    }
 
     //Fetch children to update the path accordingly
     Akonadi::CollectionFetchJob *fetchJob = new Akonadi::CollectionFetchJob(mCol, Akonadi::CollectionFetchJob::Recursive, this);
     fetchJob->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
     fetchJob->fetchScope().ancestorFetchScope().fetchAttribute<Akonadi::EntityDisplayAttribute>();
     fetchJob->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
+    fetchJob->fetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
     connect(fetchJob, &Akonadi::CollectionFetchJob::collectionsReceived, this, &CollectionUpdateJob::onCollectionsReceived);
     connect(fetchJob, &KJob::result, this, &CollectionUpdateJob::onCollectionsFetched);
 }
@@ -51,7 +55,9 @@ void CollectionUpdateJob::onCollectionsReceived(const Akonadi::Collection::List 
 {
     //Required to update the path
     Q_FOREACH (const Akonadi::Collection &child, list) {
-        mIndex.change(child);
+        if (shouldIndex(mCol)) {
+            mIndex.change(child);
+        }
     }
 }
 
@@ -63,3 +69,9 @@ void CollectionUpdateJob::onCollectionsFetched(KJob *job)
     emitResult();
 }
 
+bool CollectionUpdateJob::shouldIndex(const Akonadi::Collection &col) const
+{
+    return !col.isVirtual()
+            && (!mCol.hasAttribute<Akonadi::IndexPolicyAttribute>()
+                || mCol.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
+}

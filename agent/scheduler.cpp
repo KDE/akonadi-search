@@ -26,6 +26,7 @@
 #include <AkonadiCore/CollectionFetchScope>
 #include <AkonadiAgentBase/AgentBase>
 #include <AkonadiCore/ServerManager>
+#include <AkonadiCore/IndexPolicyAttribute>
 #include <KLocalizedString>
 #include <KConfigGroup>
 #include <QTimer>
@@ -141,6 +142,7 @@ void Scheduler::scheduleCompleteSync()
                 Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
+        job->fetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
         connect(job, &KJob::finished, this, &Scheduler::slotRootCollectionsFetched);
         job->start();
     }
@@ -151,6 +153,7 @@ void Scheduler::scheduleCompleteSync()
                 Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
+        job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
         connect(job, &KJob::finished, this, &Scheduler::slotCollectionsToIndexFetched);
         job->start();
     }
@@ -165,6 +168,10 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
             continue;
         }
         if (c == Akonadi::Collection::root()) {
+            continue;
+        }
+        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() &&
+            !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         scheduleCollection(c, true);
@@ -186,6 +193,10 @@ void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
             continue;
         }
         if (c == Akonadi::Collection::root()) {
+            continue;
+        }
+        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() &&
+            !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         m_index.index(c);
