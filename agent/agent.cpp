@@ -91,6 +91,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     changeRecorder()->itemFetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
     changeRecorder()->itemFetchScope().setFetchRemoteIdentification(false);
     changeRecorder()->itemFetchScope().setFetchModificationTime(false);
+    changeRecorder()->itemFetchScope().fetchFullPayload(true);
     changeRecorder()->collectionFetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
     changeRecorder()->collectionFetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
     changeRecorder()->collectionFetchScope().ancestorFetchScope().fetchAttribute<Akonadi::EntityDisplayAttribute>();
