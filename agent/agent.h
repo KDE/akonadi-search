@@ -80,6 +80,9 @@ private Q_SLOTS:
     void onOnlineChanged(bool online);
 
 private:
+    bool shouldIndex(const Akonadi::Item &item) const;
+    bool shouldIndex(const Akonadi::Collection &collection) const;
+
     Index m_index;
     Scheduler m_scheduler;
 };

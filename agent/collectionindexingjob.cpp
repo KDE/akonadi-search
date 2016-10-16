@@ -28,6 +28,7 @@
 #include <AkonadiCore/CollectionFetchScope>
 #include <AkonadiCore/ServerManager>
 #include <AkonadiCore/CollectionStatistics>
+#include <AkonadiCore/IndexPolicyAttribute>
 #include <KLocalizedString>
 
 CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col,
@@ -58,6 +59,7 @@ void CollectionIndexingJob::start()
     Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(m_collection, Akonadi::CollectionFetchJob::Base);
     job->fetchScope().setIncludeStatistics(true);
     job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
+    job->fetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
     connect(job, &KJob::finished, this, &CollectionIndexingJob::slotOnCollectionFetched);
     job->start();
 }
@@ -71,6 +73,14 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
         return;
     }
     m_collection = static_cast<Akonadi::CollectionFetchJob *>(job)->collections().at(0);
+    if (m_collection.isVirtual()
+        || (m_collection.hasAttribute<Akonadi::IndexPolicyAttribute>()
+            && !m_collection.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()))
+    {
+        emitResult();
+        return;
+    }
+
     Q_EMIT status(Akonadi::AgentBase::Running, i18n("Indexing collection: %1", m_collection.displayName()));
     Q_EMIT percent(0);
 
