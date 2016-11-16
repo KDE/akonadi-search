@@ -20,7 +20,7 @@ include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 
 
-set(PIM_VERSION "5.3.80")
+set(PIM_VERSION "5.4.40")
 
 set(AKONADISEARCH_VERSION ${PIM_VERSION})
 
