@@ -18,6 +18,8 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
+include(ECMCoverageOption)
+
 
 
 set(PIM_VERSION "5.4.40")
