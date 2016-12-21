@@ -284,7 +284,7 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
     return Term();
 }
 
-QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint64> &collections, const QStringList &mimeTypes)
+QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qint64> &collections, const QStringList &mimeTypes)
 {
     const Akonadi::SearchQuery searchQuery = Akonadi::SearchQuery::fromJSON(akonadiQuery.toLatin1());
     if (searchQuery.isNull()) {
