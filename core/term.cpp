@@ -307,7 +307,7 @@ QVariant tryConvert(const QVariant &var)
             return var;
         }
 
-        if (!var.toString().contains(QStringLiteral("T"))) {
+        if (!var.toString().contains(QLatin1Char('T'))) {
             return QVariant(var.toDate());
         }
         return dt;
