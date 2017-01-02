@@ -27,7 +27,7 @@
 using namespace Akonadi::Search;
 
 XapianQueryParser::XapianQueryParser()
-    : m_db(0)
+    : m_db(Q_NULLPTR)
     , m_autoExpand(true)
 {
 }

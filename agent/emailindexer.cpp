@@ -29,17 +29,17 @@
 #include <KEmailAddress>
 
 EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath):
-    AbstractIndexer(), m_doc(0), m_termGen(0), m_contactDb(0)
+    AbstractIndexer(), m_doc(Q_NULLPTR), m_termGen(Q_NULLPTR), m_contactDb(Q_NULLPTR)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
-        m_db = 0;
+        m_db = Q_NULLPTR;
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
-        m_db = 0;
+        m_db = Q_NULLPTR;
     }
 
     try {
@@ -47,10 +47,10 @@ EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath):
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
-        m_contactDb = 0;
+        m_contactDb = Q_NULLPTR;
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
-        m_contactDb = 0;
+        m_contactDb = Q_NULLPTR;
     }
 }
 
@@ -115,8 +115,8 @@ void EmailIndexer::index(const Akonadi::Item &item)
     delete m_doc;
     delete m_termGen;
 
-    m_doc = 0;
-    m_termGen = 0;
+    m_doc = Q_NULLPTR;
+    m_termGen = Q_NULLPTR;
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "DONE Indexing item" << item.id();
 }
 
@@ -242,7 +242,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
-        processPart(msg.data(), 0);
+        processPart(msg.data(), Q_NULLPTR);
     }
 }
 

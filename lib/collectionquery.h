@@ -69,7 +69,7 @@ public:
 
 private:
     //@cond PRIVATE
-    class Private;
+    struct Private;
     Private *const d;
     //@endcond
 };

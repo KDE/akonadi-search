@@ -50,14 +50,14 @@ Query *Query::fromJSON(const QByteArray &json)
     QJsonDocument doc = QJsonDocument::fromJson(json, &error);
     if (doc.isNull()) {
         qWarning() << "Could not parse json query" << error.errorString();
-        return 0;
+        return Q_NULLPTR;
     }
 
     QVariantMap result = doc.toVariant().toMap();
     const QString type = result[QStringLiteral("type")].toString().toLower();
     if (type != QLatin1String("contact")) {
         qWarning() << "Can only handle contact queries";
-        return 0;
+        return Q_NULLPTR;
     }
 
     ContactQuery *cq = new ContactQuery();
