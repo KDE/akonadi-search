@@ -24,7 +24,7 @@ class AkonadiSearchDebugDialogTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit AkonadiSearchDebugDialogTest(QObject *parent = Q_NULLPTR);
+    explicit AkonadiSearchDebugDialogTest(QObject *parent = nullptr);
     ~AkonadiSearchDebugDialogTest();
 
 private Q_SLOTS:

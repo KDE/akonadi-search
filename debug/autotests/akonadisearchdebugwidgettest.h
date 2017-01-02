@@ -24,7 +24,7 @@ class AkonadiSearchDebugWidgetTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit AkonadiSearchDebugWidgetTest(QObject *parent = Q_NULLPTR);
+    explicit AkonadiSearchDebugWidgetTest(QObject *parent = nullptr);
     ~AkonadiSearchDebugWidgetTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();

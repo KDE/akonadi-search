@@ -28,7 +28,7 @@ class PIMContactsRunnerConfig : public KCModule
 {
     Q_OBJECT
 public:
-    explicit PIMContactsRunnerConfig(QWidget *parent = Q_NULLPTR,
+    explicit PIMContactsRunnerConfig(QWidget *parent = nullptr,
                                      const QVariantList &args = QVariantList());
 
 public Q_SLOTS:

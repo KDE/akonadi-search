@@ -38,7 +38,7 @@ XapianSearchStore::XapianSearchStore(QObject *parent)
     : SearchStore(parent)
     , m_mutex(QMutex::Recursive)
     , m_nextId(1)
-    , m_db(Q_NULLPTR)
+    , m_db(nullptr)
 {
 }
 
@@ -52,7 +52,7 @@ void XapianSearchStore::setDbPath(const QString &path)
     m_dbPath = path;
 
     delete m_db;
-    m_db = Q_NULLPTR;
+    m_db = nullptr;
 
     try {
         m_db = new Xapian::Database(m_dbPath.toUtf8().constData());

@@ -36,7 +36,7 @@ class Akonadi::Search::AkonadiSearchDebugDialogPrivate
 {
 public:
     AkonadiSearchDebugDialogPrivate()
-        : mAkonadiSearchDebugWidget(Q_NULLPTR)
+        : mAkonadiSearchDebugWidget(nullptr)
     {
 
     }

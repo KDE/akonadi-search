@@ -38,7 +38,7 @@ class CalendarSearchStore : public PIMSearchStore
     Q_PLUGIN_METADATA(IID "org.kde.Akonadi.Search.SearchStore" FILE "calendarsearchstore.json") 
 #endif
 public:
-    explicit CalendarSearchStore(QObject *parent = Q_NULLPTR);
+    explicit CalendarSearchStore(QObject *parent = nullptr);
 
     QStringList types() Q_DECL_OVERRIDE;
 };

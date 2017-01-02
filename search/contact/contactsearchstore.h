@@ -38,7 +38,7 @@ class ContactSearchStore : public PIMSearchStore
     Q_PLUGIN_METADATA(IID "org.kde.Akonadi.Search.SearchStore" FILE "contactsearchstore.json")
 #endif
 public:
-    explicit ContactSearchStore(QObject *parent = Q_NULLPTR);
+    explicit ContactSearchStore(QObject *parent = nullptr);
 
     QStringList types() Q_DECL_OVERRIDE;
 };

@@ -30,7 +30,7 @@
 #include <QTextDocument>
 
 CalendarIndexer::CalendarIndexer(const QString &path)
-    : AbstractIndexer(), m_db(Q_NULLPTR)
+    : AbstractIndexer(), m_db(nullptr)
 {
     try {
         m_db = new Akonadi::Search::XapianDatabase(path, true);
@@ -38,10 +38,10 @@ CalendarIndexer::CalendarIndexer(const QString &path)
     catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
-        m_db = Q_NULLPTR;
+        m_db = nullptr;
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
-        m_db = Q_NULLPTR;
+        m_db = nullptr;
     }
 }
 

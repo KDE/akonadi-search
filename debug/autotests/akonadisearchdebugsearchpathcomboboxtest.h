@@ -24,7 +24,7 @@ class AkonadiSearchDebugSearchPathComboBoxTest : public QObject
 {
     Q_OBJECT
 public:
-    explicit AkonadiSearchDebugSearchPathComboBoxTest(QObject *parent = Q_NULLPTR);
+    explicit AkonadiSearchDebugSearchPathComboBoxTest(QObject *parent = nullptr);
     ~AkonadiSearchDebugSearchPathComboBoxTest();
 private Q_SLOTS:
     void shouldHaveDefaultValue();

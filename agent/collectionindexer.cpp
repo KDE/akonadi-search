@@ -37,10 +37,10 @@ CollectionIndexer::CollectionIndexer(const QString &path)
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
-        m_db = Q_NULLPTR;
+        m_db = nullptr;
     } catch (const Xapian::Error &e) {
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
-        m_db = Q_NULLPTR;
+        m_db = nullptr;
     }
 }
 

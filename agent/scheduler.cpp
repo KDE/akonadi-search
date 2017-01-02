@@ -50,7 +50,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config,
     :   QObject(parent),
         m_config(config),
         m_index(index),
-        m_currentJob(Q_NULLPTR),
+        m_currentJob(nullptr),
         m_jobFactory(jobFactory),
         m_busyTimeout(5000)
 {
@@ -221,7 +221,7 @@ void Scheduler::abort()
     if (m_currentJob) {
         m_currentJob->kill(KJob::Quietly);
     }
-    m_currentJob = Q_NULLPTR;
+    m_currentJob = nullptr;
     collectDirtyCollections();
     m_collectionQueue.clear();
     status(Akonadi::AgentBase::Idle, i18n("Ready"));
@@ -270,6 +270,6 @@ void Scheduler::slotIndexingFinished(KJob *job)
         m_dirtyCollections.remove(collectionId);
         status(Akonadi::AgentBase::Idle, i18n("Collection \"%1\" indexed", collectionId));
     }
-    m_currentJob = Q_NULLPTR;
+    m_currentJob = nullptr;
     m_processTimer.start();
 }

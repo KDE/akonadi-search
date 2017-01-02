@@ -33,7 +33,7 @@ class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AkonadiSearchDebugWidget(QWidget *parent = Q_NULLPTR);
+    explicit AkonadiSearchDebugWidget(QWidget *parent = nullptr);
     ~AkonadiSearchDebugWidget();
 
     void setAkonadiId(Akonadi::Item::Id akonadiId);

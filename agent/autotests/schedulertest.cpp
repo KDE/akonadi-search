@@ -34,7 +34,7 @@ class DummyIndexingJob : public CollectionIndexingJob
     Q_OBJECT
 public:
     DummyIndexingJob(Index &index, const Akonadi::Collection &col,
-                     const QList<Akonadi::Item::Id> &pending, QObject *parent = Q_NULLPTR)
+                     const QList<Akonadi::Item::Id> &pending, QObject *parent = nullptr)
         : CollectionIndexingJob(index, col, pending, parent)
     {
     }
@@ -61,7 +61,7 @@ public:
     virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index,
                                                                const Akonadi::Collection &col,
                                                                const QList<Akonadi::Item::Id> &pending,
-                                                               bool fullSync, QObject *parent = Q_NULLPTR)
+                                                               bool fullSync, QObject *parent = nullptr)
     {
         Q_FOREACH (qint64 id, pending) {
             indexedItems << Akonadi::Item(id);

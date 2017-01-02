@@ -23,7 +23,7 @@
 using namespace Akonadi::Search;
 AkonadiSearchDebugSearchJob::AkonadiSearchDebugSearchJob(QObject *parent)
     : QObject(parent),
-      mProcess(Q_NULLPTR)
+      mProcess(nullptr)
 {
 
 }
@@ -59,7 +59,7 @@ void AkonadiSearchDebugSearchJob::slotReadStandard()
     Q_EMIT result(QString::fromUtf8(stdStrg));
     mProcess->close();
     mProcess->deleteLater();
-    mProcess = Q_NULLPTR;
+    mProcess = nullptr;
     deleteLater();
 }
 
@@ -69,7 +69,7 @@ void AkonadiSearchDebugSearchJob::slotReadError()
     Q_EMIT error(QString::fromUtf8(errorStrg));
     mProcess->close();
     mProcess->deleteLater();
-    mProcess = Q_NULLPTR;
+    mProcess = nullptr;
     deleteLater();
 }
 

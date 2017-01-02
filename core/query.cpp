@@ -229,7 +229,7 @@ ResultIterator Query::exec()
         return ResultIterator();
     }
 
-    SearchStore *storeMatch = Q_NULLPTR;
+    SearchStore *storeMatch = nullptr;
     Q_FOREACH (const QSharedPointer<SearchStore> &store, *s_searchStores) {
         bool matches = true;
         Q_FOREACH (const QString &type, types()) {

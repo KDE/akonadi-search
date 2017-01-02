@@ -32,7 +32,7 @@ class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit AkonadiSearchDebugDialog(QWidget *parent = Q_NULLPTR);
+    explicit AkonadiSearchDebugDialog(QWidget *parent = nullptr);
     ~AkonadiSearchDebugDialog();
 
     void setAkonadiId(Akonadi::Item::Id akonadiId);

@@ -37,7 +37,7 @@ class AKONADI_SEARCH_PIM_EXPORT IndexedItems : public QObject
 {
     Q_OBJECT
 public:
-    explicit IndexedItems(QObject *parent = Q_NULLPTR);
+    explicit IndexedItems(QObject *parent = nullptr);
     ~IndexedItems();
 
     void setOverrideDbPrefixPath(const QString &path);

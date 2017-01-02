@@ -34,7 +34,7 @@
 using namespace Akonadi::Search::PIM;
 Index::Index(QObject *parent)
     : QObject(parent),
-      m_collectionIndexer(Q_NULLPTR)
+      m_collectionIndexer(nullptr)
 {
     m_indexedItems = new IndexedItems(this);
     m_commitTimer.setInterval(1000);
@@ -45,7 +45,7 @@ Index::Index(QObject *parent)
 Index::~Index()
 {
     delete m_collectionIndexer;
-    m_collectionIndexer = Q_NULLPTR;
+    m_collectionIndexer = nullptr;
     qDeleteAll(m_listIndexer);
 }
 
@@ -67,7 +67,7 @@ static void removeDir(const QString &dirName)
 void Index::removeDatabase()
 {
     delete m_collectionIndexer;
-    m_collectionIndexer = Q_NULLPTR;
+    m_collectionIndexer = nullptr;
     qDeleteAll(m_listIndexer);
     m_listIndexer.clear();
     m_indexer.clear();
@@ -233,7 +233,7 @@ void Index::addIndexer(AbstractIndexer *indexer)
 
 bool Index::createIndexers()
 {
-    AbstractIndexer *indexer = Q_NULLPTR;
+    AbstractIndexer *indexer = nullptr;
     try {
         QDir().mkpath(m_indexedItems->emailIndexingPath());
         QDir().mkpath(m_indexedItems->emailContactsIndexingPath());
@@ -288,11 +288,11 @@ bool Index::createIndexers()
         m_collectionIndexer = new CollectionIndexer(m_indexedItems->collectionIndexingPath());
     } catch (const Xapian::DatabaseError &e) {
         delete m_collectionIndexer;
-        m_collectionIndexer = Q_NULLPTR;
+        m_collectionIndexer = nullptr;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         delete m_collectionIndexer;
-        m_collectionIndexer = Q_NULLPTR;
+        m_collectionIndexer = nullptr;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 

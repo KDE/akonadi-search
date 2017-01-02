@@ -36,7 +36,7 @@
 using namespace Akonadi::Search;
 
 XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)
-    : m_db(Q_NULLPTR)
+    : m_db(nullptr)
     , m_writeOnly(writeOnly)
 {
     QDir().mkpath(path);

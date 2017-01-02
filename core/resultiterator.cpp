@@ -31,7 +31,7 @@ class Q_DECL_HIDDEN Akonadi::Search::ResultIteratorPrivate : public QSharedData
 public:
     ResultIteratorPrivate()
         : queryId(0)
-        , store(Q_NULLPTR)
+        , store(nullptr)
     {
     }
 

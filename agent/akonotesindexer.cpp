@@ -25,17 +25,17 @@
 #include <QTextDocument>
 
 AkonotesIndexer::AkonotesIndexer(const QString &path)
-    : AbstractIndexer(), m_db(Q_NULLPTR), m_doc(Q_NULLPTR), m_termGen(Q_NULLPTR)
+    : AbstractIndexer(), m_db(nullptr), m_doc(nullptr), m_termGen(nullptr)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
-        m_db = Q_NULLPTR;
+        m_db = nullptr;
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
-        m_db = Q_NULLPTR;
+        m_db = nullptr;
     }
 }
 
@@ -79,8 +79,8 @@ void AkonotesIndexer::index(const Akonadi::Item &item)
     delete m_doc;
     delete m_termGen;
 
-    m_doc = Q_NULLPTR;
-    m_termGen = Q_NULLPTR;
+    m_doc = nullptr;
+    m_termGen = nullptr;
 }
 
 void AkonotesIndexer::process(const KMime::Message::Ptr &msg)
@@ -103,7 +103,7 @@ void AkonotesIndexer::process(const KMime::Message::Ptr &msg)
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
-        processPart(msg.data(), Q_NULLPTR);
+        processPart(msg.data(), nullptr);
     }
 }
 

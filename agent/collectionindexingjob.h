@@ -40,7 +40,7 @@ class CollectionIndexingJob : public KJob
 public:
     explicit CollectionIndexingJob(Index &index, const Akonadi::Collection &col,
                                    const QList<Akonadi::Item::Id> &pending,
-                                   QObject *parent = Q_NULLPTR);
+                                   QObject *parent = nullptr);
     void setFullSync(bool);
     void start() Q_DECL_OVERRIDE;
 

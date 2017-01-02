@@ -45,7 +45,7 @@ class Index : public QObject
 {
     Q_OBJECT
 public:
-    explicit Index(QObject *parent = Q_NULLPTR);
+    explicit Index(QObject *parent = nullptr);
     virtual ~Index();
 
     virtual void removeDatabase();
