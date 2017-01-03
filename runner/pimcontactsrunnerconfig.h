@@ -32,9 +32,9 @@ public:
                                      const QVariantList &args = QVariantList());
 
 public Q_SLOTS:
-    void save();
-    void load();
-    void defaults();
+    void save() Q_DECL_OVERRIDE;
+    void load() Q_DECL_OVERRIDE;
+    void defaults() Q_DECL_OVERRIDE;
 
 private:
     QCheckBox *mQueryCompletionCheckBox;
