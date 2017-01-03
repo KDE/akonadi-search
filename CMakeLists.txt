@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0)
 
-project(AkonadiSearch)
+set(PIM_VERSION "5.4.41")
+project(AkonadiSearch VERSION ${PIM_VERSION})
 
 # ECM setup
 set(KF5_VERSION "5.28.0")
@@ -22,7 +23,6 @@ include(ECMCoverageOption)
 
 
 
-set(PIM_VERSION "5.4.41")
 
 set(AKONADISEARCH_VERSION ${PIM_VERSION})
 
@@ -50,7 +50,7 @@ find_package(KF5Mime ${KMIME_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
 
-ecm_setup_version(${AKONADISEARCH_VERSION}
+ecm_setup_version(PROJECT
     VARIABLE_PREFIX AKONADISEARCH
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfigVersion.cmake"
@@ -85,7 +85,7 @@ add_subdirectory(runner)
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
 
-ecm_configure_package_config_file(
+configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KF5AkonadiSearchConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
