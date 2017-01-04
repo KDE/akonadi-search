@@ -1,5 +1,5 @@
 @PACKAGE_INIT@
-
+include(CMakeFindDependencyMacro)
 find_dependency(Qt5Core)
 find_dependency(KF5CoreAddons)
 find_dependency(KF5Akonadi)
