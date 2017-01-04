@@ -10,7 +10,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)
-include(ECMPackageConfigHelpers)
+include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(FeatureSummary)
 include(KDEInstallDirs)
