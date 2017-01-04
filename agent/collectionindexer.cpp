@@ -59,7 +59,7 @@ static QByteArray getPath(const Akonadi::Collection &collection)
         col = col.parentCollection();
         pathParts.prepend(col.displayName());
     }
-    return "/" + pathParts.join(QStringLiteral("/")).toUtf8();
+    return "/" + pathParts.join(QLatin1Char('/')).toUtf8();
 }
 
 void CollectionIndexer::index(const Akonadi::Collection &collection)
