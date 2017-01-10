@@ -29,7 +29,7 @@ class AkonadiSearchDebugSearchJob : public QObject
 {
     Q_OBJECT
 public:
-    explicit AkonadiSearchDebugSearchJob(QObject *parent = Q_NULLPTR);
+    explicit AkonadiSearchDebugSearchJob(QObject *parent = nullptr);
     ~AkonadiSearchDebugSearchJob();
 
     void start();
