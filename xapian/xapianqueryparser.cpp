@@ -219,7 +219,6 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
     if (inPhrase) {
         queries << Xapian::Query(Xapian::Query::OP_PHRASE, phraseQueries.begin(), phraseQueries.end());
         phraseQueries.clear();
-        inPhrase = false;
     }
 
     if (!phraseQueries.isEmpty()) {
