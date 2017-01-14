@@ -54,7 +54,7 @@ void CollectionUpdateJob::start()
 void CollectionUpdateJob::onCollectionsReceived(const Akonadi::Collection::List &list)
 {
     //Required to update the path
-    Q_FOREACH (const Akonadi::Collection &child, list) {
+    for (const Akonadi::Collection &child : list) {
         if (shouldIndex(mCol)) {
             mIndex.change(child);
         }

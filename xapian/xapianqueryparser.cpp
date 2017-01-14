@@ -100,7 +100,7 @@ Xapian::Query makeQuery(const QString &string, int position, Xapian::Database *d
 
 bool containsSpace(const QString &string)
 {
-    Q_FOREACH (const QChar &ch, string) {
+    for (const QChar &ch : string) {
         if (ch.isSpace()) {
             return true;
         }

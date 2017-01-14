@@ -78,7 +78,7 @@ Xapian::Query XapianSearchStore::toXapianQuery(Xapian::Query::op op, const QList
     QVector<Xapian::Query> queries;
     queries.reserve(terms.size());
 
-    Q_FOREACH (const Term &term, terms) {
+    for (const Term &term : terms) {
         Xapian::Query q = toXapianQuery(term);
         queries << q;
     }

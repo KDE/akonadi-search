@@ -133,7 +133,7 @@ void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds)
 void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List &items)
 {
     qCDebug(AKONADI_INDEXER_AGENT_LOG)<<" CollectionIndexingJob::slotPendingItemsReceived " <<items.count();
-    Q_FOREACH (const Akonadi::Item &item, items) {
+    for (const Akonadi::Item &item : items) {
          qCDebug(AKONADI_INDEXER_AGENT_LOG)<<" void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List &items)"<<item.id();
         m_index.index(item);
     }
@@ -205,7 +205,7 @@ void CollectionIndexingJob::findUnindexed()
 void CollectionIndexingJob::slotUnindexedItemsReceived(const Akonadi::Item::List &items)
 {
     //qCDebug(AKONADI_INDEXER_AGENT_LOG) << "CollectionIndexingJob::slotUnindexedItemsReceived found number items :"<<items.count();
-    Q_FOREACH (const Akonadi::Item &item, items) {
+    for (const Akonadi::Item &item : items) {
         if (!m_indexedItems.remove(item.id())) {
             m_needsIndexing << item.id();
         }

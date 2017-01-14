@@ -89,7 +89,8 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     doc.indexText(name, QStringLiteral("NA"));
     doc.indexText(addresse.nickName(), QStringLiteral("NI"));
 
-    Q_FOREACH (const QString &email, addresse.emails()) {
+    const QStringList lstEmails = addresse.emails();
+    for (const QString &email : lstEmails) {
         doc.addTerm(email);
         doc.indexText(email);
     }

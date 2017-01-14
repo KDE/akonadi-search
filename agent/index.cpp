@@ -89,7 +89,7 @@ AbstractIndexer *Index::indexerForItem(const Akonadi::Item &item) const
 QList<AbstractIndexer *> Index::indexersForMimetypes(const QStringList &mimeTypes) const
 {
     QList<AbstractIndexer *> indexers;
-    Q_FOREACH (const QString &mimeType, mimeTypes) {
+    for (const QString &mimeType : mimeTypes) {
         AbstractIndexer *i = m_indexer.value(mimeType);
         if (i) {
             indexers.append(i);

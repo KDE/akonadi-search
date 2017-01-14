@@ -69,7 +69,7 @@ void SearchStore::overrideSearchStores(const QList<SearchStore *> &overrideSearc
     list->clear();
     list->reserve(overrideSearchStores.count());
 
-    Q_FOREACH (SearchStore *store, overrideSearchStores) {
+    for (SearchStore *store : overrideSearchStores) {
         list->append(QSharedPointer<SearchStore>(store));
     }
 }
@@ -92,8 +92,8 @@ SearchStore::List SearchStore::searchStores()
     QStringList plugins;
     QStringList pluginPaths;
 
-    QStringList paths = QCoreApplication::libraryPaths();
-    Q_FOREACH (const QString &libraryPath, paths) {
+    const QStringList paths = QCoreApplication::libraryPaths();
+    for (const QString &libraryPath : paths) {
         QString path(libraryPath + QStringLiteral("/akonadi"));
         QDir dir(path);
 
@@ -101,8 +101,8 @@ SearchStore::List SearchStore::searchStores()
             continue;
         }
 
-        QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
-        Q_FOREACH (const QString &fileName, entryList) {
+        const QStringList entryList = dir.entryList(QDir::Files | QDir::NoDotAndDotDot);
+        for (const QString &fileName : entryList) {
             if (plugins.contains(fileName)) {
                 continue;
             }

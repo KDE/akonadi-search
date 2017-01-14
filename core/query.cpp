@@ -105,7 +105,7 @@ void Query::addType(const QString &type)
 
 void Query::addTypes(const QStringList &typeList)
 {
-    Q_FOREACH (const QString &type, typeList) {
+    for (const QString &type : typeList) {
         addType(type);
     }
 }
