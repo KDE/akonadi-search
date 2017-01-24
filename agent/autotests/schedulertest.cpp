@@ -63,7 +63,7 @@ public:
                                                                const QList<Akonadi::Item::Id> &pending,
                                                                bool fullSync, QObject *parent = nullptr) Q_DECL_OVERRIDE
     {
-        Q_FOREACH (qint64 id, pending) {
+        for (qint64 id : pending) {
             indexedItems << Akonadi::Item(id);
         }
         indexedCollections << col;

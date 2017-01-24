@@ -89,7 +89,8 @@ private Q_SLOTS:
 
         Akonadi::CollectionFetchJob *fetchJob = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         fetchJob->exec();
-        Q_FOREACH (const Akonadi::Collection &col, fetchJob->collections()) {
+        const Akonadi::Collection::List lstCols = fetchJob->collections();
+        for (const Akonadi::Collection &col : lstCols) {
             if (col.name() == QLatin1String("foo")) {
                 itemCollection = col;
             }

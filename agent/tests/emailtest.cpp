@@ -127,7 +127,7 @@ void App::itemReceived(const Akonadi::Item::List &itemList)
     QTime timer;
     timer.start();
 
-    Q_FOREACH (const Akonadi::Item &item, itemList) {
+    for (const Akonadi::Item &item : itemList) {
         m_indexer.index(item);
     }
 

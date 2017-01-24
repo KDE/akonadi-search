@@ -113,7 +113,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     Akonadi::AgentManager *agentManager = Akonadi::AgentManager::self();
     const Akonadi::AgentInstance::List allAgents = agentManager->instances();
     // Cannot use agentManager->instance(oldInstanceName) here, it wouldn't find broken instances.
-    Q_FOREACH (const Akonadi::AgentInstance &inst, allAgents) {
+    for (const Akonadi::AgentInstance &inst : allAgents) {
         if (inst.identifier() == QLatin1String("akonadi_nepomuk_feeder")) {
             qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing old nepomuk feeder" << inst.identifier();
             agentManager->removeInstance( inst );
@@ -146,7 +146,7 @@ void AkonadiIndexingAgent::reindexCollection(const qlonglong id)
 void AkonadiIndexingAgent::reindexCollections(const QList<qlonglong> &ids)
 {
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Reindexing collections " << ids;
-    Q_FOREACH(qlonglong id, ids) {
+    for (qlonglong id : ids) {
         m_scheduler.scheduleCollection(Akonadi::Collection(id), true);
     }
 }

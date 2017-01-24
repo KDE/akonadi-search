@@ -334,7 +334,7 @@ void EmailIndexer::updateFlags(const Akonadi::Item &item,
         return;
     }
 
-    Q_FOREACH (const QByteArray &flag, removed) {
+    for (const QByteArray &flag : removed) {
         if (flag == Akonadi::MessageFlags::Seen) {
             toggleFlag(doc, "BR", "BNR");
         } else if (flag == Akonadi::MessageFlags::Flagged) {
@@ -344,7 +344,7 @@ void EmailIndexer::updateFlags(const Akonadi::Item &item,
         }
     }
 
-    Q_FOREACH (const QByteArray &flag, added) {
+    for (const QByteArray &flag : added) {
         if (flag == Akonadi::MessageFlags::Seen) {
             toggleFlag(doc, "BNR", "BR");
         } else if (flag == Akonadi::MessageFlags::Flagged) {

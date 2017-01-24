@@ -125,7 +125,7 @@ void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &fr
     if (!indexer) {
         return;
     }
-    Q_FOREACH (const Akonadi::Item &item, items) {
+    for (const Akonadi::Item &item : items) {
         try {
             indexer->move(item.id(), from.id(), to.id());
         } catch (const Xapian::Error &e) {
@@ -141,7 +141,7 @@ void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray>
     if (!indexer) {
         return;
     }
-    Q_FOREACH (const Akonadi::Item &item, items) {
+    for (const Akonadi::Item &item : items) {
         try {
             indexer->updateFlags(item, addedFlags, removedFlags);
         } catch (const Xapian::Error &e) {
@@ -153,8 +153,8 @@ void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray>
 void Index::remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTypes)
 {
     const QList<AbstractIndexer *> indexers = indexersForMimetypes(mimeTypes);
-    Q_FOREACH (Akonadi::Item::Id id, ids) {
-        Q_FOREACH (AbstractIndexer *indexer, indexers) {
+    for (Akonadi::Item::Id id : ids) {
+        for (AbstractIndexer *indexer : indexers) {
             try {
                 indexer->remove(Akonadi::Item(id));
             } catch (const Xapian::Error &e) {
@@ -170,7 +170,7 @@ void Index::remove(const Akonadi::Item::List &items)
     if (!indexer) {
         return;
     }
-    Q_FOREACH (const Akonadi::Item &item, items) {
+    for (const Akonadi::Item &item : items) {
         try {
             indexer->remove(item);
         } catch (const Xapian::Error &e) {

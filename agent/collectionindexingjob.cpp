@@ -107,7 +107,7 @@ void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds)
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "collectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds) count " << itemIds.count();
     Akonadi::Item::List items;
     items.reserve(itemIds.size());
-    Q_FOREACH (const Akonadi::Item::Id id, itemIds) {
+    for (const Akonadi::Item::Id id : itemIds) {
         items << Akonadi::Item(id);
     }
 

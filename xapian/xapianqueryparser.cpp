@@ -189,7 +189,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
             // Remove all accents
             const QString denormalized = str.normalized(QString::NormalizationForm_KD);
             QString cleanString;
-            Q_FOREACH (const QChar &ch, denormalized) {
+            for (const QChar &ch : denormalized) {
                 auto cat = ch.category();
                 if (cat != QChar::Mark_NonSpacing && cat != QChar::Mark_SpacingCombining && cat != QChar::Mark_Enclosing) {
                     cleanString.append(ch);
@@ -197,7 +197,8 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
             }
 
             str = cleanString.normalized(QString::NormalizationForm_KC);
-            Q_FOREACH (const QString &t, str.split(QLatin1Char('_'), QString::SkipEmptyParts)) {
+            const QStringList lst = str.split(QLatin1Char('_'), QString::SkipEmptyParts);
+            for (const QString &t : lst) {
                 const QString term = prefix + t;
 
                 position++;

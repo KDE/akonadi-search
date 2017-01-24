@@ -336,9 +336,9 @@ Term Term::fromVariantMap(const QVariantMap &map)
     if (andOrString.size()) {
         QList<Term> subTerms;
 
-        QVariantList list = map[andOrString].toList();
+        const QVariantList list = map[andOrString].toList();
         subTerms.reserve(list.count());
-        Q_FOREACH (const QVariant &var, list) {
+        for (const QVariant &var : list) {
             subTerms << Term::fromVariantMap(var.toMap());
         }
 

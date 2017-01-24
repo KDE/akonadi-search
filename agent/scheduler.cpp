@@ -175,7 +175,8 @@ void Scheduler::scheduleCompleteSync()
 void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 {
     Akonadi::CollectionFetchJob *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
-    Q_FOREACH (const Akonadi::Collection &c, cjob->collections()) {
+    const Akonadi::Collection::List lstCols = cjob->collections();
+    for (const Akonadi::Collection &c : lstCols) {
         //For skipping search collections
         if (c.isVirtual()) {
             continue;
@@ -200,7 +201,8 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
 {
     Akonadi::CollectionFetchJob *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
-    Q_FOREACH (const Akonadi::Collection &c, cjob->collections()) {
+    const Akonadi::Collection::List lstCols = cjob->collections();
+    for (const Akonadi::Collection &c : lstCols) {
         //For skipping search collections
         if (c.isVirtual()) {
             continue;
