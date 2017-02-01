@@ -35,8 +35,7 @@ XapianDocument::XapianDocument(const Xapian::Document &doc)
 
 void XapianDocument::addTerm(const QString &term, const QString &prefix)
 {
-    QByteArray arr = prefix.toUtf8();
-    arr += term.toUtf8();
+    const QByteArray arr = prefix.toUtf8() + term.toUtf8();
 
     m_doc.add_term(arr.constData());
 }
@@ -48,8 +47,7 @@ void XapianDocument::addBoolTerm(int term, const QString &prefix)
 
 void XapianDocument::addBoolTerm(const QString &term, const QString &prefix)
 {
-    QByteArray arr = prefix.toUtf8();
-    arr += term.toUtf8();
+    const QByteArray arr = prefix.toUtf8() + term.toUtf8();
 
     m_doc.add_boolean_term(arr.constData());
 }
