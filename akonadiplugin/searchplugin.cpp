@@ -332,7 +332,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
     if (!collections.isEmpty()) {
         Term parentTerm(Term::And);
         Term collectionTerm(Term::Or);
-        Q_FOREACH (const qint64 col, collections) {
+        for (const qint64 col : collections) {
             collectionTerm.addSubTerm(Term(QStringLiteral("collection"), QString::number(col), Term::Equal));
         }
         parentTerm.addSubTerm(collectionTerm);
