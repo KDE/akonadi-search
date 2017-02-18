@@ -226,7 +226,7 @@ private Q_SLOTS:
 
 };
 
-QTEST_MAIN(CollectionQueryTest)
+QTEST_GUILESS_MAIN(CollectionQueryTest)
 
 #include "collectionquerytest.moc"
 

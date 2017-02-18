@@ -153,7 +153,7 @@ private Q_SLOTS:
     }
 };
 
-QTEST_MAIN(IndexerTest)
+QTEST_GUILESS_MAIN(IndexerTest)
 
 #include "indexertest.moc"
 

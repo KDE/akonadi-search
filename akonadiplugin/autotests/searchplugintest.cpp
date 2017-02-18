@@ -1007,7 +1007,7 @@ private Q_SLOTS:
 
 };
 
-QTEST_MAIN(SearchPluginTest)
+QTEST_GUILESS_MAIN(SearchPluginTest)
 
 #include "searchplugintest.moc"
 
