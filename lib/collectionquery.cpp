@@ -22,6 +22,7 @@
 #include "collectionquery.h"
 #include "resultiterator_p.h"
 #include "xapian.h"
+#include "helper_p.h"
 
 #include <QList>
 #include <QFile>
@@ -131,7 +132,8 @@ ResultIterator CollectionQuery::exec()
 
     if (!d->ns.isEmpty()) {
         QList<Xapian::Query> queryList;
-        Q_FOREACH (const QString &n, d->ns) {
+        queryList.reserve(d->ns.count());
+        for (const QString &n : qAsConst(d->ns)) {
             const QByteArray term = "NS" + n.toUtf8();
             queryList << Xapian::Query(term.constData());
         }
@@ -140,7 +142,8 @@ ResultIterator CollectionQuery::exec()
 
     if (!d->mimeType.isEmpty()) {
         QList<Xapian::Query> queryList;
-        Q_FOREACH (const QString &n, d->mimeType) {
+        queryList.reserve(d->mimeType.count());
+        for (const QString &n : qAsConst(d->mimeType)) {
             const QByteArray term = "M" + n.toUtf8();
             queryList << Xapian::Query(term.constData());
         }

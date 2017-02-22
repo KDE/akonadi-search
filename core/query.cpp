@@ -232,7 +232,7 @@ ResultIterator Query::exec()
     SearchStore *storeMatch = nullptr;
     Q_FOREACH (const QSharedPointer<SearchStore> &store, *s_searchStores) {
         bool matches = true;
-        Q_FOREACH (const QString &type, types()) {
+        for (const QString &type : types()) {
             if (!store->types().contains(type)) {
                 matches = false;
                 break;
@@ -350,7 +350,8 @@ Query Query::fromJSON(const QByteArray &arr)
             QVariantHash hash = var.toHash();
 
             QHash<QString, QVariant>::const_iterator it = hash.constBegin();
-            for (; it != hash.constEnd(); ++it) {
+            const QHash<QString, QVariant>::const_iterator end = hash.constEnd();
+            for (; it != end; ++it) {
                 query.d->m_customOptions.insert(it.key(), it.value());
             }
         }
@@ -367,7 +368,7 @@ QUrl Query::toSearchUrl(const QString &title)
     QUrlQuery urlQuery;
     urlQuery.addQueryItem(QStringLiteral("json"), QString::fromUtf8(toJSON()));
 
-    if (title.size()) {
+    if (!title.isEmpty()) {
         urlQuery.addQueryItem(QStringLiteral("title"), title);
     }
 

@@ -22,6 +22,7 @@
 
 #include "emailquery.h"
 #include "resultiterator_p.h"
+#include "helper_p.h"
 #include "xapian.h"
 #include "../search/email/agepostingsource.h"
 
@@ -219,7 +220,7 @@ ResultIterator EmailQuery::exec()
         parser.add_prefix("", "BCC");
 
         // vHanda: Do we really need the query parser over here?
-        Q_FOREACH (const QString &str, d->involves) {
+        for (const QString &str : qAsConst(d->involves)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -238,7 +239,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "T");
 
-        Q_FOREACH (const QString &str, d->to) {
+        for (const QString &str : qAsConst(d->to)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -249,7 +250,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "CC");
 
-        Q_FOREACH (const QString &str, d->cc) {
+        for (const QString &str : qAsConst(d->cc)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -260,7 +261,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "BC");
 
-        Q_FOREACH (const QString &str, d->bcc) {
+        for (const QString &str : qAsConst(d->bcc)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -278,7 +279,7 @@ ResultIterator EmailQuery::exec()
 
     if (!d->collections.isEmpty()) {
         Xapian::Query query;
-        Q_FOREACH (Akonadi::Collection::Id id, d->collections) {
+        for (Akonadi::Collection::Id id : qAsConst(d->collections)) {
             QString c = QString::number(id);
             Xapian::Query q = Xapian::Query('C' + c.toStdString());
 
@@ -321,7 +322,7 @@ ResultIterator EmailQuery::exec()
         parser.set_default_op(Xapian::Query::OP_AND);
         if (d->splitSearchMatchString) {
             const QStringList list = d->matchString.split(QRegExp(QStringLiteral("\\s")), QString::SkipEmptyParts);
-            Q_FOREACH (const QString &s, list) {
+            for (const QString &s : list) {
                 const QByteArray ba = s.toUtf8();
                 m_queries << parser.parse_query(ba.constData(),
                                                 Xapian::QueryParser::FLAG_PARTIAL);

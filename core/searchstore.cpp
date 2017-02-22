@@ -21,6 +21,7 @@
  */
 
 #include "searchstore.h"
+#include "helper_p.h"
 
 #include <QDebug>
 #include <QThreadStorage>
@@ -114,7 +115,7 @@ SearchStore::List SearchStore::searchStores()
     plugins.clear();
 
     SearchStore::List stores;
-    Q_FOREACH (const QString &pluginPath, pluginPaths) {
+    for (const QString &pluginPath : qAsConst(pluginPaths)) {
         QPluginLoader loader(pluginPath);
 
         const QVariantMap metadata = loader.metaData().toVariantMap()[QStringLiteral("MetaData")].toMap();
