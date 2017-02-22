@@ -45,7 +45,7 @@
 
 static const QStringList sCategories = { i18n("Contacts") };
 
-Q_DECLARE_METATYPE(KContacts::Addressee*)
+Q_DECLARE_METATYPE(KContacts::Addressee *)
 
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
@@ -54,8 +54,8 @@ PIMContactsRunner::PIMContactsRunner(QObject *parent, const QVariantList &args)
     setObjectName(QStringLiteral("PIMContactsRunner"));
     setSpeed(Plasma::AbstractRunner::SlowSpeed);
     setIgnoredTypes(Plasma::RunnerContext::FileSystem
-                        | Plasma::RunnerContext::Executable
-                        | Plasma::RunnerContext::NetworkLocation);
+                    | Plasma::RunnerContext::Executable
+                    | Plasma::RunnerContext::NetworkLocation);
 
     // reloadConfiguration() called by default init() implementation
 }
@@ -63,7 +63,6 @@ PIMContactsRunner::PIMContactsRunner(QObject *parent, const QVariantList &args)
 PIMContactsRunner::~PIMContactsRunner()
 {
 }
-
 
 void PIMContactsRunner::reloadConfiguration()
 {
@@ -163,7 +162,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
         Plasma::QueryMatch match(this);
         match.setMatchCategory(sCategories[0]);
         match.setRelevance(0.75); // 0.75 is used by most runners, we don't
-                                  // want to shadow them
+        // want to shadow them
         match.setMimeType(KContacts::Addressee::mimeType());
 
         const KContacts::Picture photo = contact.photo();
@@ -186,12 +185,12 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
         if (name == queryString) {
             match.setType(Plasma::QueryMatch::ExactMatch);
 
-        // We got perfect match by one of the email addresses
+            // We got perfect match by one of the email addresses
         } else if (emails.contains(queryString)) {
             match.setType(Plasma::QueryMatch::ExactMatch);
             matchedEmail = queryString;
 
-        // We got partial match either by name, or email
+            // We got partial match either by name, or email
         } else {
             match.setType(Plasma::QueryMatch::PossibleMatch);
 
@@ -223,7 +222,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
 }
 
 void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context,
-                                           const QString &queryString)
+        const QString &queryString)
 {
     Akonadi::Search::PIM::ContactCompleter completer(queryString);
     const QStringList completerResults = completer.complete();
@@ -268,7 +267,6 @@ void PIMContactsRunner::run(const Plasma::RunnerContext &context,
         QDesktopServices::openUrl(QUrl::fromUserInput(mailto));
     }
 }
-
 
 K_EXPORT_PLASMA_RUNNER(pimcontactsrunner, PIMContactsRunner)
 

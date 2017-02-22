@@ -116,7 +116,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     for (const Akonadi::AgentInstance &inst : allAgents) {
         if (inst.identifier() == QLatin1String("akonadi_nepomuk_feeder")) {
             qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing old nepomuk feeder" << inst.identifier();
-            agentManager->removeInstance( inst );
+            agentManager->removeInstance(inst);
         } else if (inst.identifier() == QLatin1String("akonadi_baloo_indexer")) {
             qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing old Baloo indexer" << inst.identifier();
             agentManager->removeInstance(inst);
@@ -188,8 +188,8 @@ void AkonadiIndexingAgent::itemChanged(const Akonadi::Item &item, const QSet<QBy
 }
 
 void AkonadiIndexingAgent::itemsFlagsChanged(const Akonadi::Item::List &items,
-                                             const QSet<QByteArray> &addedFlags,
-                                             const QSet<QByteArray> &removedFlags)
+        const QSet<QByteArray> &addedFlags,
+        const QSet<QByteArray> &removedFlags)
 {
     // We optimize and skip the "shouldIndex" call for each item here, since it's
     // cheaper to just let Xapian throw an exception for items that were not
@@ -238,7 +238,7 @@ void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
 }
 
 void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection,
-                                           const Akonadi::Collection &parent)
+        const Akonadi::Collection &parent)
 {
     Q_UNUSED(parent);
 
@@ -251,7 +251,7 @@ void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection
 }
 
 void AkonadiIndexingAgent::collectionChanged(const Akonadi::Collection &collection,
-                                             const QSet<QByteArray> &changedAttributes)
+        const QSet<QByteArray> &changedAttributes)
 {
     if (changedAttributes.contains(Akonadi::IndexPolicyAttribute().type())) {
         const auto attr = collection.attribute<Akonadi::IndexPolicyAttribute>();
@@ -295,8 +295,8 @@ void AkonadiIndexingAgent::collectionRemoved(const Akonadi::Collection &collecti
 }
 
 void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection,
-                                           const Akonadi::Collection &collectionSource,
-                                           const Akonadi::Collection &collectionDestination)
+        const Akonadi::Collection &collectionSource,
+        const Akonadi::Collection &collectionDestination)
 {
     Q_UNUSED(collectionSource);
     Q_UNUSED(collectionDestination);
@@ -361,8 +361,8 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
 bool AkonadiIndexingAgent::shouldIndex(const Akonadi::Collection &col) const
 {
     return !col.isVirtual()
-            && (!col.hasAttribute<Akonadi::IndexPolicyAttribute>()
-                || col.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
+           && (!col.hasAttribute<Akonadi::IndexPolicyAttribute>()
+               || col.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
 }
 
 bool AkonadiIndexingAgent::shouldIndex(const Akonadi::Item &item) const

@@ -529,7 +529,7 @@ private Q_SLOTS:
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("note1"), Akonadi::SearchTerm::CondEqual));
 
             QVector<qint64> collections = QVector<qint64>() << 5;
-            QSet<qint64> result ;
+            QSet<qint64> result;
             QTest::newRow("find note subject equal") << QString::fromLatin1(query.toJSON()) << collections << notesMimeTypes << result;
         }
         {

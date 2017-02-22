@@ -17,7 +17,6 @@
  *
  */
 
-
 #include "helper_p.h"
 #include "xapiandatabase.h"
 #include "xapiandocument.h"

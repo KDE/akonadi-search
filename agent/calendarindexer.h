@@ -32,7 +32,6 @@
 #include <KCalCore/Event>
 #include <KCalCore/Todo>
 
-
 class CalendarIndexer : public AbstractIndexer
 {
 public:

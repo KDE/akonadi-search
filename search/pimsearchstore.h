@@ -44,12 +44,10 @@ public:
 protected:
     QString findDatabase(const QString &databasePath) const;
 
-    Xapian::Query convertTypes(const QStringList &) Q_DECL_OVERRIDE
-    {
+    Xapian::Query convertTypes(const QStringList &) Q_DECL_OVERRIDE {
         return Xapian::Query();
     }
-    QByteArray idPrefix() Q_DECL_OVERRIDE
-    {
+    QByteArray idPrefix() Q_DECL_OVERRIDE {
         return QByteArray("akonadi");
     }
 

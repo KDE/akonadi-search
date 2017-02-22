@@ -45,7 +45,7 @@ public:
     void start() Q_DECL_OVERRIDE;
 
 Q_SIGNALS:
-    void status(int, const QString&);
+    void status(int, const QString &);
     void percent(int);
 
 private Q_SLOTS:

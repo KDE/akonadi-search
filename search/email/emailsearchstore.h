@@ -42,8 +42,7 @@ public:
 
     QStringList types() Q_DECL_OVERRIDE;
     QString text(int queryId) Q_DECL_OVERRIDE;
-    QString icon(int) Q_DECL_OVERRIDE
-    {
+    QString icon(int) Q_DECL_OVERRIDE {
         return QStringLiteral("internet-mail");
     }
 

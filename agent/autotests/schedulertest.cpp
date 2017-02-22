@@ -39,8 +39,7 @@ public:
     {
     }
 
-    void start() Q_DECL_OVERRIDE
-    {
+    void start() Q_DECL_OVERRIDE {
         QMetaObject::invokeMethod(this, "finish", Qt::QueuedConnection);
     }
 
@@ -59,11 +58,11 @@ public:
     QList<bool> fullSyncs;
 
     CollectionIndexingJob *createCollectionIndexingJob(Index &index,
-                                                               const Akonadi::Collection &col,
-                                                               const QList<Akonadi::Item::Id> &pending,
-                                                               bool fullSync, QObject *parent = nullptr) Q_DECL_OVERRIDE
-    {
-        for (qint64 id : pending) {
+            const Akonadi::Collection &col,
+            const QList<Akonadi::Item::Id> &pending,
+            bool fullSync, QObject *parent = nullptr) Q_DECL_OVERRIDE {
+        for (qint64 id : pending)
+        {
             indexedItems << Akonadi::Item(id);
         }
         indexedCollections << col;

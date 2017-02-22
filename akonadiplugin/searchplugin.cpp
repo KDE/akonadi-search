@@ -39,29 +39,30 @@ using namespace Akonadi::Search;
 
 static Term::Operation mapRelation(Akonadi::SearchTerm::Relation relation)
 {
-    if (relation == Akonadi::SearchTerm::RelAnd){
+    if (relation == Akonadi::SearchTerm::RelAnd) {
         return Term::And;
     }
     return Term::Or;
 }
 
-static Term::Comparator mapComparator(Akonadi::SearchTerm::Condition comparator) {
-    if (comparator == Akonadi::SearchTerm::CondContains){
+static Term::Comparator mapComparator(Akonadi::SearchTerm::Condition comparator)
+{
+    if (comparator == Akonadi::SearchTerm::CondContains) {
         return Term::Contains;
     }
-    if (comparator == Akonadi::SearchTerm::CondGreaterOrEqual){
+    if (comparator == Akonadi::SearchTerm::CondGreaterOrEqual) {
         return Term::GreaterEqual;
     }
-    if (comparator == Akonadi::SearchTerm::CondGreaterThan){
+    if (comparator == Akonadi::SearchTerm::CondGreaterThan) {
         return Term::Greater;
     }
-    if (comparator == Akonadi::SearchTerm::CondEqual){
+    if (comparator == Akonadi::SearchTerm::CondEqual) {
         return Term::Equal;
     }
-    if (comparator == Akonadi::SearchTerm::CondLessOrEqual){
+    if (comparator == Akonadi::SearchTerm::CondLessOrEqual) {
         return Term::LessEqual;
     }
-    if (comparator == Akonadi::SearchTerm::CondLessThan){
+    if (comparator == Akonadi::SearchTerm::CondLessThan) {
         return Term::Less;
     }
     return Term::Auto;

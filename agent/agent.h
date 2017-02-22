@@ -58,22 +58,21 @@ public:
     void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection) Q_DECL_OVERRIDE;
     void itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers) Q_DECL_OVERRIDE;
     void itemsFlagsChanged(const Akonadi::Item::List &items,
-                                   const QSet<QByteArray> &addedFlags,
-                                   const QSet<QByteArray> &removedFlags) Q_DECL_OVERRIDE;
+                           const QSet<QByteArray> &addedFlags,
+                           const QSet<QByteArray> &removedFlags) Q_DECL_OVERRIDE;
     void itemsRemoved(const Akonadi::Item::List &items) Q_DECL_OVERRIDE;
     void itemsMoved(const Akonadi::Item::List &items,
-                            const Akonadi::Collection &sourceCollection,
-                            const Akonadi::Collection &destinationCollection) Q_DECL_OVERRIDE;
+                    const Akonadi::Collection &sourceCollection,
+                    const Akonadi::Collection &destinationCollection) Q_DECL_OVERRIDE;
 
     void collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent) Q_DECL_OVERRIDE;
     void collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes) Q_DECL_OVERRIDE;
     void collectionRemoved(const Akonadi::Collection &collection) Q_DECL_OVERRIDE;
     void collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
-                                 const Akonadi::Collection &collectionDestination) Q_DECL_OVERRIDE;
+                         const Akonadi::Collection &collectionDestination) Q_DECL_OVERRIDE;
 
     // Remove the entire db
     void cleanup() Q_DECL_OVERRIDE;
-
 
 private Q_SLOTS:
     void onAbortRequested();

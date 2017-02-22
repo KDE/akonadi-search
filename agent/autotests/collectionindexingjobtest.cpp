@@ -38,34 +38,28 @@ public:
     QList<Akonadi::Item::Id> itemsRemoved;
 
     void commit() Q_DECL_OVERRIDE {};
-    bool createIndexers() Q_DECL_OVERRIDE
-    {
+    bool createIndexers() Q_DECL_OVERRIDE {
         return true;
     };
-    void findIndexed(QSet< Akonadi::Item::Id> &indexed, Akonadi::Collection::Id) Q_DECL_OVERRIDE
-    {
+    void findIndexed(QSet< Akonadi::Item::Id> &indexed, Akonadi::Collection::Id) Q_DECL_OVERRIDE {
         indexed = alreadyIndexed.toSet();
     };
-    void index(const Akonadi::Item &item) Q_DECL_OVERRIDE
-    {
+    void index(const Akonadi::Item &item) Q_DECL_OVERRIDE {
         itemsIndexed << item.id();
     };
-    qlonglong indexedItems(Akonadi::Collection::Id) Q_DECL_OVERRIDE
-    {
+    qlonglong indexedItems(Akonadi::Collection::Id) Q_DECL_OVERRIDE {
         return alreadyIndexed.size();
     };
     void move(const Akonadi::Item::List & /* items */,
               const Akonadi::Collection & /* from */,
               const Akonadi::Collection & /* to */) Q_DECL_OVERRIDE {};
     void remove(const Akonadi::Collection & /* col */) Q_DECL_OVERRIDE {};
-    void remove(const QSet<Akonadi::Item::Id> &ids, const QStringList & /* mimeTypes */) Q_DECL_OVERRIDE
-    {
+    void remove(const QSet<Akonadi::Item::Id> &ids, const QStringList & /* mimeTypes */) Q_DECL_OVERRIDE {
         itemsRemoved += ids.toList();
     };
     void remove(const Akonadi::Item::List & /* items */) Q_DECL_OVERRIDE {};
     void removeDatabase() Q_DECL_OVERRIDE {};
-    bool haveIndexerForMimeTypes(const QStringList &) Q_DECL_OVERRIDE
-    {
+    bool haveIndexerForMimeTypes(const QStringList &) Q_DECL_OVERRIDE {
         return true;
     };
 };

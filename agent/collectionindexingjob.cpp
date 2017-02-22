@@ -32,15 +32,15 @@
 #include <KLocalizedString>
 
 CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col,
-                                             const QList<Akonadi::Item::Id> &pending,
-                                             QObject *parent)
-    :KJob(parent),
-     m_collection(col),
-     m_pending(pending),
-     m_index(index),
-     m_reindexingLock(false),
-     m_fullSync(true),
-     m_progressTotal(0)
+        const QList<Akonadi::Item::Id> &pending,
+        QObject *parent)
+    : KJob(parent),
+      m_collection(col),
+      m_pending(pending),
+      m_index(index),
+      m_reindexingLock(false),
+      m_fullSync(true),
+      m_progressTotal(0)
 {
 
 }
@@ -74,9 +74,8 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
     }
     m_collection = static_cast<Akonadi::CollectionFetchJob *>(job)->collections().at(0);
     if (m_collection.isVirtual()
-        || (m_collection.hasAttribute<Akonadi::IndexPolicyAttribute>()
-            && !m_collection.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()))
-    {
+            || (m_collection.hasAttribute<Akonadi::IndexPolicyAttribute>()
+                && !m_collection.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled())) {
         emitResult();
         return;
     }
@@ -132,9 +131,9 @@ void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds)
 
 void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List &items)
 {
-    qCDebug(AKONADI_INDEXER_AGENT_LOG)<<" CollectionIndexingJob::slotPendingItemsReceived " <<items.count();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << " CollectionIndexingJob::slotPendingItemsReceived " << items.count();
     for (const Akonadi::Item &item : items) {
-         qCDebug(AKONADI_INDEXER_AGENT_LOG)<<" void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List &items)"<<item.id();
+        qCDebug(AKONADI_INDEXER_AGENT_LOG) << " void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List &items)" << item.id();
         m_index.index(item);
     }
     m_progressCounter++;
@@ -143,7 +142,7 @@ void CollectionIndexingJob::slotPendingItemsReceived(const Akonadi::Item::List &
 
 void CollectionIndexingJob::slotPendingIndexed(KJob *job)
 {
-    qCDebug(AKONADI_INDEXER_AGENT_LOG)<<" CollectionIndexingJob::slotPendingIndexed ";
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << " CollectionIndexingJob::slotPendingIndexed ";
     if (job->error()) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Failed to fetch items: " << job->errorString();
         setError(KJob::UserDefinedError);
@@ -166,14 +165,14 @@ void CollectionIndexingJob::slotPendingIndexed(KJob *job)
     const qlonglong indexedItemsCount = m_index.indexedItems(m_collection.id());
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexed items count took (ms): " << m_time.elapsed() - start;
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "In index: " << indexedItemsCount;
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Number of Items in collection: " << m_collection.statistics().count() << " In collection "<< m_collection.id();
-    
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Number of Items in collection: " << m_collection.statistics().count() << " In collection " << m_collection.id();
+
     if (m_collection.statistics().count() == indexedItemsCount) {
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Index up to date";
         emitResult();
         return;
     } else {
-       qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Need to find unindexed items";
+        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Need to find unindexed items";
     }
 
     findUnindexed();
@@ -185,7 +184,7 @@ void CollectionIndexingJob::findUnindexed()
     m_needsIndexing.clear();
     const int start = m_time.elapsed();
     m_index.findIndexed(m_indexedItems, m_collection.id());
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Found " << m_indexedItems.size() << " indexed items. Took (ms): " << m_time.elapsed() - start << " collection id :"<<m_collection.id();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Found " << m_indexedItems.size() << " indexed items. Took (ms): " << m_time.elapsed() - start << " collection id :" << m_collection.id();
 
     Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(m_collection, this);
     job->fetchScope().fetchFullPayload(false);
@@ -214,7 +213,7 @@ void CollectionIndexingJob::slotUnindexedItemsReceived(const Akonadi::Item::List
 
 void CollectionIndexingJob::slotFoundUnindexed(KJob *job)
 {
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "CollectionIndexingJob::slotFoundUnindexed :m_needsIndexing.isEmpty() : " << m_needsIndexing.isEmpty() << " count :"<< m_needsIndexing.count() << " m_reindexingLock :"<<m_reindexingLock << "m_collection.id() "<<m_collection.id();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "CollectionIndexingJob::slotFoundUnindexed :m_needsIndexing.isEmpty() : " << m_needsIndexing.isEmpty() << " count :" << m_needsIndexing.count() << " m_reindexingLock :" << m_reindexingLock << "m_collection.id() " << m_collection.id();
     if (job->error()) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Failed to fetch items: " << job->errorString();
         setError(KJob::UserDefinedError);

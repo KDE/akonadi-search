@@ -29,9 +29,9 @@
 
 namespace Akonadi
 {
-namespace Search 
+namespace Search
 {
-namespace PIM 
+namespace PIM
 {
 
 /**

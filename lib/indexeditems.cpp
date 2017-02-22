@@ -27,7 +27,6 @@
 #include <AkonadiCore/ServerManager>
 #include <xapian.h>
 
-
 using namespace Akonadi::Search::PIM;
 
 class Akonadi::Search::PIM::IndexedItemsPrivate
@@ -52,7 +51,6 @@ public:
     void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
     void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId);
 };
-
 
 QString IndexedItemsPrivate::dbPath(const QString &dbName) const
 {

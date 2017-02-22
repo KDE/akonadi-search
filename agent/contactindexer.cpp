@@ -33,8 +33,7 @@ ContactIndexer::ContactIndexer(const QString &path):
 {
     try {
         m_db = new Akonadi::Search::XapianDatabase(path, true);
-    }
-    catch (const Xapian::DatabaseCorruptError &err) {
+    } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
         m_db = nullptr;

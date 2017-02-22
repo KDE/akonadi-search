@@ -37,9 +37,9 @@ JobFactory::~JobFactory()
 }
 
 CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col,
-                                                               const QList<Akonadi::Item::Id> &pending,
-                                                               bool fullSync,
-                                                               QObject *parent)
+        const QList<Akonadi::Item::Id> &pending,
+        bool fullSync,
+        QObject *parent)
 {
     CollectionIndexingJob *job = new CollectionIndexingJob(index, col, pending, parent);
     job->setFullSync(fullSync);
@@ -186,7 +186,7 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
             continue;
         }
         if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() &&
-            !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
+                !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         scheduleCollection(c, true);
@@ -212,7 +212,7 @@ void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
             continue;
         }
         if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() &&
-            !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
+                !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         m_index.index(c);

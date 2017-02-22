@@ -37,7 +37,6 @@ public:
     QStringList categories() const Q_DECL_OVERRIDE;
     QIcon categoryIcon(const QString &category) const Q_DECL_OVERRIDE;
 
-
 private:
     void queryContacts(Plasma::RunnerContext &context, const QString &queryString);
     void queryAutocompleter(Plasma::RunnerContext &context, const QString &queryString);
