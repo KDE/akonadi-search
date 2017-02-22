@@ -137,7 +137,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
         return;
     }
 
-    Q_FOREACH (const Akonadi::Item &item, fetch->items()) {
+    for (const Akonadi::Item &item : fetch->items()) {
 
         KContacts::Addressee contact;
         try {
@@ -196,7 +196,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
             match.setType(Plasma::QueryMatch::PossibleMatch);
 
             // See if the match was by one of the email addresses
-            Q_FOREACH (const QString &email, emails) {
+            for (const QString &email : emails) {
                 if (email.startsWith(queryString)) {
                     matchedEmail = email;
                     break;
@@ -211,7 +211,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
             match.setData(QStringLiteral("mailto:%1<%2>").arg(name, matchedEmail));
             context.addMatch(match);
         } else {
-            Q_FOREACH (const QString &email, emails) {
+            for (const QString &email : emails) {
                 Plasma::QueryMatch alternativeMatch = match;
                 alternativeMatch.setText(i18nc("Name (email)", "%1 (%2)", name, email));
                 alternativeMatch.setData(QStringLiteral("mailto:%1<%2>").arg(name, email));
@@ -228,7 +228,7 @@ void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context,
     Akonadi::Search::PIM::ContactCompleter completer(queryString);
     const QStringList completerResults = completer.complete();
     qCDebug(AKONADI_KRUNNER_LOG) << "Autocompleter returned"  << completerResults.count() << "results";
-    Q_FOREACH (const QString &result, completerResults) {
+    for (const QString &result : completerResults) {
         Plasma::QueryMatch match(this);
         match.setRelevance(0.7); // slightly lower relevance than real addressbook contacts
         match.setMimeType(KContacts::Addressee::mimeType());

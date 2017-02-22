@@ -19,7 +19,7 @@
  */
 
 #include "xapianqueryparser.h"
-
+#include "helper_p.h"
 #include <QTextBoundaryFinder>
 #include <QStringList>
 #include "akonadi_search_xapian_debug.h"
@@ -87,7 +87,7 @@ Xapian::Query makeQuery(const QString &string, int position, Xapian::Database *d
     QVector<Xapian::Query> queries;
     queries.reserve(topTerms.size());
 
-    Q_FOREACH (const Term &term, topTerms) {
+    for (const Term &term : qAsConst(topTerms)) {
         queries << Xapian::Query(term.t, 1, position);
     }
 

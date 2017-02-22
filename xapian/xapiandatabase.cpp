@@ -17,8 +17,8 @@
  *
  */
 
-//#include "config.h"
 
+#include "helper_p.h"
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
 
@@ -119,7 +119,7 @@ void XapianDatabase::commit()
     Xapian::WritableDatabase wdb = createWritableDb();
 
     qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Adding:" << m_docsToAdd.size() << "docs";
-    Q_FOREACH (const DocIdPair &doc, m_docsToAdd) {
+    for (const DocIdPair &doc : qAsConst(m_docsToAdd)) {
         try {
             wdb.replace_document(doc.first, doc.second);
         } catch (const Xapian::Error &) {
@@ -127,7 +127,7 @@ void XapianDatabase::commit()
     }
 
     qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Removing:" << m_docsToRemove.size() << "docs";
-    Q_FOREACH (Xapian::docid id, m_docsToRemove) {
+    for (Xapian::docid id : qAsConst(m_docsToRemove)) {
         try {
             wdb.delete_document(id);
         } catch (const Xapian::Error &) {
