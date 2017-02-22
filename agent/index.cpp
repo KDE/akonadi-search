@@ -24,6 +24,7 @@
 #include "contactindexer.h"
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
+#include "helper_p.h"
 
 #include "indexeditems.h"
 #include <AkonadiCore/ServerManager>
@@ -53,7 +54,7 @@ static void removeDir(const QString &dirName)
 {
     QDir dir(dirName);
     if (dir.exists(dirName)) {
-        Q_FOREACH (const QFileInfo &info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+        for (const QFileInfo &info : dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
             if (info.isDir()) {
                 removeDir(info.absoluteFilePath());
             } else {
@@ -199,7 +200,7 @@ void Index::change(const Akonadi::Collection &col)
 void Index::remove(const Akonadi::Collection &col)
 {
     //Remove items
-    Q_FOREACH (AbstractIndexer *indexer, indexersForMimetypes(col.contentMimeTypes())) {
+    for (AbstractIndexer *indexer : indexersForMimetypes(col.contentMimeTypes())) {
         try {
             indexer->remove(col);
         } catch (const Xapian::Error &e) {
@@ -226,7 +227,7 @@ void Index::move(const Akonadi::Collection &collection,
 void Index::addIndexer(AbstractIndexer *indexer)
 {
     m_listIndexer.append(indexer);
-    Q_FOREACH (const QString &mimeType, indexer->mimeTypes()) {
+    for (const QString &mimeType : indexer->mimeTypes()) {
         m_indexer.insert(mimeType, indexer);
     }
 }
@@ -309,7 +310,7 @@ void Index::scheduleCommit()
 void Index::commit()
 {
     m_commitTimer.stop();
-    Q_FOREACH (AbstractIndexer *indexer, m_listIndexer) {
+    for (AbstractIndexer *indexer : qAsConst(m_listIndexer)) {
         try {
             indexer->commit();
         } catch (const Xapian::Error &e) {

@@ -105,7 +105,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
             const QByteArray term = "NS" + ns;
             doc.add_boolean_term(term.constData());
         }
-        Q_FOREACH (const QString &mt, collection.contentMimeTypes()) {
+        for (const QString &mt : collection.contentMimeTypes()) {
             const QByteArray term = "M" + mt.toUtf8();
             doc.add_boolean_term(term.constData());
         }

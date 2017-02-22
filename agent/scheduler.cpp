@@ -20,6 +20,7 @@
  */
 
 #include "scheduler.h"
+#include "helper_p.h"
 #include "akonadi_indexer_agent_debug.h"
 #include "collectionindexingjob.h"
 #include <AkonadiCore/CollectionFetchJob>
@@ -72,7 +73,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config,
     }
 
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Dirty collections " << m_dirtyCollections;
-    Q_FOREACH (Akonadi::Collection::Id col, m_dirtyCollections) {
+    for (Akonadi::Collection::Id col : qAsConst(m_dirtyCollections)) {
         scheduleCollection(Akonadi::Collection(col), true);
     }
 

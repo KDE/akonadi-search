@@ -120,7 +120,7 @@ void AkonotesIndexer::processPart(KMime::Content *content, KMime::Content *mainC
                 return;
             }
 
-            Q_FOREACH (KMime::Content *c, content->contents()) {
+            for (KMime::Content *c : content->contents()) {
                 processPart(c, mainContent);
             }
         }
