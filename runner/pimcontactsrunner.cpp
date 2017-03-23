@@ -92,7 +92,7 @@ void PIMContactsRunner::match(Plasma::RunnerContext &context)
 
     queryContacts(context, queryString);
 
-    qDebug() << this << "MATCH: queryAutocompleter =" << mQueryAutocompleter;
+    qCDebug(AKONADI_KRUNNER_LOG) << this << "MATCH: queryAutocompleter =" << mQueryAutocompleter;
     if (mQueryAutocompleter) {
         queryAutocompleter(context, queryString);
     }

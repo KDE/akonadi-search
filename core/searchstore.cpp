@@ -21,6 +21,7 @@
  */
 
 #include "searchstore.h"
+#include "akonadi_search_core_debug.h"
 #include "helper_p.h"
 
 #include <QDebug>
@@ -85,7 +86,7 @@ SearchStore::List SearchStore::searchStores()
     QMutexLocker lock(&mutex);
 
     if (s_overrideSearchStores && !s_overrideSearchStores->isEmpty()) {
-        qDebug() << "Overriding search stores.";
+        qCDebug(AKONADI_SEARCH_CORE_LOG) << "Overriding search stores.";
         return *s_overrideSearchStores;
     }
 
@@ -124,8 +125,8 @@ SearchStore::List SearchStore::searchStores()
         }
 
         if (!loader.load()) {
-            qWarning() << "Could not create Akonadi Search Store: " << pluginPath;
-            qWarning() << loader.errorString();
+            qCWarning(AKONADI_SEARCH_CORE_LOG) << "Could not create Akonadi Search Store: " << pluginPath;
+            qCWarning(AKONADI_SEARCH_CORE_LOG) << loader.errorString();
             continue;
         }
 
@@ -135,11 +136,10 @@ SearchStore::List SearchStore::searchStores()
             if (ex) {
                 stores << QSharedPointer<SearchStore>(ex);
             } else {
-                qDebug() << "Plugin could not be converted to an Akonadi::Search::SearchStore";
-                qDebug() << pluginPath;
+                qCDebug(AKONADI_SEARCH_CORE_LOG) << "Plugin could not be converted to an Akonadi::Search::SearchStore " << pluginPath;
             }
         } else {
-            qDebug() << "Plugin could not create instance" << pluginPath;
+            qCDebug(AKONADI_SEARCH_CORE_LOG) << "Plugin could not create instance" << pluginPath;
         }
     }
 
