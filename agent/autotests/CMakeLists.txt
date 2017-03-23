@@ -56,12 +56,6 @@ set(scheduler_SRCS
 add_akonadi_isolated_test_advanced(schedulertest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
 add_akonadi_isolated_test_advanced(collectionindexingjobtest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
 
-set(query_SRCS
-    ../../lib/query.cpp
-    ../../lib/collectionquery.cpp
-    ../../lib/contactquery.cpp
-    ../../lib/resultiterator.cpp
-)
 
 if(NOT WIN32)
 add_executable(collectionquerytest collectionquerytest.cpp ${query_SRCS} ${indexer_SRCS} ${scheduler_SRCS})
@@ -70,5 +64,6 @@ ecm_mark_as_test(collectionquerytest)
 target_link_libraries(collectionquerytest
     ${indexer_LIBS}
     ${QJSON_LIBRARIES}
+    KF5::AkonadiSearchPIM
 )
 endif()

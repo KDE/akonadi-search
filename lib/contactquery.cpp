@@ -23,6 +23,7 @@
 #include "contactquery.h"
 #include "resultiterator_p.h"
 #include "xapian.h"
+#include "akonadi_search_pim_debug.h"
 
 #include <QDebug>
 
@@ -192,7 +193,7 @@ ResultIterator ContactQuery::exec()
     }
     try {
         Xapian::Query query(Xapian::Query::OP_OR, m_queries.begin(), m_queries.end());
-        qDebug() << query.get_description().c_str();
+        qCDebug(AKONADI_SEARCH_PIM_LOG) << query.get_description().c_str();
 
         Xapian::Enquire enquire(db);
         enquire.set_query(query);

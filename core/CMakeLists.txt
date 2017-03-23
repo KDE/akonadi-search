@@ -7,6 +7,9 @@ set(CORE_SRCS
     resultiterator.cpp
 )
 
+ecm_qt_declare_logging_category(CORE_SRCS HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core)
+
+
 add_library(KF5AkonadiSearchCore ${CORE_SRCS})
 add_library(KF5::AkonadiSearchCore ALIAS KF5AkonadiSearchCore)
 

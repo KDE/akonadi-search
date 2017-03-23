@@ -103,7 +103,7 @@ ResultIterator CollectionQuery::exec()
     QList<Xapian::Query> queries;
 
     if (!d->nameString.isEmpty()) {
-        qDebug() << "searching by name";
+        //qDebug() << "searching by name";
         Xapian::QueryParser parser;
         parser.set_database(db);
         parser.add_prefix("", "N");
