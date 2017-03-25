@@ -187,6 +187,8 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("xmailinglist"));
         case Akonadi::EmailSearchTerm::HeaderXSpamFlag:
             return getTerm(term, QStringLiteral("xspamflag"));
+        case Akonadi::EmailSearchTerm::Attachment:
+            return Term(QStringLiteral("hasattachment"), !term.isNegated());
         case Akonadi::EmailSearchTerm::Unknown:
         default:
             qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
