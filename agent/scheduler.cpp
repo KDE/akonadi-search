@@ -195,7 +195,7 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
     // If we did not schedule any collection
     if (m_collectionQueue.isEmpty()) {
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "No collections scheduled";
-        status(Akonadi::AgentBase::Idle, i18n("Ready"));
+        Q_EMIT status(Akonadi::AgentBase::Idle, i18n("Ready"));
     }
 }
 
@@ -227,7 +227,7 @@ void Scheduler::abort()
     m_currentJob = nullptr;
     collectDirtyCollections();
     m_collectionQueue.clear();
-    status(Akonadi::AgentBase::Idle, i18n("Ready"));
+    Q_EMIT status(Akonadi::AgentBase::Idle, i18n("Ready"));
 }
 
 void Scheduler::processNext()
@@ -238,7 +238,7 @@ void Scheduler::processNext()
     }
     if (m_collectionQueue.isEmpty()) {
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Processing done";
-        status(Akonadi::AgentBase::Idle, i18n("Ready"));
+        Q_EMIT status(Akonadi::AgentBase::Idle, i18n("Ready"));
         return;
     }
 
