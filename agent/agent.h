@@ -78,6 +78,9 @@ private Q_SLOTS:
     void onAbortRequested();
     void onOnlineChanged(bool online);
 
+Q_SIGNALS:
+    void collectionIndexingFinished(const qlonglong id);
+
 private:
     bool shouldIndex(const Akonadi::Item &item) const;
     bool shouldIndex(const Akonadi::Collection &collection) const;

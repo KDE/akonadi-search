@@ -92,6 +92,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
 
     connect(&m_scheduler, SIGNAL(status(int,QString)), this, SIGNAL(status(int,QString)));
     connect(&m_scheduler, &Scheduler::percent, this, &Akonadi::AgentBase::percent);
+    connect(&m_scheduler, &Scheduler::collectionIndexingFinished, this, &AkonadiIndexingAgent::collectionIndexingFinished);
 
     changeRecorder()->setAllMonitored(true);
     changeRecorder()->itemFetchScope().setCacheOnly(true);
