@@ -69,6 +69,7 @@ public:
 Q_SIGNALS:
     void status(int status, const QString &message = QString());
     void percent(int);
+    void collectionIndexingFinished(Akonadi::Collection::Id id);
 
 public Q_SLOTS:
     void scheduleCompleteSync();

@@ -271,7 +271,8 @@ void Scheduler::slotIndexingFinished(KJob *job)
     } else {
         const Akonadi::Collection::Id collectionId = job->property("collection").value<Akonadi::Collection::Id>();
         m_dirtyCollections.remove(collectionId);
-        status(Akonadi::AgentBase::Idle, i18n("Collection \"%1\" indexed", collectionId));
+        Q_EMIT status(Akonadi::AgentBase::Idle, i18n("Collection \"%1\" indexed", collectionId));
+        Q_EMIT collectionIndexingFinished(collectionId);
     }
     m_currentJob = nullptr;
     m_processTimer.start();

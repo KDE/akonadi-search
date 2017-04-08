@@ -28,6 +28,7 @@
 #include <AkonadiCore/qtest_akonadi.h>
 #include <KConfig>
 #include <KConfigGroup>
+#include <QStandardPaths>
 
 class DummyIndexingJob : public CollectionIndexingJob
 {
@@ -76,7 +77,11 @@ class SchedulerTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-
+    void initTestCase()
+    {
+        qRegisterMetaType<Akonadi::Collection::Id>("Akonadi::Collection::Id");
+        QStandardPaths::setTestModeEnabled(true);
+    }
     void init()
     {
         AkonadiTest::checkTestIsIsolated();
@@ -112,6 +117,7 @@ private Q_SLOTS:
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, config, factory);
         QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
+        QSignalSpy finishedIndexing(&scheduler, &Scheduler::collectionIndexingFinished);
         scheduler.setBusyTimeout(0);
 
         Akonadi::Collection col1(3);
@@ -126,6 +132,8 @@ private Q_SLOTS:
         QVERIFY(!factory->fullSyncs.at(0));
         QCOMPARE(factory->indexedCollections.at(1).id(), col2.id());
         QVERIFY(factory->fullSyncs.at(1));
+        //We index 2 collections.
+        QCOMPARE(finishedIndexing.count(), 2);
     }
 
     void testIndexItems()
@@ -186,12 +194,17 @@ private Q_SLOTS:
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, config, factory);
         QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
+        QSignalSpy finishedIndexing(&scheduler, &Scheduler::collectionIndexingFinished);
+
         scheduler.setBusyTimeout(0);
 
         QTRY_COMPARE(statusSpy.count(), 1);
         QCOMPARE(factory->indexedCollections.size(), 1);
         QCOMPARE(factory->indexedCollections.at(0).id(), col1.id());
         QVERIFY(factory->fullSyncs.at(0));
+
+        QCOMPARE(finishedIndexing.count(), 1);
+
     }
 };
 
