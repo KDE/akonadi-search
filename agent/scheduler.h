@@ -36,7 +36,7 @@ class JobFactory
 public:
     virtual ~JobFactory();
     virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col,
-            const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = 0);
+            const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = nullptr);
 };
 
 /**
@@ -51,7 +51,7 @@ class Scheduler : public QObject
 {
     Q_OBJECT
 public:
-    explicit Scheduler(Index &index, const KSharedConfigPtr &config, const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(), QObject *parent = 0);
+    explicit Scheduler(Index &index, const KSharedConfigPtr &config, const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(), QObject *parent = nullptr);
     virtual ~Scheduler();
     void addItem(const Akonadi::Item &);
     void scheduleCollection(const Akonadi::Collection &, bool fullSync = false);

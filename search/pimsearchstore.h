@@ -37,7 +37,7 @@ class PIMSearchStore : public XapianSearchStore
 {
     Q_OBJECT
 public:
-    PIMSearchStore(QObject *parent = 0);
+    explicit PIMSearchStore(QObject *parent = nullptr);
 
     QStringList types() Q_DECL_OVERRIDE;
 

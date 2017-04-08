@@ -38,7 +38,7 @@ class NoteSearchStore : public PIMSearchStore
     Q_PLUGIN_METADATA(IID "org.kde.Akonadi.Search.SearchStore" FILE "notesearchstore.json")
 #endif
 public:
-    NoteSearchStore(QObject *parent = 0);
+    explicit NoteSearchStore(QObject *parent = nullptr);
 
     QStringList types() Q_DECL_OVERRIDE;
 };
