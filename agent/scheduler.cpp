@@ -83,6 +83,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config,
         KConfigGroup baloorcGroup = baloorc.group("Akonadi");
         initialIndexingDone = baloorcGroup.readEntry("initialIndexingDone", false);
         cfg.writeEntry("initialIndexingDone", initialIndexingDone);
+        baloorcGroup.deleteEntry("initialIndexingDone"); // make sure that editing akonadi_indexing_agentrc by hand works in the future
     }
     //Trigger a full sync initially
     if (!initialIndexingDone) {
