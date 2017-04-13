@@ -32,7 +32,7 @@ using namespace Akonadi::Search;
 AgePostingSource::AgePostingSource(Xapian::valueno slot_)
     : Xapian::ValuePostingSource(slot_)
 {
-    m_currentTime_t = QDateTime::currentDateTime().toTime_t();
+    m_currentTime_t = QDateTime::currentDateTimeUtc().toTime_t();
 }
 
 Xapian::weight AgePostingSource::get_weight() const
