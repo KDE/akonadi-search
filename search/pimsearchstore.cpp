@@ -64,7 +64,9 @@ QString PIMSearchStore::findDatabase(const QString &dbName) const
     } else {
         basePath = QStringLiteral("akonadi/search_db");
     }
-    return QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    QDir().mkpath(dbPath);
+    return dbPath;
 }
 
 Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVariant &value,
