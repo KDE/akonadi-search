@@ -49,7 +49,7 @@
 
 #include <QFile>
 
-#define INDEXING_AGENT_VERSION 4
+#define INDEXING_AGENT_VERSION 5
 
 AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     : AgentBase(id),

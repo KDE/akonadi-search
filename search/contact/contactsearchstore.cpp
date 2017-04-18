@@ -31,6 +31,7 @@ ContactSearchStore::ContactSearchStore(QObject *parent)
     m_prefix.insert(QStringLiteral("nick"), QStringLiteral("NI"));
     m_prefix.insert(QStringLiteral("email"), QStringLiteral("")); // Email currently doesn't map to anything
     m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
+    m_prefix.insert(QStringLiteral("uid"), QStringLiteral("UID"));
 
     m_valueProperties.insert(QStringLiteral("birthday"), 0);
     m_valueProperties.insert(QStringLiteral("anniversary"), 1);

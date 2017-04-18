@@ -301,6 +301,18 @@ private Q_SLOTS:
             contactIndexer.index(item);
         }
         {
+            KContacts::Addressee addressee;
+            addressee.setUid(QStringLiteral("abcd-efgh-1234-5678"));
+            addressee.setName(QStringLiteral("Dan Vrátil"));
+            addressee.setEmails({ QStringLiteral("dan@test.com") });
+            addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
+            Akonadi::Item item(KContacts::Addressee::mimeType());
+            item.setId(105);
+            item.setPayload(addressee);
+            item.setParentCollection(Akonadi::Collection(3));
+            contactIndexer.index(item);
+        }
+        {
             KContacts::ContactGroup group;
             group.setName(QStringLiteral("group1"));
             Akonadi::Item item(KContacts::ContactGroup::mimeType());
@@ -618,6 +630,14 @@ private Q_SLOTS:
             QVector<qint64> collections = QVector<qint64>() << 3;
             QSet<qint64> result = QSet<qint64>() << 100;
             QTest::newRow("contact by uid") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Uid, QStringLiteral("abcd-efgh-1234-5678"), Akonadi::SearchTerm::CondEqual));
+
+            QVector<qint64> collections = { 3 };
+            QSet<qint64> result = { 105 };
+            QTest::newRow("contact by uid 2") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
