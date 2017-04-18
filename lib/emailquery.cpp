@@ -22,7 +22,7 @@
 
 #include "emailquery.h"
 #include "resultiterator_p.h"
-#include "helper_p.h"
+
 #include "xapian.h"
 #include "../search/email/agepostingsource.h"
 

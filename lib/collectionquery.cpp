@@ -22,7 +22,7 @@
 #include "collectionquery.h"
 #include "resultiterator_p.h"
 #include "xapian.h"
-#include "helper_p.h"
+
 
 #include <QList>
 #include <QFile>

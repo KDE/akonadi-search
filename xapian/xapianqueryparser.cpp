@@ -19,7 +19,7 @@
  */
 
 #include "xapianqueryparser.h"
-#include "helper_p.h"
+
 #include <QTextBoundaryFinder>
 #include <QStringList>
 #include "akonadi_search_xapian_debug.h"

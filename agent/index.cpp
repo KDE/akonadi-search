@@ -24,7 +24,7 @@
 #include "contactindexer.h"
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
-#include "helper_p.h"
+
 
 #include "indexeditems.h"
 #include <AkonadiCore/ServerManager>

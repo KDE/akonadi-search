@@ -22,7 +22,7 @@
 
 #include "searchstore.h"
 #include "akonadi_search_core_debug.h"
-#include "helper_p.h"
+
 
 #include <QDebug>
 #include <QThreadStorage>

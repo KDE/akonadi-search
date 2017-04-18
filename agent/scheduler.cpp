@@ -20,7 +20,7 @@
  */
 
 #include "scheduler.h"
-#include "helper_p.h"
+
 #include "akonadi_indexer_agent_debug.h"
 #include "collectionindexingjob.h"
 #include <AkonadiCore/CollectionFetchJob>

@@ -21,7 +21,7 @@
  */
 
 #include "term.h"
-#include "helper_p.h"
+
 #include <QVariant>
 #include <QDateTime>
 
