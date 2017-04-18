@@ -150,7 +150,8 @@ ResultIterator ContactQuery::exec()
         }
 
         if (!d->uid.isEmpty()) {
-            m_queries << Xapian::Query(d->uid.toStdString());
+            const QByteArray ba = "UID" + d->uid.toUtf8();
+            m_queries << Xapian::Query(ba.constData());
         }
     } else if (d->criteria == StartsWithMatch) {
         if (!d->any.isEmpty()) {
@@ -187,8 +188,9 @@ ResultIterator ContactQuery::exec()
         if (!d->uid.isEmpty()) {
             Xapian::QueryParser parser;
             parser.set_database(db);
-
-            m_queries << parser.parse_query(d->uid.toStdString(), Xapian::QueryParser::FLAG_PARTIAL);
+            parser.add_prefix("", "UID");
+            const QByteArray ba = d->uid.toUtf8();
+            m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
     }
     try {

@@ -83,7 +83,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
 
     doc.indexText(name);
     doc.indexText(addresse.nickName());
-    doc.indexText(addresse.uid());
+    doc.indexText(addresse.uid(), QStringLiteral("UID"));
 
     doc.indexText(name, QStringLiteral("NA"));
     doc.indexText(addresse.nickName(), QStringLiteral("NI"));
