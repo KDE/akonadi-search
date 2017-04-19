@@ -720,6 +720,12 @@ private Q_SLOTS:
 #if 1
         {
             Akonadi::SearchQuery query;
+            QVector<qint64> collections = QVector<qint64>() << 1;
+            QSet<qint64> result = { 1 };
+            QTest::newRow("all emails in collection") << QString::fromLatin1(query.toJSON()) << collections << emailMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("subject1"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 1;
             QSet<qint64> result = QSet<qint64>() << 1;

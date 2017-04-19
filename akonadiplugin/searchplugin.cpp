@@ -289,19 +289,22 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
 
 QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qint64> &collections, const QStringList &mimeTypes)
 {
-    const Akonadi::SearchQuery searchQuery = Akonadi::SearchQuery::fromJSON(akonadiQuery.toLatin1());
-    if (searchQuery.isNull()) {
-        qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "invalid query " << akonadiQuery;
-        return QSet<qint64>();
+    if (akonadiQuery.isEmpty() && collections.isEmpty() && mimeTypes.isEmpty()) {
+        qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "empty query";
+        return {};
     }
+
+    Akonadi::SearchQuery searchQuery;
+    if (!akonadiQuery.isEmpty()) {
+        searchQuery = Akonadi::SearchQuery::fromJSON(akonadiQuery.toLatin1());
+        if (searchQuery.isNull() && collections.isEmpty() && mimeTypes.isEmpty()) {
+            return {};
+        }
+    }
+
     const Akonadi::SearchTerm term = searchQuery.term();
 
     Query query;
-    if (term.subTerms().isEmpty()) {
-        qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "empty query";
-        return QSet<qint64>();
-    }
-
     Term t;
 
     if (mimeTypes.contains(QStringLiteral("message/rfc822"))) {
@@ -322,11 +325,6 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
         t = recursiveCalendarTermMapping(term);
     }
 
-    if (t.subTerms().isEmpty()) {
-        qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "no terms added";
-        return QSet<qint64>();
-    }
-
     if (searchQuery.limit() > 0) {
         query.setLimit(searchQuery.limit());
     }
@@ -338,11 +336,19 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
         for (const qint64 col : collections) {
             collectionTerm.addSubTerm(Term(QStringLiteral("collection"), QString::number(col), Term::Equal));
         }
-        parentTerm.addSubTerm(collectionTerm);
-        parentTerm.addSubTerm(t);
-
-        query.setTerm(parentTerm);
+        if (t.isEmpty()) {
+            query.setTerm(collectionTerm);
+        } else {
+            parentTerm.addSubTerm(collectionTerm);
+            parentTerm.addSubTerm(t);
+            query.setTerm(parentTerm);
+        }
     } else {
+        if (t.subTerms().isEmpty()) {
+            qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "no terms added";
+            return QSet<qint64>();
+        }
+
         query.setTerm(t);
     }
 
