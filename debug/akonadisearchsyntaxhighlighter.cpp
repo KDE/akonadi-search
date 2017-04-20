@@ -33,7 +33,7 @@ AkonadiSearchSyntaxHighlighter::~AkonadiSearchSyntaxHighlighter()
 
 void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
 {
-    Q_FOREACH (const Rule &rule, m_rules) {
+    for (const Rule &rule : qAsConst(m_rules)) {
         const QRegExp expression(rule.pattern);
         int index = expression.indexIn(text);
         int length = 0;
@@ -90,7 +90,7 @@ void AkonadiSearchSyntaxHighlighter::init()
     testType << QStringLiteral("\\bPS");
     testType << QStringLiteral("\\bS");
     testType << QStringLiteral("\\bL");
-    Q_FOREACH (const QString &s, testType) {
+    for (const QString &s : qAsConst(testType)) {
         const QRegExp regex(s, Qt::CaseSensitive);
         m_rules.append(Rule(regex, testFormat));
     }

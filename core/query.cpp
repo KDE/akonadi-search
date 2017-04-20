@@ -407,7 +407,7 @@ bool Query::operator==(const Query &rhs) const
         return false;
     }
 
-    Q_FOREACH (const QString &type, rhs.d->m_types) {
+    for (const QString &type : qAsConst(rhs.d->m_types)) {
         if (!d->m_types.contains(type)) {
             return false;
         }

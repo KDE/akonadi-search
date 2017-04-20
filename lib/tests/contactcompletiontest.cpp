@@ -71,8 +71,8 @@ void App::main()
     QTime timer;
     timer.start();
 
-    QStringList emails = com.complete();
-    Q_FOREACH (const QString &em, emails) {
+    const QStringList emails = com.complete();
+    for (const QString &em : qAsConst(emails)) {
         std::cout << em.toUtf8().data() << std::endl;
     }
 
