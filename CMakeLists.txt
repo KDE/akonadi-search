@@ -59,6 +59,7 @@ ecm_setup_version(PROJECT
 
 # Compiler flags
 add_definitions(-DQT_NO_KEYWORDS)
+add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
 
 # Turn exceptions on
 kde_enable_exceptions()
