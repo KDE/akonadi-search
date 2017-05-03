@@ -124,7 +124,7 @@ private Q_SLOTS:
                 //qDebug() << "result " << it.id();
                 results << it.id();
             }
-            qSort(results);
+            std::sort(results.begin(), results.end());
             QCOMPARE(results.size(), 2);
             QCOMPARE(results.at(0), col1.id());
             QCOMPARE(results.at(1), col2.id());
@@ -139,7 +139,7 @@ private Q_SLOTS:
                 //qDebug() << "result " << it.id();
                 results << it.id();
             }
-            qSort(results);
+            std::sort(results.begin(), results.end());
             QCOMPARE(results.size(), 1);
             QCOMPARE(results.at(0), col2.id());
         }
