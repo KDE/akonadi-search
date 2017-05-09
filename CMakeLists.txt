@@ -59,6 +59,8 @@ ecm_setup_version(PROJECT
 
 # Compiler flags
 add_definitions(-DQT_NO_KEYWORDS)
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
 
 # Turn exceptions on
