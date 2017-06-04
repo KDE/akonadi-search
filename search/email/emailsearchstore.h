@@ -40,16 +40,16 @@ class EmailSearchStore : public PIMSearchStore
 public:
     explicit EmailSearchStore(QObject *parent = nullptr);
 
-    QStringList types() Q_DECL_OVERRIDE;
-    QString text(int queryId) Q_DECL_OVERRIDE;
-    QString icon(int) Q_DECL_OVERRIDE {
+    QStringList types() override;
+    QString text(int queryId) override;
+    QString icon(int) override {
         return QStringLiteral("internet-mail");
     }
 
 protected:
     virtual Xapian::Query constructQuery(const QString &property, const QVariant &value,
-                                         Term::Comparator com) Q_DECL_OVERRIDE;
-    Xapian::Query finalizeQuery(const Xapian::Query &query) Q_DECL_OVERRIDE;
+                                         Term::Comparator com) override;
+    Xapian::Query finalizeQuery(const Xapian::Query &query) override;
 };
 
 }

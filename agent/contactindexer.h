@@ -32,17 +32,17 @@ public:
     ContactIndexer(const QString &path);
     ~ContactIndexer();
 
-    QStringList mimeTypes() const Q_DECL_OVERRIDE;
+    QStringList mimeTypes() const override;
 
-    void index(const Akonadi::Item &item) Q_DECL_OVERRIDE;
-    void remove(const Akonadi::Item &item) Q_DECL_OVERRIDE;
-    void remove(const Akonadi::Collection &item) Q_DECL_OVERRIDE;
+    void index(const Akonadi::Item &item) override;
+    void remove(const Akonadi::Item &item) override;
+    void remove(const Akonadi::Collection &item) override;
 
-    void commit() Q_DECL_OVERRIDE;
+    void commit() override;
 
     void move(Akonadi::Item::Id itemId,
               Akonadi::Collection::Id from,
-              Akonadi::Collection::Id to) Q_DECL_OVERRIDE;
+              Akonadi::Collection::Id to) override;
 private:
     bool indexContact(const Akonadi::Item &item);
     void indexContactGroup(const Akonadi::Item &item);

@@ -55,24 +55,24 @@ public:
     qlonglong indexedItems(const qlonglong id);
     int numberOfCollectionQueued();
 
-    void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection) Q_DECL_OVERRIDE;
-    void itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers) Q_DECL_OVERRIDE;
+    void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection) override;
+    void itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers) override;
     void itemsFlagsChanged(const Akonadi::Item::List &items,
                            const QSet<QByteArray> &addedFlags,
-                           const QSet<QByteArray> &removedFlags) Q_DECL_OVERRIDE;
-    void itemsRemoved(const Akonadi::Item::List &items) Q_DECL_OVERRIDE;
+                           const QSet<QByteArray> &removedFlags) override;
+    void itemsRemoved(const Akonadi::Item::List &items) override;
     void itemsMoved(const Akonadi::Item::List &items,
                     const Akonadi::Collection &sourceCollection,
-                    const Akonadi::Collection &destinationCollection) Q_DECL_OVERRIDE;
+                    const Akonadi::Collection &destinationCollection) override;
 
-    void collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent) Q_DECL_OVERRIDE;
-    void collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes) Q_DECL_OVERRIDE;
-    void collectionRemoved(const Akonadi::Collection &collection) Q_DECL_OVERRIDE;
+    void collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent) override;
+    void collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes) override;
+    void collectionRemoved(const Akonadi::Collection &collection) override;
     void collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
-                         const Akonadi::Collection &collectionDestination) Q_DECL_OVERRIDE;
+                         const Akonadi::Collection &collectionDestination) override;
 
     // Remove the entire db
-    void cleanup() Q_DECL_OVERRIDE;
+    void cleanup() override;
 
 private Q_SLOTS:
     void onAbortRequested();

@@ -44,12 +44,12 @@ public:
     explicit XapianSearchStore(QObject *parent = nullptr);
     virtual ~XapianSearchStore();
 
-    int exec(const Query &query) Q_DECL_OVERRIDE;
-    void close(int queryId) Q_DECL_OVERRIDE;
-    bool next(int queryId) Q_DECL_OVERRIDE;
+    int exec(const Query &query) override;
+    void close(int queryId) override;
+    bool next(int queryId) override;
 
-    QByteArray id(int queryId) Q_DECL_OVERRIDE;
-    QUrl url(int queryId) Q_DECL_OVERRIDE;
+    QByteArray id(int queryId) override;
+    QUrl url(int queryId) override;
 
     /**
      * Set the path of the xapian database

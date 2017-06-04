@@ -36,15 +36,15 @@ class AgePostingSource : public Xapian::ValuePostingSource
 public:
     AgePostingSource(Xapian::valueno slot_);
 
-    Xapian::weight get_weight() const Q_DECL_OVERRIDE;
-    Xapian::PostingSource *clone() const Q_DECL_OVERRIDE;
+    Xapian::weight get_weight() const override;
+    Xapian::PostingSource *clone() const override;
 
-    std::string name() const Q_DECL_OVERRIDE
+    std::string name() const override
     {
         return "AgePostingSource";
     }
 
-    void init(const Xapian::Database &db_) Q_DECL_OVERRIDE;
+    void init(const Xapian::Database &db_) override;
 
 private:
     uint m_currentTime_t;

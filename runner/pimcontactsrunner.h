@@ -30,12 +30,12 @@ public:
     explicit PIMContactsRunner(QObject *parent, const QVariantList &args);
     virtual ~PIMContactsRunner();
 
-    void reloadConfiguration() Q_DECL_OVERRIDE;
+    void reloadConfiguration() override;
 
-    void match(Plasma::RunnerContext &context) Q_DECL_OVERRIDE;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) Q_DECL_OVERRIDE;
-    QStringList categories() const Q_DECL_OVERRIDE;
-    QIcon categoryIcon(const QString &category) const Q_DECL_OVERRIDE;
+    void match(Plasma::RunnerContext &context) override;
+    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
+    QStringList categories() const override;
+    QIcon categoryIcon(const QString &category) const override;
 
 private:
     void queryContacts(Plasma::RunnerContext &context, const QString &queryString);

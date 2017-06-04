@@ -57,7 +57,7 @@ public:
     void setMatchCriteria(MatchCriteria m);
     MatchCriteria matchCriteria() const;
 
-    ResultIterator exec() Q_DECL_OVERRIDE;
+    ResultIterator exec() override;
 
     int limit() const;
     void setLimit(int limit);

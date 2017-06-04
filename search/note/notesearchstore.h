@@ -40,7 +40,7 @@ class NoteSearchStore : public PIMSearchStore
 public:
     explicit NoteSearchStore(QObject *parent = nullptr);
 
-    QStringList types() Q_DECL_OVERRIDE;
+    QStringList types() override;
 };
 
 }

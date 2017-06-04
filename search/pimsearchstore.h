@@ -39,21 +39,21 @@ class PIMSearchStore : public XapianSearchStore
 public:
     explicit PIMSearchStore(QObject *parent = nullptr);
 
-    QStringList types() Q_DECL_OVERRIDE;
+    QStringList types() override;
 
 protected:
     QString findDatabase(const QString &databasePath) const;
 
-    Xapian::Query convertTypes(const QStringList &) Q_DECL_OVERRIDE {
+    Xapian::Query convertTypes(const QStringList &) override {
         return Xapian::Query();
     }
-    QByteArray idPrefix() Q_DECL_OVERRIDE {
+    QByteArray idPrefix() override {
         return QByteArray("akonadi");
     }
 
     virtual Xapian::Query constructQuery(const QString &property, const QVariant &value,
-                                         Term::Comparator com) Q_DECL_OVERRIDE;
-    QUrl constructUrl(const Xapian::docid &docid) Q_DECL_OVERRIDE;
+                                         Term::Comparator com) override;
+    QUrl constructUrl(const Xapian::docid &docid) override;
 
     QHash<QString, QString> m_prefix;
 

@@ -42,7 +42,7 @@ public:
                                    const QList<Akonadi::Item::Id> &pending,
                                    QObject *parent = nullptr);
     void setFullSync(bool);
-    void start() Q_DECL_OVERRIDE;
+    void start() override;
 
 Q_SIGNALS:
     void status(int, const QString &);

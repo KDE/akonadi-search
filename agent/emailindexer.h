@@ -40,18 +40,18 @@ public:
     EmailIndexer(const QString &path, const QString &contactDbPath);
     ~EmailIndexer();
 
-    QStringList mimeTypes() const Q_DECL_OVERRIDE;
+    QStringList mimeTypes() const override;
 
-    void index(const Akonadi::Item &item) Q_DECL_OVERRIDE;
+    void index(const Akonadi::Item &item) override;
     void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &added,
-                     const QSet<QByteArray> &removed) Q_DECL_OVERRIDE;
-    void remove(const Akonadi::Item &item) Q_DECL_OVERRIDE;
-    void remove(const Akonadi::Collection &item) Q_DECL_OVERRIDE;
+                     const QSet<QByteArray> &removed) override;
+    void remove(const Akonadi::Item &item) override;
+    void remove(const Akonadi::Collection &item) override;
     void move(Akonadi::Item::Id itemId,
               Akonadi::Collection::Id from,
-              Akonadi::Collection::Id to) Q_DECL_OVERRIDE;
+              Akonadi::Collection::Id to) override;
 
-    void commit() Q_DECL_OVERRIDE;
+    void commit() override;
 
 private:
     Xapian::WritableDatabase *m_db;
