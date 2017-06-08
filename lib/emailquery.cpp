@@ -27,7 +27,7 @@
 #include "../search/email/agepostingsource.h"
 
 #include <QStandardPaths>
-
+#include <QRegularExpression>
 #include <QFile>
 
 using namespace Akonadi::Search::PIM;
@@ -321,7 +321,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.set_default_op(Xapian::Query::OP_AND);
         if (d->splitSearchMatchString) {
-            const QStringList list = d->matchString.split(QRegExp(QStringLiteral("\\s")), QString::SkipEmptyParts);
+            const QStringList list = d->matchString.split(QRegularExpression(QStringLiteral("\\s")), QString::SkipEmptyParts);
             for (const QString &s : list) {
                 const QByteArray ba = s.toUtf8();
                 m_queries << parser.parse_query(ba.constData(),
