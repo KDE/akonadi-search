@@ -27,11 +27,10 @@
 
 #include <QtCore/QDebug>
 
-#include <sys/time.h>
 #include <sys/resource.h>
 
-#include <unistd.h>
 #ifndef _WIN32
+#include <unistd.h>
 #include <sys/syscall.h>
 #include <errno.h>
 
