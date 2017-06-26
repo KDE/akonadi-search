@@ -34,7 +34,10 @@ set(KMIME_LIB_VERSION "5.5.40")
 set(QT_REQUIRED_VERSION "5.7.0")
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
-find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash KCMUtils Runner)
+find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash KCMUtils)
+if (NOT WIN32)
+    find_package(KF5Runner ${KF5_VERSION} REQUIRED)
+endif()
 
 
 find_package(Xapian CONFIG)
@@ -83,7 +86,9 @@ add_subdirectory(lib)
 add_subdirectory(akonadiplugin)
 add_subdirectory(search)
 add_subdirectory(debug)
-add_subdirectory(runner)
+if (NOT WIN32)
+    add_subdirectory(runner)
+endif()
 
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
