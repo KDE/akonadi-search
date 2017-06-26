@@ -48,6 +48,12 @@ ResultIterator::~ResultIterator()
 {
 }
 
+ResultIterator &ResultIterator::operator=(const ResultIterator &other)
+{
+    d = other.d;
+    return *this;
+}
+
 bool ResultIterator::next()
 {
     if (d->store) {

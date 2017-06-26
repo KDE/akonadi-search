@@ -62,6 +62,8 @@ public:
     ResultIterator(const ResultIterator &rhs);
     ~ResultIterator();
 
+    ResultIterator &operator=(const ResultIterator &other);
+
     // internal
     ResultIterator(int id, SearchStore *store);
 
