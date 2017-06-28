@@ -28,11 +28,10 @@
 #if defined(HAVE_MALLOC_H)
 #include <malloc.h>
 #endif
-#ifdef WIN32
-#include <Windows.h>
-#else
-#include <unistd.h>
-#endif
+
+#include <chrono>
+#include <thread>
+
 using namespace Akonadi::Search;
 
 XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)
@@ -177,17 +176,9 @@ Xapian::WritableDatabase XapianDatabase::createWritableDb()
             Xapian::WritableDatabase wdb(m_path, Xapian::DB_CREATE_OR_OPEN);
             return wdb;
         } catch (const Xapian::DatabaseLockError &) {
-#ifdef WIN32
-            Sleep(i * 50 * 1000);
-#else
-            usleep(i * 50 * 1000);
-#endif
+            std::this_thread::sleep_for(std::chrono::milliseconds(i * 50));
         } catch (const Xapian::DatabaseModifiedError &) {
-#ifdef WIN32
-            Sleep(i * 50 * 1000);
-#else
-            usleep(i * 50 * 1000);
-#endif
+            std::this_thread::sleep_for(std::chrono::milliseconds(i * 50));
         } catch (const Xapian::DatabaseCreateError &err) {
             qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << err.get_error_string();
             return Xapian::WritableDatabase();
