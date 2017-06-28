@@ -26,25 +26,6 @@
 
 using namespace Akonadi::Search;
 
-class Q_DECL_HIDDEN Akonadi::Search::ResultIteratorPrivate : public QSharedData
-{
-public:
-    ResultIteratorPrivate()
-        : queryId(0)
-        , store(nullptr)
-    {
-    }
-
-    ~ResultIteratorPrivate()
-    {
-        if (store) {
-            store->close(queryId);
-        }
-    }
-
-    int queryId;
-    SearchStore *store;
-};
 
 ResultIterator::ResultIterator(int id, SearchStore *store)
     : d(new ResultIteratorPrivate)
