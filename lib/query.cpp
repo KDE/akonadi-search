@@ -84,7 +84,8 @@ QString Query::defaultLocation(const QString &dbName)
     // First look into the old location from Baloo times in ~/.local/share/baloo,
     // because we don't migrate the database files automatically.
     QString basePath;
-    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+    bool hasInstanceIdentifier = Akonadi::ServerManager::hasInstanceIdentifier();
+    if (hasInstanceIdentifier) {
         basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
         basePath = QStringLiteral("baloo");
@@ -96,7 +97,7 @@ QString Query::defaultLocation(const QString &dbName)
 
     // If the database does not exist in old Baloo folders, than use the new
     // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
-    if (Akonadi::ServerManager::hasInstanceIdentifier()) {
+    if (hasInstanceIdentifier) {
         basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
         basePath = QStringLiteral("akonadi/search_db");
