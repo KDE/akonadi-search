@@ -25,7 +25,6 @@
 #include "xapian.h"
 
 #include <QList>
-#include <QDebug>
 #include <QStandardPaths>
 #include <QFile>
 #include <QDebug>

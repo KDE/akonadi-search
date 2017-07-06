@@ -25,7 +25,6 @@
 #include "xapian.h"
 #include "akonadi_search_pim_debug.h"
 
-#include <QDebug>
 
 #include <QList>
 #include <QDebug>
