@@ -31,7 +31,7 @@ set(searchplugintest_SRCS
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 
 add_executable( searchplugintest ${searchplugintest_SRCS} )
-add_test( searchplugintest searchplugintest )
+add_test( NAME searchplugintest COMMAND searchplugintest )
 ecm_mark_as_test(searchplugintest)
 
 target_link_libraries(searchplugintest

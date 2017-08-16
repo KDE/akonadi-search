@@ -35,7 +35,7 @@ set(indexertest_SRCS
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 
 add_executable(indexertest ${indexertest_SRCS})
-add_test(indexertest indexertest)
+add_test(NAME indexertest COMMAND indexertest)
 ecm_mark_as_test(indexertest)
 target_link_libraries(indexertest
     ${indexer_LIBS}
@@ -59,7 +59,7 @@ add_akonadi_isolated_test_advanced(collectionindexingjobtest.cpp "${scheduler_SR
 
 if(NOT WIN32)
 add_executable(collectionquerytest collectionquerytest.cpp ${query_SRCS} ${indexer_SRCS} ${scheduler_SRCS})
-add_test(collectionquerytest collectionquerytest)
+add_test(NAME collectionquerytest COMMAND collectionquerytest)
 ecm_mark_as_test(collectionquerytest)
 target_link_libraries(collectionquerytest
     ${indexer_LIBS}
