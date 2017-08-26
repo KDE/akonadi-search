@@ -323,6 +323,9 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
                mimeTypes.contains(QStringLiteral("application/x-vnd.akonadi.calendar.freebusy"))) {
         query.setType(QStringLiteral("Calendar"));
         t = recursiveCalendarTermMapping(term);
+    } else {
+        // Unknown type
+        return {};
     }
 
     if (searchQuery.limit() > 0) {
