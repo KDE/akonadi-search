@@ -87,7 +87,7 @@ private:
     QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> > m_queues;
     QQueue<Akonadi::Collection::Id> m_collectionQueue;
     Index &m_index;
-    KJob *m_currentJob;
+    KJob *m_currentJob = nullptr;
     QTimer m_processTimer;
     QHash<Akonadi::Collection::Id, qint64> m_lastModifiedTimestamps;
     QSet<Akonadi::Collection::Id> m_dirtyCollections;

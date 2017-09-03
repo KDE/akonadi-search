@@ -54,11 +54,11 @@ public:
     void commit() override;
 
 private:
-    Xapian::WritableDatabase *m_db;
-    Xapian::Document *m_doc;
-    Xapian::TermGenerator *m_termGen;
+    Xapian::WritableDatabase *m_db = nullptr;
+    Xapian::Document *m_doc = nullptr;
+    Xapian::TermGenerator *m_termGen = nullptr;
 
-    Xapian::WritableDatabase *m_contactDb;
+    Xapian::WritableDatabase *m_contactDb = nullptr;
 
     void toggleFlag(Xapian::Document &doc, const char *remove, const char *add);
 

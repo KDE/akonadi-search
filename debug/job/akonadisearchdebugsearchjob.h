@@ -50,7 +50,7 @@ private:
     QStringList mArguments;
     QString mAkonadiId;
     QString mPath;
-    QProcess *mProcess;
+    QProcess *mProcess = nullptr;
 };
 }
 }
