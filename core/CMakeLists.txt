@@ -23,8 +23,19 @@ set_target_properties(KF5AkonadiSearchCore PROPERTIES
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchCore
 )
-target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch>")
+target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Core>")
 
 generate_export_header(KF5AkonadiSearchCore BASE_NAME AKONADI_SEARCH_CORE EXPORT_FILE_NAME search_core_export.h)
 
 install(TARGETS KF5AkonadiSearchCore EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(FILES
+    searchstore.h
+    term.h
+    query.h
+    resultiterator.h
+    ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
+
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Core
+    COMPONENT Devel
+)

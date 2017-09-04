@@ -27,7 +27,19 @@ set_target_properties(KF5AkonadiSearchXapian PROPERTIES
 
 generate_export_header(KF5AkonadiSearchXapian BASE_NAME AKONADI_SEARCH_XAPIAN EXPORT_FILE_NAME search_xapian_export.h)
 
-install(TARGETS KF5AkonadiSearchXapian EXPORT AkonadiSearchXapian ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchXapian EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+
+install(FILES
+    xapiandatabase.h
+    xapiandocument.h
+    xapianqueryparser.h
+    xapiansearchstore.h
+    xapiantermgenerator.h
+    ${CMAKE_CURRENT_BINARY_DIR}/search_xapian_export.h
+
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Xapian
+    COMPONENT Devel
+)
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
