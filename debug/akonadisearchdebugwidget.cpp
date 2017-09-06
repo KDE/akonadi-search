@@ -32,31 +32,30 @@ using namespace Akonadi::Search;
 AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     : QWidget(parent)
 {
-    QVBoxLayout *mainLayout = new QVBoxLayout;
-    setLayout(mainLayout);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
 
     QHBoxLayout *hbox = new QHBoxLayout;
     mainLayout->addLayout(hbox);
-    QLabel *lab = new QLabel(QStringLiteral("Item identifier:"));
+    QLabel *lab = new QLabel(QStringLiteral("Item identifier:"), this);
     hbox->addWidget(lab);
-    mLineEdit = new KLineEdit;
+    mLineEdit = new KLineEdit(this);
     mLineEdit->setTrapReturnKey(true);
     mLineEdit->setClearButtonShown(true);
     mLineEdit->setObjectName(QStringLiteral("lineedit"));
     connect(mLineEdit, &KLineEdit::textChanged, this, &AkonadiSearchDebugWidget::slotSearchLineTextChanged);
     hbox->addWidget(mLineEdit);
 
-    mSearchPathComboBox = new Akonadi::Search::AkonadiSearchDebugSearchPathComboBox;
+    mSearchPathComboBox = new Akonadi::Search::AkonadiSearchDebugSearchPathComboBox(this);
     hbox->addWidget(mSearchPathComboBox);
     mSearchPathComboBox->setObjectName(QStringLiteral("searchpathcombo"));
 
-    mSearchButton = new QPushButton(QStringLiteral("Search"));
+    mSearchButton = new QPushButton(QStringLiteral("Search"), this);
     mSearchButton->setObjectName(QStringLiteral("searchbutton"));
     connect(mSearchButton, &QPushButton::clicked, this, &AkonadiSearchDebugWidget::slotSearch);
     hbox->addWidget(mSearchButton);
     mSearchButton->setEnabled(false);
 
-    mPlainTextEditor = new QPlainTextEdit;
+    mPlainTextEditor = new QPlainTextEdit(this);
     new AkonadiSearchSyntaxHighlighter(mPlainTextEditor->document());
     mPlainTextEditor->setReadOnly(true);
     mainLayout->addWidget(mPlainTextEditor);
