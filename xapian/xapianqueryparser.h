@@ -50,7 +50,7 @@ public:
     void setAutoExapand(bool autoexpand);
 
 private:
-    Xapian::Database *m_db;
+    Xapian::Database *m_db = nullptr;
     bool m_autoExpand;
 };
 

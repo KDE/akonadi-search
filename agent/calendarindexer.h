@@ -58,7 +58,7 @@ private:
     void indexTodoItem(const Akonadi::Item &item, const KCalCore::Todo::Ptr &todo);
     void updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc);
 
-    Akonadi::Search::XapianDatabase *m_db;
+    Akonadi::Search::XapianDatabase *m_db = nullptr;
 };
 
 #endif // CALENDARINDEXER_H

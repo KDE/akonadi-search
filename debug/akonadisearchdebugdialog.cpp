@@ -41,7 +41,7 @@ public:
 
     }
 
-    AkonadiSearchDebugWidget *mAkonadiSearchDebugWidget;
+    AkonadiSearchDebugWidget *mAkonadiSearchDebugWidget = nullptr;
 };
 
 AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)

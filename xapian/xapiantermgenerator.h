@@ -45,7 +45,7 @@ public:
 
     static QStringList termList(const QString &text);
 private:
-    Xapian::Document *m_doc;
+    Xapian::Document *m_doc = nullptr;
     Xapian::TermGenerator m_termGen;
 
     int m_position;

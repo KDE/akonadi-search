@@ -127,7 +127,7 @@ private:
 
     QString m_dbPath;
 
-    Xapian::Database *m_db;
+    Xapian::Database *m_db = nullptr;
 };
 
 }
