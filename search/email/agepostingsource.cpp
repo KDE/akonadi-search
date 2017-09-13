@@ -47,7 +47,6 @@ Xapian::weight AgePostingSource::get_weight() const
         return 0.0;
     }
 
-    QDateTime dt = QDateTime::fromTime_t(time);
     uint diff = m_currentTime_t - time;
 
     // Each day is given a penalty of penalty of 1.0
