@@ -139,14 +139,14 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::
 {
     Akonadi::Search::XapianDocument doc;
 
-    doc.indexText(event->organizer()->email(), "O");
-    doc.indexText(event->summary(), "S");
-    doc.indexText(event->location(), "L");
+    doc.indexText(event->organizer()->email(), QStringLiteral("O"));
+    doc.indexText(event->summary(), QStringLiteral("S"));
+    doc.indexText(event->location(), QStringLiteral("L"));
     KCalCore::Attendee::List attendees = event->attendees();
     KCalCore::Attendee::List::ConstIterator it;
     KCalCore::Attendee::List::ConstIterator end(attendees.constEnd());
     for (it = attendees.constBegin(); it != end; ++it) {
-        doc.addBoolTerm((*it)->email() + QString::number((*it)->status()), "PS");
+        doc.addBoolTerm((*it)->email() + QString::number((*it)->status()), QStringLiteral("PS"));
     }
 
     // Parent collection
@@ -154,7 +154,7 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::
                "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addBoolTerm(colId, "C");
+    doc.addBoolTerm(colId, QStringLiteral("C"));
 
     m_db->replaceDocument(item.id(), doc);
 }

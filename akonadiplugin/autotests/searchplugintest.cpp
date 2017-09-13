@@ -443,7 +443,7 @@ private Q_SLOTS:
         const QStringList calendarMimeTypes = QStringList() << KCalCore::Event::eventMimeType();
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, "organizer@example.com", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, QStringLiteral("organizer@example.com"), Akonadi::SearchTerm::CondEqual));
 
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
@@ -451,7 +451,7 @@ private Q_SLOTS:
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, "organizer2@example.com", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, QStringLiteral("organizer2@example.com"), Akonadi::SearchTerm::CondEqual));
 
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result;
@@ -459,56 +459,56 @@ private Q_SLOTS:
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee1@example.com0", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee1@example.com0"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
             QTest::newRow("find events needsAction") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee2@example.com1", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee2@example.com1"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
             QTest::newRow("find events accepted") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee3@example.com2", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee3@example.com2"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
             QTest::newRow("find events declined") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee4@example.com3", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee4@example.com3"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
             QTest::newRow("find events tentative") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee5@example.com4", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee5@example.com4"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
             QTest::newRow("find events delegated") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, "attendee5@example.com5", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee5@example.com5"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result;
             QTest::newRow("unknown partstatus") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Summary, "title", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Summary, QStringLiteral("title"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
             QTest::newRow("find event summary") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Location, "here", Akonadi::SearchTerm::CondEqual));
+            query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Location, QStringLiteral("here"), Akonadi::SearchTerm::CondEqual));
             QVector<qint64> collections = QVector<qint64>() << 6;
             QSet<qint64> result = QSet<qint64>() << 2001;
             QTest::newRow("find events location") << QString::fromLatin1(query.toJSON()) << collections << calendarMimeTypes << result;

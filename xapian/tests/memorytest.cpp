@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 
     QCommandLineParser parser;
     parser.addPositionalArgument(QStringLiteral("num"), QStringLiteral("The number of terms. Each term is of length 10"));
-    parser.addOption(QCommandLineOption(QStringList() << "p" << "position", QStringLiteral("Add positional information")));
+    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("p") << QStringLiteral("position"), QStringLiteral("Add positional information")));
     parser.addHelpOption();
     parser.process(app);
 
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < size; i++) {
         QByteArray term = QUuid::createUuid().toByteArray().mid(1, 10);
 
-        if (parser.isSet("p")) {
+        if (parser.isSet(QLatin1String("p"))) {
             std::string stdString(term.constData(), term.length());
             doc.doc().add_posting(stdString, i);
         } else {
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     }
 
     qDebug() << "Added" << size << "terms";
-    if (parser.isSet("p")) {
+    if (parser.isSet(QLatin1String("p"))) {
         qDebug() << "With Positional Information";
     }
     return app.exec();

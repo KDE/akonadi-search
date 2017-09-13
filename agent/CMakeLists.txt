@@ -36,6 +36,10 @@ target_link_libraries(akonadi_indexing_agent
     KF5::CalendarCore
     KF5::AkonadiSearchXapian
     KF5::AkonadiSearchPIM
+    KF5::Codecs
+    KF5::I18n
+    KF5::ConfigCore
+    Qt5::Widgets
 )
 
 install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

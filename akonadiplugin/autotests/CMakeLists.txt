@@ -44,4 +44,5 @@ target_link_libraries(searchplugintest
     KF5::CalendarCore
     KF5::AkonadiSearchPIM
     KF5::AkonadiSearchXapian
+    KF5::Codecs
 )

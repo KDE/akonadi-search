@@ -25,6 +25,8 @@ set(indexer_LIBS
     KF5::CalendarCore
     KF5::AkonadiSearchPIM
     KF5::AkonadiSearchXapian
+    KF5::I18n
+    KF5::Codecs
 )
 
 set(indexertest_SRCS
@@ -65,5 +67,8 @@ target_link_libraries(collectionquerytest
     ${indexer_LIBS}
     ${QJSON_LIBRARIES}
     KF5::AkonadiSearchPIM
+    KF5::ConfigCore
+    Qt5::Widgets
+    Qt5::DBus
 )
 endif()
