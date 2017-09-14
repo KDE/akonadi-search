@@ -27,8 +27,6 @@
 #include <agentbase.h>
 #include <collection.h>
 
-#include <QTimer>
-#include <QDateTime>
 #include <QList>
 #include "scheduler.h"
 #include "index.h"

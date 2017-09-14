@@ -33,7 +33,6 @@
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 #include <QStringList>
-#include <QDateTime>
 
 using namespace Akonadi::Search;
 

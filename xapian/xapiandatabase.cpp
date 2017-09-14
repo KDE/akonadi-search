@@ -22,7 +22,6 @@
 #include "xapiandocument.h"
 
 #include "akonadi_search_xapian_debug.h"
-#include <QTimer>
 #include <QDir>
 
 #if defined(HAVE_MALLOC_H)

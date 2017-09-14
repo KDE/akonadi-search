@@ -27,7 +27,6 @@
 #include <KCalCore/Attendee>
 #include <KCalCore/Event>
 
-#include <QTextDocument>
 
 CalendarIndexer::CalendarIndexer(const QString &path)
     : AbstractIndexer(), m_db(nullptr)

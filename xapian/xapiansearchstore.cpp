@@ -26,8 +26,6 @@
 #include "query.h"
 
 #include <QVector>
-#include <QStringList>
-#include <QTime>
 #include "akonadi_search_xapian_debug.h"
 
 #include <algorithm>

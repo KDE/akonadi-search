@@ -24,7 +24,6 @@
 #include "term.h"
 #include "query.h"
 
-#include <QDebug>
 #include <QUrl>
 #include <QUrlQuery>
 #include <QStandardPaths>

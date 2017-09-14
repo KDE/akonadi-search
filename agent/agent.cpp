@@ -47,7 +47,6 @@
 #include <KLocalizedString>
 #include "akonadi_indexer_agent_debug.h"
 
-#include <QFile>
 
 #define INDEXING_AGENT_VERSION 5
 

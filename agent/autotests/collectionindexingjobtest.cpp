@@ -26,7 +26,6 @@
 #include <AkonadiCore/ServerManager>
 #include <AkonadiCore/CollectionFetchJob>
 #include <AkonadiCore/qtest_akonadi.h>
-#include <KConfigGroup>
 
 class TestIndex : public Index
 {

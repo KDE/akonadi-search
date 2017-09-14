@@ -19,9 +19,8 @@
 
 #include "pimcontactsrunnerconfig.h"
 
-#include <QFormLayout>
 #include <QCheckBox>
-
+#include <QVBoxLayout>
 #include <KLocalizedString>
 #include <KSharedConfig>
 #include <KConfigGroup>

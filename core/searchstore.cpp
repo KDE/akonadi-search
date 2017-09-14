@@ -24,7 +24,6 @@
 #include "akonadi_search_core_debug.h"
 
 
-#include <QDebug>
 #include <QThreadStorage>
 #include <QMutex>
 #include <QSharedPointer>

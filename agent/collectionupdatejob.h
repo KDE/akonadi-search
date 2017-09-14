@@ -24,7 +24,6 @@
 #include <KJob>
 #include <AkonadiCore/Item>
 #include <AkonadiCore/Collection>
-#include <QTime>
 #include "index.h"
 
 /**

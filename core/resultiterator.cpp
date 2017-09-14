@@ -22,7 +22,6 @@
 
 #include "resultiterator.h"
 #include "searchstore.h"
-#include <QDebug>
 
 using namespace Akonadi::Search;
 

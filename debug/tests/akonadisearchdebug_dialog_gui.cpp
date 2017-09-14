@@ -17,9 +17,7 @@
 
 #include "../akonadisearchdebugdialog.h"
 
-#include <KLocalizedString>
 #include <QApplication>
-#include <KAboutData>
 #include <QCommandLineParser>
 #include <QStandardPaths>
 

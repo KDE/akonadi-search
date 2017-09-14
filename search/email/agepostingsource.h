@@ -24,7 +24,6 @@
 #define AKONADI_SEARCH_PIM_AGEPOSTINGSOURCE_H
 
 #include <xapian.h>
-#include <QString>
 
 namespace Akonadi
 {
