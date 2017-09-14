@@ -33,13 +33,6 @@
 #include "scheduler.h"
 #include "index.h"
 
-class KJob;
-class AbstractIndexer;
-
-namespace Akonadi
-{
-class ItemFetchJob;
-}
 
 class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
 {
