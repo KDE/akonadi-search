@@ -80,6 +80,7 @@ include_directories(
 )
 
 # Targets
+add_subdirectory(src)
 add_subdirectory(xapian)
 add_subdirectory(core)
 add_subdirectory(agent)
