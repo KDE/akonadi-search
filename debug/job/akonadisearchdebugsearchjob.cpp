@@ -35,7 +35,12 @@ AkonadiSearchDebugSearchJob::~AkonadiSearchDebugSearchJob()
 
 void AkonadiSearchDebugSearchJob::start()
 {
-    const QString delvePath = QStandardPaths::findExecutable(QStringLiteral("delve"));
+    // "delve" is also a name of Go debugger, some distros prefer xapian-delve
+    // for that reason, so try that first and fallback to "delve" 
+    QString delvePath = QStandardPaths::findExecutable(QStringLiteral("xapian-delve"));
+    if (delvePath.isEmpty()) {
+        delvePath = QStandardPaths::findExecutable(QStringLiteral("delve"));
+    }
     if (delvePath.isEmpty()) {
         //Don't translate it. Just debug
         Q_EMIT error(QStringLiteral("\"delve\" not installed on computer."));
