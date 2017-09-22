@@ -61,7 +61,7 @@ int main(int argc, char **argv)
 
 App::App(int &argc, char **argv, int flags): QCoreApplication(argc, argv, flags)
 {
-    QTimer::singleShot(0, this, SLOT(main()));
+    QTimer::singleShot(0, this, &App::main);
 }
 
 void App::main()
