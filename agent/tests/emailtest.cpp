@@ -75,12 +75,12 @@ App::App(int &argc, char **argv, int flags)
 void App::main()
 {
     m_commitTimer.setInterval(1000);
-    connect(&m_commitTimer, SIGNAL(timeout()), this, SLOT(slotCommitTimerElapsed()));
+    connect(&m_commitTimer, &QTimer::timeout, this, &App::slotCommitTimerElapsed);
     m_commitTimer.start();
 
     Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
             Akonadi::CollectionFetchJob::Recursive);
-    connect(job, SIGNAL(finished(KJob*)), this, SLOT(slotRootCollectionsFetched(KJob*)));
+    connect(job, &Akonadi::CollectionFetchJob::finished, this, &App::slotRootCollectionsFetched);
     job->start();
 
     m_numEmails = 0;
@@ -118,8 +118,8 @@ void App::indexNextCollection()
     fetchJob->fetchScope().setAncestorRetrieval(Akonadi::ItemFetchScope::Parent);
     fetchJob->setDeliveryOption(Akonadi::ItemFetchJob::EmitItemsIndividually);
 
-    connect(fetchJob, SIGNAL(itemsReceived(Akonadi::Item::List)), this, SLOT(itemReceived(Akonadi::Item::List)));
-    connect(fetchJob, SIGNAL(result(KJob*)), this, SLOT(slotIndexed()));
+    connect(fetchJob, &Akonadi::ItemFetchJob::itemsReceived, this, &App::itemReceived);
+    connect(fetchJob, &Akonadi::ItemFetchJob::result, this, &App::slotIndexed);
 }
 
 void App::itemReceived(const Akonadi::Item::List &itemList)
@@ -151,7 +151,7 @@ void App::slotCommitTimerElapsed()
 void App::slotIndexed()
 {
     if (!m_collections.isEmpty()) {
-        QTimer::singleShot(0, this, SLOT(indexNextCollection()));
+        QTimer::singleShot(0, this, &App::indexNextCollection);
         return;
     }
 

@@ -87,10 +87,10 @@ void App::main()
     Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(m_akonadiIds);
     job->fetchScope().fetchFullPayload(true);
 
-    connect(job, SIGNAL(itemsReceived(Akonadi::Item::List)),
-            this, SLOT(itemsReceived(Akonadi::Item::List)));
-    connect(job, SIGNAL(finished(KJob*)),
-            this, SLOT(quit()));
+    connect(job, &Akonadi::ItemFetchJob::itemsReceived,
+            this, &App::itemsReceived);
+    connect(job, &Akonadi::ItemFetchJob::finished,
+            this, &App::quit);
 
     job->start();
 }
