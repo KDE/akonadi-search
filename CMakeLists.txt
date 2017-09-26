@@ -225,6 +225,7 @@ include_directories(
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6AkonadiSearch")
 # Targets
+add_subdirectory(autotests)
 add_subdirectory(src)
 add_subdirectory(xapian)
 add_subdirectory(core)
