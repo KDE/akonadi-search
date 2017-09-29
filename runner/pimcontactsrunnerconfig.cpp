@@ -36,11 +36,16 @@ PIMContactsRunnerConfig::PIMContactsRunnerConfig(QWidget *parent, const QVariant
 
     mQueryCompletionCheckBox = new QCheckBox(i18n("Search in contacts indexed from sent and received emails too"));
     connect(mQueryCompletionCheckBox, &QCheckBox::stateChanged,
-            this, QOverload<>::of(&KCModule::changed));
+            this, &PIMContactsRunnerConfig::configChanged);
 
     vbox->addWidget(mQueryCompletionCheckBox);
 
     load();
+}
+
+void PIMContactsRunnerConfig::configChanged()
+{
+    Q_EMIT changed();
 }
 
 void PIMContactsRunnerConfig::load()

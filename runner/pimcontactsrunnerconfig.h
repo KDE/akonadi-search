@@ -37,6 +37,7 @@ public Q_SLOTS:
     void defaults() override;
 
 private:
+    void configChanged();
     QCheckBox *mQueryCompletionCheckBox = nullptr;
 };
 
