@@ -69,7 +69,9 @@ public:
 StorePrivate::~StorePrivate()
 {
     if (db) {
-        db->commit();
+        if (openMode == Store::WriteOnly) {
+            db->commit();
+        }
         delete db;
     }
 }
