@@ -38,6 +38,13 @@ using namespace Akonadi::Search;
 
 IncidenceQueryMapper::IncidenceQueryMapper()
 {
+    mPropMapper.insertPrefix(QStringLiteral("collection"), QStringLiteral("C"));
+    mPropMapper.insertPrefix(QStringLiteral("organizer"), QStringLiteral("O"));
+    mPropMapper.insertPrefix(QStringLiteral("partStatus"), QStringLiteral("PS"));
+    mPropMapper.insertPrefix(QStringLiteral("summary"), QStringLiteral("S"));
+    mPropMapper.insertPrefix(QStringLiteral("location"), QStringLiteral("L"));
+
+    mPropMapper.insertBoolValueProperty(QStringLiteral("partStatus"));
 }
 
 QStringList IncidenceQueryMapper::mimeTypes()
