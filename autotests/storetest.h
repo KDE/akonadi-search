@@ -19,30 +19,42 @@
  *
  */
 
-#ifndef AKONADISEARCH_QUERYMAPPERTEST_H_
-#define AKONADISEARCH_QUERYMAPPERTEST_H_
+#ifndef AKONADISEARCH_STORETEST_H_
+#define AKONADISEARCH_STORETEST_H_
 
 #include <QObject>
+#include <QVector>
 
-class QueryMapperTest : public QObject
+namespace Akonadi {
+class Item;
+}
+
+class StoreTest : public QObject
 {
     Q_OBJECT
 
-    void testQueryMapper(const QString &mimeType);
+private:
+    void indexContacts();
+    void indexEmails();
+    void indexIncidences();
+    void indexNotes();
+    void indexItems(const QVector<Akonadi::Item> &items);
 
 private Q_SLOTS:
-    void testContactQueryMapper_data();
-    void testContactQueryMapper();
+    void initTestCase();
+    void cleanupTestCase(); // cleanup after each testrun
 
-    void testEmailQueryMapper_data();
-    void testEmailQueryMapper();
+    void testContactStore_data();
+    void testContactStore();
 
-    void testIncidenceQueryMapper_data();
-    void testIncidenceQueryMapper();
+    void testEmailStore_data();
+    void testEmailStore();
 
-    void testNotesQueryMapper_data();
-    void testNotesQueryMapper();
+    void testCalendarStore_data();
+    void testCalendarStore();
 
+    void testNoteStore_data();
+    void testNoteStore();
 };
 
 #endif

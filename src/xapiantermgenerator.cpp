@@ -44,6 +44,8 @@ public:
 XapianTermGenerator::XapianTermGenerator(Xapian::Document *doc)
     : d(new XapianTermGeneratorPrivate)
 {
+    d->termGen.set_stemming_strategy(Xapian::TermGenerator::STEM_NONE);
+    d->termGen.set_stopper_strategy(Xapian::TermGenerator::STOP_NONE);
     d->doc = doc;
     if (doc) {
         d->termGen.set_document(*doc);
@@ -70,7 +72,7 @@ QStringList XapianTermGenerator::termList(const QString &text)
     int start = 0;
     int end = 0;
 
-    QStringList list;
+    QStringList list = { QStringLiteral("^") };
     QTextBoundaryFinder bf(QTextBoundaryFinder::Word, text);
     for (; bf.position() != -1; bf.toNextBoundary()) {
         if (bf.boundaryReasons() & QTextBoundaryFinder::StartOfItem) {
@@ -83,24 +85,10 @@ QStringList XapianTermGenerator::termList(const QString &text)
 
             // Get the string ready for saving
             str = str.toLower();
-
-            // Remove all accents
-            const QString denormalized = str.normalized(QString::NormalizationForm_KD);
-
-            QString cleanString;
-            cleanString.reserve(denormalized.size());
-            for (const QChar &ch : denormalized) {
-                auto cat = ch.category();
-                if (cat != QChar::Mark_NonSpacing && cat != QChar::Mark_SpacingCombining && cat != QChar::Mark_Enclosing) {
-                    cleanString.append(ch);
-                }
-            }
-
-            str = cleanString.normalized(QString::NormalizationForm_KC);
             list << str.split(QLatin1Char('_'), QString::SkipEmptyParts);
         }
     }
-
+    list << QStringLiteral("$");
     return list;
 }
 
