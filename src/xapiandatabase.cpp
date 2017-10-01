@@ -74,6 +74,7 @@ XapianDatabase::XapianDatabase(const QString &path, bool readOnly)
         for (int i = 1; i <= 20; ++i) {
             try {
                 d->db = new Xapian::WritableDatabase(d->path, Xapian::DB_CREATE_OR_OPEN);
+                break;
             } catch (const Xapian::DatabaseLockError &) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(i * 50));
             } catch (const Xapian::DatabaseModifiedError &) {
