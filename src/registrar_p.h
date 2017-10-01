@@ -68,6 +68,7 @@ public:
         auto it = this->constFind(type);
         while (it != this->cend() && it.key() == type) {
             rv.push_back(it->spawn());
+            ++it;
         }
         return rv;
     }
