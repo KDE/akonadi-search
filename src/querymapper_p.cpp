@@ -22,11 +22,14 @@
 
 #include <xapian.h>
 
+#include "akonadisearch_debug.h"
 #include "querymapper_p.h"
 #include "querypropertymapper_p.h"
 
 #include <QVariant>
 #include <QByteArray>
+
+#include <QDebug>
 
 namespace Akonadi {
 namespace Search {
@@ -109,14 +112,44 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
         }
     } else if ((cond == SearchTerm::CondContains || cond == SearchTerm::CondEqual)
                 && mapper.hasPrefix(prop)) {
+        const auto prefix = mapper.prefix(prop);
+        std::string str = value.toString().toStdString();
         Xapian::QueryParser parser;
-        std::string p = mapper.prefix(prop);
-        std::string str(value.toString().toUtf8().constData());
+        parser.set_stemming_strategy(Xapian::QueryParser::STEM_NONE);
+        parser.add_prefix(prop.toStdString(), prefix);
         int flags = Xapian::QueryParser::FLAG_DEFAULT;
         if (cond == SearchTerm::CondContains) {
             flags |= Xapian::QueryParser::FLAG_PARTIAL;
+        } else {
+            flags |= Xapian::QueryParser::FLAG_PHRASE;
         }
-        return parser.parse_query(str, flags, p);
+
+        Xapian::Query q;
+        try {
+            q = parser.parse_query(str, flags, prefix);
+        } catch (const Xapian::QueryParserError &e) {
+            qCWarning(AKONADISEARCH_LOG) << "Query parser error:" << e.get_error_string();
+            return {};
+        }
+        if (cond == SearchTerm::CondEqual) {
+            QVector<Xapian::Query> v;
+            v.push_back(Xapian::Query(prefix + "^", 1, 1));
+            const int subqueries = q.get_num_subqueries();
+            if (subqueries > 0) {
+                // FIXME This is still not perfect as the subquries will have termpos counted from 1
+                // but it's the best we can do to get the results we want.
+                for (int i = 0; i < subqueries; ++i) {
+                    auto sq = q.get_subquery(i);
+                    v.push_back(sq);
+                }
+            } else {
+                v.push_back(q);
+            }
+            v.push_back(Xapian::Query(prefix + "$", 1, subqueries + 2));
+            q = Xapian::Query(Xapian::Query::OP_PHRASE, v.begin(), v.end());
+        }
+        //qCDebug(AKONADISEARCH_LOG) << q.get_description().c_str();
+        return q;
     }
 
     return {};

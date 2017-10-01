@@ -56,10 +56,7 @@ Xapian::Document ContactIndexer::index(const Akonadi::Item &item)
         name = addressee.name();
     }
 
-    doc.indexText(name);
-    doc.indexText(addressee.nickName());
     doc.indexText(addressee.uid(), QStringLiteral("UID"));
-
     doc.indexText(name, QStringLiteral("NA"));
     doc.indexText(addressee.nickName(), QStringLiteral("NI"));
 
