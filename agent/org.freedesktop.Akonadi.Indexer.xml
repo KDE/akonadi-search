@@ -17,6 +17,8 @@
           <arg name="ids" type="ax" direction="in"/>
           <annotation name="org.qtproject.QtDBus.QtTypeName.In0" value="const QList&lt;qlonglong&gt; &amp;"/>
         </method>
-
+        <signal name="collectionIndexingFinished">
+          <arg type="x" name="connectionId" direction="out" />
+        </signal>
     </interface>
 </node>
