@@ -38,7 +38,6 @@ using namespace Akonadi::Search;
 
 IncidenceQueryMapper::IncidenceQueryMapper()
 {
-    mPropMapper.insertPrefix(QStringLiteral("collection"), QStringLiteral("C"));
     mPropMapper.insertPrefix(QStringLiteral("organizer"), QStringLiteral("O"));
     mPropMapper.insertPrefix(QStringLiteral("partStatus"), QStringLiteral("PS"));
     mPropMapper.insertPrefix(QStringLiteral("summary"), QStringLiteral("S"));
@@ -54,43 +53,23 @@ QStringList IncidenceQueryMapper::mimeTypes()
              KCalCore::Journal::journalMimeType() };
 }
 
-
-Xapian::Query IncidenceQueryMapper::map(const SearchQuery &akQuery)
-{
-    return recursiveTermMapping(akQuery.term());
-}
-
 Xapian::Query IncidenceQueryMapper::recursiveTermMapping(const SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
-        QVector<Xapian::Query> sub;
-        const auto subterms = term.subTerms();
-        for (const auto &s : subterms) {
-            const auto q = recursiveTermMapping(s);
-            if (!q.empty()) {
-                sub.push_back(q);
-            }
-        }
-        return Xapian::Query{ mapRelation(term.relation()), sub.cbegin(), sub.cend() };
-    } else {
-        const Akonadi::IncidenceSearchTerm::IncidenceSearchField field = Akonadi::IncidenceSearchTerm::fromKey(term.key());
-        switch (field) {
-        case Akonadi::IncidenceSearchTerm::Organizer:
-            return constructQuery(mPropMapper, QStringLiteral("organizer"), term);
-        case Akonadi::IncidenceSearchTerm::Summary:
-            return constructQuery(mPropMapper, QStringLiteral("summary"), term);
-        case Akonadi::IncidenceSearchTerm::Location:
-            return constructQuery(mPropMapper, QStringLiteral("location"), term);
-        case Akonadi::IncidenceSearchTerm::PartStatus: {
-            return negateQuery(
-                constructQuery(mPropMapper, QStringLiteral("partstatus"),
-                               term.value().toString(), SearchTerm::CondEqual),
-                term.isNegated());
-        }
-        default:
-            qCWarning(AKONADISEARCH_LOG) << "unknown term " << term.key();
-        }
+    const Akonadi::IncidenceSearchTerm::IncidenceSearchField field = Akonadi::IncidenceSearchTerm::fromKey(term.key());
+    switch (field) {
+    case Akonadi::IncidenceSearchTerm::Organizer:
+        return constructQuery(mPropMapper, QStringLiteral("organizer"), term);
+    case Akonadi::IncidenceSearchTerm::Summary:
+        return constructQuery(mPropMapper, QStringLiteral("summary"), term);
+    case Akonadi::IncidenceSearchTerm::Location:
+        return constructQuery(mPropMapper, QStringLiteral("location"), term);
+    case Akonadi::IncidenceSearchTerm::PartStatus: {
+        return negateQuery(
+            constructQuery(mPropMapper, QStringLiteral("partstatus"),
+                            term.value().toString(), SearchTerm::CondEqual),
+            term.isNegated());
     }
-
-    return {};
+    default:
+        return QueryMapper::recursiveTermMapping(term);
+    }
 }

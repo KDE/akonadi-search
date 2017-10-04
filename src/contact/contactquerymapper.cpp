@@ -38,7 +38,6 @@ ContactQueryMapper::ContactQueryMapper()
     mPropMapper.insertPrefix(QStringLiteral("name"), QStringLiteral("NA"));
     mPropMapper.insertPrefix(QStringLiteral("nick"), QStringLiteral("NI"));
     mPropMapper.insertPrefix(QStringLiteral("email"), QStringLiteral("")); // Email currently doesn't map to anything
-    mPropMapper.insertPrefix(QStringLiteral("collection"), QStringLiteral("C"));
     mPropMapper.insertPrefix(QStringLiteral("uid"), QStringLiteral("UID"));
 
     mPropMapper.insertValueProperty(QStringLiteral("birthday"), 0);
@@ -51,38 +50,20 @@ QStringList ContactQueryMapper::mimeTypes()
              KContacts::ContactGroup::mimeType() };
 }
 
-Xapian::Query ContactQueryMapper::map(const Akonadi::SearchQuery &akQuery)
-{
-    return recursiveTermMapping(akQuery.term());
-}
-
 Xapian::Query ContactQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
-        QVector<Xapian::Query> sub;
-        const auto subTerms = term.subTerms();
-        for (const auto &t : subTerms) {
-            const auto q = recursiveTermMapping(t);
-            if (!q.empty()) {
-                sub.push_back(q);
-            }
-        }
-        return Xapian::Query{ mapRelation(term.relation()), sub.cbegin(), sub.cend() };
-    } else {
-        const Akonadi::ContactSearchTerm::ContactSearchField field = Akonadi::ContactSearchTerm::fromKey(term.key());
-        switch (field) {
-        case Akonadi::ContactSearchTerm::Name:
-            return constructQuery(mPropMapper, QStringLiteral("name"), term);
-        case Akonadi::ContactSearchTerm::Email:
-            return constructQuery(mPropMapper, QStringLiteral("email"), term);
-        case Akonadi::ContactSearchTerm::Nickname:
-            return constructQuery(mPropMapper, QStringLiteral("nick"), term);
-        case Akonadi::ContactSearchTerm::Uid:
-            return constructQuery(mPropMapper, QStringLiteral("uid"), term);
-        case Akonadi::ContactSearchTerm::Unknown:
-        default:
-            qCWarning(AKONADISEARCH_LOG) << "unknown term " << term.key();
-        }
+    const Akonadi::ContactSearchTerm::ContactSearchField field = Akonadi::ContactSearchTerm::fromKey(term.key());
+    switch (field) {
+    case Akonadi::ContactSearchTerm::Name:
+        return constructQuery(mPropMapper, QStringLiteral("name"), term);
+    case Akonadi::ContactSearchTerm::Email:
+        return constructQuery(mPropMapper, QStringLiteral("email"), term);
+    case Akonadi::ContactSearchTerm::Nickname:
+        return constructQuery(mPropMapper, QStringLiteral("nick"), term);
+    case Akonadi::ContactSearchTerm::Uid:
+        return constructQuery(mPropMapper, QStringLiteral("uid"), term);
+    case Akonadi::ContactSearchTerm::Unknown:
+    default:
+        return QueryMapper::recursiveTermMapping(term);
     }
-    return {};
 }

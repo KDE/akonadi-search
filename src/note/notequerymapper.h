@@ -38,10 +38,9 @@ public:
 
     static QStringList mimeTypes();
 
-    Xapian::Query map(const Akonadi::SearchQuery &query) override;
-
 private:
-    Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &term);
+    Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &term) override;
+    QueryPropertyMapper &propertyMapper() override { return mPropMapper; }
 
     QueryPropertyMapper mPropMapper;
 };
