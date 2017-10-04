@@ -76,13 +76,16 @@ Xapian::Document ContactIndexer::index(const Akonadi::Item &item)
     const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addCollectionTerm(colId);
 
-    // TODO: Fix birthday indexing
     if (addressee.birthday().isValid()) {
-        const QString julianDay = QString::number(addressee.birthday().date().toJulianDay());
-        doc.addValue(0, julianDay);
+        doc.addValue(propMapper.valueProperty(Akonadi::ContactSearchTerm::Birthday),
+                     addressee.birthday().date().toJulianDay());
     }
 
-    // TODO: index anniversaries
+    const auto annStr = addressee.custom(QStringLiteral("KADDRESSBOOK"), QStringLiteral("X-Anniversary"));
+    if (!annStr.isEmpty()) {
+        doc.addValue(propMapper.valueProperty(Akonadi::ContactSearchTerm::Anniversary),
+                     QDate::fromString(annStr, Qt::ISODate).toJulianDay());
+    }
 
     return doc.xapianDocument();
 }

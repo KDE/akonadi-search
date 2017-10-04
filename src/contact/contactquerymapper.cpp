@@ -60,6 +60,9 @@ Xapian::Query ContactQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm
     case Akonadi::ContactSearchTerm::Nickname:
     case Akonadi::ContactSearchTerm::Uid:
         return constructQuery(propertyMapper(), field, term);
+    case Akonadi::ContactSearchTerm::Birthday:
+    case Akonadi::ContactSearchTerm::Anniversary:
+        return constructQuery(propertyMapper(), field, term.value().toDate().toJulianDay(), term.condition());
     default:
         return QueryMapper::recursiveTermMapping(term);
     }
