@@ -23,9 +23,11 @@
 #include <xapian.h>
 
 #include "contactindexer.h"
+#include "contactquerypropertymapper.h"
 #include "xapiandocument.h"
 
 #include <AkonadiCore/Item>
+#include <AkonadiCore/SearchQuery>
 
 #include <KContacts/Addressee>
 
@@ -56,9 +58,10 @@ Xapian::Document ContactIndexer::index(const Akonadi::Item &item)
         name = addressee.name();
     }
 
-    doc.indexText(addressee.uid(), QStringLiteral("UID"));
-    doc.indexText(name, QStringLiteral("NA"));
-    doc.indexText(addressee.nickName(), QStringLiteral("NI"));
+    const auto &propMapper = ContactQueryPropertyMapper::instance();
+    doc.indexText(addressee.uid(), propMapper.prefix(Akonadi::ContactSearchTerm::Uid));
+    doc.indexText(name, propMapper.prefix(Akonadi::ContactSearchTerm::Name));
+    doc.indexText(addressee.nickName(), propMapper.prefix(Akonadi::ContactSearchTerm::Nickname));
 
     const QStringList lstEmails = addressee.emails();
     for (const QString &email : lstEmails) {
@@ -73,6 +76,7 @@ Xapian::Document ContactIndexer::index(const Akonadi::Item &item)
     const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addCollectionTerm(colId);
 
+    // TODO: Fix birthday indexing
     if (addressee.birthday().isValid()) {
         const QString julianDay = QString::number(addressee.birthday().date().toJulianDay());
         doc.addValue(0, julianDay);

@@ -27,44 +27,53 @@
 
 using namespace Akonadi::Search;
 
+class TestQueryPropertyMapper : public QueryPropertyMapper
+{
+public:
+    explicit TestQueryPropertyMapper()
+        : QueryPropertyMapper()
+    {
+    }
+};
+
 void QueryPropertyMapperTest::testPrefix()
 {
-    QueryPropertyMapper mapper;
+    TestQueryPropertyMapper mapper;
 
-    mapper.insertPrefix(QStringLiteral("property"), QStringLiteral("prefix"));
-    QVERIFY(mapper.hasPrefix(QStringLiteral("property")));
-    QCOMPARE(mapper.prefix(QStringLiteral("property")), std::string("prefix"));
+    mapper.insertPrefix(1, QStringLiteral("prefix"));
+    QVERIFY(mapper.hasPrefix(1));
+    QCOMPARE(mapper.prefix(1), std::string("prefix"));
 
-    QVERIFY(!mapper.hasPrefix(QStringLiteral("anotherProperty")));
+    QVERIFY(!mapper.hasPrefix(2));
 }
 
 void QueryPropertyMapperTest::testBoolProperty()
 {
-    QueryPropertyMapper mapper;
+    TestQueryPropertyMapper mapper;
 
-    mapper.insertBoolProperty(QStringLiteral("boolProperty"));
-    QVERIFY(mapper.hasBoolProperty(QStringLiteral("boolProperty")));
+    mapper.insertBoolProperty(1);
+    QVERIFY(mapper.hasBoolProperty(1));
 }
 
 void QueryPropertyMapperTest::testBoolValueProperty()
 {
-    QueryPropertyMapper mapper;
+    TestQueryPropertyMapper mapper;
 
-    mapper.insertBoolValueProperty(QStringLiteral("boolValueProperty"));
-    QVERIFY(mapper.hasBoolValueProperty(QStringLiteral("boolValueProperty")));
+    mapper.insertBoolValueProperty(1);
+    QVERIFY(mapper.hasBoolValueProperty(1));
 
-    QVERIFY(!mapper.hasBoolValueProperty(QStringLiteral("otherBoolValueProperty")));
+    QVERIFY(!mapper.hasBoolValueProperty(2));
 }
 
 void QueryPropertyMapperTest::testValueProperty()
 {
-    QueryPropertyMapper mapper;
+    TestQueryPropertyMapper mapper;
 
-    mapper.insertValueProperty(QStringLiteral("valueProperty"), 42);
-    QVERIFY(mapper.hasValueProperty(QStringLiteral("valueProperty")));
-    QCOMPARE(mapper.valueProperty(QStringLiteral("valueProperty")), 42);
+    mapper.insertValueProperty(3, 42);
+    QVERIFY(mapper.hasValueProperty(3));
+    QCOMPARE(mapper.valueProperty(3), 42);
 
-    QVERIFY(!mapper.hasValueProperty(QStringLiteral("otherValueProperty")));
+    QVERIFY(!mapper.hasValueProperty(4));
 }
 
 QTEST_MAIN(QueryPropertyMapperTest)

@@ -16,19 +16,23 @@ set(AKONADISEARCH_LIB_SRCS
 
     email/emailindexer.cpp
     email/emailquerymapper.cpp
+    email/emailquerypropertymapper.cpp
     email/emailstore.cpp
 
-    contact/contactindexer.cpp
     contact/contactgroupindexer.cpp
+    contact/contactindexer.cpp
     contact/contactquerymapper.cpp
+    contact/contactquerypropertymapper.cpp
     contact/contactstore.cpp
 
     incidence/incidenceindexer.cpp
     incidence/incidencequerymapper.cpp
+    incidence/incidencequerypropertymapper.cpp
     incidence/incidencestore.cpp
 
     note/noteindexer.cpp
     note/notequerymapper.cpp
+    note/notequerypropertymapper.cpp
     note/notestore.cpp
 )
 

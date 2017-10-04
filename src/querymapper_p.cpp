@@ -53,16 +53,14 @@ Xapian::Query negateQuery(const Xapian::Query &query, bool negate)
 }
 
 Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
-                             const QString &property, const QVariant &value,
+                             int propertyKey, const QVariant &value,
                              SearchTerm::Condition cond)
 {
     if (value.isNull()) {
         return {};
     }
-
-    const auto prop = property.toLower();
-    if (mapper.hasBoolProperty(prop)) {
-        const auto p = mapper.prefix(prop);
+    if (mapper.hasBoolProperty(propertyKey)) {
+        const auto p = mapper.prefix(propertyKey);
         if (p.empty()) {
             return {};
         }
@@ -84,11 +82,11 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
             term += 'N' + p;
         }
         return Xapian::Query(term);
-    } else if (mapper.hasBoolValueProperty(prop)) {
-        const auto term = mapper.prefix(prop);
+    } else if (mapper.hasBoolValueProperty(propertyKey)) {
+        const auto term = mapper.prefix(propertyKey);
         std::string val(value.toString().toStdString());
         return Xapian::Query(term + val);
-    } else if (mapper.hasValueProperty(prop)
+    } else if (mapper.hasValueProperty(propertyKey)
             && (cond == SearchTerm::CondEqual
                 || cond == SearchTerm::CondGreaterThan || cond == SearchTerm::CondGreaterOrEqual 
                 || cond == SearchTerm::CondLessThan || cond == SearchTerm::CondLessOrEqual)) {
@@ -99,7 +97,7 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
         if (cond == SearchTerm::CondLessThan) {
             --numVal;
         }
-        const int valueNumber = mapper.valueProperty(prop);
+        const int valueNumber = mapper.valueProperty(propertyKey);
         if (cond == SearchTerm::CondGreaterOrEqual || cond == SearchTerm::CondGreaterThan) {
             return Xapian::Query(Xapian::Query::OP_VALUE_GE, valueNumber, Xapian::sortable_serialise(numVal));
         } else if (cond == SearchTerm::CondLessOrEqual || cond == SearchTerm::CondLessThan) {
@@ -109,12 +107,11 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
             return Xapian::Query(Xapian::Query::OP_VALUE_RANGE, valueNumber, serialisedVal, serialisedVal);
         }
     } else if ((cond == SearchTerm::CondContains || cond == SearchTerm::CondEqual)
-                && mapper.hasPrefix(prop)) {
-        const auto prefix = mapper.prefix(prop);
+                && mapper.hasPrefix(propertyKey)) {
+        const auto prefix = mapper.prefix(propertyKey);
         std::string str = value.toString().toStdString();
         Xapian::QueryParser parser;
         parser.set_stemming_strategy(Xapian::QueryParser::STEM_NONE);
-        parser.add_prefix(prop.toStdString(), prefix);
         int flags = Xapian::QueryParser::FLAG_DEFAULT;
         if (cond == SearchTerm::CondContains) {
             flags |= Xapian::QueryParser::FLAG_PARTIAL;
@@ -149,19 +146,19 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
 }
 
 Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
-                             const QString &property,
+                             int propertyKey,
                              const SearchTerm &term)
 {
     return negateQuery(
-                constructQuery(mapper, property, term.value(), term.condition()), 
+                constructQuery(mapper, propertyKey, term.value(), term.condition()), 
                 term.isNegated());
 }
 
 Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
-                             const QString &property,
+                             int propertyKey,
                              bool val)
 {
-    return constructQuery(mapper, property, val, SearchTerm::CondEqual);
+    return constructQuery(mapper, propertyKey, val, SearchTerm::CondEqual);
 }
 
 }

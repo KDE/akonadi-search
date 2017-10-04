@@ -1,5 +1,4 @@
 /*
- * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2017  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,41 +19,30 @@
  *
  */
 
-#include <xapian.h>
-
-#include "notequerymapper.h"
 #include "notequerypropertymapper.h"
-#include "querymapper_p.h"
-#include "akonadisearch_debug.h"
 
 #include <AkonadiCore/SearchQuery>
 
+#include <QMutex>
+
 using namespace Akonadi::Search;
 
-NoteQueryMapper::NoteQueryMapper()
+NoteQueryPropertyMapper *NoteQueryPropertyMapper::sInstance = nullptr;
+
+NoteQueryPropertyMapper::NoteQueryPropertyMapper()
 {
+    insertPrefix(Akonadi::EmailSearchTerm::Subject, QStringLiteral("SU"));
+    insertPrefix(Akonadi::EmailSearchTerm::Body, QStringLiteral("BO"));
 }
 
-QStringList NoteQueryMapper::mimeTypes()
+const NoteQueryPropertyMapper &NoteQueryPropertyMapper::instance()
 {
-    return { QStringLiteral("text/x-vnd.akonadi.note") };
-}
-
-const QueryPropertyMapper &NoteQueryMapper::propertyMapper()
-{
-    return NoteQueryPropertyMapper::instance();
-}
-
-
-Xapian::Query NoteQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
-{
-    // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
-    const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
-    switch (field) {
-    case Akonadi::EmailSearchTerm::Subject:
-    case Akonadi::EmailSearchTerm::Body:
-        return constructQuery(propertyMapper(), field, term);
-    default:
-        return QueryMapper::recursiveTermMapping(term);
+    static QMutex lock;
+    lock.lock();
+    if (!sInstance) {
+        sInstance = new NoteQueryPropertyMapper();
     }
+    lock.unlock();
+    return *sInstance;
 }
+

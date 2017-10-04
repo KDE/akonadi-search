@@ -21,61 +21,63 @@
 
 #include "querypropertymapper_p.h"
 
+#include <AkonadiCore/SearchQuery>
+
 using namespace Akonadi::Search;
 
 QueryPropertyMapper::QueryPropertyMapper()
 {
-    insertPrefix(QStringLiteral("collection"), QStringLiteral("C"));
-    insertBoolValueProperty(QStringLiteral("collection"));
+    insertPrefix(Akonadi::SearchTerm::Collection, QStringLiteral("C"));
+    insertBoolValueProperty(Akonadi::SearchTerm::Collection);
 }
 
-void QueryPropertyMapper::insertBoolProperty(const QString &prop)
+void QueryPropertyMapper::insertBoolProperty(int propertyKey)
 {
-    mBoolProperties.insert(prop);
+    mBoolProperties.insert(propertyKey);
 }
 
-void QueryPropertyMapper::insertPrefix(const QString &prop, const QString &prefix)
+void QueryPropertyMapper::insertPrefix(int propertyKey, const QString &prefix)
 {
-    mPrefixes.insert(prop, prefix.toStdString());
+    mPrefixes.insert(propertyKey, prefix.toStdString());
 }
 
-void QueryPropertyMapper::insertValueProperty(const QString &prop, int value)
+void QueryPropertyMapper::insertValueProperty(int propertyKey, int value)
 {
-    mValueProperties.insert(prop, value);
+    mValueProperties.insert(propertyKey, value);
 }
 
-void QueryPropertyMapper::insertBoolValueProperty(const QString &prop)
+void QueryPropertyMapper::insertBoolValueProperty(int propertyKey)
 {
-    mBoolValueProperties.insert(prop);
+    mBoolValueProperties.insert(propertyKey);
 }
 
-bool QueryPropertyMapper::hasBoolProperty(const QString &prop) const
+bool QueryPropertyMapper::hasBoolProperty(int propertyKey) const
 {
-    return mBoolProperties.contains(prop);
+    return mBoolProperties.contains(propertyKey);
 }
 
-bool QueryPropertyMapper::hasPrefix(const QString &prop) const
+bool QueryPropertyMapper::hasPrefix(int propertyKey) const
 {
-    return mPrefixes.contains(prop);
+    return mPrefixes.contains(propertyKey);
 }
 
-bool QueryPropertyMapper::hasValueProperty(const QString &prop) const
+bool QueryPropertyMapper::hasValueProperty(int propertyKey) const
 {
-    return mValueProperties.contains(prop);
+    return mValueProperties.contains(propertyKey);
 }
 
-bool QueryPropertyMapper::hasBoolValueProperty(const QString &prop) const
+bool QueryPropertyMapper::hasBoolValueProperty(int propertyKey) const
 {
-    return mBoolValueProperties.contains(prop);
+    return mBoolValueProperties.contains(propertyKey);
 }
 
-int QueryPropertyMapper::valueProperty(const QString &prop) const
+int QueryPropertyMapper::valueProperty(int propertyKey) const
 {
-    return mValueProperties.value(prop);
+    return mValueProperties.value(propertyKey);
 }
 
-const std::string &QueryPropertyMapper::prefix(const QString &prop) const
+const std::string &QueryPropertyMapper::prefix(int propertyKey) const
 {
-    Q_ASSERT(hasPrefix(prop));
-    return *mPrefixes.constFind(prop);
+    Q_ASSERT(hasPrefix(propertyKey));
+    return *mPrefixes.constFind(propertyKey);
 }

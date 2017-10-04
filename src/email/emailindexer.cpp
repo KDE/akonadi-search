@@ -23,9 +23,11 @@
 #include <xapian.h>
 
 #include "emailindexer.h"
+#include "emailquerypropertymapper.h"
 #include "xapiandocument.h"
 
 #include <AkonadiCore/Item>
+#include <AkonadiCore/SearchQuery>
 
 #include <KMime/Headers>
 #include <KMime/Content>
@@ -59,7 +61,7 @@ Xapian::Document EmailIndexer::index(const Akonadi::Item &item)
     processMessageStatus(doc, status);
     process(doc, msg);
 
-    doc.addValue(1, item.size());
+    doc.addValue(EmailQueryPropertyMapper::instance().valueProperty(Akonadi::EmailSearchTerm::ByteSize), item.size());
 
     // Parent collection
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index",
@@ -71,21 +73,21 @@ Xapian::Document EmailIndexer::index(const Akonadi::Item &item)
     return doc.xapianDocument();
 }
 
-void EmailIndexer::processHeader(XapianDocument &doc, const QString &key, KMime::Headers::Base *unstructured)
+void EmailIndexer::processHeader(XapianDocument &doc, const std::string &key, KMime::Headers::Base *unstructured)
 {
     if (unstructured) {
         doc.indexText(unstructured->asUnicodeString(), key);
     }
 }
 
-void EmailIndexer::processHeader(XapianDocument &doc, const QString &key, KMime::Headers::Generics::MailboxList *mlist)
+void EmailIndexer::processHeader(XapianDocument &doc, const std::string &key, KMime::Headers::Generics::MailboxList *mlist)
 {
     if (mlist) {
         processMailboxes(doc, key, mlist->mailboxes());
     }
 }
 
-void EmailIndexer::processHeader(XapianDocument &doc, const QString &key, KMime::Headers::Generics::AddressList *alist)
+void EmailIndexer::processHeader(XapianDocument &doc, const std::string &key, KMime::Headers::Generics::AddressList *alist)
 {
     if (alist) {
         processMailboxes(doc, key, alist->mailboxes());
@@ -94,7 +96,7 @@ void EmailIndexer::processHeader(XapianDocument &doc, const QString &key, KMime:
 
 
 // Add once with a prefix and once without
-void EmailIndexer::processMailboxes(XapianDocument &doc, const QString &key, const KMime::Types::Mailbox::List &list)
+void EmailIndexer::processMailboxes(XapianDocument &doc, const std::string &key, const KMime::Types::Mailbox::List &list)
 {
     for (const auto &mbox : list) {
         const auto name = mbox.name();
@@ -111,31 +113,35 @@ void EmailIndexer::processMailboxes(XapianDocument &doc, const QString &key, con
 
 void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
 {
+    const auto &propMapper = EmailQueryPropertyMapper::instance();
+    
     // Process Headers
     // (Give the subject a higher priority)
     KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
         const QString str = subject->asUnicodeString();
-        doc.indexText(str, QStringLiteral("SU"), 1);
-        doc.indexTextWithoutPositions(str, QString(), 100);
+        doc.indexText(str, propMapper.prefix(Akonadi::EmailSearchTerm::Subject), 1);
+        doc.indexTextWithoutPositions(str, {}, 100);
         doc.setData(str);
     }
 
-    processHeader(doc, QStringLiteral("F"), msg->from(false));
-    processHeader(doc, QStringLiteral("T"), msg->to(false));
-    processHeader(doc, QStringLiteral("CC"), msg->cc(false));
-    processHeader(doc, QStringLiteral("BC"), msg->bcc(false));
-    processHeader(doc, QStringLiteral("O"), msg->organization(false));
-    processHeader(doc, QStringLiteral("RT"), msg->replyTo(false));
-    processHeader(doc, QStringLiteral("RF"), msg->headerByType("Resent-From"));
-    processHeader(doc, QStringLiteral("LI"), msg->headerByType("List-Id"));
-    processHeader(doc, QStringLiteral("XL"), msg->headerByType("X-Loop"));
-    processHeader(doc, QStringLiteral("XML"), msg->headerByType("X-Mailing-List"));
-    processHeader(doc, QStringLiteral("XSF"), msg->headerByType("X-Spam-Flag"));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderFrom), msg->from(false));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderTo), msg->to(false));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderCC), msg->cc(false));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderBCC), msg->bcc(false));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderOrganization), msg->organization(false));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderReplyTo), msg->replyTo(false));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderResentFrom), msg->headerByType("Resent-From"));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderListId), msg->headerByType("List-Id"));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderXLoop), msg->headerByType("X-Loop"));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderXMailingList), msg->headerByType("X-Mailing-List"));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderXSpamFlag), msg->headerByType("X-Spam-Flag"));
 
     if (auto date = msg->date(false)) {
-        doc.addValue(0, date->dateTime().toSecsSinceEpoch());
-        doc.addValue(2, QDateTime(date->dateTime().date(), {}).toSecsSinceEpoch());
+        doc.addValue(propMapper.valueProperty(Akonadi::EmailSearchTerm::HeaderDate),
+                     date->dateTime().toSecsSinceEpoch());
+        doc.addValue(propMapper.valueProperty(Akonadi::EmailSearchTerm::HeaderOnlyDate),
+                     QDateTime(date->dateTime().date(), {}).toSecsSinceEpoch());
     }
 
     //
@@ -145,13 +151,13 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
     // TODO: Do we really have any use for this? It only grows the indexes and
     // makes message-wide search useless since it matches all kinds of mess
     //Index all headers
-    doc.indexText(QString::fromUtf8(msg->head()), QStringLiteral("HE"));
+    doc.indexText(QString::fromUtf8(msg->head()), propMapper.prefix(Akonadi::EmailSearchTerm::Headers));
 
     KMime::Content *mainBody = msg->mainBodyPart("text/plain");
     if (mainBody) {
         const auto text = mainBody->decodedText();
-        doc.indexTextWithoutPositions(text, QString(), 1);
-        doc.indexText(text, QStringLiteral("BO"), 1);
+        doc.indexTextWithoutPositions(text, {}, 1);
+        doc.indexText(text, propMapper.prefix(Akonadi::EmailSearchTerm::Body), 1);
     } else {
         processPart(doc, msg.data(), nullptr);
     }
@@ -182,7 +188,7 @@ void EmailIndexer::processPart(XapianDocument &doc, KMime::Content *content, KMi
             textDoc.setHtml(content->decodedText());
             const auto plainText = textDoc.toPlainText();
             doc.indexTextWithoutPositions(plainText);
-            doc.indexText(plainText, QStringLiteral("BO"));
+            doc.indexText(plainText, EmailQueryPropertyMapper::instance().prefix(Akonadi::EmailSearchTerm::Body));
         }
     }
 
@@ -191,31 +197,32 @@ void EmailIndexer::processPart(XapianDocument &doc, KMime::Content *content, KMi
 
 void EmailIndexer::processMessageStatus(XapianDocument &doc, const Akonadi::MessageStatus &status)
 {
-    insertBool(doc, 'R', status.isRead());
-    insertBool(doc, 'A', status.hasAttachment());
-    insertBool(doc, 'I', status.isImportant());
-    insertBool(doc, 'W', status.isWatched());
-    insertBool(doc, 'T', status.isToAct());
-    insertBool(doc, 'D', status.isDeleted());
-    insertBool(doc, 'S', status.isSpam());
-    insertBool(doc, 'E', status.isReplied());
-    insertBool(doc, 'G', status.isIgnored());
-    insertBool(doc, 'F', status.isForwarded());
-    insertBool(doc, 'N', status.isSent());
-    insertBool(doc, 'Q', status.isQueued());
-    insertBool(doc, 'H', status.isHam());
-    insertBool(doc, 'C', status.isEncrypted());
-    insertBool(doc, 'V', status.hasInvitation());
+    const auto &propMapper = EmailQueryPropertyMapper::instance();
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsReadFlag), status.isRead());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::HasAttachmentFlag), status.hasAttachment());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsImportantFlag), status.isImportant());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsWatchedFlag), status.isWatched());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsToActFlag), status.isToAct());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsDeletedFlag), status.isDeleted());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsSpamFlag), status.isSpam());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsRepliedFlag), status.isReplied());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsIgnoredFlag), status.isIgnored());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsForwardedFlag), status.isForwarded());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsSentFlag), status.isSent());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsQueuedFlag), status.isQueued());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsHamFlag), status.isHam());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::IsEncryptedFlag), status.isEncrypted());
+    insertBool(doc, propMapper.prefix(EmailQueryPropertyMapper::HasInvitationFlag), status.hasInvitation());
 }
 
-void EmailIndexer::insertBool(XapianDocument &doc, char key, bool value)
+void EmailIndexer::insertBool(XapianDocument &doc, const std::string &key, bool value)
 {
     QString term = QStringLiteral("B");
     if (value) {
-        term.append(QLatin1Char(key));
+        term.append(QString::fromStdString(key));
     } else {
         term.append(QLatin1Char('N'));
-        term.append(QLatin1Char(key));
+        term.append(QString::fromStdString(key));
     }
 
     doc.addBoolTerm(term);

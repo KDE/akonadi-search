@@ -43,8 +43,8 @@ public:
     ~XapianTermGenerator();
 
     void indexText(const QString &text);
-    void indexText(const QString &text, const QString &prefix, int wdfInc = 1);
-    void indexTextWithoutPositions(const QString &text, const QString &prefix, int wdfInc = 1);
+    void indexText(const QString &text, const std::string &prefix, int wdfInc = 1);
+    void indexTextWithoutPositions(const QString &text, const std::string &prefix, int wdfInc = 1);
 
     void setPosition(int position);
     int position() const;

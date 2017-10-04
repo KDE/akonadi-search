@@ -61,7 +61,7 @@ XapianTermGenerator::~XapianTermGenerator()
 
 void XapianTermGenerator::indexText(const QString &text)
 {
-    indexText(text, QString());
+    indexText(text, {});
 }
 
 void XapianTermGenerator::setDocument(Xapian::Document *doc)
@@ -96,9 +96,8 @@ QStringList XapianTermGenerator::termList(const QString &text)
     return list;
 }
 
-void XapianTermGenerator::indexText(const QString &text, const QString &prefix, int wdfInc)
+void XapianTermGenerator::indexText(const QString &text, const std::string &prefix, int wdfInc)
 {
-    const QByteArray par = prefix.toUtf8();
     //const QByteArray ta = text.toUtf8();
     //m_termGen.index_text(ta.constData(), wdfInc, par.constData());
 
@@ -106,18 +105,17 @@ void XapianTermGenerator::indexText(const QString &text, const QString &prefix, 
     for (const QString &term : terms) {
         QByteArray arr = term.toUtf8();
 
-        QByteArray finalArr = par + arr;
-        std::string stdString(finalArr.constData(), finalArr.size());
-        d->doc->add_posting(stdString, d->position, wdfInc);
+        std::string finalArr = prefix + arr.constData();
+        d->doc->add_posting(finalArr, d->position, wdfInc);
 
         d->position++;
     }
 }
 
-void XapianTermGenerator::indexTextWithoutPositions(const QString &text, const QString &prefix, int wdfInc)
+void XapianTermGenerator::indexTextWithoutPositions(const QString &text, const std::string &prefix, int wdfInc)
 {
     auto normalized = text.normalized(QString::NormalizationForm_KC);
-    d->termGen.index_text_without_positions(normalized.toStdString(), wdfInc, prefix.toStdString());
+    d->termGen.index_text_without_positions(normalized.toStdString(), wdfInc, prefix);
 }
 
 
