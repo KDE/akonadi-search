@@ -50,23 +50,26 @@ Q_DECLARE_METATYPE(QVector<Akonadi::Item::Id>)
 namespace {
 
 template<typename T>
-Akonadi::Item toItem(const QSharedPointer<T> &i, qint64 id, qint64 colId)
+Akonadi::Item toItem(const T &i, qint64 id, qint64 colId, const QString &mimeType)
 {
-    Akonadi::Item item(T::mimeType());
+    Akonadi::Item item(mimeType);
     item.setId(id);
     item.setParentCollection(Akonadi::Collection(colId));
-    item.setPayload<QSharedPointer<T>>(i);
+    item.setPayload<T>(i);
     return item;
+}
+
+
+template<typename T>
+Akonadi::Item toItem(const QSharedPointer<T> &i, qint64 id, qint64 colId)
+{
+    return toItem<QSharedPointer<T>>(i, id, colId, T::mimeType());
 }
 
 template<typename T>
 Akonadi::Item toItem(const T &i, qint64 id, qint64 colId)
 {
-    Akonadi::Item item(T::mimeType());
-    item.setId(id);
-    item.setParentCollection(Akonadi::Collection(colId));
-    item.setPayload<T>(i);
-    return item;
+    return toItem<T>(i, id, colId, T::mimeType());
 }
 
 }
@@ -87,16 +90,8 @@ void StoreTest::cleanupTestCase()
                                     QStandardPaths::LocateDirectory));
     QVERIFY(dir.absolutePath().contains(QLatin1String(".qttest")));
     if (dir.exists()) {
-       // dir.removeRecursively();
+       dir.removeRecursively();
     }
-}
-
-void StoreTest::indexIncidences()
-{
-}
-
-void StoreTest::indexNotes()
-{
 }
 
 void StoreTest::indexItems(const QVector<Akonadi::Item> &items)
@@ -143,7 +138,7 @@ void StoreTest::testStore()
 
     const auto query = mapper->map(akonadiQuery);
     QVERIFY(!query.empty());
-    qDebug() << query.get_description().c_str();
+    //qDebug() << query.get_description().c_str();
     auto it = store->search(query);
     QVector<Akonadi::Item::Id> ids;
     while (it.next()) {
@@ -151,8 +146,8 @@ void StoreTest::testStore()
     }
 
     qSort(ids); // easier to compare, we don't care about the order here
-    qDebug() << ids;
-    qDebug() << expectedResults;
+    //qDebug() << ids;
+    //qDebug() << expectedResults;
     QCOMPARE(ids, expectedResults);
 
     qDeleteAll(stores);
@@ -1079,16 +1074,170 @@ void StoreTest::testEmailStore()
     testStore();
 }
 
+
+void StoreTest::indexIncidences()
+{
+    Akonadi::Item::List items;
+    {
+        auto event = KCalCore::Event::Ptr::create();
+        event->setOrganizer(QStringLiteral("organizer@example.com"));
+        event->addAttendee(KCalCore::Attendee::Ptr::create(QStringLiteral("attendee1"), QStringLiteral("attendee1@example.com"),
+                                                           false, KCalCore::Attendee::NeedsAction));
+        event->addAttendee(KCalCore::Attendee::Ptr::create(QStringLiteral("attendee2"), QStringLiteral("attendee2@example.com"),
+                                                           false, KCalCore::Attendee::Accepted));
+        event->addAttendee(KCalCore::Attendee::Ptr::create(QStringLiteral("attendee3"), QStringLiteral("attendee3@example.com"),
+                                                           false, KCalCore::Attendee::Declined));
+        event->addAttendee(KCalCore::Attendee::Ptr::create(QStringLiteral("attendee4"), QStringLiteral("attendee4@example.com"),
+                                                           false, KCalCore::Attendee::Tentative));
+        event->addAttendee(KCalCore::Attendee::Ptr::create(QStringLiteral("attendee5"), QStringLiteral("attendee5@example.com"),
+                                                           false, KCalCore::Attendee::Delegated));
+        event->setSummary(QStringLiteral("title"));
+        event->setLocation(QStringLiteral("here"));
+
+        items << toItem(event, 200, 6, KCalCore::Event::eventMimeType());
+    }
+
+    indexItems(items);
+}
+
 void StoreTest::testIncidenceStore_data()
 {
     QTest::addColumn<Akonadi::SearchQuery>("akonadiQuery");
     QTest::addColumn<QVector<Akonadi::Item::Id>>("expectedResults");
     QTest::addColumn<QString>("mimeType");
+
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, QStringLiteral("organizer@example.com")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find organizer") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                        << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, QStringLiteral("organizer2@example.com")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find no organizer") << aq << QVector<Akonadi::Item::Id>{}
+                                           << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee1@example.com0")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find events needsAction") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                                 << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee2@example.com1")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find events accepted") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                              << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee3@example.com2")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find events declined") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                              << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee4@example.com3")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find events tentative") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                               << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee5@example.com4")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find events delegated") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                               << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::PartStatus, QStringLiteral("attendee5@example.com5")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("unknown partstatus") << aq << QVector<Akonadi::Item::Id>{}
+                                            << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Summary, QStringLiteral("title")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find event summary") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                            << QString(KCalCore::Event::eventMimeType());
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Location, QStringLiteral("here")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 6));
+        QTest::newRow("find events location") << aq << QVector<Akonadi::Item::Id>{ 200 }
+                                              << QString(KCalCore::Event::eventMimeType());
+    }
 }
 
 void StoreTest::testIncidenceStore()
 {
-    //testStore();
+    testStore();
+}
+
+
+void StoreTest::indexNotes()
+{
+    Akonadi::Item::List items;
+
+    {
+        auto msg = KMime::Message::Ptr::create();
+        msg->subject()->from7BitString("note");
+
+        //Multipart message
+        KMime::Content *b = new KMime::Content;
+        b->contentType()->setMimeType("text/plain");
+        b->setBody("body note");
+        msg->addContent(b, true);
+        msg->assemble();
+
+        auto item = toItem(msg, 300, 8, QStringLiteral("text/x-vnd.akonadi.note"));
+        item.setSize(1002);
+        item.setFlags({ Akonadi::MessageFlags::Flagged, Akonadi::MessageFlags::Replied });
+        items << item;
+    }
+    {
+        auto msg = KMime::Message::Ptr::create();
+        msg->subject()->from7BitString("note2");
+
+        //Multipart message
+        KMime::Content *b = new KMime::Content;
+        b->contentType()->setMimeType("text/plain");
+        b->setBody("note");
+        msg->addContent(b, true);
+        msg->assemble();
+
+        auto item = toItem(msg, 301, 8, QStringLiteral("text/x-vnd.akonadi.note"));
+        item.setSize(1002);
+        item.setFlags({ Akonadi::MessageFlags::Flagged, Akonadi::MessageFlags::Replied });
+        items << item;
+    }
+    {
+        auto msg = KMime::Message::Ptr::create();
+        msg->subject()->from7BitString("note3");
+
+        //Multipart message
+        KMime::Content *b = new KMime::Content;
+        b->contentType()->setMimeType("text/plain");
+        b->setBody("note3");
+        msg->addContent(b, true);
+        msg->assemble();
+
+        auto item = toItem(msg, 302, 8, QStringLiteral("text/x-vnd.akonadi.note"));
+        item.setSize(1002);
+        item.setFlags({ Akonadi::MessageFlags::Flagged, Akonadi::MessageFlags::Replied });
+        items << item;
+    }
+
+    indexItems(items);
 }
 
 void StoreTest::testNoteStore_data()
@@ -1096,11 +1245,54 @@ void StoreTest::testNoteStore_data()
     QTest::addColumn<Akonadi::SearchQuery>("akonadiQuery");
     QTest::addColumn<QVector<Akonadi::Item::Id>>("expectedResults");
     QTest::addColumn<QString>("mimeType");
+
+    const auto notesMimeType = QStringLiteral("text/x-vnd.akonadi.note");
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("note")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 8ll));
+        QTest::newRow("find note subject equal") << aq << QVector<Akonadi::Item::Id>{ 300 }
+                                                 << notesMimeType;
+    }
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("note1")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 8ll));
+        QTest::newRow("find note subject equal") << aq << QVector<Akonadi::Item::Id>{}
+                                                 << notesMimeType;
+    }
+    {
+        Akonadi::SearchQuery aq;
+        Akonadi::SearchTerm or(Akonadi::SearchTerm::RelOr);
+        or.addSubTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("note")));
+        or.addSubTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Body, QStringLiteral("note")));
+        aq.addTerm(or);
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 8ll));
+        QTest::newRow("find note subject equal or body equal") << aq << QVector<Akonadi::Item::Id>{ 300, 301 }
+                                                               << notesMimeType;
+    }
+    {
+        Akonadi::SearchQuery aq(Akonadi::SearchTerm::RelAnd);
+        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("note3")));
+        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Body, QStringLiteral("note3")));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 8ll));
+        QTest::newRow("find note subject equal and body equal") << aq << QVector<Akonadi::Item::Id>{ 302 }
+                                                                << notesMimeType;
+    }
+    {
+        Akonadi::SearchQuery aq;
+        Akonadi::EmailSearchTerm term(Akonadi::EmailSearchTerm::Subject, QStringLiteral("note3"));
+        term.setIsNegated(true);
+        aq.addTerm(term);
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 8ll));
+        QTest::newRow("find not subject equal note3") << aq << QVector<Akonadi::Item::Id>{ 300, 301 }
+                                                      << notesMimeType;
+    }
 }
 
 void StoreTest::testNoteStore()
 {
-    //testStore(QStringLiteral("text/x-vnd.akonadi.note"));
+    testStore();
 }
 
 QTEST_MAIN(StoreTest)
