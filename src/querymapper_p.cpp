@@ -120,15 +120,11 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
             flags |= Xapian::QueryParser::FLAG_PARTIAL;
         } else {
             flags |= Xapian::QueryParser::FLAG_PHRASE;
+            str = "\"" + str + "\"";
         }
 
-        Xapian::Query q;
-        try {
-            q = parser.parse_query(str, flags, prefix);
-        } catch (const Xapian::QueryParserError &e) {
-            qCWarning(AKONADISEARCH_LOG) << "Query parser error:" << e.get_error_string();
-            return {};
-        }
+        auto q = parser.parse_query(str, flags, prefix);
+        //qDebug() << q.get_description().c_str();
         if (cond == SearchTerm::CondEqual) {
             QVector<Xapian::Query> v;
             v.push_back(Xapian::Query(prefix + "^", 1, 1));
