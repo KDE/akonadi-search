@@ -66,7 +66,7 @@ Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
     KMime::Headers::Subject *subject = note->subject(false);
     if (subject) {
         const QString str = subject->asUnicodeString();
-        doc.indexTextWithoutPositions(str, QStringLiteral("SU"));
+        doc.indexText(str, QStringLiteral("SU"));
         doc.indexTextWithoutPositions(str, {}, 100);
         doc.setData(str);
     }
@@ -75,7 +75,7 @@ Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
     if (mainBody) {
         const QString str = mainBody->decodedText();
         doc.indexTextWithoutPositions(str);
-        doc.indexTextWithoutPositions(str, QStringLiteral("BO"), 1);
+        doc.indexText(str, QStringLiteral("BO"));
     } else {
         processPart(doc, note.data(), nullptr);
     }
@@ -108,6 +108,7 @@ void NoteIndexer::processPart(XapianDocument &doc, KMime::Content *content, KMim
             QTextDocument textDoc;
             textDoc.setHtml(content->decodedText());
             doc.indexTextWithoutPositions(textDoc.toPlainText());
+            doc.indexText(textDoc.toPlainText(), QStringLiteral("BO"));
         }
     }
 }

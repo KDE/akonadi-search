@@ -86,7 +86,7 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
         return Xapian::Query(term);
     } else if (mapper.hasBoolValueProperty(prop)) {
         const auto term = mapper.prefix(prop);
-        std::string val(value.toString().toUtf8().constData());
+        std::string val(value.toString().toStdString());
         return Xapian::Query(term + val);
     } else if (mapper.hasValueProperty(prop)
             && (cond == SearchTerm::CondEqual
@@ -124,7 +124,6 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
         }
 
         auto q = parser.parse_query(str, flags, prefix);
-        //qDebug() << q.get_description().c_str();
         if (cond == SearchTerm::CondEqual) {
             QVector<Xapian::Query> v;
             v.push_back(Xapian::Query(prefix + "^", 1, 1));
