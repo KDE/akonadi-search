@@ -4,8 +4,10 @@ function(add_lib_test src)
     get_filename_component(name ${src} NAME_WE)
     ecm_add_test(${src} ${ARGN}
         LINK_LIBRARIES Qt5::Core Qt5::Widgets Qt5::Test KF5::AkonadiCore KF5AkonadiSearch
-                       ${XAPIAN_LIBRARIES} KF5::Contacts KF5::CalendarCore KF5::Mime
-        TEST_NAME ${name})
+                       KF5::AkonadiMime KF5::Contacts KF5::CalendarCore KF5::Mime
+                       ${XAPIAN_LIBRARIES}
+        TEST_NAME ${name}
+    )
 endfunction()
 
 add_lib_test(querypropertymappertest.cpp ../src/querypropertymapper.cpp)

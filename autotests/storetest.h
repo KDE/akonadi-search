@@ -27,6 +27,10 @@
 
 namespace Akonadi {
 class Item;
+namespace Search {
+class Store;
+class QueryMapper;
+}
 }
 
 class StoreTest : public QObject
@@ -40,6 +44,7 @@ private:
     void indexNotes();
     void indexItems(const QVector<Akonadi::Item> &items);
 
+    void testStore();
 private Q_SLOTS:
     void initTestCase();
     void cleanupTestCase(); // cleanup after each testrun
@@ -50,8 +55,8 @@ private Q_SLOTS:
     void testEmailStore_data();
     void testEmailStore();
 
-    void testCalendarStore_data();
-    void testCalendarStore();
+    void testIncidenceStore_data();
+    void testIncidenceStore();
 
     void testNoteStore_data();
     void testNoteStore();
