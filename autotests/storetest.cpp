@@ -217,7 +217,7 @@ void StoreTest::indexContacts()
         contact.setUid(QStringLiteral("abcd-efgh-1234-5678"));
         contact.setName(QStringLiteral("Dan Vrátil"));
         contact.setEmails({ QStringLiteral("dan@test.com") });
-        contact.setBirthday(QDateTime(QDate(2001, 01, 01)));
+        contact.setBirthday(QDateTime(QDate(2002, 01, 01)));
         items << toItem(contact, 8, 1);
     }
     {
@@ -395,6 +395,21 @@ void StoreTest::testContactStore_data()
         query.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 1ll));
         QTest::newRow("contact group by name (group3 in collection 1)") << query << QVector<Akonadi::Item::Id>{}
                                                                         << KContacts::ContactGroup::mimeType();
+    }
+    {
+        Akonadi::SearchQuery query;
+        query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Birthday, QDate(2000, 1, 1)));
+        QTest::newRow("contact by birthday") << query << QVector<Akonadi::Item::Id>{ 5 }
+                                             << KContacts::Addressee::mimeType();
+    }
+    {
+        Akonadi::SearchQuery query;
+        query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Birthday, QDate(2001, 1, 1),
+                                                 Akonadi::SearchTerm::CondGreaterOrEqual));
+        query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Birthday, QDate(2001, 12, 12),
+                                                 Akonadi::SearchTerm::CondLessOrEqual));
+        QTest::newRow("contact by birthday range") << query << QVector<Akonadi::Item::Id>{ 6, 7 }
+                                                   << KContacts::Addressee::mimeType();
     }
 }
 
