@@ -74,7 +74,7 @@ Xapian::Document EmailIndexer::index(const Akonadi::Item &item)
 void EmailIndexer::processHeader(XapianDocument &doc, const QString &key, KMime::Headers::Base *unstructured)
 {
     if (unstructured) {
-        doc.indexTextWithoutPositions(unstructured->asUnicodeString(), key);
+        doc.indexText(unstructured->asUnicodeString(), key);
     }
 }
 
@@ -103,8 +103,9 @@ void EmailIndexer::processMailboxes(XapianDocument &doc, const QString &key, con
         const auto address = QString::fromUtf8(mbox.address());
         doc.indexTextWithoutPositions(address, key);
         doc.indexTextWithoutPositions(address);
-        doc.addTerm(key + address);
+        doc.indexText(address, key);
         doc.addTerm(address);
+        doc.indexText(mbox.prettyAddress(KMime::Types::Mailbox::QuoteNever), key);
     }
 }
 
@@ -115,7 +116,7 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
     KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
         const QString str = subject->asUnicodeString();
-        doc.indexTextWithoutPositions(str, QStringLiteral("SU"), 1);
+        doc.indexText(str, QStringLiteral("SU"), 1);
         doc.indexTextWithoutPositions(str, QString(), 100);
         doc.setData(str);
     }
@@ -141,6 +142,8 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
     // Process Plain Text Content
     //
 
+    // TODO: Do we really have any use for this? It only grows the indexes and
+    // makes message-wide search useless since it matches all kinds of mess
     //Index all headers
     doc.indexText(QString::fromUtf8(msg->head()), QStringLiteral("HE"));
 
