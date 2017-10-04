@@ -126,7 +126,7 @@ void QueryMapperTest::testEmailQueryMapper_data()
         aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::ByteSize, 1024, Akonadi::SearchTerm::CondGreaterOrEqual));
         aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Attachment, true, Akonadi::SearchTerm::CondEqual));
 
-        const auto xsq = { Xapian::Query(Xapian::Query::OP_VALUE_GE, 1, std::to_string(1024)),
+        const auto xsq = { Xapian::Query(Xapian::Query::OP_VALUE_GE, 1, Xapian::sortable_serialise(1024)),
                            Xapian::Query("BA") };
         QTest::newRow("size GE AND is attachment")
             << aq << Xapian::Query(Xapian::Query::OP_AND, xsq.begin(), xsq.end());
