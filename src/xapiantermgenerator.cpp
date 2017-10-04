@@ -44,6 +44,8 @@ public:
 XapianTermGenerator::XapianTermGenerator(Xapian::Document *doc)
     : d(new XapianTermGeneratorPrivate)
 {
+    // Turn off stemming to get predictable results for field searches and
+    // to avoid stemming non-English data
     d->termGen.set_stemming_strategy(Xapian::TermGenerator::STEM_NONE);
     d->termGen.set_stopper_strategy(Xapian::TermGenerator::STOP_NONE);
     d->doc = doc;
@@ -83,6 +85,8 @@ QStringList XapianTermGenerator::termList(const QString &text)
 
             QString str = text.mid(start, end - start);
 
+            str = str.normalized(QString::NormalizationForm_KC);
+
             // Get the string ready for saving
             str = str.toLower();
             list << str.split(QLatin1Char('_'), QString::SkipEmptyParts);
@@ -112,7 +116,8 @@ void XapianTermGenerator::indexText(const QString &text, const QString &prefix, 
 
 void XapianTermGenerator::indexTextWithoutPositions(const QString &text, const QString &prefix, int wdfInc)
 {
-    d->termGen.index_text_without_positions(text.toStdString(), wdfInc, prefix.toStdString());
+    auto normalized = text.normalized(QString::NormalizationForm_KC);
+    d->termGen.index_text_without_positions(normalized.toStdString(), wdfInc, prefix.toStdString());
 }
 
 
