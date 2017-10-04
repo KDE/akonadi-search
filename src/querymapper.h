@@ -52,7 +52,7 @@ public:
 
 protected:
     virtual Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &term);
-    virtual QueryPropertyMapper &propertyMapper() = 0;
+    virtual const QueryPropertyMapper &propertyMapper() = 0;
 
     explicit QueryMapper();
 };

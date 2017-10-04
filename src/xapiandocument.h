@@ -50,13 +50,13 @@ public:
 
     void addCollectionTerm(qint64 colId);
 
-    void addTerm(const QString &term, const QString &prefix = QString());
-    void addBoolTerm(const QString &term, const QString &prefix = QString());
-    void addBoolTerm(int term, const QString &prefix);
+    void addTerm(const QString &term, const std::string &prefix = {});
+    void addBoolTerm(const QString &term, const std::string &prefix = {});
+    void addBoolTerm(int term, const std::string &prefix);
 
     void indexText(const QString &text, int wdfInc = 1);
-    void indexText(const QString &text, const QString &prefix, int wdfInc = 1);
-    void indexTextWithoutPositions(const QString &text, const QString &prefix = {}, int wfdInc = 1);
+    void indexText(const QString &text, const std::string &prefix, int wdfInc = 1);
+    void indexTextWithoutPositions(const QString &text, const std::string &prefix = {}, int wfdInc = 1);
     void setData(const QString &data);
 
     void addValue(int pos, const QString &value);

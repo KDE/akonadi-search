@@ -47,11 +47,11 @@ private:
     void process(XapianDocument &doc, const KMime::Message::Ptr &msg);
     void processMessageStatus(XapianDocument &doc, const Akonadi::MessageStatus &status);
     void processPart(XapianDocument &document, KMime::Content *content, KMime::Content *mainContent);
-    void insertBool(XapianDocument &doc, char key, bool value);
-    void processHeader(XapianDocument &doc, const QString &key, KMime::Headers::Base *unstructured);
-    void processHeader(XapianDocument &doc, const QString &key, KMime::Headers::Generics::MailboxList *mlist);
-    void processHeader(XapianDocument &doc, const QString &key, KMime::Headers::Generics::AddressList *alist);
-    void processMailboxes(XapianDocument &doc, const QString &key, const KMime::Types::Mailbox::List &list);
+    void insertBool(XapianDocument &doc, const std::string &key, bool value);
+    void processHeader(XapianDocument &doc, const std::string &key, KMime::Headers::Base *unstructured);
+    void processHeader(XapianDocument &doc, const std::string &key, KMime::Headers::Generics::MailboxList *mlist);
+    void processHeader(XapianDocument &doc, const std::string &key, KMime::Headers::Generics::AddressList *alist);
+    void processMailboxes(XapianDocument &doc, const std::string &key, const KMime::Types::Mailbox::List &list);
 
 };
 

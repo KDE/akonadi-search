@@ -68,36 +68,32 @@ void XapianDocument::addCollectionTerm(qint64 colId)
     d->doc.add_boolean_term(collectionId(colId).constData());
 }
 
-void XapianDocument::addTerm(const QString &term, const QString &prefix)
+void XapianDocument::addTerm(const QString &term, const std::string &prefix)
 {
-    const QByteArray arr = prefix.toUtf8() + term.toUtf8();
-
-    d->doc.add_term(arr.constData());
+    d->doc.add_term(prefix + term.toStdString());
 }
 
-void XapianDocument::addBoolTerm(int term, const QString &prefix)
+void XapianDocument::addBoolTerm(int term, const std::string &prefix)
 {
     addBoolTerm(QString::number(term), prefix);
 }
 
-void XapianDocument::addBoolTerm(const QString &term, const QString &prefix)
+void XapianDocument::addBoolTerm(const QString &term, const std::string &prefix)
 {
-    const QByteArray arr = prefix.toUtf8() + term.toUtf8();
-
-    d->doc.add_boolean_term(arr.constData());
+    d->doc.add_boolean_term(prefix + term.toStdString());
 }
 
-void XapianDocument::indexText(const QString &text, const QString &prefix, int wdfInc)
+void XapianDocument::indexText(const QString &text, const std::string &prefix, int wdfInc)
 {
     d->termGen.indexText(text, prefix, wdfInc);
 }
 
 void XapianDocument::indexText(const QString &text, int wdfInc)
 {
-    indexText(text, QString(), wdfInc);
+    indexText(text, {}, wdfInc);
 }
 
-void XapianDocument::indexTextWithoutPositions(const QString &text, const QString &prefix, int wfdInc)
+void XapianDocument::indexTextWithoutPositions(const QString &text, const std::string &prefix, int wfdInc)
 {
     d->termGen.indexTextWithoutPositions(text, prefix, wfdInc);
 }

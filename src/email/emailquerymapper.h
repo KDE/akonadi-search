@@ -23,7 +23,6 @@
 #define AKONADISEARCH_EMAILQUERYMAPPER_H_
 
 #include "querymapper.h"
-#include "querypropertymapper_p.h"
 
 namespace Akonadi {
 
@@ -39,9 +38,7 @@ public:
 
 private:
     Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &akTerm) override;
-    QueryPropertyMapper &propertyMapper() override { return mPropMapper; }
-
-    QueryPropertyMapper mPropMapper;
+    const QueryPropertyMapper &propertyMapper() override;
 };
 
 }

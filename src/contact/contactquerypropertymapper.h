@@ -19,28 +19,22 @@
  *
  */
 
-#ifndef AKONADISEARCH_INCIDENCEQUERYMAPPER_H_
-#define AKONADISEARCH_INCIDENCEQUERYMAPPER_H_
+#ifndef AKONADISEARCH_CONTACTPROPERTYMAPPER_H_
+#define AKONADISEARCH_CONTACTPROPERTYMAPPER_H_
 
-#include "querymapper.h"
+#include "querypropertymapper_p.h"
 
 namespace Akonadi {
-
-class SearchTerm;
-
 namespace Search {
 
-class IncidenceQueryMapper : public QueryMapper
+class ContactQueryPropertyMapper : public QueryPropertyMapper
 {
 public:
-    explicit IncidenceQueryMapper();
-
-    static QStringList mimeTypes();
+    static const ContactQueryPropertyMapper &instance();
 
 private:
-    Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &term) override;
-    const QueryPropertyMapper &propertyMapper() override;
-
+    explicit ContactQueryPropertyMapper();
+    static ContactQueryPropertyMapper *sInstance;
 };
 
 }

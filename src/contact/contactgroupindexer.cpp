@@ -23,9 +23,11 @@
 #include <xapian.h>
 
 #include "contactgroupindexer.h"
+#include "contactquerypropertymapper.h"
 #include "xapiandocument.h"
 
 #include <AkonadiCore/Item>
+#include <AkonadiCore/SearchQuery>
 
 #include <KContacts/ContactGroup>
 
@@ -49,7 +51,7 @@ Xapian::Document ContactGroupIndexer::index(const Akonadi::Item &item)
 
     const QString name = group.name();
     doc.indexText(name);
-    doc.indexText(name, QStringLiteral("NA"));
+    doc.indexText(name, ContactQueryPropertyMapper::instance().prefix(Akonadi::ContactSearchTerm::Name));
 
     // Parent collection
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",

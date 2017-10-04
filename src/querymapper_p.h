@@ -37,13 +37,13 @@ class QueryPropertyMapper;
 Xapian::Query::op mapRelation(SearchTerm::Relation rel);
 Xapian::Query negateQuery(const Xapian::Query &query, bool negate);
 Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
-                             const QString &property, const QVariant &value,
+                             int propertyKey, const QVariant &value,
                              SearchTerm::Condition cond);
 Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
-                             const QString &property,
+                             int propertyKey,
                              const SearchTerm &term);
 Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
-                             const QString &property,
+                             int propertyKey,
                              bool val);
 
 }

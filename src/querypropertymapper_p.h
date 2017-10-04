@@ -31,26 +31,29 @@ namespace Search {
 class QueryPropertyMapper
 {
 public:
+    void insertPrefix(int propertyKey, const QString &prefix);
+    void insertBoolProperty(int propertyKey);
+    void insertBoolValueProperty(int propertyKey);
+    void insertValueProperty(int propertyKey, int value);
+
+    bool hasPrefix(int propertyKey) const;
+    bool hasBoolProperty(int propertyKey) const;
+    bool hasBoolValueProperty(int propertyKey) const;
+    bool hasValueProperty(int propertyKey) const;
+
+    const std::string &prefix(int propertyKey) const;
+    int valueProperty(int propertyKey) const;
+
+protected:
     explicit QueryPropertyMapper();
 
-    void insertPrefix(const QString &property, const QString &prefix);
-    void insertBoolProperty(const QString &property);
-    void insertBoolValueProperty(const QString &property);
-    void insertValueProperty(const QString &property, int value);
-
-    bool hasPrefix(const QString &prop) const;
-    bool hasBoolProperty(const QString &prop) const;
-    bool hasBoolValueProperty(const QString &prop) const;
-    bool hasValueProperty(const QString &prop) const;
-
-    const std::string &prefix(const QString &prop) const;
-    int valueProperty(const QString &prop) const;
-
 private:
-    QSet<QString> mBoolProperties;
-    QSet<QString> mBoolValueProperties;
-    QHash<QString, std::string> mPrefixes;
-    QHash<QString, int> mValueProperties;
+    QSet<int> mBoolProperties;
+    QSet<int> mBoolValueProperties;
+    QHash<int, std::string> mPrefixes;
+    QHash<int, int> mValueProperties;
+
+    Q_DISABLE_COPY(QueryPropertyMapper)
 };
 
 }

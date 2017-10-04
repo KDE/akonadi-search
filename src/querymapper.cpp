@@ -80,7 +80,7 @@ Xapian::Query QueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
         const auto field = Akonadi::SearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::SearchTerm::Collection:
-            return constructQuery(propertyMapper(), QStringLiteral("collection"), term);
+            return constructQuery(propertyMapper(), field, term);
         default:
             qCWarning(AKONADISEARCH_LOG) << "unknown term " << term.key();
         }

@@ -23,9 +23,11 @@
 #include <xapian.h>
 
 #include "noteindexer.h"
+#include "notequerypropertymapper.h"
 #include "xapiandocument.h"
 
 #include <AkonadiCore/Item>
+#include <AkonadiCore/SearchQuery>
 
 #include <KMime/Message>
 
@@ -59,6 +61,8 @@ Xapian::Document NoteIndexer::index(const Akonadi::Item &item)
 
 Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
 {
+    const auto &propMapper = NoteQueryPropertyMapper::instance();
+
     XapianDocument doc;
 
     // Process Headers
@@ -66,7 +70,7 @@ Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
     KMime::Headers::Subject *subject = note->subject(false);
     if (subject) {
         const QString str = subject->asUnicodeString();
-        doc.indexText(str, QStringLiteral("SU"));
+        doc.indexText(str, propMapper.prefix(Akonadi::EmailSearchTerm::Subject));
         doc.indexTextWithoutPositions(str, {}, 100);
         doc.setData(str);
     }
@@ -75,7 +79,7 @@ Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
     if (mainBody) {
         const QString str = mainBody->decodedText();
         doc.indexTextWithoutPositions(str);
-        doc.indexText(str, QStringLiteral("BO"));
+        doc.indexText(str, propMapper.prefix(Akonadi::EmailSearchTerm::Body));
     } else {
         processPart(doc, note.data(), nullptr);
     }
@@ -108,7 +112,7 @@ void NoteIndexer::processPart(XapianDocument &doc, KMime::Content *content, KMim
             QTextDocument textDoc;
             textDoc.setHtml(content->decodedText());
             doc.indexTextWithoutPositions(textDoc.toPlainText());
-            doc.indexText(textDoc.toPlainText(), QStringLiteral("BO"));
+            doc.indexText(textDoc.toPlainText(), NoteQueryPropertyMapper::instance().prefix(Akonadi::EmailSearchTerm::Body));
         }
     }
 }

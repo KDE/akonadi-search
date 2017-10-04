@@ -23,6 +23,8 @@
 #include <xapian.h>
 
 #include "contactquerymapper.h"
+#include "contactquerypropertymapper.h"
+#include "querypropertymapper_p.h"
 #include "querymapper_p.h"
 #include "akonadisearch_debug.h"
 
@@ -35,13 +37,6 @@ using namespace Akonadi::Search;
 
 ContactQueryMapper::ContactQueryMapper()
 {
-    mPropMapper.insertPrefix(QStringLiteral("name"), QStringLiteral("NA"));
-    mPropMapper.insertPrefix(QStringLiteral("nick"), QStringLiteral("NI"));
-    mPropMapper.insertPrefix(QStringLiteral("email"), QStringLiteral("")); // Email currently doesn't map to anything
-    mPropMapper.insertPrefix(QStringLiteral("uid"), QStringLiteral("UID"));
-
-    mPropMapper.insertValueProperty(QStringLiteral("birthday"), 0);
-    mPropMapper.insertValueProperty(QStringLiteral("anniversary"), 1);
 }
 
 QStringList ContactQueryMapper::mimeTypes()
@@ -50,19 +45,21 @@ QStringList ContactQueryMapper::mimeTypes()
              KContacts::ContactGroup::mimeType() };
 }
 
+const QueryPropertyMapper &ContactQueryMapper::propertyMapper()
+{
+    return ContactQueryPropertyMapper::instance();
+}
+
+
 Xapian::Query ContactQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
 {
     const Akonadi::ContactSearchTerm::ContactSearchField field = Akonadi::ContactSearchTerm::fromKey(term.key());
     switch (field) {
     case Akonadi::ContactSearchTerm::Name:
-        return constructQuery(mPropMapper, QStringLiteral("name"), term);
     case Akonadi::ContactSearchTerm::Email:
-        return constructQuery(mPropMapper, QStringLiteral("email"), term);
     case Akonadi::ContactSearchTerm::Nickname:
-        return constructQuery(mPropMapper, QStringLiteral("nick"), term);
     case Akonadi::ContactSearchTerm::Uid:
-        return constructQuery(mPropMapper, QStringLiteral("uid"), term);
-    case Akonadi::ContactSearchTerm::Unknown:
+        return constructQuery(propertyMapper(), field, term);
     default:
         return QueryMapper::recursiveTermMapping(term);
     }

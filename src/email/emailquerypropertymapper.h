@@ -19,31 +19,44 @@
  *
  */
 
-#ifndef AKONADISEARCH_INCIDENCEQUERYMAPPER_H_
-#define AKONADISEARCH_INCIDENCEQUERYMAPPER_H_
+#ifndef AKONADISEARCH_EMAILQUERYPROPERTYMAPPER_H_
+#define AKONADISEARCH_EMAILQUERYPROPERTYMAPPER_H_
 
-#include "querymapper.h"
+#include "querypropertymapper_p.h"
 
 namespace Akonadi {
-
-class SearchTerm;
-
 namespace Search {
 
-class IncidenceQueryMapper : public QueryMapper
+class EmailQueryPropertyMapper : public QueryPropertyMapper
 {
 public:
-    explicit IncidenceQueryMapper();
+    enum Flags {
+        IsImportantFlag = 10000, // start way up high so we don't conflict with Akonadi::SearchQuery enums
+        IsToActFlag,
+        IsWatchedFlag,
+        IsDeletedFlag,
+        IsSpamFlag,
+        IsRepliedFlag,
+        IsIgnoredFlag,
+        IsForwardedFlag,
+        IsSentFlag,
+        IsQueuedFlag,
+        IsHamFlag,
+        IsReadFlag,
+        HasAttachmentFlag,
+        IsEncryptedFlag,
+        HasInvitationFlag
+    };
 
-    static QStringList mimeTypes();
+    static const EmailQueryPropertyMapper &instance();
 
-private:
-    Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &term) override;
-    const QueryPropertyMapper &propertyMapper() override;
-
+protected:
+    explicit EmailQueryPropertyMapper();
+    static EmailQueryPropertyMapper *sInstance;
 };
 
 }
 }
+
 
 #endif

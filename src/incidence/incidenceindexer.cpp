@@ -23,10 +23,12 @@
 #include <xapian.h>
 
 #include "incidenceindexer.h"
+#include "incidencequerypropertymapper.h"
 #include "akonadisearch_debug.h"
 #include "xapiandocument.h"
 
 #include <AkonadiCore/Item>
+#include <AkonadiCore/SearchQuery>
 
 using namespace Akonadi::Search;
 
@@ -64,16 +66,19 @@ Xapian::Document IncidenceIndexer::index(const Akonadi::Item &item)
 
 Xapian::Document IncidenceIndexer::indexEvent(const KCalCore::Event::Ptr& event)
 {
+    const auto &propMapper = IncidenceQueryPropertyMapper::instance();
+
     XapianDocument doc;
 
-    doc.indexText(event->organizer()->email(), QStringLiteral("O"));
-    doc.indexText(event->summary(), QStringLiteral("S"));
-    doc.indexText(event->location(), QStringLiteral("L"));
+    doc.indexText(event->organizer()->email(), propMapper.prefix(Akonadi::IncidenceSearchTerm::Organizer));
+    doc.indexText(event->summary(), propMapper.prefix(Akonadi::IncidenceSearchTerm::Summary));
+    doc.indexText(event->location(), propMapper.prefix(Akonadi::IncidenceSearchTerm::Location));
     KCalCore::Attendee::List attendees = event->attendees();
     KCalCore::Attendee::List::ConstIterator it;
     KCalCore::Attendee::List::ConstIterator end(attendees.constEnd());
     for (it = attendees.constBegin(); it != end; ++it) {
-        doc.addBoolTerm((*it)->email() + QString::number((*it)->status()), QStringLiteral("PS"));
+        doc.addBoolTerm((*it)->email() + QString::number((*it)->status()),
+                        propMapper.prefix(Akonadi::IncidenceSearchTerm::PartStatus));
     }
 
 

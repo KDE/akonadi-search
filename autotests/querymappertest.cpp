@@ -23,6 +23,7 @@
 #include "../src/querymapper.h"
 
 #include <AkonadiCore/SearchQuery>
+#include <Akonadi/KMime/MessageFlags>
 
 #include <QTest>
 #include <QDebug>
@@ -50,10 +51,8 @@ void QueryMapperTest::testQueryMapper(const QString &mimeType)
     QCOMPARE(mappers.count(), 1);
 
     const auto result = mappers.first()->map(akonadiQuery);
-    //qDebug() << result.serialise().c_str();
-    //qDebug() << QByteArray(result.serialise().c_str()).toHex();
-    //qDebug() << xapianQuery.serialise().c_str();
-    //qDebug() << QByteArray(xapianQuery.serialise().c_str()).toHex();
+    //qDebug() << result.get_description().c_str();
+    //qDebug() << xapianQuery.get_description().c_str();
     QCOMPARE(result.serialise(), xapianQuery.serialise());
 
     qDeleteAll(mappers);
@@ -112,7 +111,7 @@ void QueryMapperTest::testEmailQueryMapper_data()
     {
         Akonadi::SearchQuery aq(Akonadi::SearchTerm::RelOr);
         aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Body, QStringLiteral("hello"), Akonadi::SearchTerm::CondContains));
-        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("test"), Akonadi::SearchTerm::CondEqual));
+        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, QStringLiteral("test")));
 
         const auto phr = { Xapian::Query("SU^", 1, 1), Xapian::Query("SUtest", 1, 1), Xapian::Query("SU$", 1, 2) };
         const auto xsq = { parser.parse_query("hello", XapianContains, "BO"),
@@ -124,7 +123,7 @@ void QueryMapperTest::testEmailQueryMapper_data()
     {
         Akonadi::SearchQuery aq;
         aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::ByteSize, 1024, Akonadi::SearchTerm::CondGreaterOrEqual));
-        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Attachment, true, Akonadi::SearchTerm::CondEqual));
+        aq.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::MessageStatus, QLatin1String(Akonadi::MessageFlags::HasAttachment)));
 
         const auto xsq = { Xapian::Query(Xapian::Query::OP_VALUE_GE, 1, Xapian::sortable_serialise(1024)),
                            Xapian::Query("BA") };

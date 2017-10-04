@@ -23,6 +23,7 @@
 #include <xapian.h>
 
 #include "incidencequerymapper.h"
+#include "incidencequerypropertymapper.h"
 #include "querymapper_p.h"
 #include "akonadisearch_debug.h"
 
@@ -38,12 +39,6 @@ using namespace Akonadi::Search;
 
 IncidenceQueryMapper::IncidenceQueryMapper()
 {
-    mPropMapper.insertPrefix(QStringLiteral("organizer"), QStringLiteral("O"));
-    mPropMapper.insertPrefix(QStringLiteral("partstatus"), QStringLiteral("PS"));
-    mPropMapper.insertPrefix(QStringLiteral("summary"), QStringLiteral("S"));
-    mPropMapper.insertPrefix(QStringLiteral("location"), QStringLiteral("L"));
-
-    mPropMapper.insertBoolValueProperty(QStringLiteral("partstatus"));
 }
 
 QStringList IncidenceQueryMapper::mimeTypes()
@@ -53,19 +48,23 @@ QStringList IncidenceQueryMapper::mimeTypes()
              KCalCore::Journal::journalMimeType() };
 }
 
+const QueryPropertyMapper &IncidenceQueryMapper::propertyMapper()
+{
+    return IncidenceQueryPropertyMapper::instance();
+}
+
+
 Xapian::Query IncidenceQueryMapper::recursiveTermMapping(const SearchTerm &term)
 {
     const Akonadi::IncidenceSearchTerm::IncidenceSearchField field = Akonadi::IncidenceSearchTerm::fromKey(term.key());
     switch (field) {
     case Akonadi::IncidenceSearchTerm::Organizer:
-        return constructQuery(mPropMapper, QStringLiteral("organizer"), term);
     case Akonadi::IncidenceSearchTerm::Summary:
-        return constructQuery(mPropMapper, QStringLiteral("summary"), term);
     case Akonadi::IncidenceSearchTerm::Location:
-        return constructQuery(mPropMapper, QStringLiteral("location"), term);
+        return constructQuery(propertyMapper(), field, term);
     case Akonadi::IncidenceSearchTerm::PartStatus: {
         return negateQuery(
-            constructQuery(mPropMapper, QStringLiteral("partstatus"),
+            constructQuery(propertyMapper(), field,
                             term.value().toString(), SearchTerm::CondEqual),
             term.isNegated());
     }

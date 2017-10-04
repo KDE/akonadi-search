@@ -1,5 +1,4 @@
 /*
- * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2017  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -20,41 +19,34 @@
  *
  */
 
-#include <xapian.h>
-
-#include "notequerymapper.h"
-#include "notequerypropertymapper.h"
-#include "querymapper_p.h"
-#include "akonadisearch_debug.h"
+#include "contactquerypropertymapper.h"
 
 #include <AkonadiCore/SearchQuery>
 
+#include <QMutex>
+
 using namespace Akonadi::Search;
 
-NoteQueryMapper::NoteQueryMapper()
+ContactQueryPropertyMapper *ContactQueryPropertyMapper::sInstance = nullptr;
+
+ContactQueryPropertyMapper::ContactQueryPropertyMapper()
 {
+    insertPrefix(Akonadi::ContactSearchTerm::Name, QStringLiteral("NA"));
+    insertPrefix(Akonadi::ContactSearchTerm::Nickname, QStringLiteral("NI"));
+    insertPrefix(Akonadi::ContactSearchTerm::Email, QStringLiteral("")); // Email currently doesn't map to anything
+    insertPrefix(Akonadi::ContactSearchTerm::Uid, QStringLiteral("UID"));
+
+    insertValueProperty(Akonadi::ContactSearchTerm::Birthday, 0);
+    insertValueProperty(Akonadi::ContactSearchTerm::Anniversary, 1);
 }
 
-QStringList NoteQueryMapper::mimeTypes()
+const ContactQueryPropertyMapper &ContactQueryPropertyMapper::instance()
 {
-    return { QStringLiteral("text/x-vnd.akonadi.note") };
-}
-
-const QueryPropertyMapper &NoteQueryMapper::propertyMapper()
-{
-    return NoteQueryPropertyMapper::instance();
-}
-
-
-Xapian::Query NoteQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
-{
-    // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
-    const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
-    switch (field) {
-    case Akonadi::EmailSearchTerm::Subject:
-    case Akonadi::EmailSearchTerm::Body:
-        return constructQuery(propertyMapper(), field, term);
-    default:
-        return QueryMapper::recursiveTermMapping(term);
+    static QMutex lock;
+    lock.lock();
+    if (!sInstance) {
+        sInstance = new ContactQueryPropertyMapper();
     }
+    lock.unlock();
+    return *sInstance;
 }
