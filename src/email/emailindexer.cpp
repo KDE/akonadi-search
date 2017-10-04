@@ -151,7 +151,7 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
     if (mainBody) {
         const auto text = mainBody->decodedText();
         doc.indexTextWithoutPositions(text, QString(), 1);
-        doc.indexTextWithoutPositions(text, QStringLiteral("BO"), 1);
+        doc.indexText(text, QStringLiteral("BO"), 1);
     } else {
         processPart(doc, msg.data(), nullptr);
     }
@@ -180,7 +180,9 @@ void EmailIndexer::processPart(XapianDocument &doc, KMime::Content *content, KMi
         if (!mainContent && type->isHTMLText()) {
             QTextDocument textDoc;
             textDoc.setHtml(content->decodedText());
-            doc.indexTextWithoutPositions(textDoc.toPlainText());
+            const auto plainText = textDoc.toPlainText();
+            doc.indexTextWithoutPositions(plainText);
+            doc.indexText(plainText, QStringLiteral("BO"));
         }
     }
 
