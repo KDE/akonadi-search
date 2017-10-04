@@ -59,8 +59,7 @@ Xapian::Document EmailIndexer::index(const Akonadi::Item &item)
     processMessageStatus(doc, status);
     process(doc, msg);
 
-    // Size
-    doc.addValue(1, QString::number(item.size()));
+    doc.addValue(1, item.size());
 
     // Parent collection
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index",
@@ -121,14 +120,6 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
         doc.setData(str);
     }
 
-    KMime::Headers::Date *date = msg->date(false);
-    if (date) {
-        const QString str = QString::number(date->dateTime().toTime_t());
-        doc.addValue(0, str);
-        const QString julianDay = QString::number(date->dateTime().date().toJulianDay());
-        doc.addValue(2, julianDay);
-    }
-
     processHeader(doc, QStringLiteral("F"), msg->from(false));
     processHeader(doc, QStringLiteral("T"), msg->to(false));
     processHeader(doc, QStringLiteral("CC"), msg->cc(false));
@@ -140,6 +131,11 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
     processHeader(doc, QStringLiteral("XL"), msg->headerByType("X-Loop"));
     processHeader(doc, QStringLiteral("XML"), msg->headerByType("X-Mailing-List"));
     processHeader(doc, QStringLiteral("XSF"), msg->headerByType("X-Spam-Flag"));
+
+    if (auto date = msg->date(false)) {
+        doc.addValue(0, date->dateTime().toSecsSinceEpoch());
+        doc.addValue(2, QDateTime(date->dateTime().date(), {}).toSecsSinceEpoch());
+    }
 
     //
     // Process Plain Text Content

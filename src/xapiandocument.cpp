@@ -38,7 +38,8 @@ public:
     XapianDocumentPrivate(const Xapian::Document &doc)
         : doc(doc)
         , termGen(&this->doc)
-    {}
+    {
+    }
 
     Xapian::Document doc;
     XapianTermGenerator termGen;
@@ -114,6 +115,11 @@ Xapian::Document XapianDocument::xapianDocument() const
 void XapianDocument::addValue(int pos, const QString &value)
 {
     d->doc.add_value(pos, value.toUtf8().constData());
+}
+
+void XapianDocument::addValue(int pos, double value)
+{
+    d->doc.add_value(pos, Xapian::sortable_serialise(value));
 }
 
 QString XapianDocument::fetchTermStartsWith(const QByteArray &term)

@@ -83,7 +83,6 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
         } else {
             term += 'N' + p;
         }
-
         return Xapian::Query(term);
     } else if (mapper.hasBoolValueProperty(prop)) {
         const auto term = mapper.prefix(prop);
@@ -102,13 +101,12 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
         }
         const int valueNumber = mapper.valueProperty(prop);
         if (cond == SearchTerm::CondGreaterOrEqual || cond == SearchTerm::CondGreaterThan) {
-            return Xapian::Query(Xapian::Query::OP_VALUE_GE, valueNumber, std::to_string(numVal));
+            return Xapian::Query(Xapian::Query::OP_VALUE_GE, valueNumber, Xapian::sortable_serialise(numVal));
         } else if (cond == SearchTerm::CondLessOrEqual || cond == SearchTerm::CondLessThan) {
-            return Xapian::Query(Xapian::Query::OP_VALUE_LE, valueNumber, std::to_string(numVal));
+            return Xapian::Query(Xapian::Query::OP_VALUE_LE, valueNumber, Xapian::sortable_serialise(numVal));
         } else if (cond == SearchTerm::CondEqual) {
-            const Xapian::Query gtQuery(Xapian::Query::OP_VALUE_GE, valueNumber, std::to_string(numVal));
-            const Xapian::Query ltQuery(Xapian::Query::OP_VALUE_LE, valueNumber, std::to_string(numVal));
-            return Xapian::Query(Xapian::Query::OP_AND, gtQuery, ltQuery);
+            const auto serialisedVal = Xapian::sortable_serialise(numVal);
+            return Xapian::Query(Xapian::Query::OP_VALUE_RANGE, valueNumber, serialisedVal, serialisedVal);
         }
     } else if ((cond == SearchTerm::CondContains || cond == SearchTerm::CondEqual)
                 && mapper.hasPrefix(prop)) {
