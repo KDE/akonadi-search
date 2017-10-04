@@ -35,7 +35,11 @@ class Query;
 namespace Akonadi {
 
 class SearchQuery;
+class SearchTerm;
+
 namespace Search {
+
+class QueryPropertyMapper;
 
 class AKONADISEARCH_EXPORT QueryMapper
 {
@@ -44,9 +48,12 @@ public:
 
     virtual ~QueryMapper();
 
-    virtual Xapian::Query map(const Akonadi::SearchQuery &akQuery) = 0;
+    Xapian::Query map(const Akonadi::SearchQuery &akQuery);
 
 protected:
+    virtual Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &term);
+    virtual QueryPropertyMapper &propertyMapper() = 0;
+
     explicit QueryMapper();
 };
 

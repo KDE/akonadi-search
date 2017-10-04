@@ -25,6 +25,8 @@ using namespace Akonadi::Search;
 
 QueryPropertyMapper::QueryPropertyMapper()
 {
+    insertPrefix(QStringLiteral("collection"), QStringLiteral("C"));
+    insertBoolValueProperty(QStringLiteral("collection"));
 }
 
 void QueryPropertyMapper::insertBoolProperty(const QString &prop)

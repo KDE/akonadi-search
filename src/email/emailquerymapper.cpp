@@ -43,7 +43,6 @@ EmailQueryMapper::EmailQueryMapper()
     mPropMapper.insertPrefix(QStringLiteral("cc"), QStringLiteral("CC"));
     mPropMapper.insertPrefix(QStringLiteral("bcc"), QStringLiteral("BC"));
     mPropMapper.insertPrefix(QStringLiteral("subject"), QStringLiteral("SU"));
-    mPropMapper.insertPrefix(QStringLiteral("collection"), QStringLiteral("C"));
     mPropMapper.insertPrefix(QStringLiteral("replyto"), QStringLiteral("RT"));
     mPropMapper.insertPrefix(QStringLiteral("organization"), QStringLiteral("O"));
     mPropMapper.insertPrefix(QStringLiteral("listid"), QStringLiteral("LI"));
@@ -100,134 +99,115 @@ QStringList EmailQueryMapper::mimeTypes()
     return { KMime::Message::mimeType() };
 }
 
-
-Xapian::Query EmailQueryMapper::map(const Akonadi::SearchQuery &akQuery)
-{
-    auto akTerm = akQuery.term();
-
-    return recursiveTermMapping(akTerm);
-}
-
 Xapian::Query EmailQueryMapper::recursiveTermMapping(const SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
-        QVector<Xapian::Query> sub;
-        const auto subTerms = term.subTerms();
-        for (const auto &t : subTerms) {
-            const auto q = recursiveTermMapping(t);
-            if (!q.empty()) {
-                sub.push_back(q);
-            }
-        }
-        return Xapian::Query{ mapRelation(term.relation()), sub.cbegin(), sub.cend() };
-    } else {
-        // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
-        const EmailSearchTerm::EmailSearchField field = EmailSearchTerm::fromKey(term.key());
-        switch (field) {
-        case EmailSearchTerm::Message: {
-            Xapian::Query q(Xapian::Query::OP_OR,
-                            constructQuery(mPropMapper, QStringLiteral("body"), term.value(), term.condition()),
-                            constructQuery(mPropMapper, QStringLiteral("headers"), term.value(), term.condition()));
-            return negateQuery(q, term.isNegated());
-        }
-        case Akonadi::EmailSearchTerm::Body:
-            return constructQuery(mPropMapper, QStringLiteral("body"), term);
-        case Akonadi::EmailSearchTerm::Headers:
-            return constructQuery(mPropMapper, QStringLiteral("headers"), term);
-        case Akonadi::EmailSearchTerm::ByteSize:
-            return constructQuery(mPropMapper, QStringLiteral("size"), term);
-        case Akonadi::EmailSearchTerm::HeaderDate: {
-            const auto q = constructQuery(mPropMapper, QStringLiteral("date"),
-                                          QString::number(term.value().toDateTime().toTime_t()),
-                                          term.condition());
-            return negateQuery(q, term.isNegated());
-        }
-        case Akonadi::EmailSearchTerm::HeaderOnlyDate: {
-            const auto q = constructQuery(mPropMapper, QStringLiteral("onlydate"),
-                                          QString::number(term.value().toDate().toJulianDay()),
-                                          term.condition());
-            return negateQuery(q, term.isNegated());
-        }
-        case Akonadi::EmailSearchTerm::Subject:
-            return constructQuery(mPropMapper, QStringLiteral("subject"), term);
-        case Akonadi::EmailSearchTerm::HeaderFrom:
-            return constructQuery(mPropMapper, QStringLiteral("from"), term);
-        case Akonadi::EmailSearchTerm::HeaderTo:
-            return constructQuery(mPropMapper, QStringLiteral("to"), term);
-        case Akonadi::EmailSearchTerm::HeaderCC:
-            return constructQuery(mPropMapper, QStringLiteral("cc"), term);
-        case Akonadi::EmailSearchTerm::HeaderBCC:
-            return constructQuery(mPropMapper, QStringLiteral("bcc"), term);
-        case Akonadi::EmailSearchTerm::MessageStatus:
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Flagged)) {
-                return constructQuery(mPropMapper, QStringLiteral("isimportant"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::ToAct)) {
-                return constructQuery(mPropMapper, QStringLiteral("istoact"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Watched)) {
-                return constructQuery(mPropMapper, QStringLiteral("iswatched"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Deleted)) {
-                return constructQuery(mPropMapper, QStringLiteral("isdeleted"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Spam)) {
-                return constructQuery(mPropMapper, QStringLiteral("isspam"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Replied)) {
-                return constructQuery(mPropMapper, QStringLiteral("isreplied"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Ignored)) {
-                return constructQuery(mPropMapper, QStringLiteral("isignored"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Forwarded)) {
-                return constructQuery(mPropMapper, QStringLiteral("isforwarded"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Sent)) {
-                return constructQuery(mPropMapper, QStringLiteral("issent"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Queued)) {
-                return constructQuery(mPropMapper, QStringLiteral("isqueued"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Ham)) {
-                return constructQuery(mPropMapper, QStringLiteral("isham"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Seen)) {
-                return constructQuery(mPropMapper, QStringLiteral("isread"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::HasAttachment)) {
-                return constructQuery(mPropMapper, QStringLiteral("hasattachment"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Encrypted)) {
-                return constructQuery(mPropMapper, QStringLiteral("isencrypted"), !term.isNegated());
-            }
-            if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::HasInvitation)) {
-                return constructQuery(mPropMapper, QStringLiteral("hasinvitation"), !term.isNegated());
-            }
-            break;
-        case Akonadi::EmailSearchTerm::MessageTag:
-            //search directly in akonadi? or index tags.
-            break;
-        case Akonadi::EmailSearchTerm::HeaderReplyTo:
-            return constructQuery(mPropMapper, QStringLiteral("replyto"), term);
-        case Akonadi::EmailSearchTerm::HeaderOrganization:
-            return constructQuery(mPropMapper, QStringLiteral("organization"), term);
-        case Akonadi::EmailSearchTerm::HeaderListId:
-            return constructQuery(mPropMapper, QStringLiteral("listid"), term);
-        case Akonadi::EmailSearchTerm::HeaderResentFrom:
-            return constructQuery(mPropMapper, QStringLiteral("resentfrom"), term);
-        case Akonadi::EmailSearchTerm::HeaderXLoop:
-            return constructQuery(mPropMapper, QStringLiteral("xloop"), term);
-        case Akonadi::EmailSearchTerm::HeaderXMailingList:
-            return constructQuery(mPropMapper, QStringLiteral("xmailinglist"), term);
-        case Akonadi::EmailSearchTerm::HeaderXSpamFlag:
-            return constructQuery(mPropMapper, QStringLiteral("xspamflag"), term);
-        case Akonadi::EmailSearchTerm::Attachment:
-            return constructQuery(mPropMapper, QStringLiteral("hasattachment"), !term.isNegated());
-        case Akonadi::EmailSearchTerm::Unknown:
-        default:
-            qCWarning(AKONADISEARCH_LOG) << "unknown term " << term.key();
-        }
+    // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
+    const EmailSearchTerm::EmailSearchField field = EmailSearchTerm::fromKey(term.key());
+    switch (field) {
+    case EmailSearchTerm::Message: {
+        Xapian::Query q(Xapian::Query::OP_OR,
+                        constructQuery(mPropMapper, QStringLiteral("body"), term.value(), term.condition()),
+                        constructQuery(mPropMapper, QStringLiteral("headers"), term.value(), term.condition()));
+        return negateQuery(q, term.isNegated());
     }
+    case Akonadi::EmailSearchTerm::Body:
+        return constructQuery(mPropMapper, QStringLiteral("body"), term);
+    case Akonadi::EmailSearchTerm::Headers:
+        return constructQuery(mPropMapper, QStringLiteral("headers"), term);
+    case Akonadi::EmailSearchTerm::ByteSize:
+        return constructQuery(mPropMapper, QStringLiteral("size"), term);
+    case Akonadi::EmailSearchTerm::HeaderDate: {
+        const auto q = constructQuery(mPropMapper, QStringLiteral("date"),
+                                        QString::number(term.value().toDateTime().toSecsSinceEpoch()),
+                                        term.condition());
+        return negateQuery(q, term.isNegated());
+    }
+    case Akonadi::EmailSearchTerm::HeaderOnlyDate: {
+        const auto q = constructQuery(mPropMapper, QStringLiteral("onlydate"),
+                                        QString::number(QDateTime(term.value().toDate(), {}).toSecsSinceEpoch()),
+                                        term.condition());
+        return negateQuery(q, term.isNegated());
+    }
+    case Akonadi::EmailSearchTerm::Subject:
+        return constructQuery(mPropMapper, QStringLiteral("subject"), term);
+    case Akonadi::EmailSearchTerm::HeaderFrom:
+        return constructQuery(mPropMapper, QStringLiteral("from"), term);
+    case Akonadi::EmailSearchTerm::HeaderTo:
+        return constructQuery(mPropMapper, QStringLiteral("to"), term);
+    case Akonadi::EmailSearchTerm::HeaderCC:
+        return constructQuery(mPropMapper, QStringLiteral("cc"), term);
+    case Akonadi::EmailSearchTerm::HeaderBCC:
+        return constructQuery(mPropMapper, QStringLiteral("bcc"), term);
+    case Akonadi::EmailSearchTerm::MessageStatus:
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Flagged)) {
+            return constructQuery(mPropMapper, QStringLiteral("isimportant"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::ToAct)) {
+            return constructQuery(mPropMapper, QStringLiteral("istoact"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Watched)) {
+            return constructQuery(mPropMapper, QStringLiteral("iswatched"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Deleted)) {
+            return constructQuery(mPropMapper, QStringLiteral("isdeleted"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Spam)) {
+            return constructQuery(mPropMapper, QStringLiteral("isspam"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Replied)) {
+            return constructQuery(mPropMapper, QStringLiteral("isreplied"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Ignored)) {
+            return constructQuery(mPropMapper, QStringLiteral("isignored"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Forwarded)) {
+            return constructQuery(mPropMapper, QStringLiteral("isforwarded"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Sent)) {
+            return constructQuery(mPropMapper, QStringLiteral("issent"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Queued)) {
+            return constructQuery(mPropMapper, QStringLiteral("isqueued"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Ham)) {
+            return constructQuery(mPropMapper, QStringLiteral("isham"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Seen)) {
+            return constructQuery(mPropMapper, QStringLiteral("isread"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::HasAttachment)) {
+            return constructQuery(mPropMapper, QStringLiteral("hasattachment"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::Encrypted)) {
+            return constructQuery(mPropMapper, QStringLiteral("isencrypted"), !term.isNegated());
+        }
+        if (term.value().toString() == QString::fromLatin1(Akonadi::MessageFlags::HasInvitation)) {
+            return constructQuery(mPropMapper, QStringLiteral("hasinvitation"), !term.isNegated());
+        }
+        break;
+    case Akonadi::EmailSearchTerm::MessageTag:
+        //search directly in akonadi? or index tags.
+        break;
+    case Akonadi::EmailSearchTerm::HeaderReplyTo:
+        return constructQuery(mPropMapper, QStringLiteral("replyto"), term);
+    case Akonadi::EmailSearchTerm::HeaderOrganization:
+        return constructQuery(mPropMapper, QStringLiteral("organization"), term);
+    case Akonadi::EmailSearchTerm::HeaderListId:
+        return constructQuery(mPropMapper, QStringLiteral("listid"), term);
+    case Akonadi::EmailSearchTerm::HeaderResentFrom:
+        return constructQuery(mPropMapper, QStringLiteral("resentfrom"), term);
+    case Akonadi::EmailSearchTerm::HeaderXLoop:
+        return constructQuery(mPropMapper, QStringLiteral("xloop"), term);
+    case Akonadi::EmailSearchTerm::HeaderXMailingList:
+        return constructQuery(mPropMapper, QStringLiteral("xmailinglist"), term);
+    case Akonadi::EmailSearchTerm::HeaderXSpamFlag:
+        return constructQuery(mPropMapper, QStringLiteral("xspamflag"), term);
+    case Akonadi::EmailSearchTerm::Attachment:
+        return constructQuery(mPropMapper, QStringLiteral("hasattachment"), !term.isNegated());
+    case Akonadi::EmailSearchTerm::Unknown:
+    default:
+        return QueryMapper::recursiveTermMapping(term);
+    }
+
     return {};
 }

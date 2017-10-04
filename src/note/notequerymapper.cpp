@@ -33,7 +33,6 @@ using namespace Akonadi::Search;
 NoteQueryMapper::NoteQueryMapper()
 {
     mPropMapper.insertPrefix(QStringLiteral("subject"), QStringLiteral("SU"));
-    mPropMapper.insertPrefix(QStringLiteral("collection"), QStringLiteral("C"));
     mPropMapper.insertPrefix(QStringLiteral("body"), QStringLiteral("BO"));
 }
 
@@ -42,35 +41,16 @@ QStringList NoteQueryMapper::mimeTypes()
     return { QStringLiteral("text/x-vnd.akonadi.note") };
 }
 
-Xapian::Query NoteQueryMapper::map(const Akonadi::SearchQuery &query)
-{
-    return recursiveTermMapping(query.term());
-}
-
 Xapian::Query NoteQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
-        QVector<Xapian::Query> sub;
-        const auto subterms = term.subTerms();
-        for (const auto &s : subterms) {
-            const auto q = recursiveTermMapping(s);
-            if (!q.empty()) {
-                sub.push_back(q);
-            }
-        }
-        return Xapian::Query{ mapRelation(term.relation()), sub.cbegin(), sub.cend() };
-    } else {
-        // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
-        const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
-        switch (field) {
-        case Akonadi::EmailSearchTerm::Subject:
-            return constructQuery(mPropMapper, QStringLiteral("subject"), term);
-        case Akonadi::EmailSearchTerm::Body:
-            return constructQuery(mPropMapper, QStringLiteral("body"), term);
-        default:
-            qCWarning(AKONADISEARCH_LOG) << "unknown term " << term.key();
-        }
+    // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
+    const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
+    switch (field) {
+    case Akonadi::EmailSearchTerm::Subject:
+        return constructQuery(mPropMapper, QStringLiteral("subject"), term);
+    case Akonadi::EmailSearchTerm::Body:
+        return constructQuery(mPropMapper, QStringLiteral("body"), term);
+    default:
+        return QueryMapper::recursiveTermMapping(term);
     }
-
-    return {};
 }
