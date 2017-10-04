@@ -60,6 +60,7 @@ public:
     void setData(const QString &data);
 
     void addValue(int pos, const QString &value);
+    void addValue(int pos, double value);
 
     Xapian::Document xapianDocument() const;
 
