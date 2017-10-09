@@ -42,7 +42,7 @@ QStringList NoteIndexer::mimeTypes()
 }
 
 
-Xapian::Document NoteIndexer::index(const Akonadi::Item &item)
+Xapian::Document NoteIndexer::doIndex(const Akonadi::Item &item)
 {
    KMime::Message::Ptr msg;
     try {

@@ -41,7 +41,7 @@ QStringList EmailIndexer::mimeTypes()
     return { KMime::Message::mimeType() };
 }
 
-Xapian::Document EmailIndexer::index(const Akonadi::Item &item)
+Xapian::Document EmailIndexer::doIndex(const Akonadi::Item &item)
 {
     Akonadi::MessageStatus status;
     status.setStatusFromFlags(item.flags());

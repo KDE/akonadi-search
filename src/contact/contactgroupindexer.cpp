@@ -38,7 +38,7 @@ QStringList ContactGroupIndexer::mimeTypes()
     return { KContacts::ContactGroup::mimeType() };
 }
 
-Xapian::Document ContactGroupIndexer::index(const Akonadi::Item &item)
+Xapian::Document ContactGroupIndexer::doIndex(const Akonadi::Item &item)
 {
     KContacts::ContactGroup group;
     try {
