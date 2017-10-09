@@ -39,7 +39,7 @@ QStringList IncidenceIndexer::mimeTypes()
              KCalCore::Journal::journalMimeType() };
 }
 
-Xapian::Document IncidenceIndexer::index(const Akonadi::Item &item)
+Xapian::Document IncidenceIndexer::doIndex(const Akonadi::Item &item)
 {
     Xapian::Document xapDoc;
     if (item.hasPayload<KCalCore::Event::Ptr>()) {

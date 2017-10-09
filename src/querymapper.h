@@ -48,7 +48,7 @@ public:
 
     virtual ~QueryMapper();
 
-    Xapian::Query map(const Akonadi::SearchQuery &akQuery);
+    QByteArray map(const Akonadi::SearchQuery &akQuery);
 
 protected:
     virtual Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm &term);

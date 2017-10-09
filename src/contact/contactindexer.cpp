@@ -38,7 +38,7 @@ QStringList ContactIndexer::mimeTypes()
     return { KContacts::Addressee::mimeType() };
 }
 
-Xapian::Document ContactIndexer::index(const Akonadi::Item &item)
+Xapian::Document ContactIndexer::doIndex(const Akonadi::Item &item)
 {
     KContacts::Addressee addressee;
     try {

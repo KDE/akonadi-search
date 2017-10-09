@@ -26,11 +26,6 @@
 
 #include <QVector>
 
-namespace Xapian {
-class Document;
-class Query;
-}
-
 namespace Akonadi {
 
 namespace Search {
@@ -53,12 +48,12 @@ public:
     OpenMode openMode() const;
     void setOpenMode(OpenMode openMode);
 
-    virtual bool index(qint64 id, const Xapian::Document &doc);
+    virtual bool index(qint64 id, const QByteArray &serializedIndex);
     virtual bool removeItem(qint64 id);
     virtual bool removeCollection(qint64 id);
     virtual bool move(const qint64, qint64 srcCollection, qint64 destCollection);
 
-    ResultIterator search(const Xapian::Query &query);
+    ResultIterator search(const QByteArray &serializedQuery);
 
     bool commit();
 

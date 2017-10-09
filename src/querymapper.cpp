@@ -50,10 +50,11 @@ QueryMapper::~QueryMapper()
 {
 }
 
-Xapian::Query QueryMapper::map(const Akonadi::SearchQuery &akQuery)
+QByteArray QueryMapper::map(const Akonadi::SearchQuery &akQuery)
 {
     try {
-        return recursiveTermMapping(akQuery.term());
+        const auto q = recursiveTermMapping(akQuery.term()).serialise();
+        return QByteArray(q.c_str(), q.size());
     } catch (const Xapian::UnimplementedError &e) {
         qCWarning(AKONADISEARCH_LOG) << "Unsupported Xapian query:" << e.get_description().c_str();
         return {};

@@ -53,7 +53,8 @@ void QueryMapperTest::testQueryMapper(const QString &mimeType)
     const auto result = mappers.first()->map(akonadiQuery);
     //qDebug() << result.get_description().c_str();
     //qDebug() << xapianQuery.get_description().c_str();
-    QCOMPARE(result.serialise(), xapianQuery.serialise());
+    const auto expectedSerialized = xapianQuery.serialise();
+    QCOMPARE(result, QByteArray(expectedSerialized.c_str(), expectedSerialized.size()));
 
     qDeleteAll(mappers);
 }

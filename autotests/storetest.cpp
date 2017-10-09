@@ -137,7 +137,7 @@ void StoreTest::testStore()
     QCOMPARE(store->openMode(), Store::ReadOnly);
 
     const auto query = mapper->map(akonadiQuery);
-    QVERIFY(!query.empty());
+    QVERIFY(!query.isEmpty());
     //qDebug() << query.get_description().c_str();
     auto it = store->search(query);
     QVector<Akonadi::Item::Id> ids;

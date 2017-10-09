@@ -158,7 +158,7 @@ void Store::setOpenMode(OpenMode openMode)
     d->openMode = openMode;
 }
 
-bool Store::index(qint64 id, const Xapian::Document &doc)
+bool Store::index(qint64 id, const QByteArray &serializedIndex)
 {
     if (!d->ensureDb()) {
         return false;
@@ -167,6 +167,8 @@ bool Store::index(qint64 id, const Xapian::Document &doc)
     // FIXME: Xapian allows up to 2^32 documents, while Akonadi can deal with IDs
     // up to 2^64. However it's very unlikely that someone will ever have a
     // problem with running out of 32bit Item Ids....
+    const auto doc = Xapian::Document::unserialise({ serializedIndex.constData(),
+                                                     static_cast<std::string::size_type>(serializedIndex.size()) });
     return d->db->replaceDocument(static_cast<uint>(id), doc);
 }
 
@@ -223,13 +225,15 @@ bool Store::commit()
     return d->db->commit();
 }
 
-ResultIterator Store::search(const Xapian::Query &query)
+ResultIterator Store::search(const QByteArray &serializedQuery)
 {
     if (!d->ensureDb()) {
         return ResultIterator();
     }
 
     Xapian::Enquire enq(*d->db->db());
+    const auto query = Xapian::Query::unserialise({ serializedQuery.constData(),
+                                                    static_cast<std::string::size_type>(serializedQuery.size()) });
     enq.set_query(query);
 
     Xapian::MSet mset;

@@ -51,7 +51,6 @@ Indexer::~Indexer()
 {
 }
 
-
 QVector<Indexer*> Indexer::forType(const QString &mimeType)
 {
     if (!sIndexers.exists()) {
@@ -65,14 +64,27 @@ QVector<Indexer*> Indexer::forType(const QString &mimeType)
     return sIndexers->spawnInstancesForType(mimeType);
 }
 
-Xapian::Document Indexer::index(const Akonadi::Item &)
+QByteArray Indexer::index(const Akonadi::Item &item)
 {
-    Q_ASSERT_X(false, "Indexer::index(Akonadi::Item)", "Default implementation called!");
+    const auto serialized = doIndex(item).serialise();
+    return QByteArray(serialized.c_str(), serialized.size());
+}
+
+QByteArray Akonadi::Search::Indexer::index(const Akonadi::Collection& collection)
+{
+    const auto serialized = doIndex(collection).serialise();
+    return QByteArray(serialized.c_str(), serialized.size());
+}
+
+
+Xapian::Document Indexer::doIndex(const Akonadi::Item &)
+{
+    Q_ASSERT_X(false, "Indexer::doIndex(Akonadi::Item)", "Default implementation called!");
     return {};
 }
 
-Xapian::Document Indexer::index(const Akonadi::Collection &)
+Xapian::Document Indexer::doIndex(const Akonadi::Collection &)
 {
-    Q_ASSERT_X(false, "Indexer::index(Akonadi::Collection)", "Default implementation called!");
+    Q_ASSERT_X(false, "Indexer::doIndex(Akonadi::Collection)", "Default implementation called!");
     return {};
 }
