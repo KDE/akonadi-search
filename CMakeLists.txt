@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-set(PIM_VERSION "5.6.41")
+set(PIM_VERSION "5.6.80")
 project(AkonadiSearch VERSION ${PIM_VERSION})
 
 # ECM setup
