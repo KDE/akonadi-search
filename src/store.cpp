@@ -116,7 +116,7 @@ QString StorePrivate::dbPath(const QString &dbName) const
 
 
 
-QVector<Store*> Store::getForType(const QString &mimeType)
+QVector<Store*> Store::create(const QString &mimeType)
 {
     if (!sStores.exists()) {
         sStores->registerForType<EmailStore>();
@@ -125,7 +125,7 @@ QVector<Store*> Store::getForType(const QString &mimeType)
         sStores->registerForType<NoteStore>();
     }
 
-    return sStores->spawnInstancesForType(mimeType);
+    return sStores->instantiate(mimeType);
 }
 
 Store::Store()

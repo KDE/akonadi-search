@@ -91,7 +91,7 @@ Xapian::Query QueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
 }
 
 
-QVector<QueryMapper*> QueryMapper::forType(const QString &mimeType)
+QVector<QueryMapper*> QueryMapper::create(const QString &mimeType)
 {
     if (!sQueryMappers.exists()) {
         sQueryMappers->registerForType<EmailQueryMapper>();
@@ -100,5 +100,5 @@ QVector<QueryMapper*> QueryMapper::forType(const QString &mimeType)
         sQueryMappers->registerForType<NoteQueryMapper>();
     }
 
-    return sQueryMappers->spawnInstancesForType(mimeType);
+    return sQueryMappers->instantiate(mimeType);
 }

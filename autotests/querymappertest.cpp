@@ -47,7 +47,7 @@ void QueryMapperTest::testQueryMapper(const QString &mimeType)
     QFETCH(Akonadi::SearchQuery, akonadiQuery);
     QFETCH(Xapian::Query, xapianQuery);
 
-    const auto mappers = QueryMapper::forType(mimeType);
+    const auto mappers = QueryMapper::create(mimeType);
     QCOMPARE(mappers.count(), 1);
 
     const auto result = mappers.first()->map(akonadiQuery);

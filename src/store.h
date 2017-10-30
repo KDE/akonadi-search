@@ -40,7 +40,7 @@ public:
         WriteOnly
     };
 
-    static QVector<Store*> getForType(const QString &mimeType);
+    static QVector<Store*> create(const QString &mimeType);
 
     virtual ~Store();
 
