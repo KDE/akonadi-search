@@ -7,9 +7,9 @@ target_sources(
         searchplugin.cpp
         searchplugin.h
 )
-ecm_qt_declare_logging_category(akonadi_search_plugin HEADER akonadiplugin_indexer_debug.h IDENTIFIER AKONADIPLUGIN_INDEXER_LOG CATEGORY_NAME org.kde.pim.akonadiplugin_indexer
-        DESCRIPTION "akonadisearch (akonadi plugin indexer)"
-        OLD_CATEGORY_NAMES log_akonadiplugin_indexer
+ecm_qt_declare_logging_category(akonadi_search_plugin HEADER akonadiplugin_search_debug.h IDENTIFIER AKONADIPLUGIN_SEARCH_LOG CATEGORY_NAME org.kde.pim.akonadiplugin_search
+        DESCRIPTION "akonadisearch (akonadi search plugin)"
+        OLD_CATEGORY_NAMES log_akonadiplugin_indexer org.kde.pim.akonadiplugin_indexer
         EXPORT AKONADISEARCH
 )
 

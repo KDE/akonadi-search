@@ -24,7 +24,7 @@ target_sources(
         ${CMAKE_CURRENT_BINARY_DIR}/../../../agent/akonadi_indexer_agent_debug.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/../../../agent/akonadi_indexer_agent_calendar_debug.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/../../../agent/akonadi_indexer_agent_email_debug.cpp
-        ${CMAKE_CURRENT_BINARY_DIR}/../akonadiplugin_indexer_debug.cpp
+        ${CMAKE_CURRENT_BINARY_DIR}/../akonadiplugin_search_debug.cpp
 )
 
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
