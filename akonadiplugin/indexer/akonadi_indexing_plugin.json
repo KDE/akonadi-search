@@ -1,0 +1,7 @@
+{
+    "X-Akonadi-PluginType": "IndexingPlugin",
+    "X-Akonadi-Library": "akonadi_indexing_plugin",
+    "X-Akonadi-LoadByDefault": true,
+
+    "X-Akonadi-PluginName": "Akonadi Indexing Plugin"
+}
