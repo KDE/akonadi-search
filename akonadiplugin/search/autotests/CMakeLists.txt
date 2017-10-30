@@ -25,7 +25,7 @@ set(searchplugintest_SRCS
     ../../../search/calendar/calendarsearchstore.cpp
     ../../../search/note/notesearchstore.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../../../agent/akonadi_indexer_agent_debug.cpp
-    ${CMAKE_CURRENT_BINARY_DIR}/../akonadiplugin_indexer_debug.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/../akonadiplugin_search_debug.cpp
 )
 
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)

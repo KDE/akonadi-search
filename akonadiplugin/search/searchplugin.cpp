@@ -28,7 +28,7 @@
 
 #include <searchquery.h>
 
-#include "akonadiplugin_indexer_debug.h"
+#include "akonadiplugin_search_debug.h"
 #include <Akonadi/KMime/MessageFlags>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
@@ -86,7 +86,7 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
+        // qCDebug(AKONADIPLUGIN_SEARCH_LOG) << term.key() << term.value();
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::EmailSearchTerm::Message: {
@@ -191,7 +191,7 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::EmailSearchTerm::Unknown:
         default:
             if (!term.key().isEmpty()) {
-                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+                qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "unknown term " << term.key();
             }
         }
     }
@@ -210,7 +210,7 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
+        // qCDebug(AKONADIPLUGIN_SEARCH_LOG) << term.key() << term.value();
         const Akonadi::IncidenceSearchTerm::IncidenceSearchField field = Akonadi::IncidenceSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::IncidenceSearchTerm::Organizer:
@@ -226,7 +226,7 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
         }
         default:
             if (!term.key().isEmpty()) {
-                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+                qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "unknown term " << term.key();
             }
         }
     }
@@ -245,7 +245,7 @@ Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
+        // qCDebug(AKONADIPLUGIN_SEARCH_LOG) << term.key() << term.value();
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::EmailSearchTerm::Subject:
@@ -254,7 +254,7 @@ Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("body"));
         default:
             if (!term.key().isEmpty()) {
-                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+                qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "unknown term " << term.key();
             }
         }
     }
@@ -273,7 +273,7 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
         }
         return t;
     } else {
-        // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
+        // qCDebug(AKONADIPLUGIN_SEARCH_LOG) << term.key() << term.value();
         const Akonadi::ContactSearchTerm::ContactSearchField field = Akonadi::ContactSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::ContactSearchTerm::Name:
@@ -287,7 +287,7 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::ContactSearchTerm::Unknown:
         default:
             if (!term.key().isEmpty()) {
-                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+                qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "unknown term " << term.key();
             }
         }
     }
@@ -297,7 +297,7 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
 QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qint64> &collections, const QStringList &mimeTypes)
 {
     if (akonadiQuery.isEmpty() && collections.isEmpty() && mimeTypes.isEmpty()) {
-        qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "empty query";
+        qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "empty query";
         return {};
     }
 
@@ -315,7 +315,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
     Term t;
 
     if (mimeTypes.contains(QStringLiteral("message/rfc822"))) {
-        // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << "mail query";
+        // qCDebug(AKONADIPLUGIN_SEARCH_LOG) << "mail query";
         query.setType(QStringLiteral("Email"));
         t = recursiveEmailTermMapping(term);
     } else if (mimeTypes.contains(KContacts::Addressee::mimeType()) || mimeTypes.contains(KContacts::ContactGroup::mimeType())) {
@@ -355,7 +355,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
         }
     } else {
         if (t.subTerms().isEmpty()) {
-            qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "no terms added";
+            qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "no terms added";
             return QSet<qint64>();
         }
 
@@ -363,13 +363,13 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
     }
 
     QSet<qint64> resultSet;
-    // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << query.toJSON();
+    // qCDebug(AKONADIPLUGIN_SEARCH_LOG) << query.toJSON();
     ResultIterator iter = query.exec();
     while (iter.next()) {
         const QByteArray id = iter.id();
         const int fid = deserialize("akonadi", id);
         resultSet << fid;
     }
-    qCDebug(AKONADIPLUGIN_INDEXER_LOG) << "Got" << resultSet.count() << "results";
+    qCDebug(AKONADIPLUGIN_SEARCH_LOG) << "Got" << resultSet.count() << "results";
     return resultSet;
 }
