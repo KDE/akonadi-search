@@ -98,12 +98,12 @@ void StoreTest::indexItems(const QVector<Akonadi::Item> &items)
 {
     for (const auto &item : items) {
         QVERIFY(!items.isEmpty());
-        auto indexers = Indexer::forType(item.mimeType());
+        auto indexers = Indexer::create(item.mimeType());
         QCOMPARE(indexers.count(), 1);
         Indexer *indexer = indexers.first();
         QVERIFY(indexer);
 
-        auto stores = Store::getForType(item.mimeType());
+        auto stores = Store::create(item.mimeType());
         QCOMPARE(stores.count(), 1);
         Store *store = stores.first();
         QVERIFY(store);
@@ -125,12 +125,12 @@ void StoreTest::testStore()
     QFETCH(QVector<Akonadi::Item::Id>, expectedResults);
     QFETCH(QString, mimeType);
 
-    auto queryMappers = QueryMapper::forType(mimeType);
+    auto queryMappers = QueryMapper::create(mimeType);
     QCOMPARE(queryMappers.count(), 1);
     QueryMapper *mapper = queryMappers.first();
     QVERIFY(mapper);
 
-    auto stores = Store::getForType(mimeType);
+    auto stores = Store::create(mimeType);
     QCOMPARE(stores.count(), 1);
     Store *store = stores.first();
     QVERIFY(store);

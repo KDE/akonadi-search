@@ -51,7 +51,7 @@ Indexer::~Indexer()
 {
 }
 
-QVector<Indexer*> Indexer::forType(const QString &mimeType)
+QVector<Indexer*> Indexer::create(const QString &mimeType)
 {
     if (!sIndexers.exists()) {
         sIndexers->registerForType<EmailIndexer>();
@@ -61,7 +61,7 @@ QVector<Indexer*> Indexer::forType(const QString &mimeType)
         sIndexers->registerForType<NoteIndexer>();
     }
 
-    return sIndexers->spawnInstancesForType(mimeType);
+    return sIndexers->instantiate(mimeType);
 }
 
 QByteArray Indexer::index(const Akonadi::Item &item)

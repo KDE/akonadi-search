@@ -44,7 +44,7 @@ class QueryPropertyMapper;
 class AKONADISEARCH_EXPORT QueryMapper
 {
 public:
-    static QVector<QueryMapper*> forType(const QString &mimeType);
+    static QVector<QueryMapper*> create(const QString &mimeType);
 
     virtual ~QueryMapper();
 

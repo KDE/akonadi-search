@@ -27,30 +27,30 @@ namespace Akonadi {
 namespace Search {
 
 template<typename Base>
-struct Spawner
+struct Instantiator
 {
 public:
     using Func = std::function<Base*()>;
 
-    Spawner(Func spawner) : mSpawner(spawner) {}
-    Base *spawn() const { return mSpawner(); }
+    Instantiator(Func inst) : mInstantiator(inst) {}
+    Base *instantiate() const { return mInstantiator(); }
 
 private:
-    Func mSpawner;
+    Func mInstantiator;
 };
 
 template<typename Base, typename Impl>
-typename Spawner<Base>::Func spawner()
+typename Instantiator<Base>::Func instantiator()
 {
-    using SpawnerFunc = typename Spawner<Base>::Func;
-    return SpawnerFunc([]() -> Base* { return new Impl{}; });
+    using InstantiatorFunc = typename Instantiator<Base>::Func;
+    return InstantiatorFunc([]() -> Base* { return new Impl{}; });
 }
 
 template<typename Base>
-class Registrar : public QHash<QString, Spawner<Base>>
+class Registrar : public QHash<QString, Instantiator<Base>>
 {
 public:
-    using QHash<QString, Spawner<Base>>::QHash;
+    using QHash<QString, Instantiator<Base>>::QHash;
 
     template<typename Impl>
     typename std::enable_if<std::is_base_of<Base, Impl>::value, void>::type
@@ -58,16 +58,16 @@ public:
     {
         const auto mts = Impl::mimeTypes();
         for (const auto &mt : mts) {
-            this->insertMulti(mt, spawner<Base, Impl>());
+            this->insertMulti(mt, instantiator<Base, Impl>());
         }
     }
 
-    QVector<Base*> spawnInstancesForType(const QString &type) const
+    QVector<Base*> instantiate(const QString &type) const
     {
         QVector<Base*> rv;
         auto it = this->constFind(type);
         while (it != this->cend() && it.key() == type) {
-            rv.push_back(it->spawn());
+            rv.push_back(it->instantiate());
             ++it;
         }
         return rv;
