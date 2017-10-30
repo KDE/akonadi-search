@@ -38,6 +38,7 @@
 
 #include <QStandardPaths>
 #include <QDir>
+#include <QTimer>
 
 using namespace Akonadi::Search;
 
@@ -53,21 +54,40 @@ namespace Search {
 class StorePrivate
 {
 public:
+    StorePrivate(Store *q);
     ~StorePrivate();
 
     bool ensureDb();
     QString dbPath(const QString &name) const;
 
+    void newChange();
+
     QString dbName;
     XapianDatabase *db = nullptr;
     Store::OpenMode openMode = Store::ReadOnly;
+    int changeCount = 0;
+    int commitChangeCount = 0;
+    QTimer *commitTimer;
+
+private:
+    Store * const q;
 };
 
 }
 }
 
+StorePrivate::StorePrivate(Store *q)
+    : q(q)
+{
+    commitTimer = new QTimer;
+    commitTimer->setSingleShot(true);
+    QObject::connect(commitTimer, &QTimer::timeout,
+                     [=]() { q->commit(); });
+}
+
 StorePrivate::~StorePrivate()
 {
+    delete commitTimer;
     if (db) {
         if (openMode == Store::WriteOnly) {
             db->commit();
@@ -83,6 +103,16 @@ bool StorePrivate::ensureDb()
     }
 
     return db && db->db();
+}
+
+void StorePrivate::newChange()
+{
+    ++changeCount;
+    if (changeCount >= commitChangeCount) {
+        q->commit();
+    } else {
+        commitTimer->start();
+    }
 }
 
 
@@ -129,7 +159,7 @@ QVector<Store*> Store::create(const QString &mimeType)
 }
 
 Store::Store()
-    : d(new StorePrivate)
+    : d(new StorePrivate(this))
 {
 }
 
@@ -137,6 +167,18 @@ Store::~Store()
 {
     delete d;
 }
+
+void Store::setAutoCommit(int changeCount, int timeoutMs)
+{
+    d->commitChangeCount = changeCount;
+    if (timeoutMs > 0) {
+        d->commitTimer->setInterval(timeoutMs);
+        d->commitTimer->start();
+    } else {
+        d->commitTimer->stop();
+    }
+}
+
 
 QString Store::dbName() const
 {
@@ -169,6 +211,9 @@ bool Store::index(qint64 id, const QByteArray &serializedIndex)
     // problem with running out of 32bit Item Ids....
     const auto doc = Xapian::Document::unserialise({ serializedIndex.constData(),
                                                      static_cast<std::string::size_type>(serializedIndex.size()) });
+
+    d->newChange();
+
     return d->db->replaceDocument(static_cast<uint>(id), doc);
 }
 
@@ -177,6 +222,8 @@ bool Store::removeItem(qint64 id)
     if (!d->ensureDb()) {
         return false;
     }
+
+    d->newChange();
 
     return d->db->deleteDocument(static_cast<uint>(id));
 }
@@ -194,6 +241,9 @@ bool Store::removeCollection(qint64 id)
         for (Xapian::MSetIterator it = mset.begin(); it != end; ++it) {
             removeItem(*it);
         }
+
+        d->newChange();
+
         return true;
     } catch (const Xapian::DocNotFoundError &) {
         return true;
@@ -213,6 +263,8 @@ bool Store::move(const qint64 id, qint64 srcCollection, qint64 destCollection)
     doc.removeTerm(XapianDocument::collectionId(srcCollection));
     doc.addCollectionTerm(destCollection);
 
+    d->newChange();
+
     return d->db->replaceDocument(id, doc);
 }
 
@@ -222,6 +274,10 @@ bool Store::commit()
         return false;
     }
 
+    d->changeCount = 0;
+    if (d->commitTimer->isActive()) {
+        d->commitTimer->stop();
+    }
     return d->db->commit();
 }
 

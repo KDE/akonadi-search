@@ -48,6 +48,8 @@ public:
     OpenMode openMode() const;
     void setOpenMode(OpenMode openMode);
 
+    void setAutoCommit(int changeCount, int timeoutMs);
+
     virtual bool index(qint64 id, const QByteArray &serializedIndex);
     virtual bool removeItem(qint64 id);
     virtual bool removeCollection(qint64 id);
