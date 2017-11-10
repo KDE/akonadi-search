@@ -47,31 +47,29 @@ typename Instantiator<Base>::Func instantiator()
 }
 
 template<typename Base>
-class Registrar : public QHash<QString, Instantiator<Base>>
+class Registrar
 {
 public:
-    using QHash<QString, Instantiator<Base>>::QHash;
-
     template<typename Impl>
     typename std::enable_if<std::is_base_of<Base, Impl>::value, void>::type
     registerForType()
     {
         const auto mts = Impl::mimeTypes();
         for (const auto &mt : mts) {
-            this->insertMulti(mt, instantiator<Base, Impl>());
+            mRegistrar.insert(mt, instantiator<Base, Impl>());
         }
     }
 
-    QVector<Base*> instantiate(const QString &type) const
+    Base* instantiate(const QString &type) const
     {
-        QVector<Base*> rv;
-        auto it = this->constFind(type);
-        while (it != this->cend() && it.key() == type) {
-            rv.push_back(it->instantiate());
-            ++it;
+        auto it = mRegistrar.constFind(type);
+        if (it != mRegistrar.cend()) {
+            return it->instantiate();
         }
-        return rv;
+        return nullptr;
     }
+private:
+    QHash<QString, Instantiator<Base>> mRegistrar;
 };
 
 

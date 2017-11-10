@@ -51,7 +51,7 @@ Indexer::~Indexer()
 {
 }
 
-QVector<Indexer*> Indexer::create(const QString &mimeType)
+Indexer* Indexer::create(const QString &mimeType)
 {
     if (!sIndexers.exists()) {
         sIndexers->registerForType<EmailIndexer>();
