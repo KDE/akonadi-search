@@ -25,6 +25,7 @@
 #include "contactindexer.h"
 #include "contactquerypropertymapper.h"
 #include "xapiandocument.h"
+#include "akonadisearch_debug.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
@@ -43,7 +44,8 @@ Xapian::Document ContactIndexer::doIndex(const Akonadi::Item &item)
     KContacts::Addressee addressee;
     try {
         addressee = item.payload<KContacts::Addressee>();
-    } catch (const Akonadi::PayloadException &) {
+    } catch (const Akonadi::PayloadException &e) {
+        qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the expected payload:" << e.what();
         return {};
     }
 
