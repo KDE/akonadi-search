@@ -14,9 +14,7 @@ add_library(akonadi_search_plugin
 
 target_link_libraries(akonadi_search_plugin
     KF5::AkonadiCore
-    KF5::AkonadiMime
-    KF5::AkonadiSearchCore
-    KF5::Contacts
+    KF5::AkonadiSearch
 )
 
 install(TARGETS akonadi_search_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)

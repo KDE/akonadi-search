@@ -26,14 +26,15 @@
 #include <QStringList>
 #include <akonadi/abstractsearchplugin.h>
 #include <QObject>
+#include <QHash>
 
 namespace Akonadi
 {
 namespace Search
 {
 class Query;
-}
-}
+class QueryMapper;
+class Store;
 
 class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
 {
@@ -41,9 +42,27 @@ class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
     Q_INTERFACES(Akonadi::AbstractSearchPlugin)
     Q_PLUGIN_METADATA(IID "org.kde.akonadi.SearchPlugin" FILE "akonadi_search_plugin.json")
 public:
+    explicit SearchPlugin();
+    ~SearchPlugin() override;
+
     QSet<qint64> search(const QString &query, const QVector<qint64> &collections, const QStringList &mimeTypes) override;
+
 private:
-    Akonadi::Search::Query fromAkonadiQuery(const QString &akonadiQuery, const QList<qint64> &collections, const QStringList &mimeTypes);
+    struct QueryMapperStorePair {
+        QueryMapperStorePair() {}
+        QueryMapperStorePair(QueryMapper *queryMapper, Store *store);
+        bool isValid() const;
+
+        QueryMapper *queryMapper = nullptr;
+        Store *store = nullptr;
+    };
+
+    QueryMapperStorePair getQueryMapperAndStore(const QString &mimeType);
+
+    QHash<QString, QueryMapperStorePair> mStoreCache;
 };
+
+}
+}
 
 #endif

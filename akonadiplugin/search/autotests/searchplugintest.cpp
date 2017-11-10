@@ -21,38 +21,35 @@
  */
 
 #include <QTest>
+#include <AkonadiCore/Item>
 #include <AkonadiCore/Collection>
+#include <AkonadiCore/SearchQuery>
+#include <Akonadi/KMime/MessageFlags>
+
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
+#include <KMime/Message>
+#include <KCalCore/Event>
+
 #include <QDir>
+#include <QStandardPaths>
 
 #include "searchplugin.h"
-#include <../agent/emailindexer.h>
-#include <../agent/contactindexer.h>
-#include <../agent/calendarindexer.h>
-#include <../agent/akonotesindexer.h>
-#include <../search/email/emailsearchstore.h>
-#include <../search/contact/contactsearchstore.h>
-#include <../search/calendar/calendarsearchstore.h>
-#include <../search/note/notesearchstore.h>
-#include <AkonadiCore/searchquery.h>
-#include <Akonadi/KMime/MessageFlags>
+#include "store.h"
+#include "indexer.h"
+#include "querymapper.h"
 
 #include <QElapsedTimer>
 
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QVector<qint64>)
 
+using namespace Akonadi::Search;
+
 class SearchPluginTest : public QObject
 {
     Q_OBJECT
 private:
-    QString emailDir;
-    QString emailContactsDir;
-    QString contactsDir;
-    QString noteDir;
-    QString calendarDir;
-
     void resultSearch()
     {
         QFETCH(QString, query);
@@ -72,30 +69,27 @@ private:
 private Q_SLOTS:
     void initTestCase()
     {
-        emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/email/");
-        emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
-        contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/contacts/");
-        noteDir = QDir::tempPath() + QLatin1String("/searchplugintest/notes/");
-        calendarDir = QDir::tempPath() + QLatin1String("/searchplugintest/calendar/");
-
-        QDir dir;
-        QVERIFY(QDir(QDir::tempPath() + QStringLiteral("/searchplugintest")).removeRecursively());
-        QVERIFY(dir.mkpath(emailDir));
-        QVERIFY(dir.mkpath(emailContactsDir));
-        QVERIFY(dir.mkpath(contactsDir));
-        QVERIFY(dir.mkpath(noteDir));
-        QVERIFY(dir.mkpath(calendarDir));
+        QStandardPaths::setTestModeEnabled(true);
 
         qDebug() << "indexing sample data";
-        qDebug() << emailDir;
-        qDebug() << emailContactsDir;
-        qDebug() << noteDir;
-        qDebug() << calendarDir;
 
-        EmailIndexer emailIndexer(emailDir, emailContactsDir);
-        ContactIndexer contactIndexer(contactsDir);
-        AkonotesIndexer noteIndexer(noteDir);
-        CalendarIndexer calendarIndexer(calendarDir);
+        QScopedPointer<Store> emailStore(Store::create(KMime::Message::mimeType()));
+        QScopedPointer<Indexer> emailIndexer(Indexer::create(KMime::Message::mimeType()));
+        emailStore->setOpenMode(Store::WriteOnly);
+
+        QScopedPointer<Store> contactStore(Store::create(KContacts::Addressee::mimeType()));
+        QScopedPointer<Indexer> contactIndexer(Indexer::create(KContacts::Addressee::mimeType()));
+        contactStore->setOpenMode(Store::WriteOnly);
+
+        QScopedPointer<Indexer> contactGroupIndexer(Indexer::create(KContacts::ContactGroup::mimeType()));
+
+        QScopedPointer<Store> eventStore(Store::create(KCalCore::Event::eventMimeType()));
+        QScopedPointer<Indexer> eventIndexer(Indexer::create(KCalCore::Event::eventMimeType()));
+        eventStore->setOpenMode(Store::WriteOnly);
+
+        QScopedPointer<Store> noteStore(Store::create(QStringLiteral("text/x-vnd.akonadi.note")));
+        QScopedPointer<Indexer> noteIndexer(Indexer::create(QStringLiteral("text/x-vnd.akonadi.note")));
+        noteStore->setOpenMode(Store::WriteOnly);
 
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -114,7 +108,7 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(1));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Replied << Akonadi::MessageFlags::Encrypted);
-            emailIndexer.index(item);
+            QVERIFY(emailStore->index(1, emailIndexer->index(item)));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -138,7 +132,7 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            emailIndexer.index(item);
+            QVERIFY(emailStore->index(2, emailIndexer->index(item)));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -162,7 +156,7 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            emailIndexer.index(item);
+            QVERIFY(emailStore->index(3, emailIndexer->index(item)));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -195,7 +189,7 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            emailIndexer.index(item);
+            QVERIFY(emailStore->index(4, emailIndexer->index(item)));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -234,7 +228,7 @@ private Q_SLOTS:
                           /*<< Akonadi::MessageFlags::Spam*/
                           << Akonadi::MessageFlags::Ham);
             //Spam is exclude from indexer. So we can't add it.
-            emailIndexer.index(item);
+            QVERIFY(emailStore->index(5, emailIndexer->index(item)));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -257,9 +251,9 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            emailIndexer.index(item);
+            QVERIFY(emailStore->index(6, emailIndexer->index(item)));
         }
-        emailIndexer.commit();
+        emailStore->commit();
 
         //Contact item
         {
@@ -274,7 +268,7 @@ private Q_SLOTS:
             item.setId(100);
             item.setPayload(addressee);
             item.setParentCollection(Akonadi::Collection(3));
-            contactIndexer.index(item);
+            QVERIFY(contactStore->index(100, contactIndexer->index(item)));
         }
         {
             KContacts::Addressee addressee;
@@ -286,7 +280,7 @@ private Q_SLOTS:
             item.setId(101);
             item.setPayload(addressee);
             item.setParentCollection(Akonadi::Collection(3));
-            contactIndexer.index(item);
+            QVERIFY(contactStore->index(101, contactIndexer->index(item)));
         }
         {
             KContacts::Addressee addressee;
@@ -298,7 +292,7 @@ private Q_SLOTS:
             item.setId(102);
             item.setPayload(addressee);
             item.setParentCollection(Akonadi::Collection(3));
-            contactIndexer.index(item);
+            QVERIFY(contactStore->index(102, contactIndexer->index(item)));
         }
         {
             KContacts::Addressee addressee;
@@ -310,7 +304,7 @@ private Q_SLOTS:
             item.setId(105);
             item.setPayload(addressee);
             item.setParentCollection(Akonadi::Collection(3));
-            contactIndexer.index(item);
+            QVERIFY(contactStore->index(105, contactIndexer->index(item)));
         }
         {
             KContacts::ContactGroup group;
@@ -319,7 +313,7 @@ private Q_SLOTS:
             item.setId(103);
             item.setPayload(group);
             item.setParentCollection(Akonadi::Collection(3));
-            contactIndexer.index(item);
+            QVERIFY(contactStore->index(103, contactGroupIndexer->index(item)));
         }
         {
             KContacts::ContactGroup group;
@@ -328,9 +322,9 @@ private Q_SLOTS:
             item.setId(104);
             item.setPayload(group);
             item.setParentCollection(Akonadi::Collection(4));
-            contactIndexer.index(item);
+            QVERIFY(contactStore->index(104, contactGroupIndexer->index(item)));
         }
-        contactIndexer.commit();
+        contactStore->commit();
 
         //Note item
         {
@@ -350,7 +344,7 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(5));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            noteIndexer.index(item);
+            QVERIFY(noteStore->index(1000, noteIndexer->index(item)));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -369,7 +363,7 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(5));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            noteIndexer.index(item);
+            QVERIFY(noteStore->index(1001, noteIndexer->index(item)));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -388,8 +382,9 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(5));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            noteIndexer.index(item);
+            QVERIFY(noteStore->index(1002, noteIndexer->index(item)));
         }
+        noteStore->commit();
 
         // Calendar item
         {
@@ -413,25 +408,19 @@ private Q_SLOTS:
             item.setId(2001);
             item.setPayload<KCalCore::Event::Ptr>(event);
             item.setParentCollection(Akonadi::Collection(6));
-            calendarIndexer.index(item);
+            QVERIFY(eventStore->index(2001, eventIndexer->index(item)));
         }
-        calendarIndexer.commit();
-
-        Akonadi::Search::EmailSearchStore *emailSearchStore = new Akonadi::Search::EmailSearchStore();
-        emailSearchStore->setDbPath(emailDir);
-        Akonadi::Search::ContactSearchStore *contactSearchStore = new Akonadi::Search::ContactSearchStore();
-        contactSearchStore->setDbPath(contactsDir);
-        Akonadi::Search::NoteSearchStore *noteSearchStore = new Akonadi::Search::NoteSearchStore();
-        noteSearchStore->setDbPath(noteDir);
-        Akonadi::Search::CalendarSearchStore *calendarSearchStore = new Akonadi::Search::CalendarSearchStore();
-        calendarSearchStore->setDbPath(calendarDir);
-
-        Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore *>() << emailSearchStore << contactSearchStore << noteSearchStore << calendarSearchStore);
+        eventStore->commit();
     }
 
     void cleanupTestCase()
     {
-        QVERIFY(QDir(QDir::tempPath() + QStringLiteral("/searchplugintest")).removeRecursively());
+        QDir dir(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("akonadi/search_db"),
+                                    QStandardPaths::LocateDirectory));
+        QVERIFY(dir.absolutePath().contains(QLatin1String(".qttest")));
+        if (dir.exists()) {
+            dir.removeRecursively();
+        }
     }
 
     void testCalendarSearch_data()
@@ -845,7 +834,7 @@ private Q_SLOTS:
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::ByteSize, QString::number(1000), Akonadi::SearchTerm::CondGreaterOrEqual));
-            QSet<qint64> result = QSet<qint64>() << 1 << 2 << 3 << 4 << 5 << 6;
+            QSet<qint64> result = QSet<qint64>() << 1 << 2 << 3 << 4 << 5;
             QTest::newRow("find by size greater than equal great or equal") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
 
@@ -859,19 +848,19 @@ private Q_SLOTS:
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::ByteSize, QString::number(1002), Akonadi::SearchTerm::CondLessOrEqual));
-            QSet<qint64> result = QSet<qint64>() << 1 << 2 << 3 << 4 << 5;
+            QSet<qint64> result = QSet<qint64>() << 1 << 2 << 3 << 4 << 5 << 6;
             QTest::newRow("find by size greater than equal less or equal") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::ByteSize, QString::number(1001), Akonadi::SearchTerm::CondGreaterOrEqual));
-            QSet<qint64> result = QSet<qint64>() << 2 << 3 << 4 << 5 << 6;
+            QSet<qint64> result = QSet<qint64>() << 2 << 3 << 4 << 5;
             QTest::newRow("find by size separate") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::ByteSize, QString::number(1001), Akonadi::SearchTerm::CondGreaterThan));
-            QSet<qint64> result = QSet<qint64>() << 2 << 3 << 4 << 5 << 6;
+            QSet<qint64> result = QSet<qint64>() << 2 << 3 << 4 << 5;
             QTest::newRow("find by size separate (greater than)") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
         {
@@ -985,7 +974,7 @@ private Q_SLOTS:
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Message, QStringLiteral("subject"), Akonadi::SearchTerm::CondEqual));
-            QSet<qint64> result = QSet<qint64>() << 1 << 2 << 3 << 4 << 5 << 6;
+            QSet<qint64> result = QSet<qint64>() << 1 << 2 << 3 << 4;
             QTest::newRow("find by message term") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
         {
