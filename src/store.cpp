@@ -46,6 +46,8 @@ namespace {
 
 Q_GLOBAL_STATIC(Registrar<Store>, sStores)
 
+static const unsigned int MaxQueryLimit = 10^6;
+
 }
 
 namespace Akonadi {
@@ -281,7 +283,7 @@ bool Store::commit()
     return d->db->commit();
 }
 
-ResultIterator Store::search(const QByteArray &serializedQuery)
+ResultIterator Store::search(const QByteArray &serializedQuery, unsigned int limit)
 {
     if (!d->ensureDb()) {
         return ResultIterator();
@@ -294,7 +296,7 @@ ResultIterator Store::search(const QByteArray &serializedQuery)
 
     Xapian::MSet mset;
     try {
-        mset = enq.get_mset(0, 100000);
+        mset = enq.get_mset(0, limit > 0 ? limit : MaxQueryLimit);
     } catch (const Xapian::InvalidArgumentError &err) {
         qCWarning(AKONADISEARCH_LOG) << "Xapian query error:" << err.get_error_string();
         qCWarning(AKONADISEARCH_LOG) << err.get_msg().c_str() << err.get_context().c_str() << err.get_description().c_str();

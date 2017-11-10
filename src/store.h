@@ -55,7 +55,7 @@ public:
     virtual bool removeCollection(qint64 id);
     virtual bool move(const qint64, qint64 srcCollection, qint64 destCollection);
 
-    ResultIterator search(const QByteArray &serializedQuery);
+    ResultIterator search(const QByteArray &serializedQuery, unsigned int limit = 0);
 
     bool commit();
 
