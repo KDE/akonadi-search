@@ -34,10 +34,9 @@ IndexingPlugin::IndexingPlugin()
 IndexingPlugin::~IndexingPlugin()
 {
     for (auto it = mStoreCache.begin(), end = mStoreCache.end(); it != end; ++it) {
-        for (const auto store : qAsConst(*it)) {
-            store->commit();
-            delete store;
-        }
+        auto &store = (*it);
+        store->commit();
+        delete store;
     }
 }
 
@@ -45,22 +44,17 @@ bool IndexingPlugin::doIndex(const QString &mimeType, const IndexingFunc &indexF
 {
     auto it = mStoreCache.find(mimeType);
     if (it == mStoreCache.end()) {
-        const auto stores = Store::create(mimeType);
-        if (stores.isEmpty()) {
+        const auto store = Store::create(mimeType);
+        if (!store) {
             qCWarning(AKONADIPLUGIN_INDEXING_LOG) << "No Store for type" << mimeType;
             return false;
         }
-        it = mStoreCache.insert(mimeType, stores);
-        for (auto store : stores) {
-            store->setAutoCommit(100, 2000);
-        }
+        store->setAutoCommit(100, 2000);
+        store->setOpenMode(Store::WriteOnly);
+        it = mStoreCache.insert(mimeType, store);
     }
 
-    bool result = false;
-    for (const auto &store : qAsConst(*it)) {
-        result |= indexFunc(store);
-    }
-    return result;
+    return indexFunc((*it));
 }
 
 bool IndexingPlugin::index(const QString &mimeType, qint64 id, const QByteArray& rawData)

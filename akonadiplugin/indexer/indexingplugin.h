@@ -59,7 +59,7 @@ private:
     using IndexingFunc = std::function<bool(Store*)>;
     bool doIndex(const QString &mimeType, const IndexingFunc &indexFunc);
 
-    QMultiHash<QString, QVector<Store*>> mStoreCache;
+    QHash<QString, Store*> mStoreCache;
 };
 
 }

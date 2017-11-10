@@ -19,6 +19,6 @@ target_link_libraries(akonadi_indexing_plugin
 install(TARGETS akonadi_indexing_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
 
 if(BUILD_TESTING)
-#    add_subdirectory(autotests)
+    add_subdirectory(autotests)
 endif()
 
