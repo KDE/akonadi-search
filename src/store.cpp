@@ -232,7 +232,11 @@ bool Store::removeItem(qint64 id)
 
 bool Store::removeCollection(qint64 id)
 {
-   try {
+    if (!d->ensureDb()) {
+        return false;
+    }
+
+    try {
         Xapian::Database *db = d->db->db();
         Xapian::Query query(XapianDocument::collectionId(id).constData());
         Xapian::Enquire enquire(*db);
