@@ -42,6 +42,11 @@ QStringList IncidenceIndexer::mimeTypes()
 Xapian::Document IncidenceIndexer::doIndex(const Akonadi::Item &item)
 {
     Xapian::Document xapDoc;
+    if (!item.hasPayload()) {
+        qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the requested payload: No payload set";
+        return {};
+    }
+
     if (item.hasPayload<KCalCore::Event::Ptr>()) {
         xapDoc = indexEvent(item.payload<KCalCore::Event::Ptr>());
     } else if (item.hasPayload<KCalCore::Todo::Ptr>()) {
@@ -49,7 +54,13 @@ Xapian::Document IncidenceIndexer::doIndex(const Akonadi::Item &item)
     } else if (item.hasPayload<KCalCore::Journal::Ptr>()) {
         xapDoc = indexJournal(item.payload<KCalCore::Journal::Ptr>());
     } else {
-        qCWarning(AKONADISEARCH_LOG) << "Unknown payload!";
+        const auto mtids = item.availablePayloadMetaTypeIds();
+        QStringList mts;
+        for (const auto mtid : mtids) {
+            mts << QString::fromUtf8(QMetaType::typeName(mtid));
+        }
+        qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the requested payload: "
+                                     << "Requested: KCalCore::Event, Todo or Journal, present:" << mts;
         return {};
     }
 

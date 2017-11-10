@@ -25,6 +25,7 @@
 #include "contactgroupindexer.h"
 #include "contactquerypropertymapper.h"
 #include "xapiandocument.h"
+#include "akonadisearch_debug.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
@@ -43,7 +44,8 @@ Xapian::Document ContactGroupIndexer::doIndex(const Akonadi::Item &item)
     KContacts::ContactGroup group;
     try {
         group = item.payload<KContacts::ContactGroup>();
-    } catch (const Akonadi::PayloadException &) {
+    } catch (const Akonadi::PayloadException &e) {
+        qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the expected payload:" << e.what();
         return {};
     }
 

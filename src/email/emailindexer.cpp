@@ -25,6 +25,7 @@
 #include "emailindexer.h"
 #include "emailquerypropertymapper.h"
 #include "xapiandocument.h"
+#include "akonadisearch_debug.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
@@ -52,7 +53,8 @@ Xapian::Document EmailIndexer::doIndex(const Akonadi::Item &item)
     KMime::Message::Ptr msg;
     try {
         msg = item.payload<KMime::Message::Ptr>();
-    } catch (const Akonadi::PayloadException &) {
+    } catch (const Akonadi::PayloadException &e) {
+        qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the expected payload:" << e.what();
         return {};
     }
 
