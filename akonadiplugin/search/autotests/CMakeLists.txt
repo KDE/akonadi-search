@@ -12,18 +12,6 @@ target_sources(
     PRIVATE
         searchplugintest.cpp
         ../searchplugin.cpp
-        ../../../agent/emailindexer.cpp
-        ../../../agent/calendarindexer.cpp
-        ../../../agent/contactindexer.cpp
-        ../../../agent/abstractindexer.cpp
-        ../../../search/pimsearchstore.cpp
-        ../../../search/email/emailsearchstore.cpp
-        ../../../search/email/agepostingsource.cpp
-        ../../../search/contact/contactsearchstore.cpp
-        ../../../search/calendar/calendarsearchstore.cpp
-        ${CMAKE_CURRENT_BINARY_DIR}/../../../agent/akonadi_indexer_agent_debug.cpp
-        ${CMAKE_CURRENT_BINARY_DIR}/../../../agent/akonadi_indexer_agent_calendar_debug.cpp
-        ${CMAKE_CURRENT_BINARY_DIR}/../../../agent/akonadi_indexer_agent_email_debug.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/../akonadiplugin_search_debug.cpp
 )
 
@@ -39,10 +27,7 @@ target_link_libraries(
     KPim6::AkonadiMime
     KF6::Mime
     KF6::Contacts
-    ${XAPIAN_LIBRARIES}
     KF6::CalendarCore
-    KPim6::AkonadiSearchPIM
-    KPim6::AkonadiSearchXapian
+    KF5::AkonadiSearch
     KF6::Codecs
-    KF6::TextUtils
 )

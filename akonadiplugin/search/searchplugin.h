@@ -1,27 +1,40 @@
 /*
  * This file is part of the KDE Akonadi Search Project
- * SPDX-FileCopyrightText: 2014 Christian Mollekopf <mollekopf@kolabsys.com>
+ * Copyright (C) 2014  Christian Mollekopf <mollekopf@kolabsys.com>
  *
- * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) version 3, or any
+ * later version accepted by the membership of KDE e.V. (or its
+ * successor approved by the membership of KDE e.V.), which shall
+ * act as a proxy defined in Section 6 of version 3 of the license.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 
-#pragma once
-
-#include <QObject>
+#ifndef AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
+#define AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
 
 #include <QStringList>
 #include <akonadi/abstractsearchplugin.h>
-
-using namespace Qt::Literals::StringLiterals;
+#include <QObject>
+#include <QHash>
 
 namespace Akonadi
 {
 namespace Search
 {
 class Query;
-}
-}
+class QueryMapper;
+class Store;
 
 class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
 {
@@ -29,5 +42,27 @@ class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
     Q_INTERFACES(Akonadi::AbstractSearchPlugin)
     Q_PLUGIN_METADATA(IID "org.kde.akonadi.SearchPlugin" FILE "akonadi_search_plugin.json")
 public:
-    [[nodiscard]] QSet<qint64> search(const QString &query, const QList<qint64> &collections, const QStringList &mimeTypes) override;
+    explicit SearchPlugin();
+    ~SearchPlugin() override;
+
+    QSet<qint64> search(const QString &query, const QVector<qint64> &collections, const QStringList &mimeTypes) override;
+
+private:
+    struct QueryMapperStorePair {
+        QueryMapperStorePair() {}
+        QueryMapperStorePair(QueryMapper *queryMapper, Store *store);
+        bool isValid() const;
+
+        QueryMapper *queryMapper = nullptr;
+        Store *store = nullptr;
+    };
+
+    QueryMapperStorePair getQueryMapperAndStore(const QString &mimeType);
+
+    QHash<QString, QueryMapperStorePair> mStoreCache;
 };
+
+}
+}
+
+#endif
