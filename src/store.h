@@ -32,7 +32,7 @@ namespace Search {
 
 class ResultIterator;
 class StorePrivate;
-class AKONADISEARCH_EXPORT Store 
+class AKONADISEARCH_EXPORT Store
 {
 public:
     enum OpenMode {
@@ -40,7 +40,7 @@ public:
         WriteOnly
     };
 
-    static QVector<Store*> create(const QString &mimeType);
+    static Store *create(const QString &mimeType);
 
     virtual ~Store();
 

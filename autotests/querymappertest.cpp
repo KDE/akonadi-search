@@ -37,7 +37,6 @@ using namespace Akonadi::Search;
 
 namespace {
 
-static const int XapianMatches  = Xapian::QueryParser::FLAG_DEFAULT | Xapian::QueryParser::FLAG_PHRASE;
 static const int XapianContains = Xapian::QueryParser::FLAG_DEFAULT | Xapian::QueryParser::FLAG_PARTIAL;
 
 }
@@ -47,16 +46,14 @@ void QueryMapperTest::testQueryMapper(const QString &mimeType)
     QFETCH(Akonadi::SearchQuery, akonadiQuery);
     QFETCH(Xapian::Query, xapianQuery);
 
-    const auto mappers = QueryMapper::create(mimeType);
-    QCOMPARE(mappers.count(), 1);
+    const QScopedPointer<QueryMapper> mapper(QueryMapper::create(mimeType));
+    QVERIFY(mapper);
 
-    const auto result = mappers.first()->map(akonadiQuery);
+    const auto result = mapper->map(akonadiQuery);
     //qDebug() << result.get_description().c_str();
     //qDebug() << xapianQuery.get_description().c_str();
     const auto expectedSerialized = xapianQuery.serialise();
     QCOMPARE(result, QByteArray(expectedSerialized.c_str(), expectedSerialized.size()));
-
-    qDeleteAll(mappers);
 }
 
 void QueryMapperTest::testContactQueryMapper_data()

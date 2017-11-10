@@ -42,7 +42,7 @@ namespace Search {
 class AKONADISEARCH_EXPORT Indexer
 {
 public:
-    static QVector<Indexer*> create(const QString &mimeType);
+    static Indexer *create(const QString &mimeType);
 
     virtual ~Indexer();
 

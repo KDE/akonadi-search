@@ -98,24 +98,16 @@ void StoreTest::indexItems(const QVector<Akonadi::Item> &items)
 {
     for (const auto &item : items) {
         QVERIFY(!items.isEmpty());
-        auto indexers = Indexer::create(item.mimeType());
-        QCOMPARE(indexers.count(), 1);
-        Indexer *indexer = indexers.first();
+        QScopedPointer<Indexer> indexer(Indexer::create(item.mimeType()));
         QVERIFY(indexer);
 
-        auto stores = Store::create(item.mimeType());
-        QCOMPARE(stores.count(), 1);
-        Store *store = stores.first();
-        QVERIFY(store);
+        QScopedPointer<Store> store(Store::create(item.mimeType()));
         store->setOpenMode(Store::WriteOnly);
         QCOMPARE(store->openMode(), Store::WriteOnly);
 
         const auto document = indexer->index(item);
         QVERIFY(store->index(item.id(), document));
         QVERIFY(store->commit());
-
-        qDeleteAll(indexers);
-        qDeleteAll(stores);
     }
 }
 
@@ -125,14 +117,10 @@ void StoreTest::testStore()
     QFETCH(QVector<Akonadi::Item::Id>, expectedResults);
     QFETCH(QString, mimeType);
 
-    auto queryMappers = QueryMapper::create(mimeType);
-    QCOMPARE(queryMappers.count(), 1);
-    QueryMapper *mapper = queryMappers.first();
+    QScopedPointer<QueryMapper> mapper(QueryMapper::create(mimeType));
     QVERIFY(mapper);
 
-    auto stores = Store::create(mimeType);
-    QCOMPARE(stores.count(), 1);
-    Store *store = stores.first();
+    QScopedPointer<Store> store(Store::create(mimeType));
     QVERIFY(store);
     QCOMPARE(store->openMode(), Store::ReadOnly);
 
@@ -149,9 +137,6 @@ void StoreTest::testStore()
     //qDebug() << ids;
     //qDebug() << expectedResults;
     QCOMPARE(ids, expectedResults);
-
-    qDeleteAll(stores);
-    qDeleteAll(queryMappers);
 }
 
 
