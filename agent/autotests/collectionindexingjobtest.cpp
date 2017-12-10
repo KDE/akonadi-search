@@ -36,31 +36,31 @@ public:
     QList<Akonadi::Item::Id> alreadyIndexed;
     QList<Akonadi::Item::Id> itemsRemoved;
 
-    void commit() override {};
+    void commit() override {}
     bool createIndexers() override {
         return true;
-    };
+    }
     void findIndexed(QSet< Akonadi::Item::Id> &indexed, Akonadi::Collection::Id) override {
         indexed = alreadyIndexed.toSet();
-    };
+    }
     void index(const Akonadi::Item &item) override {
         itemsIndexed << item.id();
-    };
+    }
     qlonglong indexedItems(Akonadi::Collection::Id) override {
         return alreadyIndexed.size();
-    };
+    }
     void move(const Akonadi::Item::List & /* items */,
               const Akonadi::Collection & /* from */,
-              const Akonadi::Collection & /* to */) override {};
-    void remove(const Akonadi::Collection & /* col */) override {};
+              const Akonadi::Collection & /* to */) override {}
+    void remove(const Akonadi::Collection & /* col */) override {}
     void remove(const QSet<Akonadi::Item::Id> &ids, const QStringList & /* mimeTypes */) override {
         itemsRemoved += ids.toList();
-    };
-    void remove(const Akonadi::Item::List & /* items */) override {};
-    void removeDatabase() override {};
+    }
+    void remove(const Akonadi::Item::List & /* items */) override {}
+    void removeDatabase() override {}
     bool haveIndexerForMimeTypes(const QStringList &) override {
         return true;
-    };
+    }
 };
 
 class CollectionIndexingJobTest : public QObject
