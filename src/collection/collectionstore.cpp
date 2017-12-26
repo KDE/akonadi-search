@@ -35,3 +35,8 @@ QStringList CollectionStore::mimeTypes()
 {
     return { Akonadi::Collection::mimeType() };
 }
+
+bool CollectionStore::removeCollection(qint64 id)
+{
+    return Store::removeItem(id);
+}

@@ -51,9 +51,10 @@ public:
     void setAutoCommit(int changeCount, int timeoutMs);
 
     virtual bool index(qint64 id, const QByteArray &serializedIndex);
+    virtual bool move(qint64 id, qint64 srcCollection, qint64 destCollection);
+    virtual bool copy(qint64 id, qint64 srcCollection, qint64 destId, qint64 destCollection);
     virtual bool removeItem(qint64 id);
     virtual bool removeCollection(qint64 id);
-    virtual bool move(const qint64, qint64 srcCollection, qint64 destCollection);
 
     ResultIterator search(const QByteArray &serializedQuery, unsigned int limit = 0);
 

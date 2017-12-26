@@ -72,21 +72,24 @@ QByteArray Indexer::index(const Akonadi::Item &item)
     return QByteArray(serialized.c_str(), serialized.size());
 }
 
-QByteArray Akonadi::Search::Indexer::index(const Akonadi::Collection& collection)
+QByteArray Indexer::index(const Akonadi::Collection &collection)
 {
     const auto serialized = doIndex(collection).serialise();
     return QByteArray(serialized.c_str(), serialized.size());
 }
 
-
 Xapian::Document Indexer::doIndex(const Akonadi::Item &)
 {
-    Q_ASSERT_X(false, "Indexer::doIndex(Akonadi::Item)", "Default implementation called!");
+    // Assert even in relase mode
+    qt_assert_x("Indexer::doIndex(Akonadi::Item)", "Default implementation called!",
+                __FILE__, __LINE__);
     return {};
 }
 
 Xapian::Document Indexer::doIndex(const Akonadi::Collection &)
 {
-    Q_ASSERT_X(false, "Indexer::doIndex(Akonadi::Collection)", "Default implementation called!");
+    // Assert event in release mode
+    qt_assert_x("Indexer::doIndex(Akonadi::Collection)", "Default implementation called!",
+                __FILE__, __LINE__);
     return {};
 }

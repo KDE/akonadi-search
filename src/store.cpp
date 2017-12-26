@@ -276,6 +276,21 @@ bool Store::move(const qint64 id, qint64 srcCollection, qint64 destCollection)
     return d->db->replaceDocument(id, doc);
 }
 
+bool Store::copy(qint64 id, qint64 srcCollection, qint64 destId, qint64 destCollection)
+{
+    if (!d->ensureDb()) {
+        return false;
+    }
+
+    XapianDocument doc(d->db->document(id));
+    doc.removeTerm(XapianDocument::collectionId(srcCollection));
+    doc.addCollectionTerm(destCollection);
+
+    d->newChange();
+
+    return d->db->replaceDocument(destId, doc);
+}
+
 bool Store::commit()
 {
     if (!d->ensureDb()) {
