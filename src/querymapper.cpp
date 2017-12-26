@@ -31,6 +31,7 @@
 #include "contact/contactquerymapper.h"
 #include "incidence/incidencequerymapper.h"
 #include "note/notequerymapper.h"
+#include "collection/collectionquerymapper.h"
 
 #include <AkonadiCore/SearchQuery>
 
@@ -98,6 +99,7 @@ QueryMapper *QueryMapper::create(const QString &mimeType)
         sQueryMappers->registerForType<ContactQueryMapper>();
         sQueryMappers->registerForType<IncidenceQueryMapper>();
         sQueryMappers->registerForType<NoteQueryMapper>();
+        sQueryMappers->registerForType<CollectionQueryMapper>();
     }
 
     return sQueryMappers->instantiate(mimeType);

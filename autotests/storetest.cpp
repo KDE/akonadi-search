@@ -36,7 +36,9 @@
 #include <Akonadi/KMime/MessageFlags>
 
 #include <AkonadiCore/Item>
+#include <AkonadiCore/Collection>
 #include <AkonadiCore/SearchQuery>
+#include <AkonadiCore/EntityDisplayAttribute>
 
 #include <QTest>
 #include <QStandardPaths>
@@ -82,6 +84,7 @@ void StoreTest::initTestCase()
     indexEmails();
     indexIncidences();
     indexNotes();
+    indexCollections();
 }
 
 void StoreTest::cleanupTestCase()
@@ -219,6 +222,60 @@ void StoreTest::indexContacts()
 
     indexItems(items);
 }
+
+void StoreTest::indexCollections()
+{
+    Akonadi::Collection::List cols;
+    {
+        Akonadi::Collection col(1);
+        col.setContentMimeTypes({ Akonadi::Collection::mimeType() });
+        col.setName(QStringLiteral("My IMAP"));
+        col.attribute<Akonadi::EntityDisplayAttribute>(Akonadi::Collection::AddIfMissing)->setDisplayName(QStringLiteral("My IMAP"));
+        col.setResource(QStringLiteral("My Resource"));
+        col.setParentCollection(Akonadi::Collection::root());
+        cols << col;
+    }
+
+    {
+        Akonadi::Collection col(2);
+        col.setContentMimeTypes({ Akonadi::Collection::mimeType(), KMime::Message::mimeType() });
+        col.setName(QStringLiteral("INBOX"));
+        col.attribute<Akonadi::EntityDisplayAttribute>(Akonadi::Collection::AddIfMissing)->setDisplayName(QStringLiteral("Inbox"));
+        col.setResource(QStringLiteral("My Resource"));
+        col.setParentCollection(Akonadi::Collection(1));
+        cols << col;
+    }
+
+    {
+        Akonadi::Collection col(3);
+        col.setContentMimeTypes({ Akonadi::Collection::mimeType(), KMime::Message::mimeType() });
+        col.setName(QStringLiteral("Work"));
+        col.setResource(QStringLiteral("My Resource"));
+        col.setParentCollection(Akonadi::Collection(2));
+        cols << col;
+    }
+
+    {
+        Akonadi::Collection col(4);
+        col.setContentMimeTypes({ KCalCore::Event::eventMimeType() });
+        col.setName(QStringLiteral("Work"));
+        col.setResource(QStringLiteral("My Resource"));
+        col.setParentCollection(Akonadi::Collection(1));
+        cols << col;
+    }
+
+    QScopedPointer<Indexer> indexer(Indexer::create(Akonadi::Collection::mimeType()));
+    QVERIFY(indexer);
+    QScopedPointer<Store> store(Store::create(Akonadi::Collection::mimeType()));
+    store->setOpenMode(Store::WriteOnly);
+    QCOMPARE(store->openMode(), Store::WriteOnly);
+    for (const auto &col : cols) {
+        const auto document = indexer->index(col);
+        QVERIFY(store->index(col.id(), document));
+        QVERIFY(store->commit());
+    }
+}
+
 
 void StoreTest::testContactStore_data()
 {
@@ -1291,6 +1348,26 @@ void StoreTest::testNoteStore_data()
 }
 
 void StoreTest::testNoteStore()
+{
+    testStore();
+}
+
+void StoreTest::testCollectionStore_data()
+{
+    QTest::addColumn<Akonadi::SearchQuery>("akonadiQuery");
+    QTest::addColumn<QVector<Akonadi::Item::Id>>("expectedResults");
+    QTest::addColumn<QString>("mimeType");
+
+    {
+        Akonadi::SearchQuery aq;
+        aq.addTerm(Akonadi::CollectionSearchTerm(Akonadi::CollectionSearchTerm::Name, QStringLiteral("Work")));
+        aq.addTerm(Akonadi::CollectionSearchTerm(Akonadi::CollectionSearchTerm::MimeType, KMime::Message::mimeType()));
+        QTest::newRow("find name and mimetype") << aq << QVector<Akonadi::Item::Id>{ 3 }
+                                                << Akonadi::Collection::mimeType();
+    }
+}
+
+void StoreTest::testCollectionStore()
 {
     testStore();
 }

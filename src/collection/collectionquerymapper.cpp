@@ -1,5 +1,4 @@
 /*
- * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2017  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -22,48 +21,41 @@
 
 #include <xapian.h>
 
-#include "contactquerymapper.h"
-#include "contactquerypropertymapper.h"
-#include "querypropertymapper_p.h"
 #include "querymapper_p.h"
-#include "akonadisearch_debug.h"
+#include "collectionquerymapper.h"
+#include "collectionquerypropertymapper.h"
 
+#include <AkonadiCore/Collection>
 #include <AkonadiCore/SearchQuery>
-
-#include <KContacts/Addressee>
-#include <KContacts/ContactGroup>
 
 using namespace Akonadi::Search;
 
-ContactQueryMapper::ContactQueryMapper()
+CollectionQueryMapper::CollectionQueryMapper()
 {
 }
 
-QStringList ContactQueryMapper::mimeTypes()
+QStringList CollectionQueryMapper::mimeTypes()
 {
-    return { KContacts::Addressee::mimeType(),
-             KContacts::ContactGroup::mimeType() };
+    return { Akonadi::Collection::mimeType() };
 }
 
-const QueryPropertyMapper &ContactQueryMapper::propertyMapper()
+const QueryPropertyMapper &CollectionQueryMapper::propertyMapper()
 {
-    return ContactQueryPropertyMapper::instance();
+    return CollectionQueryPropertyMapper::instance();
 }
 
-
-Xapian::Query ContactQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
+Xapian::Query CollectionQueryMapper::recursiveTermMapping(const Akonadi::SearchTerm &term)
 {
-    const auto field = Akonadi::ContactSearchTerm::fromKey(term.key());
+    const auto field = Akonadi::CollectionSearchTerm::fromKey(term.key());
     switch (field) {
-    case Akonadi::ContactSearchTerm::Name:
-    case Akonadi::ContactSearchTerm::Email:
-    case Akonadi::ContactSearchTerm::Nickname:
-    case Akonadi::ContactSearchTerm::Uid:
+    case Akonadi::CollectionSearchTerm::Name:
+    case Akonadi::CollectionSearchTerm::MimeType:
+    case Akonadi::CollectionSearchTerm::Namespace:
+    case Akonadi::CollectionSearchTerm::Identification:
         return constructQuery(propertyMapper(), field, term);
-    case Akonadi::ContactSearchTerm::Birthday:
-    case Akonadi::ContactSearchTerm::Anniversary:
-        return constructQuery(propertyMapper(), field, term.value().toDate().toJulianDay(), term.condition());
     default:
         return QueryMapper::recursiveTermMapping(term);
     }
+
+    return {};
 }

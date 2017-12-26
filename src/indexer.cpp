@@ -29,6 +29,7 @@
 #include "contact/contactgroupindexer.h"
 #include "incidence/incidenceindexer.h"
 #include "note/noteindexer.h"
+#include "collection/collectionindexer.h"
 
 #include <QGlobalStatic>
 #include <QHash>
@@ -59,6 +60,7 @@ Indexer* Indexer::create(const QString &mimeType)
         sIndexers->registerForType<ContactGroupIndexer>();
         sIndexers->registerForType<IncidenceIndexer>();
         sIndexers->registerForType<NoteIndexer>();
+        sIndexers->registerForType<CollectionIndexer>();
     }
 
     return sIndexers->instantiate(mimeType);

@@ -203,6 +203,31 @@ void QueryMapperTest::testNotesQueryMapper()
 }
 
 
+void QueryMapperTest::testCollectionQueryMapper_data()
+{
+    QTest::addColumn<Akonadi::SearchQuery>("akonadiQuery");
+    QTest::addColumn<Xapian::Query>("xapianQuery");
+
+    Xapian::QueryParser parser;
+
+    {
+        Akonadi::SearchQuery aq(Akonadi::SearchTerm::RelAnd);
+        aq.addTerm(Akonadi::CollectionSearchTerm(Akonadi::CollectionSearchTerm::Name, QStringLiteral("Inbox"), Akonadi::SearchTerm::CondEqual));
+        aq.addTerm(Akonadi::SearchTerm(Akonadi::SearchTerm::Collection, 1, Akonadi::SearchTerm::CondEqual));
+
+        const auto phr = { Xapian::Query("N^", 1, 1), Xapian::Query("Ninbox", 1, 1), Xapian::Query("N$", 1, 2) };
+        const auto xs = { Xapian::Query(Xapian::Query::OP_PHRASE, phr.begin(), phr.end()),
+                          Xapian::Query("C1") };
+        QTest::newRow("name and parent matches")
+            << aq << Xapian::Query(Xapian::Query::OP_AND, xs.begin(), xs.end());
+    }
+}
+
+void QueryMapperTest::testCollectionQueryMapper()
+{
+    testQueryMapper(QStringLiteral("inode/directory"));
+}
+
 
 
 QTEST_MAIN(QueryMapperTest)

@@ -30,6 +30,11 @@ set(AKONADISEARCH_LIB_SRCS
     incidence/incidencequerypropertymapper.cpp
     incidence/incidencestore.cpp
 
+    collection/collectionindexer.cpp
+    collection/collectionquerymapper.cpp
+    collection/collectionquerypropertymapper.cpp
+    collection/collectionstore.cpp
+
     note/noteindexer.cpp
     note/notequerymapper.cpp
     note/notequerypropertymapper.cpp

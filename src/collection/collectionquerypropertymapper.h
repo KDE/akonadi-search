@@ -19,32 +19,25 @@
  *
  */
 
-#ifndef AKONADISEARCH_QUERYMAPPERTEST_H_
-#define AKONADISEARCH_QUERYMAPPERTEST_H_
+#ifndef AKONADISEARCH_COLLECTIONQUERYPROPERTYMAPPER_H_
+#define AKONADISEARCH_COLLECTIONQUERYPROPERTYMAPPER_H_
 
-#include <QObject>
+#include "querypropertymapper_p.h"
 
-class QueryMapperTest : public QObject
+namespace Akonadi {
+namespace Search {
+
+class CollectionQueryPropertyMapper : public QueryPropertyMapper
 {
-    Q_OBJECT
+public:
+    static const CollectionQueryPropertyMapper &instance();
 
-    void testQueryMapper(const QString &mimeType);
-
-private Q_SLOTS:
-    void testContactQueryMapper_data();
-    void testContactQueryMapper();
-
-    void testEmailQueryMapper_data();
-    void testEmailQueryMapper();
-
-    void testIncidenceQueryMapper_data();
-    void testIncidenceQueryMapper();
-
-    void testNotesQueryMapper_data();
-    void testNotesQueryMapper();
-
-    void testCollectionQueryMapper_data();
-    void testCollectionQueryMapper();
+private:
+    explicit CollectionQueryPropertyMapper();
+    static CollectionQueryPropertyMapper *sInstance;
 };
+
+}
+}
 
 #endif

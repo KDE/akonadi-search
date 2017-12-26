@@ -19,32 +19,23 @@
  *
  */
 
-#ifndef AKONADISEARCH_QUERYMAPPERTEST_H_
-#define AKONADISEARCH_QUERYMAPPERTEST_H_
+#ifndef AKONADISEARCH_COLLECTIONSTORE_H_
+#define AKONADISEARCH_COLLECTIONSTORE_H_
 
-#include <QObject>
+#include "store.h"
 
-class QueryMapperTest : public QObject
+namespace Akonadi {
+namespace Search {
+
+class CollectionStore : public Store
 {
-    Q_OBJECT
+public:
+    explicit CollectionStore();
 
-    void testQueryMapper(const QString &mimeType);
-
-private Q_SLOTS:
-    void testContactQueryMapper_data();
-    void testContactQueryMapper();
-
-    void testEmailQueryMapper_data();
-    void testEmailQueryMapper();
-
-    void testIncidenceQueryMapper_data();
-    void testIncidenceQueryMapper();
-
-    void testNotesQueryMapper_data();
-    void testNotesQueryMapper();
-
-    void testCollectionQueryMapper_data();
-    void testCollectionQueryMapper();
+    static QStringList mimeTypes();
 };
+
+}
+}
 
 #endif
