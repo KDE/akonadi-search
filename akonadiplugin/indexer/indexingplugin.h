@@ -50,10 +50,11 @@ public:
     ~IndexingPlugin() override;
 
     bool index(const QString &mimeType, qint64 id, const QByteArray &rawData) override;
+    bool copy(const QString &mimeType, qint64 sourceId, qint64 sourceCollection,
+              qint64 destId, qint64 destCollection) override;
+    bool move(const QString &mimeType, qint64 id, qint64 sourceCollection, qint64 destCollection) override;
     bool removeItem(const QString &mimeType, qint64 id) override;
     bool removeCollection(const QString &mimeType, qint64 id) override;
-    bool moveItem(const QString &mimeType, qint64 id, qint64 sourceCollection,
-                  qint64 destinationCollection) override;
 
 private:
     using IndexingFunc = std::function<bool(Store*)>;

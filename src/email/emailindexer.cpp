@@ -50,17 +50,17 @@ Xapian::Document EmailIndexer::doIndex(const Akonadi::Item &item)
         return {};
     }
 
+    XapianDocument doc;
+    processMessageStatus(doc, status);
+
     KMime::Message::Ptr msg;
     try {
         msg = item.payload<KMime::Message::Ptr>();
     } catch (const Akonadi::PayloadException &e) {
-        qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the expected payload:" << e.what();
-        return {};
+        // It's perfectly possible that we only have flags
+        return doc.xapianDocument();
     }
 
-    XapianDocument doc;
-
-    processMessageStatus(doc, status);
     process(doc, msg);
 
     doc.addValue(EmailQueryPropertyMapper::instance().valueProperty(Akonadi::EmailSearchTerm::ByteSize), item.size());
@@ -116,7 +116,7 @@ void EmailIndexer::processMailboxes(XapianDocument &doc, const std::string &key,
 void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
 {
     const auto &propMapper = EmailQueryPropertyMapper::instance();
-    
+
     // Process Headers
     // (Give the subject a higher priority)
     KMime::Headers::Subject *subject = msg->subject(false);

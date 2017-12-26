@@ -125,7 +125,7 @@ private Q_SLOTS:
         {
             IndexingPlugin plugin;
             // Move item 1 from collection 1 to collection 3
-            plugin.moveItem(KMime::Message::mimeType(), 1, 1, 3);
+            plugin.move(KMime::Message::mimeType(), 1, 1, 3);
         }
 
         QCOMPARE(searchCollection(KMime::Message::mimeType(), 1), QVector<qint64>{ 2 });

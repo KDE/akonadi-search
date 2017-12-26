@@ -64,8 +64,15 @@ bool IndexingPlugin::index(const QString &mimeType, qint64 id, const QByteArray&
     });
 }
 
-bool IndexingPlugin::moveItem(const QString &mimeType, qint64 id, qint64 sourceCollection,
-                              qint64 destinationCollection)
+bool IndexingPlugin::copy(const QString &mimeType, qint64 sourceId, qint64 sourceCollection,
+                          qint64 destId, qint64 destCollection)
+{
+    return doIndex(mimeType, [sourceId, sourceCollection, destId, destCollection](Store *store) {
+        return store->copy(sourceId, sourceCollection, destId, destCollection);
+    });
+}
+
+bool IndexingPlugin::move(const QString &mimeType, qint64 id, qint64 sourceCollection, qint64 destinationCollection)
 {
     return doIndex(mimeType, [id, sourceCollection, destinationCollection](Store *store) {
         return store->move(id, sourceCollection, destinationCollection);

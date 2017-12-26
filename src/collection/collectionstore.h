@@ -33,6 +33,8 @@ public:
     explicit CollectionStore();
 
     static QStringList mimeTypes();
+
+    bool removeCollection(qint64 id) override;
 };
 
 }
