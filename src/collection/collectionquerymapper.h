@@ -19,32 +19,27 @@
  *
  */
 
-#ifndef AKONADISEARCH_QUERYMAPPERTEST_H_
-#define AKONADISEARCH_QUERYMAPPERTEST_H_
+#ifndef AKONADISEARCH_COLLECTIONQUERYMAPPER_H_
+#define AKONADISEARCH_COLLECTIONQUERYMAPPER_H_
 
-#include <QObject>
+#include "querymapper.h"
 
-class QueryMapperTest : public QObject
+namespace Akonadi {
+namespace Search {
+
+class CollectionQueryMapper : public QueryMapper
 {
-    Q_OBJECT
+public:
+    CollectionQueryMapper();
 
-    void testQueryMapper(const QString &mimeType);
+    static QStringList mimeTypes();
 
-private Q_SLOTS:
-    void testContactQueryMapper_data();
-    void testContactQueryMapper();
-
-    void testEmailQueryMapper_data();
-    void testEmailQueryMapper();
-
-    void testIncidenceQueryMapper_data();
-    void testIncidenceQueryMapper();
-
-    void testNotesQueryMapper_data();
-    void testNotesQueryMapper();
-
-    void testCollectionQueryMapper_data();
-    void testCollectionQueryMapper();
+private:
+    const QueryPropertyMapper &propertyMapper() override;
+    Xapian::Query recursiveTermMapping(const Akonadi::SearchTerm & term) override;
 };
+
+}
+}
 
 #endif

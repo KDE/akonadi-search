@@ -19,32 +19,25 @@
  *
  */
 
-#ifndef AKONADISEARCH_QUERYMAPPERTEST_H_
-#define AKONADISEARCH_QUERYMAPPERTEST_H_
+#include "collectionquerypropertymapper.h"
+#include <AkonadiCore/SearchQuery>
 
-#include <QObject>
+using namespace Akonadi::Search;
 
-class QueryMapperTest : public QObject
+CollectionQueryPropertyMapper *CollectionQueryPropertyMapper::sInstance = nullptr;
+
+CollectionQueryPropertyMapper::CollectionQueryPropertyMapper()
 {
-    Q_OBJECT
+    insertPrefix(Akonadi::CollectionSearchTerm::Name, QStringLiteral("N"));
+    insertPrefix(Akonadi::CollectionSearchTerm::Namespace, QStringLiteral("NS"));
+    insertPrefix(Akonadi::CollectionSearchTerm::Identification, QStringLiteral("ID"));
+    insertPrefix(Akonadi::CollectionSearchTerm::MimeType, QStringLiteral("M"));
+}
 
-    void testQueryMapper(const QString &mimeType);
-
-private Q_SLOTS:
-    void testContactQueryMapper_data();
-    void testContactQueryMapper();
-
-    void testEmailQueryMapper_data();
-    void testEmailQueryMapper();
-
-    void testIncidenceQueryMapper_data();
-    void testIncidenceQueryMapper();
-
-    void testNotesQueryMapper_data();
-    void testNotesQueryMapper();
-
-    void testCollectionQueryMapper_data();
-    void testCollectionQueryMapper();
-};
-
-#endif
+const CollectionQueryPropertyMapper &CollectionQueryPropertyMapper::instance()
+{
+    if (!sInstance) {
+        sInstance = new CollectionQueryPropertyMapper();
+    }
+    return *sInstance;
+}

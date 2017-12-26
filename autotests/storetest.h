@@ -42,6 +42,7 @@ private:
     void indexEmails();
     void indexIncidences();
     void indexNotes();
+    void indexCollections();
     void indexItems(const QVector<Akonadi::Item> &items);
 
     void testStore();
@@ -60,6 +61,9 @@ private Q_SLOTS:
 
     void testNoteStore_data();
     void testNoteStore();
+
+    void testCollectionStore_data();
+    void testCollectionStore();
 };
 
 #endif

@@ -19,32 +19,27 @@
  *
  */
 
-#ifndef AKONADISEARCH_QUERYMAPPERTEST_H_
-#define AKONADISEARCH_QUERYMAPPERTEST_H_
+#ifndef AKONADISEARCH_COLLECTIONINDEXER_H_
+#define AKONADISEARCH_COLLECTIONINDEXER_H_
 
-#include <QObject>
+#include "indexer.h"
 
-class QueryMapperTest : public QObject
+namespace Akonadi {
+namespace Search {
+
+class CollectionIndexer : public Indexer
 {
-    Q_OBJECT
+public:
+    using Indexer::Indexer;
 
-    void testQueryMapper(const QString &mimeType);
+    static QStringList mimeTypes();
 
-private Q_SLOTS:
-    void testContactQueryMapper_data();
-    void testContactQueryMapper();
-
-    void testEmailQueryMapper_data();
-    void testEmailQueryMapper();
-
-    void testIncidenceQueryMapper_data();
-    void testIncidenceQueryMapper();
-
-    void testNotesQueryMapper_data();
-    void testNotesQueryMapper();
-
-    void testCollectionQueryMapper_data();
-    void testCollectionQueryMapper();
+    using Indexer::doIndex;
+    Xapian::Document doIndex(const Akonadi::Collection &item) override;
 };
 
+}
+}
+
 #endif
+

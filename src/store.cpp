@@ -33,6 +33,7 @@
 #include "contact/contactstore.h"
 #include "incidence/incidencestore.h"
 #include "note/notestore.h"
+#include "collection/collectionstore.h"
 
 #include <AkonadiCore/ServerManager>
 
@@ -155,6 +156,7 @@ Store *Store::create(const QString &mimeType)
         sStores->registerForType<ContactStore>();
         sStores->registerForType<IncidenceStore>();
         sStores->registerForType<NoteStore>();
+        sStores->registerForType<CollectionStore>();
     }
 
     return sStores->instantiate(mimeType);
