@@ -41,7 +41,12 @@ public:
     }
 
     void start() override {
+#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
+        QMetaObject::invokeMethod(this,  &DummyIndexingJob::finish, Qt::QueuedConnection);
+#else
         QMetaObject::invokeMethod(this, "finish", Qt::QueuedConnection);
+#endif
+
     }
 
 private Q_SLOTS:
