@@ -190,7 +190,9 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             return Term(QStringLiteral("hasattachment"), !term.isNegated());
         case Akonadi::EmailSearchTerm::Unknown:
         default:
-            qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            if (!term.key().isEmpty()) {
+                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            }
         }
     }
     return Term();
@@ -223,7 +225,9 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
             return t;
         }
         default:
-            qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            if (!term.key().isEmpty()) {
+                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            }
         }
     }
     return Term();
@@ -249,7 +253,9 @@ Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::EmailSearchTerm::Body:
             return getTerm(term, QStringLiteral("body"));
         default:
-            qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            if (!term.key().isEmpty()) {
+                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            }
         }
     }
     return Term();
@@ -280,7 +286,9 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("uid"));
         case Akonadi::ContactSearchTerm::Unknown:
         default:
-            qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            if (!term.key().isEmpty()) {
+                qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
+            }
         }
     }
     return Term();
