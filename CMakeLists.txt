@@ -22,14 +22,6 @@ include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 include(ECMCoverageOption)
 
-if(NOT CMAKE_VERSION VERSION_LESS "3.10.0")
-  # CMake 3.9+ warns about automoc on files without Q_OBJECT, and doesn't know about other macros.
-  # 3.10+ lets us provide more macro names that require automoc.
-  # Remove this when depending on a Frameworks or ECM version that solves this upstream.
-  list(APPEND CMAKE_AUTOMOC_MACRO_NAMES "K_PLUGIN_FACTORY_WITH_JSON" "K_PLUGIN_FACTORY")
-endif()
-
-
 set(AKONADISEARCH_VERSION ${PIM_VERSION})
 
 set(AKONADI_VERSION "5.7.40")
@@ -85,6 +77,14 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/xapian
   ${CMAKE_BINARY_DIR}/xapian
 )
+
+if(NOT CMAKE_VERSION VERSION_LESS "3.10.0" AND KF5_VERSION VERSION_LESS "5.42.0")
+  # CMake 3.9+ warns about automoc on files without Q_OBJECT, and doesn't know about other macros.
+  # 3.10+ lets us provide more macro names that require automoc.
+  # KF5 >= 5.42 takes care itself of adding its macros in its cmake config files
+  list(APPEND CMAKE_AUTOMOC_MACRO_NAMES "K_PLUGIN_FACTORY_WITH_JSON" "K_PLUGIN_FACTORY")
+endif()
+
 
 # Targets
 add_subdirectory(xapian)
