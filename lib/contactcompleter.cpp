@@ -74,10 +74,15 @@ QStringList ContactCompleter::complete()
     QStringList list;
     Xapian::MSetIterator end = mset.end();
     list.reserve(mset.size());
-    for (; mit != end; ++mit) {
-        std::string str = mit.get_document().get_data();
-        const QString entry = QString::fromUtf8(str.c_str(), str.length());
-        list << entry;
+    try {
+        for (; mit != end; ++mit) {
+            std::string str = mit.get_document().get_data();
+            const QString entry = QString::fromUtf8(str.c_str(), str.length());
+            list << entry;
+        }
+    } catch (const Xapian::DatabaseCorruptError &e) {
+        qWarning() << "The emailContacts Xapian database is corrupted:" << QString::fromStdString(e.get_description());
+        return QStringList();
     }
 
     return list;
