@@ -24,6 +24,7 @@
 #include "akonadisearch_debug.h"
 
 #include <QDir>
+#include <QThreadStorage>
 
 #if defined(HAVE_MALLOC_H)
 #include <malloc.h>
@@ -191,8 +192,50 @@ bool XapianDatabase::commit()
     return true;
 }
 
+namespace {
+
+class RecursionCounter {
+public:
+    RecursionCounter()
+    {
+        if (!sDepth.hasLocalData()) {
+            sDepth.setLocalData(1);
+        } else {
+            ++sDepth.localData();
+        }
+    }
+
+    ~RecursionCounter()
+    {
+        --sDepth.localData();
+    }
+
+    int depth() const
+    {
+        return sDepth.localData();
+    }
+
+private:
+    static QThreadStorage<int> sDepth;
+};
+
+QThreadStorage<int> RecursionCounter::sDepth;
+
+}
+
+
 XapianDocument XapianDatabase::document(uint id)
 {
+    RecursionCounter counter;
+    if (counter.depth() > 1) {
+        if (counter.depth() < 5) {
+            std::this_thread::sleep_for(std::chrono::milliseconds(counter.depth() * 30));
+        } else {
+            qCWarning(AKONADISEARCH_LOG) << "Got DatabaseModifiedError five times in a row, aborting query";
+            return XapianDocument();
+        }
+    }
+
     try {
         return XapianDocument(d->db->get_document(id));
     } catch (const Xapian::DatabaseModifiedError &) {
