@@ -22,6 +22,7 @@
 #include <xapian.h>
 
 #include "store.h"
+#include "store_p.h"
 #include "akonadisearch_debug.h"
 #include "registrar_p.h"
 #include "resultiterator.h"
@@ -49,34 +50,6 @@ Q_GLOBAL_STATIC(Registrar<Store>, sStores)
 
 static const unsigned int MaxQueryLimit = 10^6;
 
-}
-
-namespace Akonadi {
-namespace Search {
-
-class StorePrivate
-{
-public:
-    StorePrivate(Store *q);
-    ~StorePrivate();
-
-    bool ensureDb();
-    QString dbPath(const QString &name) const;
-
-    void newChange();
-
-    QString dbName;
-    XapianDatabase *db = nullptr;
-    Store::OpenMode openMode = Store::ReadOnly;
-    int changeCount = 0;
-    int commitChangeCount = 0;
-    QTimer *commitTimer;
-
-private:
-    Store * const q;
-};
-
-}
 }
 
 StorePrivate::StorePrivate(Store *q)

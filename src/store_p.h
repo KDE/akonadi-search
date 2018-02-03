@@ -19,30 +19,41 @@
  *
  */
 
-#ifndef AKONADISEARCH_EMAILSTORE_H_
-#define AKONADISEARCH_EMAILSTORE_H_
+#ifndef AKONADISEARCH_STORE_P_H_
+#define AKONADISEARCH_STORE_P_H_
 
 #include "store.h"
+
+class QTimer;
 
 namespace Akonadi {
 namespace Search {
 
-class XapianDocument;
+class XapianDatabase;
 
-class EmailStore : public Store
+class StorePrivate
 {
 public:
-    explicit EmailStore();
+    StorePrivate(Store *q);
+    ~StorePrivate();
 
-    bool index(qint64 id, const QByteArray &serializedIndex) override;
+    bool ensureDb();
+    QString dbPath(const QString &name) const;
 
-    static QStringList mimeTypes();
+    void newChange();
+
+    QString dbName;
+    XapianDatabase *db = nullptr;
+    Store::OpenMode openMode = Store::ReadOnly;
+    int changeCount = 0;
+    int commitChangeCount = 0;
+    QTimer *commitTimer;
 
 private:
-    bool mergeFlagsOnly(const Xapian::Document &newDoc, const XapianDocument &oldDoc);
+    Store * const q;
 };
 
 }
 }
 
-#endif
+#endif // AKONADISEARCH_STORE_P_H_

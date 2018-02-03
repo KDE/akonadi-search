@@ -43,6 +43,8 @@ public:
     using Indexer::doIndex;
     Xapian::Document doIndex(const Akonadi::Item &item) override;
 
+    static const std::string MergeFlagsTerm;
+
 private:
     void process(XapianDocument &doc, const KMime::Message::Ptr &msg);
     void processMessageStatus(XapianDocument &doc, const Akonadi::MessageStatus &status);

@@ -48,6 +48,8 @@ public:
     explicit XapianDocument(const Xapian::Document &doc);
     ~XapianDocument();
 
+    bool isValid() const;
+
     void addCollectionTerm(qint64 colId);
 
     void addTerm(const QString &term, const std::string &prefix = {});
