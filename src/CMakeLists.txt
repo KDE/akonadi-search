@@ -44,6 +44,7 @@ set(AKONADISEARCH_LIB_SRCS
 ecm_generate_headers(AkonadiSearch_LIB_HEADERS
     HEADER_NAMES
     Indexer
+    ObjectCache
     QueryMapper
     ResultIterator
     Store
