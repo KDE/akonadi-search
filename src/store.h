@@ -65,7 +65,6 @@ protected:
 
     void setDbName(const QString &name);
 
-private:
     StorePrivate * const d;
 };
 

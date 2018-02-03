@@ -19,9 +19,18 @@
  *
  */
 
+#include <xapian.h>
+
 #include "emailstore.h"
+#include "emailindexer.h"
+#include "emailquerypropertymapper.h"
+#include "store_p.h"
+#include "xapiandatabase.h"
+#include "xapiandocument.h"
 
 #include <KMime/Message>
+
+#include <unordered_set>
 
 using namespace Akonadi::Search;
 
@@ -34,4 +43,81 @@ EmailStore::EmailStore()
 QStringList EmailStore::mimeTypes()
 {
     return { KMime::Message::mimeType() };
+}
+
+bool EmailStore::index(qint64 id, const QByteArray &serializedIndex)
+{
+    if (!d->ensureDb()) {
+        return false;
+    }
+
+    const auto newDoc = Xapian::Document::unserialise({ serializedIndex.constData(),
+                                static_cast<std::string::size_type>(serializedIndex.size()) });
+    bool merge = false;
+    for (auto it = newDoc.termlist_begin(), end = newDoc.termlist_end(); it != end; ++it) {
+        if (*it == EmailIndexer::MergeFlagsTerm) {
+            merge = true;
+            break;
+        }
+    }
+
+
+    if (merge) {
+        auto doc = d->db->document(id);
+        if (doc.isValid()) {
+            return mergeFlagsOnly(newDoc, doc);
+        }
+    }
+
+    // Don't chainup to Store::index() for performance reasons as it would have
+    // to unserialise the document again
+    d->newChange();
+    return d->db->replaceDocument(static_cast<uint>(id), newDoc);
+}
+
+bool EmailStore::mergeFlagsOnly(const Xapian::Document &newDoc, const XapianDocument &_oldDoc)
+{
+    Xapian::Document oldDoc = _oldDoc.xapianDocument();
+
+    static std::unordered_set<std::string> flagTerms;
+    if (flagTerms.empty()) {
+        const auto &mapper = EmailQueryPropertyMapper::instance();
+        const auto termName = [&mapper](EmailQueryPropertyMapper::Flags flag) -> std::string {
+            return "B" + mapper.prefix(flag);
+        };
+        flagTerms = {
+            termName(EmailQueryPropertyMapper::IsReadFlag),
+            termName(EmailQueryPropertyMapper::HasAttachmentFlag),
+            termName(EmailQueryPropertyMapper::IsImportantFlag),
+            termName(EmailQueryPropertyMapper::IsWatchedFlag),
+            termName(EmailQueryPropertyMapper::IsToActFlag),
+            termName(EmailQueryPropertyMapper::IsDeletedFlag),
+            termName(EmailQueryPropertyMapper::IsSpamFlag),
+            termName(EmailQueryPropertyMapper::IsRepliedFlag),
+            termName(EmailQueryPropertyMapper::IsIgnoredFlag),
+            termName(EmailQueryPropertyMapper::IsForwardedFlag),
+            termName(EmailQueryPropertyMapper::IsSentFlag),
+            termName(EmailQueryPropertyMapper::IsQueuedFlag),
+            termName(EmailQueryPropertyMapper::IsHamFlag),
+            termName(EmailQueryPropertyMapper::IsEncryptedFlag),
+            termName(EmailQueryPropertyMapper::HasInvitationFlag)
+        };
+    }
+
+    auto end = oldDoc.termlist_end();
+    for (auto it = oldDoc.termlist_begin(); it != end; ++it) {
+        if (flagTerms.find(*it) != flagTerms.cend()) {
+            oldDoc.remove_term(*it);
+            end = oldDoc.termlist_end();
+        }
+    }
+
+    for (auto it = newDoc.termlist_begin(), end = newDoc.termlist_end(); it != end; ++it) {
+        if (flagTerms.find(*it) != flagTerms.cend()) {
+            oldDoc.add_boolean_term(*it);
+        }
+    }
+
+    d->newChange();
+    return d->db->replaceDocument(oldDoc.get_docid(), newDoc);
 }

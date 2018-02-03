@@ -63,6 +63,11 @@ XapianDocument::~XapianDocument()
     delete d;
 }
 
+bool XapianDocument::isValid() const
+{
+    return d->doc.get_docid() != 0;
+}
+
 void XapianDocument::addCollectionTerm(qint64 colId)
 {
     d->doc.add_boolean_term(collectionId(colId).constData());

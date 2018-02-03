@@ -37,6 +37,8 @@
 
 using namespace Akonadi::Search;
 
+const std::string EmailIndexer::MergeFlagsTerm = "__MERGEFLAGS";
+
 QStringList EmailIndexer::mimeTypes()
 {
     return { KMime::Message::mimeType() };
@@ -58,6 +60,7 @@ Xapian::Document EmailIndexer::doIndex(const Akonadi::Item &item)
         msg = item.payload<KMime::Message::Ptr>();
     } catch (const Akonadi::PayloadException &e) {
         // It's perfectly possible that we only have flags
+        doc.addBoolTerm(QString::fromStdString(MergeFlagsTerm));
         return doc.xapianDocument();
     }
 
