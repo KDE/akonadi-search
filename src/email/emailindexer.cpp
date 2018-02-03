@@ -44,7 +44,7 @@ QStringList EmailIndexer::mimeTypes()
     return { KMime::Message::mimeType() };
 }
 
-Xapian::Document EmailIndexer::doIndex(const Akonadi::Item &item)
+Xapian::Document EmailIndexer::doIndex(const Item &item, const Collection &parent)
 {
     Akonadi::MessageStatus status;
     status.setStatusFromFlags(item.flags());
@@ -69,11 +69,13 @@ Xapian::Document EmailIndexer::doIndex(const Akonadi::Item &item)
     doc.addValue(EmailQueryPropertyMapper::instance().valueProperty(Akonadi::EmailSearchTerm::ByteSize), item.size());
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index",
-               "Item does not have a valid parent collection");
-
-    Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addCollectionTerm(colId);
+    const auto _parent = parent.isValid() ? parent : item.parentCollection();
+    if (!_parent.isValid()) {
+        Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::EmailIndexer::index",
+                   "Item does not have a valid parent collection");
+        return {};
+    }
+    doc.addCollectionTerm(_parent.id());
 
     return doc.xapianDocument();
 }

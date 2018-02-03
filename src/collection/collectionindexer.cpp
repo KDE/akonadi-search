@@ -37,7 +37,7 @@ QStringList CollectionIndexer::mimeTypes()
     return { Collection::mimeType() };
 }
 
-Xapian::Document CollectionIndexer::doIndex(const Akonadi::Collection &col)
+Xapian::Document CollectionIndexer::doIndex(const Collection &col, const Collection &parent)
 {
     XapianDocument doc;
 
@@ -61,8 +61,13 @@ Xapian::Document CollectionIndexer::doIndex(const Akonadi::Collection &col)
         }
     }
 
-    const Akonadi::Collection::Id colId = col.parentCollection().id();
-    doc.addCollectionTerm(colId);
+    const auto _parent = parent.isValid() ? parent : col.parentCollection();
+    if (!_parent.isValid()) {
+        Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::CollectionIndexer::index",
+                   "Collection does not have a valid parent collection");
+        return {};
+    }
+    doc.addCollectionTerm(_parent.id());
 
     return doc.xapianDocument();
 }

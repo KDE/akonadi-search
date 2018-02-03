@@ -35,7 +35,7 @@ public:
     static QStringList mimeTypes();
 
     using Indexer::doIndex;
-    Xapian::Document doIndex(const Akonadi::Collection &item) override;
+    Xapian::Document doIndex(const Collection &item, const Collection &parent) override;
 };
 
 }

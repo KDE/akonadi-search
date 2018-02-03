@@ -39,7 +39,7 @@ QStringList ContactIndexer::mimeTypes()
     return { KContacts::Addressee::mimeType() };
 }
 
-Xapian::Document ContactIndexer::doIndex(const Akonadi::Item &item)
+Xapian::Document ContactIndexer::doIndex(const Item &item, const Collection &parent)
 {
     KContacts::Addressee addressee;
     try {
@@ -72,11 +72,13 @@ Xapian::Document ContactIndexer::doIndex(const Akonadi::Item &item)
     }
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
-               "Item does not have a valid parent collection");
-
-    const Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addCollectionTerm(colId);
+    const auto _parent = parent.isValid() ? parent : item.parentCollection();
+    if (!_parent.isValid()) {
+        Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::ContactIndexer::index",
+                   "Item does not have a valid parent collection");
+        return {};
+    }
+    doc.addCollectionTerm(_parent.id());
 
     if (addressee.birthday().isValid()) {
         doc.addValue(propMapper.valueProperty(Akonadi::ContactSearchTerm::Birthday),

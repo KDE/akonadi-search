@@ -108,7 +108,7 @@ void StoreTest::indexItems(const QVector<Akonadi::Item> &items)
         store->setOpenMode(Store::WriteOnly);
         QCOMPARE(store->openMode(), Store::WriteOnly);
 
-        const auto document = indexer->index(item);
+        const auto document = indexer->index(item, {});
         QVERIFY(store->index(item.id(), document));
         QVERIFY(store->commit());
     }
@@ -270,7 +270,7 @@ void StoreTest::indexCollections()
     store->setOpenMode(Store::WriteOnly);
     QCOMPARE(store->openMode(), Store::WriteOnly);
     for (const auto &col : cols) {
-        const auto document = indexer->index(col);
+        const auto document = indexer->index(col, {});
         QVERIFY(store->index(col.id(), document));
         QVERIFY(store->commit());
     }

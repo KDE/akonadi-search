@@ -66,19 +66,19 @@ Indexer* Indexer::create(const QString &mimeType)
     return sIndexers->instantiate(mimeType);
 }
 
-QByteArray Indexer::index(const Akonadi::Item &item)
+QByteArray Indexer::index(const Item &item, const Collection &parent)
 {
-    const auto serialized = doIndex(item).serialise();
+    const auto serialized = doIndex(item, parent).serialise();
     return QByteArray(serialized.c_str(), serialized.size());
 }
 
-QByteArray Indexer::index(const Akonadi::Collection &collection)
+QByteArray Indexer::index(const Collection &collection, const Collection &parent)
 {
-    const auto serialized = doIndex(collection).serialise();
+    const auto serialized = doIndex(collection, parent).serialise();
     return QByteArray(serialized.c_str(), serialized.size());
 }
 
-Xapian::Document Indexer::doIndex(const Akonadi::Item &)
+Xapian::Document Indexer::doIndex(const Item &, const Collection &)
 {
     // Assert even in relase mode
     qt_assert_x("Indexer::doIndex(Akonadi::Item)", "Default implementation called!",
@@ -86,7 +86,7 @@ Xapian::Document Indexer::doIndex(const Akonadi::Item &)
     return {};
 }
 
-Xapian::Document Indexer::doIndex(const Akonadi::Collection &)
+Xapian::Document Indexer::doIndex(const Collection &, const Collection &)
 {
     // Assert event in release mode
     qt_assert_x("Indexer::doIndex(Akonadi::Collection)", "Default implementation called!",

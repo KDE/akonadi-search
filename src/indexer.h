@@ -46,12 +46,12 @@ public:
 
     virtual ~Indexer();
 
-    QByteArray index(const Akonadi::Item &item);
-    QByteArray index(const Akonadi::Collection &collection);
+    QByteArray index(const Item &item, const Collection &parent);
+    QByteArray index(const Collection &collection, const Collection &parent);
 
 protected:
-    virtual Xapian::Document doIndex(const Akonadi::Item &item);
-    virtual Xapian::Document doIndex(const Akonadi::Collection &collection);
+    virtual Xapian::Document doIndex(const Item &item, const Collection &parent);
+    virtual Xapian::Document doIndex(const Collection &collection, const Collection &parent);
 
     explicit Indexer();
 };

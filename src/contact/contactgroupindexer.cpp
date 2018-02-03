@@ -39,7 +39,7 @@ QStringList ContactGroupIndexer::mimeTypes()
     return { KContacts::ContactGroup::mimeType() };
 }
 
-Xapian::Document ContactGroupIndexer::doIndex(const Akonadi::Item &item)
+Xapian::Document ContactGroupIndexer::doIndex(const Item &item, const Collection &parent)
 {
     KContacts::ContactGroup group;
     try {
@@ -56,11 +56,13 @@ Xapian::Document ContactGroupIndexer::doIndex(const Akonadi::Item &item)
     doc.indexText(name, ContactQueryPropertyMapper::instance().prefix(Akonadi::ContactSearchTerm::Name));
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
-               "Item does not have a valid parent collection");
-
-    const Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addCollectionTerm(colId);
+    const auto _parent = parent.isValid() ? parent : item.parentCollection();
+    if (!_parent.isValid()) {
+        Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::ContactIndexer::index",
+                   "Item does not have a valid parent collection");
+        return {};
+    }
+    doc.addCollectionTerm(_parent.id());
 
     return doc.xapianDocument();
 }

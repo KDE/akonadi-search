@@ -106,9 +106,8 @@ private Q_SLOTS:
             item.setId(1);
             item.setSize(1000);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(1));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Replied << Akonadi::MessageFlags::Encrypted);
-            QVERIFY(emailStore->index(1, emailIndexer->index(item)));
+            QVERIFY(emailStore->index(1, emailIndexer->index(item, Akonadi::Collection(1))));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -130,9 +129,8 @@ private Q_SLOTS:
             item.setId(2);
             item.setSize(1002);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            QVERIFY(emailStore->index(2, emailIndexer->index(item)));
+            QVERIFY(emailStore->index(2, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -154,9 +152,8 @@ private Q_SLOTS:
             item.setId(3);
             item.setSize(1002);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            QVERIFY(emailStore->index(3, emailIndexer->index(item)));
+            QVERIFY(emailStore->index(3, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -187,9 +184,8 @@ private Q_SLOTS:
             item.setId(4);
             item.setSize(1002);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            QVERIFY(emailStore->index(4, emailIndexer->index(item)));
+            QVERIFY(emailStore->index(4, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -210,7 +206,6 @@ private Q_SLOTS:
             item.setId(5);
             item.setSize(1002);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Seen
                           << Akonadi::MessageFlags::Deleted
                           << Akonadi::MessageFlags::Answered
@@ -228,7 +223,7 @@ private Q_SLOTS:
                           /*<< Akonadi::MessageFlags::Spam*/
                           << Akonadi::MessageFlags::Ham);
             //Spam is exclude from indexer. So we can't add it.
-            QVERIFY(emailStore->index(5, emailIndexer->index(item)));
+            QVERIFY(emailStore->index(5, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -249,9 +244,8 @@ private Q_SLOTS:
             item.setId(6);
             item.setSize(50);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            QVERIFY(emailStore->index(6, emailIndexer->index(item)));
+            QVERIFY(emailStore->index(6, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         emailStore->commit();
 
@@ -267,8 +261,7 @@ private Q_SLOTS:
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(100);
             item.setPayload(addressee);
-            item.setParentCollection(Akonadi::Collection(3));
-            QVERIFY(contactStore->index(100, contactIndexer->index(item)));
+            QVERIFY(contactStore->index(100, contactIndexer->index(item, Akonadi::Collection(3))));
         }
         {
             KContacts::Addressee addressee;
@@ -279,8 +272,7 @@ private Q_SLOTS:
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(101);
             item.setPayload(addressee);
-            item.setParentCollection(Akonadi::Collection(3));
-            QVERIFY(contactStore->index(101, contactIndexer->index(item)));
+            QVERIFY(contactStore->index(101, contactIndexer->index(item, Akonadi::Collection(3))));
         }
         {
             KContacts::Addressee addressee;
@@ -291,8 +283,7 @@ private Q_SLOTS:
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(102);
             item.setPayload(addressee);
-            item.setParentCollection(Akonadi::Collection(3));
-            QVERIFY(contactStore->index(102, contactIndexer->index(item)));
+            QVERIFY(contactStore->index(102, contactIndexer->index(item, Akonadi::Collection(3))));
         }
         {
             KContacts::Addressee addressee;
@@ -303,8 +294,7 @@ private Q_SLOTS:
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(105);
             item.setPayload(addressee);
-            item.setParentCollection(Akonadi::Collection(3));
-            QVERIFY(contactStore->index(105, contactIndexer->index(item)));
+            QVERIFY(contactStore->index(105, contactIndexer->index(item, Akonadi::Collection(3))));
         }
         {
             KContacts::ContactGroup group;
@@ -312,8 +302,7 @@ private Q_SLOTS:
             Akonadi::Item item(KContacts::ContactGroup::mimeType());
             item.setId(103);
             item.setPayload(group);
-            item.setParentCollection(Akonadi::Collection(3));
-            QVERIFY(contactStore->index(103, contactGroupIndexer->index(item)));
+            QVERIFY(contactStore->index(103, contactGroupIndexer->index(item, Akonadi::Collection(3))));
         }
         {
             KContacts::ContactGroup group;
@@ -321,8 +310,7 @@ private Q_SLOTS:
             Akonadi::Item item(KContacts::ContactGroup::mimeType());
             item.setId(104);
             item.setPayload(group);
-            item.setParentCollection(Akonadi::Collection(4));
-            QVERIFY(contactStore->index(104, contactGroupIndexer->index(item)));
+            QVERIFY(contactStore->index(104, contactGroupIndexer->index(item, Akonadi::Collection(4))));
         }
         contactStore->commit();
 
@@ -342,9 +330,8 @@ private Q_SLOTS:
             item.setId(1000);
             item.setSize(1002);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(5));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            QVERIFY(noteStore->index(1000, noteIndexer->index(item)));
+            QVERIFY(noteStore->index(1000, noteIndexer->index(item, Akonadi::Collection(5))));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -361,9 +348,8 @@ private Q_SLOTS:
             item.setId(1001);
             item.setSize(1002);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(5));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            QVERIFY(noteStore->index(1001, noteIndexer->index(item)));
+            QVERIFY(noteStore->index(1001, noteIndexer->index(item, Akonadi::Collection(5))));
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
@@ -380,9 +366,8 @@ private Q_SLOTS:
             item.setId(1002);
             item.setSize(1002);
             item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(5));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            QVERIFY(noteStore->index(1002, noteIndexer->index(item)));
+            QVERIFY(noteStore->index(1002, noteIndexer->index(item, Akonadi::Collection(5))));
         }
         noteStore->commit();
 
@@ -407,8 +392,7 @@ private Q_SLOTS:
             Akonadi::Item item(KCalCore::Event::eventMimeType());
             item.setId(2001);
             item.setPayload<KCalCore::Event::Ptr>(event);
-            item.setParentCollection(Akonadi::Collection(6));
-            QVERIFY(eventStore->index(2001, eventIndexer->index(item)));
+            QVERIFY(eventStore->index(2001, eventIndexer->index(item, Akonadi::Collection(6))));
         }
         eventStore->commit();
     }
