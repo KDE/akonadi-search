@@ -90,11 +90,10 @@ private Q_SLOTS:
 
             Akonadi::Item item(KMime::Message::mimeType());
             item.setId(1);
-            item.setParentCollection(Akonadi::Collection(1));
             item.setPayload(msg);
             item.setSize(60);
 
-            QVERIFY(plugin->index(item.mimeType(), item.id(), mimeIndexer->index(item)));
+            QVERIFY(plugin->index(item.mimeType(), item.id(), mimeIndexer->index(item, Akonadi::Collection(1))));
         }
 
         {
@@ -106,11 +105,10 @@ private Q_SLOTS:
 
             Akonadi::Item item(KMime::Message::mimeType());
             item.setId(2);
-            item.setParentCollection(Akonadi::Collection(1));
             item.setPayload(msg);
             item.setSize(70);
 
-            QVERIFY(plugin->index(item.mimeType(), item.id(), mimeIndexer->index(item)));
+            QVERIFY(plugin->index(item.mimeType(), item.id(), mimeIndexer->index(item, Akonadi::Collection(1))));
         }
 
         delete plugin; // force commit

@@ -145,6 +145,8 @@ bool XapianDatabase::deleteDocument(uint id)
 
     try {
         static_cast<Xapian::WritableDatabase*>(d->db)->delete_document(id);
+    } catch (const Xapian::DocNotFoundError &) {
+        return true;
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADISEARCH_LOG) << "Failed to delete document due to Xapian db corruption:" << err.get_error_string();
         qCWarning(AKONADISEARCH_LOG) << err.get_msg().c_str() << err.get_context().c_str() << err.get_description().c_str();

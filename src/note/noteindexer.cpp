@@ -42,7 +42,7 @@ QStringList NoteIndexer::mimeTypes()
 }
 
 
-Xapian::Document NoteIndexer::doIndex(const Akonadi::Item &item)
+Xapian::Document NoteIndexer::doIndex(const Item &item, const Collection &parent)
 {
    KMime::Message::Ptr msg;
     try {
@@ -53,8 +53,13 @@ Xapian::Document NoteIndexer::doIndex(const Akonadi::Item &item)
 
     XapianDocument doc(process(msg));
 
-    Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addCollectionTerm(colId);
+    const auto _parent = parent.isValid() ? parent : item.parentCollection();
+    if (!_parent.isValid()) {
+        Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::CalenderIndexer::index",
+                   "Item does not have a valid parent collection");
+        return {};
+    }
+    doc.addCollectionTerm(_parent.id());
 
     return doc.xapianDocument();
 }

@@ -39,7 +39,7 @@ QStringList IncidenceIndexer::mimeTypes()
              KCalCore::Journal::journalMimeType() };
 }
 
-Xapian::Document IncidenceIndexer::doIndex(const Akonadi::Item &item)
+Xapian::Document IncidenceIndexer::doIndex(const Item &item, const Collection &parent)
 {
     Xapian::Document xapDoc;
     if (!item.hasPayload()) {
@@ -65,12 +65,15 @@ Xapian::Document IncidenceIndexer::doIndex(const Akonadi::Item &item)
     }
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::CalenderIndexer::index",
-               "Item does not have a valid parent collection");
+    const auto _parent = parent.isValid() ? parent : item.parentCollection();
+    if (!_parent.isValid()) {
+        Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::CalenderIndexer::index",
+                   "Item does not have a valid parent collection");
+        return {};
+    }
 
     XapianDocument doc(xapDoc);
-    const Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addCollectionTerm(colId);
+    doc.addCollectionTerm(_parent.id());
 
     return doc.xapianDocument();
 }
