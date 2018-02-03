@@ -27,6 +27,7 @@
 #include <akonadi/abstractsearchplugin.h>
 #include <QObject>
 #include <QHash>
+#include "objectcache.h"
 
 namespace Akonadi
 {
@@ -49,17 +50,13 @@ public:
 
 private:
     struct QueryMapperStorePair {
-        QueryMapperStorePair() {}
-        QueryMapperStorePair(QueryMapper *queryMapper, Store *store);
-        bool isValid() const;
+        static QueryMapperStorePair *create(const QString &mimeType);
+        ~QueryMapperStorePair();
 
         QueryMapper *queryMapper = nullptr;
         Store *store = nullptr;
     };
-
-    QueryMapperStorePair getQueryMapperAndStore(const QString &mimeType);
-
-    QHash<QString, QueryMapperStorePair> mStoreCache;
+    ObjectCache<QueryMapperStorePair> mStoreCache;
 };
 
 }

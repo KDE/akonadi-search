@@ -27,7 +27,7 @@
 #include "akonadiplugin_search_debug.h"
 #include "store.h"
 #include "querymapper.h"
-#include "src/resultiterator.h"
+#include "resultiterator.h"
 
 #include <QStringList>
 #include <QSet>
@@ -35,15 +35,26 @@
 
 using namespace Akonadi::Search;
 
-SearchPlugin::QueryMapperStorePair::QueryMapperStorePair(QueryMapper *queryMapper, Store *store)
-    : queryMapper(queryMapper)
-    , store(store)
+SearchPlugin::QueryMapperStorePair *SearchPlugin::QueryMapperStorePair::create(const QString &mimeType)
 {
+    QScopedPointer<QueryMapperStorePair> pair(new QueryMapperStorePair);
+    pair->queryMapper = QueryMapper::create(mimeType);
+    if (!pair->queryMapper) {
+        qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "No QueryMapper for type" << mimeType;
+        return {};
+    }
+    pair->store = Store::create(mimeType);
+    if (!pair->store) {
+        qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "No Store for type" << mimeType;
+        return {};
+    }
+    return pair.take();
 }
 
-bool SearchPlugin::QueryMapperStorePair::isValid() const
+SearchPlugin::QueryMapperStorePair::~QueryMapperStorePair()
 {
-    return queryMapper && store;
+    delete queryMapper;
+    delete store;
 }
 
 
@@ -54,29 +65,6 @@ SearchPlugin::SearchPlugin()
 
 SearchPlugin::~SearchPlugin()
 {
-    for (auto it = mStoreCache.begin(), end = mStoreCache.end(); it != end; ++it) {
-        delete it->queryMapper;
-        delete it->store;
-    }
-}
-
-SearchPlugin::QueryMapperStorePair SearchPlugin::getQueryMapperAndStore(const QString &mimeType)
-{
-    auto it = mStoreCache.find(mimeType);
-    if (it == mStoreCache.end()) {
-        QueryMapper *queryMapper = QueryMapper::create(mimeType);
-        if (!queryMapper) {
-            qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "No QueryMapper for type" << mimeType;
-            return {};
-        }
-        Store *store = Store::create(mimeType);
-        if (!store) {
-            qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "No Store for type" << mimeType;
-            return {};
-        }
-        it = mStoreCache.insert(mimeType, QueryMapperStorePair{ queryMapper, store });
-    }
-    return (*it);
 }
 
 QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qint64> &collections,
@@ -123,14 +111,12 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
 
     QSet<qint64> resultSet;
     for (const auto &mimeType : mimeTypes) {
-        QueryMapperStorePair storePair = getQueryMapperAndStore(mimeType);
-        if (!storePair.isValid()) {
-            continue;
-        }
-        const auto query = storePair.queryMapper->map(searchQuery);
-        ResultIterator iter = storePair.store->search(query, searchQuery.limit());
-        while (iter.next()) {
-            resultSet << iter.id();
+        if (const auto storePair = mStoreCache.get(mimeType)) {
+            const auto query = storePair->queryMapper->map(searchQuery);
+            auto iter = storePair->store->search(query, searchQuery.limit());
+            while (iter.next()) {
+                resultSet << iter.id();
+            }
         }
     }
     qCDebug(AKONADIPLUGIN_SEARCH_LOG) << "Got" << resultSet.count() << "results";
