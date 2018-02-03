@@ -216,26 +216,21 @@ kde_enable_exceptions()
 
 include_directories(
     ${XAPIAN_INCLUDE_DIR}
-    ${CMAKE_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/core
-    ${CMAKE_BINARY_DIR}/core
-    ${CMAKE_SOURCE_DIR}/xapian
-    ${CMAKE_BINARY_DIR}/xapian
 )
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6AkonadiSearch")
 # Targets
 add_subdirectory(autotests)
 add_subdirectory(src)
-add_subdirectory(xapian)
-add_subdirectory(core)
-add_subdirectory(agent)
-add_subdirectory(lib)
+#add_subdirectory(xapian)
+#add_subdirectory(core)
+#add_subdirectory(agent)
+#add_subdirectory(lib)
 add_subdirectory(akonadiplugin)
-add_subdirectory(search)
-add_subdirectory(debug)
+#add_subdirectory(search)
+#add_subdirectory(debug)
 if(AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
-    add_subdirectory(runner)
+    #add_subdirectory(runner)
 endif()
 
 configure_package_config_file(

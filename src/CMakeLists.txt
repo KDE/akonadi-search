@@ -41,18 +41,13 @@ set(AKONADISEARCH_LIB_SRCS
     note/notestore.cpp
 )
 
-set(TMP
-    query.cpp
-    resultiterator.cpp
-    store.cpp
-    term.cpp
-    xapiandatabase.cpp
-    xapiandocument.cpp
-    xapianqueryparser.cpp
-    xapiansearchstore.cpp
-    xapiantermgenerator.cpp
-    stores/email/agepostingsource.cpp
-    stores/email/emailsearchstore.cpp
+ecm_generate_headers(AkonadiSearch_LIB_HEADERS
+    HEADER_NAMES
+    Indexer
+    QueryMapper
+    ResultIterator
+    Store
+    REQUIRED_HEADERS AkonadiSearch_LIB_HEADERS
 )
 
 ecm_qt_declare_logging_category(
@@ -77,4 +72,17 @@ target_link_libraries(KF5AkonadiSearch
         KF5::Contacts
         KF5::CalendarCore
         ${XAPIAN_LIBRARIES}
+)
+
+set_target_properties(KF5AkonadiSearch PROPERTIES
+    VERSION ${AKONADISEARCH_VERSION_STRING}
+    SOVERSION ${AKONADISEARCH_SOVERSION}
+    EXPORT_NAME AkonadiSearch
+)
+
+install(TARGETS KF5AkonadiSearch EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES
+    ${CMAKE_CURRENT_BINARY_DIR}/akonadisearch_export.h
+    ${AkonadiSearch_LIB_HEADERS}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch COMPONENT Devel
 )
