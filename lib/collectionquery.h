@@ -41,7 +41,7 @@ class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
 public:
     CollectionQuery();
-    virtual ~CollectionQuery();
+    ~CollectionQuery() override;
 
     void setNamespace(const QStringList &ns);
     void setMimetype(const QStringList &mt);

@@ -42,7 +42,7 @@ class AKONADI_SEARCH_CORE_EXPORT SearchStore : public QObject
     Q_OBJECT
 public:
     explicit SearchStore(QObject *parent = nullptr);
-    virtual ~SearchStore();
+    ~SearchStore() override;
 
     /**
      * Override search stores for testing

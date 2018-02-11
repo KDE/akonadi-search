@@ -42,7 +42,7 @@ class AKONADI_SEARCH_XAPIAN_EXPORT XapianSearchStore : public SearchStore
     Q_OBJECT
 public:
     explicit XapianSearchStore(QObject *parent = nullptr);
-    virtual ~XapianSearchStore();
+    ~XapianSearchStore() override;
 
     int exec(const Query &query) override;
     void close(int queryId) override;

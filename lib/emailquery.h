@@ -40,7 +40,7 @@ class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
 public:
     EmailQuery();
-    virtual ~EmailQuery();
+    ~EmailQuery() override;
 
     enum OpType {
         OpAnd = 0,
