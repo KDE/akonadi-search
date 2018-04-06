@@ -31,6 +31,7 @@ Name[tr]=PIM Bağlantılarını Ara
 Name[uk]=Пошук у записах контактів PIM
 Name[x-test]=xxPIM Contacts Searchxx
 Name[zh_CN]=个人信息存储联系人搜索
+Name[zh_TW]=PIM 聯絡人搜尋
 Type=Service
 
 X-KDE-ServiceTypes=KCModule

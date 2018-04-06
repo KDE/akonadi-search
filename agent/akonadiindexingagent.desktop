@@ -33,6 +33,7 @@ Name[tr]=Akonadi İndeksleme Aracı
 Name[uk]=Агент індексування для Akonadi
 Name[x-test]=xxAkonadi Indexing Agentxx
 Name[zh_CN]=Akonadi 索引器
+Name[zh_TW]=Akonadi 索引精靈
 
 Type=AkonadiAgent
 Exec=akonadi_indexing_agent
