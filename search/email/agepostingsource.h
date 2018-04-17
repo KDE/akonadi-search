@@ -46,7 +46,7 @@ public:
     void init(const Xapian::Database &db_) override;
 
 private:
-    uint m_currentTime_t;
+    unsigned int m_currentTime_t;
 };
 
 }
