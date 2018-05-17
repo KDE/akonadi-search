@@ -44,7 +44,7 @@ void AkonadiSearchDebugWidgetTest::shouldHaveDefaultValue()
     QVERIFY(lineEdit);
     QVERIFY(lineEdit->text().isEmpty());
     QVERIFY(lineEdit->trapReturnKey());
-    QVERIFY(lineEdit->isClearButtonShown());
+    QVERIFY(lineEdit->isClearButtonEnabled());
     QPlainTextEdit *editorWidget = widget.findChild<QPlainTextEdit *>(QStringLiteral("plaintexteditor"));
     QVERIFY(editorWidget->isReadOnly());
     QVERIFY(editorWidget);

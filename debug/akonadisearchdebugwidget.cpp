@@ -40,7 +40,7 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     hbox->addWidget(lab);
     mLineEdit = new KLineEdit(this);
     mLineEdit->setTrapReturnKey(true);
-    mLineEdit->setClearButtonShown(true);
+    mLineEdit->setClearButtonEnabled(true);
     mLineEdit->setObjectName(QStringLiteral("lineedit"));
     connect(mLineEdit, &KLineEdit::textChanged, this, &AkonadiSearchDebugWidget::slotSearchLineTextChanged);
     hbox->addWidget(mLineEdit);
