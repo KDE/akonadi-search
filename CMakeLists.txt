@@ -66,6 +66,7 @@ add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DQT_USE_QSTRINGBUILDER)
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
 add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
+#add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
 # Turn exceptions on
 kde_enable_exceptions()
 
