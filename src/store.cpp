@@ -30,6 +30,7 @@
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
 #include "utils.h"
+#include "querypropertymapper_p.h"
 
 #include "email/emailstore.h"
 #include "emailcontacts/emailcontactsstore.h"
@@ -38,6 +39,7 @@
 #include "note/notestore.h"
 #include "collection/collectionstore.h"
 
+#include <AkonadiCore/SearchQuery>
 #include <AkonadiCore/ServerManager>
 
 #include <QStandardPaths>
@@ -317,4 +319,30 @@ ResultIterator Store::search(const QByteArray &serializedQuery, unsigned int lim
     ResultIterator iter;
     iter.d->init(mset);
     return iter;
+}
+
+namespace {
+
+class HelperPropertyMapper : public QueryPropertyMapper
+{
+public:
+    HelperPropertyMapper() = default;
+};
+
+}
+
+qint64 Store::indexedItems(qint64 collectionId)
+{
+    if (!d->ensureDb()) {
+        return 0;
+    }
+
+    const std::string term = HelperPropertyMapper().prefix(Akonadi::SearchTerm::Collection) + std::to_string(collectionId);
+    try {
+        return d->db->db()->get_termfreq(term);
+    } catch (const Xapian::Error &err) {
+        qCWarning(AKONADISEARCH_LOG, "Xapian termfreq error: %s", err.get_error_string());
+        qCWarning(AKONADISEARCH_LOG, "%s: %s (%s)", err.get_msg().c_str(), err.get_context().c_str(), err.get_description().c_str());
+        return 0;
+    }
 }

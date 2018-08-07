@@ -14,6 +14,8 @@ set(CMAKE_MODULE_PATH
     ${ECM_MODULE_PATH}
 )
 
+set(CMAKE_CXX_STANDARD 14)
+
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)
 include(ECMInstalledLibraryCheck)
