@@ -19,34 +19,22 @@
  *
  */
 
-#include "utils.h"
+#ifndef AKONADISEARCH_CONTACTCOMPLETERTEST_H_
+#define AKONADISEARCH_CONTACTCOMPLETERTEST_H_
 
-#include <xapian.h>
+#include <QObject>
 
-#include <QString>
-#include <QDataStream>
-
-QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document)
+class ContactCompleterTest : public QObject
 {
-    const std::string raw = document.serialise();
-    const auto size = raw.size();
-    stream.writeRawData(reinterpret_cast<const char *>(&size), sizeof(std::string::size_type));
-    stream.writeRawData(raw.c_str(), raw.size());
-    return stream;
-}
+    Q_OBJECT
 
+private Q_SLOTS:
+    void initTestCase();
+    void cleanupTestCase(); // cleanup after each testrun
 
-QDataStream &operator>>(QDataStream &stream, Xapian::Document &document)
-{
-    std::string::size_type size;
-    stream.readRawData(reinterpret_cast<char*>(&size), sizeof(std::string::size_type));
-    std::string string(size, '\0');
-    stream.readRawData(&string.front(), size);
-    document = Xapian::Document::unserialise(string);
-    return stream;
-}
+    void testContactCompleter_data();
+    void testContactCompleter();
+};
 
-QString Akonadi::Search::EmailContactsMimeType()
-{
-    return QStringLiteral("vnd.application.akonadi/email-contacts");
-}
+#endif
+

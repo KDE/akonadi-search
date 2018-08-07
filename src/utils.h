@@ -22,12 +22,23 @@
 #ifndef AKONADISEARCH_UTILS_H
 #define AKONADISEARCH_UTILS_H
 
+#include "akonadisearch_export.h"
+
 namespace Xapian {
 class Document;
 }
 class QDataStream;
+class QString;
 
 QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document);
 QDataStream &operator>>(QDataStream &stream, Xapian::Document &document);
+
+namespace Akonadi {
+namespace Search {
+
+AKONADISEARCH_EXPORT QString EmailContactsMimeType();
+
+}
+}
 
 #endif

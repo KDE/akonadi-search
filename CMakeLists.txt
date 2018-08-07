@@ -171,6 +171,7 @@ find_package(KF6Contacts ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6Mime ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KPim6AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
 find_package(KF6CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF6Codecs ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6TextUtils ${KTEXTADDONS_MIN_VERSION} CONFIG REQUIRED)
 
 find_package(Corrosion CONFIG)
@@ -220,7 +221,6 @@ include_directories(
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6AkonadiSearch")
 # Targets
-add_subdirectory(autotests)
 add_subdirectory(src)
 #add_subdirectory(xapian)
 #add_subdirectory(core)
@@ -231,6 +231,11 @@ add_subdirectory(akonadiplugin)
 #add_subdirectory(debug)
 if(AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     #add_subdirectory(runner)
+endif()
+
+if(BUILD_TESTING)
+    add_subdirectory(autotests)
+    add_subdirectory(tests)
 endif()
 
 configure_package_config_file(

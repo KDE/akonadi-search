@@ -19,34 +19,33 @@
  *
  */
 
-#include "utils.h"
-
 #include <xapian.h>
 
-#include <QString>
-#include <QDataStream>
+#include "emailcontactsstore.h"
+#include "store_p.h"
+#include "xapiandatabase.h"
+#include "xapiandocument.h"
+#include "utils.h"
 
-QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document)
+
+using namespace Akonadi::Search;
+
+EmailContactsStore::EmailContactsStore()
+    : Store()
 {
-    const std::string raw = document.serialise();
-    const auto size = raw.size();
-    stream.writeRawData(reinterpret_cast<const char *>(&size), sizeof(std::string::size_type));
-    stream.writeRawData(raw.c_str(), raw.size());
-    return stream;
+    setDbName(QStringLiteral("emailContacts"));
 }
 
-
-QDataStream &operator>>(QDataStream &stream, Xapian::Document &document)
+QStringList EmailContactsStore::mimeTypes()
 {
-    std::string::size_type size;
-    stream.readRawData(reinterpret_cast<char*>(&size), sizeof(std::string::size_type));
-    std::string string(size, '\0');
-    stream.readRawData(&string.front(), size);
-    document = Xapian::Document::unserialise(string);
-    return stream;
+    return { EmailContactsMimeType() };
 }
 
-QString Akonadi::Search::EmailContactsMimeType()
+QString EmailContactsStore::contactName(qint64 documentId)
 {
-    return QStringLiteral("vnd.application.akonadi/email-contacts");
+    const auto document = d->db->document(static_cast<uint>(documentId));
+    if (document.isValid()) {
+        return QString::fromStdString(document.xapianDocument().get_data());
+    }
+    return {};
 }
