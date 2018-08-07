@@ -25,10 +25,13 @@
 #include "collectionquerypropertymapper.h"
 #include "xapiandocument.h"
 #include "akonadisearch_debug.h"
+#include "utils.h"
 
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/SearchQuery>
 #include <AkonadiCore/CollectionIdentificationAttribute>
+
+#include <QDataStream>
 
 using namespace Akonadi::Search;
 
@@ -37,7 +40,7 @@ QStringList CollectionIndexer::mimeTypes()
     return { Collection::mimeType() };
 }
 
-Xapian::Document CollectionIndexer::doIndex(const Collection &col, const Collection &parent)
+bool CollectionIndexer::doIndex(const Collection &col, const Collection &parent, QDataStream &stream)
 {
     XapianDocument doc;
 
@@ -65,10 +68,11 @@ Xapian::Document CollectionIndexer::doIndex(const Collection &col, const Collect
     if (!_parent.isValid()) {
         Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::CollectionIndexer::index",
                    "Collection does not have a valid parent collection");
-        return {};
+        return false;
     }
     doc.addCollectionTerm(_parent.id());
 
-    return doc.xapianDocument();
+    stream << col.id() << doc.xapianDocument();
+    return true;
 }
 

@@ -26,6 +26,7 @@
 #include "emailquerypropertymapper.h"
 #include "xapiandocument.h"
 #include "akonadisearch_debug.h"
+#include "utils.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
@@ -34,6 +35,7 @@
 #include <KMime/Content>
 
 #include <QTextDocument>
+#include <QDataStream>
 
 using namespace Akonadi::Search;
 
@@ -44,12 +46,12 @@ QStringList EmailIndexer::mimeTypes()
     return { KMime::Message::mimeType() };
 }
 
-Xapian::Document EmailIndexer::doIndex(const Item &item, const Collection &parent)
+bool EmailIndexer::doIndex(const Item &item, const Collection &parent, QDataStream &stream)
 {
     Akonadi::MessageStatus status;
     status.setStatusFromFlags(item.flags());
     if (status.isSpam()) {
-        return {};
+        return false;
     }
 
     XapianDocument doc;
@@ -61,7 +63,8 @@ Xapian::Document EmailIndexer::doIndex(const Item &item, const Collection &paren
     } catch (const Akonadi::PayloadException &e) {
         // It's perfectly possible that we only have flags
         doc.addBoolTerm(QString::fromStdString(MergeFlagsTerm));
-        return doc.xapianDocument();
+        stream << item.id() << doc.xapianDocument();
+        return true;
     }
 
     process(doc, msg);
@@ -73,11 +76,12 @@ Xapian::Document EmailIndexer::doIndex(const Item &item, const Collection &paren
     if (!_parent.isValid()) {
         Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::EmailIndexer::index",
                    "Item does not have a valid parent collection");
-        return {};
+        return false;
     }
     doc.addCollectionTerm(_parent.id());
 
-    return doc.xapianDocument();
+    stream << item.id() << doc.xapianDocument();
+    return true;
 }
 
 void EmailIndexer::processHeader(XapianDocument &doc, const std::string &key, KMime::Headers::Base *unstructured)

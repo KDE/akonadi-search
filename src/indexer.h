@@ -50,8 +50,8 @@ public:
     QByteArray index(const Collection &collection, const Collection &parent);
 
 protected:
-    virtual Xapian::Document doIndex(const Item &item, const Collection &parent);
-    virtual Xapian::Document doIndex(const Collection &collection, const Collection &parent);
+    virtual bool doIndex(const Item &item, const Collection &parent, QDataStream &stream);
+    virtual bool doIndex(const Collection &collection, const Collection &parent, QDataStream &stream);
 
     explicit Indexer();
 };

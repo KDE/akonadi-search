@@ -68,28 +68,36 @@ Indexer* Indexer::create(const QString &mimeType)
 
 QByteArray Indexer::index(const Item &item, const Collection &parent)
 {
-    const auto serialized = doIndex(item, parent).serialise();
-    return QByteArray(serialized.c_str(), serialized.size());
+    QByteArray buffer;
+    QDataStream stream(&buffer, QIODevice::WriteOnly);
+    if (doIndex(item, parent, stream)) {
+        return buffer;
+    }
+    return {};
 }
 
 QByteArray Indexer::index(const Collection &collection, const Collection &parent)
 {
-    const auto serialized = doIndex(collection, parent).serialise();
-    return QByteArray(serialized.c_str(), serialized.size());
+    QByteArray buffer;
+    QDataStream stream(&buffer, QIODevice::WriteOnly);
+    if (doIndex(collection, parent, stream)) {
+        return buffer;
+    }
+    return {};
 }
 
-Xapian::Document Indexer::doIndex(const Item &, const Collection &)
+bool Indexer::doIndex(const Item &, const Collection &, QDataStream &)
 {
     // Assert even in relase mode
     qt_assert_x("Indexer::doIndex(Akonadi::Item)", "Default implementation called!",
                 __FILE__, __LINE__);
-    return {};
+    return false;
 }
 
-Xapian::Document Indexer::doIndex(const Collection &, const Collection &)
+bool Indexer::doIndex(const Collection &, const Collection &, QDataStream &)
 {
     // Assert event in release mode
     qt_assert_x("Indexer::doIndex(Akonadi::Collection)", "Default implementation called!",
                 __FILE__, __LINE__);
-    return {};
+    return false;
 }

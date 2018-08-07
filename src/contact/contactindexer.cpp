@@ -26,6 +26,7 @@
 #include "contactquerypropertymapper.h"
 #include "xapiandocument.h"
 #include "akonadisearch_debug.h"
+#include "utils.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
@@ -39,14 +40,14 @@ QStringList ContactIndexer::mimeTypes()
     return { KContacts::Addressee::mimeType() };
 }
 
-Xapian::Document ContactIndexer::doIndex(const Item &item, const Collection &parent)
+bool ContactIndexer::doIndex(const Item &item, const Collection &parent, QDataStream &stream)
 {
     KContacts::Addressee addressee;
     try {
         addressee = item.payload<KContacts::Addressee>();
     } catch (const Akonadi::PayloadException &e) {
         qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the expected payload:" << e.what();
-        return {};
+        return false;
     }
 
     XapianDocument doc;
@@ -76,7 +77,7 @@ Xapian::Document ContactIndexer::doIndex(const Item &item, const Collection &par
     if (!_parent.isValid()) {
         Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::ContactIndexer::index",
                    "Item does not have a valid parent collection");
-        return {};
+        return false;
     }
     doc.addCollectionTerm(_parent.id());
 
@@ -91,6 +92,7 @@ Xapian::Document ContactIndexer::doIndex(const Item &item, const Collection &par
                      QDate::fromString(annStr, Qt::ISODate).toJulianDay());
     }
 
-    return doc.xapianDocument();
+    stream << item.id() << doc.xapianDocument();
+    return true;
 }
 

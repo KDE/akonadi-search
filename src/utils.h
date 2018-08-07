@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  Daniel Vrátil <dvratil@kde.org>
+ * Copyright (C) 2018  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,35 +19,15 @@
  *
  */
 
-#ifndef AKONADISEARCH_INCIDENCEINDEXER_H_
-#define AKONADISEARCH_INCIDENCEINDEXER_H_
+#ifndef AKONADISEARCH_UTILS_H
+#define AKONADISEARCH_UTILS_H
 
-#include "indexer.h"
-
-#include <KCalCore/Event>
-#include <KCalCore/Todo>
-#include <KCalCore/Journal>
-
-namespace Akonadi {
-namespace Search {
-
-class IncidenceIndexer : public Indexer
-{
-public:
-    using Indexer::Indexer;
-
-    static QStringList mimeTypes();
-
-    using Indexer::doIndex;
-    bool doIndex(const Item &item, const Collection &parent, QDataStream &stream) override;
-
-private:
-    Xapian::Document indexEvent(const KCalCore::Event::Ptr &event);
-    Xapian::Document indexTodo(const KCalCore::Todo::Ptr &todo);
-    Xapian::Document indexJournal(const KCalCore::Journal::Ptr &journal);
-};
-
+namespace Xapian {
+class Document;
 }
-}
+class QDataStream;
+
+QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document);
+QDataStream &operator>>(QDataStream &stream, Xapian::Document &document);
 
 #endif

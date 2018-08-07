@@ -41,7 +41,7 @@ public:
     static QStringList mimeTypes();
 
     using Indexer::doIndex;
-    Xapian::Document doIndex(const Item &item, const Collection &parent) override;
+    bool doIndex(const Item &item, const Collection &parent, QDataStream &stream) override;
 
     static const std::string MergeFlagsTerm;
 

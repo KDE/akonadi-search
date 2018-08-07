@@ -13,6 +13,7 @@ set(AKONADISEARCH_LIB_SRCS
     xapiandatabase.cpp
     xapiandocument.cpp
     xapiantermgenerator.cpp
+    utils.cpp
 
     email/emailindexer.cpp
     email/emailquerymapper.cpp

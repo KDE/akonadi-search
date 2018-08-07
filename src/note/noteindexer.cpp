@@ -25,6 +25,7 @@
 #include "noteindexer.h"
 #include "notequerypropertymapper.h"
 #include "xapiandocument.h"
+#include "utils.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
@@ -32,6 +33,7 @@
 #include <KMime/Message>
 
 #include <QTextDocument>
+#include <QDataStream>
 
 using namespace Akonadi::Search;
 
@@ -42,13 +44,13 @@ QStringList NoteIndexer::mimeTypes()
 }
 
 
-Xapian::Document NoteIndexer::doIndex(const Item &item, const Collection &parent)
+bool NoteIndexer::doIndex(const Item &item, const Collection &parent, QDataStream &stream)
 {
    KMime::Message::Ptr msg;
     try {
         msg = item.payload<KMime::Message::Ptr>();
     } catch (const Akonadi::PayloadException &) {
-        return {};
+        return false;
     }
 
     XapianDocument doc(process(msg));
@@ -57,11 +59,12 @@ Xapian::Document NoteIndexer::doIndex(const Item &item, const Collection &parent
     if (!_parent.isValid()) {
         Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::CalenderIndexer::index",
                    "Item does not have a valid parent collection");
-        return {};
+        return false;
     }
     doc.addCollectionTerm(_parent.id());
 
-    return doc.xapianDocument();
+    stream << item.id() << doc.xapianDocument();
+    return true;
 }
 
 Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
