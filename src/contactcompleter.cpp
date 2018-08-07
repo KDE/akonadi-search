@@ -51,8 +51,9 @@ public:
 
 using namespace Akonadi::Search;
 
-ContactCompleter::ContactCompleter(const QString &query, int limit)
-    : d(new Private(query, limit))
+ContactCompleter::ContactCompleter(const QString &query, int limit, QObject *parent)
+    : QObject(parent)
+    , d(new Private(query, limit))
 {
 }
 

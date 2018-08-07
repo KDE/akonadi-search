@@ -36,7 +36,7 @@ class AKONADISEARCH_EXPORT ContactCompleter : public QObject
 {
     Q_OBJECT
 public:
-    explicit ContactCompleter(const QString &query, int limit = 10);
+    explicit ContactCompleter(const QString &query, int limit = 10, QObject *parent = nullptr);
     ~ContactCompleter() override;
 
     void start();
