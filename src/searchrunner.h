@@ -1,6 +1,5 @@
 /*
- * This file is part of the KDE Akonadi Search Project
- * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
+ * Copyright (C) 2018  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,39 +19,43 @@
  *
  */
 
-#ifndef AKONADISEARCH_RESULTITERATOR_H
-#define AKONADISEARCH_RESULTITERATOR_H
+#ifndef AKONADISEARCH_SEARCHRUNNER_H
+#define AKONADISEARCH_SEARCHRUNNER_H
 
 #include "akonadisearch_export.h"
+#include "resultiterator.h"
 
-#include <AkonadiCore/Item>
+#include <QObject>
 
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+class SearchQuery;
+namespace Search {
 
-class Store;
-class ResultIteratorPrivate;
-class AKONADISEARCH_EXPORT ResultIterator
+class ResultIterator;
+class AKONADISEARCH_EXPORT SearchRunner : public QObject
 {
+    Q_OBJECT
 public:
-    ResultIterator();
-    ResultIterator(const ResultIterator &ri);
-    ResultIterator(ResultIterator &&) = default;
-    ~ResultIterator();
+    explicit SearchRunner(const Akonadi::SearchQuery &query, const QString &mimeType, QObject *parent = nullptr);
+    ~SearchRunner() override;
 
-    ResultIterator &operator=(ResultIterator &&) = default;
+    void setLimit(uint limit);
+    uint limit() const;
 
-    Akonadi::Item::Id id();
-    bool next();
+    void setAutoDelete(bool autodelete);
+    bool autoDelete() const;
+
+    void start();
+
+Q_SIGNALS:
+    void finished(ResultIterator resultIterator);
 
 private:
-    friend class Store;
-    ResultIteratorPrivate *d;
+    class Private;
+    QScopedPointer<Private> const d;
 };
 
 }
 }
 
-#endif // AKONADISEARCH_RESULTITERATOR_H
+#endif
