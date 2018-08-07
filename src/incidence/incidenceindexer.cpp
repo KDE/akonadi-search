@@ -26,6 +26,7 @@
 #include "incidencequerypropertymapper.h"
 #include "akonadisearch_debug.h"
 #include "xapiandocument.h"
+#include "utils.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
@@ -39,12 +40,12 @@ QStringList IncidenceIndexer::mimeTypes()
              KCalCore::Journal::journalMimeType() };
 }
 
-Xapian::Document IncidenceIndexer::doIndex(const Item &item, const Collection &parent)
+bool IncidenceIndexer::doIndex(const Item &item, const Collection &parent, QDataStream &stream)
 {
     Xapian::Document xapDoc;
     if (!item.hasPayload()) {
         qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the requested payload: No payload set";
-        return {};
+        return false;
     }
 
     if (item.hasPayload<KCalCore::Event::Ptr>()) {
@@ -61,7 +62,7 @@ Xapian::Document IncidenceIndexer::doIndex(const Item &item, const Collection &p
         }
         qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the requested payload: "
                                      << "Requested: KCalCore::Event, Todo or Journal, present:" << mts;
-        return {};
+        return false;
     }
 
     // Parent collection
@@ -69,13 +70,14 @@ Xapian::Document IncidenceIndexer::doIndex(const Item &item, const Collection &p
     if (!_parent.isValid()) {
         Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::CalenderIndexer::index",
                    "Item does not have a valid parent collection");
-        return {};
+        return false;
     }
 
     XapianDocument doc(xapDoc);
     doc.addCollectionTerm(_parent.id());
 
-    return doc.xapianDocument();
+    stream << item.id() << doc.xapianDocument();
+    return true;
 }
 
 Xapian::Document IncidenceIndexer::indexEvent(const KCalCore::Event::Ptr& event)

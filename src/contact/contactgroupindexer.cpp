@@ -26,11 +26,14 @@
 #include "contactquerypropertymapper.h"
 #include "xapiandocument.h"
 #include "akonadisearch_debug.h"
+#include "utils.h"
 
 #include <AkonadiCore/Item>
 #include <AkonadiCore/SearchQuery>
 
 #include <KContacts/ContactGroup>
+
+#include <QDataStream>
 
 using namespace Akonadi::Search;
 
@@ -39,14 +42,14 @@ QStringList ContactGroupIndexer::mimeTypes()
     return { KContacts::ContactGroup::mimeType() };
 }
 
-Xapian::Document ContactGroupIndexer::doIndex(const Item &item, const Collection &parent)
+bool ContactGroupIndexer::doIndex(const Item &item, const Collection &parent, QDataStream &stream)
 {
     KContacts::ContactGroup group;
     try {
         group = item.payload<KContacts::ContactGroup>();
     } catch (const Akonadi::PayloadException &e) {
         qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the expected payload:" << e.what();
-        return {};
+        return false;
     }
 
     XapianDocument doc;
@@ -60,10 +63,11 @@ Xapian::Document ContactGroupIndexer::doIndex(const Item &item, const Collection
     if (!_parent.isValid()) {
         Q_ASSERT_X(_parent.isValid(), "Akonadi::Search::ContactIndexer::index",
                    "Item does not have a valid parent collection");
-        return {};
+        return false;
     }
     doc.addCollectionTerm(_parent.id());
 
-    return doc.xapianDocument();
+    stream << item.id() << doc.xapianDocument();
+    return true;
 }
 

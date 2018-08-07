@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017  Daniel Vrátil <dvratil@kde.org>
+ * Copyright (C) 2018  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,35 +19,28 @@
  *
  */
 
-#ifndef AKONADISEARCH_INCIDENCEINDEXER_H_
-#define AKONADISEARCH_INCIDENCEINDEXER_H_
+#include "utils.h"
 
-#include "indexer.h"
+#include <xapian.h>
 
-#include <KCalCore/Event>
-#include <KCalCore/Todo>
-#include <KCalCore/Journal>
+#include <QDataStream>
 
-namespace Akonadi {
-namespace Search {
-
-class IncidenceIndexer : public Indexer
+QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document)
 {
-public:
-    using Indexer::Indexer;
-
-    static QStringList mimeTypes();
-
-    using Indexer::doIndex;
-    bool doIndex(const Item &item, const Collection &parent, QDataStream &stream) override;
-
-private:
-    Xapian::Document indexEvent(const KCalCore::Event::Ptr &event);
-    Xapian::Document indexTodo(const KCalCore::Todo::Ptr &todo);
-    Xapian::Document indexJournal(const KCalCore::Journal::Ptr &journal);
-};
-
-}
+    const std::string raw = document.serialise();
+    const auto size = raw.size();
+    stream.writeRawData(reinterpret_cast<const char *>(&size), sizeof(std::string::size_type));
+    stream.writeRawData(raw.c_str(), raw.size());
+    return stream;
 }
 
-#endif
+
+QDataStream &operator>>(QDataStream &stream, Xapian::Document &document)
+{
+    std::string::size_type size;
+    stream.readRawData(reinterpret_cast<char*>(&size), sizeof(std::string::size_type));
+    std::string string(size, '\0');
+    stream.readRawData(&string.front(), size);
+    document = Xapian::Document::unserialise(string);
+    return stream;
+}

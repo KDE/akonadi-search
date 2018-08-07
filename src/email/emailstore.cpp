@@ -27,8 +27,11 @@
 #include "store_p.h"
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
+#include "utils.h"
 
 #include <KMime/Message>
+
+#include <QDataStream>
 
 #include <unordered_set>
 
@@ -51,28 +54,42 @@ bool EmailStore::index(qint64 id, const QByteArray &serializedIndex)
         return false;
     }
 
-    const auto newDoc = Xapian::Document::unserialise({ serializedIndex.constData(),
-                                static_cast<std::string::size_type>(serializedIndex.size()) });
-    bool merge = false;
-    for (auto it = newDoc.termlist_begin(), end = newDoc.termlist_end(); it != end; ++it) {
-        if (*it == EmailIndexer::MergeFlagsTerm) {
-            merge = true;
-            break;
+    QDataStream stream(serializedIndex);
+    while (!stream.atEnd()) {
+        qint64 documentId;
+        stream >> documentId;
+        if (documentId == -1) {
+            documentId = id;
+        }
+
+        Xapian::Document newDoc;
+        stream >> newDoc;
+
+        bool merge = false;
+        for (auto it = newDoc.termlist_begin(), end = newDoc.termlist_end(); it != end; ++it) {
+            if (*it == EmailIndexer::MergeFlagsTerm) {
+                merge = true;
+                break;
+            }
+        }
+
+
+        if (merge) {
+            auto doc = d->db->document(id);
+            if (doc.isValid()) {
+                return mergeFlagsOnly(newDoc, doc);
+            }
+        }
+
+        // Don't chainup to Store::index() for performance reasons as it would have
+        // to unserialise the document again
+        d->newChange();
+        if (!d->db->replaceDocument(static_cast<uint>(documentId), newDoc)) {
+            return false;
         }
     }
 
-
-    if (merge) {
-        auto doc = d->db->document(id);
-        if (doc.isValid()) {
-            return mergeFlagsOnly(newDoc, doc);
-        }
-    }
-
-    // Don't chainup to Store::index() for performance reasons as it would have
-    // to unserialise the document again
-    d->newChange();
-    return d->db->replaceDocument(static_cast<uint>(id), newDoc);
+    return true;
 }
 
 bool EmailStore::mergeFlagsOnly(const Xapian::Document &newDoc, const XapianDocument &_oldDoc)
