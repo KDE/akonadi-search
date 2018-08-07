@@ -10,6 +10,7 @@ set(AKONADISEARCH_LIB_SRCS
     querymapper_p.cpp
     querypropertymapper.cpp
     resultiterator.cpp
+    searchrunner.cpp
     store.cpp
     xapiandatabase.cpp
     xapiandocument.cpp
@@ -48,10 +49,12 @@ set(AKONADISEARCH_LIB_SRCS
 
 ecm_generate_headers(AkonadiSearch_LIB_HEADERS
     HEADER_NAMES
+    ContactCompleter
     Indexer
     ObjectCache
     QueryMapper
     ResultIterator
+    SearchRunner
     Store
     REQUIRED_HEADERS AkonadiSearch_LIB_HEADERS
 )
