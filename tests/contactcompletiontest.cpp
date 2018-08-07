@@ -1,6 +1,6 @@
 /*
- * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
+ * Copyright (C) 2018  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -20,64 +20,39 @@
  *
  */
 
-#include "../contactcompleter.h"
+#include "contactcompleter.h"
 
-#include <iostream>
 #include <QCoreApplication>
 #include <QTimer>
-#include <QDebug>
+#include <QElapsedTimer>
 
-#include <AkonadiCore/ItemFetchJob>
-#include <AkonadiCore/ItemFetchScope>
+#include <iostream>
 
-#include <KMime/Message>
-
-using namespace Akonadi::Search::PIM;
-
-class App : public QCoreApplication
-{
-    Q_OBJECT
-public:
-    App(int &argc, char **argv, int flags = ApplicationFlags);
-
-    QString m_query;
-
-private Q_SLOTS:
-    void main();
-};
+using namespace Akonadi::Search;
 
 int main(int argc, char **argv)
 {
-    App app(argc, argv);
-
+    QCoreApplication app(argc, argv);
     if (argc != 2) {
-        qWarning() << "Proper args required";
-        exit(0);
+        std::cerr << "Usage: " << argv[0] << " QUERY" << std::endl;
+        exit(1);
     }
-    app.m_query = QString::fromUtf8(argv[1]);
+
+    const auto query = QString::fromUtf8(argv[1]);
+
+    QElapsedTimer timer;
+    ContactCompleter completer(query, 100);
+    completer.setAutoDelete(false);
+    QObject::connect(&completer, &ContactCompleter::finished,
+                     &app, [&app, &timer](const QStringList &results) {
+                         for (const auto &result : results) {
+                             std::cout << result.toStdString() << std::endl;
+                         }
+                         std::cout << "Fetched " << results.count() << " results in " << timer.elapsed() << "ms" << std::endl;
+                         QTimer::singleShot(0, &app, &QCoreApplication::quit);
+                     });
+    timer.start();
+    completer.start();
 
     return app.exec();
 }
-
-App::App(int &argc, char **argv, int flags): QCoreApplication(argc, argv, flags)
-{
-    QTimer::singleShot(0, this, &App::main);
-}
-
-void App::main()
-{
-    ContactCompleter com(m_query, 100);
-
-    QTime timer;
-    timer.start();
-
-    const QStringList emails = com.complete();
-    for (const QString &em : qAsConst(emails)) {
-        std::cout << em.toUtf8().data() << std::endl;
-    }
-
-    qDebug() << timer.elapsed();
-    quit();
-}
-
-#include "contactcompletiontest.moc"

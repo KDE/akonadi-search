@@ -25,6 +25,7 @@
 #include "registrar_p.h"
 
 #include "email/emailindexer.h"
+#include "emailcontacts/emailcontactsindexer.h"
 #include "contact/contactindexer.h"
 #include "contact/contactgroupindexer.h"
 #include "incidence/incidenceindexer.h"
@@ -56,6 +57,7 @@ Indexer* Indexer::create(const QString &mimeType)
 {
     if (!sIndexers.exists()) {
         sIndexers->registerForType<EmailIndexer>();
+        sIndexers->registerForType<EmailContactsIndexer>();
         sIndexers->registerForType<ContactIndexer>();
         sIndexers->registerForType<ContactGroupIndexer>();
         sIndexers->registerForType<IncidenceIndexer>();

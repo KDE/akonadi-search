@@ -29,8 +29,10 @@
 #include "resultiterator_p.h"
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
+#include "utils.h"
 
 #include "email/emailstore.h"
+#include "emailcontacts/emailcontactsstore.h"
 #include "contact/contactstore.h"
 #include "incidence/incidencestore.h"
 #include "note/notestore.h"
@@ -41,6 +43,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QTimer>
+#include <QDataStream>
 
 using namespace Akonadi::Search;
 
@@ -126,6 +129,7 @@ Store *Store::create(const QString &mimeType)
 {
     if (!sStores.exists()) {
         sStores->registerForType<EmailStore>();
+        sStores->registerForType<EmailContactsStore>();
         sStores->registerForType<ContactStore>();
         sStores->registerForType<IncidenceStore>();
         sStores->registerForType<NoteStore>();
@@ -183,15 +187,28 @@ bool Store::index(qint64 id, const QByteArray &serializedIndex)
         return false;
     }
 
-    // FIXME: Xapian allows up to 2^32 documents, while Akonadi can deal with IDs
-    // up to 2^64. However it's very unlikely that someone will ever have a
-    // problem with running out of 32bit Item Ids....
-    const auto doc = Xapian::Document::unserialise({ serializedIndex.constData(),
-                                                     static_cast<std::string::size_type>(serializedIndex.size()) });
+    QDataStream stream(serializedIndex);
+    while (!stream.atEnd()) {
+        qint64 documentId;
+        stream >> documentId;
+        if (documentId == -1) {
+            documentId = id;
+        }
 
-    d->newChange();
+        Xapian::Document document;
+        stream >> document;
 
-    return d->db->replaceDocument(static_cast<uint>(id), doc);
+        d->newChange();
+
+        // FIXME: Xapian allows up to 2^32 documents, while Akonadi can deal with IDs
+        // up to 2^64. However it's very unlikely that someone will ever have a
+        // problem with running out of 32bit Item Ids....
+        if (!d->db->replaceDocument(static_cast<uint>(documentId), document)) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 bool Store::removeItem(qint64 id)

@@ -4,6 +4,7 @@ include_directories(
 )
 
 set(AKONADISEARCH_LIB_SRCS
+    contactcompleter.cpp
     indexer.cpp
     querymapper.cpp
     querymapper_p.cpp
@@ -19,6 +20,9 @@ set(AKONADISEARCH_LIB_SRCS
     email/emailquerymapper.cpp
     email/emailquerypropertymapper.cpp
     email/emailstore.cpp
+
+    emailcontacts/emailcontactsindexer.cpp
+    emailcontacts/emailcontactsstore.cpp
 
     contact/contactgroupindexer.cpp
     contact/contactindexer.cpp
@@ -73,6 +77,8 @@ target_link_libraries(KF5AkonadiSearch
         KF5::AkonadiMime
         KF5::Contacts
         KF5::CalendarCore
+        KF5::Codecs
+        Qt5::Concurrent
         ${XAPIAN_LIBRARIES}
 )
 

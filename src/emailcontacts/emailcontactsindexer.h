@@ -19,34 +19,32 @@
  *
  */
 
-#include "utils.h"
+#ifndef AKONADISEARCH_EMAILCONTACTSINDEXER_H_
+#define AKONADISEARCH_EMAILCONTACTSINDEXER_H_
 
-#include <xapian.h>
+#include "indexer.h"
 
-#include <QString>
-#include <QDataStream>
+#include <KMime/Types>
 
-QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document)
+namespace Akonadi {
+namespace Search {
+
+class EmailContactsIndexer : public Indexer
 {
-    const std::string raw = document.serialise();
-    const auto size = raw.size();
-    stream.writeRawData(reinterpret_cast<const char *>(&size), sizeof(std::string::size_type));
-    stream.writeRawData(raw.c_str(), raw.size());
-    return stream;
+public:
+    using Indexer::Indexer;
+
+    static QStringList mimeTypes();
+
+    using Indexer::doIndex;
+    bool doIndex(const Item &item, const Collection &parent, QDataStream &stream) override;
+
+private:
+    void insert(const KMime::Types::Mailbox::List &list, QDataStream &stream);
+};
+
+}
 }
 
+#endif
 
-QDataStream &operator>>(QDataStream &stream, Xapian::Document &document)
-{
-    std::string::size_type size;
-    stream.readRawData(reinterpret_cast<char*>(&size), sizeof(std::string::size_type));
-    std::string string(size, '\0');
-    stream.readRawData(&string.front(), size);
-    document = Xapian::Document::unserialise(string);
-    return stream;
-}
-
-QString Akonadi::Search::EmailContactsMimeType()
-{
-    return QStringLiteral("vnd.application.akonadi/email-contacts");
-}

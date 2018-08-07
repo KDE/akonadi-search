@@ -19,34 +19,28 @@
  *
  */
 
-#include "utils.h"
+#ifndef AKONADISEARCH_EMAILCONTACTSSTORE_H_
+#define AKONADISEARCH_EMAILCONTACTSSTORE_H_
 
-#include <xapian.h>
+#include "store.h"
 
-#include <QString>
-#include <QDataStream>
+namespace Akonadi {
+namespace Search {
 
-QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document)
+class XapianDocument;
+
+class EmailContactsStore : public Store
 {
-    const std::string raw = document.serialise();
-    const auto size = raw.size();
-    stream.writeRawData(reinterpret_cast<const char *>(&size), sizeof(std::string::size_type));
-    stream.writeRawData(raw.c_str(), raw.size());
-    return stream;
+public:
+    explicit EmailContactsStore();
+
+    static QStringList mimeTypes();
+
+    QString contactName(qint64 documentId);
+};
+
+}
 }
 
+#endif
 
-QDataStream &operator>>(QDataStream &stream, Xapian::Document &document)
-{
-    std::string::size_type size;
-    stream.readRawData(reinterpret_cast<char*>(&size), sizeof(std::string::size_type));
-    std::string string(size, '\0');
-    stream.readRawData(&string.front(), size);
-    document = Xapian::Document::unserialise(string);
-    return stream;
-}
-
-QString Akonadi::Search::EmailContactsMimeType()
-{
-    return QStringLiteral("vnd.application.akonadi/email-contacts");
-}

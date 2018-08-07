@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2013  Vishesh Handa <me@vhanda.in>
  * Copyright (C) 2018  Daniel Vrátil <dvratil@kde.org>
  *
  * This library is free software; you can redistribute it and/or
@@ -19,34 +20,37 @@
  *
  */
 
-#include "utils.h"
-
-#include <xapian.h>
+#ifndef AKONADISEARCH_CONTACTCOMPLETER_H
+#define AKONADISEARCH_CONTACTCOMPLETER_H
 
 #include <QString>
-#include <QDataStream>
+#include <QObject>
+#include "akonadisearch_export.h"
 
-QDataStream &operator<<(QDataStream &stream, const Xapian::Document &document)
+namespace Akonadi
 {
-    const std::string raw = document.serialise();
-    const auto size = raw.size();
-    stream.writeRawData(reinterpret_cast<const char *>(&size), sizeof(std::string::size_type));
-    stream.writeRawData(raw.c_str(), raw.size());
-    return stream;
-}
-
-
-QDataStream &operator>>(QDataStream &stream, Xapian::Document &document)
+namespace Search
 {
-    std::string::size_type size;
-    stream.readRawData(reinterpret_cast<char*>(&size), sizeof(std::string::size_type));
-    std::string string(size, '\0');
-    stream.readRawData(&string.front(), size);
-    document = Xapian::Document::unserialise(string);
-    return stream;
-}
 
-QString Akonadi::Search::EmailContactsMimeType()
+class AKONADISEARCH_EXPORT ContactCompleter : public QObject
 {
-    return QStringLiteral("vnd.application.akonadi/email-contacts");
+    Q_OBJECT
+public:
+    explicit ContactCompleter(const QString &query, int limit = 10);
+    ~ContactCompleter() override;
+
+    void start();
+
+    void setAutoDelete(bool autodelete);
+    bool autoDelete() const;
+Q_SIGNALS:
+    void finished(const QStringList &results);
+
+private:
+    class Private;
+    QScopedPointer<Private> const d;
+};
+
 }
+}
+#endif // AKONADISEARCH_EXPORT

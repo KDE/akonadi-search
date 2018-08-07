@@ -52,6 +52,7 @@ find_package(KF5AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
 find_package(KF5CalendarCore ${KCALENDARCORE_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5DBusAddons ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5Codecs ${KF5_VERSION} CONFIG REQUIRED)
 
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX AKONADISEARCH
@@ -75,7 +76,6 @@ include_directories(
 )
 
 # Targets
-add_subdirectory(autotests)
 add_subdirectory(src)
 #add_subdirectory(xapian)
 #add_subdirectory(core)
@@ -87,6 +87,12 @@ add_subdirectory(akonadiplugin)
 if (NOT WIN32)
     #add_subdirectory(runner)
 endif()
+
+if (BUILD_TESTING)
+    add_subdirectory(autotests)
+    add_subdirectory(tests)
+endif()
+
 
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
