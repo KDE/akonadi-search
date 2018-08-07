@@ -5,6 +5,7 @@ include_directories(
 
 set(AKONADISEARCH_LIB_SRCS
     contactcompleter.cpp
+    indexeditems.cpp
     indexer.cpp
     querymapper.cpp
     querymapper_p.cpp
@@ -50,6 +51,7 @@ set(AKONADISEARCH_LIB_SRCS
 ecm_generate_headers(AkonadiSearch_LIB_HEADERS
     HEADER_NAMES
     ContactCompleter
+    IndexedItems
     Indexer
     ObjectCache
     QueryMapper

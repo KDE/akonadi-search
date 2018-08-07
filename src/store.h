@@ -58,6 +58,8 @@ public:
 
     ResultIterator search(const QByteArray &serializedQuery, unsigned int limit = 0);
 
+    qint64 indexedItems(qint64 collectionId);
+
     bool commit();
 
 protected:
