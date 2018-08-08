@@ -1,0 +1,8 @@
+[Misc]
+Name=Collection Serializer
+Comment=An Akonadi serializer plugin for indexing Collections
+
+[Plugin]
+Type=inode/directory
+X-KDE-Library=akonadi_serializer_collection
+X-KDE-ClassName=Akonadi::SerializerPluginCollection
