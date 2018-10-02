@@ -12,6 +12,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)
 include(CMakePackageConfigHelpers)
+include(CMakeDependentOption)
 include(ECMSetupVersion)
 include(FeatureSummary)
 include(KDEInstallDirs)
@@ -21,6 +22,12 @@ include(ECMInstallIcons)
 include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 
+
+cmake_dependent_option(
+    AKONADISEARCH_ENABLE_KRUNNER_RUNNER
+    "Build KRunner runner to search contacts" ON
+    "NOT WIN32" OFF
+)
 
 set(AKONADISEARCH_VERSION ${PIM_VERSION})
 
@@ -33,7 +40,7 @@ set(QT_REQUIRED_VERSION "5.9.0")
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
 find_package(KF5 ${KF5_VERSION} REQUIRED COMPONENTS I18n Config Crash KCMUtils)
-if (NOT WIN32)
+if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     find_package(KF5Runner ${KF5_VERSION} REQUIRED)
 endif()
 
@@ -84,7 +91,7 @@ add_subdirectory(lib)
 add_subdirectory(akonadiplugin)
 add_subdirectory(search)
 add_subdirectory(debug)
-if (NOT WIN32)
+if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     add_subdirectory(runner)
 endif()
 
