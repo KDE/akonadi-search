@@ -20,7 +20,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
-include(ECMCoverageOption)
+
 
 set(AKONADISEARCH_VERSION ${PIM_VERSION})
 
