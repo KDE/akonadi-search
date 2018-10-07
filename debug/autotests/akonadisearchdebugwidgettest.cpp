@@ -72,7 +72,7 @@ void AkonadiSearchDebugWidgetTest::shouldEnabledPushButtonWhenLineEditIsNotEmpty
     QVERIFY(button->isEnabled());
 
     KLineEdit *lineEdit = widget.findChild<KLineEdit *>(QStringLiteral("lineedit"));
-    lineEdit->setText(QStringLiteral(""));
+    lineEdit->setText(QString());
     QVERIFY(!button->isEnabled());
 
     //trimmed string
