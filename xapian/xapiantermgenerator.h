@@ -18,8 +18,8 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_TOKENIZER_H
-#define AKONADI_SEARCH_TOKENIZER_H
+#ifndef AKONADI_SEARCH_XAPIAN_TERMGENERATOR_H
+#define AKONADI_SEARCH_XAPIAN_TERMGENERATOR_H
 
 #include <QString>
 #include <xapian.h>
@@ -33,7 +33,7 @@ namespace Search
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianTermGenerator
 {
 public:
-    XapianTermGenerator(Xapian::Document *doc);
+    explicit XapianTermGenerator(Xapian::Document *doc);
 
     void indexText(const QString &text);
     void indexText(const QString &text, const QString &prefix, int wdfInc = 1);
@@ -53,4 +53,4 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_TOKENIZER_H
+#endif // AKONADI_SEARCH_XAPIAN_TERMGENERATOR_H

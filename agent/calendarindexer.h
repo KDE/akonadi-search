@@ -39,7 +39,7 @@ public:
      * You must provide the path where the indexed information
      * should be stored
      */
-    CalendarIndexer(const QString &path);
+    explicit CalendarIndexer(const QString &path);
     ~CalendarIndexer();
 
     QStringList mimeTypes() const override;

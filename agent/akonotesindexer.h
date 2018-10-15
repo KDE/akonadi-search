@@ -38,7 +38,7 @@ public:
      * You must provide the path where the indexed information
      * should be stored
      */
-    AkonotesIndexer(const QString &path);
+    explicit AkonotesIndexer(const QString &path);
     ~AkonotesIndexer();
 
     QStringList mimeTypes() const override;

@@ -33,7 +33,7 @@ namespace Search
 class AgePostingSource : public Xapian::ValuePostingSource
 {
 public:
-    AgePostingSource(Xapian::valueno slot_);
+    explicit AgePostingSource(Xapian::valueno slot_);
 
     Xapian::weight get_weight() const override;
     Xapian::PostingSource *clone() const override;

@@ -122,7 +122,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
     }
 
     // There can be multiple queries running at the same time, make sure we have
-    // a separete Session for each, otherwise things might explode
+    // a separate Session for each, otherwise things might explode
     QScopedPointer<Akonadi::Session, QScopedPointerDeleteLater> session(
         new Akonadi::Session("PIIMContactRunner-" + QByteArray::number((qlonglong)QThread::currentThread())));
     Akonadi::ItemFetchJob *fetch = new Akonadi::ItemFetchJob(results, session.data());
@@ -142,7 +142,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
         try {
             contact = item.payload<KContacts::Addressee>();
         } catch (const Akonadi::Exception &e) {
-            qCDebug(AKONADI_KRUNNER_LOG) << "Corrutped index? Index referrers to an Item without contact";
+            qCDebug(AKONADI_KRUNNER_LOG) << "Corrupted index? Index referrers to an Item without contact";
             // Error?
             continue;
         }

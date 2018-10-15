@@ -39,7 +39,7 @@ class IndexedItems;
 }
 }
 /**
- * Maintains the variuous indexers and databases
+ * Maintains the various indexers and databases
  */
 class Index : public QObject
 {

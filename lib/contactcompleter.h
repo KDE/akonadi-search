@@ -37,7 +37,7 @@ namespace PIM
 class AKONADI_SEARCH_PIM_EXPORT ContactCompleter
 {
 public:
-    ContactCompleter(const QString &prefix, int limit = 10);
+    explicit ContactCompleter(const QString &prefix, int limit = 10);
 
     QStringList complete();
 

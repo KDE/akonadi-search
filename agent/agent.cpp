@@ -342,7 +342,7 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
         if (!aborted) {
             // Check baloorc which we used historically to make sure we don't
             // miss the value
-            // TODO: Unfortunatelly we will hit this path in most cases
+            // TODO: Unfortunately we will hit this path in most cases
             KConfig baloorc(QStringLiteral("baloorc"));
             KConfigGroup baloorcgroup = baloorc.group("Akonadi");
             aborted = baloorcgroup.readEntry("aborted", false);

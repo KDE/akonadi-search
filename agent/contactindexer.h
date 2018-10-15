@@ -29,7 +29,7 @@
 class ContactIndexer: public AbstractIndexer
 {
 public:
-    ContactIndexer(const QString &path);
+    explicit ContactIndexer(const QString &path);
     ~ContactIndexer();
 
     QStringList mimeTypes() const override;

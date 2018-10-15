@@ -42,7 +42,7 @@ public:
      * writeOnly locks the database as long as this object is
      * valid
      */
-    XapianDatabase(const QString &path, bool writeOnly = false);
+    explicit XapianDatabase(const QString &path, bool writeOnly = false);
     ~XapianDatabase();
 
     void replaceDocument(uint id, const Xapian::Document &doc);

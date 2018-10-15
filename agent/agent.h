@@ -37,7 +37,7 @@ class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBas
     Q_OBJECT
 public:
     using Akonadi::AgentBase::ObserverV3::collectionChanged; // So we don't trigger -Woverloaded-virtual
-    AkonadiIndexingAgent(const QString &id);
+    explicit AkonadiIndexingAgent(const QString &id);
     ~AkonadiIndexingAgent();
 
     void reindexAll();
