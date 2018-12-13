@@ -18,19 +18,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+
+#include <xapian.h>
+
 #include "index.h"
 #include "akonadi_indexer_agent_debug.h"
 #include "emailindexer.h"
 #include "contactindexer.h"
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
-
-
 #include "indexeditems.h"
+
 #include <AkonadiCore/ServerManager>
 #include <QDir>
 #include <QStandardPaths>
-#include <xapian.h>
 
 using namespace Akonadi::Search::PIM;
 Index::Index(QObject *parent)

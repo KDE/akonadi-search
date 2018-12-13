@@ -20,13 +20,13 @@
  *
  */
 
+#include <xapian.h>
+
 #include "contactcompleter.h"
 #include "query.h"
-#include <xapian.h>
 
 #include <QStandardPaths>
 #include <QDebug>
-
 #include <QFile>
 
 using namespace Akonadi::Search::PIM;

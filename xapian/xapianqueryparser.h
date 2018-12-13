@@ -21,8 +21,9 @@
 #ifndef AKONADI_SEARCH_XAPIAN_QUERYPARSER_H
 #define AKONADI_SEARCH_XAPIAN_QUERYPARSER_H
 
-#include <QString>
 #include <xapian.h>
+
+#include <QString>
 #include "search_xapian_export.h"
 
 namespace Akonadi

@@ -20,10 +20,10 @@
  *
  */
 
+#include <xapian.h>
+
 #include "emailquery.h"
 #include "resultiterator_p.h"
-
-#include "xapian.h"
 #include "../search/email/agepostingsource.h"
 
 #include <QStandardPaths>

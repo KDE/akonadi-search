@@ -23,13 +23,13 @@
 #ifndef AKONOTESINDEXER_H
 #define AKONOTESINDEXER_H
 
+#include <xapian.h>
+
 #include "abstractindexer.h"
 
 #include <KMime/Message>
 #include <Collection>
 #include <Item>
-
-#include <xapian.h>
 
 class AkonotesIndexer : public AbstractIndexer
 {

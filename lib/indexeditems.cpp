@@ -19,13 +19,16 @@
  * License along with this library.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+
+#include <xapian.h>
+
 #include "indexeditems.h"
 #include "akonadi_search_pim_debug.h"
+
 #include <QStandardPaths>
 #include <QHash>
 #include <QDir>
 #include <AkonadiCore/ServerManager>
-#include <xapian.h>
 
 using namespace Akonadi::Search::PIM;
 

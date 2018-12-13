@@ -22,7 +22,6 @@
 
 #include "query.h"
 #include "contactquery.h"
-#include <qjsondocument.h>
 
 #include <QVariant>
 #include <QDebug>

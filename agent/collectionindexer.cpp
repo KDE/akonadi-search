@@ -18,14 +18,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+
+#include <xapian.h>
+
 #include "collectionindexer.h"
+#include "xapiandocument.h"
 
 #include <QString>
 #include <QStringList>
-#include <xapian.h>
 #include <AkonadiCore/collectionidentificationattribute.h>
 #include <AkonadiCore/AttributeFactory>
-#include <xapiandocument.h>
+
 #include "akonadi_indexer_agent_debug.h"
 
 CollectionIndexer::CollectionIndexer(const QString &path)

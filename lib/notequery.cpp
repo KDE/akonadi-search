@@ -20,9 +20,10 @@
  *
  */
 
+#include <xapian.h>
+
 #include "notequery.h"
 #include "resultiterator_p.h"
-#include "xapian.h"
 
 #include <QList>
 #include <QStandardPaths>

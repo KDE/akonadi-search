@@ -23,10 +23,12 @@
 #ifndef AKONADI_SEARCH_XAPIANSEARCHSTORE_H
 #define AKONADI_SEARCH_XAPIANSEARCHSTORE_H
 
+#include <xapian.h>
+
 #include "searchstore.h"
 #include "term.h"
 #include "search_xapian_export.h"
-#include <xapian.h>
+
 #include <QMutex>
 
 namespace Akonadi

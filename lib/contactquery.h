@@ -24,8 +24,9 @@
 #define AKONADI_SEARCH_PIM_CONTACTQUERY_H
 
 #include "search_pim_export.h"
-#include <QString>
 #include "query.h"
+
+#include <QString>
 
 namespace Akonadi
 {

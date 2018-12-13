@@ -23,8 +23,9 @@
 #ifndef AKONADI_SEARCH_PIM_RESULTITERATOR_P_H
 #define AKONADI_SEARCH_PIM_RESULTITERATOR_P_H
 
+#include <xapian.h>
+
 #include "resultiterator.h"
-#include "xapian.h"
 
 namespace Akonadi
 {

@@ -19,10 +19,11 @@
  * License along with this library.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+
+#include <xapian.h>
+
 #include "collectionquery.h"
 #include "resultiterator_p.h"
-#include "xapian.h"
-
 
 #include <QList>
 #include <QFile>

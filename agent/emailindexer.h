@@ -23,9 +23,9 @@
 #ifndef EMAILINDEXER_H
 #define EMAILINDEXER_H
 
-#include "abstractindexer.h"
-
 #include <xapian.h>
+
+#include "abstractindexer.h"
 
 #include <KMime/Message>
 #include <Akonadi/KMime/MessageStatus>
