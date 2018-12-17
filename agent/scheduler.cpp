@@ -88,12 +88,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config,
     //Trigger a full sync initially
     if (!initialIndexingDone) {
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "initial indexing";
-#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
         QMetaObject::invokeMethod(this, &Scheduler::scheduleCompleteSync, Qt::QueuedConnection);
-#else
-        QMetaObject::invokeMethod(this, "scheduleCompleteSync", Qt::QueuedConnection);
-#endif
-
     }
     cfg.writeEntry("initialIndexingDone", true);
     cfg.sync();
