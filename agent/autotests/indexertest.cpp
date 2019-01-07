@@ -49,7 +49,8 @@ private:
         QDir dir(dirName);
 
         if (dir.exists(dirName)) {
-            Q_FOREACH (const QFileInfo &info, dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+            const QFileInfoList infoDirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
+            for (const QFileInfo &info : infoDirs) {
                 if (info.isDir()) {
                     result = removeDir(info.absoluteFilePath());
                 } else {

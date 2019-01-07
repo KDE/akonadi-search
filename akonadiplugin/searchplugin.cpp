@@ -78,7 +78,8 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
 {
     if (!term.subTerms().isEmpty()) {
         Term t(mapRelation(term.relation()));
-        Q_FOREACH (const Akonadi::SearchTerm &subterm, term.subTerms()) {
+        const auto subTermsResult = term.subTerms();
+        for (const Akonadi::SearchTerm &subterm : subTermsResult) {
             const Term newTerm = recursiveEmailTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);

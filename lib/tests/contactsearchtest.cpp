@@ -82,7 +82,7 @@ void App::main()
 void App::slotItemsReceived(const Akonadi::Item::List &list)
 {
     qDebug() << list.size();
-    Q_FOREACH (const Akonadi::Item &item, list) {
+    for (const Akonadi::Item &item : list) {
         qDebug() << item.id() << item.mimeType();
     }
 }
