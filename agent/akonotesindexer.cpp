@@ -49,7 +49,7 @@ AkonotesIndexer::~AkonotesIndexer()
 
 QStringList AkonotesIndexer::mimeTypes() const
 {
-    return QStringList() << QString::fromLatin1("text/x-vnd.akonadi.note");
+    return QStringList() << QStringLiteral("text/x-vnd.akonadi.note");
 }
 
 void AkonotesIndexer::index(const Akonadi::Item &item)

@@ -43,7 +43,7 @@ QStringList allWords(const Xapian::Document &doc)
 }
 void TermGeneratorTest::testWordBoundaries()
 {
-    QString str = QString::fromLatin1("The quick (\"brown\") 'fox' can't jump 32.3 feet, right? No-Wrong;xx.txt");
+    QString str = QStringLiteral("The quick (\"brown\") 'fox' can't jump 32.3 feet, right? No-Wrong;xx.txt");
 
     Xapian::Document doc;
     XapianTermGenerator termGen(&doc);
@@ -52,16 +52,16 @@ void TermGeneratorTest::testWordBoundaries()
     QStringList words = allWords(doc);
 
     QStringList expectedWords;
-    expectedWords << QLatin1String("32.3") << QLatin1String("brown") << QLatin1String("can't") << QLatin1String("feet") << QLatin1String("fox") << QLatin1String("jump")
-                  << QLatin1String("no") << QLatin1String("quick") << QLatin1String("right") << QLatin1String("the") << QLatin1String("txt") << QLatin1String("wrong")
-                  << QLatin1String("xx");
+    expectedWords << QStringLiteral("32.3") << QStringLiteral("brown") << QStringLiteral("can't") << QStringLiteral("feet") << QStringLiteral("fox") << QStringLiteral("jump")
+                  << QStringLiteral("no") << QStringLiteral("quick") << QStringLiteral("right") << QStringLiteral("the") << QStringLiteral("txt") << QStringLiteral("wrong")
+                  << QStringLiteral("xx");
 
     QCOMPARE(words, expectedWords);
 }
 
 void TermGeneratorTest::testUnderscore_splitting()
 {
-    QString str = QString::fromLatin1("Hello_Howdy");
+    QString str = QStringLiteral("Hello_Howdy");
 
     Xapian::Document doc;
     XapianTermGenerator termGen(&doc);
@@ -70,7 +70,7 @@ void TermGeneratorTest::testUnderscore_splitting()
     QStringList words = allWords(doc);
 
     QStringList expectedWords;
-    expectedWords << QLatin1String("hello") << QLatin1String("howdy");
+    expectedWords << QStringLiteral("hello") << QStringLiteral("howdy");
 
     QCOMPARE(words, expectedWords);
 }
@@ -86,7 +86,7 @@ void TermGeneratorTest::testAccetCharacters()
     QStringList words = allWords(doc);
 
     QStringList expectedWords;
-    expectedWords << QLatin1String("como") << QLatin1String("esta") << QLatin1String("kug");
+    expectedWords << QStringLiteral("como") << QStringLiteral("esta") << QStringLiteral("kug");
 
     QCOMPARE(words, expectedWords);
 }
@@ -94,7 +94,7 @@ void TermGeneratorTest::testAccetCharacters()
 void TermGeneratorTest::testUnicodeCompatibleComposition()
 {
     // The 0xfb00 corresponds to U+FB00 which is a 'ff'
-    QString str = QLatin1Literal("maffab");
+    QString str = QStringLiteral("maffab");
     QString str2 = QLatin1Literal("ma") + QChar(0xfb00) + QStringLiteral("ab");
 
     Xapian::Document doc;
@@ -110,7 +110,7 @@ void TermGeneratorTest::testUnicodeCompatibleComposition()
 
 void TermGeneratorTest::testEmails()
 {
-    QString str = QString::fromLatin1("me@vhanda.in");
+    QString str = QStringLiteral("me@vhanda.in");
 
     Xapian::Document doc;
     XapianTermGenerator termGen(&doc);
@@ -119,7 +119,7 @@ void TermGeneratorTest::testEmails()
     QStringList words = allWords(doc);
 
     QStringList expectedWords;
-    expectedWords << QLatin1String("in") << QLatin1String("me") << QLatin1String("vhanda");
+    expectedWords << QStringLiteral("in") << QStringLiteral("me") << QStringLiteral("vhanda");
 
     QCOMPARE(words, expectedWords);
 }
@@ -132,7 +132,7 @@ void TermGeneratorTest::testWordPositions()
     Xapian::Document doc;
     XapianTermGenerator termGen(&doc);
 
-    QString str = QString::fromLatin1("Hello hi how hi");
+    QString str = QStringLiteral("Hello hi how hi");
     termGen.indexText(str);
 
     db.replaceDocument(1, doc);

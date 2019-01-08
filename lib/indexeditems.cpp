@@ -62,7 +62,7 @@ QString IndexedItemsPrivate::dbPath(const QString &dbName) const
         return cachedPath;
     }
     if (!m_overridePrefixPath.isEmpty()) {
-        const QString path = QString::fromLatin1("%1/%2/").arg(m_overridePrefixPath, dbName);
+        const QString path = QStringLiteral("%1/%2/").arg(m_overridePrefixPath, dbName);
         m_cachePath.insert(dbName, path);
         return path;
     }
@@ -139,7 +139,7 @@ qlonglong IndexedItemsPrivate::indexedItemsInDatabase(const std::string &term, c
 
 qlonglong IndexedItemsPrivate::indexedItems(const qlonglong id)
 {
-    const std::string term = QString::fromLatin1("C%1").arg(id).toStdString();
+    const std::string term = QStringLiteral("C%1").arg(id).toStdString();
     return indexedItemsInDatabase(term, emailIndexingPath())
            + indexedItemsInDatabase(term, contactIndexingPath())
            + indexedItemsInDatabase(term, akonotesIndexingPath())
@@ -155,7 +155,7 @@ void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed
         qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return;
     }
-    const std::string term = QString::fromLatin1("C%1").arg(collectionId).toStdString();
+    const std::string term = QStringLiteral("C%1").arg(collectionId).toStdString();
     Xapian::Query query(term);
     Xapian::Enquire enquire(db);
     enquire.set_query(query);

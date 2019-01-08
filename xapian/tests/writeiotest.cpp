@@ -62,7 +62,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < size; i++) {
         QByteArray term = QUuid::createUuid().toByteArray().mid(1, 10);
 
-        if (parser.isSet(QLatin1String("p"))) {
+        if (parser.isSet(QStringLiteral("p"))) {
             std::string stdString(term.constData(), term.length());
             doc.doc().add_posting(stdString, i);
         } else {

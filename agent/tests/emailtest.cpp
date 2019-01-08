@@ -175,25 +175,25 @@ void App::slotIndexed()
 
         QString rchar(QStringLiteral("rchar: "));
         if (str.startsWith(rchar)) {
-            ulong amt = str.mid(rchar.size()).toULong();
+            ulong amt = str.midRef(rchar.size()).toULong();
             qDebug() << "Read:" << amt / 1024  << "kb";
         }
 
         QString wchar(QStringLiteral("wchar: "));
         if (str.startsWith(wchar)) {
-            ulong amt = str.mid(wchar.size()).toULong();
+            ulong amt = str.midRef(wchar.size()).toULong();
             qDebug() << "Write:" << amt / 1024  << "kb";
         }
 
         QString read(QStringLiteral("read_bytes: "));
         if (str.startsWith(read)) {
-            ulong amt = str.mid(read.size()).toULong();
+            ulong amt = str.midRef(read.size()).toULong();
             qDebug() << "Actual Reads:" << amt / 1024  << "kb";
         }
 
         QString write(QStringLiteral("write_bytes: "));
         if (str.startsWith(write)) {
-            ulong amt = str.mid(write.size()).toULong();
+            ulong amt = str.midRef(write.size()).toULong();
             qDebug() << "Actual Writes:" << amt / 1024  << "kb";
         }
     }
