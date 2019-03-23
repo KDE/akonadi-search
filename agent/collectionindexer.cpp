@@ -94,7 +94,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
         doc.add_boolean_term(term.constData());
 
         QByteArray ns;
-        if (Akonadi::CollectionIdentificationAttribute *folderAttribute = collection.attribute<Akonadi::CollectionIdentificationAttribute>()) {
+        if (const Akonadi::CollectionIdentificationAttribute *folderAttribute = collection.attribute<Akonadi::CollectionIdentificationAttribute>()) {
             if (!folderAttribute->collectionNamespace().isEmpty()) {
                 ns = folderAttribute->collectionNamespace();
             }
