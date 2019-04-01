@@ -21,7 +21,7 @@
 #include <QPlainTextEdit>
 #include <QStandardPaths>
 #include <KLineEdit>
-#include <qtest.h>
+#include <QTest>
 
 AkonadiSearchDebugDialogTest::AkonadiSearchDebugDialogTest(QObject *parent)
     : QObject(parent)

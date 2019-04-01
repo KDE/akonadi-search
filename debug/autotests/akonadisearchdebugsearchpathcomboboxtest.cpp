@@ -17,7 +17,7 @@
 
 #include "akonadisearchdebugsearchpathcomboboxtest.h"
 #include "../akonadisearchdebugsearchpathcombobox.h"
-#include <qtest.h>
+#include <QTest>
 
 AkonadiSearchDebugSearchPathComboBoxTest::AkonadiSearchDebugSearchPathComboBoxTest(QObject *parent)
     : QObject(parent)

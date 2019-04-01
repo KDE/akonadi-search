@@ -18,7 +18,7 @@
 #include "akonadisearchdebugwidgettest.h"
 #include <QPlainTextEdit>
 #include "../akonadisearchdebugwidget.h"
-#include <qtest.h>
+#include <QTest>
 #include "../akonadisearchdebugsearchpathcombobox.h"
 #include <KLineEdit>
 #include <QPushButton>
