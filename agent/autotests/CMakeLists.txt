@@ -44,19 +44,19 @@ target_link_libraries(indexertest
 )
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
+if (KDEPIM_RUN_AKONADI_TEST)
+	set(KDEPIMLIBS_RUN_ISOLATED_TESTS TRUE)
+	set(KDEPIMLIBS_RUN_SQLITE_ISOLATED_TESTS TRUE)
 
-set(KDEPIMLIBS_RUN_ISOLATED_TESTS TRUE)
-set(KDEPIMLIBS_RUN_SQLITE_ISOLATED_TESTS TRUE)
+	set(scheduler_SRCS
+	    ../scheduler.cpp
+	    ../index.cpp
+	    ../collectionindexingjob.cpp
+	    ${indexer_SRCS}
+	)
 
-set(scheduler_SRCS
-    ../scheduler.cpp
-    ../index.cpp
-    ../collectionindexingjob.cpp
-    ${indexer_SRCS}
-)
-
-add_akonadi_isolated_test_advanced(schedulertest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
-add_akonadi_isolated_test_advanced(collectionindexingjobtest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
+	add_akonadi_isolated_test_advanced(schedulertest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
+	add_akonadi_isolated_test_advanced(collectionindexingjobtest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
 
 
 if(NOT WIN32)
@@ -71,4 +71,5 @@ target_link_libraries(collectionquerytest
     Qt5::Widgets
     Qt5::DBus
 )
+endif()
 endif()

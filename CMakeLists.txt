@@ -64,6 +64,7 @@ ecm_setup_version(PROJECT
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfigVersion.cmake"
     SOVERSION 5
 )
+option(KDEPIM_RUN_AKONADI_TEST "Enable autotest based on Akonadi." TRUE)
 
 # Compiler flags
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
