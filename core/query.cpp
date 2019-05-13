@@ -228,7 +228,7 @@ ResultIterator Query::exec()
     }
 
     SearchStore *storeMatch = nullptr;
-    Q_FOREACH (const QSharedPointer<SearchStore> &store, *s_searchStores) {
+    for (const QSharedPointer<SearchStore> &store : qAsConst(*s_searchStores)) {
         bool matches = true;
         for (const QString &type : types()) {
             if (!store->types().contains(type)) {
