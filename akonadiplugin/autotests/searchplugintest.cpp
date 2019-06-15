@@ -394,16 +394,16 @@ private Q_SLOTS:
         // Calendar item
         {
             KCalCore::Event::Ptr event(new KCalCore::Event);
-            KCalCore::Attendee::Ptr attendee(new KCalCore::Attendee(QStringLiteral("attendee1"), QStringLiteral("attendee1@example.com"), false, KCalCore::Attendee::NeedsAction));
+            KCalCore::Attendee attendee(QStringLiteral("attendee1"), QStringLiteral("attendee1@example.com"), false, KCalCore::Attendee::NeedsAction);
             event->setOrganizer(QStringLiteral("organizer@example.com"));
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee2"), QStringLiteral("attendee2@example.com"), false, KCalCore::Attendee::Accepted));
+            attendee = KCalCore::Attendee(QStringLiteral("attendee2"), QStringLiteral("attendee2@example.com"), false, KCalCore::Attendee::Accepted);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee3"), QStringLiteral("attendee3@example.com"), false, KCalCore::Attendee::Declined));
+            attendee = KCalCore::Attendee(QStringLiteral("attendee3"), QStringLiteral("attendee3@example.com"), false, KCalCore::Attendee::Declined);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee4"), QStringLiteral("attendee4@example.com"), false, KCalCore::Attendee::Tentative));
+            attendee = KCalCore::Attendee(QStringLiteral("attendee4"), QStringLiteral("attendee4@example.com"), false, KCalCore::Attendee::Tentative);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee5"), QStringLiteral("attendee5@example.com"), false, KCalCore::Attendee::Delegated));
+            attendee = KCalCore::Attendee(QStringLiteral("attendee5"), QStringLiteral("attendee5@example.com"), false, KCalCore::Attendee::Delegated);
             event->addAttendee(attendee);
 
             event->setSummary(QStringLiteral("title"));

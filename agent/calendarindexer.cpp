@@ -145,7 +145,7 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::
     KCalCore::Attendee::List::ConstIterator it;
     KCalCore::Attendee::List::ConstIterator end(attendees.constEnd());
     for (it = attendees.constBegin(); it != end; ++it) {
-        doc.addBoolTerm((*it)->email() + QString::number((*it)->status()), QStringLiteral("PS"));
+        doc.addBoolTerm((*it).email() + QString::number((*it).status()), QStringLiteral("PS"));
     }
 
     // Parent collection
