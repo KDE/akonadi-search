@@ -23,7 +23,6 @@
 #include <KLocalizedString>
 
 #include <QIcon>
-#include <QVector>
 #include <QSharedPointer>
 #include <QThread>
 #include <QDesktopServices>
@@ -35,7 +34,6 @@
 #include <KContacts/Addressee>
 
 #include <KSharedConfig>
-#include <KConfigGroup>
 
 #include <KEmailAddress>
 
