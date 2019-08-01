@@ -393,25 +393,25 @@ private Q_SLOTS:
 
         // Calendar item
         {
-            KCalCore::Event::Ptr event(new KCalCore::Event);
-            KCalCore::Attendee attendee(QStringLiteral("attendee1"), QStringLiteral("attendee1@example.com"), false, KCalCore::Attendee::NeedsAction);
+            KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
+            KCalendarCore::Attendee attendee(QStringLiteral("attendee1"), QStringLiteral("attendee1@example.com"), false, KCalendarCore::Attendee::NeedsAction);
             event->setOrganizer(QStringLiteral("organizer@example.com"));
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee(QStringLiteral("attendee2"), QStringLiteral("attendee2@example.com"), false, KCalCore::Attendee::Accepted);
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee2"), QStringLiteral("attendee2@example.com"), false, KCalendarCore::Attendee::Accepted);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee(QStringLiteral("attendee3"), QStringLiteral("attendee3@example.com"), false, KCalCore::Attendee::Declined);
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee3"), QStringLiteral("attendee3@example.com"), false, KCalendarCore::Attendee::Declined);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee(QStringLiteral("attendee4"), QStringLiteral("attendee4@example.com"), false, KCalCore::Attendee::Tentative);
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee4"), QStringLiteral("attendee4@example.com"), false, KCalendarCore::Attendee::Tentative);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee(QStringLiteral("attendee5"), QStringLiteral("attendee5@example.com"), false, KCalCore::Attendee::Delegated);
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee5"), QStringLiteral("attendee5@example.com"), false, KCalendarCore::Attendee::Delegated);
             event->addAttendee(attendee);
 
             event->setSummary(QStringLiteral("title"));
             event->setLocation(QStringLiteral("here"));
 
-            Akonadi::Item item(KCalCore::Event::eventMimeType());
+            Akonadi::Item item(KCalendarCore::Event::eventMimeType());
             item.setId(2001);
-            item.setPayload<KCalCore::Event::Ptr>(event);
+            item.setPayload<KCalendarCore::Event::Ptr>(event);
             item.setParentCollection(Akonadi::Collection(6));
             calendarIndexer.index(item);
         }
@@ -440,7 +440,7 @@ private Q_SLOTS:
         QTest::addColumn<QVector<qint64> >("collections");
         QTest::addColumn<QStringList>("mimeTypes");
         QTest::addColumn<QSet<qint64> >("expectedResult");
-        const QStringList calendarMimeTypes = QStringList() << KCalCore::Event::eventMimeType();
+        const QStringList calendarMimeTypes = QStringList() << KCalendarCore::Event::eventMimeType();
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, QStringLiteral("organizer@example.com"), Akonadi::SearchTerm::CondEqual));
