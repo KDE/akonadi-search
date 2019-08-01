@@ -28,9 +28,9 @@
 
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/Item>
-#include <KCalCore/Journal>
-#include <KCalCore/Event>
-#include <KCalCore/Todo>
+#include <KCalendarCore/Journal>
+#include <KCalendarCore/Event>
+#include <KCalendarCore/Todo>
 
 class CalendarIndexer : public AbstractIndexer
 {
@@ -53,10 +53,10 @@ public:
               Akonadi::Collection::Id from,
               Akonadi::Collection::Id to) override;
 private:
-    void indexEventItem(const Akonadi::Item &item, const KCalCore::Event::Ptr &event);
-    void indexJournalItem(const Akonadi::Item &item, const KCalCore::Journal::Ptr &journal);
-    void indexTodoItem(const Akonadi::Item &item, const KCalCore::Todo::Ptr &todo);
-    void updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc);
+    void indexEventItem(const Akonadi::Item &item, const KCalendarCore::Event::Ptr &event);
+    void indexJournalItem(const Akonadi::Item &item, const KCalendarCore::Journal::Ptr &journal);
+    void indexTodoItem(const Akonadi::Item &item, const KCalendarCore::Todo::Ptr &todo);
+    void updateIncidenceItem(const KCalendarCore::Incidence::Ptr &calInc);
 
     Akonadi::Search::XapianDatabase *m_db = nullptr;
 };

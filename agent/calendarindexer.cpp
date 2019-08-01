@@ -24,8 +24,8 @@
 #include "xapiandocument.h"
 #include "akonadi_indexer_agent_debug.h"
 
-#include <KCalCore/Attendee>
-#include <KCalCore/Event>
+#include <KCalendarCore/Attendee>
+#include <KCalendarCore/Event>
 
 
 CalendarIndexer::CalendarIndexer(const QString &path)
@@ -61,12 +61,12 @@ QStringList CalendarIndexer::mimeTypes() const
 
 void CalendarIndexer::index(const Akonadi::Item &item)
 {
-    if (item.hasPayload<KCalCore::Event::Ptr>()) {
-        indexEventItem(item, item.payload<KCalCore::Event::Ptr>());
-    } else if (item.hasPayload<KCalCore::Journal::Ptr>()) {
-        indexJournalItem(item, item.payload<KCalCore::Journal::Ptr>());
-    } else if (item.hasPayload<KCalCore::Todo::Ptr>()) {
-        indexTodoItem(item, item.payload<KCalCore::Todo::Ptr>());
+    if (item.hasPayload<KCalendarCore::Event::Ptr>()) {
+        indexEventItem(item, item.payload<KCalendarCore::Event::Ptr>());
+    } else if (item.hasPayload<KCalendarCore::Journal::Ptr>()) {
+        indexJournalItem(item, item.payload<KCalendarCore::Journal::Ptr>());
+    } else if (item.hasPayload<KCalendarCore::Todo::Ptr>()) {
+        indexTodoItem(item, item.payload<KCalendarCore::Todo::Ptr>());
     } else {
         return;
     }
@@ -134,16 +134,16 @@ void CalendarIndexer::move(Akonadi::Item::Id itemId,
     m_db->replaceDocument(doc.get_docid(), doc);
 }
 
-void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::Event::Ptr &event)
+void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarCore::Event::Ptr &event)
 {
     Akonadi::Search::XapianDocument doc;
 
     doc.indexText(event->organizer().email(), QStringLiteral("O"));
     doc.indexText(event->summary(), QStringLiteral("S"));
     doc.indexText(event->location(), QStringLiteral("L"));
-    KCalCore::Attendee::List attendees = event->attendees();
-    KCalCore::Attendee::List::ConstIterator it;
-    KCalCore::Attendee::List::ConstIterator end(attendees.constEnd());
+    KCalendarCore::Attendee::List attendees = event->attendees();
+    KCalendarCore::Attendee::List::ConstIterator it;
+    KCalendarCore::Attendee::List::ConstIterator end(attendees.constEnd());
     for (it = attendees.constBegin(); it != end; ++it) {
         doc.addBoolTerm((*it).email() + QString::number((*it).status()), QStringLiteral("PS"));
     }
@@ -158,21 +158,21 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalCore::
     m_db->replaceDocument(item.id(), doc);
 }
 
-void CalendarIndexer::indexJournalItem(const Akonadi::Item &item, const KCalCore::Journal::Ptr &journal)
+void CalendarIndexer::indexJournalItem(const Akonadi::Item &item, const KCalendarCore::Journal::Ptr &journal)
 {
     //TODO
     Q_UNUSED(item);
     Q_UNUSED(journal);
 }
 
-void CalendarIndexer::indexTodoItem(const Akonadi::Item &item, const KCalCore::Todo::Ptr &todo)
+void CalendarIndexer::indexTodoItem(const Akonadi::Item &item, const KCalendarCore::Todo::Ptr &todo)
 {
     //TODO
     Q_UNUSED(item);
     Q_UNUSED(todo);
 }
 
-void CalendarIndexer::updateIncidenceItem(const KCalCore::Incidence::Ptr &calInc)
+void CalendarIndexer::updateIncidenceItem(const KCalendarCore::Incidence::Ptr &calInc)
 {
     //TODO
     Q_UNUSED(calInc);
