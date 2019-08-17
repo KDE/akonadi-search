@@ -33,6 +33,8 @@ namespace Search
 namespace PIM
 {
 class IndexedItemsPrivate;
+
+/** Indexed items. */
 class AKONADI_SEARCH_PIM_EXPORT IndexedItems : public QObject
 {
     Q_OBJECT

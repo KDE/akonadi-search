@@ -36,6 +36,7 @@ namespace Search
 namespace PIM
 {
 
+/** Email query. */
 class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
 public:

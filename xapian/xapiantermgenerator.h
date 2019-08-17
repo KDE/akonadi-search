@@ -31,6 +31,7 @@ namespace Akonadi
 namespace Search
 {
 
+/** Xapian term generator. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianTermGenerator
 {
 public:

@@ -32,11 +32,13 @@
 
 namespace Akonadi
 {
+/** Akonadi search infrastructure. */
 namespace Search
 {
 
 class Query;
 
+/** Search store. */
 class AKONADI_SEARCH_CORE_EXPORT SearchStore : public QObject
 {
     Q_OBJECT

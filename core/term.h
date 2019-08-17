@@ -34,6 +34,7 @@ namespace Akonadi
 namespace Search
 {
 
+/** Search term. */
 class AKONADI_SEARCH_CORE_EXPORT Term
 {
 public:

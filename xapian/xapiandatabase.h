@@ -34,6 +34,7 @@ namespace Search
 
 class XapianDocument;
 
+/** Xapian database. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianDatabase
 {
 public:

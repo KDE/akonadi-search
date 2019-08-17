@@ -35,6 +35,7 @@ namespace PIM
 
 class ResultIterator;
 
+/** Query base class. */
 class AKONADI_SEARCH_PIM_EXPORT Query
 {
 public:

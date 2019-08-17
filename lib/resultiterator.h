@@ -38,6 +38,7 @@ class ContactQuery;
 class EmailQuery;
 class NoteQuery;
 
+/** Result iterator. */
 class AKONADI_SEARCH_PIM_EXPORT ResultIterator
 {
 public:

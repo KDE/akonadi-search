@@ -31,6 +31,7 @@ namespace Akonadi
 namespace Search
 {
 
+/** Xapian query parser. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianQueryParser
 {
 public:

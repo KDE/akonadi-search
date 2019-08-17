@@ -34,6 +34,7 @@ namespace PIM
 {
 
 // FIXME: Make this async!!
+/** Contact completer. */
 class AKONADI_SEARCH_PIM_EXPORT ContactCompleter
 {
 public:

@@ -35,6 +35,7 @@ namespace Search
 
 class Term;
 
+/** Search query. */
 class AKONADI_SEARCH_CORE_EXPORT Query
 {
 public:

@@ -34,9 +34,11 @@ namespace Akonadi
 {
 namespace Search
 {
+/** PIM specific search API. */
 namespace PIM
 {
 
+/** Collection query. */
 class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
 public:

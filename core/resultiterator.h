@@ -55,6 +55,7 @@ public:
     SearchStore *store;
 };
 
+/** Result iterator. */
 class AKONADI_SEARCH_CORE_EXPORT ResultIterator
 {
 public:
