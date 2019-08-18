@@ -18,3 +18,8 @@ cmakename: KF5AkonadiSearch
 
 public_lib: true
 group: kdepim
+
+public_source_dirs:
+ - core
+ - lib
+ - xapian
