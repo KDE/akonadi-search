@@ -29,6 +29,10 @@ namespace Akonadi
 namespace Search
 {
 class AkonadiSearchDebugDialogPrivate;
+/**
+ * @brief The AkonadiSearchDebugDialog class
+ * @author Laurent Montel <montel@kde.org>
+ */
 class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugDialog : public QDialog
 {
     Q_OBJECT

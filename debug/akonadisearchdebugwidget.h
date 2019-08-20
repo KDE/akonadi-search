@@ -30,6 +30,9 @@ namespace Akonadi
 {
 namespace Search
 {
+/**
+ * @brief The AkonadiSearchDebugWidget class
+ */
 class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugWidget : public QWidget
 {
     Q_OBJECT

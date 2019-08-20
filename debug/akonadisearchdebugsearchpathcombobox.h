@@ -25,7 +25,10 @@ namespace Akonadi
 {
 namespace Search
 {
-
+/**
+ * @brief The AkonadiSearchDebugSearchPathComboBox class
+ * @author Laurent Montel <montel@kde.org>
+ */
 class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugSearchPathComboBox : public QComboBox
 {
     Q_OBJECT
