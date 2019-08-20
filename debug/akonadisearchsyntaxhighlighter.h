@@ -41,7 +41,7 @@ class AkonadiSearchSyntaxHighlighter : public QSyntaxHighlighter
     Q_OBJECT
 public:
     explicit AkonadiSearchSyntaxHighlighter(QTextDocument *doc);
-    ~AkonadiSearchSyntaxHighlighter();
+    ~AkonadiSearchSyntaxHighlighter() override;
 
     void highlightBlock(const QString &text) override;
 
