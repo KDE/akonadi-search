@@ -311,7 +311,7 @@ Query Query::fromJSON(const QByteArray &arr)
     Query query;
     query.d->m_types = map[QStringLiteral("type")].toStringList();
 
-    if (map.contains(QStringLiteral("limit"))) {
+    if (map.contains(QLatin1String("limit"))) {
         query.d->m_limit = map[QStringLiteral("limit")].toUInt();
     } else {
         query.d->m_limit = defaultLimit;
@@ -321,26 +321,26 @@ Query Query::fromJSON(const QByteArray &arr)
     query.d->m_searchString = map[QStringLiteral("searchString")].toString();
     query.d->m_term = Term::fromVariantMap(map[QStringLiteral("term")].toMap());
 
-    if (map.contains(QStringLiteral("yearFilter"))) {
+    if (map.contains(QLatin1String("yearFilter"))) {
         query.d->m_yearFilter = map[QStringLiteral("yearFilter")].toInt();
     }
-    if (map.contains(QStringLiteral("monthFilter"))) {
+    if (map.contains(QLatin1String("monthFilter"))) {
         query.d->m_monthFilter = map[QStringLiteral("monthFilter")].toInt();
     }
-    if (map.contains(QStringLiteral("dayFilter"))) {
+    if (map.contains(QLatin1String("dayFilter"))) {
         query.d->m_dayFilter = map[QStringLiteral("dayFilter")].toInt();
     }
 
-    if (map.contains(QStringLiteral("sortingOption"))) {
+    if (map.contains(QLatin1String("sortingOption"))) {
         int option = map.value(QStringLiteral("sortingOption")).toInt();
         query.d->m_sortingOption = static_cast<SortingOption>(option);
     }
 
-    if (map.contains(QStringLiteral("sortingProperty"))) {
+    if (map.contains(QLatin1String("sortingProperty"))) {
         query.d->m_sortingProperty = map.value(QStringLiteral("sortingProperty")).toString();
     }
 
-    if (map.contains(QStringLiteral("customOptions"))) {
+    if (map.contains(QLatin1String("customOptions"))) {
         QVariant var = map[QStringLiteral("customOptions")];
         if (var.type() == QVariant::Map) {
             query.d->m_customOptions = map[QStringLiteral("customOptions")].toMap();

@@ -97,7 +97,7 @@ void App::slotRootCollectionsFetched(KJob *kjob)
     while (it.hasNext()) {
         const Akonadi::Collection &c = it.next();
         const QStringList mimeTypes = c.contentMimeTypes();
-        if (!c.contentMimeTypes().contains(QStringLiteral("message/rfc822"))) {
+        if (!c.contentMimeTypes().contains(QLatin1String("message/rfc822"))) {
             it.remove();
         }
     }

@@ -326,10 +326,10 @@ Term Term::fromVariantMap(const QVariantMap &map)
     Term term;
 
     QString andOrString;
-    if (map.contains(QStringLiteral("$and"))) {
+    if (map.contains(QLatin1String("$and"))) {
         andOrString = QStringLiteral("$and");
         term.setOperation(And);
-    } else if (map.contains(QStringLiteral("$or"))) {
+    } else if (map.contains(QLatin1String("$or"))) {
         andOrString = QStringLiteral("$or");
         term.setOperation(Or);
     }
