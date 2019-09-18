@@ -211,7 +211,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
 
     KMime::Headers::Date *date = msg->date(false);
     if (date) {
-        const QString str = QString::number(date->dateTime().toTime_t());
+        const QString str = QString::number(date->dateTime().toSecsSinceEpoch());
         m_doc->add_value(0, str.toStdString());
         const QString julianDay = QString::number(date->dateTime().date().toJulianDay());
         m_doc->add_value(2, julianDay.toStdString());

@@ -24,7 +24,7 @@
 #include <KJob>
 #include <AkonadiCore/Item>
 #include <AkonadiCore/Collection>
-#include <QTime>
+#include <QElapsedTimer>
 #include "index.h"
 
 /**
@@ -64,7 +64,7 @@ private:
     QSet<Akonadi::Item::Id> m_indexedItems;
     QList<Akonadi::Item::Id> m_needsIndexing;
     Index &m_index;
-    QTime m_time;
+    QElapsedTimer m_time;
     bool m_reindexingLock;
     bool m_fullSync;
     int m_progressCounter;

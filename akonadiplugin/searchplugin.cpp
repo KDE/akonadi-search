@@ -104,7 +104,7 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::EmailSearchTerm::ByteSize:
             return getTerm(term, QStringLiteral("size"));
         case Akonadi::EmailSearchTerm::HeaderDate: {
-            Term s(QStringLiteral("date"), QString::number(term.value().toDateTime().toTime_t()), mapComparator(term.condition()));
+            Term s(QStringLiteral("date"), QString::number(term.value().toDateTime().toSecsSinceEpoch()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
         }

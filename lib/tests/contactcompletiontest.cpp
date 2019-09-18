@@ -25,6 +25,7 @@
 #include <iostream>
 #include <QCoreApplication>
 #include <QTimer>
+#include <QElapsedTimer>
 #include <QDebug>
 
 #include <AkonadiCore/ItemFetchJob>
@@ -68,7 +69,7 @@ void App::main()
 {
     ContactCompleter com(m_query, 100);
 
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
 
     const QStringList emails = com.complete();

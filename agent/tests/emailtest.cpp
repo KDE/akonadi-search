@@ -26,6 +26,7 @@
 #include <QTimer>
 #include <QFile>
 #include <QDebug>
+#include <QElapsedTimer>
 
 #include <CollectionFetchJob>
 #include <Collection>
@@ -52,7 +53,7 @@ private:
     Akonadi::Collection::List m_collections;
     EmailIndexer m_indexer;
 
-    QTime m_totalTime;
+    QElapsedTimer m_totalTime;
     int m_indexTime;
     int m_numEmails;
 
@@ -124,7 +125,7 @@ void App::indexNextCollection()
 
 void App::itemReceived(const Akonadi::Item::List &itemList)
 {
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
 
     for (const Akonadi::Item &item : itemList) {
@@ -137,7 +138,7 @@ void App::itemReceived(const Akonadi::Item::List &itemList)
 
 void App::slotCommitTimerElapsed()
 {
-    QTime timer;
+    QElapsedTimer timer;
     timer.start();
 
     m_indexer.commit();
