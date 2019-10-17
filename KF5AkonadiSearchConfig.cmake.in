@@ -1,11 +1,11 @@
 @PACKAGE_INIT@
 include(CMakeFindDependencyMacro)
-find_dependency(Qt5Core)
-find_dependency(KF5CoreAddons)
-find_dependency(KF5Akonadi)
-find_dependency(KF5Contacts)
-find_dependency(KF5Mime)
-find_dependency(KF5AkonadiMime)
-find_dependency(KF5CalendarCore)
+find_dependency(Qt5Core "@QT_REQUIRED_VERSION@")
+find_dependency(KF5CoreAddons "@KF5_MIN_VERSION@")
+find_dependency(KF5Akonadi "@AKONADI_VERSION@")
+find_dependency(KF5Contacts "@KF5_MIN_VERSION@")
+find_dependency(KF5Mime "@KMIME_LIB_VERSION@")
+find_dependency(KF5AkonadiMime "@AKONADI_MIMELIB_VERSION@")
+find_dependency(KF5CalendarCore "@KF5_MIN_VERSION@")
 
 include("${CMAKE_CURRENT_LIST_DIR}/KF5AkonadiSearchTargets.cmake")
