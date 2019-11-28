@@ -45,11 +45,7 @@ PIMContactsRunnerConfig::PIMContactsRunnerConfig(QWidget *parent, const QVariant
 
 void PIMContactsRunnerConfig::configChanged()
 {
-#if KCONFIGWIDGETS_VERSION < QT_VERSION_CHECK(5, 64, 0)
-    Q_EMIT changed();
-#else
     Q_EMIT markAsChanged();
-#endif
 }
 
 void PIMContactsRunnerConfig::load()
