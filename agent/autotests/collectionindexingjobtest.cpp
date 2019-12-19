@@ -54,7 +54,7 @@ public:
               const Akonadi::Collection & /* to */) override {}
     void remove(const Akonadi::Collection & /* col */) override {}
     void remove(const QSet<Akonadi::Item::Id> &ids, const QStringList & /* mimeTypes */) override {
-        itemsRemoved += ids.toList();
+        itemsRemoved += ids.values();
     }
     void remove(const Akonadi::Item::List & /* items */) override {}
     void removeDatabase() override {}

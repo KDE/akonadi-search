@@ -121,7 +121,7 @@ void Scheduler::collectDirtyCollections()
         }
     }
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << m_dirtyCollections;
-    cfg.writeEntry("dirtyCollections", m_dirtyCollections.toList());
+    cfg.writeEntry("dirtyCollections", m_dirtyCollections.values());
     cfg.sync();
 }
 
