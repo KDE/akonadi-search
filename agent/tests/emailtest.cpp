@@ -80,7 +80,7 @@ void App::main()
     m_commitTimer.start();
 
     Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-            Akonadi::CollectionFetchJob::Recursive);
+                                                                       Akonadi::CollectionFetchJob::Recursive);
     connect(job, &Akonadi::CollectionFetchJob::finished, this, &App::slotRootCollectionsFetched);
     job->start();
 

@@ -26,11 +26,8 @@
 #include <QString>
 #include "search_xapian_export.h"
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 /** Xapian term generator. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianTermGenerator
 {

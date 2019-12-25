@@ -69,8 +69,7 @@ QString PIMSearchStore::findDatabase(const QString &dbName) const
     return dbPath;
 }
 
-Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVariant &value,
-        Term::Comparator com)
+Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVariant &value, Term::Comparator com)
 {
     if (value.isNull()) {
         return Xapian::Query();
@@ -153,4 +152,3 @@ QUrl PIMSearchStore::constructUrl(const Xapian::docid &docid)
 
     return url;
 }
-

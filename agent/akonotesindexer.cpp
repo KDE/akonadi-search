@@ -25,7 +25,10 @@
 #include <QTextDocument>
 
 AkonotesIndexer::AkonotesIndexer(const QString &path)
-    : AbstractIndexer(), m_db(nullptr), m_doc(nullptr), m_termGen(nullptr)
+    : AbstractIndexer()
+    , m_db(nullptr)
+    , m_doc(nullptr)
+    , m_termGen(nullptr)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
@@ -176,9 +179,7 @@ void AkonotesIndexer::remove(const Akonadi::Collection &collection)
     }
 }
 
-void AkonotesIndexer::move(Akonadi::Item::Id itemId,
-                           Akonadi::Collection::Id from,
-                           Akonadi::Collection::Id to)
+void AkonotesIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to)
 {
     if (!m_db) {
         return;
@@ -197,4 +198,3 @@ void AkonotesIndexer::move(Akonadi::Item::Id itemId,
     doc.add_boolean_term(tt.data());
     m_db->replace_document(doc.get_docid(), doc);
 }
-

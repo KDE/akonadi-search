@@ -27,9 +27,9 @@
 #include <KCalendarCore/Attendee>
 #include <KCalendarCore/Event>
 
-
 CalendarIndexer::CalendarIndexer(const QString &path)
-    : AbstractIndexer(), m_db(nullptr)
+    : AbstractIndexer()
+    , m_db(nullptr)
 {
     try {
         m_db = new Akonadi::Search::XapianDatabase(path, true);
@@ -54,9 +54,9 @@ CalendarIndexer::~CalendarIndexer()
 QStringList CalendarIndexer::mimeTypes() const
 {
     return QStringList() << QStringLiteral("application/x-vnd.akonadi.calendar.event")
-           << QStringLiteral("application/x-vnd.akonadi.calendar.todo")
-           << QStringLiteral("application/x-vnd.akonadi.calendar.journal")
-           << QStringLiteral("application/x-vnd.akonadi.calendar.freebusy");
+                         << QStringLiteral("application/x-vnd.akonadi.calendar.todo")
+                         << QStringLiteral("application/x-vnd.akonadi.calendar.journal")
+                         << QStringLiteral("application/x-vnd.akonadi.calendar.freebusy");
 }
 
 void CalendarIndexer::index(const Akonadi::Item &item)
@@ -112,9 +112,7 @@ void CalendarIndexer::remove(const Akonadi::Collection &collection)
     }
 }
 
-void CalendarIndexer::move(Akonadi::Item::Id itemId,
-                           Akonadi::Collection::Id from,
-                           Akonadi::Collection::Id to)
+void CalendarIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to)
 {
     if (!m_db) {
         return;

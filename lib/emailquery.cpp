@@ -58,19 +58,19 @@ public:
     bool splitSearchMatchString;
 };
 
-EmailQuery::Private::Private():
-    important('0'),
-    read('0'),
-    attachment('0'),
-    opType(OpAnd),
-    limit(0),
-    splitSearchMatchString(true)
+EmailQuery::Private::Private()
+    : important('0')
+    , read('0')
+    , attachment('0')
+    , opType(OpAnd)
+    , limit(0)
+    , splitSearchMatchString(true)
 {
 }
 
-EmailQuery::EmailQuery():
-    Query(),
-    d(new Private)
+EmailQuery::EmailQuery()
+    : Query()
+    , d(new Private)
 {
 }
 
@@ -171,7 +171,7 @@ void EmailQuery::subjectMatches(const QString &subjectMatch)
 
 void EmailQuery::bodyMatches(const QString &bodyMatch)
 {
-    d->bodyMatchString =  bodyMatch;
+    d->bodyMatchString = bodyMatch;
 }
 
 void EmailQuery::setAttachment(bool hasAttachment)

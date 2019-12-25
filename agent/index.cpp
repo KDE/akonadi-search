@@ -35,8 +35,8 @@
 
 using namespace Akonadi::Search::PIM;
 Index::Index(QObject *parent)
-    : QObject(parent),
-      m_collectionIndexer(nullptr)
+    : QObject(parent)
+    , m_collectionIndexer(nullptr)
 {
     m_indexedItems = new IndexedItems(this);
     m_commitTimer.setInterval(1000);
@@ -215,9 +215,7 @@ void Index::remove(const Akonadi::Collection &col)
     }
 }
 
-void Index::move(const Akonadi::Collection &collection,
-                 const Akonadi::Collection &from,
-                 const Akonadi::Collection &to)
+void Index::move(const Akonadi::Collection &collection, const Akonadi::Collection &from, const Akonadi::Collection &to)
 {
     if (m_collectionIndexer) {
         m_collectionIndexer->move(collection, from, to);

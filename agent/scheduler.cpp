@@ -36,24 +36,20 @@ JobFactory::~JobFactory()
 {
 }
 
-CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col,
-        const QList<Akonadi::Item::Id> &pending,
-        bool fullSync,
-        QObject *parent)
+CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent)
 {
     CollectionIndexingJob *job = new CollectionIndexingJob(index, col, pending, parent);
     job->setFullSync(fullSync);
     return job;
 }
 
-Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config,
-                     const QSharedPointer<JobFactory> &jobFactory, QObject *parent)
-    :   QObject(parent),
-        m_config(config),
-        m_index(index),
-        m_currentJob(nullptr),
-        m_jobFactory(jobFactory),
-        m_busyTimeout(5000)
+Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QSharedPointer<JobFactory> &jobFactory, QObject *parent)
+    :   QObject(parent)
+    , m_config(config)
+    , m_index(index)
+    , m_currentJob(nullptr)
+    , m_jobFactory(jobFactory)
+    , m_busyTimeout(5000)
 {
     if (!m_jobFactory) {
         m_jobFactory = QSharedPointer<JobFactory>(new JobFactory);
@@ -113,8 +109,8 @@ void Scheduler::collectDirtyCollections()
 {
     KConfigGroup cfg = m_config->group("General");
     //Store collections where we did not manage to index all, we'll need to do a full sync for them the next time
-    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>>::ConstIterator it = m_queues.constBegin();
-    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>>::ConstIterator end = m_queues.constEnd();
+    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> >::ConstIterator it = m_queues.constBegin();
+    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> >::ConstIterator end = m_queues.constEnd();
     for (; it != end; ++it) {
         if (!it.value().isEmpty()) {
             m_dirtyCollections.insert(it.key());
@@ -154,7 +150,7 @@ void Scheduler::scheduleCompleteSync()
     qCDebug(AKONADI_INDEXER_AGENT_LOG);
     {
         Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                Akonadi::CollectionFetchJob::Recursive);
+                                                                           Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
         job->fetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
@@ -165,7 +161,7 @@ void Scheduler::scheduleCompleteSync()
     //We want to index all collections, even if we don't index their content
     {
         Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                Akonadi::CollectionFetchJob::Recursive);
+                                                                           Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
@@ -186,8 +182,8 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
         if (c == Akonadi::Collection::root()) {
             continue;
         }
-        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() &&
-                !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
+        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>()
+            && !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         scheduleCollection(c, true);
@@ -212,8 +208,8 @@ void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
         if (c == Akonadi::Collection::root()) {
             continue;
         }
-        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() &&
-                !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
+        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>()
+            && !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         m_index.index(c);

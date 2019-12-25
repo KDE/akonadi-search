@@ -28,11 +28,8 @@
 
 class QVariant;
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 class Term;
 
 /** Search query. */
@@ -150,7 +147,7 @@ public:
     static Query fromSearchUrl(const QUrl &url);
     static QString titleFromQueryUrl(const QUrl &url);
 
-    bool operator == (const Query &rhs) const;
+    bool operator ==(const Query &rhs) const;
 
     Query &operator=(const Query &rhs);
 
@@ -158,7 +155,6 @@ private:
     class Private;
     Private *d;
 };
-
 }
 }
 

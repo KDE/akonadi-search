@@ -35,7 +35,6 @@ ContactCompleter::ContactCompleter(const QString &prefix, int limit)
     : m_prefix(prefix.toLower())
     , m_limit(limit)
 {
-
 }
 
 QStringList ContactCompleter::complete()

@@ -26,12 +26,10 @@
 AkonadiSearchDebugWidgetTest::AkonadiSearchDebugWidgetTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 AkonadiSearchDebugWidgetTest::~AkonadiSearchDebugWidgetTest()
 {
-
 }
 
 void AkonadiSearchDebugWidgetTest::shouldHaveDefaultValue()
@@ -78,7 +76,6 @@ void AkonadiSearchDebugWidgetTest::shouldEnabledPushButtonWhenLineEditIsNotEmpty
     //trimmed string
     lineEdit->setText(QStringLiteral(" "));
     QVERIFY(!button->isEnabled());
-
 }
 
 void AkonadiSearchDebugWidgetTest::shouldChangeSearchType()
@@ -89,7 +86,6 @@ void AkonadiSearchDebugWidgetTest::shouldChangeSearchType()
     Akonadi::Search::AkonadiSearchDebugSearchPathComboBox *searchCombo = widget.findChild<Akonadi::Search::AkonadiSearchDebugSearchPathComboBox *>(QStringLiteral("searchpathcombo"));
     const QString path = searchCombo->pathFromEnum(type);
     QCOMPARE(searchCombo->searchPath(), path);
-
 }
 
 QTEST_MAIN(AkonadiSearchDebugWidgetTest)

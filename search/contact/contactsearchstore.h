@@ -25,11 +25,8 @@
 
 #include "../pimsearchstore.h"
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 class ContactSearchStore : public PIMSearchStore
 {
     Q_OBJECT
@@ -42,7 +39,6 @@ public:
 
     QStringList types() override;
 };
-
 }
 }
 #endif // AKONADI_SEARCH_PIM_CONTACT_SEARCHSTORE_H

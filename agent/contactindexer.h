@@ -26,7 +26,7 @@
 #include "abstractindexer.h"
 #include "xapiandatabase.h"
 
-class ContactIndexer: public AbstractIndexer
+class ContactIndexer : public AbstractIndexer
 {
 public:
     explicit ContactIndexer(const QString &path);
@@ -40,9 +40,7 @@ public:
 
     void commit() override;
 
-    void move(Akonadi::Item::Id itemId,
-              Akonadi::Collection::Id from,
-              Akonadi::Collection::Id to) override;
+    void move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to) override;
 private:
     bool indexContact(const Akonadi::Item &item);
     void indexContactGroup(const Akonadi::Item &item);

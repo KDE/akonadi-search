@@ -72,7 +72,6 @@ private Q_SLOTS:
         dbPrefix = QDir::tempPath() + QLatin1String("/collectiontest");
         index.setOverrideDbPrefixPath(dbPrefix);
         index.createIndexers();
-
     }
 
     void cleanup()
@@ -144,7 +143,6 @@ private Q_SLOTS:
             QCOMPARE(results.size(), 1);
             QCOMPARE(results.at(0), col2.id());
         }
-
     }
 
     QList<qint64> getResults(Akonadi::Search::PIM::ResultIterator it)
@@ -224,10 +222,8 @@ private Q_SLOTS:
             QCOMPARE(results.at(0), col3.id());
         }
     }
-
 };
 
 QTEST_GUILESS_MAIN(CollectionQueryTest)
 
 #include "collectionquerytest.moc"
-

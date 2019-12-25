@@ -27,11 +27,8 @@
 #include <QPair>
 #include <QVector>
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 class XapianDocument;
 
 /** Xapian database. */
@@ -90,7 +87,6 @@ private:
 
     Xapian::WritableDatabase createWritableDb();
 };
-
 }
 }
 

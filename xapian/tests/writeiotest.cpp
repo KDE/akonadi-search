@@ -1,4 +1,3 @@
-
 /*
  * This file is part of the KDE Akonadi Search Project
  * Copyright (C) 2014  Vishesh Handa <me@vhanda.in>
@@ -78,7 +77,6 @@ int main(int argc, char **argv)
     for (const QFileInfo &file : dbDir.entryInfoList(QDir::Files)) {
         qDebug() << file.fileName() << file.size() / 1024 << "kb";
         dbSize += file.size();
-
     }
     qDebug() << "Database Size:" << dbSize / 1024 << "kb";
 

@@ -27,13 +27,9 @@
 
 #include "resultiterator.h"
 
-namespace Akonadi
-{
-namespace Search
-{
-namespace PIM
-{
-
+namespace Akonadi {
+namespace Search {
+namespace PIM {
 class Q_DECL_HIDDEN ResultIterator::Private
 {
 public:
@@ -51,7 +47,6 @@ public:
 
     bool m_firstElement;
 };
-
 }
 }
 }

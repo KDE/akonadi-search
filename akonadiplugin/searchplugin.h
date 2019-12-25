@@ -27,10 +27,8 @@
 #include <akonadi/abstractsearchplugin.h>
 #include <QObject>
 
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 class Query;
 }
 }

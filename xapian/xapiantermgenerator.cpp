@@ -110,4 +110,3 @@ void XapianTermGenerator::setPosition(int position)
 {
     m_position = position;
 }
-

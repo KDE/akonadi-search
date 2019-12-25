@@ -28,8 +28,11 @@
 #include <QTextDocument>
 #include <KEmailAddress>
 
-EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath):
-    AbstractIndexer(), m_doc(nullptr), m_termGen(nullptr), m_contactDb(nullptr)
+EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
+    : AbstractIndexer()
+    , m_doc(nullptr)
+    , m_termGen(nullptr)
+    , m_contactDb(nullptr)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
@@ -141,8 +144,7 @@ void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Generics::Addre
     }
 }
 
-namespace
-{
+namespace {
 // Does some extra stuff such as lower casing the email, removing all quotes
 // and removing extra spaces
 // TODO: Move this into KMime?
@@ -320,9 +322,7 @@ void EmailIndexer::toggleFlag(Xapian::Document &doc, const char *remove, const c
     doc.add_term(add);
 }
 
-void EmailIndexer::updateFlags(const Akonadi::Item &item,
-                               const QSet<QByteArray> &added,
-                               const QSet<QByteArray> &removed)
+void EmailIndexer::updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &added, const QSet<QByteArray> &removed)
 {
     if (!m_db) {
         return;
@@ -391,9 +391,7 @@ void EmailIndexer::remove(const Akonadi::Collection &collection)
     }
 }
 
-void EmailIndexer::move(Akonadi::Item::Id itemId,
-                        Akonadi::Collection::Id from,
-                        Akonadi::Collection::Id to)
+void EmailIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to)
 {
     if (!m_db) {
         return;

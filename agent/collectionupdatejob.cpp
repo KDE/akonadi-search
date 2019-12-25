@@ -28,11 +28,10 @@
 #include <AkonadiCore/IndexPolicyAttribute>
 
 CollectionUpdateJob::CollectionUpdateJob(Index &index, const Akonadi::Collection &col, QObject *parent)
-    : KJob(parent),
-      mCol(col),
-      mIndex(index)
+    : KJob(parent)
+    , mCol(col)
+    , mIndex(index)
 {
-
 }
 
 void CollectionUpdateJob::start()

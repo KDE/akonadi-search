@@ -39,15 +39,14 @@ public:
     AkonadiSearchDebugDialogPrivate()
         : mAkonadiSearchDebugWidget(nullptr)
     {
-
     }
 
     AkonadiSearchDebugWidget *mAkonadiSearchDebugWidget = nullptr;
 };
 
 AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
-    : QDialog(parent),
-      d(new Akonadi::Search::AkonadiSearchDebugDialogPrivate)
+    : QDialog(parent)
+    , d(new Akonadi::Search::AkonadiSearchDebugDialogPrivate)
 {
     //Don't translate it's just a dialog to debug
     setWindowTitle(QStringLiteral("Debug Akonadi Search"));

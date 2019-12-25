@@ -37,8 +37,8 @@ class Akonadi::Search::PIM::IndexedItemsPrivate
 public:
     IndexedItemsPrivate()
     {
-
     }
+
     QString dbPath(const QString &dbName) const;
     QString emailIndexingPath() const;
     QString collectionIndexingPath() const;
@@ -176,10 +176,9 @@ void IndexedItemsPrivate::findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi:
 }
 
 IndexedItems::IndexedItems(QObject *parent)
-    : QObject(parent),
-      d(new Akonadi::Search::PIM::IndexedItemsPrivate())
+    : QObject(parent)
+    , d(new Akonadi::Search::PIM::IndexedItemsPrivate())
 {
-
 }
 
 IndexedItems::~IndexedItems()

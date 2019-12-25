@@ -29,13 +29,9 @@
 #include <QStringList>
 #include <Collection>
 
-namespace Akonadi
-{
-namespace Search
-{
-namespace PIM
-{
-
+namespace Akonadi {
+namespace Search {
+namespace PIM {
 /** Email query. */
 class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
@@ -117,7 +113,6 @@ private:
     Private *const d;
     //@endcond
 };
-
 }
 }
 }

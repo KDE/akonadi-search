@@ -28,11 +28,8 @@
 
 #include <QSet>
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 class PIMSearchStore : public XapianSearchStore
 {
     Q_OBJECT
@@ -44,15 +41,17 @@ public:
 protected:
     QString findDatabase(const QString &databasePath) const;
 
-    Xapian::Query convertTypes(const QStringList &) override {
+    Xapian::Query convertTypes(const QStringList &) override
+    {
         return Xapian::Query();
     }
-    QByteArray idPrefix() override {
+
+    QByteArray idPrefix() override
+    {
         return QByteArray("akonadi");
     }
 
-    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value,
-                                         Term::Comparator com) override;
+    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;
     QUrl constructUrl(const Xapian::docid &docid) override;
 
     QHash<QString, QString> m_prefix;
@@ -70,7 +69,6 @@ protected:
 
     QHash<QString, int> m_valueProperties;
 };
-
 }
 }
 

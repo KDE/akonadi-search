@@ -21,10 +21,8 @@
 
 #include <QComboBox>
 #include "search_debug_export.h"
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 /**
  * @brief The AkonadiSearchDebugSearchPathComboBox class
  * @author Laurent Montel <montel@kde.org>
@@ -54,4 +52,3 @@ private:
 }
 }
 #endif // AKONADISEARCHDEBUGSEARCHPATHCOMBOBOX_H
-

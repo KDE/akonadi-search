@@ -29,11 +29,8 @@
 #include <QVariant>
 #include <QDebug>
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 /** Search term. */
 class AKONADI_SEARCH_CORE_EXPORT Term
 {
@@ -126,7 +123,7 @@ public:
     QVariantMap toVariantMap() const;
     static Term fromVariantMap(const QVariantMap &map);
 
-    bool operator == (const Term &rhs) const;
+    bool operator ==(const Term &rhs) const;
 
     Term &operator=(const Term &rhs);
 
@@ -157,7 +154,6 @@ inline Term operator !(const Term &rhs)
     t.setNegation(!rhs.isNegated());
     return t;
 }
-
 }
 }
 

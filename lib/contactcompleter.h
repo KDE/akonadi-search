@@ -26,13 +26,9 @@
 #include <QString>
 #include "search_pim_export.h"
 
-namespace Akonadi
-{
-namespace Search
-{
-namespace PIM
-{
-
+namespace Akonadi {
+namespace Search {
+namespace PIM {
 // FIXME: Make this async!!
 /** Contact completer. */
 class AKONADI_SEARCH_PIM_EXPORT ContactCompleter
@@ -46,7 +42,6 @@ private:
     QString m_prefix;
     int m_limit;
 };
-
 }
 }
 }

@@ -26,10 +26,8 @@
 class KLineEdit;
 class QPushButton;
 class QPlainTextEdit;
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 /**
  * @brief The AkonadiSearchDebugWidget class
  */
@@ -61,4 +59,3 @@ private:
 }
 }
 #endif // AKONADISEARCHDEBUGWIDGET_H
-

@@ -31,18 +31,15 @@
 #include <AkonadiCore/IndexPolicyAttribute>
 #include <KLocalizedString>
 
-CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col,
-        const QList<Akonadi::Item::Id> &pending,
-        QObject *parent)
-    : KJob(parent),
-      m_collection(col),
-      m_pending(pending),
-      m_index(index),
-      m_reindexingLock(false),
-      m_fullSync(true),
-      m_progressTotal(0)
+CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, QObject *parent)
+    : KJob(parent)
+    , m_collection(col)
+    , m_pending(pending)
+    , m_index(index)
+    , m_reindexingLock(false)
+    , m_fullSync(true)
+    , m_progressTotal(0)
 {
-
 }
 
 void CollectionIndexingJob::setFullSync(bool enable)
@@ -74,8 +71,8 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
     }
     m_collection = static_cast<Akonadi::CollectionFetchJob *>(job)->collections().at(0);
     if (m_collection.isVirtual()
-            || (m_collection.hasAttribute<Akonadi::IndexPolicyAttribute>()
-                && !m_collection.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled())) {
+        || (m_collection.hasAttribute<Akonadi::IndexPolicyAttribute>()
+            && !m_collection.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled())) {
         emitResult();
         return;
     }
@@ -236,4 +233,3 @@ void CollectionIndexingJob::slotFoundUnindexed(KJob *job)
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing complete. Total time: " << m_time.elapsed();
     emitResult();
 }
-

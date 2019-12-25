@@ -25,8 +25,7 @@
 #include <AkonadiCore/Item>
 #include <QStringList>
 
-namespace Akonadi
-{
+namespace Akonadi {
 class Collection;
 }
 
@@ -42,12 +41,8 @@ public:
     virtual void remove(const Akonadi::Collection &item) = 0;
     virtual void commit() = 0;
 
-    virtual void move(Akonadi::Item::Id item,
-                      Akonadi::Collection::Id from,
-                      Akonadi::Collection::Id to);
-    virtual void updateFlags(const Akonadi::Item &item,
-                             const QSet<QByteArray> &addedFlags,
-                             const QSet<QByteArray> &removed);
+    virtual void move(Akonadi::Item::Id item, Akonadi::Collection::Id from, Akonadi::Collection::Id to);
+    virtual void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removed);
 };
 
 #endif // ABSTRACTINDEXER_H

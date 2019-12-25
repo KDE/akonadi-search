@@ -26,12 +26,10 @@
 AkonadiSearchDebugDialogTest::AkonadiSearchDebugDialogTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 AkonadiSearchDebugDialogTest::~AkonadiSearchDebugDialogTest()
 {
-
 }
 
 void AkonadiSearchDebugDialogTest::initTestCase()
@@ -65,4 +63,3 @@ void AkonadiSearchDebugDialogTest::shouldFillLineEditWhenWeWantToSearchItem()
 }
 
 QTEST_MAIN(AkonadiSearchDebugDialogTest)
-

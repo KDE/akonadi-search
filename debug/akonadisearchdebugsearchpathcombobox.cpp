@@ -30,7 +30,6 @@ AkonadiSearchDebugSearchPathComboBox::AkonadiSearchDebugSearchPathComboBox(QWidg
 
 AkonadiSearchDebugSearchPathComboBox::~AkonadiSearchDebugSearchPathComboBox()
 {
-
 }
 
 QString AkonadiSearchDebugSearchPathComboBox::searchPath()

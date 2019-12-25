@@ -29,7 +29,6 @@ AkonadiSearchSyntaxHighlighter::AkonadiSearchSyntaxHighlighter(QTextDocument *do
 
 AkonadiSearchSyntaxHighlighter::~AkonadiSearchSyntaxHighlighter()
 {
-
 }
 
 void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
@@ -96,4 +95,3 @@ void AkonadiSearchSyntaxHighlighter::init()
         m_rules.append(Rule(regex, testFormat));
     }
 }
-

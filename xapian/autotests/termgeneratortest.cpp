@@ -28,8 +28,7 @@
 
 using namespace Akonadi::Search;
 
-namespace
-{
+namespace {
 QStringList allWords(const Xapian::Document &doc)
 {
     QStringList words;
@@ -164,4 +163,3 @@ void TermGeneratorTest::testWordPositions()
 }
 
 QTEST_MAIN(TermGeneratorTest)
-

@@ -43,4 +43,3 @@ QStringList ContactSearchStore::types()
 {
     return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Contact");
 }
-

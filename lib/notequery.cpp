@@ -38,7 +38,6 @@ public:
     Private()
         : limit(0)
     {
-
     }
 
     QString title;

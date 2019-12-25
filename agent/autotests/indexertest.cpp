@@ -157,4 +157,3 @@ private Q_SLOTS:
 QTEST_GUILESS_MAIN(IndexerTest)
 
 #include "indexertest.moc"
-

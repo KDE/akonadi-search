@@ -22,10 +22,8 @@
 #include <QObject>
 #include <QStringList>
 class QProcess;
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 class AkonadiSearchDebugSearchJob : public QObject
 {
     Q_OBJECT
@@ -56,4 +54,3 @@ private:
 }
 }
 #endif // AKONADISEARCHDEBUGSEARCHJOB_H
-

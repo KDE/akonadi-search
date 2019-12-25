@@ -28,12 +28,9 @@
 #include <AkonadiCore/item.h>
 #include "abstractindexer.h"
 #include "collectionindexer.h"
-namespace Akonadi
-{
-namespace Search
-{
-namespace PIM
-{
+namespace Akonadi {
+namespace Search {
+namespace PIM {
 class IndexedItems;
 }
 }
@@ -52,21 +49,15 @@ public:
     virtual bool createIndexers();
 
     virtual void index(const Akonadi::Item &item);
-    virtual void move(const Akonadi::Item::List &items,
-                      const Akonadi::Collection &from,
-                      const Akonadi::Collection &to);
-    virtual void updateFlags(const Akonadi::Item::List &items,
-                             const QSet<QByteArray> &addedFlags,
-                             const QSet<QByteArray> &removed);
+    virtual void move(const Akonadi::Item::List &items, const Akonadi::Collection &from, const Akonadi::Collection &to);
+    virtual void updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removed);
     virtual void remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTypes);
     virtual void remove(const Akonadi::Item::List &items);
 
     virtual void index(const Akonadi::Collection &collection);
     virtual void change(const Akonadi::Collection &collection);
     virtual void remove(const Akonadi::Collection &col);
-    virtual void move(const Akonadi::Collection &collection,
-                      const Akonadi::Collection &from,
-                      const Akonadi::Collection &to);
+    virtual void move(const Akonadi::Collection &collection, const Akonadi::Collection &from, const Akonadi::Collection &to);
 
     virtual bool haveIndexerForMimeTypes(const QStringList &);
     virtual qlonglong indexedItems(const qlonglong id);

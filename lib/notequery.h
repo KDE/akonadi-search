@@ -27,13 +27,9 @@
 #include <QString>
 #include "query.h"
 
-namespace Akonadi
-{
-namespace Search
-{
-namespace PIM
-{
-
+namespace Akonadi {
+namespace Search {
+namespace PIM {
 /**
  * Query for a list of contacts matching a criteria
  */
@@ -55,7 +51,6 @@ private:
     class Private;
     Private *d;
 };
-
 }
 }
 }

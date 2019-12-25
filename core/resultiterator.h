@@ -28,10 +28,8 @@
 
 #include <QExplicitlySharedDataPointer>
 
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 class SearchStore;
 class Result;
 
@@ -79,7 +77,6 @@ public:
 private:
     QExplicitlySharedDataPointer<ResultIteratorPrivate> d;
 };
-
 }
 }
 

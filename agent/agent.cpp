@@ -47,12 +47,11 @@
 #include <KLocalizedString>
 #include "akonadi_indexer_agent_debug.h"
 
-
 #define INDEXING_AGENT_VERSION 5
 
 AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
-    : AgentBase(id),
-      m_scheduler(m_index, config(), QSharedPointer<JobFactory>(new JobFactory))
+    : AgentBase(id)
+    , m_scheduler(m_index, config(), QSharedPointer<JobFactory>(new JobFactory))
 {
     lowerIOPriority();
     lowerSchedulingPriority();
@@ -187,9 +186,7 @@ void AkonadiIndexingAgent::itemChanged(const Akonadi::Item &item, const QSet<QBy
     m_scheduler.addItem(item);
 }
 
-void AkonadiIndexingAgent::itemsFlagsChanged(const Akonadi::Item::List &items,
-        const QSet<QByteArray> &addedFlags,
-        const QSet<QByteArray> &removedFlags)
+void AkonadiIndexingAgent::itemsFlagsChanged(const Akonadi::Item::List &items, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removedFlags)
 {
     // We optimize and skip the "shouldIndex" call for each item here, since it's
     // cheaper to just let Xapian throw an exception for items that were not
@@ -214,9 +211,7 @@ void AkonadiIndexingAgent::itemsRemoved(const Akonadi::Item::List &items)
     m_index.scheduleCommit();
 }
 
-void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
-                                      const Akonadi::Collection &sourceCollection,
-                                      const Akonadi::Collection &destinationCollection)
+void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items, const Akonadi::Collection &sourceCollection, const Akonadi::Collection &destinationCollection)
 {
     const bool indexSource = shouldIndex(sourceCollection);
     const bool indexDest = shouldIndex(destinationCollection);
@@ -237,8 +232,7 @@ void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
     }
 }
 
-void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection,
-        const Akonadi::Collection &parent)
+void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent)
 {
     Q_UNUSED(parent);
 
@@ -250,8 +244,7 @@ void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection
     m_index.scheduleCommit();
 }
 
-void AkonadiIndexingAgent::collectionChanged(const Akonadi::Collection &collection,
-        const QSet<QByteArray> &changedAttributes)
+void AkonadiIndexingAgent::collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes)
 {
     if (changedAttributes.contains(Akonadi::IndexPolicyAttribute().type())) {
         const auto attr = collection.attribute<Akonadi::IndexPolicyAttribute>();
@@ -294,9 +287,7 @@ void AkonadiIndexingAgent::collectionRemoved(const Akonadi::Collection &collecti
     m_index.scheduleCommit();
 }
 
-void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection,
-        const Akonadi::Collection &collectionSource,
-        const Akonadi::Collection &collectionDestination)
+void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource, const Akonadi::Collection &collectionDestination)
 {
     Q_UNUSED(collectionSource);
     Q_UNUSED(collectionDestination);

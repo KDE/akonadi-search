@@ -83,8 +83,7 @@ QStringList EmailSearchStore::types()
     return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Email");
 }
 
-Xapian::Query EmailSearchStore::constructQuery(const QString &property, const QVariant &value,
-        Term::Comparator com)
+Xapian::Query EmailSearchStore::constructQuery(const QString &property, const QVariant &value, Term::Comparator com)
 {
     //TODO is this special case necessary? maybe we can also move it to PIM
     if (com == Term::Contains) {
@@ -119,4 +118,3 @@ Xapian::Query EmailSearchStore::finalizeQuery(const Xapian::Query &query)
 {
     return Xapian::Query(Xapian::Query::OP_AND_MAYBE, query, Xapian::Query(new AgePostingSource(0)));
 }
-

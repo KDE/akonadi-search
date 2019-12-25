@@ -43,8 +43,8 @@ struct CollectionQuery::Private {
 };
 
 CollectionQuery::CollectionQuery()
-    : Query(),
-      d(new Private)
+    : Query()
+    , d(new Private)
 {
     d->databaseDir = defaultLocation(QStringLiteral("collections"));
     d->limit = 0;
@@ -166,4 +166,3 @@ ResultIterator CollectionQuery::exec()
     iter.d->init(mset);
     return iter;
 }
-

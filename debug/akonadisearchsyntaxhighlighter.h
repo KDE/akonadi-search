@@ -21,16 +21,20 @@
 
 #include <QSyntaxHighlighter>
 
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 class Rule
 {
 public:
-    Rule() {}
+    Rule()
+    {
+    }
+
     Rule(const QRegExp &r, const QTextCharFormat &f)
-        : pattern(r), format(f) {}
+        : pattern(r)
+        , format(f)
+    {
+    }
 
     QRegExp pattern;
     QTextCharFormat format;

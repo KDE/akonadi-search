@@ -37,14 +37,13 @@ void XapianQueryParser::setDatabase(Xapian::Database *db)
     m_db = db;
 }
 
-namespace
-{
+namespace {
 struct Term {
     std::string t;
     uint count;
 
     // pop_heap pops the largest element, we want the smallest to be popped
-    bool operator < (const Term &rhs) const
+    bool operator <(const Term &rhs) const
     {
         return count > rhs.count;
     }

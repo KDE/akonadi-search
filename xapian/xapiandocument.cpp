@@ -119,4 +119,3 @@ bool XapianDocument::removeTermStartsWith(const QByteArray &prefix)
 
     return modified;
 }
-

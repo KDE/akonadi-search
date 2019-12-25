@@ -30,7 +30,7 @@
 #include <KMime/Message>
 #include <Akonadi/KMime/MessageStatus>
 
-class EmailIndexer: public AbstractIndexer
+class EmailIndexer : public AbstractIndexer
 {
 public:
     /**
@@ -43,13 +43,10 @@ public:
     QStringList mimeTypes() const override;
 
     void index(const Akonadi::Item &item) override;
-    void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &added,
-                     const QSet<QByteArray> &removed) override;
+    void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &added, const QSet<QByteArray> &removed) override;
     void remove(const Akonadi::Item &item) override;
     void remove(const Akonadi::Collection &item) override;
-    void move(Akonadi::Item::Id itemId,
-              Akonadi::Collection::Id from,
-              Akonadi::Collection::Id to) override;
+    void move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to) override;
 
     void commit() override;
 

@@ -96,8 +96,7 @@ void PIMContactsRunner::match(Plasma::RunnerContext &context)
     }
 }
 
-void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
-                                      const QString &queryString)
+void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QString &queryString)
 {
     Akonadi::Search::PIM::ContactQuery query;
     query.matchName(queryString);
@@ -135,7 +134,6 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
     }
 
     for (const Akonadi::Item &item : fetch->items()) {
-
         KContacts::Addressee contact;
         try {
             contact = item.payload<KContacts::Addressee>();
@@ -215,12 +213,10 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context,
                 context.addMatch(alternativeMatch);
             }
         }
-
     }
 }
 
-void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context,
-        const QString &queryString)
+void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context, const QString &queryString)
 {
     Akonadi::Search::PIM::ContactCompleter completer(queryString);
     const QStringList completerResults = completer.complete();
@@ -255,8 +251,7 @@ void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context,
     }
 }
 
-void PIMContactsRunner::run(const Plasma::RunnerContext &context,
-                            const Plasma::QueryMatch &match)
+void PIMContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
 {
     Q_UNUSED(context)
 

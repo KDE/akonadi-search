@@ -25,11 +25,8 @@
 
 #include <xapian.h>
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 class AgePostingSource : public Xapian::ValuePostingSource
 {
 public:
@@ -48,7 +45,6 @@ public:
 private:
     unsigned int m_currentTime_t;
 };
-
 }
 }
 

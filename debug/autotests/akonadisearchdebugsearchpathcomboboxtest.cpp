@@ -22,12 +22,10 @@
 AkonadiSearchDebugSearchPathComboBoxTest::AkonadiSearchDebugSearchPathComboBoxTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 AkonadiSearchDebugSearchPathComboBoxTest::~AkonadiSearchDebugSearchPathComboBoxTest()
 {
-
 }
 
 void AkonadiSearchDebugSearchPathComboBoxTest::shouldHaveDefaultValue()
@@ -58,7 +56,6 @@ void AkonadiSearchDebugSearchPathComboBoxTest::shouldSelectCorrectType()
     path = combox.pathFromEnum(Akonadi::Search::AkonadiSearchDebugSearchPathComboBox::Emails);
     combox.setSearchType(Akonadi::Search::AkonadiSearchDebugSearchPathComboBox::Emails);
     QCOMPARE(combox.searchPath(), path);
-
 }
 
 QTEST_MAIN(AkonadiSearchDebugSearchPathComboBoxTest)

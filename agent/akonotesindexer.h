@@ -48,9 +48,7 @@ public:
 
     void remove(const Akonadi::Item &item) override;
     void remove(const Akonadi::Collection &collection) override;
-    void move(Akonadi::Item::Id itemId,
-              Akonadi::Collection::Id from,
-              Akonadi::Collection::Id to) override;
+    void move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to) override;
 private:
     void processPart(KMime::Content *content, KMime::Content *mainContent);
     void process(const KMime::Message::Ptr &msg);

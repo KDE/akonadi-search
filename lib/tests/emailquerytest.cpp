@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     return app.exec();
 }
 
-App::App(int &argc, char **argv, int flags): QCoreApplication(argc, argv, flags)
+App::App(int &argc, char **argv, int flags) : QCoreApplication(argc, argv, flags)
 {
     QTimer::singleShot(0, this, &App::main);
 }

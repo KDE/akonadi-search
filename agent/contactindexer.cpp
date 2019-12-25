@@ -28,8 +28,9 @@
 #include <KContacts/ContactGroup>
 #include <Collection>
 
-ContactIndexer::ContactIndexer(const QString &path):
-    AbstractIndexer(), m_db(nullptr)
+ContactIndexer::ContactIndexer(const QString &path)
+    : AbstractIndexer()
+    , m_db(nullptr)
 {
     try {
         m_db = new Akonadi::Search::XapianDatabase(path, true);
@@ -181,9 +182,7 @@ void ContactIndexer::commit()
     }
 }
 
-void ContactIndexer::move(Akonadi::Item::Id itemId,
-                          Akonadi::Collection::Id from,
-                          Akonadi::Collection::Id to)
+void ContactIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to)
 {
     if (!m_db) {
         return;
@@ -203,4 +202,3 @@ void ContactIndexer::move(Akonadi::Item::Id itemId,
     doc.addBoolTerm(QString::fromLatin1(tt.data()));
     m_db->replaceDocument(doc.doc().get_docid(), doc);
 }
-

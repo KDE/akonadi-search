@@ -35,8 +35,7 @@ class JobFactory
 {
 public:
     virtual ~JobFactory();
-    virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col,
-            const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = nullptr);
+    virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = nullptr);
 };
 
 /**

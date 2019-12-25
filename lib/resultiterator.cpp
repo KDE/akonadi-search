@@ -49,11 +49,11 @@ bool ResultIterator::next()
     if (d->m_firstElement) {
         d->m_iter = d->m_mset.begin();
         d->m_firstElement = false;
-        return (d->m_iter != d->m_end);
+        return d->m_iter != d->m_end;
     }
 
     ++d->m_iter;
-    return (d->m_iter != d->m_end);
+    return d->m_iter != d->m_end;
 }
 
 Akonadi::Item::Id ResultIterator::id()

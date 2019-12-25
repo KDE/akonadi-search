@@ -31,11 +31,8 @@
 
 #include <QMutex>
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 /**
  * Implements a search store using Xapian
  */
@@ -64,9 +61,7 @@ protected:
      * The derived class should implement the logic for constructing the appropriate
      * Xapian::Query class from the given values.
      */
-    virtual Xapian::Query constructQuery(const QString &property,
-                                         const QVariant &value,
-                                         Term::Comparator com) = 0;
+    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) = 0;
 
     virtual Xapian::Query constructFilterQuery(int year, int month, int day);
 
@@ -131,7 +126,6 @@ private:
 
     Xapian::Database *m_db = nullptr;
 };
-
 }
 }
 

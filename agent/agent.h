@@ -31,7 +31,6 @@
 #include "scheduler.h"
 #include "index.h"
 
-
 class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
 {
     Q_OBJECT
@@ -48,19 +47,14 @@ public:
 
     void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection) override;
     void itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers) override;
-    void itemsFlagsChanged(const Akonadi::Item::List &items,
-                           const QSet<QByteArray> &addedFlags,
-                           const QSet<QByteArray> &removedFlags) override;
+    void itemsFlagsChanged(const Akonadi::Item::List &items, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removedFlags) override;
     void itemsRemoved(const Akonadi::Item::List &items) override;
-    void itemsMoved(const Akonadi::Item::List &items,
-                    const Akonadi::Collection &sourceCollection,
-                    const Akonadi::Collection &destinationCollection) override;
+    void itemsMoved(const Akonadi::Item::List &items, const Akonadi::Collection &sourceCollection, const Akonadi::Collection &destinationCollection) override;
 
     void collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent) override;
     void collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes) override;
     void collectionRemoved(const Akonadi::Collection &collection) override;
-    void collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource,
-                         const Akonadi::Collection &collectionDestination) override;
+    void collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource, const Akonadi::Collection &collectionDestination) override;
 
     // Remove the entire db
     void cleanup() override;

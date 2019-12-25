@@ -30,14 +30,10 @@
 #include <QStringList>
 #include <AkonadiCore/Collection>
 
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 /** PIM specific search API. */
-namespace PIM
-{
-
+namespace PIM {
 /** Collection query. */
 class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
@@ -75,7 +71,6 @@ private:
     Private *const d;
     //@endcond
 };
-
 }
 }
 }

@@ -90,7 +90,8 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
-        case Akonadi::EmailSearchTerm::Message: {
+        case Akonadi::EmailSearchTerm::Message:
+        {
             Term s(Term::Or);
             s.setNegation(term.isNegated());
             s.addSubTerm(Term(QStringLiteral("body"), term.value(), mapComparator(term.condition())));
@@ -103,12 +104,14 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("headers"));
         case Akonadi::EmailSearchTerm::ByteSize:
             return getTerm(term, QStringLiteral("size"));
-        case Akonadi::EmailSearchTerm::HeaderDate: {
+        case Akonadi::EmailSearchTerm::HeaderDate:
+        {
             Term s(QStringLiteral("date"), QString::number(term.value().toDateTime().toSecsSinceEpoch()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
         }
-        case Akonadi::EmailSearchTerm::HeaderOnlyDate: {
+        case Akonadi::EmailSearchTerm::HeaderOnlyDate:
+        {
             Term s(QStringLiteral("onlydate"), QString::number(term.value().toDate().toJulianDay()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
@@ -220,7 +223,8 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("summary"));
         case Akonadi::IncidenceSearchTerm::Location:
             return getTerm(term, QStringLiteral("location"));
-        case Akonadi::IncidenceSearchTerm::PartStatus: {
+        case Akonadi::IncidenceSearchTerm::PartStatus:
+        {
             Term t(QStringLiteral("partstatus"), term.value().toString(), Term::Equal);
             t.setNegation(term.isNegated());
             return t;
@@ -325,10 +329,10 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
     } else if (mimeTypes.contains(QLatin1String("text/x-vnd.akonadi.note"))) {
         query.setType(QStringLiteral("Note"));
         t = recursiveNoteTermMapping(term);
-    } else if (mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.event")) ||
-               mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.todo")) ||
-               mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.journal")) ||
-               mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.freebusy"))) {
+    } else if (mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.event"))
+               || mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.todo"))
+               || mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.journal"))
+               || mimeTypes.contains(QLatin1String("application/x-vnd.akonadi.calendar.freebusy"))) {
         query.setType(QStringLiteral("Calendar"));
         t = recursiveCalendarTermMapping(term);
     } else {

@@ -42,4 +42,3 @@ QStringList CalendarSearchStore::types()
 {
     return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Calendar");
 }
-

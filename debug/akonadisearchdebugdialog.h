@@ -24,10 +24,8 @@
 #include "akonadisearchdebugsearchpathcombobox.h"
 #include <AkonadiCore/Item>
 
-namespace Akonadi
-{
-namespace Search
-{
+namespace Akonadi {
+namespace Search {
 class AkonadiSearchDebugDialogPrivate;
 /**
  * @brief The AkonadiSearchDebugDialog class
@@ -55,4 +53,3 @@ private:
 }
 }
 #endif // AKONADISEARCHDEBUGDIALOG_H
-

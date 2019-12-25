@@ -27,11 +27,8 @@
 #include "search_xapian_export.h"
 #include "xapiantermgenerator.h"
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 /**
  * This class is just a light wrapper over Xapian::Document
  * which provides nice Qt apis.

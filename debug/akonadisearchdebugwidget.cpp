@@ -63,12 +63,10 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     mPlainTextEditor->setObjectName(QStringLiteral("plaintexteditor"));
 
     connect(mLineEdit, &KLineEdit::returnPressed, this, &AkonadiSearchDebugWidget::slotSearch);
-
 }
 
 AkonadiSearchDebugWidget::~AkonadiSearchDebugWidget()
 {
-
 }
 
 void AkonadiSearchDebugWidget::slotSearchLineTextChanged(const QString &text)

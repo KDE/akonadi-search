@@ -23,7 +23,6 @@
 #include "searchstore.h"
 #include "akonadi_search_core_debug.h"
 
-
 #include <QThreadStorage>
 #include <QMutex>
 #include <QSharedPointer>

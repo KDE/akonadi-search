@@ -26,12 +26,9 @@
 #include "search_pim_export.h"
 #include <AkonadiCore/Item>
 
-namespace Akonadi
-{
-namespace Search
-{
-namespace PIM
-{
+namespace Akonadi {
+namespace Search {
+namespace PIM {
 class IndexedItemsPrivate;
 
 /** Indexed items. */

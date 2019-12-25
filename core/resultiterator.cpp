@@ -25,7 +25,6 @@
 
 using namespace Akonadi::Search;
 
-
 ResultIterator::ResultIterator(int id, SearchStore *store)
     : d(new ResultIteratorPrivate)
 {

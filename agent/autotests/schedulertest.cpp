@@ -34,15 +34,14 @@ class DummyIndexingJob : public CollectionIndexingJob
 {
     Q_OBJECT
 public:
-    DummyIndexingJob(Index &index, const Akonadi::Collection &col,
-                     const QList<Akonadi::Item::Id> &pending, QObject *parent = nullptr)
+    DummyIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, QObject *parent = nullptr)
         : CollectionIndexingJob(index, col, pending, parent)
     {
     }
 
-    void start() override {
-        QMetaObject::invokeMethod(this,  &DummyIndexingJob::finish, Qt::QueuedConnection);
-
+    void start() override
+    {
+        QMetaObject::invokeMethod(this, &DummyIndexingJob::finish, Qt::QueuedConnection);
     }
 
 private Q_SLOTS:
@@ -59,12 +58,9 @@ public:
     Akonadi::Item::List indexedItems;
     QList<bool> fullSyncs;
 
-    CollectionIndexingJob *createCollectionIndexingJob(Index &index,
-            const Akonadi::Collection &col,
-            const QList<Akonadi::Item::Id> &pending,
-            bool fullSync, QObject *parent = nullptr) override {
-        for (qint64 id : pending)
-        {
+    CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = nullptr) override
+    {
+        for (qint64 id : pending) {
             indexedItems << Akonadi::Item(id);
         }
         indexedCollections << col;
@@ -83,6 +79,7 @@ private Q_SLOTS:
         qRegisterMetaType<Akonadi::Collection::Id>("Akonadi::Collection::Id");
         QStandardPaths::setTestModeEnabled(true);
     }
+
     void init()
     {
         AkonadiTest::checkTestIsIsolated();
@@ -205,11 +202,9 @@ private Q_SLOTS:
         QVERIFY(factory->fullSyncs.at(0));
 
         QCOMPARE(finishedIndexing.count(), 1);
-
     }
 };
 
 QTEST_MAIN(SchedulerTest)
 
 #include "schedulertest.moc"
-

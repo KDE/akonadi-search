@@ -17,7 +17,6 @@
  *
  */
 
-
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
 
@@ -194,4 +193,3 @@ Xapian::WritableDatabase XapianDatabase::createWritableDb()
     qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Could not obtain lock for Xapian Database. This is bad";
     return Xapian::WritableDatabase();
 }
-

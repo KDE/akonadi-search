@@ -218,21 +218,21 @@ private Q_SLOTS:
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(2));
             item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Seen
-                          << Akonadi::MessageFlags::Deleted
-                          << Akonadi::MessageFlags::Answered
-                          << Akonadi::MessageFlags::Flagged
-                          << Akonadi::MessageFlags::HasAttachment
-                          << Akonadi::MessageFlags::HasInvitation
-                          << Akonadi::MessageFlags::Sent
+                                                 << Akonadi::MessageFlags::Deleted
+                                                 << Akonadi::MessageFlags::Answered
+                                                 << Akonadi::MessageFlags::Flagged
+                                                 << Akonadi::MessageFlags::HasAttachment
+                                                 << Akonadi::MessageFlags::HasInvitation
+                                                 << Akonadi::MessageFlags::Sent
                           //<< Akonadi::MessageFlags::Queued    //can't have Sent and Queued at the same time
-                          << Akonadi::MessageFlags::Replied
-                          << Akonadi::MessageFlags::Forwarded
-                          << Akonadi::MessageFlags::ToAct
-                          << Akonadi::MessageFlags::Watched
+                                                 << Akonadi::MessageFlags::Replied
+                                                 << Akonadi::MessageFlags::Forwarded
+                                                 << Akonadi::MessageFlags::ToAct
+                                                 << Akonadi::MessageFlags::Watched
                           //<< Akonadi::MessageFlags::Ignored   // can't have Watched and Ignored at the same time
-                          << Akonadi::MessageFlags::Encrypted
+                                                 << Akonadi::MessageFlags::Encrypted
                           /*<< Akonadi::MessageFlags::Spam*/
-                          << Akonadi::MessageFlags::Ham);
+                                                 << Akonadi::MessageFlags::Ham);
             //Spam is exclude from indexer. So we can't add it.
             emailIndexer.index(item);
         }
@@ -572,6 +572,7 @@ private Q_SLOTS:
             QTest::newRow("find not subject equal note3") << QString::fromLatin1(query.toJSON()) << collections << notesMimeTypes << result;
         }
     }
+
     void testNoteSearch()
     {
         resultSearch();
@@ -708,6 +709,7 @@ private Q_SLOTS:
         }
 #endif
     }
+
 #endif
     void testEmailSearch_data()
     {
@@ -1030,10 +1032,8 @@ private Q_SLOTS:
     {
         resultSearch();
     }
-
 };
 
 QTEST_GUILESS_MAIN(SearchPluginTest)
 
 #include "searchplugintest.moc"
-

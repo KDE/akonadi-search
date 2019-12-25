@@ -38,4 +38,3 @@ QStringList NoteSearchStore::types()
 {
     return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Note");
 }
-

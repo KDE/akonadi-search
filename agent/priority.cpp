@@ -37,8 +37,7 @@
 #endif
 
 #ifdef SYS_ioprio_set
-namespace
-{
+namespace {
 #ifndef IOPRIO_CLASS_IDLE
 enum {
     IOPRIO_CLASS_NONE,
@@ -66,7 +65,7 @@ bool lowerIOPriority()
 {
 #ifdef SYS_ioprio_set
     if (syscall(SYS_ioprio_set, IOPRIO_WHO_PROCESS, 0, IOPRIO_CLASS_IDLE << IOPRIO_CLASS_SHIFT) < 0) {
-        qDebug("cannot set io scheduling to idle (%s). Trying best effort.\n",  strerror(errno));
+        qDebug("cannot set io scheduling to idle (%s). Trying best effort.\n", strerror(errno));
         if (syscall(SYS_ioprio_set, IOPRIO_WHO_PROCESS, 0, 7 | IOPRIO_CLASS_BE << IOPRIO_CLASS_SHIFT) < 0) {
             qDebug("cannot set io scheduling to best effort.\n");
             return false;

@@ -25,11 +25,8 @@
 
 #include "../pimsearchstore.h"
 
-namespace Akonadi
-{
-namespace Search
-{
-
+namespace Akonadi {
+namespace Search {
 class EmailSearchStore : public PIMSearchStore
 {
     Q_OBJECT
@@ -42,16 +39,15 @@ public:
 
     QStringList types() override;
     QString text(int queryId) override;
-    QString icon(int) override {
+    QString icon(int) override
+    {
         return QStringLiteral("internet-mail");
     }
 
 protected:
-    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value,
-                                         Term::Comparator com) override;
+    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;
     Xapian::Query finalizeQuery(const Xapian::Query &query) override;
 };
-
 }
 }
 

@@ -30,12 +30,9 @@
 
 #include "search_core_export.h"
 
-namespace Akonadi
-{
+namespace Akonadi {
 /** Akonadi search infrastructure. */
-namespace Search
-{
-
+namespace Search {
 class Query;
 
 /** Search store. */
@@ -95,7 +92,6 @@ inline int deserialize(const QByteArray &namespace_, const QByteArray &str)
     // The +1 is for the ':'
     return str.mid(namespace_.size() + 1).toInt();
 }
-
 } // namespace Search
 } // namespace Akonadi
 

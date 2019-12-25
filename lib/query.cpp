@@ -35,12 +35,10 @@ using namespace Akonadi::Search::PIM;
 
 Query::Query()
 {
-
 }
 
 Query::~Query()
 {
-
 }
 
 Query *Query::fromJSON(const QByteArray &json)

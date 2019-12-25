@@ -23,21 +23,19 @@
 
 using namespace Akonadi::Search;
 AkonadiSearchDebugSearchJob::AkonadiSearchDebugSearchJob(QObject *parent)
-    : QObject(parent),
-      mProcess(nullptr)
+    : QObject(parent)
+    , mProcess(nullptr)
 {
-
 }
 
 AkonadiSearchDebugSearchJob::~AkonadiSearchDebugSearchJob()
 {
-
 }
 
 void AkonadiSearchDebugSearchJob::start()
 {
     // "delve" is also a name of Go debugger, some distros prefer xapian-delve
-    // for that reason, so try that first and fallback to "delve" 
+    // for that reason, so try that first and fallback to "delve"
     QString delvePath = QStandardPaths::findExecutable(QStringLiteral("xapian-delve"));
     if (delvePath.isEmpty()) {
         delvePath = QStandardPaths::findExecutable(QStringLiteral("delve"));
@@ -93,4 +91,3 @@ void AkonadiSearchDebugSearchJob::setSearchPath(const QString &path)
 {
     mPath = path;
 }
-
