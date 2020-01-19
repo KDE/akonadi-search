@@ -47,7 +47,11 @@ public:
 
     void findIndexed(QSet< Akonadi::Item::Id> &indexed, Akonadi::Collection::Id) override
     {
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
         indexed = alreadyIndexed.toSet();
+#else
+        indexed = QSet< Akonadi::Item::Id>(alreadyIndexed.begin(), alreadyIndexed.end());
+#endif
     }
 
     void index(const Akonadi::Item &item) override

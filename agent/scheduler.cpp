@@ -59,13 +59,23 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
     connect(&m_processTimer, &QTimer::timeout, this, &Scheduler::processNext);
 
     KConfigGroup cfg = m_config->group("General");
-    m_dirtyCollections = cfg.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>()).toSet();
+    const auto dirtyCollectionsResult2 = cfg.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>());
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+        m_dirtyCollections = dirtyCollectionsResult2.toSet();
+#else
+        m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult2.begin(), dirtyCollectionsResult2.end());
+#endif
     if (m_dirtyCollections.isEmpty()) {
         KConfig baloorc(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
         KConfigGroup baloorcGroup = baloorc.group("Akonadi");
 
         //Schedule collections we know have missing items from last time
-        m_dirtyCollections = baloorcGroup.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>()).toSet();
+        const auto dirtyCollectionsResult = baloorcGroup.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>());
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
+        m_dirtyCollections = dirtyCollectionsResult.toSet();
+#else
+        m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult.begin(), dirtyCollectionsResult.end());
+#endif
     }
 
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Dirty collections " << m_dirtyCollections;
