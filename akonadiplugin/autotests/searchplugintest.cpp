@@ -269,7 +269,7 @@ private Q_SLOTS:
             addressee.setFormattedName(QStringLiteral("John Doe"));
             addressee.setNickName(QStringLiteral("JD"));
             addressee.setEmails(QStringList() << QStringLiteral("john@test.com"));
-            addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
+            addressee.setBirthday(QDateTime(QDate(2000, 01, 01).startOfDay()));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(100);
             item.setPayload(addressee);
@@ -281,7 +281,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("uid2"));
             addressee.setName(QStringLiteral("Jane Doe"));
             addressee.setEmails(QStringList() << QStringLiteral("jane@test.com"));
-            addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
+            addressee.setBirthday(QDateTime(QDate(2001, 01, 01).startOfDay()));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(101);
             item.setPayload(addressee);
@@ -293,7 +293,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("uid2"));
             addressee.setName(QStringLiteral("Jane Doe"));
             addressee.setEmails(QStringList() << QStringLiteral("JANE@TEST.COM"));
-            addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
+            addressee.setBirthday(QDateTime(QDate(2001, 01, 01).startOfDay()));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(102);
             item.setPayload(addressee);
@@ -305,7 +305,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("abcd-efgh-1234-5678"));
             addressee.setName(QStringLiteral("Dan Vrátil"));
             addressee.setEmails({ QStringLiteral("dan@test.com") });
-            addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
+            addressee.setBirthday(QDateTime(QDate(2001, 01, 01).startOfDay()));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(105);
             item.setPayload(addressee);
