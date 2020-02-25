@@ -96,7 +96,7 @@ private Q_SLOTS:
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, config, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
+        QSignalSpy statusSpy(&scheduler, &Scheduler::status);
         scheduler.setBusyTimeout(0);
         //Wait for ready signal (indicates that indexing is complete)
         QTRY_COMPARE(statusSpy.count(), 1);
@@ -114,7 +114,7 @@ private Q_SLOTS:
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, config, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
+        QSignalSpy statusSpy(&scheduler, &Scheduler::status);
         QSignalSpy finishedIndexing(&scheduler, &Scheduler::collectionIndexingFinished);
         scheduler.setBusyTimeout(0);
 
@@ -143,7 +143,7 @@ private Q_SLOTS:
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, config, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
+        QSignalSpy statusSpy(&scheduler, &Scheduler::status);
         scheduler.setBusyTimeout(0);
 
         Akonadi::Collection parent1(3);

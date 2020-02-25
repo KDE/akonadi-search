@@ -279,7 +279,7 @@ void EmailIndexer::processPart(KMime::Content *content, KMime::Content *mainCont
     // FIXME: Handle attachments?
 }
 
-void EmailIndexer::processMessageStatus(const Akonadi::MessageStatus &status)
+void EmailIndexer::processMessageStatus(Akonadi::MessageStatus status)
 {
     insertBool('R', status.isRead());
     insertBool('A', status.hasAttachment());

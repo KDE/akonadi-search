@@ -89,7 +89,7 @@ void XapianTermGenerator::indexText(const QString &text, const QString &prefix, 
     //const QByteArray ta = text.toUtf8();
     //m_termGen.index_text(ta.constData(), wdfInc, par.constData());
 
-    QStringList terms = termList(text);
+    const QStringList terms = termList(text);
     for (const QString &term : terms) {
         QByteArray arr = term.toUtf8();
 

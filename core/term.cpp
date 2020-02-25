@@ -168,7 +168,7 @@ void Term::setSubTerms(const QList<Term> &terms)
 
 Term Term::subTerm() const
 {
-    if (d->m_subTerms.size()) {
+    if (!d->m_subTerms.isEmpty()) {
         return d->m_subTerms.first();
     }
 
