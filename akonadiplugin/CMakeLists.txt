@@ -1,7 +1,16 @@
 kde_enable_exceptions()
 
 set(akonadi_search_plugin_SRCS searchplugin.cpp)
-ecm_qt_declare_logging_category(akonadi_search_plugin_SRCS HEADER akonadiplugin_indexer_debug.h IDENTIFIER AKONADIPLUGIN_INDEXER_LOG CATEGORY_NAME org.kde.pim.akonadiplugin_indexer)
+if (ECM_VERSION VERSION_LESS "5.68.0")
+    ecm_qt_declare_logging_category(akonadi_search_plugin_SRCS HEADER akonadiplugin_indexer_debug.h IDENTIFIER AKONADIPLUGIN_INDEXER_LOG CATEGORY_NAME org.kde.pim.akonadiplugin_indexer)
+else()
+    ecm_qt_declare_logging_category(akonadi_search_plugin_SRCS HEADER akonadiplugin_indexer_debug.h IDENTIFIER AKONADIPLUGIN_INDEXER_LOG CATEGORY_NAME org.kde.pim.akonadiplugin_indexer
+        DESCRIPTION "akonadisearch (akonadi plugin indexer)"
+        OLD_CATEGORY_NAMES log_akonadiplugin_indexer
+        EXPORT AKONADISEARCH
+    )
+endif()
+
 
 add_library(akonadi_search_plugin
  MODULE
