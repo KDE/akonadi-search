@@ -76,7 +76,11 @@ QStringList XapianTermGenerator::termList(const QString &text)
             }
 
             str = cleanString.normalized(QString::NormalizationForm_KC);
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
             list << str.split(QLatin1Char('_'), QString::SkipEmptyParts);
+#else
+            list << str.split(QLatin1Char('_'), Qt::SkipEmptyParts);
+#endif
         }
     }
 
