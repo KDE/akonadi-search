@@ -1,6 +1,0 @@
-org.kde.pim.akonadi_indexer_agent akonadisearch (akonadi indexer agent) IDENTIFIER [AKONADI_INDEXER_AGENT_LOG]
-org.kde.pim.akonadiplugin_indexer akonadisearch (akonadi plugin indexer) IDENTIFIER [AKONADIPLUGIN_INDEXER_LOG]
-org.kde.pim.akonadi_search_xapian akonadisearch (akonadi indexer xapian) IDENTIFIER [AKONADI_SEARCH_XAPIAN_LOG]
-org.kde.pim.akonadi_krunner_plugin akonadisearch (akonadi plugin krunner) IDENTIFIER [AKONADI_KRUNNER_LOG]
-org.kde.pim.akonadi_search_pim akonadisearch akonadisearch(akonadi pim lib) IDENTIFIER [AKONADI_SEARCH_PIM_LOG]
-org.kde.pim.akonadi_search_core akonadisearch (akonadi core lib) IDENTIFIER [AKONADI_SEARCH_CORE_LOG]

@@ -1,18 +1,11 @@
 
-if (ECM_VERSION VERSION_LESS "5.68.0")
-    ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_debug.h
-        IDENTIFIER AKONADI_KRUNNER_LOG
-        CATEGORY_NAME org.kde.pim.akonadi_krunner_plugin
-    )
-else()
-    ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_debug.h
+ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_debug.h
         IDENTIFIER AKONADI_KRUNNER_LOG
         CATEGORY_NAME org.kde.pim.akonadi_krunner_plugin
         DESCRIPTION "akonadisearch (akonadi plugin krunner)"
         OLD_CATEGORY_NAMES log_akonadi_krunner_plugin
         EXPORT AKONADISEARCH
     )
-endif()
 
 
 set(pimcontactsrunner_SRCS

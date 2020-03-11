@@ -8,15 +8,11 @@ set(XAPIAN_SRCS
     xapianqueryparser.cpp
 )
 
-if (ECM_VERSION VERSION_LESS "5.68.0")
-    ecm_qt_declare_logging_category(XAPIAN_SRCS HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME org.kde.pim.akonadi_search_xapian)
-else()
-    ecm_qt_declare_logging_category(XAPIAN_SRCS HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME org.kde.pim.akonadi_search_xapian
+ecm_qt_declare_logging_category(XAPIAN_SRCS HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME org.kde.pim.akonadi_search_xapian
         DESCRIPTION "akonadisearch (akonadi indexer xapian)"
         OLD_CATEGORY_NAMES log_akonadi_search_xapian
         EXPORT AKONADISEARCH
     )
-endif()
 
 
 add_library(KF5AkonadiSearchXapian ${XAPIAN_SRCS})

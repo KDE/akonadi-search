@@ -20,15 +20,11 @@ set(akonadi_indexing_agent_SRCS
     collectionupdatejob.cpp
 )
 
-if (ECM_VERSION VERSION_LESS "5.68.0")
-    ecm_qt_declare_logging_category(akonadi_indexing_agent_SRCS HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent)
-else()
-    ecm_qt_declare_logging_category(akonadi_indexing_agent_SRCS HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent
+ecm_qt_declare_logging_category(akonadi_indexing_agent_SRCS HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent
         DESCRIPTION "akonadisearch (akonadi indexer agent)"
         OLD_CATEGORY_NAMES log_akonadi_indexer_agent
         EXPORT AKONADISEARCH
     )
-endif()
 
 qt5_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
 

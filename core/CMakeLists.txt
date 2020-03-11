@@ -7,14 +7,10 @@ set(CORE_SRCS
     resultiterator.cpp
 )
 
-if (ECM_VERSION VERSION_LESS "5.68.0")
-    ecm_qt_declare_logging_category(CORE_SRCS HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core)
-else()
-    ecm_qt_declare_logging_category(CORE_SRCS HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core
+ecm_qt_declare_logging_category(CORE_SRCS HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core
         DESCRIPTION "akonadisearch (akonadi core lib)"
         EXPORT AKONADISEARCH
     )
-endif()
 
 
 

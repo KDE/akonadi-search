@@ -123,15 +123,11 @@ install(FILES
     COMPONENT Devel
 )
 
-if (ECM_VERSION VERSION_LESS "5.68.0")
-    install(FILES akonadi-search.renamecategories akonadi-search.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
-else ()
-    ecm_qt_install_logging_categories(
+ecm_qt_install_logging_categories(
         EXPORT AKONADISEARCH
         FILE akonadi-search.categories
         DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
         )
-endif()
 
 feature_summary(WHAT ALL
     INCLUDE_QUIET_PACKAGES
