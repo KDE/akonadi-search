@@ -31,9 +31,9 @@ cmake_dependent_option(
 
 set(AKONADISEARCH_VERSION ${PIM_VERSION})
 
-set(AKONADI_VERSION "5.13.40")
-set(AKONADI_MIMELIB_VERSION "5.13.40")
-set(KMIME_LIB_VERSION "5.13.40")
+set(AKONADI_VERSION "5.13.80")
+set(AKONADI_MIMELIB_VERSION "5.13.80")
+set(KMIME_LIB_VERSION "5.13.80")
 set(QT_REQUIRED_VERSION "5.12.0")
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
@@ -68,7 +68,7 @@ option(KDEPIM_RUN_AKONADI_TEST "Enable autotest based on Akonadi." TRUE)
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
 if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
    add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050e00)
-   add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x058000)
+   add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054400)
 endif()
 
 add_definitions(-DQT_NO_FOREACH)
