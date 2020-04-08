@@ -46,7 +46,7 @@ PIMContactsRunnerConfig::PIMContactsRunnerConfig(QWidget *parent, const QVariant
 
 void PIMContactsRunnerConfig::configChanged()
 {
-    Q_EMIT markAsChanged();
+    markAsChanged();
 }
 
 void PIMContactsRunnerConfig::load()

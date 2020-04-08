@@ -191,7 +191,7 @@ private Q_SLOTS:
 
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
         Scheduler scheduler(index, config, factory);
-        QSignalSpy statusSpy(&scheduler, SIGNAL(status(int,QString)));
+        QSignalSpy statusSpy(&scheduler, &Scheduler::status);
         QSignalSpy finishedIndexing(&scheduler, &Scheduler::collectionIndexingFinished);
 
         scheduler.setBusyTimeout(0);

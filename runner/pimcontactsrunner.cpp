@@ -133,7 +133,8 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
         return;
     }
 
-    for (const Akonadi::Item &item : fetch->items()) {
+    const auto items = fetch->items();
+    for (const Akonadi::Item &item : items) {
         KContacts::Addressee contact;
         try {
             contact = item.payload<KContacts::Addressee>();

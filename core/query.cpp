@@ -297,7 +297,7 @@ QByteArray Query::toJSON() const
         map[QStringLiteral("sortingProperty")] = d->m_sortingProperty;
     }
 
-    if (d->m_customOptions.size()) {
+    if (!d->m_customOptions.isEmpty()) {
         map[QStringLiteral("customOptions")] = d->m_customOptions;
     }
 
@@ -316,7 +316,7 @@ Query Query::fromJSON(const QByteArray &arr)
     Query query;
     query.d->m_types = map[QStringLiteral("type")].toStringList();
 
-    if (map.contains(QLatin1String("limit"))) {
+    if (map.contains(QStringLiteral("limit"))) {
         query.d->m_limit = map[QStringLiteral("limit")].toUInt();
     } else {
         query.d->m_limit = defaultLimit;
@@ -326,26 +326,26 @@ Query Query::fromJSON(const QByteArray &arr)
     query.d->m_searchString = map[QStringLiteral("searchString")].toString();
     query.d->m_term = Term::fromVariantMap(map[QStringLiteral("term")].toMap());
 
-    if (map.contains(QLatin1String("yearFilter"))) {
+    if (map.contains(QStringLiteral("yearFilter"))) {
         query.d->m_yearFilter = map[QStringLiteral("yearFilter")].toInt();
     }
-    if (map.contains(QLatin1String("monthFilter"))) {
+    if (map.contains(QStringLiteral("monthFilter"))) {
         query.d->m_monthFilter = map[QStringLiteral("monthFilter")].toInt();
     }
-    if (map.contains(QLatin1String("dayFilter"))) {
+    if (map.contains(QStringLiteral("dayFilter"))) {
         query.d->m_dayFilter = map[QStringLiteral("dayFilter")].toInt();
     }
 
-    if (map.contains(QLatin1String("sortingOption"))) {
+    if (map.contains(QStringLiteral("sortingOption"))) {
         int option = map.value(QStringLiteral("sortingOption")).toInt();
         query.d->m_sortingOption = static_cast<SortingOption>(option);
     }
 
-    if (map.contains(QLatin1String("sortingProperty"))) {
+    if (map.contains(QStringLiteral("sortingProperty"))) {
         query.d->m_sortingProperty = map.value(QStringLiteral("sortingProperty")).toString();
     }
 
-    if (map.contains(QLatin1String("customOptions"))) {
+    if (map.contains(QStringLiteral("customOptions"))) {
         QVariant var = map[QStringLiteral("customOptions")];
         if (var.type() == QVariant::Map) {
             query.d->m_customOptions = map[QStringLiteral("customOptions")].toMap();

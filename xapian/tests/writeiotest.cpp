@@ -74,7 +74,8 @@ int main(int argc, char **argv)
 
     int dbSize = 0;
     QDir dbDir(tempDir.path());
-    for (const QFileInfo &file : dbDir.entryInfoList(QDir::Files)) {
+    const auto entryInfoList = dbDir.entryInfoList(QDir::Files);
+    for (const QFileInfo &file : entryInfoList) {
         qDebug() << file.fileName() << file.size() / 1024 << "kb";
         dbSize += file.size();
     }

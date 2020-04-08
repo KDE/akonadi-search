@@ -149,7 +149,7 @@ int XapianSearchStore::exec(const Query &query)
                 qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.term() << "could not be processed. Aborting";
                 return 0;
             }
-            if (query.searchString().size()) {
+            if (!query.searchString().isEmpty()) {
                 QString str = query.searchString();
 
                 Xapian::Query q = constructSearchQuery(str);

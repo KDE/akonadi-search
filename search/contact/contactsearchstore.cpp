@@ -29,7 +29,7 @@ ContactSearchStore::ContactSearchStore(QObject *parent)
 {
     m_prefix.insert(QStringLiteral("name"), QStringLiteral("NA"));
     m_prefix.insert(QStringLiteral("nick"), QStringLiteral("NI"));
-    m_prefix.insert(QStringLiteral("email"), QStringLiteral("")); // Email currently doesn't map to anything
+    m_prefix.insert(QStringLiteral("email"), QLatin1String("")); // Email currently doesn't map to anything
     m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
     m_prefix.insert(QStringLiteral("uid"), QStringLiteral("UID"));
 

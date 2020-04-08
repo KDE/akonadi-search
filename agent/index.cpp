@@ -55,7 +55,8 @@ static void removeDir(const QString &dirName)
 {
     QDir dir(dirName);
     if (dir.exists(dirName)) {
-        for (const QFileInfo &info : dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst)) {
+        const auto dirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
+        for (const QFileInfo &info : dirs) {
             if (info.isDir()) {
                 removeDir(info.absoluteFilePath());
             } else {
@@ -201,7 +202,8 @@ void Index::change(const Akonadi::Collection &col)
 void Index::remove(const Akonadi::Collection &col)
 {
     //Remove items
-    for (AbstractIndexer *indexer : indexersForMimetypes(col.contentMimeTypes())) {
+    const auto indexers = indexersForMimetypes(col.contentMimeTypes());
+    for (AbstractIndexer *indexer : indexers) {
         try {
             indexer->remove(col);
         } catch (const Xapian::Error &e) {
@@ -226,7 +228,8 @@ void Index::move(const Akonadi::Collection &collection, const Akonadi::Collectio
 void Index::addIndexer(AbstractIndexer *indexer)
 {
     m_listIndexer.append(indexer);
-    for (const QString &mimeType : indexer->mimeTypes()) {
+    const QStringList indexerMimetypes = indexer->mimeTypes();
+    for (const QString &mimeType : indexerMimetypes) {
         m_indexer.insert(mimeType, indexer);
     }
 }

@@ -123,7 +123,8 @@ void AkonotesIndexer::processPart(KMime::Content *content, KMime::Content *mainC
                 return;
             }
 
-            for (KMime::Content *c : content->contents()) {
+            const auto contents = content->contents();
+            for (KMime::Content *c : contents) {
                 processPart(c, mainContent);
             }
         }
