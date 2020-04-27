@@ -202,7 +202,7 @@ ResultIterator EmailQuery::exec()
         qWarning() << "Xapian Database corrupted";
         return ResultIterator();
     } catch (const Xapian::DatabaseError &e) {
-        qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
+        qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_description());
         return ResultIterator();
     } catch (...) {
         qWarning() << "Random exception, but we do not want to crash";
