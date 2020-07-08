@@ -69,7 +69,6 @@ Type=Service
 Icon=view-pim-contacts
 
 X-KDE-ServiceTypes=Plasma/Runner
-X-KDE-Library=krunner_pimcontacts
 X-KDE-PluginInfo-Author=Daniel Vrátil
 X-KDE-PluginInfo-Email=dvratil@kde.org
 X-KDE-PluginInfo-Name=PIM Contacts Search Runner

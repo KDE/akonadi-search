@@ -250,6 +250,6 @@ void PIMContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::
     }
 }
 
-K_EXPORT_PLASMA_RUNNER(pimcontactsrunner, PIMContactsRunner)
+K_EXPORT_PLASMA_RUNNER_WITH_JSON(PIMContactsRunner, "plasma-krunner-pimcontacts.json")
 
 #include "pimcontactsrunner.moc"

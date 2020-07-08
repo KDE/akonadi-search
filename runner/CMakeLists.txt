@@ -14,6 +14,7 @@ set(pimcontactsrunner_SRCS
 )
 
 add_library(krunner_pimcontacts MODULE ${pimcontactsrunner_SRCS})
+kcoreaddons_desktop_to_json(krunner_pimcontacts plasma-krunner-pimcontacts.desktop)
 target_link_libraries(krunner_pimcontacts
     KF5::Runner
     KF5::AkonadiCore
@@ -35,12 +36,12 @@ target_link_libraries(kcm_krunner_pimcontacts
     KF5::I18n
 )
 
-
-install(TARGETS krunner_pimcontacts
+install(TARGETS krunner_pimcontacts DESTINATION "${KDE_INSTALL_PLUGINDIR}/kf5/krunner")
+install(TARGETS 
                 kcm_krunner_pimcontacts
         DESTINATION ${PLUGIN_INSTALL_DIR}
 )
-install(FILES plasma-krunner-pimcontacts.desktop
+install(FILES 
               plasma-krunner-pimcontacts_config.desktop
         DESTINATION ${SERVICES_INSTALL_DIR}
 )
