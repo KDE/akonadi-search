@@ -102,6 +102,7 @@ QStringList ContactCompleter::complete()
     // TODO: extend the indexer to use value slots for the normalized email address so that
     // duplicates can be collapsed by Xapian::Enquire::set_collapse_key()
 
+    int retryCount = 0;
     Q_FOREVER {
         try {
             return processEnquire(enq, m_limit);
@@ -110,6 +111,11 @@ QStringList ContactCompleter::complete()
             return QStringList();
         } catch (const Xapian::DatabaseModifiedError &e) {
             db.reopen();
+            retryCount++;
+            if (retryCount > 3) {
+                qCWarning(AKONADI_SEARCH_PIM_LOG) << "The emailContacts Xapian database seems broken:" << QString::fromStdString(e.get_description());
+                return QStringList();
+            }
             continue; // try again
         }
     }
