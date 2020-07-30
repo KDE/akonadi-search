@@ -22,7 +22,6 @@
 using namespace Akonadi::Search::PIM;
 Index::Index(QObject *parent)
     : QObject(parent)
-    , m_collectionIndexer(nullptr)
 {
     m_indexedItems = new IndexedItems(this);
     m_commitTimer.setInterval(1000);

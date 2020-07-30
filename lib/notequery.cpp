@@ -10,6 +10,7 @@
 
 #include "notequery.h"
 #include "resultiterator_p.h"
+#include "akonadi_search_pim_debug.h"
 
 #include <QList>
 #include <QStandardPaths>
@@ -22,13 +23,12 @@ class Q_DECL_HIDDEN NoteQuery::Private
 {
 public:
     Private()
-        : limit(0)
     {
     }
 
     QString title;
     QString note;
-    int limit;
+    int limit = 0;
 };
 
 NoteQuery::NoteQuery()
@@ -70,16 +70,16 @@ ResultIterator NoteQuery::exec()
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());
     } catch (const Xapian::DatabaseOpeningError &) {
-        qWarning() << "Xapian Database does not exist at " << dir;
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database does not exist at " << dir;
         return ResultIterator();
     } catch (const Xapian::DatabaseCorruptError &) {
-        qWarning() << "Xapian Database corrupted";
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database corrupted";
         return ResultIterator();
     } catch (const Xapian::DatabaseError &e) {
-        qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     } catch (...) {
-        qWarning() << "Random exception, but we do not want to crash";
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Random exception, but we do not want to crash";
         return ResultIterator();
     }
 
@@ -120,7 +120,7 @@ ResultIterator NoteQuery::exec()
         iter.d->init(matches);
         return iter;
     } catch (const Xapian::Error &e) {
-        qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         return ResultIterator();
     }
 }

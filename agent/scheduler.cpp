@@ -33,7 +33,6 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
     :   QObject(parent)
     , m_config(config)
     , m_index(index)
-    , m_currentJob(nullptr)
     , m_jobFactory(jobFactory)
     , m_busyTimeout(5000)
 {

@@ -49,10 +49,10 @@ private:
     QList<Akonadi::Item::Id> m_needsIndexing;
     Index &m_index;
     QElapsedTimer m_time;
-    bool m_reindexingLock;
-    bool m_fullSync;
-    int m_progressCounter;
-    int m_progressTotal;
+    bool m_reindexingLock = false;
+    bool m_fullSync = true;
+    int m_progressCounter = 0;
+    int m_progressTotal = 0;
 };
 
 #endif

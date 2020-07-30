@@ -41,8 +41,7 @@ CollectionIndexer::~CollectionIndexer()
 
 static QByteArray getPath(const Akonadi::Collection &collection)
 {
-    QStringList pathParts;
-    pathParts << collection.displayName();
+    QStringList pathParts = {collection.displayName()};
     Akonadi::Collection col = collection;
     while (col.parentCollection().isValid() && (col.parentCollection() != Akonadi::Collection::root())) {
         col = col.parentCollection();

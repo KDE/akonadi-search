@@ -15,7 +15,6 @@
 
 CalendarIndexer::CalendarIndexer(const QString &path)
     : AbstractIndexer()
-    , m_db(nullptr)
 {
     try {
         m_db = new Akonadi::Search::XapianDatabase(path, true);

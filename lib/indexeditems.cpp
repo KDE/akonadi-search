@@ -25,18 +25,18 @@ public:
     {
     }
 
-    QString dbPath(const QString &dbName) const;
-    QString emailIndexingPath() const;
-    QString collectionIndexingPath() const;
-    QString calendarIndexingPath() const;
-    QString akonotesIndexingPath() const;
-    QString emailContactsIndexingPath() const;
-    QString contactIndexingPath() const;
+    Q_REQUIRED_RESULT QString dbPath(const QString &dbName) const;
+    Q_REQUIRED_RESULT QString emailIndexingPath() const;
+    Q_REQUIRED_RESULT QString collectionIndexingPath() const;
+    Q_REQUIRED_RESULT QString calendarIndexingPath() const;
+    Q_REQUIRED_RESULT QString akonotesIndexingPath() const;
+    Q_REQUIRED_RESULT QString emailContactsIndexingPath() const;
+    Q_REQUIRED_RESULT QString contactIndexingPath() const;
 
     mutable QHash<QString, QString> m_cachePath;
     QString m_overridePrefixPath;
-    qlonglong indexedItems(const qlonglong id);
-    qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
+    Q_REQUIRED_RESULT qlonglong indexedItems(const qlonglong id);
+    Q_REQUIRED_RESULT qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
     void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
     void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId);
 };

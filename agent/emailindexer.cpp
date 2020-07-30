@@ -16,9 +16,6 @@
 
 EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
     : AbstractIndexer()
-    , m_doc(nullptr)
-    , m_termGen(nullptr)
-    , m_contactDb(nullptr)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);

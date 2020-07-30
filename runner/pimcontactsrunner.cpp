@@ -35,7 +35,6 @@ Q_DECLARE_METATYPE(KContacts::Addressee *)
 
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const QVariantList &args)
     : Plasma::AbstractRunner(parent, args)
-    , mQueryAutocompleter(true)
 {
     setObjectName(QStringLiteral("PIMContactsRunner"));
     setSpeed(Plasma::AbstractRunner::SlowSpeed);

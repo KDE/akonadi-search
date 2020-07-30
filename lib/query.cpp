@@ -8,6 +8,7 @@
 
 #include "query.h"
 #include "contactquery.h"
+#include "akonadi_search_pim_debug.h"
 
 #include <QVariant>
 #include <QDebug>
@@ -32,14 +33,14 @@ Query *Query::fromJSON(const QByteArray &json)
     QJsonParseError error;
     QJsonDocument doc = QJsonDocument::fromJson(json, &error);
     if (doc.isNull()) {
-        qWarning() << "Could not parse json query" << error.errorString();
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Could not parse json query" << error.errorString();
         return nullptr;
     }
 
     QVariantMap result = doc.toVariant().toMap();
     const QString type = result[QStringLiteral("type")].toString().toLower();
     if (type != QLatin1String("contact")) {
-        qWarning() << "Can only handle contact queries";
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Can only handle contact queries";
         return nullptr;
     }
 

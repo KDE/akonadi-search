@@ -12,9 +12,6 @@
 
 AkonotesIndexer::AkonotesIndexer(const QString &path)
     : AbstractIndexer()
-    , m_db(nullptr)
-    , m_doc(nullptr)
-    , m_termGen(nullptr)
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);

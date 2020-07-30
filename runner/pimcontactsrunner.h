@@ -30,7 +30,7 @@ private:
     void queryAutocompleter(Plasma::RunnerContext &context, const QString &queryString);
 
 private:
-    bool mQueryAutocompleter;
+    bool mQueryAutocompleter = true;
 };
 
 #endif // PIMCONTACTSRUNNER_H

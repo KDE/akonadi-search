@@ -11,6 +11,7 @@
 #include "emailquery.h"
 #include "resultiterator_p.h"
 #include "../search/email/agepostingsource.h"
+#include "akonadi_search_pim_debug.h"
 
 #include <QStandardPaths>
 #include <QRegularExpression>
@@ -39,18 +40,15 @@ public:
     QString subjectMatchString;
     QString bodyMatchString;
 
-    EmailQuery::OpType opType;
-    int limit;
-    bool splitSearchMatchString;
+    EmailQuery::OpType opType = EmailQuery::OpAnd;
+    int limit = 0;
+    bool splitSearchMatchString = true;
 };
 
 EmailQuery::Private::Private()
     : important('0')
     , read('0')
     , attachment('0')
-    , opType(OpAnd)
-    , limit(0)
-    , splitSearchMatchString(true)
 {
 }
 
@@ -182,16 +180,16 @@ ResultIterator EmailQuery::exec()
     try {
         db = Xapian::Database(QFile::encodeName(dir).constData());
     } catch (const Xapian::DatabaseOpeningError &) {
-        qWarning() << "Xapian Database does not exist at " << dir;
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database does not exist at " << dir;
         return ResultIterator();
     } catch (const Xapian::DatabaseCorruptError &) {
-        qWarning() << "Xapian Database corrupted";
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database corrupted";
         return ResultIterator();
     } catch (const Xapian::DatabaseError &e) {
-        qWarning() << "Failed to open Xapian database:" << QString::fromStdString(e.get_description());
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Failed to open Xapian database:" << QString::fromStdString(e.get_description());
         return ResultIterator();
     } catch (...) {
-        qWarning() << "Random exception, but we do not want to crash";
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Random exception, but we do not want to crash";
         return ResultIterator();
     }
 
@@ -350,7 +348,7 @@ ResultIterator EmailQuery::exec()
         iter.d->init(mset);
         return iter;
     } catch (const Xapian::Error &e) {
-        qWarning() << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         return ResultIterator();
     }
 }

@@ -10,7 +10,7 @@
 
 #include "collectionquery.h"
 #include "resultiterator_p.h"
-
+#include "akonadi_search_pim_debug.h"
 #include <QList>
 #include <QFile>
 
@@ -82,7 +82,7 @@ ResultIterator CollectionQuery::exec()
     try {
         db = Xapian::Database(QFile::encodeName(d->databaseDir).constData());
     } catch (const Xapian::DatabaseError &e) {
-        qWarning() << "Failed to open Xapian database:" << d->databaseDir
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Failed to open Xapian database:" << d->databaseDir
                    << "; error:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     }
