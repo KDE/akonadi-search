@@ -136,7 +136,7 @@ void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed
 {
     Xapian::Database db;
     try {
-        db = Xapian::Database(QFile::encodeName(dbPath).constData());
+        db = Xapian::Database(QFile::encodeName(dbPath).toStdString());
     } catch (const Xapian::DatabaseError &e) {
         qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return;
@@ -146,10 +146,29 @@ void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed
     Xapian::Enquire enquire(db);
     enquire.set_query(query);
 
-    Xapian::MSet mset = enquire.get_mset(0, UINT_MAX);
-    Xapian::MSetIterator it = mset.begin();
-    for (; it != mset.end(); it++) {
-        indexed << *it;
+    auto getResults = [&enquire, &indexed]() {
+        Xapian::MSet mset;
+        mset = enquire.get_mset(0, UINT_MAX);
+        Xapian::MSetIterator it = mset.begin();
+        for (auto result : mset) {
+            indexed << result;
+        }
+    };
+
+    try {
+        getResults();
+    } catch (const Xapian::DatabaseModifiedError &e) {
+        qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to read database" << dbPath << ":" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_SEARCH_PIM_LOG) << "Calling reopen() on database" << dbPath << "and trying again";
+        if (db.reopen()) { // only try again once
+            try {
+                getResults();
+            } catch (const Xapian::DatabaseModifiedError &e) {
+                qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to query database" << dbPath << "even after calling reopen()";
+            }
+        }
+    } catch (const Xapian::DatabaseCorruptError &e) {
+        qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to query database" << dbPath << ":" << QString::fromStdString(e.get_msg());
     }
 }
 
