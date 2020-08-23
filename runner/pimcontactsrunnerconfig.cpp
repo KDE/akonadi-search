@@ -6,7 +6,6 @@
  */
 
 #include "pimcontactsrunnerconfig.h"
-#include <kconfigwidgets_version.h>
 #include <QCheckBox>
 #include <QVBoxLayout>
 #include <KLocalizedString>
