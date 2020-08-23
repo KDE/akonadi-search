@@ -18,7 +18,7 @@ EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
     : AbstractIndexer()
 {
     try {
-        m_db = new Xapian::WritableDatabase(path.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
+        m_db = new Xapian::WritableDatabase(path.toStdString(), Xapian::DB_CREATE_OR_OPEN);
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
@@ -29,7 +29,7 @@ EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
     }
 
     try {
-        m_contactDb = new Xapian::WritableDatabase(contactDbPath.toUtf8().constData(), Xapian::DB_CREATE_OR_OPEN);
+        m_contactDb = new Xapian::WritableDatabase(contactDbPath.toStdString(), Xapian::DB_CREATE_OR_OPEN);
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();

@@ -39,7 +39,7 @@ void XapianSearchStore::setDbPath(const QString &path)
     m_db = nullptr;
 
     try {
-        m_db = new Xapian::Database(m_dbPath.toUtf8().constData());
+        m_db = new Xapian::Database(m_dbPath.toStdString());
     } catch (const Xapian::DatabaseOpeningError &) {
         qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Xapian Database does not exist at " << m_dbPath;
     } catch (const Xapian::DatabaseCorruptError &) {

@@ -24,7 +24,7 @@ XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)
     : m_writeOnly(writeOnly)
 {
     QDir().mkpath(path);
-    m_path = path.toUtf8().constData();
+    m_path = path.toStdString();
 
     if (!writeOnly) {
         try {
