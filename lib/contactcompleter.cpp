@@ -75,7 +75,7 @@ QStringList ContactCompleter::complete()
     const QString dir = Query::defaultLocation(QStringLiteral("emailContacts"));
     Xapian::Database db;
     try {
-        db = Xapian::Database(QFile::encodeName(dir).constData());
+        db = Xapian::Database(QFile::encodeName(dir).toStdString());
     } catch (const Xapian::DatabaseOpeningError &) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database does not exist at " << dir;
         return QStringList();

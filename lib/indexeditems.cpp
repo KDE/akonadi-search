@@ -115,7 +115,7 @@ qlonglong IndexedItemsPrivate::indexedItemsInDatabase(const std::string &term, c
 {
     Xapian::Database db;
     try {
-        db = Xapian::Database(QFile::encodeName(dbPath).constData());
+        db = Xapian::Database(QFile::encodeName(dbPath).toStdString());
     } catch (const Xapian::DatabaseError &e) {
         qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return 0;
