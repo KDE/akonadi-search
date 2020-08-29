@@ -27,10 +27,8 @@ AkonotesIndexer::AkonotesIndexer(const QString &path)
 
 AkonotesIndexer::~AkonotesIndexer()
 {
-    if (m_db) {
-        m_db->commit();
-        delete m_db;
-    }
+    commit();
+    delete m_db;
 }
 
 QStringList AkonotesIndexer::mimeTypes() const
@@ -125,9 +123,16 @@ void AkonotesIndexer::processPart(KMime::Content *content, KMime::Content *mainC
 
 void AkonotesIndexer::commit()
 {
-    if (m_db) {
-        m_db->commit();
+    if (!m_db) {
+        return;
     }
+
+    try {
+        m_db->commit();
+    } catch (const Xapian::Error &err) {
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+    }
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
 }
 
 void AkonotesIndexer::remove(const Akonadi::Item &item)

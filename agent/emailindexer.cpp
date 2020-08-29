@@ -42,15 +42,9 @@ EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
 
 EmailIndexer::~EmailIndexer()
 {
-    if (m_db) {
-        m_db->commit();
-        delete m_db;
-    }
-
-    if (m_contactDb) {
-        m_contactDb->commit();
-        delete m_contactDb;
-    }
+    commit();
+    delete m_db;
+    delete m_contactDb;
 }
 
 QStringList EmailIndexer::mimeTypes() const
@@ -397,9 +391,20 @@ void EmailIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, 
 void EmailIndexer::commit()
 {
     if (m_db) {
-        m_db->commit();
+        try {
+            m_db->commit();
+        } catch (const Xapian::Error &err) {
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+        }
+        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
     }
+
     if (m_contactDb) {
-        m_contactDb->commit();
+        try {
+            m_contactDb->commit();
+        } catch (const Xapian::Error &err) {
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+        }
+        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
     }
 }

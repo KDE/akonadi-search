@@ -149,7 +149,14 @@ void CollectionIndexer::move(const Akonadi::Collection &collection, const Akonad
 
 void CollectionIndexer::commit()
 {
-    if (m_db) {
-        m_db->commit();
+    if (!m_db) {
+        return;
     }
+
+    try {
+        m_db->commit();
+    } catch (const Xapian::Error &err) {
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+    }
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
 }

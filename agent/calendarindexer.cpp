@@ -30,10 +30,8 @@ CalendarIndexer::CalendarIndexer(const QString &path)
 
 CalendarIndexer::~CalendarIndexer()
 {
-    if (m_db) {
-        m_db->commit();
-        delete m_db;
-    }
+    commit();
+    delete m_db;
 }
 
 QStringList CalendarIndexer::mimeTypes() const
@@ -59,9 +57,16 @@ void CalendarIndexer::index(const Akonadi::Item &item)
 
 void CalendarIndexer::commit()
 {
-    if (m_db) {
-        m_db->commit();
+    if (!m_db) {
+        return;
     }
+
+    try {
+        m_db->commit();
+    } catch (const Xapian::Error &err) {
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+    }
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
 }
 
 void CalendarIndexer::remove(const Akonadi::Item &item)

@@ -31,10 +31,8 @@ ContactIndexer::ContactIndexer(const QString &path)
 
 ContactIndexer::~ContactIndexer()
 {
-    if (m_db) {
-        m_db->commit();
-        delete m_db;
-    }
+    commit();
+    delete m_db;
 }
 
 QStringList ContactIndexer::mimeTypes() const
@@ -162,9 +160,16 @@ void ContactIndexer::remove(const Akonadi::Collection &collection)
 
 void ContactIndexer::commit()
 {
-    if (m_db) {
-        m_db->commit();
+    if (!m_db) {
+        return;
     }
+
+    try {
+        m_db->commit();
+    } catch (const Xapian::Error &err) {
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+    }
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
 }
 
 void ContactIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to)
