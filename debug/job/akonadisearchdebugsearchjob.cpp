@@ -12,7 +12,6 @@
 using namespace Akonadi::Search;
 AkonadiSearchDebugSearchJob::AkonadiSearchDebugSearchJob(QObject *parent)
     : QObject(parent)
-    , mProcess(nullptr)
 {
 }
 

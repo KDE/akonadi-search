@@ -22,7 +22,6 @@ XapianSearchStore::XapianSearchStore(QObject *parent)
     : SearchStore(parent)
     , m_mutex(QMutex::Recursive)
     , m_nextId(1)
-    , m_db(nullptr)
 {
 }
 

@@ -26,28 +26,18 @@ const int defaultLimit = 100000;
 class Q_DECL_HIDDEN Akonadi::Search::Query::Private
 {
 public:
-    Private()
-    {
-        m_limit = defaultLimit;
-        m_offset = 0;
-        m_yearFilter = -1;
-        m_monthFilter = -1;
-        m_dayFilter = -1;
-        m_sortingOption = SortAuto;
-    }
-
     Term m_term;
 
     QStringList m_types;
     QString m_searchString;
-    uint m_limit;
-    uint m_offset;
+    uint m_limit = defaultLimit;
+    uint m_offset = 0;
 
-    int m_yearFilter;
-    int m_monthFilter;
-    int m_dayFilter;
+    int m_yearFilter = -1;
+    int m_monthFilter = -1;
+    int m_dayFilter = -1;
 
-    SortingOption m_sortingOption;
+    SortingOption m_sortingOption = SortAuto;
     QString m_sortingProperty;
     QVariantMap m_customOptions;
 };

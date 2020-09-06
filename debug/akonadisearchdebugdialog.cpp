@@ -24,11 +24,6 @@ using namespace Akonadi::Search;
 class Akonadi::Search::AkonadiSearchDebugDialogPrivate
 {
 public:
-    AkonadiSearchDebugDialogPrivate()
-        : mAkonadiSearchDebugWidget(nullptr)
-    {
-    }
-
     AkonadiSearchDebugWidget *mAkonadiSearchDebugWidget = nullptr;
 };
 

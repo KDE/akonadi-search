@@ -38,7 +38,7 @@ private:
     friend class CollectionQuery;
 
     class Private;
-    Private *d;
+    Private *const d;
 };
 }
 }

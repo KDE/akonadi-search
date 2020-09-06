@@ -14,7 +14,6 @@ using namespace Akonadi::Search;
 
 XapianTermGenerator::XapianTermGenerator(Xapian::Document *doc)
     : m_doc(doc)
-    , m_position(1)
 {
     if (doc) {
         m_termGen.set_document(*doc);

@@ -34,7 +34,7 @@ private:
     Xapian::Document *m_doc = nullptr;
     Xapian::TermGenerator m_termGen;
 
-    int m_position;
+    int m_position = 1;
 };
 }
 }

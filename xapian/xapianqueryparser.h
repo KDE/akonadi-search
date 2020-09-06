@@ -37,7 +37,7 @@ public:
 
 private:
     Xapian::Database *m_db = nullptr;
-    bool m_autoExpand;
+    bool m_autoExpand = true;
 };
 }
 }

@@ -30,7 +30,7 @@ CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, con
 }
 
 Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QSharedPointer<JobFactory> &jobFactory, QObject *parent)
-    :   QObject(parent)
+    : QObject(parent)
     , m_config(config)
     , m_index(index)
     , m_jobFactory(jobFactory)
