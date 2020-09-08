@@ -4,7 +4,7 @@
    Parts of this file are based on code from Strigi
    SPDX-FileCopyrightText: 2006-2007 Jos van den Oever <jos@vandenoever.info>
 
-   SPDX-License-Identifier: LGPL-2.0-only
+   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 #include "priority.h"
