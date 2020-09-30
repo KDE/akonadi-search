@@ -13,7 +13,6 @@ using namespace Akonadi::Search::PIM;
 ResultIterator::ResultIterator()
     : d(new Private)
 {
-    d->m_firstElement = false;
 }
 
 ResultIterator::ResultIterator(const ResultIterator &ri)

@@ -31,7 +31,7 @@ public:
     Xapian::MSetIterator m_iter;
     Xapian::MSetIterator m_end;
 
-    bool m_firstElement;
+    bool m_firstElement = false;
 };
 }
 }
