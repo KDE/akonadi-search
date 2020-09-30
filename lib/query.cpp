@@ -37,7 +37,7 @@ Query *Query::fromJSON(const QByteArray &json)
         return nullptr;
     }
 
-    QVariantMap result = doc.toVariant().toMap();
+    const QVariantMap result = doc.toVariant().toMap();
     const QString type = result[QStringLiteral("type")].toString().toLower();
     if (type != QLatin1String("contact")) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Can only handle contact queries";

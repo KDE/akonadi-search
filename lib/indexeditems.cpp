@@ -142,7 +142,7 @@ void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed
         return;
     }
     const std::string term = QStringLiteral("C%1").arg(collectionId).toStdString();
-    Xapian::Query query(term);
+    const Xapian::Query query(term);
     Xapian::Enquire enquire(db);
     enquire.set_query(query);
 

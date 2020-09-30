@@ -264,8 +264,8 @@ ResultIterator EmailQuery::exec()
     if (!d->collections.isEmpty()) {
         Xapian::Query query;
         for (Akonadi::Collection::Id id : qAsConst(d->collections)) {
-            QString c = QString::number(id);
-            Xapian::Query q = Xapian::Query('C' + c.toStdString());
+            const QString c = QString::number(id);
+            const Xapian::Query q = Xapian::Query('C' + c.toStdString());
 
             query = Xapian::Query(Xapian::Query::OP_OR, query, q);
         }
