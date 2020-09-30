@@ -87,7 +87,7 @@ void CalendarIndexer::remove(const Akonadi::Collection &collection)
         return;
     }
     try {
-        Xapian::Query query('C' + QString::number(collection.id()).toStdString());
+        const Xapian::Query query('C' + QString::number(collection.id()).toStdString());
         Xapian::Enquire enquire(*(m_db->db()));
         enquire.set_query(query);
 
@@ -129,7 +129,7 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarC
     doc.indexText(event->organizer().email(), QStringLiteral("O"));
     doc.indexText(event->summary(), QStringLiteral("S"));
     doc.indexText(event->location(), QStringLiteral("L"));
-    KCalendarCore::Attendee::List attendees = event->attendees();
+    const KCalendarCore::Attendee::List attendees = event->attendees();
     KCalendarCore::Attendee::List::ConstIterator it;
     KCalendarCore::Attendee::List::ConstIterator end(attendees.constEnd());
     for (it = attendees.constBegin(); it != end; ++it) {

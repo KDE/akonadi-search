@@ -54,8 +54,8 @@ void AkonotesIndexer::index(const Akonadi::Item &item)
 
     process(msg);
 
-    Akonadi::Collection::Id colId = item.parentCollection().id();
-    QByteArray term = 'C' + QByteArray::number(colId);
+    const Akonadi::Collection::Id colId = item.parentCollection().id();
+    const QByteArray term = 'C' + QByteArray::number(colId);
     m_doc->add_boolean_term(term.data());
 
     m_db->replace_document(item.id(), *m_doc);
@@ -74,7 +74,7 @@ void AkonotesIndexer::process(const KMime::Message::Ptr &msg)
     // (Give the subject a higher priority)
     KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
-        std::string str(subject->asUnicodeString().toUtf8().constData());
+        const std::string str(subject->asUnicodeString().toStdString());
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << str.c_str();
         m_termGen->index_text_without_positions(str, 1, "SU");
         m_termGen->index_text_without_positions(str, 100);
@@ -83,7 +83,7 @@ void AkonotesIndexer::process(const KMime::Message::Ptr &msg)
 
     KMime::Content *mainBody = msg->mainBodyPart("text/plain");
     if (mainBody) {
-        const std::string text(mainBody->decodedText().toUtf8().constData());
+        const std::string text(mainBody->decodedText().toStdString());
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
@@ -115,7 +115,7 @@ void AkonotesIndexer::processPart(KMime::Content *content, KMime::Content *mainC
             QTextDocument doc;
             doc.setHtml(content->decodedText());
 
-            const std::string text(doc.toPlainText().toUtf8().constData());
+            const std::string text(doc.toPlainText().toStdString());
             m_termGen->index_text_without_positions(text);
         }
     }
@@ -153,7 +153,7 @@ void AkonotesIndexer::remove(const Akonadi::Collection &collection)
         return;
     }
     try {
-        Xapian::Query query('C' + QString::number(collection.id()).toStdString());
+        const Xapian::Query query('C' + QString::number(collection.id()).toStdString());
         Xapian::Enquire enquire(*m_db);
         enquire.set_query(query);
 

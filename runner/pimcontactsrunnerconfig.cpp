@@ -22,7 +22,7 @@ PIMContactsRunnerConfig::PIMContactsRunnerConfig(QWidget *parent, const QVariant
 {
     QVBoxLayout *vbox = new QVBoxLayout(this);
 
-    mQueryCompletionCheckBox = new QCheckBox(i18n("Search in contacts indexed from sent and received emails too"));
+    mQueryCompletionCheckBox = new QCheckBox(i18n("Search in contacts indexed from sent and received emails too"), this);
     connect(mQueryCompletionCheckBox, &QCheckBox::stateChanged,
             this, &PIMContactsRunnerConfig::configChanged);
 

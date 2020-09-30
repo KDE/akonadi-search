@@ -37,8 +37,8 @@ struct Term {
 Xapian::Query makeQuery(const QString &string, int position, Xapian::Database *db)
 {
     if (!db) {
-        QByteArray arr = string.toUtf8();
-        std::string stdString(arr.constData(), arr.size());
+        const QByteArray arr = string.toUtf8();
+        const std::string stdString(arr.constData(), arr.size());
         return Xapian::Query(stdString, 1, position);
     }
 
@@ -47,7 +47,7 @@ Xapian::Query makeQuery(const QString &string, int position, Xapian::Database *d
     QList<Term> topTerms;
     topTerms.reserve(MaxTerms + 1);
 
-    const std::string stdString(string.toUtf8().constData());
+    const std::string stdString(string.toStdString());
     Xapian::TermIterator it = db->allterms_begin(stdString);
     Xapian::TermIterator end = db->allterms_end(stdString);
     for (; it != end; ++it) {
@@ -76,7 +76,7 @@ Xapian::Query makeQuery(const QString &string, int position, Xapian::Database *d
     }
 
     if (queries.isEmpty()) {
-        return Xapian::Query(string.toUtf8().constData(), 1, position);
+        return Xapian::Query(string.toStdString(), 1, position);
     }
     Xapian::Query finalQ(Xapian::Query::OP_SYNONYM, queries.begin(), queries.end());
     return finalQ;
@@ -105,7 +105,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
 
     int flags = Xapian::QueryParser::FLAG_PHRASE | Xapian::QueryParser::FLAG_PARTIAL;
 
-    std::string stdString(text.toUtf8().constData());
+    std::string stdString(text.toStdString());
     return parser.parse_query(stdString, flags);
     */
 
@@ -198,7 +198,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
                     if (m_autoExpand) {
                         queries << makeQuery(term, position, m_db);
                     } else {
-                        queries << Xapian::Query(term.toUtf8().constData(), 1, position);
+                        queries << Xapian::Query(term.toStdString(), 1, position);
                     }
                 }
             }

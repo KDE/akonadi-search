@@ -56,7 +56,7 @@ Xapian::Document XapianDocument::doc() const
 
 void XapianDocument::addValue(int pos, const QString &value)
 {
-    m_doc.add_value(pos, value.toUtf8().constData());
+    m_doc.add_value(pos, value.toStdString());
 }
 
 QString XapianDocument::fetchTermStartsWith(const QByteArray &term)

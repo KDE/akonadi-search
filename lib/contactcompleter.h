@@ -22,11 +22,11 @@ class AKONADI_SEARCH_PIM_EXPORT ContactCompleter
 public:
     explicit ContactCompleter(const QString &prefix, int limit = 10);
 
-    QStringList complete();
+    Q_REQUIRED_RESULT QStringList complete();
 
 private:
-    QString m_prefix;
-    int m_limit;
+    const QString m_prefix;
+    const int m_limit;
 };
 }
 }

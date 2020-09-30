@@ -30,7 +30,7 @@ private Q_SLOTS:
 private:
     bool shouldIndex(const Akonadi::Collection &col) const;
 
-    Akonadi::Collection mCol;
+    const Akonadi::Collection mCol;
     Index &mIndex;
 };
 

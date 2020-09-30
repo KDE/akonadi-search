@@ -81,10 +81,10 @@ void XapianTermGenerator::indexText(const QString &text, const QString &prefix, 
 
     const QStringList terms = termList(text);
     for (const QString &term : terms) {
-        QByteArray arr = term.toUtf8();
+        const QByteArray arr = term.toUtf8();
 
-        QByteArray finalArr = par + arr;
-        std::string stdString(finalArr.constData(), finalArr.size());
+        const QByteArray finalArr = par + arr;
+        const std::string stdString(finalArr.constData(), finalArr.size());
         m_doc->add_posting(stdString, m_position, wdfInc);
 
         m_position++;

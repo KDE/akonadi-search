@@ -17,27 +17,27 @@ using namespace Akonadi::Search;
 
 AgePostingSource::AgePostingSource(Xapian::valueno slot_)
     : Xapian::ValuePostingSource(slot_)
+    , m_currentTime_t(QDateTime::currentDateTimeUtc().toSecsSinceEpoch())
 {
-    m_currentTime_t = QDateTime::currentDateTimeUtc().toSecsSinceEpoch();
 }
 
 Xapian::weight AgePostingSource::get_weight() const
 {
-    std::string s = *value_it;
-    QString str = QString::fromUtf8(s.c_str(), s.length());
+    const std::string s = *value_it;
+    const QString str = QString::fromUtf8(s.c_str(), s.length());
 
     bool ok = false;
-    uint time = str.toUInt(&ok);
+    const uint time = str.toUInt(&ok);
 
     if (!ok) {
         return 0.0;
     }
 
-    uint diff = m_currentTime_t - time;
+    const uint diff = m_currentTime_t - time;
 
     // Each day is given a penalty of penalty of 1.0
-    double penalty = 1.0 / (24 * 60 * 60);
-    double result = 1000.0 - (diff * penalty);
+    const double penalty = 1.0 / (24 * 60 * 60);
+    const double result = 1000.0 - (diff * penalty);
 
     if (result < 0.0) {
         return 0.0;

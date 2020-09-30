@@ -92,7 +92,7 @@ QString EmailSearchStore::text(int queryId)
         // Nothing to do, move along
     }
 
-    QString subject = QString::fromUtf8(data.c_str(), data.length());
+    const QString subject = QString::fromUtf8(data.c_str(), data.length());
     if (subject.isEmpty()) {
         return QStringLiteral("No Subject");
     }

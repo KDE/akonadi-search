@@ -95,7 +95,7 @@ ResultIterator CollectionQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "N");
         parser.set_default_op(Xapian::Query::OP_AND);
-        queries << parser.parse_query(d->nameString.toUtf8().constData(),
+        queries << parser.parse_query(d->nameString.toStdString(),
                                       Xapian::QueryParser::FLAG_PARTIAL);
     }
 
@@ -104,7 +104,7 @@ ResultIterator CollectionQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "I");
         parser.set_default_op(Xapian::Query::OP_AND);
-        queries << parser.parse_query(d->identifierString.toUtf8().constData(),
+        queries << parser.parse_query(d->identifierString.toStdString(),
                                       Xapian::QueryParser::FLAG_PARTIAL);
     }
 
@@ -113,7 +113,7 @@ ResultIterator CollectionQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "P");
         parser.set_default_op(Xapian::Query::OP_AND);
-        queries << parser.parse_query(d->pathString.toUtf8().constData(),
+        queries << parser.parse_query(d->pathString.toStdString(),
                                       Xapian::QueryParser::FLAG_PARTIAL | Xapian::QueryParser::FLAG_PHRASE);
     }
 

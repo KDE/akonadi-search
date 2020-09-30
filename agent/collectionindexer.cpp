@@ -63,8 +63,8 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
         gen.set_document(doc);
         gen.set_database(*m_db);
 
-        gen.index_text_without_positions(collection.displayName().toUtf8().constData());
-        gen.index_text_without_positions(collection.displayName().toUtf8().constData(), 1, "N");
+        gen.index_text_without_positions(collection.displayName().toStdString());
+        gen.index_text_without_positions(collection.displayName().toStdString(), 1, "N");
 
         //We index with positions so we can do phrase searches (required for exact matches)
         {
@@ -74,7 +74,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
             doc.add_term(term.constData());
         }
 
-        Akonadi::Collection::Id colId = collection.parentCollection().id();
+        const Akonadi::Collection::Id colId = collection.parentCollection().id();
         const QByteArray term = 'C' + QByteArray::number(colId);
         doc.add_boolean_term(term.constData());
 

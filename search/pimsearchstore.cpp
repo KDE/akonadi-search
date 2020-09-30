@@ -90,7 +90,7 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
 
     if (m_boolWithValue.contains(prop)) {
         std::string term(m_prefix.value(prop).toStdString());
-        std::string val(value.toString().toUtf8().constData());
+        std::string val(value.toString().toStdString());
         return Xapian::Query(term + val);
     }
 
@@ -117,7 +117,7 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
         parser.set_database(*xapianDb());
 
         std::string p = m_prefix.value(prop).toStdString();
-        std::string str(value.toString().toUtf8().constData());
+        std::string str(value.toString().toStdString());
         int flags = Xapian::QueryParser::FLAG_DEFAULT;
         if (com == Term::Contains) {
             flags |= Xapian::QueryParser::FLAG_PARTIAL;

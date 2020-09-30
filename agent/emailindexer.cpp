@@ -103,7 +103,7 @@ void EmailIndexer::index(const Akonadi::Item &item)
 void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Base *unstructured)
 {
     if (unstructured) {
-        m_termGen->index_text_without_positions(unstructured->asUnicodeString().toUtf8().constData(), 1, key.data());
+        m_termGen->index_text_without_positions(unstructured->asUnicodeString().toStdString(), 1, key.data());
     }
 }
 
@@ -141,7 +141,7 @@ void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::Li
         return;
     }
     for (const KMime::Types::Mailbox &mbox : list) {
-        std::string name(mbox.name().toUtf8().constData());
+        std::string name(mbox.name().toStdString());
         m_termGen->index_text_without_positions(name, 1, key.data());
         m_termGen->index_text_without_positions(name, 1);
         m_termGen->index_text_without_positions(mbox.address().data(), 1, key.data());
@@ -160,7 +160,7 @@ void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::Li
             continue;
         } catch (const Xapian::DocNotFoundError &) {
             Xapian::Document doc;
-            std::string pretty(pa.toUtf8().constData());
+            std::string pretty(pa.toStdString());
             doc.set_data(pretty);
 
             Xapian::TermGenerator termGen;
@@ -181,7 +181,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
     // (Give the subject a higher priority)
     KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
-        std::string str(subject->asUnicodeString().toUtf8().constData());
+        std::string str(subject->asUnicodeString().toStdString());
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << str.c_str();
         m_termGen->index_text_without_positions(str, 1, "SU");
         m_termGen->index_text_without_positions(str, 100);
@@ -217,7 +217,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
 
     KMime::Content *mainBody = msg->mainBodyPart("text/plain");
     if (mainBody) {
-        const std::string text(mainBody->decodedText().toUtf8().constData());
+        const std::string text(mainBody->decodedText().toStdString());
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
@@ -248,7 +248,7 @@ void EmailIndexer::processPart(KMime::Content *content, KMime::Content *mainCont
             QTextDocument doc;
             doc.setHtml(content->decodedText());
 
-            const std::string text(doc.toPlainText().toUtf8().constData());
+            const std::string text(doc.toPlainText().toStdString());
             m_termGen->index_text_without_positions(text);
         }
     }
