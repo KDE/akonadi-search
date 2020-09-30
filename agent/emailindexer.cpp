@@ -86,8 +86,8 @@ void EmailIndexer::index(const Akonadi::Item &item)
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index",
                "Item does not have a valid parent collection");
 
-    Akonadi::Collection::Id colId = item.parentCollection().id();
-    QByteArray term = 'C' + QByteArray::number(colId);
+    const Akonadi::Collection::Id colId = item.parentCollection().id();
+    const QByteArray term = 'C' + QByteArray::number(colId);
     m_doc->add_boolean_term(term.data());
 
     m_db->replace_document(item.id(), *m_doc);
@@ -141,7 +141,7 @@ void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::Li
         return;
     }
     for (const KMime::Types::Mailbox &mbox : list) {
-        std::string name(mbox.name().toStdString());
+        const std::string name(mbox.name().toStdString());
         m_termGen->index_text_without_positions(name, 1, key.data());
         m_termGen->index_text_without_positions(name, 1);
         m_termGen->index_text_without_positions(mbox.address().data(), 1, key.data());
@@ -160,7 +160,7 @@ void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::Li
             continue;
         } catch (const Xapian::DocNotFoundError &) {
             Xapian::Document doc;
-            std::string pretty(pa.toStdString());
+            const std::string pretty(pa.toStdString());
             doc.set_data(pretty);
 
             Xapian::TermGenerator termGen;
@@ -181,7 +181,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
     // (Give the subject a higher priority)
     KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
-        std::string str(subject->asUnicodeString().toStdString());
+        const std::string str(subject->asUnicodeString().toStdString());
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << str.c_str();
         m_termGen->index_text_without_positions(str, 1, "SU");
         m_termGen->index_text_without_positions(str, 100);
