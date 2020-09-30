@@ -362,7 +362,7 @@ Query Query::fromSearchUrl(const QUrl &url)
     }
 
     QUrlQuery urlQuery(url);
-    QString jsonString = urlQuery.queryItemValue(QStringLiteral("json"), QUrl::FullyDecoded);
+    const QString jsonString = urlQuery.queryItemValue(QStringLiteral("json"), QUrl::FullyDecoded);
     return Query::fromJSON(jsonString.toUtf8());
 }
 
