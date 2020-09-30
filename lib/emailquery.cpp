@@ -339,7 +339,8 @@ ResultIterator EmailQuery::exec()
         enquire.set_query(query);
 
         if (d->limit == 0) {
-            d->limit = 1000000;
+            //d->limit = 1000000;
+            d->limit = 100000;
         }
 
         Xapian::MSet mset = enquire.get_mset(0, d->limit);
