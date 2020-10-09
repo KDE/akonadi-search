@@ -29,8 +29,6 @@
 #include "lib/contactcompleter.h"
 #include "lib/resultiterator.h"
 
-static const QStringList sCategories = { i18n("Contacts") };
-
 Q_DECLARE_METATYPE(KContacts::Addressee *)
 
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const QVariantList &args)
@@ -52,20 +50,6 @@ PIMContactsRunner::~PIMContactsRunner()
 void PIMContactsRunner::reloadConfiguration()
 {
     mQueryAutocompleter = config().readEntry(QStringLiteral("queryAutocompleter"), true);
-}
-
-QStringList PIMContactsRunner::categories() const
-{
-    return sCategories;
-}
-
-QIcon PIMContactsRunner::categoryIcon(const QString &category) const
-{
-    if (category == sCategories[0]) {
-        return QIcon::fromTheme(QStringLiteral("view-pim-contacts"));
-    }
-
-    return Plasma::AbstractRunner::categoryIcon(category);
 }
 
 void PIMContactsRunner::match(Plasma::RunnerContext &context)
@@ -144,7 +128,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
         }
 
         Plasma::QueryMatch match(this);
-        match.setMatchCategory(sCategories[0]);
+        match.setMatchCategory(i18n("Contacts"));
         match.setRelevance(0.75); // 0.75 is used by most runners, we don't
         // want to shadow them
         match.setMimeType(KContacts::Addressee::mimeType());
@@ -213,7 +197,7 @@ void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context, const
         Plasma::QueryMatch match(this);
         match.setRelevance(0.7); // slightly lower relevance than real addressbook contacts
         match.setMimeType(KContacts::Addressee::mimeType());
-        match.setMatchCategory(sCategories[0]);
+        match.setMatchCategory(i18n("Contacts"));
         match.setSubtext(i18n("Autocompleted from received and sent emails"));
         match.setIcon(QIcon::fromTheme(QStringLiteral("user-identity")));
         if (result == queryString) {
