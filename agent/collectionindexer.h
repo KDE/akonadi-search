@@ -29,7 +29,6 @@ public:
     void commit();
 
 private:
-    void adjustPath(const Akonadi::Collection &col, int level, const QString &name);
     Xapian::WritableDatabase *m_db;
 };
 
