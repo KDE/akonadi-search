@@ -18,7 +18,6 @@
 #include <Akonadi/KMime/MessageFlags>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
-#include <QStringList>
 
 using namespace Akonadi::Search;
 

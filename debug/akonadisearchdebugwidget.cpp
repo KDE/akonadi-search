@@ -6,7 +6,6 @@
 
 #include "akonadisearchdebugwidget.h"
 #include "job/akonadisearchdebugsearchjob.h"
-#include "akonadisearchdebugsearchpathcombobox.h"
 #include "akonadisearchsyntaxhighlighter.h"
 #include <KLineEdit>
 #include <QPushButton>

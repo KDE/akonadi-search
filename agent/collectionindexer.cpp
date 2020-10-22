@@ -10,7 +10,6 @@
 #include "collectionindexer.h"
 #include "xapiandocument.h"
 
-#include <QString>
 #include <QStringList>
 #include <AkonadiCore/collectionidentificationattribute.h>
 #include <AkonadiCore/AttributeFactory>

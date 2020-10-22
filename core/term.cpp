@@ -8,7 +8,6 @@
 
 #include "term.h"
 
-#include <QVariant>
 #include <QDateTime>
 
 using namespace Akonadi::Search;

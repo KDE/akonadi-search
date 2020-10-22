@@ -7,7 +7,6 @@
  */
 
 #include "resultiterator.h"
-#include "searchstore.h"
 
 using namespace Akonadi::Search;
 

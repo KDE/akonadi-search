@@ -11,7 +11,6 @@
 #include "akonadi_indexer_agent_debug.h"
 
 #include <KCalendarCore/Attendee>
-#include <KCalendarCore/Event>
 
 CalendarIndexer::CalendarIndexer(const QString &path)
     : AbstractIndexer()

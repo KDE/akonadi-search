@@ -7,7 +7,6 @@
 #include "collectionupdatejob.h"
 #include "akonadi_indexer_agent_debug.h"
 
-#include <AkonadiCore/Collection>
 #include <AkonadiCore/CollectionFetchJob>
 #include <AkonadiCore/CollectionFetchScope>
 #include <AkonadiCore/EntityDisplayAttribute>

@@ -8,7 +8,6 @@
 
 #include "xapiansearchstore.h"
 #include "xapianqueryparser.h"
-#include "term.h"
 #include "query.h"
 
 #include <QVector>
