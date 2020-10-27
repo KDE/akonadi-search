@@ -10,10 +10,8 @@ portingAid: false
 deprecated: false
 release: false
 libraries:
- - qmake: KF5AkonadiSearchXapian
-   cmake: "KF5::AkonadiSearchXapian"
- - qmake: KF5AkonadiSearchCore
-   cmake: "KF5::AkonadiSearchCore"
+  - cmake: "KF5::AkonadiSearchXapian"
+  - cmake: "KF5::AkonadiSearchCore"
 cmakename: KF5AkonadiSearch
 
 public_lib: true
