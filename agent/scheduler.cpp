@@ -24,7 +24,7 @@ JobFactory::~JobFactory()
 
 CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent)
 {
-    CollectionIndexingJob *job = new CollectionIndexingJob(index, col, pending, parent);
+    auto *job = new CollectionIndexingJob(index, col, pending, parent);
     job->setFullSync(fullSync);
     return job;
 }
@@ -167,7 +167,7 @@ void Scheduler::scheduleCompleteSync()
 
 void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 {
-    Akonadi::CollectionFetchJob *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
+    auto *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
     const Akonadi::Collection::List lstCols = cjob->collections();
     for (const Akonadi::Collection &c : lstCols) {
         //For skipping search collections
@@ -193,7 +193,7 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 
 void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
 {
-    Akonadi::CollectionFetchJob *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
+    auto *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
     const Akonadi::Collection::List lstCols = cjob->collections();
     for (const Akonadi::Collection &c : lstCols) {
         //For skipping search collections
@@ -261,7 +261,7 @@ void Scheduler::slotIndexingFinished(KJob *job)
     if (job->error()) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Indexing failed: " << job->errorString();
     } else {
-        const Akonadi::Collection::Id collectionId = job->property("collection").value<Akonadi::Collection::Id>();
+        const auto collectionId = job->property("collection").value<Akonadi::Collection::Id>();
         m_dirtyCollections.remove(collectionId);
         Q_EMIT status(Akonadi::AgentBase::Idle, i18n("Collection \"%1\" indexed", collectionId));
         Q_EMIT collectionIndexingFinished(collectionId);

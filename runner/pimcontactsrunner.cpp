@@ -93,7 +93,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
     // a separate Session for each, otherwise things might explode
     QScopedPointer<Akonadi::Session, QScopedPointerDeleteLater> session(
         new Akonadi::Session("PIIMContactRunner-" + QByteArray::number((qlonglong)QThread::currentThread())));
-    Akonadi::ItemFetchJob *fetch = new Akonadi::ItemFetchJob(results, session.data());
+    auto *fetch = new Akonadi::ItemFetchJob(results, session.data());
     Akonadi::ItemFetchScope &scope = fetch->fetchScope();
     scope.fetchFullPayload(true);
     scope.setFetchRemoteIdentification(false);

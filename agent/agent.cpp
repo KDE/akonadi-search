@@ -256,7 +256,7 @@ void AkonadiIndexingAgent::collectionChanged(const Akonadi::Collection &collecti
 
     if (changes.contains("ENTITYDISPLAY")) {
         //If the name changed we have to reindex all subcollections
-        CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
+        auto *job = new CollectionUpdateJob(m_index, collection, this);
         job->start();
     } else {
         m_index.index(collection);
@@ -283,7 +283,7 @@ void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection
     }
 
     m_index.remove(collection);
-    CollectionUpdateJob *job = new CollectionUpdateJob(m_index, collection, this);
+    auto *job = new CollectionUpdateJob(m_index, collection, this);
     job->start();
 }
 

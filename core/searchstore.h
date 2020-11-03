@@ -34,7 +34,7 @@ public:
      */
     static void overrideSearchStores(const QList<SearchStore *> &overrideSearchStores);
 
-    typedef QList< QSharedPointer<SearchStore> > List;
+    using List = QList<QSharedPointer<SearchStore> >;
 
     /**
      * Gives a list of available search stores. These stores must be managed and

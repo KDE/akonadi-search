@@ -36,7 +36,7 @@ void CollectionIndexingJob::start()
     m_time.start();
 
     //Fetch collection for statistics
-    Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(m_collection, Akonadi::CollectionFetchJob::Base);
+    auto *job = new Akonadi::CollectionFetchJob(m_collection, Akonadi::CollectionFetchJob::Base);
     job->fetchScope().setIncludeStatistics(true);
     job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
     job->fetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
@@ -90,7 +90,7 @@ void CollectionIndexingJob::indexItems(const QList<Akonadi::Item::Id> &itemIds)
         items << Akonadi::Item(id);
     }
 
-    Akonadi::ItemFetchJob *fetchJob = new Akonadi::ItemFetchJob(items);
+    auto *fetchJob = new Akonadi::ItemFetchJob(items);
     fetchJob->fetchScope().fetchFullPayload(true);
     fetchJob->fetchScope().setCacheOnly(true);
     fetchJob->fetchScope().setIgnoreRetrievalErrors(true);
@@ -166,7 +166,7 @@ void CollectionIndexingJob::findUnindexed()
     m_index.findIndexed(m_indexedItems, m_collection.id());
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Found " << m_indexedItems.size() << " indexed items. Took (ms): " << m_time.elapsed() - start << " collection id :" << m_collection.id();
 
-    Akonadi::ItemFetchJob *job = new Akonadi::ItemFetchJob(m_collection, this);
+    auto *job = new Akonadi::ItemFetchJob(m_collection, this);
     job->fetchScope().fetchFullPayload(false);
     job->fetchScope().setCacheOnly(true);
     job->fetchScope().setIgnoreRetrievalErrors(true);

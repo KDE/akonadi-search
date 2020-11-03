@@ -116,7 +116,7 @@ int XapianSearchStore::exec(const Query &query)
         return 0;
     }
 
-    while (1) {
+    while (true) {
         try {
             QMutexLocker lock(&m_mutex);
             try {
