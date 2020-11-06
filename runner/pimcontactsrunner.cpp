@@ -36,10 +36,6 @@ PIMContactsRunner::PIMContactsRunner(QObject *parent, const QVariantList &args)
 {
     setObjectName(QStringLiteral("PIMContactsRunner"));
     setSpeed(Plasma::AbstractRunner::SlowSpeed);
-    setIgnoredTypes(Plasma::RunnerContext::FileSystem
-                    | Plasma::RunnerContext::Executable
-                    | Plasma::RunnerContext::NetworkLocation);
-
     // reloadConfiguration() called by default init() implementation
 }
 
