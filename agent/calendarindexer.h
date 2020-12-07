@@ -26,7 +26,7 @@ public:
      * should be stored
      */
     explicit CalendarIndexer(const QString &path);
-    ~CalendarIndexer();
+    ~CalendarIndexer() override;
 
     QStringList mimeTypes() const override;
 

@@ -23,7 +23,7 @@ public:
      * should be stored
      */
     EmailIndexer(const QString &path, const QString &contactDbPath);
-    ~EmailIndexer();
+    ~EmailIndexer() override;
 
     QStringList mimeTypes() const override;
 

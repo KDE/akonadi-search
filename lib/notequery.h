@@ -23,7 +23,7 @@ class AKONADI_SEARCH_PIM_EXPORT NoteQuery : public Query
 {
 public:
     NoteQuery();
-    ~NoteQuery();
+    ~NoteQuery() override;
 
     void matchTitle(const QString &title);
     void matchNote(const QString &note);

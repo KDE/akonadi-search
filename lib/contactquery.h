@@ -24,7 +24,7 @@ class AKONADI_SEARCH_PIM_EXPORT ContactQuery : public Query
 {
 public:
     ContactQuery();
-    ~ContactQuery();
+    ~ContactQuery() override;
 
     void matchName(const QString &name);
     void matchNickname(const QString &nick);

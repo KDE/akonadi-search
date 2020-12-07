@@ -23,7 +23,7 @@ class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBas
 public:
     using Akonadi::AgentBase::ObserverV3::collectionChanged; // So we don't trigger -Woverloaded-virtual
     explicit AkonadiIndexingAgent(const QString &id);
-    ~AkonadiIndexingAgent();
+    ~AkonadiIndexingAgent() override;
 
     void reindexAll();
     void reindexCollection(const qlonglong id);

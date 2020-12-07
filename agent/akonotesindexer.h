@@ -25,7 +25,7 @@ public:
      * should be stored
      */
     explicit AkonotesIndexer(const QString &path);
-    ~AkonotesIndexer();
+    ~AkonotesIndexer() override;
 
     QStringList mimeTypes() const override;
 
