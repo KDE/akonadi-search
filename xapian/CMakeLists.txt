@@ -16,6 +16,10 @@ ecm_qt_declare_logging_category(XAPIAN_SRCS HEADER akonadi_search_xapian_debug.h
 
 
 add_library(KF5AkonadiSearchXapian ${XAPIAN_SRCS})
+if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+    set_target_properties(KF5AkonadiSearchXapian PROPERTIES UNITY_BUILD ON)
+endif()
+
 add_library(KF5::AkonadiSearchXapian ALIAS KF5AkonadiSearchXapian)
 
 target_link_libraries(KF5AkonadiSearchXapian PUBLIC

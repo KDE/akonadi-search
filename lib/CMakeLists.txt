@@ -24,6 +24,10 @@ ecm_qt_declare_logging_category(AKONADI_SEARCH_PIM_LIB_SRCS HEADER akonadi_searc
 
 
 add_library(KF5AkonadiSearchPIM ${AKONADI_SEARCH_PIM_LIB_SRCS})
+if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+    set_target_properties(KF5AkonadiSearchPIM PROPERTIES UNITY_BUILD ON)
+endif()
+
 add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)
 
 generate_export_header(KF5AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_FILE_NAME search_pim_export.h)

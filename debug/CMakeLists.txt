@@ -9,6 +9,10 @@ set(akonadisearchdebug_SRCS
 )
 
 add_library(KF5AkonadiSearchDebug ${akonadisearchdebug_SRCS})
+if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+    set_target_properties(KF5AkonadiSearchDebug PROPERTIES UNITY_BUILD ON)
+endif()
+
 add_library(KF5::AkonadiSearchDebug ALIAS KF5AkonadiSearchDebug)
 
 generate_export_header(KF5AkonadiSearchDebug BASE_NAME AKONADI_SEARCH_DEBUG EXPORT_FILE_NAME search_debug_export.h)

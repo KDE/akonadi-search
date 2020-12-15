@@ -15,6 +15,10 @@ ecm_qt_declare_logging_category(CORE_SRCS HEADER akonadi_search_core_debug.h IDE
 
 
 add_library(KF5AkonadiSearchCore ${CORE_SRCS})
+if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+    set_target_properties(KF5AkonadiSearchCore PROPERTIES UNITY_BUILD ON)
+endif()
+
 add_library(KF5::AkonadiSearchCore ALIAS KF5AkonadiSearchCore)
 
 target_link_libraries(KF5AkonadiSearchCore
