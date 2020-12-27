@@ -9,18 +9,13 @@
 #define PIMCONTACTSRUNNER_H
 
 #include <KRunner/AbstractRunner>
-#include <krunner_version.h>
 
 class PIMContactsRunner : public Plasma::AbstractRunner
 {
     Q_OBJECT
 
 public:
-#if KRUNNER_VERSION >= QT_VERSION_CHECK(5, 77, 0)
     explicit PIMContactsRunner(QObject *parent, const KPluginMetaData& metaData, const QVariantList &args);
-#else
-    explicit PIMContactsRunner(QObject *parent, const QVariantList &args);
-#endif
     ~PIMContactsRunner() override;
 
     void reloadConfiguration() override;

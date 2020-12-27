@@ -32,11 +32,7 @@
 Q_DECLARE_METATYPE(KContacts::Addressee *)
 
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData& metaData, const QVariantList &args)
-#if KRUNNER_VERSION >= QT_VERSION_CHECK(5, 77, 0)
     : Plasma::AbstractRunner(parent, metaData, args)
-#else
-    : Plasma::AbstractRunner(parent, args)
-#endif
 {
     setObjectName(QStringLiteral("PIMContactsRunner"));
     setSpeed(Plasma::AbstractRunner::SlowSpeed);
