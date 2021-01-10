@@ -89,7 +89,7 @@ protected:
     Xapian::Database *xapianDb();
 
 protected:
-    QMutex m_mutex;
+    QRecursiveMutex m_mutex;
 
 private:
     Xapian::Query toXapianQuery(const Term &term);

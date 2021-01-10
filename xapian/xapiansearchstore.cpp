@@ -19,7 +19,7 @@ using namespace Akonadi::Search;
 
 XapianSearchStore::XapianSearchStore(QObject *parent)
     : SearchStore(parent)
-    , m_mutex(QMutex::Recursive)
+    , m_mutex()
     , m_nextId(1)
 {
 }
