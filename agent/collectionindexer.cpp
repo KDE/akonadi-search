@@ -141,8 +141,8 @@ void CollectionIndexer::remove(const Akonadi::Collection &col)
 
 void CollectionIndexer::move(const Akonadi::Collection &collection, const Akonadi::Collection &from, const Akonadi::Collection &to)
 {
-    Q_UNUSED(from);
-    Q_UNUSED(to);
+    Q_UNUSED(from)
+    Q_UNUSED(to)
     index(collection);
 }
 

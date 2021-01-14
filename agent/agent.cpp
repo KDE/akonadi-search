@@ -220,7 +220,7 @@ void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items, const Ak
 
 void AkonadiIndexingAgent::collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent)
 {
-    Q_UNUSED(parent);
+    Q_UNUSED(parent)
 
     if (!shouldIndex(collection)) {
         return;
@@ -275,8 +275,8 @@ void AkonadiIndexingAgent::collectionRemoved(const Akonadi::Collection &collecti
 
 void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource, const Akonadi::Collection &collectionDestination)
 {
-    Q_UNUSED(collectionSource);
-    Q_UNUSED(collectionDestination);
+    Q_UNUSED(collectionSource)
+    Q_UNUSED(collectionDestination)
 
     if (!shouldIndex(collection)) {
         return;

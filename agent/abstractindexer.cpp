@@ -17,14 +17,14 @@ AbstractIndexer::~AbstractIndexer()
 
 void AbstractIndexer::move(Akonadi::Item::Id item, Akonadi::Collection::Id from, Akonadi::Collection::Id to)
 {
-    Q_UNUSED(item);
-    Q_UNUSED(from);
-    Q_UNUSED(to);
+    Q_UNUSED(item)
+    Q_UNUSED(from)
+    Q_UNUSED(to)
 }
 
 void AbstractIndexer::updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removed)
 {
-    Q_UNUSED(item);
-    Q_UNUSED(addedFlags);
-    Q_UNUSED(removed);
+    Q_UNUSED(item)
+    Q_UNUSED(addedFlags)
+    Q_UNUSED(removed)
 }

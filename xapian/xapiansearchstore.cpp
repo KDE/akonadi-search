@@ -261,9 +261,9 @@ Xapian::Database *XapianSearchStore::xapianDb()
 
 Xapian::Query XapianSearchStore::constructFilterQuery(int year, int month, int day)
 {
-    Q_UNUSED(year);
-    Q_UNUSED(month);
-    Q_UNUSED(day);
+    Q_UNUSED(year)
+    Q_UNUSED(month)
+    Q_UNUSED(day)
     return Xapian::Query();
 }
 
@@ -274,6 +274,6 @@ Xapian::Query XapianSearchStore::finalizeQuery(const Xapian::Query &query)
 
 Xapian::Query XapianSearchStore::applyCustomOptions(const Xapian::Query &q, const QVariantMap &options)
 {
-    Q_UNUSED(options);
+    Q_UNUSED(options)
     return q;
 }
