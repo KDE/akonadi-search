@@ -305,11 +305,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.set_default_op(Xapian::Query::OP_AND);
         if (d->splitSearchMatchString) {
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            const QStringList list = d->matchString.split(QRegularExpression(QStringLiteral("\\s")), QString::SkipEmptyParts);
-#else
             const QStringList list = d->matchString.split(QRegularExpression(QStringLiteral("\\s")), Qt::SkipEmptyParts);
-#endif
             for (const QString &s : list) {
                 const QByteArray ba = s.toUtf8();
                 m_queries << parser.parse_query(ba.constData(),

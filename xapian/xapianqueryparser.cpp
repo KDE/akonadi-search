@@ -181,11 +181,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
             }
 
             str = cleanString.normalized(QString::NormalizationForm_KC);
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            const QStringList lst = str.split(QLatin1Char('_'), QString::SkipEmptyParts);
-#else
             const QStringList lst = str.split(QLatin1Char('_'), Qt::SkipEmptyParts);
-#endif
             for (const QString &t : lst) {
                 const QString term = prefix + t;
 
