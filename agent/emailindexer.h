@@ -12,8 +12,8 @@
 
 #include "abstractindexer.h"
 
-#include <KMime/Message>
 #include <Akonadi/KMime/MessageStatus>
+#include <KMime/Message>
 
 class EmailIndexer : public AbstractIndexer
 {

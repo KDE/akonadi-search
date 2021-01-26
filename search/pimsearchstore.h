@@ -14,8 +14,10 @@
 
 #include <QSet>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 class PIMSearchStore : public XapianSearchStore
 {
     Q_OBJECT

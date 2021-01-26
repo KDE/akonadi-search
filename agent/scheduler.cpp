@@ -9,20 +9,21 @@
 
 #include "akonadi_indexer_agent_debug.h"
 #include "collectionindexingjob.h"
+#include <AkonadiAgentBase/AgentBase>
 #include <AkonadiCore/CollectionFetchJob>
 #include <AkonadiCore/CollectionFetchScope>
-#include <AkonadiAgentBase/AgentBase>
-#include <AkonadiCore/ServerManager>
 #include <AkonadiCore/IndexPolicyAttribute>
-#include <KLocalizedString>
+#include <AkonadiCore/ServerManager>
 #include <KConfigGroup>
+#include <KLocalizedString>
 #include <QTimer>
 
 JobFactory::~JobFactory()
 {
 }
 
-CollectionIndexingJob *JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent)
+CollectionIndexingJob *
+JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent)
 {
     auto *job = new CollectionIndexingJob(index, col, pending, parent);
     job->setFullSync(fullSync);
@@ -45,12 +46,12 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
 
     KConfigGroup cfg = m_config->group("General");
     const auto dirtyCollectionsResult2 = cfg.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>());
-        m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult2.begin(), dirtyCollectionsResult2.end());
+    m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult2.begin(), dirtyCollectionsResult2.end());
     if (m_dirtyCollections.isEmpty()) {
         KConfig baloorc(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
         KConfigGroup baloorcGroup = baloorc.group("Akonadi");
 
-        //Schedule collections we know have missing items from last time
+        // Schedule collections we know have missing items from last time
         const auto dirtyCollectionsResult = baloorcGroup.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>());
         m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult.begin(), dirtyCollectionsResult.end());
     }
@@ -68,7 +69,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
         cfg.writeEntry("initialIndexingDone", initialIndexingDone);
         baloorcGroup.deleteEntry("initialIndexingDone"); // make sure that editing akonadi_indexing_agentrc by hand works in the future
     }
-    //Trigger a full sync initially
+    // Trigger a full sync initially
     if (!initialIndexingDone) {
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "initial indexing";
         QMetaObject::invokeMethod(this, &Scheduler::scheduleCompleteSync, Qt::QueuedConnection);
@@ -95,9 +96,9 @@ int Scheduler::numberOfCollectionQueued() const
 void Scheduler::collectDirtyCollections()
 {
     KConfigGroup cfg = m_config->group("General");
-    //Store collections where we did not manage to index all, we'll need to do a full sync for them the next time
-    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> >::ConstIterator it = m_queues.constBegin();
-    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> >::ConstIterator end = m_queues.constEnd();
+    // Store collections where we did not manage to index all, we'll need to do a full sync for them the next time
+    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>>::ConstIterator it = m_queues.constBegin();
+    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>>::ConstIterator end = m_queues.constEnd();
     for (; it != end; ++it) {
         if (!it.value().isEmpty()) {
             m_dirtyCollections.insert(it.key());
@@ -124,7 +125,7 @@ void Scheduler::addItem(const Akonadi::Item &item)
     Q_ASSERT(item.parentCollection().isValid());
     m_lastModifiedTimestamps.insert(item.parentCollection().id(), QDateTime::currentMSecsSinceEpoch());
     m_queues[item.parentCollection().id()].append(item.id());
-    //Move to the back
+    // Move to the back
     m_collectionQueue.removeOne(item.parentCollection().id());
     m_collectionQueue.enqueue(item.parentCollection().id());
     if (!m_processTimer.isActive()) {
@@ -136,8 +137,7 @@ void Scheduler::scheduleCompleteSync()
 {
     qCDebug(AKONADI_INDEXER_AGENT_LOG);
     {
-        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                                                                           Akonadi::CollectionFetchJob::Recursive);
+        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
         job->fetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
@@ -145,10 +145,9 @@ void Scheduler::scheduleCompleteSync()
         job->start();
     }
 
-    //We want to index all collections, even if we don't index their content
+    // We want to index all collections, even if we don't index their content
     {
-        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                                                                           Akonadi::CollectionFetchJob::Recursive);
+        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
@@ -162,15 +161,14 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
     auto *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
     const Akonadi::Collection::List lstCols = cjob->collections();
     for (const Akonadi::Collection &c : lstCols) {
-        //For skipping search collections
+        // For skipping search collections
         if (c.isVirtual()) {
             continue;
         }
         if (c == Akonadi::Collection::root()) {
             continue;
         }
-        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>()
-            && !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
+        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() && !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         scheduleCollection(c, true);
@@ -188,15 +186,14 @@ void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
     auto *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
     const Akonadi::Collection::List lstCols = cjob->collections();
     for (const Akonadi::Collection &c : lstCols) {
-        //For skipping search collections
+        // For skipping search collections
         if (c.isVirtual()) {
             continue;
         }
         if (c == Akonadi::Collection::root()) {
             continue;
         }
-        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>()
-            && !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
+        if (c.hasAttribute<Akonadi::IndexPolicyAttribute>() && !c.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled()) {
             continue;
         }
         m_index.index(c);
@@ -226,10 +223,10 @@ void Scheduler::processNext()
         return;
     }
 
-    //An item was queued within the last 5 seconds, we're probably in the middle of a sync
+    // An item was queued within the last 5 seconds, we're probably in the middle of a sync
     const bool collectionIsChanging = (QDateTime::currentMSecsSinceEpoch() - m_lastModifiedTimestamps.value(m_collectionQueue.head())) < m_busyTimeout;
     if (collectionIsChanging) {
-        //We're in the middle of something, wait with indexing
+        // We're in the middle of something, wait with indexing
         m_processTimer.start();
         return;
     }

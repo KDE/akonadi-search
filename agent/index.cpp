@@ -7,12 +7,12 @@
 
 #include <xapian.h>
 
-#include "index.h"
 #include "akonadi_indexer_agent_debug.h"
-#include "emailindexer.h"
-#include "contactindexer.h"
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
+#include "contactindexer.h"
+#include "emailindexer.h"
+#include "index.h"
 #include "indexeditems.h"
 
 #include <AkonadiCore/ServerManager>
@@ -40,7 +40,7 @@ static void removeDir(const QString &dirName)
 {
     QDir dir(dirName);
     if (dir.exists(dirName)) {
-        const auto dirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
+        const auto dirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
         for (const QFileInfo &info : dirs) {
             if (info.isDir()) {
                 removeDir(info.absoluteFilePath());
@@ -108,7 +108,7 @@ void Index::index(const Akonadi::Item &item)
 
 void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &from, const Akonadi::Collection &to)
 {
-    //We always get items of the same type
+    // We always get items of the same type
     AbstractIndexer *indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
@@ -124,7 +124,7 @@ void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &fr
 
 void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removedFlags)
 {
-    //We always get items of the same type
+    // We always get items of the same type
     AbstractIndexer *indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
@@ -186,7 +186,7 @@ void Index::change(const Akonadi::Collection &col)
 
 void Index::remove(const Akonadi::Collection &col)
 {
-    //Remove items
+    // Remove items
     const auto indexers = indexersForMimetypes(col.contentMimeTypes());
     for (AbstractIndexer *indexer : indexers) {
         try {

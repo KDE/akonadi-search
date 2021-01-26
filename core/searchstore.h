@@ -9,16 +9,18 @@
 #ifndef AKONADI_SEARCH_CORE_SEARCHSTORE_H
 #define AKONADI_SEARCH_CORE_SEARCHSTORE_H
 
+#include <QHash>
 #include <QObject>
 #include <QString>
-#include <QHash>
 #include <QUrl>
 
 #include "search_core_export.h"
 
-namespace Akonadi {
+namespace Akonadi
+{
 /** Akonadi search infrastructure. */
-namespace Search {
+namespace Search
+{
 class Query;
 
 /** Search store. */
@@ -34,7 +36,7 @@ public:
      */
     static void overrideSearchStores(const QList<SearchStore *> &overrideSearchStores);
 
-    using List = QList<QSharedPointer<SearchStore> >;
+    using List = QList<QSharedPointer<SearchStore>>;
 
     /**
      * Gives a list of available search stores. These stores must be managed and

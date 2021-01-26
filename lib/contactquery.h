@@ -9,14 +9,17 @@
 #ifndef AKONADI_SEARCH_PIM_CONTACTQUERY_H
 #define AKONADI_SEARCH_PIM_CONTACTQUERY_H
 
-#include "search_pim_export.h"
 #include "query.h"
+#include "search_pim_export.h"
 
 #include <QString>
 
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 /**
  * Query for a list of contacts matching a criteria
  */
@@ -32,10 +35,7 @@ public:
     void matchUID(const QString &uid);
     void match(const QString &str);
 
-    enum MatchCriteria {
-        ExactMatch,
-        StartsWithMatch
-    };
+    enum MatchCriteria { ExactMatch, StartsWithMatch };
 
     void setMatchCriteria(MatchCriteria m);
     MatchCriteria matchCriteria() const;

@@ -13,9 +13,12 @@
 
 #include <AkonadiCore/Item>
 
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 class ContactQuery;
 class EmailQuery;
 class NoteQuery;

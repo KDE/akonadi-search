@@ -7,8 +7,8 @@
  */
 
 #include "calendarindexer.h"
-#include "xapiandocument.h"
 #include "akonadi_indexer_agent_debug.h"
+#include "xapiandocument.h"
 
 #include <KCalendarCore/Attendee>
 
@@ -35,10 +35,8 @@ CalendarIndexer::~CalendarIndexer()
 
 QStringList CalendarIndexer::mimeTypes() const
 {
-    return QStringList() << QStringLiteral("application/x-vnd.akonadi.calendar.event")
-                         << QStringLiteral("application/x-vnd.akonadi.calendar.todo")
-                         << QStringLiteral("application/x-vnd.akonadi.calendar.journal")
-                         << QStringLiteral("application/x-vnd.akonadi.calendar.freebusy");
+    return QStringList() << QStringLiteral("application/x-vnd.akonadi.calendar.event") << QStringLiteral("application/x-vnd.akonadi.calendar.todo")
+                         << QStringLiteral("application/x-vnd.akonadi.calendar.journal") << QStringLiteral("application/x-vnd.akonadi.calendar.freebusy");
 }
 
 void CalendarIndexer::index(const Akonadi::Item &item)
@@ -136,8 +134,7 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarC
     }
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::CalenderIndexer::index",
-               "Item does not have a valid parent collection");
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::CalenderIndexer::index", "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addBoolTerm(colId, QStringLiteral("C"));
@@ -147,20 +144,20 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarC
 
 void CalendarIndexer::indexJournalItem(const Akonadi::Item &item, const KCalendarCore::Journal::Ptr &journal)
 {
-    //TODO
+    // TODO
     Q_UNUSED(item)
     Q_UNUSED(journal)
 }
 
 void CalendarIndexer::indexTodoItem(const Akonadi::Item &item, const KCalendarCore::Todo::Ptr &todo)
 {
-    //TODO
+    // TODO
     Q_UNUSED(item)
     Q_UNUSED(todo)
 }
 
 void CalendarIndexer::updateIncidenceItem(const KCalendarCore::Incidence::Ptr &calInc)
 {
-    //TODO
+    // TODO
     Q_UNUSED(calInc)
 }

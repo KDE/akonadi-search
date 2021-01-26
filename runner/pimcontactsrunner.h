@@ -15,7 +15,7 @@ class PIMContactsRunner : public Plasma::AbstractRunner
     Q_OBJECT
 
 public:
-    explicit PIMContactsRunner(QObject *parent, const KPluginMetaData& metaData, const QVariantList &args);
+    explicit PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     ~PIMContactsRunner() override;
 
     void reloadConfiguration() override;

@@ -8,14 +8,16 @@
 #ifndef AKONADI_SEARCH_XAPIANDOCUMENT_H
 #define AKONADI_SEARCH_XAPIANDOCUMENT_H
 
-#include <xapian.h>
 #include <QString>
+#include <xapian.h>
 
 #include "search_xapian_export.h"
 #include "xapiantermgenerator.h"
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 /**
  * This class is just a light wrapper over Xapian::Document
  * which provides nice Qt apis.
@@ -45,6 +47,7 @@ public:
      * \return true if the document was modified
      */
     bool removeTermStartsWith(const QByteArray &prefix);
+
 private:
     Xapian::Document m_doc;
     XapianTermGenerator m_termGen;

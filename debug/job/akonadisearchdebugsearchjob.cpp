@@ -28,7 +28,7 @@ void AkonadiSearchDebugSearchJob::start()
         delvePath = QStandardPaths::findExecutable(QStringLiteral("delve"));
     }
     if (delvePath.isEmpty()) {
-        //Don't translate it. Just debug
+        // Don't translate it. Just debug
         Q_EMIT error(QStringLiteral("\"delve\" not installed on computer."));
         deleteLater();
         return;

@@ -8,15 +8,17 @@
 #ifndef AKONADI_SEARCH_XAPIANDATABASE_H
 #define AKONADI_SEARCH_XAPIANDATABASE_H
 
-#include <xapian.h>
 #include "search_xapian_export.h"
+#include <xapian.h>
 
-#include <QString>
 #include <QPair>
+#include <QString>
 #include <QVector>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 class XapianDocument;
 
 /** Xapian database. */

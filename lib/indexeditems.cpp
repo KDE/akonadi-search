@@ -8,13 +8,13 @@
 
 #include <xapian.h>
 
-#include "indexeditems.h"
 #include "akonadi_search_pim_debug.h"
+#include "indexeditems.h"
 
-#include <QStandardPaths>
-#include <QHash>
-#include <QDir>
 #include <AkonadiCore/ServerManager>
+#include <QDir>
+#include <QHash>
+#include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
 
@@ -126,10 +126,8 @@ qlonglong IndexedItemsPrivate::indexedItemsInDatabase(const std::string &term, c
 qlonglong IndexedItemsPrivate::indexedItems(const qlonglong id)
 {
     const std::string term = QStringLiteral("C%1").arg(id).toStdString();
-    return indexedItemsInDatabase(term, emailIndexingPath())
-           + indexedItemsInDatabase(term, contactIndexingPath())
-           + indexedItemsInDatabase(term, akonotesIndexingPath())
-           + indexedItemsInDatabase(term, calendarIndexingPath());
+    return indexedItemsInDatabase(term, emailIndexingPath()) + indexedItemsInDatabase(term, contactIndexingPath())
+        + indexedItemsInDatabase(term, akonotesIndexingPath()) + indexedItemsInDatabase(term, calendarIndexingPath());
 }
 
 void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath)

@@ -9,29 +9,29 @@
 
 #include "agent.h"
 
-#include "contactindexer.h"
-#include "emailindexer.h"
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
-#include "indexeradaptor.h"
 #include "collectionupdatejob.h"
+#include "contactindexer.h"
+#include "emailindexer.h"
+#include "indexeradaptor.h"
 
 #include "priority.h"
 
-#include <ChangeRecorder>
+#include <AkonadiCore/AttributeFactory>
 #include <AkonadiCore/CollectionFetchScope>
-#include <AkonadiCore/ItemFetchScope>
 #include <AkonadiCore/EntityDisplayAttribute>
 #include <AkonadiCore/IndexPolicyAttribute>
-#include <AkonadiCore/AttributeFactory>
+#include <AkonadiCore/ItemFetchScope>
+#include <ChangeRecorder>
 
 #include <AgentManager>
 #include <ServerManager>
 
+#include "akonadi_indexer_agent_debug.h"
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include "akonadi_indexer_agent_debug.h"
 
 #define INDEXING_AGENT_VERSION 5
 
@@ -69,12 +69,10 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     } else {
         setOnline(true);
     }
-    connect(this, &Akonadi::AgentBase::abortRequested,
-            this, &AkonadiIndexingAgent::onAbortRequested);
-    connect(this, &Akonadi::AgentBase::onlineChanged,
-            this, &AkonadiIndexingAgent::onOnlineChanged);
+    connect(this, &Akonadi::AgentBase::abortRequested, this, &AkonadiIndexingAgent::onAbortRequested);
+    connect(this, &Akonadi::AgentBase::onlineChanged, this, &AkonadiIndexingAgent::onOnlineChanged);
 
-    connect(&m_scheduler, SIGNAL(status(int,QString)), this, SIGNAL(status(int,QString)));
+    connect(&m_scheduler, SIGNAL(status(int, QString)), this, SIGNAL(status(int, QString)));
     connect(&m_scheduler, &Scheduler::percent, this, &Akonadi::AgentBase::percent);
     connect(&m_scheduler, &Scheduler::collectionIndexingFinished, this, &AkonadiIndexingAgent::collectionIndexingFinished);
 
@@ -197,7 +195,9 @@ void AkonadiIndexingAgent::itemsRemoved(const Akonadi::Item::List &items)
     m_index.scheduleCommit();
 }
 
-void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items, const Akonadi::Collection &sourceCollection, const Akonadi::Collection &destinationCollection)
+void AkonadiIndexingAgent::itemsMoved(const Akonadi::Item::List &items,
+                                      const Akonadi::Collection &sourceCollection,
+                                      const Akonadi::Collection &destinationCollection)
 {
     const bool indexSource = shouldIndex(sourceCollection);
     const bool indexDest = shouldIndex(destinationCollection);
@@ -255,7 +255,7 @@ void AkonadiIndexingAgent::collectionChanged(const Akonadi::Collection &collecti
     }
 
     if (changes.contains("ENTITYDISPLAY")) {
-        //If the name changed we have to reindex all subcollections
+        // If the name changed we have to reindex all subcollections
         auto *job = new CollectionUpdateJob(m_index, collection, this);
         job->start();
     } else {
@@ -273,7 +273,9 @@ void AkonadiIndexingAgent::collectionRemoved(const Akonadi::Collection &collecti
     m_index.scheduleCommit();
 }
 
-void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource, const Akonadi::Collection &collectionDestination)
+void AkonadiIndexingAgent::collectionMoved(const Akonadi::Collection &collection,
+                                           const Akonadi::Collection &collectionSource,
+                                           const Akonadi::Collection &collectionDestination)
 {
     Q_UNUSED(collectionSource)
     Q_UNUSED(collectionDestination)
@@ -313,7 +315,7 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
 
     // Index items that might have changed while we were offline
     if (online) {
-        //We only reindex if this is not a regular start
+        // We only reindex if this is not a regular start
         KConfigGroup cfg = config()->group("General");
         bool aborted = cfg.readEntry("aborted", false);
         if (!aborted) {
@@ -337,9 +339,7 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
 
 bool AkonadiIndexingAgent::shouldIndex(const Akonadi::Collection &col) const
 {
-    return !col.isVirtual()
-           && (!col.hasAttribute<Akonadi::IndexPolicyAttribute>()
-               || col.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
+    return !col.isVirtual() && (!col.hasAttribute<Akonadi::IndexPolicyAttribute>() || col.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
 }
 
 bool AkonadiIndexingAgent::shouldIndex(const Akonadi::Item &item) const

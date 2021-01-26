@@ -7,12 +7,12 @@
  */
 
 #include "contactindexer.h"
-#include "xapiandocument.h"
 #include "akonadi_indexer_agent_debug.h"
+#include "xapiandocument.h"
 
+#include <Collection>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
-#include <Collection>
 
 ContactIndexer::ContactIndexer(const QString &path)
     : AbstractIndexer()
@@ -79,8 +79,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     }
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
-               "Item does not have a valid parent collection");
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index", "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addBoolTerm(colId, QStringLiteral("C"));
@@ -89,7 +88,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
         const QString julianDay = QString::number(addresse.birthday().date().toJulianDay());
         doc.addValue(0, julianDay);
     }
-    //TODO index anniversary ?
+    // TODO index anniversary ?
 
     m_db->replaceDocument(item.id(), doc);
     return true;
@@ -114,8 +113,7 @@ void ContactIndexer::indexContactGroup(const Akonadi::Item &item)
     doc.indexText(name, QStringLiteral("NA"));
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index",
-               "Item does not have a valid parent collection");
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index", "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addBoolTerm(colId, QStringLiteral("C"));

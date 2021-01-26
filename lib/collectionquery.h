@@ -9,17 +9,20 @@
 #ifndef AKONADI_SEARCH_PIM_COLLECTION_QUERY_H
 #define AKONADI_SEARCH_PIM_COLLECTION_QUERY_H
 
-#include "search_pim_export.h"
 #include "query.h"
 #include "resultiterator.h"
+#include "search_pim_export.h"
 
-#include <QStringList>
 #include <AkonadiCore/Collection>
+#include <QStringList>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 /** PIM specific search API. */
-namespace PIM {
+namespace PIM
+{
 /** Collection query. */
 class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {

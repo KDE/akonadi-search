@@ -16,31 +16,23 @@
 #include <QDebug>
 
 #ifndef _WIN32
-#include <unistd.h>
+#include <errno.h>
 #include <sys/resource.h>
 #include <sys/syscall.h>
-#include <errno.h>
+#include <unistd.h>
 
 #include <sched.h>
 #endif
 
 #ifdef SYS_ioprio_set
-namespace {
+namespace
+{
 #ifndef IOPRIO_CLASS_IDLE
-enum {
-    IOPRIO_CLASS_NONE,
-    IOPRIO_CLASS_RT,
-    IOPRIO_CLASS_BE,
-    IOPRIO_CLASS_IDLE
-};
+enum { IOPRIO_CLASS_NONE, IOPRIO_CLASS_RT, IOPRIO_CLASS_BE, IOPRIO_CLASS_IDLE };
 #endif
 
 #ifndef IOPRIO_WHO_PROCESS
-enum {
-    IOPRIO_WHO_PROCESS = 1,
-    IOPRIO_WHO_PGRP,
-    IOPRIO_WHO_USER
-};
+enum { IOPRIO_WHO_PROCESS = 1, IOPRIO_WHO_PGRP, IOPRIO_WHO_USER };
 #endif
 
 #ifndef IOPRIO_CLASS_SHIFT

@@ -6,16 +6,17 @@
  */
 
 #include "termgeneratortest.h"
-#include "../xapiantermgenerator.h"
 #include "../xapiandatabase.h"
+#include "../xapiantermgenerator.h"
 
-#include <QTest>
 #include "akonadi_search_xapian_debug.h"
 #include <QTemporaryDir>
+#include <QTest>
 
 using namespace Akonadi::Search;
 
-namespace {
+namespace
+{
 QStringList allWords(const Xapian::Document &doc)
 {
     QStringList words;
@@ -38,9 +39,9 @@ void TermGeneratorTest::testWordBoundaries()
     QStringList words = allWords(doc);
 
     QStringList expectedWords;
-    expectedWords << QStringLiteral("32.3") << QStringLiteral("brown") << QStringLiteral("can't") << QStringLiteral("feet") << QStringLiteral("fox") << QStringLiteral("jump")
-                  << QStringLiteral("no") << QStringLiteral("quick") << QStringLiteral("right") << QStringLiteral("the") << QStringLiteral("txt") << QStringLiteral("wrong")
-                  << QStringLiteral("xx");
+    expectedWords << QStringLiteral("32.3") << QStringLiteral("brown") << QStringLiteral("can't") << QStringLiteral("feet") << QStringLiteral("fox")
+                  << QStringLiteral("jump") << QStringLiteral("no") << QStringLiteral("quick") << QStringLiteral("right") << QStringLiteral("the")
+                  << QStringLiteral("txt") << QStringLiteral("wrong") << QStringLiteral("xx");
 
     QCOMPARE(words, expectedWords);
 }

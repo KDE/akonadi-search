@@ -10,11 +10,13 @@
 
 #include <xapian.h>
 
-#include <QString>
 #include "search_xapian_export.h"
+#include <QString>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 /** Xapian term generator. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianTermGenerator
 {
@@ -30,6 +32,7 @@ public:
     void setDocument(Xapian::Document *doc);
 
     static QStringList termList(const QString &text);
+
 private:
     Xapian::Document *m_doc = nullptr;
     Xapian::TermGenerator m_termGen;

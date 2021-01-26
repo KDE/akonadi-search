@@ -5,16 +5,16 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  *
  */
-#include <scheduler.h>
 #include <collectionindexingjob.h>
+#include <scheduler.h>
 
-#include <QTest>
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/ServerManager>
 #include <AkonadiCore/qtest_akonadi.h>
 #include <KConfig>
 #include <KConfigGroup>
 #include <QStandardPaths>
+#include <QTest>
 
 class DummyIndexingJob : public CollectionIndexingJob
 {
@@ -44,7 +44,11 @@ public:
     Akonadi::Item::List indexedItems;
     QList<bool> fullSyncs;
 
-    CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = nullptr) override
+    CollectionIndexingJob *createCollectionIndexingJob(Index &index,
+                                                       const Akonadi::Collection &col,
+                                                       const QList<Akonadi::Item::Id> &pending,
+                                                       bool fullSync,
+                                                       QObject *parent = nullptr) override
     {
         for (qint64 id : pending) {
             indexedItems << Akonadi::Item(id);
@@ -84,7 +88,7 @@ private Q_SLOTS:
         Scheduler scheduler(index, config, factory);
         QSignalSpy statusSpy(&scheduler, &Scheduler::status);
         scheduler.setBusyTimeout(0);
-        //Wait for ready signal (indicates that indexing is complete)
+        // Wait for ready signal (indicates that indexing is complete)
         QTRY_COMPARE(statusSpy.count(), 1);
         QTRY_COMPARE(factory->indexedCollections.size(), 2);
         QVERIFY(factory->fullSyncs.at(0));
@@ -109,14 +113,14 @@ private Q_SLOTS:
         Akonadi::Collection col2(4);
         scheduler.scheduleCollection(col2, true);
 
-        //Wait for ready signal (indicates that indexing is complete)
+        // Wait for ready signal (indicates that indexing is complete)
         QTRY_COMPARE(statusSpy.count(), 1);
         QTRY_COMPARE(factory->indexedCollections.size(), 2);
         QCOMPARE(factory->indexedCollections.at(0).id(), col1.id());
         QVERIFY(!factory->fullSyncs.at(0));
         QCOMPARE(factory->indexedCollections.at(1).id(), col2.id());
         QVERIFY(factory->fullSyncs.at(1));
-        //We index 2 collections.
+        // We index 2 collections.
         QCOMPARE(finishedIndexing.count(), 2);
     }
 
@@ -146,7 +150,7 @@ private Q_SLOTS:
         item3.setParentCollection(parent2);
         scheduler.addItem(item3);
 
-        //Wait for ready signal (indicates that indexing is complete)
+        // Wait for ready signal (indicates that indexing is complete)
         QTRY_COMPARE(statusSpy.count(), 1);
         QTRY_COMPARE(factory->indexedCollections.size(), 2);
         QCOMPARE(factory->indexedCollections.at(0).id(), parent1.id());
@@ -168,7 +172,7 @@ private Q_SLOTS:
 
         Index index;
 
-        //Populate dirty collections
+        // Populate dirty collections
         {
             QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
             Scheduler scheduler(index, config, factory);

@@ -7,18 +7,19 @@
  *
  */
 #include "pimsearchstore.h"
-#include "term.h"
 #include "query.h"
+#include "term.h"
 
+#include <AkonadiCore/ServerManager>
+#include <QDir>
+#include <QStandardPaths>
 #include <QUrl>
 #include <QUrlQuery>
-#include <QStandardPaths>
-#include <QDir>
-#include <AkonadiCore/ServerManager>
 
 using namespace Akonadi::Search;
 
-PIMSearchStore::PIMSearchStore(QObject *parent) : XapianSearchStore(parent)
+PIMSearchStore::PIMSearchStore(QObject *parent)
+    : XapianSearchStore(parent)
 {
 }
 
@@ -94,7 +95,8 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
         return Xapian::Query(term + val);
     }
 
-    if (m_valueProperties.contains(prop) && (com == Term::Equal || com == Term::Greater || com == Term::GreaterEqual || com == Term::Less || com == Term::LessEqual)) {
+    if (m_valueProperties.contains(prop)
+        && (com == Term::Equal || com == Term::Greater || com == Term::GreaterEqual || com == Term::Less || com == Term::LessEqual)) {
         qlonglong numVal = value.toLongLong();
         if (com == Term::Greater) {
             ++numVal;

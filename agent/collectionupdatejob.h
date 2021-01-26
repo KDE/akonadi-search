@@ -7,10 +7,10 @@
 #ifndef COLLECTIONUPDATEJOB_H
 #define COLLECTIONUPDATEJOB_H
 
-#include <KJob>
-#include <AkonadiCore/Item>
-#include <AkonadiCore/Collection>
 #include "index.h"
+#include <AkonadiCore/Collection>
+#include <AkonadiCore/Item>
+#include <KJob>
 
 /**
  * A Job that indexes a collection and all it's children in order to correctly update the paths (for which we need to have the display attribute available).

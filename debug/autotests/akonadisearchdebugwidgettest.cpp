@@ -5,12 +5,12 @@
 */
 
 #include "akonadisearchdebugwidgettest.h"
-#include <QPlainTextEdit>
-#include "../akonadisearchdebugwidget.h"
-#include <QTest>
 #include "../akonadisearchdebugsearchpathcombobox.h"
+#include "../akonadisearchdebugwidget.h"
 #include <KLineEdit>
+#include <QPlainTextEdit>
 #include <QPushButton>
+#include <QTest>
 
 AkonadiSearchDebugWidgetTest::AkonadiSearchDebugWidgetTest(QObject *parent)
     : QObject(parent)
@@ -62,7 +62,7 @@ void AkonadiSearchDebugWidgetTest::shouldEnabledPushButtonWhenLineEditIsNotEmpty
     lineEdit->setText(QString());
     QVERIFY(!button->isEnabled());
 
-    //trimmed string
+    // trimmed string
     lineEdit->setText(QStringLiteral(" "));
     QVERIFY(!button->isEnabled());
 }

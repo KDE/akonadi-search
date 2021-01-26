@@ -6,11 +6,11 @@
  *
  */
 
+#include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QCoreApplication>
 #include <QDebug>
 #include <QUuid>
-#include <QCoreApplication>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
 
 #include "xapiandocument.h"
 

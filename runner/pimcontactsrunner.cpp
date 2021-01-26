@@ -10,14 +10,14 @@
 
 #include <KLocalizedString>
 
+#include <QDesktopServices>
 #include <QIcon>
 #include <QSharedPointer>
 #include <QThread>
-#include <QDesktopServices>
 
-#include <AkonadiCore/Session>
 #include <AkonadiCore/ItemFetchJob>
 #include <AkonadiCore/ItemFetchScope>
+#include <AkonadiCore/Session>
 
 #include <KContacts/Addressee>
 
@@ -25,13 +25,13 @@
 
 #include <KEmailAddress>
 
-#include "lib/contactquery.h"
 #include "lib/contactcompleter.h"
+#include "lib/contactquery.h"
 #include "lib/resultiterator.h"
 
 Q_DECLARE_METATYPE(KContacts::Addressee *)
 
-PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData& metaData, const QVariantList &args)
+PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : Plasma::AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("PIMContactsRunner"));
@@ -188,7 +188,7 @@ void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context, const
 {
     Akonadi::Search::PIM::ContactCompleter completer(queryString);
     const QStringList completerResults = completer.complete();
-    qCDebug(AKONADI_KRUNNER_LOG) << "Autocompleter returned"  << completerResults.count() << "results";
+    qCDebug(AKONADI_KRUNNER_LOG) << "Autocompleter returned" << completerResults.count() << "results";
     for (const QString &result : completerResults) {
         Plasma::QueryMatch match(this);
         match.setRelevance(0.7); // slightly lower relevance than real addressbook contacts

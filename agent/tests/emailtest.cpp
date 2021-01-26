@@ -9,16 +9,16 @@
 #include "emailindexer.h"
 
 #include <QApplication>
-#include <QTimer>
-#include <QFile>
 #include <QDebug>
 #include <QElapsedTimer>
+#include <QFile>
+#include <QTimer>
 
-#include <CollectionFetchJob>
 #include <Collection>
+#include <CollectionFetchJob>
+#include <Item>
 #include <ItemFetchJob>
 #include <ItemFetchScope>
-#include <Item>
 
 class App : public QApplication
 {
@@ -65,8 +65,7 @@ void App::main()
     connect(&m_commitTimer, &QTimer::timeout, this, &App::slotCommitTimerElapsed);
     m_commitTimer.start();
 
-    Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(),
-                                                                       Akonadi::CollectionFetchJob::Recursive);
+    Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
     connect(job, &Akonadi::CollectionFetchJob::finished, this, &App::slotRootCollectionsFetched);
     job->start();
 
@@ -163,25 +162,25 @@ void App::slotIndexed()
         QString rchar(QStringLiteral("rchar: "));
         if (str.startsWith(rchar)) {
             ulong amt = str.midRef(rchar.size()).toULong();
-            qDebug() << "Read:" << amt / 1024  << "kb";
+            qDebug() << "Read:" << amt / 1024 << "kb";
         }
 
         QString wchar(QStringLiteral("wchar: "));
         if (str.startsWith(wchar)) {
             ulong amt = str.midRef(wchar.size()).toULong();
-            qDebug() << "Write:" << amt / 1024  << "kb";
+            qDebug() << "Write:" << amt / 1024 << "kb";
         }
 
         QString read(QStringLiteral("read_bytes: "));
         if (str.startsWith(read)) {
             ulong amt = str.midRef(read.size()).toULong();
-            qDebug() << "Actual Reads:" << amt / 1024  << "kb";
+            qDebug() << "Actual Reads:" << amt / 1024 << "kb";
         }
 
         QString write(QStringLiteral("write_bytes: "));
         if (str.startsWith(write)) {
             ulong amt = str.midRef(write.size()).toULong();
-            qDebug() << "Actual Writes:" << amt / 1024  << "kb";
+            qDebug() << "Actual Writes:" << amt / 1024 << "kb";
         }
     }
     qDebug() << "\nThe actual read/writes may be 0 because of an existing"

@@ -7,13 +7,15 @@
 #ifndef AKONADISEARCHDEBUGDIALOG_H
 #define AKONADISEARCHDEBUGDIALOG_H
 
-#include <QDialog>
-#include "search_debug_export.h"
 #include "akonadisearchdebugsearchpathcombobox.h"
+#include "search_debug_export.h"
 #include <AkonadiCore/Item>
+#include <QDialog>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 class AkonadiSearchDebugDialogPrivate;
 /**
  * @brief The AkonadiSearchDebugDialog class
@@ -31,6 +33,7 @@ public:
     void doSearch();
 private Q_SLOTS:
     void slotSaveAs();
+
 private:
     void readConfig();
     void writeConfig();

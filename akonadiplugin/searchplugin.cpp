@@ -9,8 +9,8 @@
 #include "searchplugin.h"
 
 #include "query.h"
-#include "term.h"
 #include "resultiterator.h"
+#include "term.h"
 
 #include <searchquery.h>
 
@@ -75,8 +75,7 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << term.key() << term.value();
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
-        case Akonadi::EmailSearchTerm::Message:
-        {
+        case Akonadi::EmailSearchTerm::Message: {
             Term s(Term::Or);
             s.setNegation(term.isNegated());
             s.addSubTerm(Term(QStringLiteral("body"), term.value(), mapComparator(term.condition())));
@@ -89,14 +88,12 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("headers"));
         case Akonadi::EmailSearchTerm::ByteSize:
             return getTerm(term, QStringLiteral("size"));
-        case Akonadi::EmailSearchTerm::HeaderDate:
-        {
+        case Akonadi::EmailSearchTerm::HeaderDate: {
             Term s(QStringLiteral("date"), QString::number(term.value().toDateTime().toSecsSinceEpoch()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
         }
-        case Akonadi::EmailSearchTerm::HeaderOnlyDate:
-        {
+        case Akonadi::EmailSearchTerm::HeaderOnlyDate: {
             Term s(QStringLiteral("onlydate"), QString::number(term.value().toDate().toJulianDay()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
@@ -161,7 +158,7 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             break;
         }
         case Akonadi::EmailSearchTerm::MessageTag:
-            //search directly in akonadi? or index tags.
+            // search directly in akonadi? or index tags.
             break;
         case Akonadi::EmailSearchTerm::HeaderReplyTo:
             return getTerm(term, QStringLiteral("replyto"));
@@ -210,8 +207,7 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("summary"));
         case Akonadi::IncidenceSearchTerm::Location:
             return getTerm(term, QStringLiteral("location"));
-        case Akonadi::IncidenceSearchTerm::PartStatus:
-        {
+        case Akonadi::IncidenceSearchTerm::PartStatus: {
             Term t(QStringLiteral("partstatus"), term.value().toString(), Term::Equal);
             t.setNegation(term.isNegated());
             return t;
@@ -331,7 +327,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
         query.setLimit(searchQuery.limit());
     }
 
-    //Filter by collection if not empty
+    // Filter by collection if not empty
     if (!collections.isEmpty()) {
         Term parentTerm(Term::And);
         Term collectionTerm(Term::Or);

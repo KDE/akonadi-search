@@ -7,16 +7,16 @@
  */
 
 #include "query.h"
-#include "contactquery.h"
 #include "akonadi_search_pim_debug.h"
+#include "contactquery.h"
 
-#include <QVariant>
 #include <QDebug>
+#include <QVariant>
 
-#include <QJsonDocument>
 #include <AkonadiCore/ServerManager>
-#include <QStandardPaths>
 #include <QDir>
+#include <QJsonDocument>
+#include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
 

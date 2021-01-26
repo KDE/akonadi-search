@@ -7,9 +7,9 @@
  */
 
 #include "emailsearchstore.h"
-#include "term.h"
-#include "query.h"
 #include "agepostingsource.h"
+#include "query.h"
+#include "term.h"
 
 using namespace Akonadi::Search;
 
@@ -53,9 +53,10 @@ EmailSearchStore::EmailSearchStore(QObject *parent)
     m_prefix.insert(QStringLiteral("isencrypted"), QStringLiteral("C"));
     m_prefix.insert(QStringLiteral("hasinvitation"), QStringLiteral("V"));
 
-    m_boolProperties << QStringLiteral("isimportant") << QStringLiteral("istoact") << QStringLiteral("iswatched") << QStringLiteral("isdeleted") << QStringLiteral("isspam")
-                     << QStringLiteral("isreplied") << QStringLiteral("isignored") << QStringLiteral("isforwarded") << QStringLiteral("issent") << QStringLiteral("isqueued")
-                     << QStringLiteral("isham") << QStringLiteral("isread") << QStringLiteral("hasattachment") << QStringLiteral("isencrypted") << QStringLiteral("hasinvitation");
+    m_boolProperties << QStringLiteral("isimportant") << QStringLiteral("istoact") << QStringLiteral("iswatched") << QStringLiteral("isdeleted")
+                     << QStringLiteral("isspam") << QStringLiteral("isreplied") << QStringLiteral("isignored") << QStringLiteral("isforwarded")
+                     << QStringLiteral("issent") << QStringLiteral("isqueued") << QStringLiteral("isham") << QStringLiteral("isread")
+                     << QStringLiteral("hasattachment") << QStringLiteral("isencrypted") << QStringLiteral("hasinvitation");
 
     m_valueProperties.insert(QStringLiteral("date"), 0);
     m_valueProperties.insert(QStringLiteral("size"), 1);
@@ -71,7 +72,7 @@ QStringList EmailSearchStore::types()
 
 Xapian::Query EmailSearchStore::constructQuery(const QString &property, const QVariant &value, Term::Comparator com)
 {
-    //TODO is this special case necessary? maybe we can also move it to PIM
+    // TODO is this special case necessary? maybe we can also move it to PIM
     if (com == Term::Contains) {
         if (!m_prefix.contains(property.toLower())) {
             return Xapian::Query();

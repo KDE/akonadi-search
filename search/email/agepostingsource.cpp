@@ -8,8 +8,8 @@
 
 #include "agepostingsource.h"
 
-#include <QString>
 #include <QDateTime>
+#include <QString>
 
 #include <cmath>
 

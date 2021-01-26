@@ -8,14 +8,14 @@
 
 #include <xapian.h>
 
+#include "akonadi_search_pim_debug.h"
 #include "contactquery.h"
 #include "resultiterator_p.h"
-#include "akonadi_search_pim_debug.h"
 
-#include <QList>
 #include <QDebug>
-#include <QStandardPaths>
 #include <QFile>
+#include <QList>
+#include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
 

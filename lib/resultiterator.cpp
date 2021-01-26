@@ -43,6 +43,6 @@ bool ResultIterator::next()
 
 Akonadi::Item::Id ResultIterator::id()
 {
-    //qDebug() << d->m_iter.get_rank() << d->m_iter.get_weight();
+    // qDebug() << d->m_iter.get_rank() << d->m_iter.get_weight();
     return *(d->m_iter);
 }

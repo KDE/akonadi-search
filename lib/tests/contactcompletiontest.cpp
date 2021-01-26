@@ -8,11 +8,11 @@
 
 #include "../contactcompleter.h"
 
-#include <iostream>
 #include <QCoreApplication>
-#include <QTimer>
-#include <QElapsedTimer>
 #include <QDebug>
+#include <QElapsedTimer>
+#include <QTimer>
+#include <iostream>
 
 #include <AkonadiCore/ItemFetchJob>
 #include <AkonadiCore/ItemFetchScope>
@@ -46,7 +46,8 @@ int main(int argc, char **argv)
     return app.exec();
 }
 
-App::App(int &argc, char **argv, int flags) : QCoreApplication(argc, argv, flags)
+App::App(int &argc, char **argv, int flags)
+    : QCoreApplication(argc, argv, flags)
 {
     QTimer::singleShot(0, this, &App::main);
 }

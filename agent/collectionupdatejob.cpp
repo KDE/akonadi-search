@@ -25,7 +25,7 @@ void CollectionUpdateJob::start()
         mIndex.change(mCol);
     }
 
-    //Fetch children to update the path accordingly
+    // Fetch children to update the path accordingly
     auto *fetchJob = new Akonadi::CollectionFetchJob(mCol, Akonadi::CollectionFetchJob::Recursive, this);
     fetchJob->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
     fetchJob->fetchScope().ancestorFetchScope().fetchAttribute<Akonadi::EntityDisplayAttribute>();
@@ -37,7 +37,7 @@ void CollectionUpdateJob::start()
 
 void CollectionUpdateJob::onCollectionsReceived(const Akonadi::Collection::List &list)
 {
-    //Required to update the path
+    // Required to update the path
     for (const Akonadi::Collection &child : list) {
         if (shouldIndex(mCol)) {
             mIndex.change(child);
@@ -55,7 +55,5 @@ void CollectionUpdateJob::onCollectionsFetched(KJob *job)
 
 bool CollectionUpdateJob::shouldIndex(const Akonadi::Collection &col) const
 {
-    return !col.isVirtual()
-           && (!mCol.hasAttribute<Akonadi::IndexPolicyAttribute>()
-               || mCol.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
+    return !col.isVirtual() && (!mCol.hasAttribute<Akonadi::IndexPolicyAttribute>() || mCol.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
 }

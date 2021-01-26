@@ -11,8 +11,10 @@
 
 #include "../pimsearchstore.h"
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 class NoteSearchStore : public PIMSearchStore
 {
     Q_OBJECT

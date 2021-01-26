@@ -6,12 +6,12 @@
  */
 
 #include "queryparsertest.h"
-#include "../xapianqueryparser.h"
 #include "../xapiandatabase.h"
+#include "../xapianqueryparser.h"
 
-#include <QTest>
 #include "akonadi_search_xapian_debug.h"
 #include <QTemporaryDir>
+#include <QTest>
 
 using namespace Akonadi::Search;
 
@@ -48,7 +48,7 @@ void QueryParserTest::testPhraseSearch()
     XapianQueryParser parser;
 
     Xapian::Query query = parser.parseQuery(QStringLiteral("The \"song of Ice\" Fire"));
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> phraseQueries;
     phraseQueries << Xapian::Query("song", 1, 2);
@@ -61,7 +61,7 @@ void QueryParserTest::testPhraseSearch()
     queries << Xapian::Query("fire", 1, 5);
 
     Xapian::Query q(Xapian::Query::OP_AND, queries.begin(), queries.end());
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
     QCOMPARE(query.serialise(), q.serialise());
 }
 
@@ -70,14 +70,14 @@ void QueryParserTest::testPhraseSearchOnly()
     XapianQueryParser parser;
 
     Xapian::Query query = parser.parseQuery(QStringLiteral("/opt/pro"));
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> queries;
     queries << Xapian::Query("opt", 1, 1);
     queries << Xapian::Query("pro", 1, 2);
 
     Xapian::Query q(Xapian::Query::OP_PHRASE, queries.begin(), queries.end());
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
     QCOMPARE(query.serialise(), q.serialise());
 }
 
@@ -86,7 +86,7 @@ void QueryParserTest::testPhraseSearch_sameLimiter()
     XapianQueryParser parser;
 
     Xapian::Query query = parser.parseQuery(QStringLiteral("The \"song of Ice' and Fire"));
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> queries;
     queries << Xapian::Query("the", 1, 1);
@@ -97,7 +97,7 @@ void QueryParserTest::testPhraseSearch_sameLimiter()
     queries << Xapian::Query("fire", 1, 6);
 
     Xapian::Query q(Xapian::Query::OP_AND, queries.begin(), queries.end());
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
 
     QCOMPARE(query.serialise(), q.serialise());
 }
@@ -166,7 +166,7 @@ void QueryParserTest::testWordExpansion()
     parser.setDatabase(xap);
 
     Xapian::Query query = parser.parseQuery(QStringLiteral("hell"));
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> synQueries;
     synQueries << Xapian::Query("hell", 1, 1);
@@ -174,7 +174,7 @@ void QueryParserTest::testWordExpansion()
     synQueries << Xapian::Query("hellog", 1, 1);
 
     Xapian::Query q(Xapian::Query::OP_SYNONYM, synQueries.begin(), synQueries.end());
-    //qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
+    // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << q.get_description().c_str();
 
     QCOMPARE(query.serialise(), q.serialise());
 

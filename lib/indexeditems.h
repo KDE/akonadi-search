@@ -8,13 +8,16 @@
 #ifndef INDEXEDITEMS_H
 #define INDEXEDITEMS_H
 
-#include <QObject>
 #include "search_pim_export.h"
 #include <AkonadiCore/Item>
+#include <QObject>
 
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 class IndexedItemsPrivate;
 
 /** Indexed items. */

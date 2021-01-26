@@ -10,9 +10,9 @@
 #include "collectionindexer.h"
 #include "xapiandocument.h"
 
-#include <QStringList>
-#include <AkonadiCore/collectionidentificationattribute.h>
 #include <AkonadiCore/AttributeFactory>
+#include <AkonadiCore/collectionidentificationattribute.h>
+#include <QStringList>
 
 #include "akonadi_indexer_agent_debug.h"
 
@@ -54,7 +54,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
     if (!m_db) {
         return;
     }
-    //qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing " << collection.id() << collection.displayName() << collection.name();
+    // qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing " << collection.id() << collection.displayName() << collection.name();
 
     try {
         Xapian::Document doc;
@@ -65,7 +65,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
         gen.index_text_without_positions(collection.displayName().toStdString());
         gen.index_text_without_positions(collection.displayName().toStdString(), 1, "N");
 
-        //We index with positions so we can do phrase searches (required for exact matches)
+        // We index with positions so we can do phrase searches (required for exact matches)
         {
             const QByteArray path = getPath(collection);
             gen.index_text(path.constData(), 1, "P");
@@ -88,7 +88,7 @@ void CollectionIndexer::index(const Akonadi::Collection &collection)
             }
         }
         {
-            //We must add the term also with an empty namespace, so we can search for that as well
+            // We must add the term also with an empty namespace, so we can search for that as well
             const QByteArray term = "NS" + ns;
             doc.add_boolean_term(term.constData());
         }
@@ -115,14 +115,14 @@ void CollectionIndexer::remove(const Akonadi::Collection &col)
         return;
     }
 
-    //Remove collection
+    // Remove collection
     try {
         m_db->delete_document(col.id());
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer:" << e.get_msg().c_str();
     }
 
-    //Remove subcollections
+    // Remove subcollections
     try {
         Xapian::Query query('C' + QString::number(col.id()).toStdString());
         Xapian::Enquire enquire(*m_db);

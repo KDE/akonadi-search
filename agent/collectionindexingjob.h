@@ -7,11 +7,11 @@
 #ifndef COLLECTIONINDEXINGJOB_H
 #define COLLECTIONINDEXINGJOB_H
 
-#include <KJob>
-#include <AkonadiCore/Item>
-#include <AkonadiCore/Collection>
-#include <QElapsedTimer>
 #include "index.h"
+#include <AkonadiCore/Collection>
+#include <AkonadiCore/Item>
+#include <KJob>
+#include <QElapsedTimer>
 
 /**
  * Indexing Job that ensure a collections is fully indexed.

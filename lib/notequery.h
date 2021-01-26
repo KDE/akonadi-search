@@ -9,13 +9,16 @@
 #ifndef AKONADI_SEARCH_PIM_NOTEQUERY_H
 #define AKONADI_SEARCH_PIM_NOTEQUERY_H
 
+#include "query.h"
 #include "search_pim_export.h"
 #include <QString>
-#include "query.h"
 
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 /**
  * Query for a list of contacts matching a criteria
  */

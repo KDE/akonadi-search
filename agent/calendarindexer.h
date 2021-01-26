@@ -14,8 +14,8 @@
 
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/Item>
-#include <KCalendarCore/Journal>
 #include <KCalendarCore/Event>
+#include <KCalendarCore/Journal>
 #include <KCalendarCore/Todo>
 
 class CalendarIndexer : public AbstractIndexer
@@ -36,6 +36,7 @@ public:
     void remove(const Akonadi::Item &item) override;
     void remove(const Akonadi::Collection &collection) override;
     void move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to) override;
+
 private:
     void indexEventItem(const Akonadi::Item &item, const KCalendarCore::Event::Ptr &event);
     void indexJournalItem(const Akonadi::Item &item, const KCalendarCore::Journal::Ptr &journal);

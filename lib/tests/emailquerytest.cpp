@@ -6,12 +6,12 @@
  *
  */
 
-#include "../resultiterator.h"
 #include "../emailquery.h"
+#include "../resultiterator.h"
 
 #include <QCoreApplication>
-#include <QTimer>
 #include <QDebug>
+#include <QTimer>
 
 #include <AkonadiCore/ItemFetchJob>
 #include <AkonadiCore/ItemFetchScope>
@@ -46,7 +46,8 @@ int main(int argc, char **argv)
     return app.exec();
 }
 
-App::App(int &argc, char **argv, int flags) : QCoreApplication(argc, argv, flags)
+App::App(int &argc, char **argv, int flags)
+    : QCoreApplication(argc, argv, flags)
 {
     QTimer::singleShot(0, this, &App::main);
 }
@@ -73,10 +74,8 @@ void App::main()
     auto *job = new Akonadi::ItemFetchJob(m_akonadiIds);
     job->fetchScope().fetchFullPayload(true);
 
-    connect(job, &Akonadi::ItemFetchJob::itemsReceived,
-            this, &App::itemsReceived);
-    connect(job, &Akonadi::ItemFetchJob::finished,
-            this, &App::quit);
+    connect(job, &Akonadi::ItemFetchJob::itemsReceived, this, &App::itemsReceived);
+    connect(job, &Akonadi::ItemFetchJob::finished, this, &App::quit);
 
     job->start();
 }

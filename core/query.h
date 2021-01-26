@@ -9,13 +9,15 @@
 #ifndef AKONADI_SEARCH_CORE_QUERY_H
 #define AKONADI_SEARCH_CORE_QUERY_H
 
-#include "search_core_export.h"
 #include "resultiterator.h"
+#include "search_core_export.h"
 
 class QVariant;
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 class Term;
 
 /** Search query. */
@@ -133,7 +135,7 @@ public:
     static Query fromSearchUrl(const QUrl &url);
     static QString titleFromQueryUrl(const QUrl &url);
 
-    bool operator ==(const Query &rhs) const;
+    bool operator==(const Query &rhs) const;
 
     Query &operator=(const Query &rhs);
 

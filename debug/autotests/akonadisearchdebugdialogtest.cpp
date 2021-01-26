@@ -7,9 +7,9 @@
 #include "akonadisearchdebugdialogtest.h"
 #include "../akonadisearchdebugdialog.h"
 #include "../akonadisearchdebugwidget.h"
+#include <KLineEdit>
 #include <QPlainTextEdit>
 #include <QStandardPaths>
-#include <KLineEdit>
 #include <QTest>
 
 AkonadiSearchDebugDialogTest::AkonadiSearchDebugDialogTest(QObject *parent)

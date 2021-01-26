@@ -7,15 +7,17 @@
 #ifndef AKONADISEARCHDEBUGWIDGET_H
 #define AKONADISEARCHDEBUGWIDGET_H
 
-#include <QWidget>
-#include "search_debug_export.h"
 #include "akonadisearchdebugsearchpathcombobox.h"
+#include "search_debug_export.h"
 #include <AkonadiCore/Item>
+#include <QWidget>
 class KLineEdit;
 class QPushButton;
 class QPlainTextEdit;
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 /**
  * @brief The AkonadiSearchDebugWidget class
  */

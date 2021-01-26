@@ -13,9 +13,9 @@
 #include <agentbase.h>
 #include <collection.h>
 
-#include <QList>
-#include "scheduler.h"
 #include "index.h"
+#include "scheduler.h"
+#include <QList>
 
 class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
 {
@@ -40,7 +40,9 @@ public:
     void collectionAdded(const Akonadi::Collection &collection, const Akonadi::Collection &parent) override;
     void collectionChanged(const Akonadi::Collection &collection, const QSet<QByteArray> &changedAttributes) override;
     void collectionRemoved(const Akonadi::Collection &collection) override;
-    void collectionMoved(const Akonadi::Collection &collection, const Akonadi::Collection &collectionSource, const Akonadi::Collection &collectionDestination) override;
+    void collectionMoved(const Akonadi::Collection &collection,
+                         const Akonadi::Collection &collectionSource,
+                         const Akonadi::Collection &collectionDestination) override;
 
     // Remove the entire db
     void cleanup() override;

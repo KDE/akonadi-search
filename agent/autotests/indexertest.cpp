@@ -6,15 +6,15 @@
  *
  */
 
-#include <QTest>
 #include <AkonadiCore/Collection>
 #include <KContacts/Addressee>
 #include <QDir>
+#include <QTest>
 
-#include "emailindexer.h"
 #include "contactindexer.h"
-#include <../search/email/emailsearchstore.h>
+#include "emailindexer.h"
 #include <../search/contact/contactsearchstore.h>
+#include <../search/email/emailsearchstore.h>
 #include <query.h>
 
 Q_DECLARE_METATYPE(QSet<qint64>)
@@ -35,7 +35,7 @@ private:
         QDir dir(dirName);
 
         if (dir.exists(dirName)) {
-            const QFileInfoList infoDirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
+            const QFileInfoList infoDirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
             for (const QFileInfo &info : infoDirs) {
                 if (info.isDir()) {
                     result = removeDir(info.absoluteFilePath());
@@ -75,14 +75,14 @@ private Q_SLOTS:
         qDebug() << emailContactsDir;
         qDebug() << notesDir;
 
-//         EmailIndexer emailIndexer(emailDir, emailContactsDir);
-//         ContactIndexer contactIndexer(contactsDir);
+        //         EmailIndexer emailIndexer(emailDir, emailContactsDir);
+        //         ContactIndexer contactIndexer(contactsDir);
 
-//         Akonadi::Search::EmailSearchStore *emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
-//         emailSearchStore->setDbPath(emailDir);
-//         Akonadi::Search::ContactSearchStore *contactSearchStore = new Akonadi::Search::ContactSearchStore(this);
-//         contactSearchStore->setDbPath(contactsDir);
-//         Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore*>() << emailSearchStore << contactSearchStore);
+        //         Akonadi::Search::EmailSearchStore *emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
+        //         emailSearchStore->setDbPath(emailDir);
+        //         Akonadi::Search::ContactSearchStore *contactSearchStore = new Akonadi::Search::ContactSearchStore(this);
+        //         contactSearchStore->setDbPath(contactsDir);
+        //         Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore*>() << emailSearchStore << contactSearchStore);
     }
 
     QSet<qint64> getAllItems()

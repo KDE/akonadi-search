@@ -12,9 +12,12 @@
 #include "search_pim_export.h"
 #include <QByteArray>
 
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 class ResultIterator;
 
 /** Query base class. */

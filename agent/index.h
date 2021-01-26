@@ -8,15 +8,18 @@
 #ifndef INDEX_H
 #define INDEX_H
 
-#include <QObject>
-#include <QTimer>
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/item.h>
 #include "abstractindexer.h"
 #include "collectionindexer.h"
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+#include <AkonadiCore/Collection>
+#include <AkonadiCore/item.h>
+#include <QObject>
+#include <QTimer>
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 class IndexedItems;
 }
 }

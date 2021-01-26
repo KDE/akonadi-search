@@ -9,12 +9,14 @@
 #ifndef AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
 #define AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
 
+#include <QObject>
 #include <QStringList>
 #include <akonadi/abstractsearchplugin.h>
-#include <QObject>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 class Query;
 }
 }

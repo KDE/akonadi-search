@@ -9,15 +9,15 @@
 #include "akonadisearchdebugdialog.h"
 #include "akonadisearchdebugwidget.h"
 
+#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMessageBox>
-#include <QVBoxLayout>
 #include <KSharedConfig>
-#include <KConfigGroup>
 #include <QDialogButtonBox>
-#include <QPushButton>
-#include <QPointer>
 #include <QFileDialog>
+#include <QPointer>
+#include <QPushButton>
+#include <QVBoxLayout>
 
 using namespace Akonadi::Search;
 
@@ -31,14 +31,14 @@ AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
     : QDialog(parent)
     , d(new Akonadi::Search::AkonadiSearchDebugDialogPrivate)
 {
-    //Don't translate it's just a dialog to debug
+    // Don't translate it's just a dialog to debug
     setWindowTitle(QStringLiteral("Debug Akonadi Search"));
 
     auto *mainLayout = new QVBoxLayout(this);
     QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Close, this);
     auto *user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
-    //Don't translate it.
+    // Don't translate it.
     user1Button->setText(QStringLiteral("Save As..."));
     connect(user1Button, &QPushButton::clicked, this, &AkonadiSearchDebugDialog::slotSaveAs);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &AkonadiSearchDebugDialog::reject);

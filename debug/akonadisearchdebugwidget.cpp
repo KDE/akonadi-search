@@ -5,13 +5,13 @@
 */
 
 #include "akonadisearchdebugwidget.h"
-#include "job/akonadisearchdebugsearchjob.h"
 #include "akonadisearchsyntaxhighlighter.h"
+#include "job/akonadisearchdebugsearchjob.h"
 #include <KLineEdit>
 #include <QPushButton>
 
-#include <QVBoxLayout>
 #include <QLabel>
+#include <QVBoxLayout>
 
 #include <QPlainTextEdit>
 

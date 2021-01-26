@@ -7,12 +7,12 @@
  */
 
 #include "query.h"
-#include "term.h"
 #include "searchstore.h"
+#include "term.h"
 
+#include <QSharedPointer>
 #include <QString>
 #include <QStringList>
-#include <QSharedPointer>
 #include <QUrlQuery>
 #include <QVariant>
 
@@ -370,11 +370,9 @@ QString Query::titleFromQueryUrl(const QUrl &url)
 
 bool Query::operator==(const Query &rhs) const
 {
-    if (rhs.d->m_limit != d->m_limit || rhs.d->m_offset != d->m_offset
-        || rhs.d->m_dayFilter != d->m_dayFilter || rhs.d->m_monthFilter != d->m_monthFilter
-        || rhs.d->m_yearFilter != d->m_yearFilter || rhs.d->m_customOptions != d->m_customOptions
-        || rhs.d->m_searchString != d->m_searchString || rhs.d->m_sortingProperty != d->m_sortingProperty
-        || rhs.d->m_sortingOption != d->m_sortingOption) {
+    if (rhs.d->m_limit != d->m_limit || rhs.d->m_offset != d->m_offset || rhs.d->m_dayFilter != d->m_dayFilter || rhs.d->m_monthFilter != d->m_monthFilter
+        || rhs.d->m_yearFilter != d->m_yearFilter || rhs.d->m_customOptions != d->m_customOptions || rhs.d->m_searchString != d->m_searchString
+        || rhs.d->m_sortingProperty != d->m_sortingProperty || rhs.d->m_sortingOption != d->m_sortingOption) {
         return false;
     }
 

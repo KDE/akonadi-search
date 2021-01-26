@@ -11,14 +11,16 @@
 
 #include <xapian.h>
 
+#include "search_xapian_export.h"
 #include "searchstore.h"
 #include "term.h"
-#include "search_xapian_export.h"
 
 #include <QMutex>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 /**
  * Implements a search store using Xapian
  */

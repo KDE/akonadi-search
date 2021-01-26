@@ -10,11 +10,13 @@
 
 #include <xapian.h>
 
-#include <QString>
 #include "search_xapian_export.h"
+#include <QString>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 /** Xapian query parser. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianQueryParser
 {

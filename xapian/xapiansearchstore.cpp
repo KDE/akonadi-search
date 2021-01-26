@@ -7,11 +7,11 @@
  */
 
 #include "xapiansearchstore.h"
-#include "xapianqueryparser.h"
 #include "query.h"
+#include "xapianqueryparser.h"
 
-#include <QVector>
 #include "akonadi_search_xapian_debug.h"
+#include <QVector>
 
 #include <algorithm>
 
@@ -54,8 +54,7 @@ QString XapianSearchStore::dbPath()
 
 Xapian::Query XapianSearchStore::toXapianQuery(Xapian::Query::op op, const QList<Term> &terms)
 {
-    Q_ASSERT_X(op == Xapian::Query::OP_AND || op == Xapian::Query::OP_OR,
-               "XapianSearchStore::toXapianQuery", "The op must be AND / OR");
+    Q_ASSERT_X(op == Xapian::Query::OP_AND || op == Xapian::Query::OP_OR, "XapianSearchStore::toXapianQuery", "The op must be AND / OR");
 
     QVector<Xapian::Query> queries;
     queries.reserve(terms.size());
@@ -122,7 +121,7 @@ int XapianSearchStore::exec(const Query &query)
             try {
                 m_db->reopen();
             } catch (Xapian::DatabaseError &e) {
-                qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Failed to reopen database" << dbPath() << ":" <<  QString::fromStdString(e.get_msg());
+                qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Failed to reopen database" << dbPath() << ":" << QString::fromStdString(e.get_msg());
                 return 0;
             }
 
@@ -179,8 +178,7 @@ void XapianSearchStore::close(int queryId)
 QByteArray XapianSearchStore::id(int queryId)
 {
     QMutexLocker lock(&m_mutex);
-    Q_ASSERT_X(m_queryMap.contains(queryId), "FileSearchStore::id",
-               "Passed a queryId which does not exist");
+    Q_ASSERT_X(m_queryMap.contains(queryId), "FileSearchStore::id", "Passed a queryId which does not exist");
 
     const Result res = m_queryMap.value(queryId);
     if (!res.lastId) {

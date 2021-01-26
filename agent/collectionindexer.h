@@ -11,7 +11,8 @@
 #include <AkonadiCore/collection.h>
 #include <QString>
 
-namespace Xapian {
+namespace Xapian
+{
 class WritableDatabase;
 }
 

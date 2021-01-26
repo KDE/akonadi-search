@@ -7,9 +7,9 @@
 
 #include "xapianqueryparser.h"
 
-#include <QTextBoundaryFinder>
-#include <QStringList>
 #include "akonadi_search_xapian_debug.h"
+#include <QStringList>
+#include <QTextBoundaryFinder>
 
 using namespace Akonadi::Search;
 
@@ -22,13 +22,14 @@ void XapianQueryParser::setDatabase(Xapian::Database *db)
     m_db = db;
 }
 
-namespace {
+namespace
+{
 struct Term {
     std::string t;
     uint count;
 
     // pop_heap pops the largest element, we want the smallest to be popped
-    bool operator <(const Term &rhs) const
+    bool operator<(const Term &rhs) const
     {
         return count > rhs.count;
     }

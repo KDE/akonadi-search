@@ -6,16 +6,14 @@
  */
 
 #include "pimcontactsrunnerconfig.h"
+#include <KConfigGroup>
+#include <KLocalizedString>
+#include <KPluginFactory>
+#include <KSharedConfig>
 #include <QCheckBox>
 #include <QVBoxLayout>
-#include <KLocalizedString>
-#include <KSharedConfig>
-#include <KConfigGroup>
-#include <KPluginFactory>
 
-K_PLUGIN_FACTORY(PIMContactsRunnerConfigFactory,
-                 registerPlugin<PIMContactsRunnerConfig>(QStringLiteral("kcm_krunner_pimcontacts"));
-                 )
+K_PLUGIN_FACTORY(PIMContactsRunnerConfigFactory, registerPlugin<PIMContactsRunnerConfig>(QStringLiteral("kcm_krunner_pimcontacts"));)
 
 PIMContactsRunnerConfig::PIMContactsRunnerConfig(QWidget *parent, const QVariantList &args)
     : KCModule(parent, args)
@@ -23,8 +21,7 @@ PIMContactsRunnerConfig::PIMContactsRunnerConfig(QWidget *parent, const QVariant
     auto *vbox = new QVBoxLayout(this);
 
     mQueryCompletionCheckBox = new QCheckBox(i18n("Search in contacts indexed from sent and received emails too"), this);
-    connect(mQueryCompletionCheckBox, &QCheckBox::stateChanged,
-            this, &PIMContactsRunnerConfig::configChanged);
+    connect(mQueryCompletionCheckBox, &QCheckBox::stateChanged, this, &PIMContactsRunnerConfig::configChanged);
 
     vbox->addWidget(mQueryCompletionCheckBox);
 

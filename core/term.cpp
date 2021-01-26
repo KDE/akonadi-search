@@ -274,7 +274,8 @@ QVariantMap Term::toVariantMap() const
     return map;
 }
 
-namespace {
+namespace
+{
 // QJson does not recognize QDate/QDateTime parameters. We try to guess
 // and see if they can be converted into date/datetime.
 QVariant tryConvert(const QVariant &var)
@@ -364,8 +365,7 @@ Term Term::fromVariantMap(const QVariantMap &map)
 
 bool Term::operator==(const Term &rhs) const
 {
-    if (d->m_op != rhs.d->m_op || d->m_comp != rhs.d->m_comp
-        || d->m_isNegated != rhs.d->m_isNegated || d->m_property != rhs.d->m_property
+    if (d->m_op != rhs.d->m_op || d->m_comp != rhs.d->m_comp || d->m_isNegated != rhs.d->m_isNegated || d->m_property != rhs.d->m_property
         || d->m_value != rhs.d->m_value) {
         return false;
     }
@@ -393,7 +393,8 @@ Term &Term::operator=(const Term &rhs)
     return *this;
 }
 
-namespace {
+namespace
+{
 QString comparatorToString(Term::Comparator c)
 {
     switch (c) {
@@ -431,13 +432,13 @@ QString operationToString(Term::Operation op)
 }
 } // namespace
 
-QDebug operator <<(QDebug d, const Term &t)
+QDebug operator<<(QDebug d, const Term &t)
 {
     if (t.subTerms().isEmpty()) {
-        d << QStringLiteral("(%1 %2 %3 (%4))").arg(t.property(),
-                                                   comparatorToString(t.comparator()),
-                                                   t.value().toString(),
-                                                   QString::fromLatin1(t.value().typeName())).toUtf8().constData();
+        d << QStringLiteral("(%1 %2 %3 (%4))")
+                 .arg(t.property(), comparatorToString(t.comparator()), t.value().toString(), QString::fromLatin1(t.value().typeName()))
+                 .toUtf8()
+                 .constData();
     } else {
         d << "(" << operationToString(t.operation()).toUtf8().constData();
         const QList<Term> subterms = t.subTerms();

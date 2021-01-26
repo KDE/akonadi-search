@@ -19,7 +19,7 @@ CalendarSearchStore::CalendarSearchStore(QObject *parent)
     m_prefix.insert(QStringLiteral("summary"), QStringLiteral("S"));
     m_prefix.insert(QStringLiteral("location"), QStringLiteral("L"));
 
-    m_boolWithValue <<  QStringLiteral("partstatus");
+    m_boolWithValue << QStringLiteral("partstatus");
 
     setDbPath(findDatabase(QStringLiteral("calendars")));
 }

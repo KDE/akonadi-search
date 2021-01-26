@@ -7,17 +7,17 @@
  */
 #include <collectionindexingjob.h>
 
-#include <QTest>
 #include <AkonadiCore/Collection>
-#include <AkonadiCore/ServerManager>
 #include <AkonadiCore/CollectionFetchJob>
+#include <AkonadiCore/ServerManager>
 #include <AkonadiCore/qtest_akonadi.h>
+#include <QTest>
 
 class TestIndex : public Index
 {
 public:
-    using Index::move; // So we don't trigger -Woverloaded-virtual
     using Index::index; // So we don't trigger -Woverloaded-virtual
+    using Index::move; // So we don't trigger -Woverloaded-virtual
     QList<Akonadi::Item::Id> itemsIndexed;
     QList<Akonadi::Item::Id> alreadyIndexed;
     QList<Akonadi::Item::Id> itemsRemoved;
@@ -31,9 +31,9 @@ public:
         return true;
     }
 
-    void findIndexed(QSet< Akonadi::Item::Id> &indexed, Akonadi::Collection::Id) override
+    void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id) override
     {
-        indexed = QSet< Akonadi::Item::Id>(alreadyIndexed.begin(), alreadyIndexed.end());
+        indexed = QSet<Akonadi::Item::Id>(alreadyIndexed.begin(), alreadyIndexed.end());
     }
 
     void index(const Akonadi::Item &item) override

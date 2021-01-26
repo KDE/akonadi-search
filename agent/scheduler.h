@@ -8,12 +8,12 @@
 #ifndef SCHEDULER_H
 #define SCHEDULER_H
 
-#include <QObject>
-#include <QQueue>
+#include "index.h"
 #include <AkonadiCore/Collection>
 #include <AkonadiCore/Item>
-#include "index.h"
 #include <KSharedConfig>
+#include <QObject>
+#include <QQueue>
 
 class CollectionIndexingJob;
 
@@ -21,7 +21,11 @@ class JobFactory
 {
 public:
     virtual ~JobFactory();
-    virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent = nullptr);
+    virtual CollectionIndexingJob *createCollectionIndexingJob(Index &index,
+                                                               const Akonadi::Collection &col,
+                                                               const QList<Akonadi::Item::Id> &pending,
+                                                               bool fullSync,
+                                                               QObject *parent = nullptr);
 };
 
 /**
@@ -36,7 +40,10 @@ class Scheduler : public QObject
 {
     Q_OBJECT
 public:
-    explicit Scheduler(Index &index, const KSharedConfigPtr &config, const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(), QObject *parent = nullptr);
+    explicit Scheduler(Index &index,
+                       const KSharedConfigPtr &config,
+                       const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(),
+                       QObject *parent = nullptr);
     virtual ~Scheduler();
     void addItem(const Akonadi::Item &);
     void scheduleCollection(const Akonadi::Collection &, bool fullSync = false);
@@ -69,7 +76,7 @@ private:
     void collectDirtyCollections();
 
     KSharedConfigPtr m_config;
-    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id> > m_queues;
+    QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>> m_queues;
     QQueue<Akonadi::Collection::Id> m_collectionQueue;
     Index &m_index;
     KJob *m_currentJob = nullptr;

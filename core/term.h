@@ -11,31 +11,21 @@
 
 #include "search_core_export.h"
 
+#include <QDebug>
 #include <QString>
 #include <QVariant>
-#include <QDebug>
 
-namespace Akonadi {
-namespace Search {
+namespace Akonadi
+{
+namespace Search
+{
 /** Search term. */
 class AKONADI_SEARCH_CORE_EXPORT Term
 {
 public:
-    enum Comparator {
-        Auto,
-        Equal,
-        Contains,
-        Greater,
-        GreaterEqual,
-        Less,
-        LessEqual
-    };
+    enum Comparator { Auto, Equal, Contains, Greater, GreaterEqual, Less, LessEqual };
 
-    enum Operation {
-        None,
-        And,
-        Or
-    };
+    enum Operation { None, And, Or };
 
     Term();
     Term(const Term &t);
@@ -109,7 +99,7 @@ public:
     QVariantMap toVariantMap() const;
     static Term fromVariantMap(const QVariantMap &map);
 
-    bool operator ==(const Term &rhs) const;
+    bool operator==(const Term &rhs) const;
 
     Term &operator=(const Term &rhs);
 
@@ -118,7 +108,7 @@ private:
     Private *const d;
 };
 
-inline Term operator &&(const Term &lhs, const Term &rhs)
+inline Term operator&&(const Term &lhs, const Term &rhs)
 {
     Term t(Term::And);
     t.addSubTerm(lhs);
@@ -126,7 +116,7 @@ inline Term operator &&(const Term &lhs, const Term &rhs)
     return t;
 }
 
-inline Term operator ||(const Term &lhs, const Term &rhs)
+inline Term operator||(const Term &lhs, const Term &rhs)
 {
     Term t(Term::Or);
     t.addSubTerm(lhs);
@@ -134,7 +124,7 @@ inline Term operator ||(const Term &lhs, const Term &rhs)
     return t;
 }
 
-inline Term operator !(const Term &rhs)
+inline Term operator!(const Term &rhs)
 {
     Term t(rhs);
     t.setNegation(!rhs.isNegated());
@@ -143,6 +133,6 @@ inline Term operator !(const Term &rhs)
 }
 }
 
-AKONADI_SEARCH_CORE_EXPORT QDebug operator <<(QDebug d, const Akonadi::Search::Term &t);
+AKONADI_SEARCH_CORE_EXPORT QDebug operator<<(QDebug d, const Akonadi::Search::Term &t);
 
 #endif // AKONADI_SEARCH_CORE_TERM_H

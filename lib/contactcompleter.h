@@ -9,12 +9,15 @@
 #ifndef AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H
 #define AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H
 
-#include <QString>
 #include "search_pim_export.h"
+#include <QString>
 
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 // FIXME: Make this async!!
 /** Contact completer. */
 class AKONADI_SEARCH_PIM_EXPORT ContactCompleter

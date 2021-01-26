@@ -8,11 +8,11 @@
 
 #include "emailindexer.h"
 #include "akonadi_indexer_agent_debug.h"
-#include <Collection>
 #include <Akonadi/KMime/MessageFlags>
+#include <Collection>
 
-#include <QTextDocument>
 #include <KEmailAddress>
+#include <QTextDocument>
 
 EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
     : AbstractIndexer()
@@ -83,8 +83,7 @@ void EmailIndexer::index(const Akonadi::Item &item)
     m_doc->add_value(1, QString::number(item.size()).toStdString());
 
     // Parent collection
-    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index",
-               "Item does not have a valid parent collection");
+    Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::EmailIndexer::index", "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
     const QByteArray term = 'C' + QByteArray::number(colId);
@@ -121,7 +120,8 @@ void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Generics::Addre
     }
 }
 
-namespace {
+namespace
+{
 // Does some extra stuff such as lower casing the email, removing all quotes
 // and removing extra spaces
 // TODO: Move this into KMime?
@@ -212,7 +212,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
     // Process Plain Text Content
     //
 
-    //Index all headers
+    // Index all headers
     m_termGen->index_text_without_positions(std::string(msg->head().constData()), 1, "HE");
 
     KMime::Content *mainBody = msg->mainBodyPart("text/plain");
@@ -341,7 +341,7 @@ void EmailIndexer::remove(const Akonadi::Item &item)
     }
     try {
         m_db->delete_document(item.id());
-        //TODO remove contacts from contact db?
+        // TODO remove contacts from contact db?
     } catch (const Xapian::DocNotFoundError &) {
         return;
     }

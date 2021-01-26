@@ -6,16 +6,16 @@
  *
  */
 
-#include <QTest>
 #include <AkonadiCore/Collection>
 #include <KContacts/Addressee>
 #include <QDir>
+#include <QTest>
 
-#include <query.h>
-#include <index.h>
 #include <../lib/collectionquery.h>
 #include <../lib/resultiterator.h>
 #include <QDebug>
+#include <index.h>
+#include <query.h>
 
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)
@@ -32,7 +32,7 @@ private:
         QDir dir(dirName);
 
         if (dir.exists(dirName)) {
-            const QFileInfoList infoDirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden  | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
+            const QFileInfoList infoDirs = dir.entryInfoList(QDir::NoDotAndDotDot | QDir::System | QDir::Hidden | QDir::AllDirs | QDir::Files, QDir::DirsFirst);
             for (const QFileInfo &info : infoDirs) {
                 if (info.isDir()) {
                     result = removeDir(info.absoluteFilePath());
@@ -82,7 +82,7 @@ private Q_SLOTS:
         Akonadi::Search::PIM::ResultIterator it = query.exec();
         QList<qint64> results;
         while (it.next()) {
-            //qDebug() << "result " << it.id();
+            // qDebug() << "result " << it.id();
             results << it.id();
         }
         QCOMPARE(results.size(), 1);
@@ -107,7 +107,7 @@ private Q_SLOTS:
             Akonadi::Search::PIM::ResultIterator it = query.exec();
             QList<qint64> results;
             while (it.next()) {
-                //qDebug() << "result " << it.id();
+                // qDebug() << "result " << it.id();
                 results << it.id();
             }
             std::sort(results.begin(), results.end());
@@ -122,7 +122,7 @@ private Q_SLOTS:
             Akonadi::Search::PIM::ResultIterator it = query.exec();
             QList<qint64> results;
             while (it.next()) {
-                //qDebug() << "result " << it.id();
+                // qDebug() << "result " << it.id();
                 results << it.id();
             }
             std::sort(results.begin(), results.end());
@@ -135,7 +135,7 @@ private Q_SLOTS:
     {
         QList<qint64> results;
         while (it.next()) {
-            //qDebug() << "result " << it.id();
+            // qDebug() << "result " << it.id();
             results << it.id();
         }
         return results;
@@ -164,7 +164,7 @@ private Q_SLOTS:
         col3.setParentCollection(col2);
         index.change(col3);
 
-        //Old name gone
+        // Old name gone
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
@@ -172,7 +172,7 @@ private Q_SLOTS:
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 0);
         }
-        //New name
+        // New name
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
@@ -181,7 +181,7 @@ private Q_SLOTS:
             QCOMPARE(results.size(), 1);
             QCOMPARE(results.at(0), col1.id());
         }
-        //Old path gone
+        // Old path gone
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));
@@ -189,7 +189,7 @@ private Q_SLOTS:
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 0);
         }
-        //New paths
+        // New paths
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + QLatin1String("/collections/"));

@@ -11,7 +11,8 @@
 #include <AkonadiCore/Item>
 #include <QStringList>
 
-namespace Akonadi {
+namespace Akonadi
+{
 class Collection;
 }
 

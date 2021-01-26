@@ -6,12 +6,12 @@
  *
  */
 
-#include "contactquery.h"
 #include "../resultiterator.h"
+#include "contactquery.h"
 
 #include <QApplication>
-#include <QTimer>
 #include <QDebug>
+#include <QTimer>
 
 #include <Akonadi/Contact/ContactSearchJob>
 
@@ -26,6 +26,7 @@ public:
 private Q_SLOTS:
     void main();
     void slotItemsReceived(const Akonadi::Item::List &list);
+
 private:
 };
 

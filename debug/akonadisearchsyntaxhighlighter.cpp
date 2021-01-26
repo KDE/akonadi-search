@@ -38,42 +38,42 @@ void AkonadiSearchSyntaxHighlighter::init()
     testFormat.setForeground(Qt::black);
     testFormat.setFontWeight(QFont::Bold);
     QStringList testType;
-    //Collection
+    // Collection
     testType << QStringLiteral("C\\d+");
 
-    //Emails:
-    //From
+    // Emails:
+    // From
     testType << QStringLiteral("\\bF");
-    //To
+    // To
     testType << QStringLiteral("\\bT");
-    //CC
+    // CC
     testType << QStringLiteral("\\bCC");
-    //BC
+    // BC
     testType << QStringLiteral("\\bBC");
-    //Organization
+    // Organization
     testType << QStringLiteral("\\bO");
-    //Reply To
+    // Reply To
     testType << QStringLiteral("\\bRT");
-    //Resent-from
+    // Resent-from
     testType << QStringLiteral("\\bRF");
-    //List Id
+    // List Id
     testType << QStringLiteral("\\bLI");
-    //X-Loop
+    // X-Loop
     testType << QStringLiteral("\\bXL");
-    //X-Mailing-List
+    // X-Mailing-List
     testType << QStringLiteral("\\bXML");
-    //X-Spam-Flag
+    // X-Spam-Flag
     testType << QStringLiteral("\\bXSF");
-    //BO body element
+    // BO body element
     testType << QStringLiteral("\\bBO");
 
-    //Contacts:
-    //Name
+    // Contacts:
+    // Name
     testType << QStringLiteral("\\bNA");
-    //NickName
+    // NickName
     testType << QStringLiteral("\\bNI");
 
-    //Calendar
+    // Calendar
     testType << QStringLiteral("\\bO");
     testType << QStringLiteral("\\bPS");
     testType << QStringLiteral("\\bS");

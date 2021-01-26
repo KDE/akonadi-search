@@ -9,15 +9,18 @@
 #ifndef AKONADI_SEARCH_PIM_EMAIL_QUERY_H
 #define AKONADI_SEARCH_PIM_EMAIL_QUERY_H
 
-#include "search_pim_export.h"
 #include "query.h"
+#include "search_pim_export.h"
 
-#include <QStringList>
 #include <Collection>
+#include <QStringList>
 
-namespace Akonadi {
-namespace Search {
-namespace PIM {
+namespace Akonadi
+{
+namespace Search
+{
+namespace PIM
+{
 /** Email query. */
 class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
@@ -25,10 +28,7 @@ public:
     EmailQuery();
     ~EmailQuery() override;
 
-    enum OpType {
-        OpAnd = 0,
-        OpOr
-    };
+    enum OpType { OpAnd = 0, OpOr };
 
     void setSplitSearchMatchString(bool split);
 

@@ -8,11 +8,11 @@
 
 #include <xapian.h>
 
+#include "akonadi_search_pim_debug.h"
 #include "collectionquery.h"
 #include "resultiterator_p.h"
-#include "akonadi_search_pim_debug.h"
-#include <QList>
 #include <QFile>
+#include <QList>
 
 #include <QStandardPaths>
 
@@ -82,21 +82,19 @@ ResultIterator CollectionQuery::exec()
     try {
         db = Xapian::Database(QFile::encodeName(d->databaseDir).toStdString());
     } catch (const Xapian::DatabaseError &e) {
-        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Failed to open Xapian database:" << d->databaseDir
-                   << "; error:" << QString::fromStdString(e.get_error_string());
+        qCWarning(AKONADI_SEARCH_PIM_LOG) << "Failed to open Xapian database:" << d->databaseDir << "; error:" << QString::fromStdString(e.get_error_string());
         return ResultIterator();
     }
 
     QList<Xapian::Query> queries;
 
     if (!d->nameString.isEmpty()) {
-        //qDebug() << "searching by name";
+        // qDebug() << "searching by name";
         Xapian::QueryParser parser;
         parser.set_database(db);
         parser.add_prefix("", "N");
         parser.set_default_op(Xapian::Query::OP_AND);
-        queries << parser.parse_query(d->nameString.toStdString(),
-                                      Xapian::QueryParser::FLAG_PARTIAL);
+        queries << parser.parse_query(d->nameString.toStdString(), Xapian::QueryParser::FLAG_PARTIAL);
     }
 
     if (!d->identifierString.isEmpty()) {
@@ -104,8 +102,7 @@ ResultIterator CollectionQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "I");
         parser.set_default_op(Xapian::Query::OP_AND);
-        queries << parser.parse_query(d->identifierString.toStdString(),
-                                      Xapian::QueryParser::FLAG_PARTIAL);
+        queries << parser.parse_query(d->identifierString.toStdString(), Xapian::QueryParser::FLAG_PARTIAL);
     }
 
     if (!d->pathString.isEmpty()) {
@@ -113,8 +110,7 @@ ResultIterator CollectionQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "P");
         parser.set_default_op(Xapian::Query::OP_AND);
-        queries << parser.parse_query(d->pathString.toStdString(),
-                                      Xapian::QueryParser::FLAG_PARTIAL | Xapian::QueryParser::FLAG_PHRASE);
+        queries << parser.parse_query(d->pathString.toStdString(), Xapian::QueryParser::FLAG_PARTIAL | Xapian::QueryParser::FLAG_PHRASE);
     }
 
     if (!d->ns.isEmpty()) {

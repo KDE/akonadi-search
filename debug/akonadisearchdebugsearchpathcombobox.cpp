@@ -5,9 +5,9 @@
 */
 
 #include "akonadisearchdebugsearchpathcombobox.h"
-#include <QStandardPaths>
-#include <QDir>
 #include <AkonadiCore/ServerManager>
+#include <QDir>
+#include <QStandardPaths>
 
 using namespace Akonadi::Search;
 AkonadiSearchDebugSearchPathComboBox::AkonadiSearchDebugSearchPathComboBox(QWidget *parent)

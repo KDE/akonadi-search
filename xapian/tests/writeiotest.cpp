@@ -6,14 +6,14 @@
  *
  */
 
+#include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QCoreApplication>
 #include <QDebug>
+#include <QDir>
+#include <QFileInfo>
 #include <QTemporaryDir>
 #include <QUuid>
-#include <QFileInfo>
-#include <QDir>
-#include <QCoreApplication>
-#include <QCommandLineParser>
-#include <QCommandLineOption>
 
 #include "xapiandatabase.h"
 #include "xapiandocument.h"

@@ -8,14 +8,14 @@
 
 #include <xapian.h>
 
+#include "akonadi_search_pim_debug.h"
 #include "notequery.h"
 #include "resultiterator_p.h"
-#include "akonadi_search_pim_debug.h"
 
+#include <QDebug>
+#include <QFile>
 #include <QList>
 #include <QStandardPaths>
-#include <QFile>
-#include <QDebug>
 
 using namespace Akonadi::Search::PIM;
 
@@ -105,7 +105,7 @@ ResultIterator NoteQuery::exec()
     }
     try {
         Xapian::Query query(Xapian::Query::OP_OR, m_queries.begin(), m_queries.end());
-        //qDebug() << query.get_description().c_str();
+        // qDebug() << query.get_description().c_str();
 
         Xapian::Enquire enquire(db);
         enquire.set_query(query);

@@ -8,14 +8,14 @@
 
 #include <xapian.h>
 
-#include "emailquery.h"
-#include "resultiterator_p.h"
 #include "../search/email/agepostingsource.h"
 #include "akonadi_search_pim_debug.h"
+#include "emailquery.h"
+#include "resultiterator_p.h"
 
-#include <QStandardPaths>
-#include <QRegularExpression>
 #include <QFile>
+#include <QRegularExpression>
+#include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
 
@@ -257,8 +257,7 @@ ResultIterator EmailQuery::exec()
         parser.add_prefix("", "SU");
         parser.set_default_op(Xapian::Query::OP_AND);
         const QByteArray ba = d->subjectMatchString.toUtf8();
-        m_queries << parser.parse_query(ba.constData(),
-                                        Xapian::QueryParser::FLAG_PARTIAL);
+        m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
     }
 
     if (!d->collections.isEmpty()) {
@@ -308,13 +307,11 @@ ResultIterator EmailQuery::exec()
             const QStringList list = d->matchString.split(QRegularExpression(QStringLiteral("\\s")), Qt::SkipEmptyParts);
             for (const QString &s : list) {
                 const QByteArray ba = s.toUtf8();
-                m_queries << parser.parse_query(ba.constData(),
-                                                Xapian::QueryParser::FLAG_PARTIAL);
+                m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
             }
         } else {
             const QByteArray ba = d->matchString.toUtf8();
-            m_queries << parser.parse_query(ba.constData(),
-                                            Xapian::QueryParser::FLAG_PARTIAL);
+            m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
     }
     Xapian::Query query;
@@ -335,7 +332,7 @@ ResultIterator EmailQuery::exec()
         enquire.set_query(query);
 
         if (d->limit == 0) {
-            //d->limit = 1000000;
+            // d->limit = 1000000;
             d->limit = 100000;
         }
 

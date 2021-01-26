@@ -7,8 +7,8 @@
 
 #include "xapiantermgenerator.h"
 
-#include <QTextBoundaryFinder>
 #include "akonadi_search_xapian_debug.h"
+#include <QTextBoundaryFinder>
 
 using namespace Akonadi::Search;
 
@@ -72,8 +72,8 @@ QStringList XapianTermGenerator::termList(const QString &text)
 void XapianTermGenerator::indexText(const QString &text, const QString &prefix, int wdfInc)
 {
     const QByteArray par = prefix.toUtf8();
-    //const QByteArray ta = text.toUtf8();
-    //m_termGen.index_text(ta.constData(), wdfInc, par.constData());
+    // const QByteArray ta = text.toUtf8();
+    // m_termGen.index_text(ta.constData(), wdfInc, par.constData());
 
     const QStringList terms = termList(text);
     for (const QString &term : terms) {
