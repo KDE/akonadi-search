@@ -17,7 +17,7 @@ set(indexer_SRCS
 )
 
 set(indexer_LIBS
-    Qt5::Test
+    Qt::Test
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime
@@ -68,8 +68,8 @@ target_link_libraries(collectionquerytest
     ${QJSON_LIBRARIES}
     KF5::AkonadiSearchPIM
     KF5::ConfigCore
-    Qt5::Widgets
-    Qt5::DBus
+    Qt::Widgets
+    Qt::DBus
 )
 endif()
 endif()
