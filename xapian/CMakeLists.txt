@@ -23,7 +23,7 @@ endif()
 add_library(KF5::AkonadiSearchXapian ALIAS KF5AkonadiSearchXapian)
 
 target_link_libraries(KF5AkonadiSearchXapian PUBLIC
-    Qt::Core
+    Qt5::Core
     KF5::AkonadiSearchCore
     ${XAPIAN_LIBRARIES}
 )

@@ -31,7 +31,7 @@ set(pimcontactsrunnerconfig_SRCS
 
 add_library(kcm_krunner_pimcontacts MODULE ${pimcontactsrunnerconfig_SRCS})
 target_link_libraries(kcm_krunner_pimcontacts
-    Qt::Gui
+    Qt5::Gui
     KF5::KCMUtils
     KF5::I18n
 )
