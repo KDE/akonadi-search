@@ -141,7 +141,7 @@ void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::Li
         return;
     }
     for (const KMime::Types::Mailbox &mbox : list) {
-        const std::string name(mbox.name().toStdString());
+        const auto name(mbox.name().toStdString());
         m_termGen->index_text_without_positions(name, 1, key.data());
         m_termGen->index_text_without_positions(name, 1);
         m_termGen->index_text_without_positions(mbox.address().data(), 1, key.data());
@@ -153,14 +153,15 @@ void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::Li
         //
         // Add emails for email auto-completion
         //
-        const QString pa = prettyAddress(mbox);
-        int id = qHash(pa);
+        const auto pa = prettyAddress(mbox);
+        const auto id = qHash(pa);
         try {
-            Xapian::Document doc = m_contactDb->get_document(id);
+            const auto doc = m_contactDb->get_document(id);
+            Q_UNUSED(doc);
             continue;
         } catch (const Xapian::DocNotFoundError &) {
             Xapian::Document doc;
-            const std::string pretty(pa.toStdString());
+            const auto pretty(pa.toStdString());
             doc.set_data(pretty);
 
             Xapian::TermGenerator termGen;
