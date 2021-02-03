@@ -54,7 +54,6 @@ private:
         qDebug() << "result:" << result << "(in" << t.elapsed() << "ms)";
         QEXPECT_FAIL("contact by name (oe)", "Does not work for the moment", Continue);
         QEXPECT_FAIL("search extras in subject", "Does not work for the moment", Continue);
-        QEXPECT_FAIL("contact by email (jack_sparrow@test.com)", "We split terms by underscore manually (testcase for #370385).", Continue);
         QCOMPARE(result, expectedResult);
     }
 
