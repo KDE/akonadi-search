@@ -95,7 +95,7 @@ private Q_SLOTS:
         Akonadi::Search::Query query(term);
         query.setType(QStringLiteral("Email"));
 
-        auto *emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
+        auto emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
         emailSearchStore->setDbPath(emailDir);
         int res = emailSearchStore->exec(query);
         qDebug() << res;

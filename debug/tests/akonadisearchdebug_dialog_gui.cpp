@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     parser.addHelpOption();
     parser.process(app);
 
-    auto *dlg = new Akonadi::Search::AkonadiSearchDebugDialog();
+    auto dlg = new Akonadi::Search::AkonadiSearchDebugDialog();
     dlg->resize(800, 600);
     dlg->show();
     app.exec();

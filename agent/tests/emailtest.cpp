@@ -76,7 +76,7 @@ void App::main()
 
 void App::slotRootCollectionsFetched(KJob *kjob)
 {
-    auto *job = qobject_cast<Akonadi::CollectionFetchJob *>(kjob);
+    auto job = qobject_cast<Akonadi::CollectionFetchJob *>(kjob);
     m_collections = job->collections();
 
     QMutableVectorIterator<Akonadi::Collection> it(m_collections);

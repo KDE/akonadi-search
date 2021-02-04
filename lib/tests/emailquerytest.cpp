@@ -71,7 +71,7 @@ void App::main()
         return;
     }
 
-    auto *job = new Akonadi::ItemFetchJob(m_akonadiIds);
+    auto job = new Akonadi::ItemFetchJob(m_akonadiIds);
     job->fetchScope().fetchFullPayload(true);
 
     connect(job, &Akonadi::ItemFetchJob::itemsReceived, this, &App::itemsReceived);

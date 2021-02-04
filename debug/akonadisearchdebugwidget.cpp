@@ -20,9 +20,9 @@ using namespace Akonadi::Search;
 AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     : QWidget(parent)
 {
-    auto *mainLayout = new QVBoxLayout(this);
+    auto mainLayout = new QVBoxLayout(this);
 
-    auto *hbox = new QHBoxLayout;
+    auto hbox = new QHBoxLayout;
     mainLayout->addLayout(hbox);
     QLabel *lab = new QLabel(QStringLiteral("Item identifier:"), this);
     hbox->addWidget(lab);
@@ -87,7 +87,7 @@ void AkonadiSearchDebugWidget::slotSearch()
     if (searchId.isEmpty()) {
         return;
     }
-    auto *job = new Akonadi::Search::AkonadiSearchDebugSearchJob(this);
+    auto job = new Akonadi::Search::AkonadiSearchDebugSearchJob(this);
     job->setAkonadiId(searchId);
     job->setSearchPath(mSearchPathComboBox->searchPath());
     connect(job, &Akonadi::Search::AkonadiSearchDebugSearchJob::result, this, &AkonadiSearchDebugWidget::slotResult);

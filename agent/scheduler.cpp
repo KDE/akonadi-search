@@ -25,7 +25,7 @@ JobFactory::~JobFactory()
 CollectionIndexingJob *
 JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent)
 {
-    auto *job = new CollectionIndexingJob(index, col, pending, parent);
+    auto job = new CollectionIndexingJob(index, col, pending, parent);
     job->setFullSync(fullSync);
     return job;
 }
@@ -158,7 +158,7 @@ void Scheduler::scheduleCompleteSync()
 
 void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 {
-    auto *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
+    auto cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
     const Akonadi::Collection::List lstCols = cjob->collections();
     for (const Akonadi::Collection &c : lstCols) {
         // For skipping search collections
@@ -183,7 +183,7 @@ void Scheduler::slotRootCollectionsFetched(KJob *kjob)
 
 void Scheduler::slotCollectionsToIndexFetched(KJob *kjob)
 {
-    auto *cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
+    auto cjob = static_cast<Akonadi::CollectionFetchJob *>(kjob);
     const Akonadi::Collection::List lstCols = cjob->collections();
     for (const Akonadi::Collection &c : lstCols) {
         // For skipping search collections

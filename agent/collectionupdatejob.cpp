@@ -26,7 +26,7 @@ void CollectionUpdateJob::start()
     }
 
     // Fetch children to update the path accordingly
-    auto *fetchJob = new Akonadi::CollectionFetchJob(mCol, Akonadi::CollectionFetchJob::Recursive, this);
+    auto fetchJob = new Akonadi::CollectionFetchJob(mCol, Akonadi::CollectionFetchJob::Recursive, this);
     fetchJob->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
     fetchJob->fetchScope().ancestorFetchScope().fetchAttribute<Akonadi::EntityDisplayAttribute>();
     fetchJob->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);

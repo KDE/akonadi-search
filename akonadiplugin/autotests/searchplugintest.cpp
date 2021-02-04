@@ -107,7 +107,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject2");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body2");
             msg->addContent(b, true);
@@ -131,7 +131,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject3");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body3");
             msg->addContent(b, true);
@@ -155,7 +155,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject4");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body4");
             msg->addContent(b, true);
@@ -166,7 +166,7 @@ private Q_SLOTS:
             msg->bcc()->addAddress("bcc@test.com", QStringLiteral("Jane Doe"));
             msg->date()->setDateTime(QDateTime(QDate(2014, 11, 11), QTime(13, 0, 0)));
             msg->replyTo()->from7BitString("test@kde.org");
-            auto *header = new KMime::Headers::Generic("Resent-From");
+            auto header = new KMime::Headers::Generic("Resent-From");
             header->fromUnicodeString(QStringLiteral("resent@kde.org"), "utf-8");
             msg->setHeader(header);
             header = new KMime::Headers::Generic("List-Id");
@@ -188,7 +188,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("all tags");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("tags");
             msg->addContent(b, true);
@@ -222,7 +222,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("Change in qt/qtx11extras[stable]: remove QtWidgets dependency");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body5");
             msg->addContent(b, true);
@@ -335,7 +335,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("note");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body note");
             msg->addContent(b, true);
@@ -354,7 +354,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("note2");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("note");
             msg->addContent(b, true);
@@ -373,7 +373,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("note3");
 
             // Multipart message
-            auto *b = new KMime::Content;
+            auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("note3");
             msg->addContent(b, true);
@@ -414,13 +414,13 @@ private Q_SLOTS:
         }
         calendarIndexer.commit();
 
-        auto *emailSearchStore = new Akonadi::Search::EmailSearchStore();
+        auto emailSearchStore = new Akonadi::Search::EmailSearchStore();
         emailSearchStore->setDbPath(emailDir);
-        auto *contactSearchStore = new Akonadi::Search::ContactSearchStore();
+        auto contactSearchStore = new Akonadi::Search::ContactSearchStore();
         contactSearchStore->setDbPath(contactsDir);
-        auto *noteSearchStore = new Akonadi::Search::NoteSearchStore();
+        auto noteSearchStore = new Akonadi::Search::NoteSearchStore();
         noteSearchStore->setDbPath(noteDir);
-        auto *calendarSearchStore = new Akonadi::Search::CalendarSearchStore();
+        auto calendarSearchStore = new Akonadi::Search::CalendarSearchStore();
         calendarSearchStore->setDbPath(calendarDir);
 
         Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore *>()

@@ -44,7 +44,7 @@ Query *Query::fromJSON(const QByteArray &json)
         return nullptr;
     }
 
-    auto *cq = new ContactQuery();
+    auto cq = new ContactQuery();
     cq->matchName(result[QStringLiteral("name")].toString());
     cq->matchNickname(result[QStringLiteral("nick")].toString());
     cq->matchEmail(result[QStringLiteral("email")].toString());
