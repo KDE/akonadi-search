@@ -533,7 +533,6 @@ private Q_SLOTS:
         resultSearch();
     }
 
-#if 1
     void testNoteSearch_data()
     {
         QTest::addColumn<QString>("query");
@@ -604,7 +603,6 @@ private Q_SLOTS:
         QTest::addColumn<QSet<qint64>>("expectedResult");
         const QStringList contactMimeTypes({KContacts::Addressee::mimeType()});
         const QStringList contactGroupMimeTypes({KContacts::ContactGroup::mimeType()});
-#if 1
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Name, QStringLiteral("John"), Akonadi::SearchTerm::CondContains));
@@ -724,7 +722,6 @@ private Q_SLOTS:
 #endif
     }
 
-#endif
     void testEmailSearch_data()
     {
         QTest::addColumn<QString>("query");
@@ -733,7 +730,6 @@ private Q_SLOTS:
         QTest::addColumn<QSet<qint64>>("expectedResult");
         const QStringList emailMimeTypes = QStringList() << QStringLiteral("message/rfc822");
         const QVector<qint64> allEmailCollections({1, 2});
-#if 1
         {
             Akonadi::SearchQuery query;
             QVector<qint64> collections({1});
@@ -1091,7 +1087,6 @@ private Q_SLOTS:
             QSet<qint64> result({6});
             QTest::newRow("search qtx11extras in subject") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
-#endif
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::HeaderFrom, QStringLiteral("test.com"), Akonadi::SearchTerm::CondContains));
