@@ -52,6 +52,8 @@ private:
         SearchPlugin plugin;
         const QSet<qint64> result = plugin.search(query, collections, mimeTypes);
         qDebug() << "result:" << result << "(in" << t.elapsed() << "ms)";
+        QEXPECT_FAIL("contact by name (oe)", "Does not work for the moment", Continue);
+        QEXPECT_FAIL("search extras in subject", "Does not work for the moment", Continue);
         QCOMPARE(result, expectedResult);
     }
 
@@ -710,7 +712,6 @@ private Q_SLOTS:
                 << QString::fromLatin1(query.toJSON()) << collections << contactGroupMimeTypes << result;
         }
 
-#if 0 // Doesn't work for the moment
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Name, QStringLiteral("oe"), Akonadi::SearchTerm::CondContains));
@@ -719,7 +720,6 @@ private Q_SLOTS:
             QSet<qint64> result({100, 101, 102});
             QTest::newRow("contact by name (oe)") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
         }
-#endif
     }
 
     void testEmailSearch_data()
@@ -1064,7 +1064,6 @@ private Q_SLOTS:
             QSet<qint64> result({4});
             QTest::newRow("find by header cc (contains) with case") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
-#if 0 // Can not work for the moment
         {
             Akonadi::SearchQuery query;
             //Change in qt/qtx11extras[stable]: remove QtWidgets dependency
@@ -1072,7 +1071,6 @@ private Q_SLOTS:
             QSet<qint64> result({6});
             QTest::newRow("search extras in subject") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
-#endif
         {
             Akonadi::SearchQuery query;
             // Change in qt/qtx11extras[stable]: remove QtWidgets dependency
