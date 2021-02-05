@@ -54,6 +54,7 @@ private:
         qDebug() << "result:" << result << "(in" << t.elapsed() << "ms)";
         QEXPECT_FAIL("contact by name (oe)", "Does not work for the moment", Continue);
         QEXPECT_FAIL("search extras in subject", "Does not work for the moment", Continue);
+        QEXPECT_FAIL("contact by email (jack_sparrow@test.com)", "We split terms by underscore manually (testcase for #370385).", Continue);
         QCOMPARE(result, expectedResult);
     }
 
@@ -162,7 +163,7 @@ private Q_SLOTS:
             b->setBody("body4");
             msg->addContent(b, true);
 
-            msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
+            msg->from()->addAddress("john_blue@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
             msg->cc()->addAddress("cc@test.com", QStringLiteral("Jane Doe"));
             msg->bcc()->addAddress("bcc@test.com", QStringLiteral("Jane Doe"));
@@ -267,7 +268,7 @@ private Q_SLOTS:
             KContacts::Addressee addressee;
             addressee.setUid(QStringLiteral("uid2"));
             addressee.setName(QStringLiteral("Jane Doe"));
-            addressee.setEmails({QStringLiteral("jane@test.com")});
+            addressee.setEmails({QStringLiteral("jane@test.com"), QStringLiteral("jack_sparrow@test.com")});
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
             addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
 #else
@@ -311,6 +312,7 @@ private Q_SLOTS:
             item.setParentCollection(Akonadi::Collection(3));
             contactIndexer.index(item);
         }
+
         {
             KContacts::ContactGroup group;
             group.setName(QStringLiteral("group1"));
@@ -659,7 +661,35 @@ private Q_SLOTS:
 
             QVector<qint64> collections({3});
             QSet<qint64> result({101, 102});
-            QTest::newRow("contact by email") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
+            QTest::newRow("contact by email (JANE@TEST.COM)") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Email, QStringLiteral("jack_sparrow@test.com"), Akonadi::SearchTerm::CondContains));
+            QVector<qint64> collections = {3};
+            QSet<qint64> result = {101};
+            QTest::newRow("contact by email (jack_sparrow@test.com)") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Email, QStringLiteral("jack_sparrow"), Akonadi::SearchTerm::CondContains));
+            QVector<qint64> collections = {3};
+            QSet<qint64> result = {101};
+            QTest::newRow("contact by email (jack_sparrow)") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Email, QStringLiteral("jack"), Akonadi::SearchTerm::CondContains));
+            QVector<qint64> collections = {3};
+            QSet<qint64> result = {101};
+            QTest::newRow("contact by email (jack)") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
+        }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::ContactSearchTerm(Akonadi::ContactSearchTerm::Email, QStringLiteral("sparrow"), Akonadi::SearchTerm::CondContains));
+            QVector<qint64> collections = {3};
+            QSet<qint64> result = {101};
+            QTest::newRow("contact by email (sparrow)") << QString::fromLatin1(query.toJSON()) << collections << contactMimeTypes << result;
         }
         {
             Akonadi::SearchQuery query;
@@ -1091,6 +1121,13 @@ private Q_SLOTS:
             QSet<qint64> result({1, 2, 3, 4, 5, 6});
             QTest::newRow("search by from email part") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
         }
+        {
+            Akonadi::SearchQuery query;
+            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::HeaderFrom, QStringLiteral("john_blue@test.com"), Akonadi::SearchTerm::CondContains));
+            QSet<qint64> result = QSet<qint64>() << 4;
+            QTest::newRow("search by from email part") << QString::fromLatin1(query.toJSON()) << allEmailCollections << emailMimeTypes << result;
+        }
+
     }
 
     void testEmailSearch()
