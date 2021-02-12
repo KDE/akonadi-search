@@ -54,10 +54,13 @@ void TermGeneratorTest::testUnderscore_splitting()
     XapianTermGenerator termGen(&doc);
     termGen.indexText(str);
 
-    QStringList words = allWords(doc);
+    const auto aW = allWords(doc);
+    const auto words = QSet<QString>(aW.constBegin(), aW.constEnd());
 
-    QStringList expectedWords;
-    expectedWords << QStringLiteral("hello") << QStringLiteral("howdy");
+    QSet<QString> expectedWords;
+    expectedWords << QStringLiteral("hello")
+                  << QStringLiteral("howdy")
+                  << QStringLiteral("hello_howdy");
 
     QCOMPARE(words, expectedWords);
 }
@@ -70,10 +73,15 @@ void TermGeneratorTest::testAccetCharacters()
     XapianTermGenerator termGen(&doc);
     termGen.indexText(str);
 
-    QStringList words = allWords(doc);
+    const auto aW = allWords(doc);
+    const auto words = QSet<QString>(aW.constBegin(), aW.constEnd());
 
-    QStringList expectedWords;
-    expectedWords << QStringLiteral("como") << QStringLiteral("esta") << QStringLiteral("kug");
+    QSet<QString> expectedWords;
+    expectedWords << QStringLiteral("como")
+                  << QStringLiteral("esta")
+                  << QStringLiteral("kug")
+                  << QString::fromLatin1("está")
+                  << QString::fromLatin1("kûg");
 
     QCOMPARE(words, expectedWords);
 }
@@ -89,7 +97,8 @@ void TermGeneratorTest::testUnicodeCompatibleComposition()
     termGen.indexText(str2);
 
     QStringList words = allWords(doc);
-    QCOMPARE(words.size(), 1);
+    QStringList expectedWords({str, str2});
+    QCOMPARE(words, expectedWords);
 
     QString output = words.first();
     QCOMPARE(str, output);
