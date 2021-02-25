@@ -142,6 +142,7 @@ ecm_qt_install_logging_categories(
         )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
+ki18n_install(po)
 feature_summary(WHAT ALL
     INCLUDE_QUIET_PACKAGES
     FATAL_ON_MISSING_REQUIRED_PACKAGES
