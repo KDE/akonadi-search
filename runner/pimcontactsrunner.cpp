@@ -35,7 +35,6 @@ PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &met
     : Plasma::AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("PIMContactsRunner"));
-    setSpeed(Plasma::AbstractRunner::SlowSpeed);
     // reloadConfiguration() called by default init() implementation
 }
 
