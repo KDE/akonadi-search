@@ -126,7 +126,7 @@ void QueryParserTest::testAccentSearch()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QString::fromLatin1("sóng"));
+    Xapian::Query query = parser.parseQuery(QString::fromUtf8("sÃ³ng"));
     Xapian::Query q("song", 1, 1);
 
     QCOMPARE(query.serialise(), q.serialise());
