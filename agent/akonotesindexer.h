@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONOTESINDEXER_H
-#define AKONOTESINDEXER_H
+#pragma once
 
 #include <xapian.h>
 
@@ -44,4 +43,3 @@ private:
     Xapian::TermGenerator *m_termGen = nullptr;
 };
 
-#endif // AKONOTESINDEXER_H

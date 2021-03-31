@@ -4,8 +4,7 @@
   SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef AKONADISEARCHSYNTAXHIGHLIGHTER_H
-#define AKONADISEARCHSYNTAXHIGHLIGHTER_H
+#pragma once
 
 #include <QSyntaxHighlighter>
 
@@ -45,4 +44,3 @@ protected:
 };
 }
 }
-#endif // AKONADISEARCHSYNTAXHIGHLIGHTER_H

@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_RESULT_ITERATOR_H
-#define AKONADI_SEARCH_PIM_RESULT_ITERATOR_H
+#pragma once
 
 #include "search_pim_export.h"
 
@@ -47,4 +46,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_RESULT_ITERATOR_H

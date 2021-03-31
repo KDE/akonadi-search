@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_XAPIAN_TERMGENERATOR_H
-#define AKONADI_SEARCH_XAPIAN_TERMGENERATOR_H
+#pragma once
 
 #include <xapian.h>
 
@@ -42,4 +41,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_XAPIAN_TERMGENERATOR_H

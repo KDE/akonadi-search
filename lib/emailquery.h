@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_EMAIL_QUERY_H
-#define AKONADI_SEARCH_PIM_EMAIL_QUERY_H
+#pragma once
 
 #include "query.h"
 #include "search_pim_export.h"
@@ -103,4 +102,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_EMAIL_QUERY_H

@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef CONTACTINDEXER_H
-#define CONTACTINDEXER_H
+#pragma once
 
 #include "abstractindexer.h"
 #include "xapiandatabase.h"
@@ -34,4 +33,3 @@ private:
     Akonadi::Search::XapianDatabase *m_db = nullptr;
 };
 
-#endif // CONTACTINDEXER_H

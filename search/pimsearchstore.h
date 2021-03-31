@@ -7,8 +7,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_SEARCHSTORE_H
-#define AKONADI_SEARCH_PIM_SEARCHSTORE_H
+#pragma once
 
 #include "xapiansearchstore.h"
 
@@ -60,4 +59,3 @@ protected:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_SEARCHSTORE_H

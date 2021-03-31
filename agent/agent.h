@@ -7,8 +7,7 @@
  *
  */
 
-#ifndef AGENT_H
-#define AGENT_H
+#pragma once
 
 #include <agentbase.h>
 #include <collection.h>
@@ -62,4 +61,3 @@ private:
     Scheduler m_scheduler;
 };
 
-#endif // AGENT_H

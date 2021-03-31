@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef PIMCONTACTSRUNNER_H
-#define PIMCONTACTSRUNNER_H
+#pragma once
 
 #include <KRunner/AbstractRunner>
 
@@ -31,4 +30,3 @@ private:
     bool mQueryAutocompleter = true;
 };
 
-#endif // PIMCONTACTSRUNNER_H

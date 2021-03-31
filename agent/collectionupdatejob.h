@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  *
  */
-#ifndef COLLECTIONUPDATEJOB_H
-#define COLLECTIONUPDATEJOB_H
+#pragma once
 
 #include "index.h"
 #include <AkonadiCore/Collection>
@@ -34,4 +33,3 @@ private:
     Index &mIndex;
 };
 
-#endif

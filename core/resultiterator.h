@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_CORE_RESULT_ITERATOR_H
-#define AKONADI_SEARCH_CORE_RESULT_ITERATOR_H
+#pragma once
 
 #include "search_core_export.h"
 #include "searchstore.h"
@@ -68,4 +67,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_CORE_RESULT_ITERATOR_H

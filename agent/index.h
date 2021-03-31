@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef INDEX_H
-#define INDEX_H
+#pragma once
 
 #include "abstractindexer.h"
 #include "collectionindexer.h"
@@ -71,4 +70,3 @@ private:
     CollectionIndexer *m_collectionIndexer = nullptr;
 };
 
-#endif

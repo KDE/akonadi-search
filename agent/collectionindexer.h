@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef COLLECTIONINDEXER_H
-#define COLLECTIONINDEXER_H
+#pragma once
 
 #include <AkonadiCore/collection.h>
 #include <QString>
@@ -33,4 +32,3 @@ private:
     Xapian::WritableDatabase *m_db;
 };
 
-#endif

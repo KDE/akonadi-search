@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_CONTACTQUERY_H
-#define AKONADI_SEARCH_PIM_CONTACTQUERY_H
+#pragma once
 
 #include "query.h"
 #include "search_pim_export.h"
@@ -53,4 +52,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_CONTACTQUERY_H

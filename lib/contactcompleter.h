@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H
-#define AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H
+#pragma once
 
 #include "search_pim_export.h"
 #include <QString>
@@ -34,4 +33,3 @@ private:
 }
 }
 }
-#endif // AKONADI_SEARCH_PIM_CONTACTCOMPLETER_H

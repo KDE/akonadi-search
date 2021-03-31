@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_AGEPOSTINGSOURCE_H
-#define AKONADI_SEARCH_PIM_AGEPOSTINGSOURCE_H
+#pragma once
 
 #include <xapian.h>
 
@@ -36,4 +35,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_AGEPOSTINGSOURCE_H

@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_XAPIANDOCUMENT_H
-#define AKONADI_SEARCH_XAPIANDOCUMENT_H
+#pragma once
 
 #include <QString>
 #include <xapian.h>
@@ -55,4 +54,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_XAPIANDOCUMENT_H

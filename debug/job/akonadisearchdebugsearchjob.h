@@ -4,8 +4,7 @@
   SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef AKONADISEARCHDEBUGSEARCHJOB_H
-#define AKONADISEARCHDEBUGSEARCHJOB_H
+#pragma once
 
 #include <QObject>
 #include <QStringList>
@@ -43,4 +42,3 @@ private:
 };
 }
 }
-#endif // AKONADISEARCHDEBUGSEARCHJOB_H

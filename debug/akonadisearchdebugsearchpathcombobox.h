@@ -4,8 +4,7 @@
   SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef AKONADISEARCHDEBUGSEARCHPATHCOMBOBOX_H
-#define AKONADISEARCHDEBUGSEARCHPATHCOMBOBOX_H
+#pragma once
 
 #include "search_debug_export.h"
 #include <QComboBox>
@@ -36,4 +35,3 @@ private:
 };
 }
 }
-#endif // AKONADISEARCHDEBUGSEARCHPATHCOMBOBOX_H

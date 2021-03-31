@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_COLLECTION_QUERY_H
-#define AKONADI_SEARCH_PIM_COLLECTION_QUERY_H
+#pragma once
 
 #include "query.h"
 #include "resultiterator.h"
@@ -64,4 +63,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_COLLECTION_QUERY_H

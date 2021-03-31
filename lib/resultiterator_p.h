@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_RESULTITERATOR_P_H
-#define AKONADI_SEARCH_PIM_RESULTITERATOR_P_H
+#pragma once
 
 #include <xapian.h>
 
@@ -40,4 +39,3 @@ public:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_RESULTITERATOR_P_H

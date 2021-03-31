@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_CORE_TERM_H
-#define AKONADI_SEARCH_CORE_TERM_H
+#pragma once
 
 #include "search_core_export.h"
 
@@ -135,4 +134,3 @@ inline Term operator!(const Term &rhs)
 
 AKONADI_SEARCH_CORE_EXPORT QDebug operator<<(QDebug d, const Akonadi::Search::Term &t);
 
-#endif // AKONADI_SEARCH_CORE_TERM_H

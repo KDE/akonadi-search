@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_CORE_QUERY_H
-#define AKONADI_SEARCH_CORE_QUERY_H
+#pragma once
 
 #include "resultiterator.h"
 #include "search_core_export.h"
@@ -146,4 +145,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_CORE_QUERY_H

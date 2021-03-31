@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_EMAIL_SEARCHSTORE_H
-#define AKONADI_SEARCH_PIM_EMAIL_SEARCHSTORE_H
+#pragma once
 
 #include "../pimsearchstore.h"
 
@@ -39,4 +38,3 @@ protected:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_EMAIL_SEARCHSTORE_H

@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef QUERYPARSERTEST_H
-#define QUERYPARSERTEST_H
+#pragma once
 
 #include <QObject>
 
@@ -27,4 +26,3 @@ private Q_SLOTS:
     void testWordExpansion();
 };
 
-#endif // QUERYPARSERTEST_H

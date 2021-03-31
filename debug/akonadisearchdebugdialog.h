@@ -4,8 +4,7 @@
   SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef AKONADISEARCHDEBUGDIALOG_H
-#define AKONADISEARCHDEBUGDIALOG_H
+#pragma once
 
 #include "akonadisearchdebugsearchpathcombobox.h"
 #include "search_debug_export.h"
@@ -43,4 +42,3 @@ private:
 };
 }
 }
-#endif // AKONADISEARCHDEBUGDIALOG_H

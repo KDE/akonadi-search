@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_XAPIANDATABASE_H
-#define AKONADI_SEARCH_XAPIANDATABASE_H
+#pragma once
 
 #include "search_xapian_export.h"
 #include <xapian.h>
@@ -80,4 +79,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_XAPIANDATABASE_H

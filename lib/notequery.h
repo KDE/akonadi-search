@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_NOTEQUERY_H
-#define AKONADI_SEARCH_PIM_NOTEQUERY_H
+#pragma once
 
 #include "query.h"
 #include "search_pim_export.h"
@@ -44,4 +43,3 @@ private:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_NOTEQUERY_H

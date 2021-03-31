@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef EMAILINDEXER_H
-#define EMAILINDEXER_H
+#pragma once
 
 #include <xapian.h>
 
@@ -56,4 +55,3 @@ private:
     void insertBool(char key, bool value);
 };
 
-#endif // EMAILINDEXER_H

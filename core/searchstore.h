@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_CORE_SEARCHSTORE_H
-#define AKONADI_SEARCH_CORE_SEARCHSTORE_H
+#pragma once
 
 #include <QHash>
 #include <QObject>
@@ -85,4 +84,3 @@ inline int deserialize(const QByteArray &namespace_, const QByteArray &str)
 
 Q_DECLARE_INTERFACE(Akonadi::Search::SearchStore, "org.kde.Akonadi.Search.SearchStore")
 
-#endif // AKONADI_SEARCH_CORE_SEARCHSTORE_H

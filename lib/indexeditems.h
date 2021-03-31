@@ -5,8 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  *
  */
-#ifndef INDEXEDITEMS_H
-#define INDEXEDITEMS_H
+#pragma once
 
 #include "search_pim_export.h"
 #include <AkonadiCore/Item>
@@ -48,4 +47,3 @@ private:
 }
 }
 }
-#endif // INDEXEDITEMS_H

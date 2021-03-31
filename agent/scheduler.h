@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef SCHEDULER_H
-#define SCHEDULER_H
+#pragma once
 
 #include "index.h"
 #include <AkonadiCore/Collection>
@@ -87,4 +86,3 @@ private:
     int m_busyTimeout;
 };
 
-#endif

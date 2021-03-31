@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  *
  */
-#ifndef COLLECTIONINDEXINGJOB_H
-#define COLLECTIONINDEXINGJOB_H
+#pragma once
 
 #include "index.h"
 #include <AkonadiCore/Collection>
@@ -55,4 +54,3 @@ private:
     int m_progressTotal = 0;
 };
 
-#endif

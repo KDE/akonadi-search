@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_CONTACT_SEARCHSTORE_H
-#define AKONADI_SEARCH_PIM_CONTACT_SEARCHSTORE_H
+#pragma once
 
 #include "../pimsearchstore.h"
 
@@ -29,4 +28,3 @@ public:
 };
 }
 }
-#endif // AKONADI_SEARCH_PIM_CONTACT_SEARCHSTORE_H

@@ -4,8 +4,7 @@
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef _NEPOMUK_LINUX_PRIORITY_H_
-#define _NEPOMUK_LINUX_PRIORITY_H_
+#pragma once
 
 bool lowerIOPriority();
 /// Sets the priority to batch
@@ -13,4 +12,3 @@ bool lowerSchedulingPriority();
 bool setIdleSchedulingPriority();
 bool lowerPriority();
 
-#endif // _NEPOMUK_LINUX_PRIORITY_H_

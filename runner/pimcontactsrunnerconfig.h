@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef PIMCONTACTSRUNNERCONFIG_H
-#define PIMCONTACTSRUNNERCONFIG_H
+#pragma once
 
 #include <KCModule>
 
@@ -28,4 +27,3 @@ private:
     QCheckBox *mQueryCompletionCheckBox = nullptr;
 };
 
-#endif

@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef TERMGENERATORTEST_H
-#define TERMGENERATORTEST_H
+#pragma once
 
 #include <QObject>
 
@@ -23,4 +22,3 @@ private Q_SLOTS:
     void testWordPositions();
 };
 
-#endif // TERMGENERATORTEST_H

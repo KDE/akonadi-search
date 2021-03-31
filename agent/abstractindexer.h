@@ -5,8 +5,7 @@
  *
  */
 
-#ifndef ABSTRACTINDEXER_H
-#define ABSTRACTINDEXER_H
+#pragma once
 
 #include <AkonadiCore/Item>
 #include <QStringList>
@@ -32,4 +31,3 @@ public:
     virtual void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removed);
 };
 
-#endif // ABSTRACTINDEXER_H

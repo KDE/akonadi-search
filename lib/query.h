@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_QUERY_H
-#define AKONADI_SEARCH_PIM_QUERY_H
+#pragma once
 
 #include "search_pim_export.h"
 #include <QByteArray>
@@ -35,4 +34,3 @@ public:
 }
 }
 
-#endif // AKONADI_SEARCH_PIM_QUERY_H

@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef CALENDARINDEXER_H
-#define CALENDARINDEXER_H
+#pragma once
 
 #include "abstractindexer.h"
 #include "xapiandatabase.h"
@@ -46,4 +45,3 @@ private:
     Akonadi::Search::XapianDatabase *m_db = nullptr;
 };
 
-#endif // CALENDARINDEXER_H

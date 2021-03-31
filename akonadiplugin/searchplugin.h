@@ -6,8 +6,7 @@
  *
  */
 
-#ifndef AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
-#define AKONADI_SEARCH_PIM_SEARCHPLUGIN_H
+#pragma once
 
 #include <QObject>
 #include <QStringList>
@@ -30,4 +29,3 @@ public:
     QSet<qint64> search(const QString &query, const QVector<qint64> &collections, const QStringList &mimeTypes) override;
 };
 
-#endif
