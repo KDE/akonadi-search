@@ -16,7 +16,7 @@
 #include <QDebug>
 
 #ifndef _WIN32
-#include <errno.h>
+#include <cerrno>
 #include <sys/resource.h>
 #include <sys/syscall.h>
 #include <unistd.h>
