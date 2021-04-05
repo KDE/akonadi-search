@@ -27,6 +27,7 @@ set(indexer_LIBS
     KF5::AkonadiSearchXapian
     KF5::I18n
     KF5::Codecs
+    KF5::ConfigCore
 )
 
 set(indexertest_SRCS
