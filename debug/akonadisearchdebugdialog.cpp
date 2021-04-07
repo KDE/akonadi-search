@@ -57,7 +57,7 @@ AkonadiSearchDebugDialog::~AkonadiSearchDebugDialog()
 
 void AkonadiSearchDebugDialog::readConfig()
 {
-    KConfigGroup group(KSharedConfig::openConfig(), "AkonadiSearchDebugDialog");
+    KConfigGroup group(KSharedConfig::openStateConfig(), "AkonadiSearchDebugDialog");
     const QSize sizeDialog = group.readEntry("Size", QSize(800, 600));
     if (sizeDialog.isValid()) {
         resize(sizeDialog);
@@ -66,7 +66,7 @@ void AkonadiSearchDebugDialog::readConfig()
 
 void AkonadiSearchDebugDialog::writeConfig()
 {
-    KConfigGroup group(KSharedConfig::openConfig(), "AkonadiSearchDebugDialog");
+    KConfigGroup group(KSharedConfig::openStateConfig(), "AkonadiSearchDebugDialog");
     group.writeEntry("Size", size());
 }
 
