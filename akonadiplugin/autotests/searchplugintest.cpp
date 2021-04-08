@@ -252,11 +252,7 @@ private Q_SLOTS:
             addressee.setFormattedName(QStringLiteral("John Doe"));
             addressee.setNickName(QStringLiteral("JD"));
             addressee.setEmails({QStringLiteral("john@test.com")});
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
-#else
             addressee.setBirthday(QDateTime(QDate(2000, 01, 01).startOfDay()));
-#endif
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(100);
             item.setPayload(addressee);
@@ -268,11 +264,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("uid2"));
             addressee.setName(QStringLiteral("Jane Doe"));
             addressee.setEmails({QStringLiteral("jane@test.com"), QStringLiteral("jack_sparrow@test.com")});
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
-#else
             addressee.setBirthday(QDateTime(QDate(2000, 01, 01).startOfDay()));
-#endif
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(101);
             item.setPayload(addressee);
@@ -284,11 +276,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("uid2"));
             addressee.setName(QStringLiteral("Jane Doe"));
             addressee.setEmails({QStringLiteral("JANE@TEST.COM")});
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
-#else
             addressee.setBirthday(QDateTime(QDate(2000, 01, 01).startOfDay()));
-#endif
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(102);
             item.setPayload(addressee);
@@ -300,11 +288,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("abcd-efgh-1234-5678"));
             addressee.setName(QStringLiteral("Dan Vrátil"));
             addressee.setEmails({QStringLiteral("dan@test.com")});
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
-#else
             addressee.setBirthday(QDateTime(QDate(2000, 01, 01).startOfDay()));
-#endif
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(105);
             item.setPayload(addressee);
