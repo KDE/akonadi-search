@@ -125,8 +125,6 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
         Plasma::QueryMatch match(this);
         match.setMatchCategory(i18n("Contacts"));
         match.setRelevance(0.75); // 0.75 is used by most runners, we don't
-        // want to shadow them
-        match.setMimeType(KContacts::Addressee::mimeType());
 
         const KContacts::Picture photo = contact.photo();
         if (!photo.isEmpty()) {
@@ -191,7 +189,6 @@ void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context, const
     for (const QString &result : completerResults) {
         Plasma::QueryMatch match(this);
         match.setRelevance(0.7); // slightly lower relevance than real addressbook contacts
-        match.setMimeType(KContacts::Addressee::mimeType());
         match.setMatchCategory(i18n("Contacts"));
         match.setSubtext(i18n("Autocompleted from received and sent emails"));
         match.setIcon(QIcon::fromTheme(QStringLiteral("user-identity")));
