@@ -137,7 +137,7 @@ void Scheduler::scheduleCompleteSync()
 {
     qCDebug(AKONADI_INDEXER_AGENT_LOG);
     {
-        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
+        auto job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
         job->fetchScope().fetchAttribute<Akonadi::IndexPolicyAttribute>();
@@ -147,7 +147,7 @@ void Scheduler::scheduleCompleteSync()
 
     // We want to index all collections, even if we don't index their content
     {
-        Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
+        auto job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);

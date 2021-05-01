@@ -67,7 +67,7 @@ private:
     Xapian::Database *m_db = nullptr;
     Xapian::WritableDatabase m_wDb;
 
-    typedef QPair<Xapian::docid, Xapian::Document> DocIdPair;
+    using DocIdPair = QPair<Xapian::docid, Xapian::Document>;
     QVector<DocIdPair> m_docsToAdd;
     QVector<uint> m_docsToRemove;
 

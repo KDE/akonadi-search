@@ -90,7 +90,7 @@ private Q_SLOTS:
         QVERIFY(agent.isValid());
         agent.setIsOnline(true);
 
-        Akonadi::CollectionFetchJob *fetchJob = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
+        auto fetchJob = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         fetchJob->exec();
         const Akonadi::Collection::List lstCols = fetchJob->collections();
         for (const Akonadi::Collection &col : lstCols) {
@@ -104,7 +104,7 @@ private Q_SLOTS:
     void testFullSync()
     {
         TestIndex index;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
+        auto job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(true);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 3);
@@ -113,7 +113,7 @@ private Q_SLOTS:
     void testNoFullSync()
     {
         TestIndex index;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
+        auto job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(false);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 0);
@@ -122,7 +122,7 @@ private Q_SLOTS:
     void testNoFullSyncWithPending()
     {
         TestIndex index;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>() << 1);
+        auto job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>() << 1);
         job->setFullSync(false);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 1);
@@ -132,7 +132,7 @@ private Q_SLOTS:
     {
         TestIndex index;
         index.alreadyIndexed << 1 << 2 << 3;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
+        auto job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(true);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 0);
@@ -142,7 +142,7 @@ private Q_SLOTS:
     {
         TestIndex index;
         index.alreadyIndexed << 15 << 16 << 17;
-        CollectionIndexingJob *job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
+        auto job = new CollectionIndexingJob(index, itemCollection, QList<Akonadi::Item::Id>());
         job->setFullSync(true);
         AKVERIFYEXEC(job);
         QCOMPARE(index.itemsIndexed.size(), 3);

@@ -24,7 +24,7 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
 
     auto hbox = new QHBoxLayout;
     mainLayout->addLayout(hbox);
-    QLabel *lab = new QLabel(QStringLiteral("Item identifier:"), this);
+    auto lab = new QLabel(QStringLiteral("Item identifier:"), this);
     hbox->addWidget(lab);
     mLineEdit = new KLineEdit(this);
     mLineEdit->setTrapReturnKey(true);

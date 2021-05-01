@@ -65,7 +65,7 @@ void App::main()
     connect(&m_commitTimer, &QTimer::timeout, this, &App::slotCommitTimerElapsed);
     m_commitTimer.start();
 
-    Akonadi::CollectionFetchJob *job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
+    auto job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
     connect(job, &Akonadi::CollectionFetchJob::finished, this, &App::slotRootCollectionsFetched);
     job->start();
 
@@ -97,7 +97,7 @@ void App::slotRootCollectionsFetched(KJob *kjob)
 
 void App::indexNextCollection()
 {
-    Akonadi::ItemFetchJob *fetchJob = new Akonadi::ItemFetchJob(m_collections.takeFirst(), this);
+    auto fetchJob = new Akonadi::ItemFetchJob(m_collections.takeFirst(), this);
     fetchJob->fetchScope().fetchAllAttributes(true);
     fetchJob->fetchScope().fetchFullPayload(true);
     fetchJob->fetchScope().setFetchModificationTime(false);
