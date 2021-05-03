@@ -27,7 +27,7 @@ target_link_libraries(KF5AkonadiSearchCore
 )
 
 set_target_properties(KF5AkonadiSearchCore PROPERTIES
-    VERSION ${AKONADISEARCH_VERSION_STRING}
+    VERSION ${AKONADISEARCH_VERSION}
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchCore
 )

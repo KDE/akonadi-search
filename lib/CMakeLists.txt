@@ -42,7 +42,7 @@ target_link_libraries(KF5AkonadiSearchPIM
 )
 
 set_target_properties(KF5AkonadiSearchPIM PROPERTIES
-    VERSION ${AKONADISEARCH_VERSION_STRING}
+    VERSION ${AKONADISEARCH_VERSION}
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchPIM
 )

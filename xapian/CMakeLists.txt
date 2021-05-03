@@ -29,7 +29,7 @@ target_link_libraries(KF5AkonadiSearchXapian PUBLIC
 )
 
 set_target_properties(KF5AkonadiSearchXapian PROPERTIES
-    VERSION ${AKONADISEARCH_VERSION_STRING}
+    VERSION ${AKONADISEARCH_VERSION}
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchXapian
 )
