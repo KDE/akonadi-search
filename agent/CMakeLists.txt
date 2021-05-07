@@ -26,7 +26,7 @@ ecm_qt_declare_logging_category(akonadi_indexing_agent_SRCS HEADER akonadi_index
         EXPORT AKONADISEARCH
     )
 
-qt5_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
+qt_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
 
 add_executable(akonadi_indexing_agent ${akonadi_indexing_agent_SRCS})
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
