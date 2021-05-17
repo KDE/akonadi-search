@@ -23,7 +23,7 @@ add_library(KF5::AkonadiSearchCore ALIAS KF5AkonadiSearchCore)
 
 target_link_libraries(KF5AkonadiSearchCore
     PUBLIC
-    Qt5::Core
+    Qt::Core
 )
 
 set_target_properties(KF5AkonadiSearchCore PROPERTIES
