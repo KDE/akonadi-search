@@ -3,7 +3,11 @@ include_directories(
     ${XAPIAN_INCLUDE_DIR}
 )
 
-set(AKONADI_SEARCH_PIM_LIB_SRCS
+add_library(KF5AkonadiSearchPIM)
+add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)
+
+
+target_sources(KF5AkonadiSearchPIM PRIVATE
     query.cpp
     resultiterator.cpp
     contactquery.cpp
@@ -16,19 +20,16 @@ set(AKONADI_SEARCH_PIM_LIB_SRCS
     ../search/email/agepostingsource.cpp
 )
 
-ecm_qt_declare_logging_category(AKONADI_SEARCH_PIM_LIB_SRCS HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME org.kde.pim.akonadi_search_pim
+ecm_qt_declare_logging_category(KF5AkonadiSearchPIM HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME org.kde.pim.akonadi_search_pim
         DESCRIPTION "akonadisearch(akonadi pim lib)"
         OLD_CATEGORY_NAMES log_akonadi_search_pim
         EXPORT AKONADISEARCH
     )
 
-
-add_library(KF5AkonadiSearchPIM ${AKONADI_SEARCH_PIM_LIB_SRCS})
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KF5AkonadiSearchPIM PROPERTIES UNITY_BUILD ON)
 endif()
 
-add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)
 
 generate_export_header(KF5AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_FILE_NAME search_pim_export.h)
 

@@ -8,8 +8,9 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/../../agent/
   ${CMAKE_CURRENT_BINARY_DIR}/..
 )
+add_executable( searchplugintest)
 
-set(searchplugintest_SRCS
+target_sources(searchplugintest PRIVATE
     searchplugintest.cpp
     ../searchplugin.cpp
     ../../agent/emailindexer.cpp
@@ -29,7 +30,6 @@ set(searchplugintest_SRCS
 
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 
-add_executable( searchplugintest ${searchplugintest_SRCS} )
 add_test( NAME searchplugintest COMMAND searchplugintest )
 ecm_mark_as_test(searchplugintest)
 
