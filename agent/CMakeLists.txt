@@ -4,8 +4,9 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+add_executable(akonadi_indexing_agent)
 
-set(akonadi_indexing_agent_SRCS
+target_sources(akonadi_indexing_agent PRIVATE
     abstractindexer.cpp
     agent.cpp
     emailindexer.cpp
@@ -20,15 +21,15 @@ set(akonadi_indexing_agent_SRCS
     collectionupdatejob.cpp
 )
 
-ecm_qt_declare_logging_category(akonadi_indexing_agent_SRCS HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent
+ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent
         DESCRIPTION "akonadisearch (akonadi indexer agent)"
         OLD_CATEGORY_NAMES log_akonadi_indexer_agent
         EXPORT AKONADISEARCH
     )
 
 qt_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
+target_sources(akonadi_indexing_agent PRIVATE ${akonadi_indexing_agent_SRCS})
 
-add_executable(akonadi_indexing_agent ${akonadi_indexing_agent_SRCS})
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(akonadi_indexing_agent PROPERTIES UNITY_BUILD ON)
 endif()

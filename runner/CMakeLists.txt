@@ -24,12 +24,13 @@ target_link_libraries(krunner_pimcontacts
     KF5::Codecs
 )
 
-set(pimcontactsrunnerconfig_SRCS
+########################
+add_library(kcm_krunner_pimcontacts MODULE)
+target_sources(kcm_krunner_pimcontacts PRIVATE
     pimcontactsrunnerconfig.cpp
     ${pimcontactsrunner_DEBUG}
 )
 
-add_library(kcm_krunner_pimcontacts MODULE ${pimcontactsrunnerconfig_SRCS})
 target_link_libraries(kcm_krunner_pimcontacts
     Qt::Gui
     KF5::KCMUtils
