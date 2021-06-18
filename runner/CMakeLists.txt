@@ -8,12 +8,13 @@ ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_de
     )
 
 
-set(pimcontactsrunner_SRCS
+add_library(krunner_pimcontacts MODULE)
+target_sources(krunner_pimcontacts PRIVATE
     pimcontactsrunner.cpp
     ${pimcontactsrunner_DEBUG}
 )
 
-add_library(krunner_pimcontacts MODULE ${pimcontactsrunner_SRCS})
+
 kcoreaddons_desktop_to_json(krunner_pimcontacts plasma-krunner-pimcontacts.desktop)
 target_link_libraries(krunner_pimcontacts
     KF5::Runner

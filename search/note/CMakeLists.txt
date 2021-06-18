@@ -1,5 +1,5 @@
-add_library(notesearchstore MODULE notesearchstore.cpp ../pimsearchstore.cpp)
-
+add_library(notesearchstore MODULE)
+target_sources(notesearchstore PRIVATE notesearchstore.cpp ../pimsearchstore.cpp)
 target_link_libraries(notesearchstore
     Qt::Core
     KF5::AkonadiCore

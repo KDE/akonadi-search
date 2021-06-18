@@ -1,5 +1,5 @@
-add_library(contactsearchstore MODULE contactsearchstore.cpp ../pimsearchstore.cpp)
-
+add_library(contactsearchstore MODULE )
+target_sources(contactsearchstore PRIVATE contactsearchstore.cpp ../pimsearchstore.cpp)
 target_link_libraries(contactsearchstore
     Qt::Core
     KF5::AkonadiCore

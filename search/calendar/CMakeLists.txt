@@ -1,5 +1,5 @@
-add_library(calendarsearchstore MODULE calendarsearchstore.cpp ../pimsearchstore.cpp)
-
+add_library(calendarsearchstore MODULE )
+target_sources(calendarsearchstore PRIVATE calendarsearchstore.cpp ../pimsearchstore.cpp)
 target_link_libraries(calendarsearchstore
     Qt::Core
     KF5::AkonadiCore

@@ -1,6 +1,8 @@
 kde_enable_exceptions()
+add_library(KF5AkonadiSearchXapian)
+add_library(KF5::AkonadiSearchXapian ALIAS KF5AkonadiSearchXapian)
 
-set(XAPIAN_SRCS
+target_sources(KF5AkonadiSearchXapian PRIVATE
     xapiansearchstore.cpp
     xapiandocument.cpp
     xapiandatabase.cpp
@@ -8,19 +10,17 @@ set(XAPIAN_SRCS
     xapianqueryparser.cpp
 )
 
-ecm_qt_declare_logging_category(XAPIAN_SRCS HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME org.kde.pim.akonadi_search_xapian
+ecm_qt_declare_logging_category(KF5AkonadiSearchXapian HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME org.kde.pim.akonadi_search_xapian
         DESCRIPTION "akonadisearch (akonadi indexer xapian)"
         OLD_CATEGORY_NAMES log_akonadi_search_xapian
         EXPORT AKONADISEARCH
     )
 
 
-add_library(KF5AkonadiSearchXapian ${XAPIAN_SRCS})
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KF5AkonadiSearchXapian PROPERTIES UNITY_BUILD ON)
 endif()
 
-add_library(KF5::AkonadiSearchXapian ALIAS KF5AkonadiSearchXapian)
 
 target_link_libraries(KF5AkonadiSearchXapian PUBLIC
     Qt::Core
