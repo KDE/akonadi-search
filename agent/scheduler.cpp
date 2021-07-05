@@ -57,7 +57,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
     }
 
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Dirty collections " << m_dirtyCollections;
-    for (Akonadi::Collection::Id col : qAsConst(m_dirtyCollections)) {
+    for (Akonadi::Collection::Id col : std::as_const(m_dirtyCollections)) {
         scheduleCollection(Akonadi::Collection(col), true);
     }
 

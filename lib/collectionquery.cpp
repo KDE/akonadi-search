@@ -116,7 +116,7 @@ ResultIterator CollectionQuery::exec()
     if (!d->ns.isEmpty()) {
         QList<Xapian::Query> queryList;
         queryList.reserve(d->ns.count());
-        for (const QString &n : qAsConst(d->ns)) {
+        for (const QString &n : std::as_const(d->ns)) {
             const QByteArray term = "NS" + n.toUtf8();
             queryList << Xapian::Query(term.constData());
         }
@@ -126,7 +126,7 @@ ResultIterator CollectionQuery::exec()
     if (!d->mimeType.isEmpty()) {
         QList<Xapian::Query> queryList;
         queryList.reserve(d->mimeType.count());
-        for (const QString &n : qAsConst(d->mimeType)) {
+        for (const QString &n : std::as_const(d->mimeType)) {
             const QByteArray term = "M" + n.toUtf8();
             queryList << Xapian::Query(term.constData());
         }

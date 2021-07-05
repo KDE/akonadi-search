@@ -103,7 +103,7 @@ void XapianDatabase::commit()
     Xapian::WritableDatabase wdb = createWritableDb();
 
     qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Adding:" << m_docsToAdd.size() << "docs";
-    for (const DocIdPair &doc : qAsConst(m_docsToAdd)) {
+    for (const DocIdPair &doc : std::as_const(m_docsToAdd)) {
         try {
             wdb.replace_document(doc.first, doc.second);
         } catch (const Xapian::Error &) {
@@ -111,7 +111,7 @@ void XapianDatabase::commit()
     }
 
     qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Removing:" << m_docsToRemove.size() << "docs";
-    for (Xapian::docid id : qAsConst(m_docsToRemove)) {
+    for (Xapian::docid id : std::as_const(m_docsToRemove)) {
         try {
             wdb.delete_document(id);
         } catch (const Xapian::Error &) {

@@ -204,7 +204,7 @@ ResultIterator EmailQuery::exec()
         parser.add_prefix("", "BCC");
 
         // vHanda: Do we really need the query parser over here?
-        for (const QString &str : qAsConst(d->involves)) {
+        for (const QString &str : std::as_const(d->involves)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -223,7 +223,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "T");
 
-        for (const QString &str : qAsConst(d->to)) {
+        for (const QString &str : std::as_const(d->to)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -234,7 +234,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "CC");
 
-        for (const QString &str : qAsConst(d->cc)) {
+        for (const QString &str : std::as_const(d->cc)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -245,7 +245,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.add_prefix("", "BC");
 
-        for (const QString &str : qAsConst(d->bcc)) {
+        for (const QString &str : std::as_const(d->bcc)) {
             const QByteArray ba = str.toUtf8();
             m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
         }
@@ -262,7 +262,7 @@ ResultIterator EmailQuery::exec()
 
     if (!d->collections.isEmpty()) {
         Xapian::Query query;
-        for (Akonadi::Collection::Id id : qAsConst(d->collections)) {
+        for (Akonadi::Collection::Id id : std::as_const(d->collections)) {
             const QString c = QString::number(id);
             const Xapian::Query q = Xapian::Query('C' + c.toStdString());
 

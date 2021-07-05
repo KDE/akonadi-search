@@ -100,7 +100,7 @@ SearchStore::List SearchStore::searchStores()
     plugins.clear();
 
     SearchStore::List stores;
-    for (const QString &pluginPath : qAsConst(pluginPaths)) {
+    for (const QString &pluginPath : std::as_const(pluginPaths)) {
         QPluginLoader loader(pluginPath);
 
         const QVariantMap metadata = loader.metaData().toVariantMap()[QStringLiteral("MetaData")].toMap();

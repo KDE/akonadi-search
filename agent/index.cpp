@@ -297,7 +297,7 @@ void Index::scheduleCommit()
 void Index::commit()
 {
     m_commitTimer.stop();
-    for (AbstractIndexer *indexer : qAsConst(m_listIndexer)) {
+    for (AbstractIndexer *indexer : std::as_const(m_listIndexer)) {
         try {
             indexer->commit();
         } catch (const Xapian::Error &e) {

@@ -205,7 +205,7 @@ ResultIterator Query::exec()
     }
 
     SearchStore *storeMatch = nullptr;
-    for (const QSharedPointer<SearchStore> &store : qAsConst(*s_searchStores)) {
+    for (const QSharedPointer<SearchStore> &store : std::as_const(*s_searchStores)) {
         bool matches = true;
         for (const QString &type : types()) {
             if (!store->types().contains(type)) {
@@ -380,7 +380,7 @@ bool Query::operator==(const Query &rhs) const
         return false;
     }
 
-    for (const QString &type : qAsConst(rhs.d->m_types)) {
+    for (const QString &type : std::as_const(rhs.d->m_types)) {
         if (!d->m_types.contains(type)) {
             return false;
         }

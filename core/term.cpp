@@ -224,7 +224,7 @@ QVariantMap Term::toVariantMap() const
     if (d->m_op != None) {
         QVariantList variantList;
         variantList.reserve(d->m_subTerms.count());
-        for (const Term &term : qAsConst(d->m_subTerms)) {
+        for (const Term &term : std::as_const(d->m_subTerms)) {
             variantList << QVariant(term.toVariantMap());
         }
 
@@ -378,7 +378,7 @@ bool Term::operator==(const Term &rhs) const
         return true;
     }
 
-    for (const Term &t : qAsConst(d->m_subTerms)) {
+    for (const Term &t : std::as_const(d->m_subTerms)) {
         if (!rhs.d->m_subTerms.contains(t)) {
             return false;
         }
@@ -442,7 +442,7 @@ QDebug operator<<(QDebug d, const Term &t)
     } else {
         d << "(" << operationToString(t.operation()).toUtf8().constData();
         const QList<Term> subterms = t.subTerms();
-        for (const Term &term : qAsConst(subterms)) {
+        for (const Term &term : std::as_const(subterms)) {
             d << term;
         }
         d << ")";

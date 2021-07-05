@@ -60,7 +60,7 @@ void App::main()
     timer.start();
 
     const QStringList emails = com.complete();
-    for (const QString &em : qAsConst(emails)) {
+    for (const QString &em : std::as_const(emails)) {
         std::cout << em.toUtf8().data() << std::endl;
     }
 
