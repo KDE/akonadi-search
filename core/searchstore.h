@@ -52,7 +52,7 @@ public:
     /**
      * Executes the particular query synchronously.
      *
-     * \return Returns a integer representating the integer
+     * \return Returns a integer representing the integer
      */
     virtual int exec(const Query &query) = 0;
     virtual bool next(int queryId) = 0;

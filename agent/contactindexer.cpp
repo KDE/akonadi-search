@@ -45,9 +45,9 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     if (!m_db) {
         return false;
     }
-    KContacts::Addressee addresse;
+    KContacts::Addressee addressee;
     try {
-        addresse = item.payload<KContacts::Addressee>();
+        addressee = item.payload<KContacts::Addressee>();
     } catch (const Akonadi::PayloadException &) {
         return false;
     }
@@ -55,24 +55,24 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     Akonadi::Search::XapianDocument doc;
 
     QString name;
-    if (!addresse.formattedName().isEmpty()) {
-        name = addresse.formattedName();
-    } else if (!addresse.assembledName().isEmpty()) {
-        name = addresse.assembledName();
+    if (!addressee.formattedName().isEmpty()) {
+        name = addressee.formattedName();
+    } else if (!addressee.assembledName().isEmpty()) {
+        name = addressee.assembledName();
     } else {
-        name = addresse.name();
+        name = addressee.name();
     }
 
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << name << addresse.nickName();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << name << addressee.nickName();
 
     doc.indexText(name);
-    doc.indexText(addresse.nickName());
-    doc.indexText(addresse.uid(), QStringLiteral("UID"));
+    doc.indexText(addressee.nickName());
+    doc.indexText(addressee.uid(), QStringLiteral("UID"));
 
     doc.indexText(name, QStringLiteral("NA"));
-    doc.indexText(addresse.nickName(), QStringLiteral("NI"));
+    doc.indexText(addressee.nickName(), QStringLiteral("NI"));
 
-    const QStringList lstEmails = addresse.emails();
+    const QStringList lstEmails = addressee.emails();
     for (const QString &email : lstEmails) {
         doc.addTerm(email);
         doc.indexText(email);
@@ -84,8 +84,8 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     const Akonadi::Collection::Id colId = item.parentCollection().id();
     doc.addBoolTerm(colId, QStringLiteral("C"));
 
-    if (addresse.birthday().isValid()) {
-        const QString julianDay = QString::number(addresse.birthday().date().toJulianDay());
+    if (addressee.birthday().isValid()) {
+        const QString julianDay = QString::number(addressee.birthday().date().toJulianDay());
         doc.addValue(0, julianDay);
     }
     // TODO index anniversary ?

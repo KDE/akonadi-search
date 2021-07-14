@@ -111,7 +111,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
         }
 
         if (contact.isEmpty()) {
-            qCDebug(AKONADI_KRUNNER_LOG) << "Corrupted index? Index referrs to an Item with an empty contact";
+            qCDebug(AKONADI_KRUNNER_LOG) << "Corrupted index? Index refers to an Item with an empty contact";
             continue;
         }
 
