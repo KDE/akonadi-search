@@ -13,7 +13,7 @@
 #include <QCheckBox>
 #include <QVBoxLayout>
 
-K_PLUGIN_FACTORY(PIMContactsRunnerConfigFactory, registerPlugin<PIMContactsRunnerConfig>(QStringLiteral("kcm_krunner_pimcontacts"));)
+K_PLUGIN_FACTORY(PIMContactsRunnerConfigFactory, registerPlugin<PIMContactsRunnerConfig>();)
 
 PIMContactsRunnerConfig::PIMContactsRunnerConfig(QWidget *parent, const QVariantList &args)
     : KCModule(parent, args)

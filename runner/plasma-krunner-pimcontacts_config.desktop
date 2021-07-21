@@ -42,4 +42,3 @@ Type=Service
 X-KDE-ServiceTypes=KCModule
 X-KDE-Library=kcm_krunner_pimcontacts
 X-KDE-ParentComponents=PIM Contacts Search Runner
-X-KDE-PluginKeyword=kcm_krunner_pimcontacts
