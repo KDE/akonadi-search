@@ -32,7 +32,7 @@ public:
     }
 
 protected:
-    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;
+    Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;
     Xapian::Query finalizeQuery(const Xapian::Query &query) override;
 };
 }

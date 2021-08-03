@@ -38,7 +38,7 @@ protected:
         return QByteArray("akonadi");
     }
 
-    virtual Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;
+    Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;
     QUrl constructUrl(const Xapian::docid &docid) override;
 
     QHash<QString, QString> m_prefix;
