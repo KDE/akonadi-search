@@ -198,7 +198,8 @@ void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context, const
             match.setType(Plasma::QueryMatch::PossibleMatch);
         }
 
-        QString name, email;
+        QString name;
+        QString email;
         if (KEmailAddress::extractEmailAddressAndName(result, email, name)) {
             if (name.isEmpty()) {
                 match.setText(email);
