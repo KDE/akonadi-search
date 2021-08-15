@@ -35,7 +35,7 @@ set(AKONADISEARCH_VERSION ${PIM_VERSION})
 set(AKONADI_VERSION "5.18.40")
 set(AKONADI_MIMELIB_VERSION "5.18.40")
 set(KMIME_LIB_VERSION "5.18.40")
-set(QT_REQUIRED_VERSION "5.15.0")
+set(QT_REQUIRED_VERSION "5.15.2")
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAddons KCMUtils KIO)
@@ -67,7 +67,7 @@ option(KDEPIM_RUN_AKONADI_TEST "Enable autotest based on Akonadi." TRUE)
 
 # Compiler flags
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
-add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
+add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
 add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055600)
 
 
