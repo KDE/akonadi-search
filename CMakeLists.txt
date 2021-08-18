@@ -22,6 +22,10 @@ include(KDECompilerSettings NO_POLICY_SCOPE)
 include(ECMInstallIcons)
 include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
+include(ECMAddQch)
+
+option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
+add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 
 cmake_dependent_option(
@@ -91,6 +95,8 @@ include_directories(
   ${CMAKE_SOURCE_DIR}/xapian
   ${CMAKE_BINARY_DIR}/xapian
 )
+# Config files
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
 
 # Targets
 add_subdirectory(xapian)
@@ -104,8 +110,6 @@ if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     add_subdirectory(runner)
 endif()
 
-# Config files
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
 
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KF5AkonadiSearchConfig.cmake.in"

@@ -2,6 +2,15 @@ kde_enable_exceptions()
 include_directories(
     ${XAPIAN_INCLUDE_DIR}
 )
+if (BUILD_QCH)
+    ecm_install_qch_export(
+        TARGETS KF5AkonadiSearchPIM_QCH
+        FILE KF5AkonadiSearchPIMQchTargets.cmake
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF5AkonadiSearchPIMQchTargets.cmake\")")
+endif()
 
 add_library(KF5AkonadiSearchPIM)
 add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)
@@ -52,7 +61,7 @@ target_include_directories(KF5AkonadiSearchPIM INTERFACE "$<INSTALL_INTERFACE:${
 
 install(TARGETS KF5AkonadiSearchPIM EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(FILES
+set(AKONADISEARCH_INCLUDES
     query.h
     contactquery.h
     emailquery.h
@@ -62,6 +71,10 @@ install(FILES
     indexeditems.h
 
     resultiterator.h
+    )
+
+install(FILES
+    ${AKONADISEARCH_INCLUDES}
     ${CMAKE_CURRENT_BINARY_DIR}/search_pim_export.h
 
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/PIM
@@ -70,4 +83,29 @@ install(FILES
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
+endif()
+
+if (BUILD_QCH)
+    ecm_add_qch(
+        KF5AkonadiSearchPIM_QCH
+        NAME KF5AkonadiSearchPIM
+        BASE_NAME KF5AkonadiSearchPIM
+        VERSION ${PIM_VERSION}
+        ORG_DOMAIN org.kde
+        SOURCES # using only public headers, to cover only public API
+        ${AKONADISEARCH_INCLUDES}
+        #MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
+        #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
+        LINK_QCHS
+            Qt5Core_QCH
+            Qt5Gui_QCH
+            Qt5Widgets_QCH
+        INCLUDE_DIRS
+            ${CMAKE_CURRENT_BINARY_DIR}
+        BLANK_MACROS
+            AKONADI_SEARCH_PIM_EXPORT
+        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
+        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
+        COMPONENT Devel
+    )
 endif()
