@@ -94,7 +94,7 @@ if (BUILD_QCH)
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
         ${AKONADISEARCH_INCLUDES}
-        #MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
+        MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
         LINK_QCHS
             Qt5Core_QCH
