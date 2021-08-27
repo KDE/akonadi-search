@@ -19,7 +19,9 @@
 #include <Item>
 #include <ItemFetchJob>
 #include <ItemFetchScope>
+#include <chrono>
 
+using namespace std::chrono_literals;
 class App : public QApplication
 {
     Q_OBJECT
@@ -61,7 +63,7 @@ App::App(int &argc, char **argv, int flags)
 
 void App::main()
 {
-    m_commitTimer.setInterval(1000);
+    m_commitTimer.setInterval(1s);
     connect(&m_commitTimer, &QTimer::timeout, this, &App::slotCommitTimerElapsed);
     m_commitTimer.start();
 

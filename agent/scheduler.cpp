@@ -17,6 +17,9 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <QTimer>
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 JobFactory::~JobFactory()
 {
@@ -41,7 +44,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
         m_jobFactory = QSharedPointer<JobFactory>(new JobFactory);
     }
     m_processTimer.setSingleShot(true);
-    m_processTimer.setInterval(100);
+    m_processTimer.setInterval(100ms);
     connect(&m_processTimer, &QTimer::timeout, this, &Scheduler::processNext);
 
     KConfigGroup cfg = m_config->group("General");
