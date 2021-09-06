@@ -6,6 +6,6 @@ Dependencies:
   'require':
     'frameworks/kcontacts' : '@latest'
     'frameworks/kcalendarcore' : '@latest'
-    'kde/pim/akonadi' : '@latest'
-    'kde/pim/akonadi-mime' : '@latest'
-    'kde/pim/kmime' : '@latest'
+    'kde/pim/akonadi' : '@same'
+    'kde/pim/akonadi-mime' : '@same'
+    'kde/pim/kmime' : '@same'
