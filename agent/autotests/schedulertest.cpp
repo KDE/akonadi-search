@@ -8,11 +8,13 @@
 #include <collectionindexingjob.h>
 #include <scheduler.h>
 
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/ServerManager>
-#include <AkonadiCore/qtest_akonadi.h>
+#include <Collection>
+#include <ServerManager>
+#include <qtest_akonadi.h>
+
 #include <KConfig>
 #include <KConfigGroup>
+
 #include <QStandardPaths>
 #include <QTest>
 

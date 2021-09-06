@@ -9,13 +9,16 @@
 
 #include "akonadi_indexer_agent_debug.h"
 #include "collectionindexingjob.h"
-#include <AkonadiAgentBase/AgentBase>
-#include <AkonadiCore/CollectionFetchJob>
-#include <AkonadiCore/CollectionFetchScope>
-#include <AkonadiCore/IndexPolicyAttribute>
-#include <AkonadiCore/ServerManager>
+
+#include <AgentBase>
+#include <CollectionFetchJob>
+#include <CollectionFetchScope>
+#include <IndexPolicyAttribute>
+#include <ServerManager>
+
 #include <KConfigGroup>
 #include <KLocalizedString>
+
 #include <QTimer>
 #include <chrono>
 

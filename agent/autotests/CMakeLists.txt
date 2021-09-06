@@ -20,6 +20,7 @@ set(indexer_LIBS
     Qt::Test
     KF5::AkonadiCore
     KF5::AkonadiMime
+    KF5::AkonadiAgentBase
     KF5::Mime
     KF5::Contacts
     KF5::CalendarCore
@@ -68,6 +69,7 @@ target_link_libraries(collectionquerytest
     ${indexer_LIBS}
     ${QJSON_LIBRARIES}
     KF5::AkonadiSearchPIM
+    KF5::AkonadiAgentBase
     KF5::ConfigCore
     Qt::Widgets
     Qt::DBus
