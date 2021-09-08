@@ -11,8 +11,8 @@
 #include "abstractindexer.h"
 #include "xapiandatabase.h"
 
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/Item>
+#include <Akonadi/Collection>
+#include <Akonadi/Item>
 #include <KCalendarCore/Event>
 #include <KCalendarCore/Journal>
 #include <KCalendarCore/Todo>

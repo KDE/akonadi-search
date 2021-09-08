@@ -11,7 +11,7 @@
 #include "query.h"
 #include "search_pim_export.h"
 
-#include <Collection>
+#include <Akonadi/Collection>
 #include <QStringList>
 
 namespace Akonadi

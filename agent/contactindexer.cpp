@@ -10,7 +10,7 @@
 #include "akonadi_indexer_agent_debug.h"
 #include "xapiandocument.h"
 
-#include <Collection>
+#include <Akonadi/Collection>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 

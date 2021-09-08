@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <AkonadiCore/collection.h>
+#include <Akonadi/Collection>
 #include <QString>
 
 namespace Xapian

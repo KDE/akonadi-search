@@ -8,8 +8,8 @@
 
 #include "emailindexer.h"
 #include "akonadi_indexer_agent_debug.h"
+#include <Akonadi/Collection>
 #include <Akonadi/KMime/MessageFlags>
-#include <Collection>
 
 #include <KEmailAddress>
 #include <QTextDocument>

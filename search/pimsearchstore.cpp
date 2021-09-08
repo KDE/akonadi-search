@@ -10,7 +10,7 @@
 #include "query.h"
 #include "term.h"
 
-#include <AkonadiCore/ServerManager>
+#include <Akonadi/ServerManager>
 #include <QDir>
 #include <QStandardPaths>
 #include <QUrl>

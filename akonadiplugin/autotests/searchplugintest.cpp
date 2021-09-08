@@ -6,7 +6,7 @@
  *
  */
 
-#include <AkonadiCore/Collection>
+#include <Akonadi/Collection>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 #include <QDir>
@@ -22,7 +22,7 @@
 #include <../search/email/emailsearchstore.h>
 #include <../search/note/notesearchstore.h>
 #include <Akonadi/KMime/MessageFlags>
-#include <AkonadiCore/searchquery.h>
+#include <Akonadi/SearchQuery>
 
 #include <QElapsedTimer>
 

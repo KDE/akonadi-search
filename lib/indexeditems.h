@@ -8,7 +8,7 @@
 #pragma once
 
 #include "search_pim_export.h"
-#include <AkonadiCore/Item>
+#include <Akonadi/Item>
 #include <QObject>
 
 namespace Akonadi

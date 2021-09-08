@@ -6,7 +6,7 @@
  *
  */
 
-#include <AkonadiCore/Collection>
+#include <Akonadi/Collection>
 #include <KContacts/Addressee>
 #include <QDir>
 #include <QTest>

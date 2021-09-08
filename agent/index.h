@@ -9,8 +9,8 @@
 
 #include "abstractindexer.h"
 #include "collectionindexer.h"
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/item.h>
+#include <Akonadi/Collection>
+#include <Akonadi/Item>
 #include <QObject>
 #include <QTimer>
 namespace Akonadi

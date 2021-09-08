@@ -14,11 +14,11 @@
 #include <QFile>
 #include <QTimer>
 
-#include <Collection>
-#include <CollectionFetchJob>
-#include <Item>
-#include <ItemFetchJob>
-#include <ItemFetchScope>
+#include <Akonadi/Collection>
+#include <Akonadi/CollectionFetchJob>
+#include <Akonadi/Item>
+#include <Akonadi/ItemFetchJob>
+#include <Akonadi/ItemFetchScope>
 #include <chrono>
 
 using namespace std::chrono_literals;

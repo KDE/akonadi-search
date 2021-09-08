@@ -10,7 +10,7 @@
 
 #include "search_pim_export.h"
 
-#include <AkonadiCore/Item>
+#include <Akonadi/Item>
 
 namespace Akonadi
 {

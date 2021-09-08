@@ -11,10 +11,10 @@
 #include "collectionindexingjob.h"
 
 #include <AgentBase>
-#include <CollectionFetchJob>
-#include <CollectionFetchScope>
-#include <IndexPolicyAttribute>
-#include <ServerManager>
+#include <Akonadi/CollectionFetchJob>
+#include <Akonadi/CollectionFetchScope>
+#include <Akonadi/IndexPolicyAttribute>
+#include <Akonadi/ServerManager>
 
 #include <KConfigGroup>
 #include <KLocalizedString>

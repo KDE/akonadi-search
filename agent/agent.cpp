@@ -18,15 +18,15 @@
 
 #include "priority.h"
 
-#include <AkonadiCore/AttributeFactory>
-#include <AkonadiCore/CollectionFetchScope>
-#include <AkonadiCore/EntityDisplayAttribute>
-#include <AkonadiCore/IndexPolicyAttribute>
-#include <AkonadiCore/ItemFetchScope>
-#include <ChangeRecorder>
+#include <Akonadi/AttributeFactory>
+#include <Akonadi/ChangeRecorder>
+#include <Akonadi/CollectionFetchScope>
+#include <Akonadi/EntityDisplayAttribute>
+#include <Akonadi/IndexPolicyAttribute>
+#include <Akonadi/ItemFetchScope>
 
-#include <AgentManager>
-#include <ServerManager>
+#include <Akonadi/AgentManager>
+#include <Akonadi/ServerManager>
 
 #include "akonadi_indexer_agent_debug.h"
 #include <KConfig>

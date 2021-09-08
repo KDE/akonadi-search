@@ -8,9 +8,9 @@
 #include <collectionindexingjob.h>
 #include <scheduler.h>
 
-#include <Collection>
-#include <ServerManager>
-#include <qtest_akonadi.h>
+#include <Akonadi/Collection>
+#include <Akonadi/ServerManager>
+#include <akonadi/qtest_akonadi.h>
 
 #include <KConfig>
 #include <KConfigGroup>

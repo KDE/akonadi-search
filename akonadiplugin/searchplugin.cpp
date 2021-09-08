@@ -12,7 +12,7 @@
 #include "resultiterator.h"
 #include "term.h"
 
-#include <searchquery.h>
+#include <Akonadi/SearchQuery>
 
 #include "akonadiplugin_indexer_debug.h"
 #include <Akonadi/KMime/MessageFlags>

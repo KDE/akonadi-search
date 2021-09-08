@@ -11,7 +11,7 @@
 #include "akonadi_search_pim_debug.h"
 #include "indexeditems.h"
 
-#include <AkonadiCore/ServerManager>
+#include <Akonadi/ServerManager>
 #include <QDir>
 #include <QHash>
 #include <QStandardPaths>

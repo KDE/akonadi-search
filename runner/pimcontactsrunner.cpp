@@ -15,9 +15,9 @@
 #include <QSharedPointer>
 #include <QThread>
 
-#include <AkonadiCore/ItemFetchJob>
-#include <AkonadiCore/ItemFetchScope>
-#include <AkonadiCore/Session>
+#include <Akonadi/ItemFetchJob>
+#include <Akonadi/ItemFetchScope>
+#include <akonadi/session.h>
 
 #include <KContacts/Addressee>
 

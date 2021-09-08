@@ -13,7 +13,7 @@
 #include <QDebug>
 #include <QVariant>
 
-#include <AkonadiCore/ServerManager>
+#include <Akonadi/ServerManager>
 #include <QDir>
 #include <QJsonDocument>
 #include <QStandardPaths>

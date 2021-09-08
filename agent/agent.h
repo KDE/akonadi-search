@@ -9,8 +9,8 @@
 
 #pragma once
 
-#include <agentbase.h>
-#include <collection.h>
+#include <Akonadi/AgentBase>
+#include <Akonadi/Collection>
 
 #include "index.h"
 #include "scheduler.h"

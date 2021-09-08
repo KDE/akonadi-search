@@ -7,9 +7,9 @@
  */
 #include <collectionindexingjob.h>
 
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/CollectionFetchJob>
-#include <AkonadiCore/ServerManager>
+#include <Akonadi/Collection>
+#include <Akonadi/CollectionFetchJob>
+#include <Akonadi/ServerManager>
 #include <AkonadiCore/qtest_akonadi.h>
 #include <QTest>
 

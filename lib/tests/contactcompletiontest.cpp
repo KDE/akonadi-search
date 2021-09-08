@@ -14,8 +14,8 @@
 #include <QTimer>
 #include <iostream>
 
-#include <AkonadiCore/ItemFetchJob>
-#include <AkonadiCore/ItemFetchScope>
+#include <Akonadi/ItemFetchJob>
+#include <Akonadi/ItemFetchScope>
 
 #include <KMime/Message>
 

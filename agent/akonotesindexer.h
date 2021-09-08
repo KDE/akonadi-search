@@ -12,8 +12,8 @@
 
 #include "abstractindexer.h"
 
-#include <Collection>
-#include <Item>
+#include <Akonadi/Collection>
+#include <Akonadi/Item>
 #include <KMime/Message>
 
 class AkonotesIndexer : public AbstractIndexer

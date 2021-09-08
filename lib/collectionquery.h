@@ -12,7 +12,7 @@
 #include "resultiterator.h"
 #include "search_pim_export.h"
 
-#include <AkonadiCore/Collection>
+#include <Akonadi/Collection>
 #include <QStringList>
 
 namespace Akonadi

@@ -8,7 +8,7 @@
 
 #include "akonadisearchdebugsearchpathcombobox.h"
 #include "search_debug_export.h"
-#include <AkonadiCore/Item>
+#include <Akonadi/Item>
 #include <QDialog>
 
 namespace Akonadi
