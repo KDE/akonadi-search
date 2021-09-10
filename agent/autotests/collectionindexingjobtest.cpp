@@ -10,8 +10,8 @@
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/ServerManager>
-#include <AkonadiCore/qtest_akonadi.h>
 #include <QTest>
+#include <akonadi/qtest_akonadi.h>
 
 class TestIndex : public Index
 {

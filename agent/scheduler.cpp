@@ -10,7 +10,7 @@
 #include "akonadi_indexer_agent_debug.h"
 #include "collectionindexingjob.h"
 
-#include <AgentBase>
+#include <Akonadi/AgentBase>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/CollectionFetchScope>
 #include <Akonadi/IndexPolicyAttribute>

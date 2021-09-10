@@ -6,6 +6,7 @@
  */
 #include "collectionindexingjob.h"
 #include "abstractindexer.h"
+#include <Akonadi/AgentBase>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/CollectionFetchScope>
 #include <Akonadi/CollectionStatistics>
@@ -14,7 +15,6 @@
 #include <Akonadi/ItemFetchScope>
 #include <Akonadi/ServerManager>
 #include <KLocalizedString>
-#include <akonadi/agentbase.h>
 #include <akonadi_indexer_agent_debug.h>
 
 CollectionIndexingJob::CollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, QObject *parent)

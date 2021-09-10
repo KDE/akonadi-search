@@ -17,7 +17,7 @@
 
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
-#include <akonadi/session.h>
+#include <Akonadi/Session>
 
 #include <KContacts/Addressee>
 
