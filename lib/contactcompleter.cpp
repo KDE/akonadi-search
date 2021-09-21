@@ -103,7 +103,7 @@ QStringList ContactCompleter::complete()
     // duplicates can be collapsed by Xapian::Enquire::set_collapse_key()
 
     int retryCount = 0;
-    Q_FOREVER {
+    for (;;) {
         try {
             return processEnquire(enq, m_limit);
         } catch (const Xapian::DatabaseCorruptError &e) {
