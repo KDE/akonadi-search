@@ -18,7 +18,9 @@
 
 using namespace Akonadi::Search::PIM;
 
-struct CollectionQuery::Private {
+class Akonadi::Search::PIM::CollectionQueryPrivate
+{
+public:
     QStringList ns;
     QStringList mimeType;
     QString nameString;
@@ -30,7 +32,7 @@ struct CollectionQuery::Private {
 
 CollectionQuery::CollectionQuery()
     : Query()
-    , d(new Private)
+    , d(new CollectionQueryPrivate)
 {
     d->databaseDir = defaultLocation(QStringLiteral("collections"));
     d->limit = 0;

@@ -24,6 +24,8 @@ namespace Search
 /** PIM specific search API. */
 namespace PIM
 {
+class CollectionQueryPrivate;
+
 /** Collection query. */
 class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
@@ -57,8 +59,7 @@ public:
 
 private:
     //@cond PRIVATE
-    struct Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<CollectionQueryPrivate> const d;
     //@endcond
 };
 }
