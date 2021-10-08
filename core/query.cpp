@@ -58,10 +58,7 @@ Query::Query(const Query &rhs)
 {
 }
 
-Query::~Query()
-{
-    delete d;
-}
+Query::~Query() = default;
 
 void Query::setTerm(const Term &t)
 {

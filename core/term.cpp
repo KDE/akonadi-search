@@ -101,10 +101,7 @@ Term::Term(const Term &lhs, Term::Operation op, const Term &rhs)
     d->m_subTerms << rhs;
 }
 
-Term::~Term()
-{
-    delete d;
-}
+Term::~Term() = default;
 
 bool Term::isValid() const
 {

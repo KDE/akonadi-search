@@ -11,6 +11,8 @@
 #include <Akonadi/Item>
 #include <QObject>
 
+#include <memory>
+
 namespace Akonadi
 {
 namespace Search
@@ -42,7 +44,7 @@ public:
     QString contactIndexingPath() const;
 
 private:
-    IndexedItemsPrivate *const d;
+    std::unique_ptr<IndexedItemsPrivate> const d;
 };
 }
 }

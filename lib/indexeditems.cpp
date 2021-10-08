@@ -184,10 +184,7 @@ IndexedItems::IndexedItems(QObject *parent)
 {
 }
 
-IndexedItems::~IndexedItems()
-{
-    delete d;
-}
+IndexedItems::~IndexedItems() = default;
 
 void IndexedItems::setOverrideDbPrefixPath(const QString &path)
 {

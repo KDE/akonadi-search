@@ -39,10 +39,7 @@ ContactQuery::ContactQuery()
     d->criteria = StartsWithMatch;
 }
 
-ContactQuery::~ContactQuery()
-{
-    delete d;
-}
+ContactQuery::~ContactQuery() = default;
 
 void ContactQuery::matchName(const QString &name)
 {

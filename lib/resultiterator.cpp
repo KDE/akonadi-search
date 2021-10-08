@@ -20,10 +20,7 @@ ResultIterator::ResultIterator(const ResultIterator &ri)
 {
 }
 
-ResultIterator::~ResultIterator()
-{
-    delete d;
-}
+ResultIterator::~ResultIterator() = default;
 
 bool ResultIterator::next()
 {

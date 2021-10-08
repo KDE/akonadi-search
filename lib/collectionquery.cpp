@@ -36,10 +36,7 @@ CollectionQuery::CollectionQuery()
     d->limit = 0;
 }
 
-CollectionQuery::~CollectionQuery()
-{
-    delete d;
-}
+CollectionQuery::~CollectionQuery() = default;
 
 void CollectionQuery::setDatabaseDir(const QString &dir)
 {

@@ -13,6 +13,8 @@
 
 #include <QString>
 
+#include <memory>
+
 namespace Akonadi
 {
 namespace Search
@@ -46,7 +48,7 @@ public:
 
 private:
     class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 }
 }

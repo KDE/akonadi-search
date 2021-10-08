@@ -11,6 +11,8 @@
 #include "resultiterator.h"
 #include "search_core_export.h"
 
+#include <memory>
+
 class QVariant;
 
 namespace Akonadi
@@ -140,7 +142,7 @@ public:
 
 private:
     class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 }
 }

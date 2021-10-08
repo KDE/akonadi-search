@@ -37,10 +37,7 @@ NoteQuery::NoteQuery()
 {
 }
 
-NoteQuery::~NoteQuery()
-{
-    delete d;
-}
+NoteQuery::~NoteQuery() = default;
 
 void NoteQuery::matchTitle(const QString &title)
 {

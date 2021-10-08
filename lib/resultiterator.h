@@ -12,6 +12,8 @@
 
 #include <Akonadi/Item>
 
+#include <memory>
+
 namespace Akonadi
 {
 namespace Search
@@ -40,7 +42,7 @@ private:
     friend class CollectionQuery;
 
     class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 }
 }

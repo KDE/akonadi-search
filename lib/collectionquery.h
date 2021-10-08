@@ -15,6 +15,8 @@
 #include <Akonadi/Collection>
 #include <QStringList>
 
+#include <memory>
+
 namespace Akonadi
 {
 namespace Search
@@ -56,7 +58,7 @@ public:
 private:
     //@cond PRIVATE
     struct Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
     //@endcond
 };
 }

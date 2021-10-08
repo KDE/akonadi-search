@@ -14,6 +14,8 @@
 #include <QString>
 #include <QVariant>
 
+#include <memory>
+
 namespace Akonadi
 {
 namespace Search
@@ -104,7 +106,7 @@ public:
 
 private:
     class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 
 inline Term operator&&(const Term &lhs, const Term &rhs)

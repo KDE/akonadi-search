@@ -58,10 +58,7 @@ EmailQuery::EmailQuery()
 {
 }
 
-EmailQuery::~EmailQuery()
-{
-    delete d;
-}
+EmailQuery::~EmailQuery() = default;
 
 void EmailQuery::setSplitSearchMatchString(bool split)
 {
