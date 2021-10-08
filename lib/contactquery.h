@@ -21,6 +21,8 @@ namespace Search
 {
 namespace PIM
 {
+class ContactQueryPrivate;
+
 /**
  * Query for a list of contacts matching a criteria
  */
@@ -47,8 +49,7 @@ public:
     void setLimit(int limit);
 
 private:
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<ContactQueryPrivate> const d;
 };
 }
 }

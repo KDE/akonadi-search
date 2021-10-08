@@ -11,12 +11,12 @@
 using namespace Akonadi::Search::PIM;
 
 ResultIterator::ResultIterator()
-    : d(new Private)
+    : d(new ResultIteratorPrivate)
 {
 }
 
 ResultIterator::ResultIterator(const ResultIterator &ri)
-    : d(new Private(*ri.d))
+    : d(new ResultIteratorPrivate(*ri.d))
 {
 }
 

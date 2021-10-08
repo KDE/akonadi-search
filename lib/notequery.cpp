@@ -19,10 +19,10 @@
 
 using namespace Akonadi::Search::PIM;
 
-class Q_DECL_HIDDEN NoteQuery::Private
+class Akonadi::Search::PIM::NoteQueryPrivate
 {
 public:
-    Private()
+    NoteQueryPrivate()
     {
     }
 
@@ -33,7 +33,7 @@ public:
 
 NoteQuery::NoteQuery()
     : Query()
-    , d(new Private)
+    , d(new NoteQueryPrivate)
 {
 }
 

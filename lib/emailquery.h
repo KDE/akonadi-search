@@ -22,6 +22,8 @@ namespace Search
 {
 namespace PIM
 {
+class EmailQueryPrivate;
+
 /** Email query. */
 class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
@@ -96,8 +98,7 @@ public:
 
 private:
     //@cond PRIVATE
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<EmailQueryPrivate> const d;
     //@endcond
 };
 }

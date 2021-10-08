@@ -20,6 +20,7 @@ namespace Akonadi
 namespace Search
 {
 class Term;
+class QueryPrivate;
 
 /** Search query. */
 class AKONADI_SEARCH_CORE_EXPORT Query
@@ -141,8 +142,7 @@ public:
     Query &operator=(const Query &rhs);
 
 private:
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<QueryPrivate> const d;
 };
 }
 }

@@ -12,11 +12,11 @@
 
 using namespace Akonadi::Search;
 
-class Q_DECL_HIDDEN Akonadi::Search::Term::Private
+class Akonadi::Search::TermPrivate
 {
 public:
-    Operation m_op = None;
-    Comparator m_comp = Auto;
+    Term::Operation m_op = Term::None;
+    Term::Comparator m_comp = Term::Auto;
 
     QString m_property;
     QVariant m_value;
@@ -28,23 +28,23 @@ public:
 };
 
 Term::Term()
-    : d(new Private)
+    : d(new TermPrivate)
 {
 }
 
 Term::Term(const Term &t)
-    : d(new Private(*t.d))
+    : d(new TermPrivate(*t.d))
 {
 }
 
 Term::Term(const QString &property)
-    : d(new Private)
+    : d(new TermPrivate)
 {
     d->m_property = property;
 }
 
 Term::Term(const QString &property, const QVariant &value, Term::Comparator c)
-    : d(new Private)
+    : d(new TermPrivate)
 {
     d->m_property = property;
     d->m_value = value;
@@ -64,7 +64,7 @@ Term::Term(const QString &property, const QVariant &value, Term::Comparator c)
 
 /*
 Term::Term(const QString& property, const QVariant& start, const QVariant& end)
-    : d(new Private)
+    : d(new TermPrivate)
 {
     d->m_property = property;
     d->m_op = Range;
@@ -74,27 +74,27 @@ Term::Term(const QString& property, const QVariant& start, const QVariant& end)
 */
 
 Term::Term(Term::Operation op)
-    : d(new Private)
+    : d(new TermPrivate)
 {
     d->m_op = op;
 }
 
 Term::Term(Term::Operation op, const Term &t)
-    : d(new Private)
+    : d(new TermPrivate)
 {
     d->m_op = op;
     d->m_subTerms << t;
 }
 
 Term::Term(Term::Operation op, const QList<Term> &t)
-    : d(new Private)
+    : d(new TermPrivate)
 {
     d->m_op = op;
     d->m_subTerms = t;
 }
 
 Term::Term(const Term &lhs, Term::Operation op, const Term &rhs)
-    : d(new Private)
+    : d(new TermPrivate)
 {
     d->m_op = op;
     d->m_subTerms << lhs;

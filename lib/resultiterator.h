@@ -23,6 +23,7 @@ namespace PIM
 class ContactQuery;
 class EmailQuery;
 class NoteQuery;
+class ResultIteratorPrivate;
 
 /** Result iterator. */
 class AKONADI_SEARCH_PIM_EXPORT ResultIterator
@@ -41,8 +42,7 @@ private:
     friend class NoteQuery;
     friend class CollectionQuery;
 
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<ResultIteratorPrivate> const d;
 };
 }
 }

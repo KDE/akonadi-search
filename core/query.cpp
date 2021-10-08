@@ -23,7 +23,7 @@ using namespace Akonadi::Search;
 
 const int defaultLimit = 100000;
 
-class Q_DECL_HIDDEN Akonadi::Search::Query::Private
+class Akonadi::Search::QueryPrivate
 {
 public:
     Term m_term;
@@ -37,24 +37,24 @@ public:
     int m_monthFilter = -1;
     int m_dayFilter = -1;
 
-    SortingOption m_sortingOption = SortAuto;
+    Query::SortingOption m_sortingOption = Query::SortAuto;
     QString m_sortingProperty;
     QVariantMap m_customOptions;
 };
 
 Query::Query()
-    : d(new Private)
+    : d(new QueryPrivate)
 {
 }
 
 Query::Query(const Term &t)
-    : d(new Private)
+    : d(new QueryPrivate)
 {
     d->m_term = t;
 }
 
 Query::Query(const Query &rhs)
-    : d(new Private(*rhs.d))
+    : d(new QueryPrivate(*rhs.d))
 {
 }
 

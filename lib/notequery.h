@@ -20,6 +20,8 @@ namespace Search
 {
 namespace PIM
 {
+class NoteQueryPrivate;
+
 /**
  * Query for a list of contacts matching a criteria
  */
@@ -38,8 +40,7 @@ public:
     ResultIterator exec() override;
 
 private:
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<NoteQueryPrivate> const d;
 };
 }
 }

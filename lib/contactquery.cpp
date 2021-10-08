@@ -19,7 +19,7 @@
 
 using namespace Akonadi::Search::PIM;
 
-class Q_DECL_HIDDEN ContactQuery::Private
+class Akonadi::Search::PIM::ContactQueryPrivate
 {
 public:
     QString name;
@@ -29,12 +29,12 @@ public:
     QString any;
 
     int limit;
-    MatchCriteria criteria;
+    ContactQuery::MatchCriteria criteria;
 };
 
 ContactQuery::ContactQuery()
     : Query()
-    , d(new Private)
+    , d(new ContactQueryPrivate)
 {
     d->criteria = StartsWithMatch;
 }

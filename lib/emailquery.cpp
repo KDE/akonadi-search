@@ -19,10 +19,10 @@
 
 using namespace Akonadi::Search::PIM;
 
-class Q_DECL_HIDDEN EmailQuery::Private
+class Akonadi::Search::PIM::EmailQueryPrivate
 {
 public:
-    Private();
+    EmailQueryPrivate();
 
     QStringList involves;
     QStringList to;
@@ -45,7 +45,7 @@ public:
     bool splitSearchMatchString = true;
 };
 
-EmailQuery::Private::Private()
+EmailQueryPrivate::EmailQueryPrivate()
     : important('0')
     , read('0')
     , attachment('0')
@@ -54,7 +54,7 @@ EmailQuery::Private::Private()
 
 EmailQuery::EmailQuery()
     : Query()
-    , d(new Private)
+    , d(new EmailQueryPrivate)
 {
 }
 

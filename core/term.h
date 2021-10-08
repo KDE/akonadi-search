@@ -20,6 +20,8 @@ namespace Akonadi
 {
 namespace Search
 {
+class TermPrivate;
+
 /** Search term. */
 class AKONADI_SEARCH_CORE_EXPORT Term
 {
@@ -105,8 +107,7 @@ public:
     Term &operator=(const Term &rhs);
 
 private:
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<TermPrivate> const d;
 };
 
 inline Term operator&&(const Term &lhs, const Term &rhs)
