@@ -18,7 +18,7 @@ class AkonadiSearchDebugSearchJob : public QObject
     Q_OBJECT
 public:
     explicit AkonadiSearchDebugSearchJob(QObject *parent = nullptr);
-    ~AkonadiSearchDebugSearchJob();
+    ~AkonadiSearchDebugSearchJob() override;
 
     void start();
 

@@ -20,7 +20,7 @@ class CollectionIndexer : public QObject
     Q_OBJECT
 public:
     explicit CollectionIndexer(const QString &path);
-    ~CollectionIndexer();
+    ~CollectionIndexer() override;
 
     void index(const Akonadi::Collection &collection);
     void change(const Akonadi::Collection &collection);

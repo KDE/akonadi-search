@@ -13,7 +13,7 @@ class AkonadiSearchDebugWidgetTest : public QObject
     Q_OBJECT
 public:
     explicit AkonadiSearchDebugWidgetTest(QObject *parent = nullptr);
-    ~AkonadiSearchDebugWidgetTest();
+    ~AkonadiSearchDebugWidgetTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldFillLineEditWhenWeWantToSearchItem();

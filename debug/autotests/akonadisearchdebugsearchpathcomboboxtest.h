@@ -13,7 +13,7 @@ class AkonadiSearchDebugSearchPathComboBoxTest : public QObject
     Q_OBJECT
 public:
     explicit AkonadiSearchDebugSearchPathComboBoxTest(QObject *parent = nullptr);
-    ~AkonadiSearchDebugSearchPathComboBoxTest();
+    ~AkonadiSearchDebugSearchPathComboBoxTest() override;
 private Q_SLOTS:
     void shouldHaveDefaultValue();
     void shouldReturnPath();

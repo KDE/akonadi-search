@@ -43,7 +43,7 @@ public:
                        const KSharedConfigPtr &config,
                        const QSharedPointer<JobFactory> &jobFactory = QSharedPointer<JobFactory>(),
                        QObject *parent = nullptr);
-    virtual ~Scheduler();
+    ~Scheduler() override;
     void addItem(const Akonadi::Item &);
     void scheduleCollection(const Akonadi::Collection &, bool fullSync = false);
 

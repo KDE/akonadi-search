@@ -13,7 +13,7 @@ class AkonadiSearchDebugDialogTest : public QObject
     Q_OBJECT
 public:
     explicit AkonadiSearchDebugDialogTest(QObject *parent = nullptr);
-    ~AkonadiSearchDebugDialogTest();
+    ~AkonadiSearchDebugDialogTest() override;
 
 private Q_SLOTS:
     void shouldHaveDefaultValue();

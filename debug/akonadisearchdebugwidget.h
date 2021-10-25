@@ -25,7 +25,7 @@ class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugWidget : public QWidget
     Q_OBJECT
 public:
     explicit AkonadiSearchDebugWidget(QWidget *parent = nullptr);
-    ~AkonadiSearchDebugWidget();
+    ~AkonadiSearchDebugWidget() override;
 
     void setAkonadiId(Akonadi::Item::Id akonadiId);
     void setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type);
