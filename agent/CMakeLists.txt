@@ -19,7 +19,19 @@ target_sources(akonadi_indexing_agent PRIVATE
     collectionindexingjob.cpp
     index.cpp
     collectionupdatejob.cpp
-)
+
+    abstractindexer.h
+    agent.h
+    emailindexer.h
+    contactindexer.h
+    akonotesindexer.h
+    calendarindexer.h
+    collectionindexer.h
+    priority.h
+    scheduler.h
+    collectionindexingjob.h
+    index.h
+    collectionupdatejob.h)
 
 ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent
         DESCRIPTION "akonadisearch (akonadi indexer agent)"

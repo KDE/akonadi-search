@@ -11,6 +11,7 @@ ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_de
 add_library(krunner_pimcontacts MODULE)
 target_sources(krunner_pimcontacts PRIVATE
     pimcontactsrunner.cpp
+    pimcontactsrunner.h
     ${pimcontactsrunner_DEBUG}
 )
 
@@ -29,6 +30,7 @@ target_link_libraries(krunner_pimcontacts
 add_library(kcm_krunner_pimcontacts MODULE)
 target_sources(kcm_krunner_pimcontacts PRIVATE
     pimcontactsrunnerconfig.cpp
+    pimcontactsrunnerconfig.h
     ${pimcontactsrunner_DEBUG}
 )
 

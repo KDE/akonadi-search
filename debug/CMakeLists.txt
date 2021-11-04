@@ -8,6 +8,11 @@ target_sources(KF5AkonadiSearchDebug PRIVATE
   akonadisearchdebugsearchpathcombobox.cpp
   akonadisearchsyntaxhighlighter.cpp
 
+  akonadisearchdebugdialog.h
+  akonadisearchdebugwidget.h
+  job/akonadisearchdebugsearchjob.h
+  akonadisearchdebugsearchpathcombobox.h
+  akonadisearchsyntaxhighlighter.h
 )
 
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)

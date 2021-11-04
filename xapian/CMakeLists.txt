@@ -8,7 +8,13 @@ target_sources(KF5AkonadiSearchXapian PRIVATE
     xapiandatabase.cpp
     xapiantermgenerator.cpp
     xapianqueryparser.cpp
-)
+
+    xapiansearchstore.h
+    xapiandocument.h
+    xapiandatabase.h
+    xapiantermgenerator.h
+    xapianqueryparser.h
+    )
 
 ecm_qt_declare_logging_category(KF5AkonadiSearchXapian HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME org.kde.pim.akonadi_search_xapian
         DESCRIPTION "akonadisearch (akonadi indexer xapian)"

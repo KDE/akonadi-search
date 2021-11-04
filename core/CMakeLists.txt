@@ -6,7 +6,12 @@ target_sources(KF5AkonadiSearchCore PRIVATE
     term.cpp
     query.cpp
     resultiterator.cpp
-)
+
+    searchstore.h
+    term.h
+    query.h
+    resultiterator.h
+    )
 
 ecm_qt_declare_logging_category(KF5AkonadiSearchCore HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core
         DESCRIPTION "akonadisearch (akonadi core lib)"

@@ -27,7 +27,18 @@ target_sources(KF5AkonadiSearchPIM PRIVATE
     indexeditems.cpp
 
     ../search/email/agepostingsource.cpp
-)
+
+    query.h
+    resultiterator.h
+    contactquery.h
+    emailquery.h
+    notequery.h
+    contactcompleter.h
+    collectionquery.h
+    indexeditems.h
+
+    ../search/email/agepostingsource.h
+    )
 
 ecm_qt_declare_logging_category(KF5AkonadiSearchPIM HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME org.kde.pim.akonadi_search_pim
         DESCRIPTION "akonadisearch(akonadi pim lib)"
