@@ -67,7 +67,7 @@ void TermGeneratorTest::testUnderscore_splitting()
 
 void TermGeneratorTest::testAccetCharacters()
 {
-    QString str = QString::fromLatin1("Como está Kûg");
+    QString str = QString::fromUtf8("Como estÃ¡ KÃ»g");
 
     Xapian::Document doc;
     XapianTermGenerator termGen(&doc);
@@ -80,8 +80,8 @@ void TermGeneratorTest::testAccetCharacters()
     expectedWords << QStringLiteral("como")
                   << QStringLiteral("esta")
                   << QStringLiteral("kug")
-                  << QString::fromLatin1("está")
-                  << QString::fromLatin1("kûg");
+                  << QString::fromUtf8("estÃ¡")
+                  << QString::fromUtf8("kÃ»g");
 
     QCOMPARE(words, expectedWords);
 }
