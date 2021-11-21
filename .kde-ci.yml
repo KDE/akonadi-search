@@ -8,6 +8,7 @@ Dependencies:
     'frameworks/kcmutils': '@latest'
     'frameworks/kcontacts' : '@latest'
     'frameworks/kcalendarcore' : '@latest'
+    'frameworks/krunner' : '@latest'
     'pim/akonadi' : '@same'
     'pim/akonadi-mime' : '@same'
     'pim/kmime' : '@same'
