@@ -183,7 +183,7 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             }
         }
     }
-    return Term();
+    return {};
 }
 
 Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
@@ -218,7 +218,7 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
             }
         }
     }
-    return Term();
+    return {};
 }
 
 Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
@@ -246,7 +246,7 @@ Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
             }
         }
     }
-    return Term();
+    return {};
 }
 
 Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
@@ -279,7 +279,7 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
             }
         }
     }
-    return Term();
+    return {};
 }
 
 QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qint64> &collections, const QStringList &mimeTypes)
@@ -344,7 +344,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qin
     } else {
         if (t.subTerms().isEmpty()) {
             qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "no terms added";
-            return QSet<qint64>();
+            return {};
         }
 
         query.setTerm(t);

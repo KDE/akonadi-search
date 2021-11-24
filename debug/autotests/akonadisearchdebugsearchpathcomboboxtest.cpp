@@ -13,9 +13,7 @@ AkonadiSearchDebugSearchPathComboBoxTest::AkonadiSearchDebugSearchPathComboBoxTe
 {
 }
 
-AkonadiSearchDebugSearchPathComboBoxTest::~AkonadiSearchDebugSearchPathComboBoxTest()
-{
-}
+AkonadiSearchDebugSearchPathComboBoxTest::~AkonadiSearchDebugSearchPathComboBoxTest() = default;
 
 void AkonadiSearchDebugSearchPathComboBoxTest::shouldHaveDefaultValue()
 {

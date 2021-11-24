@@ -66,12 +66,12 @@ QString XapianDocument::fetchTermStartsWith(const QByteArray &term)
         it.skip_to(term.constData());
 
         if (it == m_doc.termlist_end()) {
-            return QString();
+            return {};
         }
         std::string str = *it;
         return QString::fromUtf8(str.c_str(), str.length());
     } catch (const Xapian::Error &) {
-        return QString();
+        return {};
     }
 }
 

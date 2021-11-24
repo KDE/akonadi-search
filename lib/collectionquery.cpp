@@ -82,7 +82,7 @@ ResultIterator CollectionQuery::exec()
         db = Xapian::Database(QFile::encodeName(d->databaseDir).toStdString());
     } catch (const Xapian::DatabaseError &e) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Failed to open Xapian database:" << d->databaseDir << "; error:" << QString::fromStdString(e.get_error_string());
-        return ResultIterator();
+        return {};
     }
 
     QList<Xapian::Query> queries;

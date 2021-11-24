@@ -17,9 +17,7 @@ AkonadiSearchDebugDialogTest::AkonadiSearchDebugDialogTest(QObject *parent)
 {
 }
 
-AkonadiSearchDebugDialogTest::~AkonadiSearchDebugDialogTest()
-{
-}
+AkonadiSearchDebugDialogTest::~AkonadiSearchDebugDialogTest() = default;
 
 void AkonadiSearchDebugDialogTest::initTestCase()
 {

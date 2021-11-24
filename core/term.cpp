@@ -147,7 +147,7 @@ Term Term::subTerm() const
         return d->m_subTerms.first();
     }
 
-    return Term();
+    return {};
 }
 
 QList<Term> Term::subTerms() const
@@ -261,7 +261,7 @@ QVariantMap Term::toVariantMap() const
         break;
 
     default:
-        return QVariantMap();
+        return {};
     }
 
     QVariantMap m;
@@ -295,7 +295,7 @@ QVariant tryConvert(const QVariant &var)
 Term Term::fromVariantMap(const QVariantMap &map)
 {
     if (map.size() != 1) {
-        return Term();
+        return {};
     }
 
     Term term;
@@ -411,7 +411,7 @@ QString comparatorToString(Term::Comparator c)
         return QStringLiteral(">=");
     }
 
-    return QString();
+    return {};
 }
 
 QString operationToString(Term::Operation op)
@@ -425,7 +425,7 @@ QString operationToString(Term::Operation op)
         return QStringLiteral("OR");
     }
 
-    return QString();
+    return {};
 }
 } // namespace
 

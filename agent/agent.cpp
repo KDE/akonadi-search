@@ -107,9 +107,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     }
 }
 
-AkonadiIndexingAgent::~AkonadiIndexingAgent()
-{
-}
+AkonadiIndexingAgent::~AkonadiIndexingAgent() = default;
 
 void AkonadiIndexingAgent::reindexAll()
 {

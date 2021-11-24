@@ -16,9 +16,7 @@ AkonadiSearchDebugSearchPathComboBox::AkonadiSearchDebugSearchPathComboBox(QWidg
     initialize();
 }
 
-AkonadiSearchDebugSearchPathComboBox::~AkonadiSearchDebugSearchPathComboBox()
-{
-}
+AkonadiSearchDebugSearchPathComboBox::~AkonadiSearchDebugSearchPathComboBox() = default;
 
 QString AkonadiSearchDebugSearchPathComboBox::searchPath()
 {
@@ -27,7 +25,7 @@ QString AkonadiSearchDebugSearchPathComboBox::searchPath()
         const QString value = pathFromEnum(static_cast<Akonadi::Search::AkonadiSearchDebugSearchPathComboBox::SearchType>(itemData(currentPathIndex).toInt()));
         return value;
     } else {
-        return QString();
+        return {};
     }
 }
 
@@ -54,7 +52,7 @@ QString AkonadiSearchDebugSearchPathComboBox::pathFromEnum(SearchType type)
     case Calendars:
         return defaultLocations(QStringLiteral("calendars"));
     }
-    return QString();
+    return {};
 }
 
 void AkonadiSearchDebugSearchPathComboBox::setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type)

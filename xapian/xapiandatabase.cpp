@@ -148,7 +148,7 @@ XapianDocument XapianDatabase::document(uint id)
         m_db->reopen();
         return document(id);
     } catch (const Xapian::Error &) {
-        return XapianDocument();
+        return {};
     }
 }
 
@@ -166,17 +166,17 @@ Xapian::WritableDatabase XapianDatabase::createWritableDb()
             std::this_thread::sleep_for(std::chrono::milliseconds(i * 50));
         } catch (const Xapian::DatabaseCreateError &err) {
             qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << err.get_error_string();
-            return Xapian::WritableDatabase();
+            return {};
         } catch (const Xapian::DatabaseCorruptError &err) {
             qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Database Corrupted - What did you do?";
             qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << err.get_error_string();
-            return Xapian::WritableDatabase();
+            return {};
         } catch (...) {
             qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Bananana Error";
-            return Xapian::WritableDatabase();
+            return {};
         }
     }
 
     qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Could not obtain lock for Xapian Database. This is bad";
-    return Xapian::WritableDatabase();
+    return {};
 }

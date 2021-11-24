@@ -83,7 +83,7 @@ void App::main()
 void App::itemsReceived(const Akonadi::Item::List &itemList)
 {
     for (const Akonadi::Item &item : itemList) {
-        KMime::Message::Ptr message = item.payload<KMime::Message::Ptr>();
+        auto message = item.payload<KMime::Message::Ptr>();
         QDateTime date = message->date()->dateTime();
         qDebug() << date.toString(Qt::ISODate) << message->subject()->asUnicodeString();
     }

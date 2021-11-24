@@ -24,9 +24,7 @@
 
 using namespace std::chrono_literals;
 
-JobFactory::~JobFactory()
-{
-}
+JobFactory::~JobFactory() = default;
 
 CollectionIndexingJob *
 JobFactory::createCollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, bool fullSync, QObject *parent)

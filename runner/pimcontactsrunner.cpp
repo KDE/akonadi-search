@@ -38,9 +38,7 @@ PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &met
     // reloadConfiguration() called by default init() implementation
 }
 
-PIMContactsRunner::~PIMContactsRunner()
-{
-}
+PIMContactsRunner::~PIMContactsRunner() = default;
 
 void PIMContactsRunner::reloadConfiguration()
 {

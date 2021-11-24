@@ -23,28 +23,26 @@ SearchStore::SearchStore(QObject *parent)
 {
 }
 
-SearchStore::~SearchStore()
-{
-}
+SearchStore::~SearchStore() = default;
 
 QUrl SearchStore::url(int)
 {
-    return QUrl();
+    return {};
 }
 
 QString SearchStore::icon(int)
 {
-    return QString();
+    return {};
 }
 
 QString SearchStore::text(int)
 {
-    return QString();
+    return {};
 }
 
 QString SearchStore::property(int, const QString &)
 {
-    return QString();
+    return {};
 }
 
 Q_GLOBAL_STATIC(SearchStore::List, s_overrideSearchStores)

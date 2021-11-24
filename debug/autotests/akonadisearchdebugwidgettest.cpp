@@ -17,9 +17,7 @@ AkonadiSearchDebugWidgetTest::AkonadiSearchDebugWidgetTest(QObject *parent)
 {
 }
 
-AkonadiSearchDebugWidgetTest::~AkonadiSearchDebugWidgetTest()
-{
-}
+AkonadiSearchDebugWidgetTest::~AkonadiSearchDebugWidgetTest() = default;
 
 void AkonadiSearchDebugWidgetTest::shouldHaveDefaultValue()
 {

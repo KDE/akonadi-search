@@ -52,9 +52,7 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     connect(mLineEdit, &KLineEdit::returnPressed, this, &AkonadiSearchDebugWidget::slotSearch);
 }
 
-AkonadiSearchDebugWidget::~AkonadiSearchDebugWidget()
-{
-}
+AkonadiSearchDebugWidget::~AkonadiSearchDebugWidget() = default;
 
 void AkonadiSearchDebugWidget::slotSearchLineTextChanged(const QString &text)
 {

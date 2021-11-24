@@ -15,9 +15,7 @@ namespace Search
 class Rule
 {
 public:
-    Rule()
-    {
-    }
+    Rule() = default;
 
     Rule(const QRegExp &r, const QTextCharFormat &f)
         : pattern(r)

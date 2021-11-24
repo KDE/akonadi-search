@@ -15,9 +15,7 @@ AkonadiSearchSyntaxHighlighter::AkonadiSearchSyntaxHighlighter(QTextDocument *do
     init();
 }
 
-AkonadiSearchSyntaxHighlighter::~AkonadiSearchSyntaxHighlighter()
-{
-}
+AkonadiSearchSyntaxHighlighter::~AkonadiSearchSyntaxHighlighter() = default;
 
 void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
 {

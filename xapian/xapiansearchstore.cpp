@@ -64,7 +64,7 @@ Xapian::Query XapianSearchStore::toXapianQuery(Xapian::Query::op op, const QList
         queries << q;
     }
 
-    return Xapian::Query(op, queries.begin(), queries.end());
+    return {op, queries.begin(), queries.end()};
 }
 
 static Xapian::Query negate(bool shouldNegate, const Xapian::Query &query)
@@ -96,7 +96,7 @@ Xapian::Query XapianSearchStore::andQuery(const Xapian::Query &a, const Xapian::
         return a;
     }
     if (a.empty() && b.empty()) {
-        return Xapian::Query();
+        return {};
     } else {
         return Xapian::Query(Xapian::Query::OP_AND, a, b);
     }
@@ -182,7 +182,7 @@ QByteArray XapianSearchStore::id(int queryId)
 
     const Result res = m_queryMap.value(queryId);
     if (!res.lastId) {
-        return QByteArray();
+        return {};
     }
 
     return serialize(idPrefix(), res.lastId);
@@ -194,7 +194,7 @@ QUrl XapianSearchStore::url(int queryId)
     Result &res = m_queryMap[queryId];
 
     if (!res.lastId) {
-        return QUrl();
+        return {};
     }
 
     if (!res.lastUrl.isEmpty()) {
@@ -230,7 +230,7 @@ bool XapianSearchStore::next(int queryId)
 Xapian::Document XapianSearchStore::docForQuery(int queryId)
 {
     if (!m_db) {
-        return Xapian::Document();
+        return {};
     }
 
     QMutexLocker lock(&m_mutex);
@@ -238,17 +238,17 @@ Xapian::Document XapianSearchStore::docForQuery(int queryId)
     try {
         const Result &res = m_queryMap.value(queryId);
         if (!res.lastId) {
-            return Xapian::Document();
+            return {};
         }
 
         return m_db->get_document(res.lastId);
     } catch (const Xapian::DocNotFoundError &) {
-        return Xapian::Document();
+        return {};
     } catch (const Xapian::DatabaseModifiedError &) {
         m_db->reopen();
         return docForQuery(queryId);
     } catch (const Xapian::Error &) {
-        return Xapian::Document();
+        return {};
     }
 }
 
@@ -262,7 +262,7 @@ Xapian::Query XapianSearchStore::constructFilterQuery(int year, int month, int d
     Q_UNUSED(year)
     Q_UNUSED(month)
     Q_UNUSED(day)
-    return Xapian::Query();
+    return {};
 }
 
 Xapian::Query XapianSearchStore::finalizeQuery(const Xapian::Query &query)

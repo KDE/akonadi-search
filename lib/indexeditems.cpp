@@ -21,9 +21,7 @@ using namespace Akonadi::Search::PIM;
 class Akonadi::Search::PIM::IndexedItemsPrivate
 {
 public:
-    IndexedItemsPrivate()
-    {
-    }
+    IndexedItemsPrivate() = default;
 
     Q_REQUIRED_RESULT QString dbPath(const QString &dbName) const;
     Q_REQUIRED_RESULT QString emailIndexingPath() const;

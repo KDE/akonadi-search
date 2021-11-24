@@ -15,9 +15,7 @@ AkonadiSearchDebugSearchJob::AkonadiSearchDebugSearchJob(QObject *parent)
 {
 }
 
-AkonadiSearchDebugSearchJob::~AkonadiSearchDebugSearchJob()
-{
-}
+AkonadiSearchDebugSearchJob::~AkonadiSearchDebugSearchJob() = default;
 
 void AkonadiSearchDebugSearchJob::start()
 {

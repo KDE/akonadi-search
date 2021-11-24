@@ -78,16 +78,16 @@ QStringList ContactCompleter::complete()
         db = Xapian::Database(QFile::encodeName(dir).toStdString());
     } catch (const Xapian::DatabaseOpeningError &) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database does not exist at " << dir;
-        return QStringList();
+        return {};
     } catch (const Xapian::DatabaseCorruptError &) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database corrupted";
-        return QStringList();
+        return {};
     } catch (const Xapian::DatabaseError &e) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
-        return QStringList();
+        return {};
     } catch (...) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Random exception, but we do not want to crash";
-        return QStringList();
+        return {};
     }
 
     Xapian::QueryParser parser;
@@ -108,13 +108,13 @@ QStringList ContactCompleter::complete()
             return processEnquire(enq, m_limit);
         } catch (const Xapian::DatabaseCorruptError &e) {
             qCWarning(AKONADI_SEARCH_PIM_LOG) << "The emailContacts Xapian database is corrupted:" << QString::fromStdString(e.get_description());
-            return QStringList();
+            return {};
         } catch (const Xapian::DatabaseModifiedError &e) {
             db.reopen();
             retryCount++;
             if (retryCount > 3) {
                 qCWarning(AKONADI_SEARCH_PIM_LOG) << "The emailContacts Xapian database seems broken:" << QString::fromStdString(e.get_description());
-                return QStringList();
+                return {};
             }
             continue; // try again
         }

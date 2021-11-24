@@ -7,13 +7,9 @@
 
 #include "abstractindexer.h"
 
-AbstractIndexer::AbstractIndexer()
-{
-}
+AbstractIndexer::AbstractIndexer() = default;
 
-AbstractIndexer::~AbstractIndexer()
-{
-}
+AbstractIndexer::~AbstractIndexer() = default;
 
 void AbstractIndexer::move(Akonadi::Item::Id item, Akonadi::Collection::Id from, Akonadi::Collection::Id to)
 {

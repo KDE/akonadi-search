@@ -22,9 +22,7 @@ using namespace Akonadi::Search::PIM;
 class Akonadi::Search::PIM::NoteQueryPrivate
 {
 public:
-    NoteQueryPrivate()
-    {
-    }
+    NoteQueryPrivate() = default;
 
     QString title;
     QString note;
@@ -68,16 +66,16 @@ ResultIterator NoteQuery::exec()
         db = Xapian::Database(QFile::encodeName(dir).toStdString());
     } catch (const Xapian::DatabaseOpeningError &) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database does not exist at " << dir;
-        return ResultIterator();
+        return {};
     } catch (const Xapian::DatabaseCorruptError &) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Xapian Database corrupted";
-        return ResultIterator();
+        return {};
     } catch (const Xapian::DatabaseError &e) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Failed to open Xapian database:" << QString::fromStdString(e.get_error_string());
-        return ResultIterator();
+        return {};
     } catch (...) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Random exception, but we do not want to crash";
-        return ResultIterator();
+        return {};
     }
 
     QList<Xapian::Query> m_queries;
@@ -118,6 +116,6 @@ ResultIterator NoteQuery::exec()
         return iter;
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
-        return ResultIterator();
+        return {};
     }
 }

@@ -59,14 +59,14 @@ QString PIMSearchStore::findDatabase(const QString &dbName) const
 Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVariant &value, Term::Comparator com)
 {
     if (value.isNull()) {
-        return Xapian::Query();
+        return {};
     }
 
     QString prop = property.toLower();
     if (m_boolProperties.contains(prop)) {
         QString p = m_prefix.value(prop);
         if (p.isEmpty()) {
-            return Xapian::Query();
+            return {};
         }
 
         std::string term("B");

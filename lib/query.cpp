@@ -20,13 +20,9 @@
 
 using namespace Akonadi::Search::PIM;
 
-Query::Query()
-{
-}
+Query::Query() = default;
 
-Query::~Query()
-{
-}
+Query::~Query() = default;
 
 Query *Query::fromJSON(const QByteArray &json)
 {

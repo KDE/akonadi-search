@@ -30,12 +30,12 @@ protected:
 
     Xapian::Query convertTypes(const QStringList &) override
     {
-        return Xapian::Query();
+        return {};
     }
 
     QByteArray idPrefix() override
     {
-        return QByteArray("akonadi");
+        return {"akonadi"};
     }
 
     Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;

@@ -198,7 +198,7 @@ ResultIterator Query::exec()
     // vHanda: Maybe this should default to allow searches on all search stores?
     Q_ASSERT_X(!types().isEmpty(), "Akonadi::Search::Query::exec", "A query is being initialized without a type");
     if (types().isEmpty()) {
-        return ResultIterator();
+        return {};
     }
 
     SearchStore *storeMatch = nullptr;
@@ -218,11 +218,11 @@ ResultIterator Query::exec()
     }
 
     if (!storeMatch) {
-        return ResultIterator();
+        return {};
     }
 
     int id = storeMatch->exec(*this);
-    return ResultIterator(id, storeMatch);
+    return {id, storeMatch};
 }
 
 QByteArray Query::toJSON() const
@@ -351,7 +351,7 @@ QUrl Query::toSearchUrl(const QString &title)
 Query Query::fromSearchUrl(const QUrl &url)
 {
     if (url.scheme() != QLatin1String("akonadisearch")) {
-        return Query();
+        return {};
     }
 
     QUrlQuery urlQuery(url);

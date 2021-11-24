@@ -13,9 +13,7 @@
 
 using namespace Akonadi::Search;
 
-XapianQueryParser::XapianQueryParser()
-{
-}
+XapianQueryParser::XapianQueryParser() = default;
 
 void XapianQueryParser::setDatabase(Xapian::Database *db)
 {
@@ -111,7 +109,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
     */
 
     if (text.isEmpty()) {
-        return Xapian::Query();
+        return {};
     }
 
     QList<Xapian::Query> queries;
@@ -215,7 +213,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
     if (queries.size() == 1) {
         return queries.first();
     }
-    return Xapian::Query(Xapian::Query::OP_AND, queries.begin(), queries.end());
+    return {Xapian::Query::OP_AND, queries.begin(), queries.end()};
 }
 
 void XapianQueryParser::setAutoExapand(bool autoexpand)

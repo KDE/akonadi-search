@@ -75,7 +75,7 @@ Xapian::Query EmailSearchStore::constructQuery(const QString &property, const QV
     // TODO is this special case necessary? maybe we can also move it to PIM
     if (com == Term::Contains) {
         if (!m_prefix.contains(property.toLower())) {
-            return Xapian::Query();
+            return {};
         }
     }
     return PIMSearchStore::constructQuery(property, value, com);

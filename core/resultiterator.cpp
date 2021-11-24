@@ -23,19 +23,12 @@ ResultIterator::ResultIterator()
 }
 
 ResultIterator::ResultIterator(const ResultIterator &rhs)
-    : d(rhs.d)
-{
-}
 
-ResultIterator::~ResultIterator()
-{
-}
+    = default;
 
-ResultIterator &ResultIterator::operator=(const ResultIterator &other)
-{
-    d = other.d;
-    return *this;
-}
+ResultIterator::~ResultIterator() = default;
+
+ResultIterator &ResultIterator::operator=(const ResultIterator &other) = default;
 
 bool ResultIterator::next()
 {
@@ -51,7 +44,7 @@ QByteArray ResultIterator::id() const
     if (d->store) {
         return d->store->id(d->queryId);
     } else {
-        return QByteArray();
+        return {};
     }
 }
 
@@ -60,7 +53,7 @@ QUrl ResultIterator::url() const
     if (d->store) {
         return d->store->url(d->queryId);
     } else {
-        return QUrl();
+        return {};
     }
 }
 
@@ -69,7 +62,7 @@ QString ResultIterator::text() const
     if (d->store) {
         return d->store->text(d->queryId);
     } else {
-        return QString();
+        return {};
     }
 }
 
@@ -78,6 +71,6 @@ QString ResultIterator::icon() const
     if (d->store) {
         return d->store->icon(d->queryId);
     } else {
-        return QString();
+        return {};
     }
 }
