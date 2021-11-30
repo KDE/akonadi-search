@@ -5,8 +5,10 @@ Dependencies:
 - 'on': ['@all']
   'require':
     'frameworks/extra-cmake-modules': '@latest'
+    'frameworks/kcmutils': '@latest'
     'frameworks/kcontacts' : '@latest'
     'frameworks/kcalendarcore' : '@latest'
-    'kde/pim/akonadi' : '@same'
-    'kde/pim/akonadi-mime' : '@same'
-    'kde/pim/kmime' : '@same'
+    'frameworks/krunner' : '@latest'
+    'pim/akonadi' : '@same'
+    'pim/akonadi-mime' : '@same'
+    'pim/kmime' : '@same'
