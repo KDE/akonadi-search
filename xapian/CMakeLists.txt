@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: none
 kde_enable_exceptions()
 add_library(KF5AkonadiSearchXapian)
 add_library(KF5::AkonadiSearchXapian ALIAS KF5AkonadiSearchXapian)

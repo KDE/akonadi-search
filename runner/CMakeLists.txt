@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: none
 
 ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_debug.h
         IDENTIFIER AKONADI_KRUNNER_LOG

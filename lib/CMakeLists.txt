@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: none
 kde_enable_exceptions()
 include_directories(
     ${XAPIAN_INCLUDE_DIR}
