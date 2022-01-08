@@ -45,10 +45,5 @@ target_link_libraries(kcm_krunner_pimcontacts
 install(TARGETS krunner_pimcontacts DESTINATION "${KDE_INSTALL_PLUGINDIR}/kf5/krunner")
 install(TARGETS 
                 kcm_krunner_pimcontacts
-        DESTINATION ${KDE_INSTALL_PLUGINDIR}
+        DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/krunner/kcms
 )
-install(FILES 
-              plasma-krunner-pimcontacts_config.desktop
-        DESTINATION ${SERVICES_INSTALL_DIR}
-)
-
