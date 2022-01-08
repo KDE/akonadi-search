@@ -32,7 +32,7 @@
 Q_DECLARE_METATYPE(KContacts::Addressee *)
 
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : Plasma::AbstractRunner(parent, metaData, args)
+    : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("PIMContactsRunner"));
     // reloadConfiguration() called by default init() implementation
@@ -45,7 +45,7 @@ void PIMContactsRunner::reloadConfiguration()
     mQueryAutocompleter = config().readEntry(QStringLiteral("queryAutocompleter"), true);
 }
 
-void PIMContactsRunner::match(Plasma::RunnerContext &context)
+void PIMContactsRunner::match(RunnerContext &context)
 {
     const QString queryString = context.query();
     if (queryString.size() < 3) {
@@ -60,7 +60,7 @@ void PIMContactsRunner::match(Plasma::RunnerContext &context)
     }
 }
 
-void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QString &queryString)
+void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &queryString)
 {
     Akonadi::Search::PIM::ContactQuery query;
     query.matchName(queryString);
@@ -120,7 +120,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
             continue;
         }
 
-        Plasma::QueryMatch match(this);
+        QueryMatch match(this);
         match.setMatchCategory(i18n("Contacts"));
         match.setRelevance(0.75); // 0.75 is used by most runners, we don't
 
@@ -142,16 +142,16 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
 
         // We got perfect match by name
         if (name == queryString) {
-            match.setType(Plasma::QueryMatch::ExactMatch);
+            match.setType(QueryMatch::ExactMatch);
 
             // We got perfect match by one of the email addresses
         } else if (emails.contains(queryString)) {
-            match.setType(Plasma::QueryMatch::ExactMatch);
+            match.setType(QueryMatch::ExactMatch);
             matchedEmail = queryString;
 
             // We got partial match either by name, or email
         } else {
-            match.setType(Plasma::QueryMatch::PossibleMatch);
+            match.setType(QueryMatch::PossibleMatch);
 
             // See if the match was by one of the email addresses
             for (const QString &email : emails) {
@@ -170,7 +170,7 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
             context.addMatch(match);
         } else {
             for (const QString &email : emails) {
-                Plasma::QueryMatch alternativeMatch = match;
+                QueryMatch alternativeMatch = match;
                 alternativeMatch.setText(i18nc("Name (email)", "%1 (%2)", name, email));
                 alternativeMatch.setData(QStringLiteral("mailto:%1<%2>").arg(name, email));
                 context.addMatch(alternativeMatch);
@@ -179,21 +179,21 @@ void PIMContactsRunner::queryContacts(Plasma::RunnerContext &context, const QStr
     }
 }
 
-void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context, const QString &queryString)
+void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString &queryString)
 {
     Akonadi::Search::PIM::ContactCompleter completer(queryString);
     const QStringList completerResults = completer.complete();
     qCDebug(AKONADI_KRUNNER_LOG) << "Autocompleter returned" << completerResults.count() << "results";
     for (const QString &result : completerResults) {
-        Plasma::QueryMatch match(this);
+        QueryMatch match(this);
         match.setRelevance(0.7); // slightly lower relevance than real addressbook contacts
         match.setMatchCategory(i18n("Contacts"));
         match.setSubtext(i18n("Autocompleted from received and sent emails"));
         match.setIcon(QIcon::fromTheme(QStringLiteral("user-identity")));
         if (result == queryString) {
-            match.setType(Plasma::QueryMatch::ExactMatch);
+            match.setType(QueryMatch::ExactMatch);
         } else {
-            match.setType(Plasma::QueryMatch::PossibleMatch);
+            match.setType(QueryMatch::PossibleMatch);
         }
 
         QString name;
@@ -214,7 +214,7 @@ void PIMContactsRunner::queryAutocompleter(Plasma::RunnerContext &context, const
     }
 }
 
-void PIMContactsRunner::run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match)
+void PIMContactsRunner::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
 

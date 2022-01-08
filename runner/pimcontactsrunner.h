@@ -9,6 +9,8 @@
 
 #include <KRunner/AbstractRunner>
 
+using namespace Plasma;
+
 class PIMContactsRunner : public Plasma::AbstractRunner
 {
     Q_OBJECT
@@ -19,12 +21,12 @@ public:
 
     void reloadConfiguration() override;
 
-    void match(Plasma::RunnerContext &context) override;
-    void run(const Plasma::RunnerContext &context, const Plasma::QueryMatch &match) override;
+    void match(RunnerContext &context) override;
+    void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private:
-    void queryContacts(Plasma::RunnerContext &context, const QString &queryString);
-    void queryAutocompleter(Plasma::RunnerContext &context, const QString &queryString);
+    void queryContacts(RunnerContext &context, const QString &queryString);
+    void queryAutocompleter(RunnerContext &context, const QString &queryString);
 
 private:
     bool mQueryAutocompleter = true;
