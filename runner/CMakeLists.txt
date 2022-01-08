@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: none
 
-add_library(krunner_pimcontacts MODULE)
+kcoreaddons_add_plugin(krunner_pimcontacts INSTALL_NAMESPACE "kf5/krunner")
 
 ecm_qt_declare_logging_category(krunner_pimcontacts HEADER akonadi_runner_debug.h
     IDENTIFIER AKONADI_KRUNNER_LOG
@@ -26,8 +26,8 @@ target_link_libraries(krunner_pimcontacts
     KF5::Codecs
 )
 
-########################
-add_library(kcm_krunner_pimcontacts MODULE)
+kcoreaddons_add_plugin(kcm_krunner_pimcontacts INSTALL_NAMESPACE "kf5/krunner/kcms")
+
 target_sources(kcm_krunner_pimcontacts PRIVATE
     pimcontactsrunnerconfig.cpp
     pimcontactsrunnerconfig.h
@@ -37,10 +37,4 @@ target_link_libraries(kcm_krunner_pimcontacts
     Qt${QT_MAJOR_VERSION}::Gui
     KF5::KCMUtils
     KF5::I18n
-)
-
-install(TARGETS krunner_pimcontacts DESTINATION "${KDE_INSTALL_PLUGINDIR}/kf5/krunner")
-install(TARGETS 
-                kcm_krunner_pimcontacts
-        DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/krunner/kcms
 )
