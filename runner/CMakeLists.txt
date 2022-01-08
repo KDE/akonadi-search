@@ -1,20 +1,18 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: none
 
-ecm_qt_declare_logging_category(pimcontactsrunner_DEBUG HEADER akonadi_runner_debug.h
-        IDENTIFIER AKONADI_KRUNNER_LOG
-        CATEGORY_NAME org.kde.pim.akonadi_krunner_plugin
-        DESCRIPTION "akonadisearch (akonadi plugin krunner)"
-        OLD_CATEGORY_NAMES log_akonadi_krunner_plugin
-        EXPORT AKONADISEARCH
-    )
-
-
 add_library(krunner_pimcontacts MODULE)
+
+ecm_qt_declare_logging_category(krunner_pimcontacts HEADER akonadi_runner_debug.h
+    IDENTIFIER AKONADI_KRUNNER_LOG
+    CATEGORY_NAME org.kde.pim.akonadi_krunner_plugin
+    DESCRIPTION "akonadisearch (akonadi plugin krunner)"
+    OLD_CATEGORY_NAMES log_akonadi_krunner_plugin
+    EXPORT AKONADISEARCH
+)
 target_sources(krunner_pimcontacts PRIVATE
     pimcontactsrunner.cpp
     pimcontactsrunner.h
-    ${pimcontactsrunner_DEBUG}
 )
 
 
