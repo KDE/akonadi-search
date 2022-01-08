@@ -33,7 +33,6 @@ add_library(kcm_krunner_pimcontacts MODULE)
 target_sources(kcm_krunner_pimcontacts PRIVATE
     pimcontactsrunnerconfig.cpp
     pimcontactsrunnerconfig.h
-    ${pimcontactsrunner_DEBUG}
 )
 
 target_link_libraries(kcm_krunner_pimcontacts
