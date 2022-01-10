@@ -57,7 +57,7 @@ generate_export_header(KF5AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_F
 
 target_link_libraries(KF5AkonadiSearchPIM
     PUBLIC
-    Qt::Core
+    Qt${QT_MAJOR_VERSION}::Core
 
     PRIVATE
     KF5::AkonadiCore
@@ -70,7 +70,7 @@ set_target_properties(KF5AkonadiSearchPIM PROPERTIES
     EXPORT_NAME AkonadiSearchPIM
 )
 
-target_include_directories(KF5AkonadiSearchPIM INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch>")
+target_include_directories(KF5AkonadiSearchPIM INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch>")
 
 install(TARGETS KF5AkonadiSearchPIM EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -90,7 +90,7 @@ install(FILES
     ${AKONADISEARCH_INCLUDES}
     ${CMAKE_CURRENT_BINARY_DIR}/search_pim_export.h
 
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/PIM
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/PIM
     COMPONENT Devel
 )
 

@@ -26,7 +26,7 @@ generate_export_header(KF5AkonadiSearchDebug BASE_NAME AKONADI_SEARCH_DEBUG EXPO
 
 target_link_libraries(KF5AkonadiSearchDebug
     PRIVATE
-    Qt::Widgets
+    Qt${QT_MAJOR_VERSION}::Widgets
     KF5::I18n
     KF5::AkonadiCore
     KF5::WidgetsAddons
@@ -40,7 +40,7 @@ set_target_properties(KF5AkonadiSearchDebug PROPERTIES
     EXPORT_NAME AkonadiSearchDebug
 )
 
-target_include_directories(KF5AkonadiSearchDebug INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch>")
+target_include_directories(KF5AkonadiSearchDebug INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch>")
 
 install(TARGETS KF5AkonadiSearchDebug EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
@@ -48,7 +48,7 @@ install(FILES
     akonadisearchdebugdialog.h
     akonadisearchdebugsearchpathcombobox.h
     ${CMAKE_CURRENT_BINARY_DIR}/search_debug_export.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Debug
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Debug
     COMPONENT Devel
 )
 

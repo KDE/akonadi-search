@@ -5,7 +5,7 @@ include_directories(
 macro(add_akonadisearchdebug_unittest _source)
     ecm_add_test(${_source}
         NAME_PREFIX "akonadisearchdebug-"
-        LINK_LIBRARIES Qt::Test Qt::Gui KF5::Completion KF5::CoreAddons KF5::AkonadiSearchDebug KF5::AkonadiCore
+        LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test Qt${QT_MAJOR_VERSION}::Gui KF5::Completion KF5::CoreAddons KF5::AkonadiSearchDebug KF5::AkonadiCore
         GUI
     )
 endmacro ()

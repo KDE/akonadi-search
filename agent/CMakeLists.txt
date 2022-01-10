@@ -49,7 +49,7 @@ if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
 endif()
 
 target_link_libraries(akonadi_indexing_agent
-    Qt::Core
+    Qt${QT_MAJOR_VERSION}::Core
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime
@@ -61,7 +61,7 @@ target_link_libraries(akonadi_indexing_agent
     KF5::Codecs
     KF5::I18n
     KF5::ConfigCore
-    Qt::Widgets
+    Qt${QT_MAJOR_VERSION}::Widgets
 )
 
 install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

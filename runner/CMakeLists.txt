@@ -37,7 +37,7 @@ target_sources(kcm_krunner_pimcontacts PRIVATE
 )
 
 target_link_libraries(kcm_krunner_pimcontacts
-    Qt::Gui
+    Qt${QT_MAJOR_VERSION}::Gui
     KF5::KCMUtils
     KF5::I18n
 )

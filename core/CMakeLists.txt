@@ -28,7 +28,7 @@ endif()
 
 target_link_libraries(KF5AkonadiSearchCore
     PUBLIC
-    Qt::Core
+    Qt${QT_MAJOR_VERSION}::Core
 )
 
 set_target_properties(KF5AkonadiSearchCore PROPERTIES
@@ -36,7 +36,7 @@ set_target_properties(KF5AkonadiSearchCore PROPERTIES
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchCore
 )
-target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Core>")
+target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Core>")
 
 generate_export_header(KF5AkonadiSearchCore BASE_NAME AKONADI_SEARCH_CORE EXPORT_FILE_NAME search_core_export.h)
 
@@ -49,6 +49,6 @@ install(FILES
     resultiterator.h
     ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
 
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Core
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Core
     COMPONENT Devel
 )

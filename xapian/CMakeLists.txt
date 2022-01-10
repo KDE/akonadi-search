@@ -31,7 +31,7 @@ endif()
 
 
 target_link_libraries(KF5AkonadiSearchXapian PUBLIC
-    Qt::Core
+    Qt${QT_MAJOR_VERSION}::Core
     KF5::AkonadiSearchCore
     ${XAPIAN_LIBRARIES}
 )
@@ -54,7 +54,7 @@ install(FILES
     xapiantermgenerator.h
     ${CMAKE_CURRENT_BINARY_DIR}/search_xapian_export.h
 
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch/Xapian
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Xapian
     COMPONENT Devel
 )
 
