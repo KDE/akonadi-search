@@ -137,7 +137,7 @@ install(EXPORT KF5AkonadiSearchTargets
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch
     COMPONENT Devel
 )
 
