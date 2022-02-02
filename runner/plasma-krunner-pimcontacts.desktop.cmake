@@ -88,4 +88,4 @@ X-KDE-PluginInfo-Name=PIM Contacts Search Runner
 X-KDE-PluginInfo-Version=1.0
 X-KDE-PluginInfo-License=LGPL
 X-KDE-PluginInfo-EnabledByDefault=true
-X-KDE-ConfigModule=kf5/krunner/kcms/kcm_krunner_pimcontacts
+X-KDE-ConfigModule=kf@QT_MAJOR_VERSION@/krunner/kcms/kcm_krunner_pimcontacts
