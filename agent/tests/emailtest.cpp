@@ -163,25 +163,41 @@ void App::slotIndexed()
 
         QString rchar(QStringLiteral("rchar: "));
         if (str.startsWith(rchar)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             ulong amt = str.midRef(rchar.size()).toULong();
+#else
+            ulong amt = QStringView(str).mid(rchar.size()).toULong();
+#endif
             qDebug() << "Read:" << amt / 1024 << "kb";
         }
 
         QString wchar(QStringLiteral("wchar: "));
         if (str.startsWith(wchar)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             ulong amt = str.midRef(wchar.size()).toULong();
+#else
+            ulong amt = QStringView(str).mid(wchar.size()).toULong();
+#endif
             qDebug() << "Write:" << amt / 1024 << "kb";
         }
 
         QString read(QStringLiteral("read_bytes: "));
         if (str.startsWith(read)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             ulong amt = str.midRef(read.size()).toULong();
+#else
+            ulong amt = QStringView(str).mid(read.size()).toULong();
+#endif
             qDebug() << "Actual Reads:" << amt / 1024 << "kb";
         }
 
         QString write(QStringLiteral("write_bytes: "));
         if (str.startsWith(write)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             ulong amt = str.midRef(write.size()).toULong();
+#else
+            ulong amt = QStringView(str).mid(write.size()).toULong();
+#endif
             qDebug() << "Actual Writes:" << amt / 1024 << "kb";
         }
     }
