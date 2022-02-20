@@ -33,6 +33,10 @@ target_link_libraries(KF5AkonadiSearchDebug
     KF5::ConfigCore
     KF5::Completion
 )
+target_link_libraries(KF5AkonadiSearchDebug
+    PRIVATE
+    Qt6::Core5Compat
+    )
 
 set_target_properties(KF5AkonadiSearchDebug PROPERTIES
     VERSION ${AKONADISEARCH_VERSION}

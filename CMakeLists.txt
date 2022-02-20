@@ -53,6 +53,9 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAd
 if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     find_package(KF5Runner ${KF5_MIN_VERSION} REQUIRED)
 endif()
+if (QT_MAJOR_VERSION STREQUAL "6")
+    find_package(Qt6Core5Compat)
+endif()
 
 
 find_package(Xapian CONFIG)

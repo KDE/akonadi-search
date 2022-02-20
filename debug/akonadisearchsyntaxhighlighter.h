@@ -6,8 +6,8 @@
 
 #pragma once
 
+#include <QRegExp>
 #include <QSyntaxHighlighter>
-
 namespace Akonadi
 {
 namespace Search
