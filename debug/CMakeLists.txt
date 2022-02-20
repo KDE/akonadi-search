@@ -33,11 +33,12 @@ target_link_libraries(KF5AkonadiSearchDebug
     KF5::ConfigCore
     KF5::Completion
 )
+if (QT_MAJOR_VERSION STREQUAL "6")
 target_link_libraries(KF5AkonadiSearchDebug
     PRIVATE
     Qt6::Core5Compat
     )
-
+endif()
 set_target_properties(KF5AkonadiSearchDebug PROPERTIES
     VERSION ${AKONADISEARCH_VERSION}
     SOVERSION ${AKONADISEARCH_SOVERSION}
