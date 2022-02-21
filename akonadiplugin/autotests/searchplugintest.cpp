@@ -21,7 +21,7 @@
 #include <../search/contact/contactsearchstore.h>
 #include <../search/email/emailsearchstore.h>
 #include <../search/note/notesearchstore.h>
-#include <Akonadi/KMime/MessageFlags>
+#include <Akonadi/MessageFlags>
 #include <Akonadi/SearchQuery>
 
 #include <QElapsedTimer>

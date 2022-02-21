@@ -15,7 +15,7 @@
 #include <Akonadi/SearchQuery>
 
 #include "akonadiplugin_indexer_debug.h"
-#include <Akonadi/KMime/MessageFlags>
+#include <Akonadi/MessageFlags>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 

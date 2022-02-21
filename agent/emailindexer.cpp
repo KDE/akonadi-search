@@ -9,7 +9,7 @@
 #include "emailindexer.h"
 #include "akonadi_indexer_agent_debug.h"
 #include <Akonadi/Collection>
-#include <Akonadi/KMime/MessageFlags>
+#include <Akonadi/MessageFlags>
 
 #include <KEmailAddress>
 #include <QTextDocument>
