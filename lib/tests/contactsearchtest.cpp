@@ -13,7 +13,7 @@
 #include <QDebug>
 #include <QTimer>
 
-#include <Akonadi/Contact/ContactSearchJob>
+#include <Akonadi/ContactSearchJob>
 
 using namespace Akonadi::Search::PIM;
 
