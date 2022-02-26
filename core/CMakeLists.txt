@@ -36,19 +36,39 @@ set_target_properties(KF5AkonadiSearchCore PROPERTIES
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchCore
 )
-target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Core>")
+target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch>")
 
 generate_export_header(KF5AkonadiSearchCore BASE_NAME AKONADI_SEARCH_CORE EXPORT_FILE_NAME search_core_export.h)
+
+ecm_generate_headers(KF5AkonadiSearchCore_CamelCasecore_HEADERS
+    HEADER_NAMES
+    Term
+    Query
+    ResultIterator
+    REQUIRED_HEADERS KF5AkonadiSearchCore_core_HEADERS
+    PREFIX Core
+    )
 
 install(TARGETS KF5AkonadiSearchCore EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
+    ${KF5AkonadiSearchCore_CamelCasecore_HEADERS}
+    ${KF5AkonadiSearchCore_core_HEADERS}
     searchstore.h
-    term.h
-    query.h
-    resultiterator.h
-    ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
-
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Core
+    COMPONENT Devel
+)
+install(FILES
+    ${KF5AkonadiSearchCore_core_HEADERS}
+    searchstore.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/core
+    COMPONENT Devel
+)
+
+install(FILES
+    ${KF5AkonadiSearchCore_core_HEADERS}
+    searchstore.h
+    ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch
     COMPONENT Devel
 )
