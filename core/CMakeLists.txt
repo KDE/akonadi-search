@@ -45,6 +45,7 @@ ecm_generate_headers(KF5AkonadiSearchCore_CamelCasecore_HEADERS
     Term
     Query
     ResultIterator
+    SearchStore
     REQUIRED_HEADERS KF5AkonadiSearchCore_core_HEADERS
     PREFIX Core
     )
@@ -53,21 +54,16 @@ install(TARGETS KF5AkonadiSearchCore EXPORT KF5AkonadiSearchTargets ${KF5_INSTAL
 
 install(FILES
     ${KF5AkonadiSearchCore_CamelCasecore_HEADERS}
-    ${KF5AkonadiSearchCore_core_HEADERS}
-    searchstore.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Core
     COMPONENT Devel
 )
 install(FILES
     ${KF5AkonadiSearchCore_core_HEADERS}
-    searchstore.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/core
     COMPONENT Devel
 )
 
 install(FILES
-    ${KF5AkonadiSearchCore_core_HEADERS}
-    searchstore.h
     ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch
     COMPONENT Devel
