@@ -10,9 +10,9 @@
 
 #include <xapian.h>
 
+#include "core/searchstore.h"
+#include "core/term.h"
 #include "search_xapian_export.h"
-#include "searchstore.h"
-#include "term.h"
 
 #include <QMutex>
 
