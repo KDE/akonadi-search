@@ -31,7 +31,10 @@ public:
     EmailQuery();
     ~EmailQuery() override;
 
-    enum OpType { OpAnd = 0, OpOr };
+    enum OpType {
+        OpAnd = 0,
+        OpOr,
+    };
 
     void setSplitSearchMatchString(bool split);
 

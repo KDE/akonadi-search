@@ -32,7 +32,7 @@ public:
     ~Query();
 
     void setTerm(const Term &t);
-    Term term() const;
+    Q_REQUIRED_RESULT Term term() const;
 
     /**
      * Add a type to the results of the query.
@@ -52,7 +52,7 @@ public:
     void setType(const QString &type);
     void setTypes(const QStringList &types);
 
-    QStringList types() const;
+    Q_REQUIRED_RESULT QStringList types() const;
 
     /**
      * Set some text which should be used to search for Items. This
@@ -62,17 +62,17 @@ public:
      * to give the best possible results.
      */
     void setSearchString(const QString &str);
-    QString searchString() const;
+    Q_REQUIRED_RESULT QString searchString() const;
 
     /**
      * Only a maximum of \p limit results will be returned.
      * By default the limit is 100000.
      */
     void setLimit(uint limit);
-    uint limit() const;
+    Q_REQUIRED_RESULT uint limit() const;
 
     void setOffset(uint offset);
-    uint offset() const;
+    Q_REQUIRED_RESULT uint offset() const;
 
     /**
      * Filter the results in the specified date range.
@@ -81,9 +81,9 @@ public:
      */
     void setDateFilter(int year, int month = -1, int day = -1);
 
-    int yearFilter() const;
-    int monthFilter() const;
-    int dayFilter() const;
+    Q_REQUIRED_RESULT int yearFilter() const;
+    Q_REQUIRED_RESULT int monthFilter() const;
+    Q_REQUIRED_RESULT int dayFilter() const;
 
     enum SortingOption {
         /**
@@ -107,14 +107,14 @@ public:
     };
 
     void setSortingOption(SortingOption option);
-    SortingOption sortingOption() const;
+    Q_REQUIRED_RESULT SortingOption sortingOption() const;
 
     /**
      * Sets the property that should be used for sorting. This automatically
      * set the sorting mechanism to SortProperty
      */
     void setSortingProperty(const QString &property);
-    QString sortingProperty() const;
+    Q_REQUIRED_RESULT QString sortingProperty() const;
 
     /**
      * Adds a custom option which any search backend could use
@@ -130,7 +130,7 @@ public:
 
     ResultIterator exec();
 
-    QByteArray toJSON() const;
+    Q_REQUIRED_RESULT QByteArray toJSON() const;
     static Query fromJSON(const QByteArray &arr);
 
     QUrl toSearchUrl(const QString &title = QString());

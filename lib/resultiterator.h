@@ -33,7 +33,7 @@ public:
     ResultIterator(const ResultIterator &ri);
     ~ResultIterator();
 
-    Akonadi::Item::Id id();
+    Q_REQUIRED_RESULT Akonadi::Item::Id id();
     bool next();
 
 private:

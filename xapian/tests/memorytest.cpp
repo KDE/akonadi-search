@@ -30,13 +30,13 @@ int main(int argc, char **argv)
     }
 
     Akonadi::Search::XapianDocument doc;
-    int size = args.first().toInt();
+    const int size = args.first().toInt();
 
     for (int i = 0; i < size; i++) {
         QByteArray term = QUuid::createUuid().toByteArray().mid(1, 10);
 
         if (parser.isSet(QStringLiteral("p"))) {
-            std::string stdString(term.constData(), term.length());
+            const std::string stdString(term.constData(), term.length());
             doc.doc().add_posting(stdString, i);
         } else {
             doc.addTerm(QString::fromUtf8(term));

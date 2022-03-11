@@ -40,7 +40,7 @@ private Q_SLOTS:
     void slotError(const QString &errorStr);
 
 private:
-    QPlainTextEdit *mPlainTextEditor = nullptr;
+    QPlainTextEdit *const mPlainTextEditor;
     AkonadiSearchDebugSearchPathComboBox *const mSearchPathComboBox;
     KLineEdit *const mLineEdit;
     QPushButton *const mSearchButton;

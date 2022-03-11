@@ -31,7 +31,7 @@ public:
 
     void setOverrideDbPrefixPath(const QString &path);
 
-    qlonglong indexedItems(const qlonglong id);
+    Q_REQUIRED_RESULT qlonglong indexedItems(const qlonglong id);
 
     void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
     void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId);

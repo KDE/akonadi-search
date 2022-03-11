@@ -38,10 +38,13 @@ public:
     void matchUID(const QString &uid);
     void match(const QString &str);
 
-    enum MatchCriteria { ExactMatch, StartsWithMatch };
+    enum MatchCriteria {
+        ExactMatch,
+        StartsWithMatch,
+    };
 
     void setMatchCriteria(MatchCriteria m);
-    MatchCriteria matchCriteria() const;
+    Q_REQUIRED_RESULT MatchCriteria matchCriteria() const;
 
     ResultIterator exec() override;
 

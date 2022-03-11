@@ -28,7 +28,7 @@ int main(int argc, char **argv)
     parser.addHelpOption();
     parser.process(app);
 
-    QStringList args = parser.positionalArguments();
+    const QStringList args = parser.positionalArguments();
     if (args.size() != 1) {
         parser.showHelp(1);
     }
@@ -42,13 +42,13 @@ int main(int argc, char **argv)
     qDebug() << "Creating the document";
 
     Akonadi::Search::XapianDocument doc;
-    int size = args.first().toInt();
+    const int size = args.first().toInt();
 
     for (int i = 0; i < size; i++) {
-        QByteArray term = QUuid::createUuid().toByteArray().mid(1, 10);
+        const QByteArray term = QUuid::createUuid().toByteArray().mid(1, 10);
 
         if (parser.isSet(QStringLiteral("p"))) {
-            std::string stdString(term.constData(), term.length());
+            const std::string stdString(term.constData(), term.length());
             doc.doc().add_posting(stdString, i);
         } else {
             doc.addTerm(QString::fromUtf8(term));

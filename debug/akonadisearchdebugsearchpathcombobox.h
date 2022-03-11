@@ -21,7 +21,13 @@ class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugSearchPathComboBox : public 
     Q_OBJECT
 public:
     explicit AkonadiSearchDebugSearchPathComboBox(QWidget *parent = nullptr);
-    enum SearchType { Contacts = 0, ContactCompleter, Emails, Notes, Calendars };
+    enum SearchType {
+        Contacts = 0,
+        ContactCompleter,
+        Emails,
+        Notes,
+        Calendars,
+    };
     ~AkonadiSearchDebugSearchPathComboBox() override;
 
     Q_REQUIRED_RESULT QString searchPath() const;

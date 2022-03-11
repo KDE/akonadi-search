@@ -24,8 +24,6 @@ class Q_DECL_HIDDEN ResultIteratorPrivate : public QSharedData
 {
 public:
     ResultIteratorPrivate()
-        : queryId(0)
-        , store(nullptr)
     {
     }
 
@@ -36,8 +34,8 @@ public:
         }
     }
 
-    int queryId;
-    SearchStore *store;
+    int queryId = 0;
+    SearchStore *store = nullptr;
 };
 
 /** Result iterator. */
@@ -55,11 +53,11 @@ public:
 
     bool next();
 
-    QByteArray id() const;
-    QUrl url() const;
+    Q_REQUIRED_RESULT QByteArray id() const;
+    Q_REQUIRED_RESULT QUrl url() const;
 
-    QString text() const;
-    QString icon() const;
+    Q_REQUIRED_RESULT QString text() const;
+    Q_REQUIRED_RESULT QString icon() const;
 
 private:
     QExplicitlySharedDataPointer<ResultIteratorPrivate> d;
