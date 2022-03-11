@@ -46,15 +46,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     Akonadi::AttributeFactory::registerAttribute<Akonadi::IndexPolicyAttribute>();
 
     KConfigGroup cfg = config()->group("General");
-    int agentIndexingVersion = cfg.readEntry("agentIndexingVersion", 0);
-    if (agentIndexingVersion == 0) {
-        // Check for value in baloorc, which we used historically, and migrate
-        // to the native config file
-        KConfig baloorc(QStringLiteral("baloorc"));
-        KConfigGroup baloorcGroup = baloorc.group("Akonadi");
-        agentIndexingVersion = baloorcGroup.readEntry("agentIndexingVersion", 0);
-        cfg.writeEntry("agentIndexingVersion", agentIndexingVersion);
-    }
+    const int agentIndexingVersion = cfg.readEntry("agentIndexingVersion", 0);
 
     if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
         m_index.removeDatabase();
