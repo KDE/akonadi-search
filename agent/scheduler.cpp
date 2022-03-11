@@ -51,14 +51,6 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
     KConfigGroup cfg = m_config->group("General");
     const auto dirtyCollectionsResult2 = cfg.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>());
     m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult2.begin(), dirtyCollectionsResult2.end());
-    if (m_dirtyCollections.isEmpty()) {
-        KConfig baloorc(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
-        KConfigGroup baloorcGroup = baloorc.group("Akonadi");
-
-        // Schedule collections we know have missing items from last time
-        const auto dirtyCollectionsResult = baloorcGroup.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>());
-        m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult.begin(), dirtyCollectionsResult.end());
-    }
 
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Dirty collections " << m_dirtyCollections;
     for (Akonadi::Collection::Id col : std::as_const(m_dirtyCollections)) {
@@ -66,13 +58,6 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
     }
 
     bool initialIndexingDone = cfg.readEntry("initialIndexingDone", false);
-    if (!initialIndexingDone) {
-        KConfig baloorc(Akonadi::ServerManager::addNamespace(QStringLiteral("baloorc")));
-        KConfigGroup baloorcGroup = baloorc.group("Akonadi");
-        initialIndexingDone = baloorcGroup.readEntry("initialIndexingDone", false);
-        cfg.writeEntry("initialIndexingDone", initialIndexingDone);
-        baloorcGroup.deleteEntry("initialIndexingDone"); // make sure that editing akonadi_indexing_agentrc by hand works in the future
-    }
     // Trigger a full sync initially
     if (!initialIndexingDone) {
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "initial indexing";

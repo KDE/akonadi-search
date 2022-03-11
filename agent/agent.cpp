@@ -308,14 +308,6 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
         // We only reindex if this is not a regular start
         KConfigGroup cfg = config()->group("General");
         bool aborted = cfg.readEntry("aborted", false);
-        if (!aborted) {
-            // Check baloorc which we used historically to make sure we don't
-            // miss the value
-            // TODO: Unfortunately we will hit this path in most cases
-            KConfig baloorc(QStringLiteral("baloorc"));
-            KConfigGroup baloorcgroup = baloorc.group("Akonadi");
-            aborted = baloorcgroup.readEntry("aborted", false);
-        }
         if (aborted) {
             cfg.writeEntry("aborted", false);
             cfg.sync();
