@@ -24,7 +24,7 @@ public:
     EmailIndexer(const QString &path, const QString &contactDbPath);
     ~EmailIndexer() override;
 
-    QStringList mimeTypes() const override;
+    Q_REQUIRED_RESULT QStringList mimeTypes() const override;
 
     void index(const Akonadi::Item &item) override;
     void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &added, const QSet<QByteArray> &removed) override;

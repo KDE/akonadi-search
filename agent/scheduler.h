@@ -55,7 +55,7 @@ public:
      */
     void setBusyTimeout(int);
 
-    int numberOfCollectionQueued() const;
+    Q_REQUIRED_RESULT int numberOfCollectionQueued() const;
 
 Q_SIGNALS:
     void status(int status, const QString &message = QString());

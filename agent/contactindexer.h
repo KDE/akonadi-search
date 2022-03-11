@@ -16,7 +16,7 @@ public:
     explicit ContactIndexer(const QString &path);
     ~ContactIndexer() override;
 
-    QStringList mimeTypes() const override;
+    Q_REQUIRED_RESULT QStringList mimeTypes() const override;
 
     void index(const Akonadi::Item &item) override;
     void remove(const Akonadi::Item &item) override;

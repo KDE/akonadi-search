@@ -28,7 +28,7 @@ public:
     void reindexCollection(const qlonglong id);
     void reindexCollections(const QList<qlonglong> &ids);
     qlonglong indexedItems(const qlonglong id);
-    int numberOfCollectionQueued();
+    Q_REQUIRED_RESULT int numberOfCollectionQueued();
 
     void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection) override;
     void itemChanged(const Akonadi::Item &item, const QSet<QByteArray> &partIdentifiers) override;

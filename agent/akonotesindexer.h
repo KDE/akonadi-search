@@ -26,7 +26,7 @@ public:
     explicit AkonotesIndexer(const QString &path);
     ~AkonotesIndexer() override;
 
-    QStringList mimeTypes() const override;
+    Q_REQUIRED_RESULT QStringList mimeTypes() const override;
 
     void index(const Akonadi::Item &item) override;
     void commit() override;
