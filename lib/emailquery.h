@@ -88,7 +88,7 @@ public:
     void bodyMatches(const QString &bodyMatch);
 
     void setLimit(int limit);
-    int limit() const;
+    Q_REQUIRED_RESULT int limit() const;
 
     /**
      * Execute the query and return an iterator to fetch

@@ -18,7 +18,7 @@ AkonadiSearchDebugSearchPathComboBox::AkonadiSearchDebugSearchPathComboBox(QWidg
 
 AkonadiSearchDebugSearchPathComboBox::~AkonadiSearchDebugSearchPathComboBox() = default;
 
-QString AkonadiSearchDebugSearchPathComboBox::searchPath()
+QString AkonadiSearchDebugSearchPathComboBox::searchPath() const
 {
     const int currentPathIndex = currentIndex();
     if (currentPathIndex > -1) {
@@ -38,7 +38,7 @@ void AkonadiSearchDebugSearchPathComboBox::initialize()
     addItem(QStringLiteral("Calendars"), Calendars);
 }
 
-QString AkonadiSearchDebugSearchPathComboBox::pathFromEnum(SearchType type)
+QString AkonadiSearchDebugSearchPathComboBox::pathFromEnum(SearchType type) const
 {
     switch (type) {
     case Contacts:
@@ -63,7 +63,7 @@ void AkonadiSearchDebugSearchPathComboBox::setSearchType(AkonadiSearchDebugSearc
     }
 }
 
-QString AkonadiSearchDebugSearchPathComboBox::defaultLocations(const QString &dbName)
+const QString AkonadiSearchDebugSearchPathComboBox::defaultLocations(const QString &dbName) const
 {
     // First look into the old location from Baloo times in ~/.local/share/baloo,
     // because we don't migrate the database files automatically.

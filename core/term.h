@@ -58,7 +58,7 @@ public:
     Term(const Term &lhs, Operation op, const Term &rhs);
     ~Term();
 
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     /**
      * Negate this term. Negation only applies for Equal or Contains
@@ -66,8 +66,8 @@ public:
      */
     void setNegation(bool isNegated);
 
-    bool negated() const;
-    bool isNegated() const;
+    Q_REQUIRED_RESULT bool negated() const;
+    Q_REQUIRED_RESULT bool isNegated() const;
 
     void addSubTerm(const Term &term);
     void setSubTerms(const QList<Term> &terms);
@@ -75,31 +75,31 @@ public:
     /**
      * Returns the first subTerm in the list of subTerms
      */
-    Term subTerm() const;
-    QList<Term> subTerms() const;
+    Q_REQUIRED_RESULT Term subTerm() const;
+    Q_REQUIRED_RESULT QList<Term> subTerms() const;
 
     void setOperation(Operation op);
-    Operation operation() const;
+    Q_REQUIRED_RESULT Operation operation() const;
 
-    bool isEmpty() const;
-    bool empty() const;
+    Q_REQUIRED_RESULT bool isEmpty() const;
+    Q_REQUIRED_RESULT bool empty() const;
 
     /**
      * Return the property this term is targeting
      */
-    QString property() const;
+    Q_REQUIRED_RESULT QString property() const;
     void setProperty(const QString &property);
 
-    QVariant value() const;
+    Q_REQUIRED_RESULT QVariant value() const;
     void setValue(const QVariant &value);
 
-    Comparator comparator() const;
+    Q_REQUIRED_RESULT Comparator comparator() const;
     void setComparator(Comparator c);
 
     void setUserData(const QString &name, const QVariant &value);
-    QVariant userData(const QString &name) const;
+    Q_REQUIRED_RESULT QVariant userData(const QString &name) const;
 
-    QVariantMap toVariantMap() const;
+    Q_REQUIRED_RESULT QVariantMap toVariantMap() const;
     static Term fromVariantMap(const QVariantMap &map);
 
     bool operator==(const Term &rhs) const;

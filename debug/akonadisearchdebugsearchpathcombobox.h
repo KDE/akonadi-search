@@ -24,13 +24,13 @@ public:
     enum SearchType { Contacts = 0, ContactCompleter, Emails, Notes, Calendars };
     ~AkonadiSearchDebugSearchPathComboBox() override;
 
-    QString searchPath();
+    Q_REQUIRED_RESULT QString searchPath() const;
 
-    QString pathFromEnum(SearchType type);
+    Q_REQUIRED_RESULT QString pathFromEnum(SearchType type) const;
     void setSearchType(SearchType type);
 
 private:
-    QString defaultLocations(const QString &dbname);
+    const QString defaultLocations(const QString &dbname) const;
     void initialize();
 };
 }

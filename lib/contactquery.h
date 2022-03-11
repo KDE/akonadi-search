@@ -45,7 +45,7 @@ public:
 
     ResultIterator exec() override;
 
-    int limit() const;
+    Q_REQUIRED_RESULT int limit() const;
     void setLimit(int limit);
 
 private:

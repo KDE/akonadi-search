@@ -24,9 +24,9 @@ class EmailSearchStore : public PIMSearchStore
 public:
     explicit EmailSearchStore(QObject *parent = nullptr);
 
-    QStringList types() override;
+    Q_REQUIRED_RESULT QStringList types() override;
     QString text(int queryId) override;
-    QString icon(int) override
+    Q_REQUIRED_RESULT QString icon(int) override
     {
         return QStringLiteral("internet-mail");
     }

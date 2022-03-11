@@ -35,7 +35,7 @@ public:
     void matchNote(const QString &note);
 
     void setLimit(int limit);
-    int limit() const;
+    Q_REQUIRED_RESULT int limit() const;
 
     ResultIterator exec() override;
 

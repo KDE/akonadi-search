@@ -31,7 +31,7 @@ public:
     void setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type);
     void doSearch();
 
-    QString plainText() const;
+    Q_REQUIRED_RESULT QString plainText() const;
 
 private Q_SLOTS:
     void slotSearchLineTextChanged(const QString &text);
@@ -41,9 +41,9 @@ private Q_SLOTS:
 
 private:
     QPlainTextEdit *mPlainTextEditor = nullptr;
-    AkonadiSearchDebugSearchPathComboBox *mSearchPathComboBox = nullptr;
-    KLineEdit *mLineEdit = nullptr;
-    QPushButton *mSearchButton = nullptr;
+    AkonadiSearchDebugSearchPathComboBox *const mSearchPathComboBox;
+    KLineEdit *const mLineEdit;
+    QPushButton *const mSearchButton;
 };
 }
 }

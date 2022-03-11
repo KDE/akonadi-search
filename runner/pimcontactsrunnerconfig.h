@@ -24,6 +24,6 @@ public Q_SLOTS:
 
 private:
     void configChanged();
-    QCheckBox *mQueryCompletionCheckBox = nullptr;
+    QCheckBox *const mQueryCompletionCheckBox;
 };
 
