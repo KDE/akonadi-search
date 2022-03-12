@@ -6,6 +6,7 @@
  */
 
 #include "abstractindexer.h"
+#include "stringutil.h"
 
 AbstractIndexer::AbstractIndexer() = default;
 
@@ -23,4 +24,23 @@ void AbstractIndexer::updateFlags(const Akonadi::Item &item, const QSet<QByteArr
     Q_UNUSED(item)
     Q_UNUSED(addedFlags)
     Q_UNUSED(removed)
+}
+
+bool AbstractIndexer::respectDiacriticAndAccents() const
+{
+    return mRespectDiacriticAndAccents;
+}
+
+void AbstractIndexer::setRespectDiacriticAndAccents(bool newRespectDiacriticAndAccents)
+{
+    mRespectDiacriticAndAccents = newRespectDiacriticAndAccents;
+}
+
+QString AbstractIndexer::normalizeString(const QString &str)
+{
+    if (mRespectDiacriticAndAccents) {
+        return str;
+    } else {
+        return StringUtil::normalize(str);
+    }
 }

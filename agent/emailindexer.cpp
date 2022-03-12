@@ -8,6 +8,7 @@
 
 #include "emailindexer.h"
 #include "akonadi_indexer_agent_debug.h"
+#include "stringutil.h"
 #include <Akonadi/Collection>
 #include <Akonadi/MessageFlags>
 
@@ -182,7 +183,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
     // (Give the subject a higher priority)
     KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
-        const std::string str(subject->asUnicodeString().toStdString());
+        const std::string str{normalizeString(subject->asUnicodeString()).toStdString()};
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << str.c_str();
         m_termGen->index_text_without_positions(str, 1, "SU");
         m_termGen->index_text_without_positions(str, 100);
@@ -218,7 +219,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
 
     KMime::Content *mainBody = msg->mainBodyPart("text/plain");
     if (mainBody) {
-        const std::string text(mainBody->decodedText().toStdString());
+        const std::string text(normalizeString(mainBody->decodedText()).toStdString());
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
@@ -249,7 +250,7 @@ void EmailIndexer::processPart(KMime::Content *content, KMime::Content *mainCont
             QTextDocument doc;
             doc.setHtml(content->decodedText());
 
-            const std::string text(doc.toPlainText().toStdString());
+            const std::string text(normalizeString(doc.toPlainText()).toStdString());
             m_termGen->index_text_without_positions(text);
         }
     }
