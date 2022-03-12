@@ -229,6 +229,7 @@ bool Index::createIndexers()
         QDir().mkpath(m_indexedItems->emailIndexingPath());
         QDir().mkpath(m_indexedItems->emailContactsIndexingPath());
         indexer = new EmailIndexer(m_indexedItems->emailIndexingPath(), m_indexedItems->emailContactsIndexingPath());
+        indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -241,6 +242,7 @@ bool Index::createIndexers()
     try {
         QDir().mkpath(m_indexedItems->contactIndexingPath());
         indexer = new ContactIndexer(m_indexedItems->contactIndexingPath());
+        indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -253,6 +255,7 @@ bool Index::createIndexers()
     try {
         QDir().mkpath(m_indexedItems->akonotesIndexingPath());
         indexer = new AkonotesIndexer(m_indexedItems->akonotesIndexingPath());
+        indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -265,6 +268,7 @@ bool Index::createIndexers()
     try {
         QDir().mkpath(m_indexedItems->calendarIndexingPath());
         indexer = new CalendarIndexer(m_indexedItems->calendarIndexingPath());
+        indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
         addIndexer(indexer);
     } catch (const Xapian::DatabaseError &e) {
         delete indexer;
@@ -322,4 +326,9 @@ qlonglong Index::indexedItems(const qlonglong id)
 void Index::setOverrideDbPrefixPath(const QString &path)
 {
     m_indexedItems->setOverrideDbPrefixPath(path);
+}
+
+void Index::setRespectDiacriticAndAccents(bool b)
+{
+    mRespectDiacriticAndAccents = b;
 }

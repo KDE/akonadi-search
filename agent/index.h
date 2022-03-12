@@ -55,6 +55,7 @@ public:
     /// For testing
     void setOverrideDbPrefixPath(const QString &path);
 
+    void setRespectDiacriticAndAccents(bool b);
 public Q_SLOTS:
     virtual void commit();
 
@@ -68,5 +69,6 @@ private:
     Akonadi::Search::PIM::IndexedItems *m_indexedItems = nullptr;
     QTimer m_commitTimer;
     CollectionIndexer *m_collectionIndexer = nullptr;
+    bool mRespectDiacriticAndAccents = true;
 };
 

@@ -124,8 +124,8 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarC
     Akonadi::Search::XapianDocument doc;
 
     doc.indexText(event->organizer().email(), QStringLiteral("O"));
-    doc.indexText(event->summary(), QStringLiteral("S"));
-    doc.indexText(event->location(), QStringLiteral("L"));
+    doc.indexText(normalizeString(event->summary()), QStringLiteral("S"));
+    doc.indexText(normalizeString(event->location()), QStringLiteral("L"));
     const KCalendarCore::Attendee::List attendees = event->attendees();
     KCalendarCore::Attendee::List::ConstIterator it;
     KCalendarCore::Attendee::List::ConstIterator end(attendees.constEnd());

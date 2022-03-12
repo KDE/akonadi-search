@@ -47,14 +47,16 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
 
     KConfigGroup cfg = config()->group("General");
     const int agentIndexingVersion = cfg.readEntry("agentIndexingVersion", 0);
-
+    bool respectDiacriticAndAccents = cfg.readEntry("respectDiacriticAndAccents", true);
     if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
         m_index.removeDatabase();
+        // Don't respect Diacritic and Accents in new Database so search will be more easy.
+        // TODO activate it in the future respectDiacriticAndAccents = false;
         QTimer::singleShot(0, &m_scheduler, &Scheduler::scheduleCompleteSync);
         cfg.writeEntry("agentIndexingVersion", INDEXING_AGENT_VERSION);
         cfg.sync();
     }
-
+    m_index.setRespectDiacriticAndAccents(respectDiacriticAndAccents);
     if (!m_index.createIndexers()) {
         Q_EMIT status(Broken, i18nc("@info:status", "No indexers available"));
         setOnline(false);

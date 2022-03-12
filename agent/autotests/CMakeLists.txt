@@ -14,6 +14,7 @@ set(indexer_SRCS
     ../../search/email/agepostingsource.cpp
     ../../search/contact/contactsearchstore.cpp
     ../akonadi_indexer_agent_debug.cpp
+    ../stringutil.cpp
 )
 
 set(indexer_LIBS
