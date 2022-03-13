@@ -27,7 +27,7 @@ private Q_SLOTS:
     void onCollectionsFetched(KJob *);
 
 private:
-    bool shouldIndex(const Akonadi::Collection &col) const;
+    Q_REQUIRED_RESULT bool shouldIndex(const Akonadi::Collection &col) const;
 
     const Akonadi::Collection mCol;
     Index &mIndex;

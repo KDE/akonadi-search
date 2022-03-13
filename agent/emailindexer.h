@@ -21,7 +21,7 @@ public:
      * You must provide the path where the indexed information
      * should be stored
      */
-    EmailIndexer(const QString &path, const QString &contactDbPath);
+    explicit EmailIndexer(const QString &path, const QString &contactDbPath);
     ~EmailIndexer() override;
 
     Q_REQUIRED_RESULT QStringList mimeTypes() const override;

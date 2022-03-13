@@ -27,7 +27,7 @@ public:
     void move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to) override;
 
 private:
-    bool indexContact(const Akonadi::Item &item);
+    Q_REQUIRED_RESULT bool indexContact(const Akonadi::Item &item);
     void indexContactGroup(const Akonadi::Item &item);
 
     Akonadi::Search::XapianDatabase *m_db = nullptr;
