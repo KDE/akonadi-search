@@ -61,9 +61,9 @@ static Term getTerm(const Akonadi::SearchTerm &term, const QString &property)
 
 Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
+    const auto subTermsResult = term.subTerms();
+    if (!subTermsResult.isEmpty()) {
         Term t(mapRelation(term.relation()));
-        const auto subTermsResult = term.subTerms();
         for (const Akonadi::SearchTerm &subterm : subTermsResult) {
             const Term newTerm = recursiveEmailTermMapping(subterm);
             if (newTerm.isValid()) {
