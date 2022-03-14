@@ -51,9 +51,10 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
         m_index.removeDatabase();
         // Don't respect Diacritic and Accents in new Database so search will be more easy.
-        // TODO activate it in the future respectDiacriticAndAccents = false;
+        respectDiacriticAndAccents = false;
         QTimer::singleShot(0, &m_scheduler, &Scheduler::scheduleCompleteSync);
         cfg.writeEntry("agentIndexingVersion", INDEXING_AGENT_VERSION);
+        cfg.writeEntry("respectDiacriticAndAccents", respectDiacriticAndAccents);
         cfg.sync();
     }
     m_index.setRespectDiacriticAndAccents(respectDiacriticAndAccents);
