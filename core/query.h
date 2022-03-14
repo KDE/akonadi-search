@@ -126,9 +126,9 @@ public:
     void addCustomOption(const QString &option, const QVariant &value);
     void removeCustomOption(const QString &option);
     QVariant customOption(const QString &option) const;
-    QVariantMap customOptions() const;
+    Q_REQUIRED_RESULT QVariantMap customOptions() const;
 
-    ResultIterator exec();
+    Q_REQUIRED_RESULT ResultIterator exec();
 
     Q_REQUIRED_RESULT QByteArray toJSON() const;
     static Query fromJSON(const QByteArray &arr);

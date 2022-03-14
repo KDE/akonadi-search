@@ -204,7 +204,8 @@ ResultIterator Query::exec()
     SearchStore *storeMatch = nullptr;
     for (const QSharedPointer<SearchStore> &store : std::as_const(*s_searchStores)) {
         bool matches = true;
-        for (const QString &type : types()) {
+        const auto typeList{types()};
+        for (const QString &type : typeList) {
             if (!store->types().contains(type)) {
                 matches = false;
                 break;

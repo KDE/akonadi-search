@@ -188,9 +188,10 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
 
 Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
+    const auto subTerms{term.subTerms()};
+    if (!subTerms.isEmpty()) {
         Term t(mapRelation(term.relation()));
-        for (const Akonadi::SearchTerm &subterm : term.subTerms()) {
+        for (const Akonadi::SearchTerm &subterm : subTerms) {
             const Term newTerm = recursiveCalendarTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);
@@ -223,9 +224,10 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
 
 Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
+    const auto subTerms{term.subTerms()};
+    if (!subTerms.isEmpty()) {
         Term t(mapRelation(term.relation()));
-        for (const Akonadi::SearchTerm &subterm : term.subTerms()) {
+        for (const Akonadi::SearchTerm &subterm : subTerms) {
             const Term newTerm = recursiveNoteTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);
@@ -251,9 +253,10 @@ Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
 
 Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
 {
-    if (!term.subTerms().isEmpty()) {
+    const auto subTerms{term.subTerms()};
+    if (!subTerms.isEmpty()) {
         Term t(mapRelation(term.relation()));
-        for (const Akonadi::SearchTerm &subterm : term.subTerms()) {
+        for (const Akonadi::SearchTerm &subterm : subTerms) {
             const Term newTerm = recursiveContactTermMapping(subterm);
             if (newTerm.isValid()) {
                 t.addSubTerm(newTerm);
