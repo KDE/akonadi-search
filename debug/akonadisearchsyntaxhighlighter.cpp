@@ -5,8 +5,11 @@
 */
 
 #include "akonadisearchsyntaxhighlighter.h"
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <QRegExp>
-
+#else
+#include <QRegularExpression>
+#endif
 using namespace Akonadi::Search;
 
 AkonadiSearchSyntaxHighlighter::AkonadiSearchSyntaxHighlighter(QTextDocument *doc)
@@ -19,6 +22,7 @@ AkonadiSearchSyntaxHighlighter::~AkonadiSearchSyntaxHighlighter() = default;
 
 void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     for (const Rule &rule : std::as_const(m_rules)) {
         const QRegExp expression(rule.pattern);
         int index = expression.indexIn(text);
@@ -28,6 +32,16 @@ void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
             index = expression.indexIn(text, index + length);
         }
     }
+#else
+    for (const Rule &rule : std::as_const(m_rules)) {
+        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+        while (matchIterator.hasNext()) {
+            QRegularExpressionMatch match = matchIterator.next();
+            setFormat(match.capturedStart(), match.capturedLength(), rule.format);
+        }
+    }
+
+#endif
 }
 
 void AkonadiSearchSyntaxHighlighter::init()
@@ -77,7 +91,11 @@ void AkonadiSearchSyntaxHighlighter::init()
     testType << QStringLiteral("\\bS");
     testType << QStringLiteral("\\bL");
     for (const QString &s : std::as_const(testType)) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         const QRegExp regex(s, Qt::CaseSensitive);
+#else
+        const QRegularExpression regex(s, Qt::CaseSensitive);
+#endif
         m_rules.append(Rule(regex, testFormat));
     }
 }

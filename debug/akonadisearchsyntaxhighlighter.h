@@ -5,9 +5,12 @@
 */
 
 #pragma once
-
-#include <QRegExp>
 #include <QSyntaxHighlighter>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QRegExp>
+#else
+#include <QRegularExpression>
+#endif
 namespace Akonadi
 {
 namespace Search
@@ -16,14 +19,20 @@ class Rule
 {
 public:
     Rule() = default;
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     Rule(const QRegExp &r, const QTextCharFormat &f)
+#else
+    Rule(const QRegularExpression &r, const QTextCharFormat &f)
+#endif
         : pattern(r)
         , format(f)
     {
     }
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QRegExp pattern;
+#else
+    QRegularExpression pattern;
+#endif
     QTextCharFormat format;
 };
 
