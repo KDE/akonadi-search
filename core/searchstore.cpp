@@ -78,7 +78,7 @@ SearchStore::List SearchStore::searchStores()
 
     const QStringList paths = QCoreApplication::libraryPaths();
     for (const QString &libraryPath : paths) {
-        QString path(libraryPath + QStringLiteral("/akonadi"));
+        const QString path(libraryPath + QStringLiteral("/akonadi"));
         QDir dir(path);
 
         if (!dir.exists()) {
