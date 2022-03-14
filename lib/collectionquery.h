@@ -50,7 +50,7 @@ public:
      * Execute the query and return an iterator to fetch
      * the results
      */
-    ResultIterator exec() override;
+    Q_REQUIRED_RESULT ResultIterator exec() override;
 
     /**
      * For testing
