@@ -22,9 +22,7 @@ ResultIterator::ResultIterator()
 {
 }
 
-ResultIterator::ResultIterator(const ResultIterator &rhs)
-
-    = default;
+ResultIterator::ResultIterator(const ResultIterator &rhs) = default;
 
 ResultIterator::~ResultIterator() = default;
 

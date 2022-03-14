@@ -59,7 +59,7 @@ int main(int argc, char **argv)
     db.commit();
 
     int dbSize = 0;
-    QDir dbDir(tempDir.path());
+    const QDir dbDir(tempDir.path());
     const auto entryInfoList = dbDir.entryInfoList(QDir::Files);
     for (const QFileInfo &file : entryInfoList) {
         qDebug() << file.fileName() << file.size() / 1024 << "kb";

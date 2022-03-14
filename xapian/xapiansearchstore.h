@@ -107,7 +107,7 @@ private:
     };
 
     QHash<int, Result> m_queryMap;
-    int m_nextId;
+    int m_nextId = 1;
 
     QString m_dbPath;
 
