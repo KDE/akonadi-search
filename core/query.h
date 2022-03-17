@@ -133,7 +133,7 @@ public:
     Q_REQUIRED_RESULT QByteArray toJSON() const;
     static Query fromJSON(const QByteArray &arr);
 
-    QUrl toSearchUrl(const QString &title = QString());
+    Q_REQUIRED_RESULT QUrl toSearchUrl(const QString &title = QString());
     static Query fromSearchUrl(const QUrl &url);
     static QString titleFromQueryUrl(const QUrl &url);
 
