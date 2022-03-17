@@ -37,8 +37,8 @@ private:
     void readConfig();
     void writeConfig();
     void saveTextAs(const QString &text, const QString &filter);
+    Q_REQUIRED_RESULT bool saveToFile(const QString &filename, const QString &text);
     AkonadiSearchDebugDialogPrivate *const d;
-    bool saveToFile(const QString &filename, const QString &text);
 };
 }
 }

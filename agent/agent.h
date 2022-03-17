@@ -27,7 +27,7 @@ public:
     void reindexAll();
     void reindexCollection(const qlonglong id);
     void reindexCollections(const QList<qlonglong> &ids);
-    qlonglong indexedItems(const qlonglong id);
+    Q_REQUIRED_RESULT qlonglong indexedItems(const qlonglong id);
     Q_REQUIRED_RESULT int numberOfCollectionQueued();
 
     void itemAdded(const Akonadi::Item &item, const Akonadi::Collection &collection) override;
@@ -54,8 +54,8 @@ Q_SIGNALS:
     void collectionIndexingFinished(const qlonglong id);
 
 private:
-    bool shouldIndex(const Akonadi::Item &item) const;
-    bool shouldIndex(const Akonadi::Collection &collection) const;
+    Q_REQUIRED_RESULT bool shouldIndex(const Akonadi::Item &item) const;
+    Q_REQUIRED_RESULT bool shouldIndex(const Akonadi::Collection &collection) const;
 
     Index m_index;
     Scheduler m_scheduler;
