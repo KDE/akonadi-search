@@ -28,4 +28,3 @@ class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
 public:
     Q_REQUIRED_RESULT QSet<qint64> search(const QString &query, const QVector<qint64> &collections, const QStringList &mimeTypes) override;
 };
-

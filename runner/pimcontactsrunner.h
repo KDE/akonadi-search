@@ -31,4 +31,3 @@ private:
 private:
     bool mQueryAutocompleter = true;
 };
-

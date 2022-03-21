@@ -60,4 +60,3 @@ private:
     Index m_index;
     Scheduler m_scheduler;
 };
-

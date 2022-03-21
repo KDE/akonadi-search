@@ -54,4 +54,3 @@ private:
 
     void insertBool(char key, bool value);
 };
-

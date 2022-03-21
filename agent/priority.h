@@ -11,4 +11,3 @@ bool lowerIOPriority();
 bool lowerSchedulingPriority();
 bool setIdleSchedulingPriority();
 bool lowerPriority();
-

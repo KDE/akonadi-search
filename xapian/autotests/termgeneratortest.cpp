@@ -58,9 +58,7 @@ void TermGeneratorTest::testUnderscore_splitting()
     const auto words = QSet<QString>(aW.constBegin(), aW.constEnd());
 
     QSet<QString> expectedWords;
-    expectedWords << QStringLiteral("hello")
-                  << QStringLiteral("howdy")
-                  << QStringLiteral("hello_howdy");
+    expectedWords << QStringLiteral("hello") << QStringLiteral("howdy") << QStringLiteral("hello_howdy");
 
     QCOMPARE(words, expectedWords);
 }
@@ -77,11 +75,7 @@ void TermGeneratorTest::testAccetCharacters()
     const auto words = QSet<QString>(aW.constBegin(), aW.constEnd());
 
     QSet<QString> expectedWords;
-    expectedWords << QStringLiteral("como")
-                  << QStringLiteral("esta")
-                  << QStringLiteral("kug")
-                  << QString::fromUtf8("está")
-                  << QString::fromUtf8("kûg");
+    expectedWords << QStringLiteral("como") << QStringLiteral("esta") << QStringLiteral("kug") << QString::fromUtf8("está") << QString::fromUtf8("kûg");
 
     QCOMPARE(words, expectedWords);
 }

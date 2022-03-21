@@ -31,4 +31,3 @@ public:
 private:
     Xapian::WritableDatabase *m_db;
 };
-

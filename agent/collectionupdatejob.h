@@ -32,4 +32,3 @@ private:
     const Akonadi::Collection mCol;
     Index &mIndex;
 };
-

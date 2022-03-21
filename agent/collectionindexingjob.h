@@ -53,4 +53,3 @@ private:
     int m_progressCounter = 0;
     int m_progressTotal = 0;
 };
-

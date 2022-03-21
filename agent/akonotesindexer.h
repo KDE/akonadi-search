@@ -42,4 +42,3 @@ private:
     Xapian::Document *m_doc = nullptr;
     Xapian::TermGenerator *m_termGen = nullptr;
 };
-

@@ -26,4 +26,3 @@ private:
     void configChanged();
     QCheckBox *const mQueryCompletionCheckBox;
 };
-

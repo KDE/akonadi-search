@@ -37,4 +37,3 @@ protected:
     bool mRespectDiacriticAndAccents = true;
     Q_REQUIRED_RESULT QString normalizeString(const QString &str);
 };
-

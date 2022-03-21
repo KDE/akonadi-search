@@ -83,4 +83,3 @@ inline int deserialize(const QByteArray &namespace_, const QByteArray &str)
 } // namespace Akonadi
 
 Q_DECLARE_INTERFACE(Akonadi::Search::SearchStore, "org.kde.Akonadi.Search.SearchStore")
-

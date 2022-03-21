@@ -136,4 +136,3 @@ inline Term operator!(const Term &rhs)
 }
 
 AKONADI_SEARCH_CORE_EXPORT QDebug operator<<(QDebug d, const Akonadi::Search::Term &t);
-

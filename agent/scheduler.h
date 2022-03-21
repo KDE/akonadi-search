@@ -85,4 +85,3 @@ private:
     QSharedPointer<JobFactory> m_jobFactory;
     int m_busyTimeout;
 };
-

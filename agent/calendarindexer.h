@@ -44,4 +44,3 @@ private:
 
     Akonadi::Search::XapianDatabase *m_db = nullptr;
 };
-
