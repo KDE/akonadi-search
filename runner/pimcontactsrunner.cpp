@@ -8,6 +8,7 @@
 #include "pimcontactsrunner.h"
 #include "akonadi_runner_debug.h"
 
+#include <KConfigGroup>
 #include <KLocalizedString>
 
 #include <QDesktopServices>
