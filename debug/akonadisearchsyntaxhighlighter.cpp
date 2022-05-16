@@ -92,7 +92,7 @@ void AkonadiSearchSyntaxHighlighter::init()
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         const QRegExp regex(s, Qt::CaseSensitive);
 #else
-        const QRegularExpression regex(s, Qt::CaseSensitive);
+        const QRegularExpression regex(s);
 #endif
         m_rules.append(Rule(regex, testFormat));
     }
