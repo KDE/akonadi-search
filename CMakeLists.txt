@@ -81,7 +81,7 @@ option(KDEPIM_RUN_AKONADI_TEST "Enable autotest based on Akonadi." TRUE)
 
 # Compiler flags
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
-ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.94.0)
+ecm_set_disabled_deprecation_versions(QT 5.15.2 KF 5.95.0)
 
 
 
