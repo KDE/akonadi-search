@@ -22,6 +22,7 @@ target_link_libraries(krunner_pimcontacts
     KF5::AkonadiCore
     KF5AkonadiSearchPIM
     KF5::I18n
+    KF5::ConfigCore
     KF5::Contacts
     KF5::Codecs
 )
