@@ -4,6 +4,7 @@
             {
                 "Email": "dvratil@kde.org",
                 "Name": "Daniel Vrátil",
+                "Name[ca@valencia]": "Daniel Vrátil",
                 "Name[ca]": "Daniel Vrátil",
                 "Name[fr]": "Daniel Vrátil",
                 "Name[nl]": "Daniel Vrátil",
@@ -16,6 +17,7 @@
             }
         ],
         "Description": "Runner which searches through your contacts",
+        "Description[ca@valencia]": "Executor que busca a través dels vostres contactes",
         "Description[ca]": "Executor que cerca a través dels vostres contactes",
         "Description[fr]": "Le lanceur cherchant parmi vos contacts",
         "Description[nl]": "Programma dat uw contactpersonen doorzoekt",
@@ -30,6 +32,7 @@
         "Id": "PIM Contacts Search Runner",
         "License": "LGPL",
         "Name": "PIM Contacts Search",
+        "Name[ca@valencia]": "Busca de contactes PIM",
         "Name[ca]": "Cerca de contactes PIM",
         "Name[fr]": "Recherche de contact « PIM »",
         "Name[nl]": "PIM in contactpersonen zoeken",
