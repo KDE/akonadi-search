@@ -21,7 +21,7 @@ target_link_libraries(akonadi_search_plugin
     KF5::Contacts
 )
 
-install(TARGETS akonadi_search_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
+install(TARGETS akonadi_search_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim${QT_MAJOR_VERSION}/akonadi)
 
 if(BUILD_TESTING)
     add_subdirectory(autotests)

@@ -8,4 +8,4 @@ target_link_libraries(emailsearchstore
     KF5AkonadiSearchXapian
 )
 
-install(TARGETS emailsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
+install(TARGETS emailsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim${QT_MAJOR_VERSION}/akonadi)
