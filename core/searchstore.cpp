@@ -78,7 +78,7 @@ SearchStore::List SearchStore::searchStores()
 
     const QStringList paths = QCoreApplication::libraryPaths();
     for (const QString &libraryPath : paths) {
-        const QString path(libraryPath + QStringLiteral("pim" QT_STRINGIFY(QT_VERSION_MAJOR)) + QStringLiteral("/akonadi"));
+        const QString path(libraryPath + QStringLiteral("/pim" QT_STRINGIFY(QT_VERSION_MAJOR)) + QStringLiteral("/akonadi"));
         QDir dir(path);
 
         if (!dir.exists()) {
