@@ -12,6 +12,7 @@
                 "Name[pt]": "Daniel Vrátil",
                 "Name[sl]": "Daniel Vrátil",
                 "Name[sv]": "Daniel Vrátil",
+                "Name[tr]": "Daniel Vrátil",
                 "Name[uk]": "Daniel Vrátil",
                 "Name[x-test]": "xxDaniel Vrátilxx"
             }
@@ -25,6 +26,7 @@
         "Description[pt]": "Um módulo de execução que pesquisa nos seus contactos",
         "Description[sl]": "Tekač, ki preišče vaše stike",
         "Description[sv]": "Körprogram som söker igenom kontakter",
+        "Description[tr]": "Kişileriniz arasında arama yapan çalıştırıcı",
         "Description[uk]": "Засіб запуску для пошуку у записах ваших контактів",
         "Description[x-test]": "xxRunner which searches through your contactsxx",
         "EnabledByDefault": true,
@@ -40,6 +42,7 @@
         "Name[pt]": "Pesquisa de Contactos PIM",
         "Name[sl]": "PIM Contacts Search",
         "Name[sv]": "Kontaktsökning i personlig informationshantering",
+        "Name[tr]": "PIM Kişiler Arama",
         "Name[uk]": "Пошук у записах контактів PIM",
         "Name[x-test]": "xxPIM Contacts Searchxx",
         "ServiceTypes": [
