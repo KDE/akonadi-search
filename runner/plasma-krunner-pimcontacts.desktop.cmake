@@ -2,6 +2,7 @@
 Name=PIM Contacts Search
 Name[ar]=البحث في متراسلي PIM
 Name[az]=PİM Kontaktları Axtarışı
+Name[bg]=Търсене на контакти
 Name[ca]=Cerca de contactes PIM
 Name[ca@valencia]=Busca de contactes PIM
 Name[cs]=Vyhledávání kontaktů PIM
@@ -42,6 +43,7 @@ Name[zh_TW]=PIM 聯絡人搜尋
 Comment=Runner which searches through your contacts
 Comment[ar]=مشغّل يبحث في متراسليك
 Comment[az]=Kontaktları axtarmaq və açmaq üçün modul
+Comment[bg]=Програма, която извършва търсене във вашите контакти
 Comment[ca]=Executor que cerca a través dels vostres contactes
 Comment[ca@valencia]=Executor que busca a través dels vostres contactes
 Comment[da]=Runner som søger efter dine kontakter
