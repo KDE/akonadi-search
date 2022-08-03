@@ -8,6 +8,8 @@
 #pragma once
 
 #include <Akonadi/Collection>
+
+#include <QObject>
 #include <QString>
 
 namespace Xapian
