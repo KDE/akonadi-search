@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: none
 cmake_minimum_required(VERSION 3.16 FATAL_ERROR)
 
-set(PIM_VERSION "5.20.90")
+set(PIM_VERSION "5.21.0")
 project(AkonadiSearch VERSION ${PIM_VERSION})
 
 # ECM setup
