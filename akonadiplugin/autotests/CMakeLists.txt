@@ -32,7 +32,7 @@ add_test( NAME searchplugintest COMMAND searchplugintest )
 ecm_mark_as_test(searchplugintest)
 
 target_link_libraries(searchplugintest
-    Qt${QT_MAJOR_VERSION}::Test
+    Qt::Test
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime

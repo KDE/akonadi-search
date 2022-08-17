@@ -31,7 +31,7 @@ endif()
 
 
 target_link_libraries(KF5AkonadiSearchXapian PUBLIC
-    Qt${QT_MAJOR_VERSION}::Core
+    Qt::Core
     KF5::AkonadiSearchCore
     ${XAPIAN_LIBRARIES}
 )

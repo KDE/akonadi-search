@@ -1,7 +1,7 @@
 add_library(emailsearchstore MODULE )
 target_sources(emailsearchstore PRIVATE agepostingsource.cpp emailsearchstore.cpp ../pimsearchstore.cpp agepostingsource.h emailsearchstore.h ../pimsearchstore.h)
 target_link_libraries(emailsearchstore
-    Qt${QT_MAJOR_VERSION}::Core
+    Qt::Core
     KF5::AkonadiCore
     ${XAPIAN_LIBRARIES}
     KF5AkonadiSearchCore

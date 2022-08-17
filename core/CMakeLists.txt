@@ -28,7 +28,7 @@ endif()
 
 target_link_libraries(KF5AkonadiSearchCore
     PUBLIC
-    Qt${QT_MAJOR_VERSION}::Core
+    Qt::Core
 )
 
 set_target_properties(KF5AkonadiSearchCore PROPERTIES

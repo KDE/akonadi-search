@@ -57,7 +57,7 @@ generate_export_header(KF5AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_F
 
 target_link_libraries(KF5AkonadiSearchPIM
     PUBLIC
-    Qt${QT_MAJOR_VERSION}::Core
+    Qt::Core
 
     PRIVATE
     KF5::AkonadiCore

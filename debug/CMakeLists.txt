@@ -26,7 +26,7 @@ generate_export_header(KF5AkonadiSearchDebug BASE_NAME AKONADI_SEARCH_DEBUG EXPO
 
 target_link_libraries(KF5AkonadiSearchDebug
     PRIVATE
-    Qt${QT_MAJOR_VERSION}::Widgets
+    Qt::Widgets
     KF5::I18n
     KF5::AkonadiCore
     KF5::WidgetsAddons

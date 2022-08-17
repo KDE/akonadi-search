@@ -18,7 +18,7 @@ set(indexer_SRCS
 )
 
 set(indexer_LIBS
-    Qt${QT_MAJOR_VERSION}::Test
+    Qt::Test
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::AkonadiAgentBase
@@ -72,8 +72,8 @@ target_link_libraries(collectionquerytest
     KF5::AkonadiSearchPIM
     KF5::AkonadiAgentBase
     KF5::ConfigCore
-    Qt${QT_MAJOR_VERSION}::Widgets
-    Qt${QT_MAJOR_VERSION}::DBus
+    Qt::Widgets
+    Qt::DBus
 )
 endif()
 endif()
