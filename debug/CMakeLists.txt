@@ -47,7 +47,7 @@ set_target_properties(KF5AkonadiSearchDebug PROPERTIES
 
 target_include_directories(KF5AkonadiSearchDebug INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch>")
 
-install(TARGETS KF5AkonadiSearchDebug EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchDebug EXPORT KF5AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     akonadisearchdebugdialog.h

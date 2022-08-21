@@ -50,7 +50,7 @@ ecm_generate_headers(KF5AkonadiSearchCore_CamelCasecore_HEADERS
     PREFIX Core
     )
 
-install(TARGETS KF5AkonadiSearchCore EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchCore EXPORT KF5AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     ${KF5AkonadiSearchCore_CamelCasecore_HEADERS}

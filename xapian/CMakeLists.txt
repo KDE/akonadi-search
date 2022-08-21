@@ -44,7 +44,7 @@ set_target_properties(KF5AkonadiSearchXapian PROPERTIES
 
 generate_export_header(KF5AkonadiSearchXapian BASE_NAME AKONADI_SEARCH_XAPIAN EXPORT_FILE_NAME search_xapian_export.h)
 
-install(TARGETS KF5AkonadiSearchXapian EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5AkonadiSearchXapian EXPORT KF5AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     xapiandatabase.h
