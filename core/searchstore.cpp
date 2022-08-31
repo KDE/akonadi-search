@@ -105,18 +105,17 @@ SearchStore::List SearchStore::searchStores()
         if (metadata[QStringLiteral("X-Akonadi-PluginType")].toString() != QLatin1String("SearchStore")) {
             continue;
         }
-
         if (!loader.load()) {
             qCWarning(AKONADI_SEARCH_CORE_LOG) << "Could not create Akonadi Search Store: " << pluginPath;
             qCWarning(AKONADI_SEARCH_CORE_LOG) << loader.errorString();
             continue;
         }
-
         QObject *obj = loader.instance();
         if (obj) {
             SearchStore *ex = qobject_cast<SearchStore *>(obj);
             if (ex) {
                 stores << QSharedPointer<SearchStore>(ex);
+                qCDebug(AKONADI_SEARCH_CORE_LOG) << " Loaded plugins: " << pluginPath;
             } else {
                 qCDebug(AKONADI_SEARCH_CORE_LOG) << "Plugin could not be converted to an Akonadi::Search::SearchStore " << pluginPath;
             }
@@ -124,6 +123,5 @@ SearchStore::List SearchStore::searchStores()
             qCDebug(AKONADI_SEARCH_CORE_LOG) << "Plugin could not create instance" << pluginPath;
         }
     }
-
     return stores;
 }
