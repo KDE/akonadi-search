@@ -8,7 +8,6 @@
 
 #pragma once
 
-#include <QHash>
 #include <QObject>
 #include <QString>
 #include <QUrl>

@@ -10,7 +10,6 @@
 #include "akonadi_search_pim_debug.h"
 #include "contactquery.h"
 
-#include <QDebug>
 #include <QVariant>
 
 #include <Akonadi/ServerManager>

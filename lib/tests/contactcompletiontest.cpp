@@ -17,8 +17,6 @@
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
 
-#include <KMime/Message>
-
 using namespace Akonadi::Search::PIM;
 
 class App : public QCoreApplication

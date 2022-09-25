@@ -12,7 +12,6 @@
 #include "contactcompleter.h"
 #include "query.h"
 
-#include <QDebug>
 #include <QElapsedTimer>
 #include <QFile>
 #include <QStandardPaths>

@@ -12,7 +12,6 @@
 #include "contactquery.h"
 #include "resultiterator_p.h"
 
-#include <QDebug>
 #include <QFile>
 #include <QList>
 #include <QStandardPaths>
