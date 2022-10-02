@@ -1,0 +1,82 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2014, 2016, 2017.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"PO-Revision-Date: 2017-04-22 23:42+0100\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: agent/agent.cpp:62
+#, kde-format
+msgctxt "@info:status"
+msgid "No indexers available"
+msgstr "Geen programma's voor indexering beschikbaar"
+
+#: agent/collectionindexingjob.cpp:62
+#, kde-format
+msgid "Indexing collection: %1"
+msgstr "Verzameling indexeren: %1"
+
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#, kde-format
+msgid "Ready"
+msgstr "Gereed"
+
+#: agent/scheduler.cpp:244
+#, kde-format
+msgid "Collection \"%1\" indexed"
+msgstr "Verzameling \"%1\" geïndexeerd"
+
+#: debug/akonadisearchdebugdialog.cpp:90
+#, kde-format
+msgid "Text Files (*.txt);;All Files (*)"
+msgstr "Tekstbestanden (*.txt);;Alle bestanden (*)"
+
+#: debug/akonadisearchdebugdialog.cpp:102
+#, kde-format
+msgid ""
+"Could not write the file %1:\n"
+"\"%2\" is the detailed error description."
+msgstr ""
+"Kon bestand %1 niet wegschrijven:\n"
+"\"%2\" is de gedetailleerde foutbeschrijving."
+
+#: debug/akonadisearchdebugdialog.cpp:106
+#, kde-format
+msgid "Save File Error"
+msgstr "Fout met opslaan van bestand"
+
+#: runner/pimcontactsrunner.cpp:125 runner/pimcontactsrunner.cpp:191
+#, kde-format
+msgid "Contacts"
+msgstr "Contactpersonen"
+
+#: runner/pimcontactsrunner.cpp:169 runner/pimcontactsrunner.cpp:175
+#: runner/pimcontactsrunner.cpp:207
+#, kde-format
+msgctxt "Name (email)"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: runner/pimcontactsrunner.cpp:192
+#, kde-format
+msgid "Autocompleted from received and sent emails"
+msgstr "Automatisch aangevuld vanuit ontvangen en verzonden e-mailberichten"
+
+#: runner/pimcontactsrunnerconfig.cpp:20
+#, kde-format
+msgid "Search in contacts indexed from sent and received emails too"
+msgstr ""
+"Ook in contactpersonen zoeken die geïndexeerd zijn uit verzonden en "
+"ontvangen e-mailberichten"

@@ -1,0 +1,81 @@
+# Lithuanian translations for trunk-kf package.
+# Copyright (C) 2015 This_file_is_part_of_KDE
+# This file is distributed under the same license as the trunk-kf package.
+#
+# Automatically generated, 2015.
+# Liudas Ališauskas <liudas@akmc.lt>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: trunk-kf 5\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"PO-Revision-Date: 2015-08-30 15:56+0200\n"
+"Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
+"Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: agent/agent.cpp:62
+#, kde-format
+msgctxt "@info:status"
+msgid "No indexers available"
+msgstr "Nėra pasiekiamų indeksavimo programų"
+
+#: agent/collectionindexingjob.cpp:62
+#, kde-format
+msgid "Indexing collection: %1"
+msgstr "Indeksuojamas rinkinys: %1"
+
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#, kde-format
+msgid "Ready"
+msgstr "Pasiruošęs"
+
+#: agent/scheduler.cpp:244
+#, kde-format
+msgid "Collection \"%1\" indexed"
+msgstr ""
+
+#: debug/akonadisearchdebugdialog.cpp:90
+#, kde-format
+msgid "Text Files (*.txt);;All Files (*)"
+msgstr ""
+
+#: debug/akonadisearchdebugdialog.cpp:102
+#, kde-format
+msgid ""
+"Could not write the file %1:\n"
+"\"%2\" is the detailed error description."
+msgstr ""
+
+#: debug/akonadisearchdebugdialog.cpp:106
+#, kde-format
+msgid "Save File Error"
+msgstr ""
+
+#: runner/pimcontactsrunner.cpp:125 runner/pimcontactsrunner.cpp:191
+#, kde-format
+msgid "Contacts"
+msgstr ""
+
+#: runner/pimcontactsrunner.cpp:169 runner/pimcontactsrunner.cpp:175
+#: runner/pimcontactsrunner.cpp:207
+#, kde-format
+msgctxt "Name (email)"
+msgid "%1 (%2)"
+msgstr ""
+
+#: runner/pimcontactsrunner.cpp:192
+#, kde-format
+msgid "Autocompleted from received and sent emails"
+msgstr ""
+
+#: runner/pimcontactsrunnerconfig.cpp:20
+#, kde-format
+msgid "Search in contacts indexed from sent and received emails too"
+msgstr ""

@@ -1,0 +1,80 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Shinjo Park <kde@peremen.name>, 2014, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"PO-Revision-Date: 2017-12-03 19:17+0100\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 2.0\n"
+
+#: agent/agent.cpp:62
+#, kde-format
+msgctxt "@info:status"
+msgid "No indexers available"
+msgstr "색인 도구를 찾을 수 없음"
+
+#: agent/collectionindexingjob.cpp:62
+#, kde-format
+msgid "Indexing collection: %1"
+msgstr "모음집 색인 중: %1"
+
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#, kde-format
+msgid "Ready"
+msgstr "준비"
+
+#: agent/scheduler.cpp:244
+#, kde-format
+msgid "Collection \"%1\" indexed"
+msgstr "모음집 \"%1\"을(를) 색인에 추가함"
+
+#: debug/akonadisearchdebugdialog.cpp:90
+#, kde-format
+msgid "Text Files (*.txt);;All Files (*)"
+msgstr "텍스트 파일 (*.txt);;모든 파일 (*)"
+
+#: debug/akonadisearchdebugdialog.cpp:102
+#, kde-format
+msgid ""
+"Could not write the file %1:\n"
+"\"%2\" is the detailed error description."
+msgstr ""
+"파일 %1에 쓸 수 없습니다:\n"
+"자세한 오류 설명은 \"%2\"입니다."
+
+#: debug/akonadisearchdebugdialog.cpp:106
+#, kde-format
+msgid "Save File Error"
+msgstr "파일 저장 오류"
+
+#: runner/pimcontactsrunner.cpp:125 runner/pimcontactsrunner.cpp:191
+#, kde-format
+msgid "Contacts"
+msgstr "연락처"
+
+#: runner/pimcontactsrunner.cpp:169 runner/pimcontactsrunner.cpp:175
+#: runner/pimcontactsrunner.cpp:207
+#, kde-format
+msgctxt "Name (email)"
+msgid "%1 (%2)"
+msgstr "%1(%2)"
+
+#: runner/pimcontactsrunner.cpp:192
+#, kde-format
+msgid "Autocompleted from received and sent emails"
+msgstr "보내고 받은 메일에서 자동으로 완성됨"
+
+#: runner/pimcontactsrunnerconfig.cpp:20
+#, kde-format
+msgid "Search in contacts indexed from sent and received emails too"
+msgstr "보내고 받은 메일에서 색인에 추가한 연락처에서도 검색"

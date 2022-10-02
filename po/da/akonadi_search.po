@@ -1,0 +1,80 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Martin Schlander <mschlander@opensuse.org>, 2015, 2016, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"PO-Revision-Date: 2020-07-21 18:10+0200\n"
+"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"Language-Team: Danish <kde-i18n-doc@kde.org>\n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: agent/agent.cpp:62
+#, kde-format
+msgctxt "@info:status"
+msgid "No indexers available"
+msgstr "Ingen indeksering tilgængelig"
+
+#: agent/collectionindexingjob.cpp:62
+#, kde-format
+msgid "Indexing collection: %1"
+msgstr "Indekserer samling: %1"
+
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#, kde-format
+msgid "Ready"
+msgstr "Klar"
+
+#: agent/scheduler.cpp:244
+#, kde-format
+msgid "Collection \"%1\" indexed"
+msgstr "Samlingen \"%1\" indekseret"
+
+#: debug/akonadisearchdebugdialog.cpp:90
+#, kde-format
+msgid "Text Files (*.txt);;All Files (*)"
+msgstr "Tekstfiler (*.txt);;Alle filer (*)"
+
+#: debug/akonadisearchdebugdialog.cpp:102
+#, kde-format
+msgid ""
+"Could not write the file %1:\n"
+"\"%2\" is the detailed error description."
+msgstr ""
+"Kunne ikke skrive filen %1:\n"
+"\"%2\" er den detaljerede fejlbeskrivelse."
+
+#: debug/akonadisearchdebugdialog.cpp:106
+#, kde-format
+msgid "Save File Error"
+msgstr "Fejl ved gemning af fil"
+
+#: runner/pimcontactsrunner.cpp:125 runner/pimcontactsrunner.cpp:191
+#, kde-format
+msgid "Contacts"
+msgstr "Kontakter"
+
+#: runner/pimcontactsrunner.cpp:169 runner/pimcontactsrunner.cpp:175
+#: runner/pimcontactsrunner.cpp:207
+#, kde-format
+msgctxt "Name (email)"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: runner/pimcontactsrunner.cpp:192
+#, kde-format
+msgid "Autocompleted from received and sent emails"
+msgstr "Autokompletteret fra modtagne og sendte e-mails"
+
+#: runner/pimcontactsrunnerconfig.cpp:20
+#, kde-format
+msgid "Search in contacts indexed from sent and received emails too"
+msgstr "Søg også i kontakter der er indekseret fra sendte og modtagne e-mails"
