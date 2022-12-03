@@ -32,6 +32,7 @@ target_link_libraries(KF5AkonadiSearchDebug
     KF5::WidgetsAddons
     KF5::ConfigCore
     KF5::Completion
+    KF5::ConfigGui
 )
 if (QT_MAJOR_VERSION STREQUAL "6")
 target_link_libraries(KF5AkonadiSearchDebug

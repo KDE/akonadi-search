@@ -13,11 +13,13 @@
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KSharedConfig>
+#include <KWindowConfig>
 #include <QDialogButtonBox>
 #include <QFileDialog>
 #include <QPointer>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QWindow>
 
 using namespace Akonadi::Search;
 
@@ -27,6 +29,10 @@ public:
     AkonadiSearchDebugWidget *mAkonadiSearchDebugWidget = nullptr;
 };
 
+namespace
+{
+static const char myAkonadiSearchDebugDialogConfigGroupName[] = "AkonadiSearchDebugDialog";
+}
 AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
     : QDialog(parent)
     , d(new Akonadi::Search::AkonadiSearchDebugDialogPrivate)
@@ -57,17 +63,18 @@ AkonadiSearchDebugDialog::~AkonadiSearchDebugDialog()
 
 void AkonadiSearchDebugDialog::readConfig()
 {
-    KConfigGroup group(KSharedConfig::openStateConfig(), "AkonadiSearchDebugDialog");
-    const QSize sizeDialog = group.readEntry("Size", QSize(800, 600));
-    if (sizeDialog.isValid()) {
-        resize(sizeDialog);
-    }
+    create(); // ensure a window is created
+    windowHandle()->resize(QSize(800, 600));
+    KConfigGroup group(KSharedConfig::openStateConfig(), myAkonadiSearchDebugDialogConfigGroupName);
+    KWindowConfig::restoreWindowSize(windowHandle(), group);
+    resize(windowHandle()->size()); // workaround for QTBUG-40584
 }
 
 void AkonadiSearchDebugDialog::writeConfig()
 {
-    KConfigGroup group(KSharedConfig::openStateConfig(), "AkonadiSearchDebugDialog");
-    group.writeEntry("Size", size());
+    KConfigGroup group(KSharedConfig::openStateConfig(), myAkonadiSearchDebugDialogConfigGroupName);
+    KWindowConfig::saveWindowSize(windowHandle(), group);
+    group.sync();
 }
 
 void AkonadiSearchDebugDialog::setAkonadiId(Akonadi::Item::Id akonadiId)
