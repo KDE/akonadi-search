@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"POT-Creation-Date: 2022-12-04 00:47+0000\n"
 "PO-Revision-Date: 2018-07-29 16:13-0300\n"
 "Last-Translator: André Marcelo Alvarenga <alvarenga@kde.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_br@kde.org>\n"
@@ -39,12 +39,12 @@ msgstr "Pronto"
 msgid "Collection \"%1\" indexed"
 msgstr "A coleção \"%1\" foi indexada"
 
-#: debug/akonadisearchdebugdialog.cpp:90
+#: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Arquivos de texto (*.txt);;Todos os arquivos (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:102
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -53,7 +53,7 @@ msgstr ""
 "Não foi possível gravar o arquivo %1:\n"
 "\"%2\" é a descrição detalhada do erro."
 
-#: debug/akonadisearchdebugdialog.cpp:106
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgid "Save File Error"
 msgstr "Erro de gravação do arquivo"

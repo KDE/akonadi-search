@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"POT-Creation-Date: 2022-12-04 00:47+0000\n"
 "PO-Revision-Date: 2020-11-07 13:29+0100\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -38,12 +38,12 @@ msgstr "Kész"
 msgid "Collection \"%1\" indexed"
 msgstr "A(z) „%1” gyűjtemény indexelve"
 
-#: debug/akonadisearchdebugdialog.cpp:90
+#: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Szövegfájlok (*.txt);;Minden fájl (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:102
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -52,7 +52,7 @@ msgstr ""
 "Nem lehet írni a(z) %1 fájlt:\n"
 "A hiba részletes leírása: „%2”."
 
-#: debug/akonadisearchdebugdialog.cpp:106
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgid "Save File Error"
 msgstr "Fájlmentési hiba"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"POT-Creation-Date: 2022-12-04 00:47+0000\n"
 "PO-Revision-Date: 2021-06-15 12:57+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -39,12 +39,12 @@ msgstr "तैयार"
 msgid "Collection \"%1\" indexed"
 msgstr "संग्रह \"%1\" अनुक्रमित हो चुका"
 
-#: debug/akonadisearchdebugdialog.cpp:90
+#: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "पाठ फ़ाइलें (*.टीएक्सटी);; सभी फ़ाइलें (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:102
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -53,7 +53,7 @@ msgstr ""
 "%1 फ़ाइल लिख नहीं सके:\n"
 "\"%2\" इस त्रुटि का विस्तृत वर्णन है."
 
-#: debug/akonadisearchdebugdialog.cpp:106
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgid "Save File Error"
 msgstr "फ़ाइल सहेजने में त्रुटि"

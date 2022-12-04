@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-04 00:46+0000\n"
+"POT-Creation-Date: 2022-12-04 00:47+0000\n"
 "PO-Revision-Date: 2022-07-06 18:01+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -38,12 +38,12 @@ msgstr "Hazırdır"
 msgid "Collection \"%1\" indexed"
 msgstr "\"%1\" kolleksiyası indeksləndi"
 
-#: debug/akonadisearchdebugdialog.cpp:90
+#: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Mətn faylları (*.txt);;Bütün fayllar (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:102
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -52,7 +52,7 @@ msgstr ""
 "%1 faylı yazıla bilmədi:\n"
 "\"%2\" xətanın ətraflı təsviridir."
 
-#: debug/akonadisearchdebugdialog.cpp:106
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgid "Save File Error"
 msgstr "Faylda saxlama xətası"
