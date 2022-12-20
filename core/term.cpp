@@ -50,13 +50,25 @@ Term::Term(const QString &property, const QVariant &value, Term::Comparator c)
     d->m_value = value;
 
     if (c == Auto) {
-        if (value.type() == QVariant::String) {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+        auto valueType = value.type();
+        if (valueType == QVariant::String) {
             d->m_comp = Contains;
-        } else if (value.type() == QVariant::DateTime) {
+        } else if (valueType == QVariant::String) {
             d->m_comp = Contains;
         } else {
             d->m_comp = Equal;
         }
+#else
+        auto valueType = value.metaType();
+        if (valueType == QMetaType::QString) {
+            d->m_comp = Contains;
+        } else if (valueType == QMetaType::QDateTime) {
+            d->m_comp = Contains;
+        } else {
+            d->m_comp = Equal;
+        }
+#endif
     } else {
         d->m_comp = c;
     }
