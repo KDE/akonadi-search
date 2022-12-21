@@ -60,7 +60,7 @@ Term::Term(const QString &property, const QVariant &value, Term::Comparator c)
             d->m_comp = Equal;
         }
 #else
-        auto valueType = value.metaType();
+        auto valueType = value.metaType().id();
         if (valueType == QMetaType::QString) {
             d->m_comp = Contains;
         } else if (valueType == QMetaType::QDateTime) {
