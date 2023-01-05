@@ -41,6 +41,7 @@
         "Description[bg]": "Програма, която извършва търсене във вашите контакти",
         "Description[ca@valencia]": "Executor que busca a través dels vostres contactes",
         "Description[ca]": "Executor que cerca a través dels vostres contactes",
+        "Description[cs]": "Prohledává vaše kontakty",
         "Description[de]": "Runner, der Ihre Kontakte durchsucht",
         "Description[el]": "Πρόγραμμα αναζήτησης στη λίστα των επαφών σας",
         "Description[en_GB]": "Runner which searches through your contacts",
