@@ -6,9 +6,9 @@ set(PIM_VERSION "5.22.40")
 project(AkonadiSearch VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_MIN_VERSION "5.102.0")
+set(KF_MIN_VERSION "5.102.0")
 
-find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -52,9 +52,9 @@ if (QT_MAJOR_VERSION STREQUAL "6")
 endif()
 
 find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAddons KCMUtils KIO)
+find_package(KF5 ${KF_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAddons KCMUtils KIO)
 if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
-    find_package(KF5Runner ${KF5_MIN_VERSION} REQUIRED)
+    find_package(KF5Runner ${KF_MIN_VERSION} REQUIRED)
 endif()
 if (QT_MAJOR_VERSION STREQUAL "6")
     find_package(Qt6Core5Compat)
@@ -69,10 +69,10 @@ set_package_properties(Xapian PROPERTIES
 )
 
 find_package(KF5Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
-find_package(KF5Contacts ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5Contacts ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5Mime ${KMIME_LIB_VERSION} CONFIG REQUIRED)
 find_package(KF5AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
-find_package(KF5CalendarCore ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
 
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX AKONADISEARCH
