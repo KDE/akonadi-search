@@ -23,13 +23,13 @@ set(indexer_LIBS
     KF5::AkonadiMime
     KF5::AkonadiAgentBase
     KF5::Mime
-    KF5::Contacts
-    KF5::CalendarCore
+    KF${KF_MAJOR_VERSION}::Contacts
+    KF${KF_MAJOR_VERSION}::CalendarCore
     KF5::AkonadiSearchPIM
     KF5::AkonadiSearchXapian
-    KF5::I18n
-    KF5::Codecs
-    KF5::ConfigCore
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::Codecs
+    KF${KF_MAJOR_VERSION}::ConfigCore
 )
 
 set(indexertest_SRCS
@@ -71,7 +71,7 @@ target_link_libraries(collectionquerytest
     ${QJSON_LIBRARIES}
     KF5::AkonadiSearchPIM
     KF5::AkonadiAgentBase
-    KF5::ConfigCore
+    KF${KF_MAJOR_VERSION}::ConfigCore
     Qt::Widgets
     Qt::DBus
 )

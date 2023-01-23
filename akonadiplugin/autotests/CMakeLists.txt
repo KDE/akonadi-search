@@ -36,10 +36,10 @@ target_link_libraries(searchplugintest
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime
-    KF5::Contacts
+    KF${KF_MAJOR_VERSION}::Contacts
     ${XAPIAN_LIBRARIES}
-    KF5::CalendarCore
+    KF${KF_MAJOR_VERSION}::CalendarCore
     KF5::AkonadiSearchPIM
     KF5::AkonadiSearchXapian
-    KF5::Codecs
+    KF${KF_MAJOR_VERSION}::Codecs
 )

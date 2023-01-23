@@ -18,7 +18,7 @@ target_link_libraries(akonadi_search_plugin
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::AkonadiSearchCore
-    KF5::Contacts
+    KF${KF_MAJOR_VERSION}::Contacts
 )
 
 install(TARGETS akonadi_search_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim${QT_MAJOR_VERSION}/akonadi)

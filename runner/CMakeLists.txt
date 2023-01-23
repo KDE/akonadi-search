@@ -16,13 +16,13 @@ target_sources(krunner_pimcontacts PRIVATE
 )
 
 target_link_libraries(krunner_pimcontacts
-    KF5::Runner
+    KF${KF_MAJOR_VERSION}::Runner
     KF5::AkonadiCore
     KF5AkonadiSearchPIM
-    KF5::I18n
-    KF5::ConfigCore
-    KF5::Contacts
-    KF5::Codecs
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::ConfigCore
+    KF${KF_MAJOR_VERSION}::Contacts
+    KF${KF_MAJOR_VERSION}::Codecs
 )
 
 kcoreaddons_add_plugin(kcm_krunner_pimcontacts INSTALL_NAMESPACE "kf${QT_MAJOR_VERSION}/krunner/kcms")
@@ -34,6 +34,6 @@ target_sources(kcm_krunner_pimcontacts PRIVATE
 
 target_link_libraries(kcm_krunner_pimcontacts
     Qt::Gui
-    KF5::KCMUtils
-    KF5::I18n
+    KF${KF_MAJOR_VERSION}::KCMUtils
+    KF${KF_MAJOR_VERSION}::I18n
 )

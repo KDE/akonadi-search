@@ -27,12 +27,12 @@ generate_export_header(KF5AkonadiSearchDebug BASE_NAME AKONADI_SEARCH_DEBUG EXPO
 target_link_libraries(KF5AkonadiSearchDebug
     PRIVATE
     Qt::Widgets
-    KF5::I18n
+    KF${KF_MAJOR_VERSION}::I18n
     KF5::AkonadiCore
-    KF5::WidgetsAddons
-    KF5::ConfigCore
-    KF5::Completion
-    KF5::ConfigGui
+    KF${KF_MAJOR_VERSION}::WidgetsAddons
+    KF${KF_MAJOR_VERSION}::ConfigCore
+    KF${KF_MAJOR_VERSION}::Completion
+    KF${KF_MAJOR_VERSION}::ConfigGui
 )
 if (QT_MAJOR_VERSION STREQUAL "6")
 target_link_libraries(KF5AkonadiSearchDebug

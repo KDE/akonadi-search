@@ -57,14 +57,14 @@ target_link_libraries(akonadi_indexing_agent
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::Mime
-    KF5::Contacts
+    KF${KF_MAJOR_VERSION}::Contacts
     KF5::AkonadiAgentBase
-    KF5::CalendarCore
+    KF${KF_MAJOR_VERSION}::CalendarCore
     KF5::AkonadiSearchXapian
     KF5::AkonadiSearchPIM
-    KF5::Codecs
-    KF5::I18n
-    KF5::ConfigCore
+    KF${KF_MAJOR_VERSION}::Codecs
+    KF${KF_MAJOR_VERSION}::I18n
+    KF${KF_MAJOR_VERSION}::ConfigCore
     Qt::Widgets
 )
 
