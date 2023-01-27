@@ -75,8 +75,11 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
         if (value.isNull()) {
             isTrue = true;
         }
-
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
         if (value.type() == QVariant::Bool) {
+#else
+        if (value.userType() == QMetaType::Bool) {
+#endif
             isTrue = value.toBool();
         }
 

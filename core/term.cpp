@@ -289,7 +289,11 @@ namespace
 // and see if they can be converted into date/datetime.
 QVariant tryConvert(const QVariant &var)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (var.canConvert(QVariant::DateTime)) {
+#else
+    if (var.canConvert<QDateTime>()) {
+#endif
         QDateTime dt = var.toDateTime();
         if (!dt.isValid()) {
             return var;
@@ -338,7 +342,11 @@ Term Term::fromVariantMap(const QVariantMap &map)
     term.setProperty(prop);
 
     QVariant value = map.value(prop);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     if (value.type() == QVariant::Map) {
+#else
+    if (value.userType() == QMetaType::QVariantMap) {
+#endif
         QVariantMap map = value.toMap();
         if (map.size() != 1) {
             return term;
