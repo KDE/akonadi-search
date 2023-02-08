@@ -9,9 +9,13 @@
 
 #include <KRunner/AbstractRunner>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace Plasma;
-
 class PIMContactsRunner : public Plasma::AbstractRunner
+#else
+using namespace KRunner;
+class PIMContactsRunner : public KRunner::AbstractRunner
+#endif
 {
     Q_OBJECT
 
