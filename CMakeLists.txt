@@ -145,7 +145,7 @@ install(FILES
 install(EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets
         NAMESPACE KPim${KF_MAJOR_VERSION}::
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        FILE KF5AkonadiSearchTargets.cmake)
+        FILE KPim${KF_MAJOR_VERSION}AkonadiSearchTargets.cmake)
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
