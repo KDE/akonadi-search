@@ -35,7 +35,7 @@ target_link_libraries(searchplugintest
     Qt::Test
     KF5::AkonadiCore
     KF5::AkonadiMime
-    KF5::Mime
+    KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts
     ${XAPIAN_LIBRARIES}
     KF${KF_MAJOR_VERSION}::CalendarCore

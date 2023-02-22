@@ -8,7 +8,7 @@ target_link_libraries(emailindexer
   Qt::Test
   KF5::AkonadiCore
   KF5::AkonadiMime
-  KF5::Mime
+  KPim${KF_MAJOR_VERSION}::Mime
   KF5::AkonadiSearchPIM
   KF5::AkonadiSearchXapian
   KF${KF_MAJOR_VERSION}::Codecs

@@ -56,7 +56,7 @@ target_link_libraries(akonadi_indexing_agent
     Qt::Core
     KF5::AkonadiCore
     KF5::AkonadiMime
-    KF5::Mime
+    KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts
     KF5::AkonadiAgentBase
     KF${KF_MAJOR_VERSION}::CalendarCore

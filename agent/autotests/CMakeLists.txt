@@ -22,7 +22,7 @@ set(indexer_LIBS
     KF5::AkonadiCore
     KF5::AkonadiMime
     KF5::AkonadiAgentBase
-    KF5::Mime
+    KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts
     KF${KF_MAJOR_VERSION}::CalendarCore
     KF5::AkonadiSearchPIM
