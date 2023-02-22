@@ -35,7 +35,7 @@ target_link_libraries(KPim${KF_MAJOR_VERSION}AkonadiSearchDebug
     KF${KF_MAJOR_VERSION}::ConfigGui
 )
 if (QT_MAJOR_VERSION STREQUAL "6")
-target_link_libraries(KF5AkonadiSearchDebug
+target_link_libraries(KPim${KF_MAJOR_VERSION}AkonadiSearchDebug
     PRIVATE
     Qt6::Core5Compat
     )

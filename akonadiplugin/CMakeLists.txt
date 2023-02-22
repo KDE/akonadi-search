@@ -16,7 +16,7 @@ ecm_qt_declare_logging_category(akonadi_search_plugin HEADER akonadiplugin_index
 
 target_link_libraries(akonadi_search_plugin
     KF5::AkonadiCore
-    KF5::AkonadiMime
+    KPim${KF_MAJOR_VERSION}::AkonadiMime
     KPim${KF_MAJOR_VERSION}::AkonadiSearchCore
     KF${KF_MAJOR_VERSION}::Contacts
 )

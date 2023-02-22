@@ -20,7 +20,7 @@ set(indexer_SRCS
 set(indexer_LIBS
     Qt::Test
     KF5::AkonadiCore
-    KF5::AkonadiMime
+    KPim${KF_MAJOR_VERSION}::AkonadiMime
     KF5::AkonadiAgentBase
     KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts
