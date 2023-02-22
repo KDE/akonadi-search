@@ -4,8 +4,8 @@ target_link_libraries(emailsearchstore
     Qt::Core
     KF5::AkonadiCore
     ${XAPIAN_LIBRARIES}
-    KF5AkonadiSearchCore
-    KF5AkonadiSearchXapian
+    KPim${KF_MAJOR_VERSION}AkonadiSearchCore
+    KPim${KF_MAJOR_VERSION}AkonadiSearchXapian
 )
 
 install(TARGETS emailsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim${QT_MAJOR_VERSION}/akonadi)

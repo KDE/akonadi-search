@@ -39,7 +39,7 @@ target_link_libraries(searchplugintest
     KF${KF_MAJOR_VERSION}::Contacts
     ${XAPIAN_LIBRARIES}
     KF${KF_MAJOR_VERSION}::CalendarCore
-    KF5::AkonadiSearchPIM
-    KF5::AkonadiSearchXapian
+    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
+    KPim${KF_MAJOR_VERSION}::AkonadiSearchXapian
     KF${KF_MAJOR_VERSION}::Codecs
 )

@@ -6,19 +6,19 @@ include_directories(
 )
 if (BUILD_QCH)
     ecm_install_qch_export(
-        TARGETS KF5AkonadiSearchPIM_QCH
-        FILE KF5AkonadiSearchPIMQchTargets.cmake
+        TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchPIM_QCH
+        FILE KPim${KF_MAJOR_VERSION}AkonadiSearchPIMQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF5AkonadiSearchPIMQchTargets.cmake\")")
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchPIMQchTargets.cmake\")")
 endif()
 
-add_library(KF5AkonadiSearchPIM)
-add_library(KF5::AkonadiSearchPIM ALIAS KF5AkonadiSearchPIM)
+add_library(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM)
+add_library(KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM ALIAS KPim${KF_MAJOR_VERSION}AkonadiSearchPIM)
 
 
-target_sources(KF5AkonadiSearchPIM PRIVATE
+target_sources(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM PRIVATE
     query.cpp
     resultiterator.cpp
     contactquery.cpp
@@ -42,20 +42,20 @@ target_sources(KF5AkonadiSearchPIM PRIVATE
     ../search/email/agepostingsource.h
     )
 
-ecm_qt_declare_logging_category(KF5AkonadiSearchPIM HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME org.kde.pim.akonadi_search_pim
+ecm_qt_declare_logging_category(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME org.kde.pim.akonadi_search_pim
         DESCRIPTION "akonadisearch(akonadi pim lib)"
         OLD_CATEGORY_NAMES log_akonadi_search_pim
         EXPORT AKONADISEARCH
     )
 
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KF5AkonadiSearchPIM PROPERTIES UNITY_BUILD ON)
+    set_target_properties(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM PROPERTIES UNITY_BUILD ON)
 endif()
 
 
-generate_export_header(KF5AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_FILE_NAME search_pim_export.h)
+generate_export_header(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_FILE_NAME search_pim_export.h)
 
-target_link_libraries(KF5AkonadiSearchPIM
+target_link_libraries(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM
     PUBLIC
     Qt::Core
 
@@ -64,15 +64,15 @@ target_link_libraries(KF5AkonadiSearchPIM
     ${XAPIAN_LIBRARIES}
 )
 
-set_target_properties(KF5AkonadiSearchPIM PROPERTIES
+set_target_properties(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM PROPERTIES
     VERSION ${AKONADISEARCH_VERSION}
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchPIM
 )
 
-target_include_directories(KF5AkonadiSearchPIM INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch>")
+target_include_directories(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch>")
 
-install(TARGETS KF5AkonadiSearchPIM EXPORT KF5AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchPIM EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 set(AKONADISEARCH_INCLUDES
     query.h
@@ -90,7 +90,7 @@ install(FILES
     ${AKONADISEARCH_INCLUDES}
     ${CMAKE_CURRENT_BINARY_DIR}/search_pim_export.h
 
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/PIM
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch/PIM
     COMPONENT Devel
 )
 
@@ -100,9 +100,9 @@ endif()
 
 if (BUILD_QCH)
     ecm_add_qch(
-        KF5AkonadiSearchPIM_QCH
-        NAME KF5AkonadiSearchPIM
-        BASE_NAME KF5AkonadiSearchPIM
+        KPim${KF_MAJOR_VERSION}AkonadiSearchPIM_QCH
+        NAME KPim${KF_MAJOR_VERSION}AkonadiSearchPIM
+        BASE_NAME KPim${KF_MAJOR_VERSION}AkonadiSearchPIM
         VERSION ${PIM_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API

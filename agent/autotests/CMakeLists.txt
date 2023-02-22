@@ -25,8 +25,8 @@ set(indexer_LIBS
     KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts
     KF${KF_MAJOR_VERSION}::CalendarCore
-    KF5::AkonadiSearchPIM
-    KF5::AkonadiSearchXapian
+    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
+    KPim${KF_MAJOR_VERSION}::AkonadiSearchXapian
     KF${KF_MAJOR_VERSION}::I18n
     KF${KF_MAJOR_VERSION}::Codecs
     KF${KF_MAJOR_VERSION}::ConfigCore
@@ -69,7 +69,7 @@ ecm_mark_as_test(collectionquerytest)
 target_link_libraries(collectionquerytest
     ${indexer_LIBS}
     ${QJSON_LIBRARIES}
-    KF5::AkonadiSearchPIM
+    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
     KF5::AkonadiAgentBase
     KF${KF_MAJOR_VERSION}::ConfigCore
     Qt::Widgets

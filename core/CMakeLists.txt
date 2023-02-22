@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: none
 kde_enable_exceptions()
-add_library(KF5AkonadiSearchCore)
-add_library(KF5::AkonadiSearchCore ALIAS KF5AkonadiSearchCore)
-target_sources(KF5AkonadiSearchCore PRIVATE
+add_library(KPim${KF_MAJOR_VERSION}AkonadiSearchCore)
+add_library(KPim${KF_MAJOR_VERSION}::AkonadiSearchCore ALIAS KPim${KF_MAJOR_VERSION}AkonadiSearchCore)
+target_sources(KPim${KF_MAJOR_VERSION}AkonadiSearchCore PRIVATE
     searchstore.cpp
     term.cpp
     query.cpp
@@ -15,56 +15,56 @@ target_sources(KF5AkonadiSearchCore PRIVATE
     resultiterator.h
     )
 
-ecm_qt_declare_logging_category(KF5AkonadiSearchCore HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core
+ecm_qt_declare_logging_category(KPim${KF_MAJOR_VERSION}AkonadiSearchCore HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core
         DESCRIPTION "akonadisearch (akonadi core lib)"
         EXPORT AKONADISEARCH
     )
 
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KF5AkonadiSearchCore PROPERTIES UNITY_BUILD ON)
+    set_target_properties(KPim${KF_MAJOR_VERSION}AkonadiSearchCore PROPERTIES UNITY_BUILD ON)
 endif()
 
 
 
-target_link_libraries(KF5AkonadiSearchCore
+target_link_libraries(KPim${KF_MAJOR_VERSION}AkonadiSearchCore
     PUBLIC
     Qt::Core
 )
 
-set_target_properties(KF5AkonadiSearchCore PROPERTIES
+set_target_properties(KPim${KF_MAJOR_VERSION}AkonadiSearchCore PROPERTIES
     VERSION ${AKONADISEARCH_VERSION}
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearchCore
 )
-target_include_directories(KF5AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch>")
+target_include_directories(KPim${KF_MAJOR_VERSION}AkonadiSearchCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch>")
 
-generate_export_header(KF5AkonadiSearchCore BASE_NAME AKONADI_SEARCH_CORE EXPORT_FILE_NAME search_core_export.h)
+generate_export_header(KPim${KF_MAJOR_VERSION}AkonadiSearchCore BASE_NAME AKONADI_SEARCH_CORE EXPORT_FILE_NAME search_core_export.h)
 
-ecm_generate_headers(KF5AkonadiSearchCore_CamelCasecore_HEADERS
+ecm_generate_headers(KPim${KF_MAJOR_VERSION}AkonadiSearchCore_CamelCasecore_HEADERS
     HEADER_NAMES
     Term
     Query
     ResultIterator
     SearchStore
-    REQUIRED_HEADERS KF5AkonadiSearchCore_core_HEADERS
+    REQUIRED_HEADERS KPim${KF_MAJOR_VERSION}AkonadiSearchCore_core_HEADERS
     PREFIX Core
     )
 
-install(TARGETS KF5AkonadiSearchCore EXPORT KF5AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchCore EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
-    ${KF5AkonadiSearchCore_CamelCasecore_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/Core
+    ${KPim${KF_MAJOR_VERSION}AkonadiSearchCore_CamelCasecore_HEADERS}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch/Core
     COMPONENT Devel
 )
 install(FILES
-    ${KF5AkonadiSearchCore_core_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch/core
+    ${KPim${KF_MAJOR_VERSION}AkonadiSearchCore_core_HEADERS}
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch/core
     COMPONENT Devel
 )
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/AkonadiSearch
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch
     COMPONENT Devel
 )

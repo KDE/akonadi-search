@@ -10,6 +10,6 @@ target_link_libraries(akonadisearchdebug_dialog_gui
   Qt::Widgets
   KF5::AkonadiCore
   KF${KF_MAJOR_VERSION}::I18n
-  KF5::AkonadiSearchDebug
+  KPim${KF_MAJOR_VERSION}::AkonadiSearchDebug
 )
 

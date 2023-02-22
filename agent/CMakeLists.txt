@@ -60,8 +60,8 @@ target_link_libraries(akonadi_indexing_agent
     KF${KF_MAJOR_VERSION}::Contacts
     KF5::AkonadiAgentBase
     KF${KF_MAJOR_VERSION}::CalendarCore
-    KF5::AkonadiSearchXapian
-    KF5::AkonadiSearchPIM
+    KPim${KF_MAJOR_VERSION}::AkonadiSearchXapian
+    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
     KF${KF_MAJOR_VERSION}::Codecs
     KF${KF_MAJOR_VERSION}::I18n
     KF${KF_MAJOR_VERSION}::ConfigCore
