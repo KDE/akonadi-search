@@ -28,7 +28,7 @@ target_link_libraries(KPim${KF_MAJOR_VERSION}AkonadiSearchDebug
     PRIVATE
     Qt::Widgets
     KF${KF_MAJOR_VERSION}::I18n
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     KF${KF_MAJOR_VERSION}::WidgetsAddons
     KF${KF_MAJOR_VERSION}::ConfigCore
     KF${KF_MAJOR_VERSION}::Completion

@@ -33,7 +33,7 @@ ecm_mark_as_test(searchplugintest)
 
 target_link_libraries(searchplugintest
     Qt::Test
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     KPim${KF_MAJOR_VERSION}::AkonadiMime
     KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts

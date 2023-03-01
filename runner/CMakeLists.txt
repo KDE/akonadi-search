@@ -17,7 +17,7 @@ target_sources(krunner_pimcontacts PRIVATE
 
 target_link_libraries(krunner_pimcontacts
     KF${KF_MAJOR_VERSION}::Runner
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
     KF${KF_MAJOR_VERSION}::I18n
     KF${KF_MAJOR_VERSION}::ConfigCore

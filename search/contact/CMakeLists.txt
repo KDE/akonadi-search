@@ -2,7 +2,7 @@ add_library(contactsearchstore MODULE )
 target_sources(contactsearchstore PRIVATE contactsearchstore.cpp ../pimsearchstore.cpp contactsearchstore.h ../pimsearchstore.h)
 target_link_libraries(contactsearchstore
     Qt::Core
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     ${XAPIAN_LIBRARIES}
     KPim${KF_MAJOR_VERSION}AkonadiSearchCore
     KPim${KF_MAJOR_VERSION}AkonadiSearchXapian

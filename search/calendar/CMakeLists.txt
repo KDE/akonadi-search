@@ -2,7 +2,7 @@ add_library(calendarsearchstore MODULE )
 target_sources(calendarsearchstore PRIVATE calendarsearchstore.cpp ../pimsearchstore.cpp calendarsearchstore.h ../pimsearchstore.h)
 target_link_libraries(calendarsearchstore
     Qt::Core
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     ${XAPIAN_LIBRARIES}
     KPim${KF_MAJOR_VERSION}AkonadiSearchCore
     KPim${KF_MAJOR_VERSION}AkonadiSearchXapian

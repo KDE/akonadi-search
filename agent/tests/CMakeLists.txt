@@ -6,7 +6,7 @@ add_executable(emailindexer emailtest.cpp ../emailindexer.cpp ../abstractindexer
 
 target_link_libraries(emailindexer
   Qt::Test
-  KF5::AkonadiCore
+  KPim${KF_MAJOR_VERSION}::AkonadiCore
   KPim${KF_MAJOR_VERSION}::AkonadiMime
   KPim${KF_MAJOR_VERSION}::Mime
   KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM

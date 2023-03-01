@@ -7,7 +7,7 @@ macro(add_akonadisearchdebug_unittest _source)
     ecm_add_test(${_source} ${_name}.h
         TEST_NAME ${_name}
         NAME_PREFIX "akonadisearchdebug-"
-        LINK_LIBRARIES Qt::Test Qt::Gui KF${KF_MAJOR_VERSION}::Completion KF${KF_MAJOR_VERSION}::CoreAddons KPim${KF_MAJOR_VERSION}::AkonadiSearchDebug KF5::AkonadiCore
+        LINK_LIBRARIES Qt::Test Qt::Gui KF${KF_MAJOR_VERSION}::Completion KF${KF_MAJOR_VERSION}::CoreAddons KPim${KF_MAJOR_VERSION}::AkonadiSearchDebug KPim${KF_MAJOR_VERSION}::AkonadiCore
         GUI
     )
 endmacro ()

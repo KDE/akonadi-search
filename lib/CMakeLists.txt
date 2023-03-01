@@ -60,7 +60,7 @@ target_link_libraries(KPim${KF_MAJOR_VERSION}AkonadiSearchPIM
     Qt::Core
 
     PRIVATE
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     ${XAPIAN_LIBRARIES}
 )
 

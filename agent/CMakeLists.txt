@@ -54,11 +54,11 @@ endif()
 
 target_link_libraries(akonadi_indexing_agent
     Qt::Core
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     KPim${KF_MAJOR_VERSION}::AkonadiMime
     KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts
-    KF5::AkonadiAgentBase
+    KPim${KF_MAJOR_VERSION}::AkonadiAgentBase
     KF${KF_MAJOR_VERSION}::CalendarCore
     KPim${KF_MAJOR_VERSION}::AkonadiSearchXapian
     KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM

@@ -19,9 +19,9 @@ set(indexer_SRCS
 
 set(indexer_LIBS
     Qt::Test
-    KF5::AkonadiCore
+    KPim${KF_MAJOR_VERSION}::AkonadiCore
     KPim${KF_MAJOR_VERSION}::AkonadiMime
-    KF5::AkonadiAgentBase
+    KPim${KF_MAJOR_VERSION}::AkonadiAgentBase
     KPim${KF_MAJOR_VERSION}::Mime
     KF${KF_MAJOR_VERSION}::Contacts
     KF${KF_MAJOR_VERSION}::CalendarCore
@@ -70,7 +70,7 @@ target_link_libraries(collectionquerytest
     ${indexer_LIBS}
     ${QJSON_LIBRARIES}
     KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
-    KF5::AkonadiAgentBase
+    KPim${KF_MAJOR_VERSION}::AkonadiAgentBase
     KF${KF_MAJOR_VERSION}::ConfigCore
     Qt::Widgets
     Qt::DBus
