@@ -33,8 +33,7 @@
                 "Name[tr]": "Daniel Vrátil",
                 "Name[uk]": "Daniel Vrátil",
                 "Name[x-test]": "xxDaniel Vrátilxx",
-                "Name[zh_CN]": "Daniel Vrátil",
-                "Name[zh_TW]": "Daniel Vrátil"
+                "Name[zh_CN]": "Daniel Vrátil"
             }
         ],
         "Description": "Runner which searches through your contacts",
@@ -68,7 +67,6 @@
         "Description[uk]": "Засіб запуску для пошуку у записах ваших контактів",
         "Description[x-test]": "xxRunner which searches through your contactsxx",
         "Description[zh_CN]": "用于搜索您的联系人的 Runner 程序",
-        "Description[zh_TW]": "搜尋您的聯絡人用的 runner",
         "EnabledByDefault": true,
         "Icon": "view-pim-contacts",
         "Id": "PIM Contacts Search Runner",
@@ -104,7 +102,6 @@
         "Name[uk]": "Пошук у записах контактів PIM",
         "Name[x-test]": "xxPIM Contacts Searchxx",
         "Name[zh_CN]": "PIM 联系人搜索",
-        "Name[zh_TW]": "PIM 聯絡人搜尋",
         "ServiceTypes": [
             "Plasma/Runner"
         ],
