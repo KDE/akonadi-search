@@ -8,15 +8,5 @@ find_dependency(KPim@KF_MAJOR_VERSION@Mime "@KMIME_LIB_VERSION@")
 find_dependency(KPim@KF_MAJOR_VERSION@AkonadiMime "@AKONADI_MIMELIB_VERSION@")
 find_dependency(KF@KF_MAJOR_VERSION@CalendarCore "@KF_MIN_VERSION@")
 
-if (@AKONADISEARCH_KF5_COMPAT@)
-    message(WARNING "\n"
-                    "************* DEPRECATION WARNING *************\n"
-		    "Using find_package(KF5AkonadiSearch) and KF5::AkonadiSearch targets is deprecated. "
-		    "Please use find_package(KPim@KF_MAJOR_VERSION@AkonadiSearch) and KPim@KF_MAJOR_VERSION@::AkonadiSearch instead. This backwards "
-                    "compatibility will be removed in the next major version.\n"
-                    "***********************************************\n")
-endif()
-
-
 include("${CMAKE_CURRENT_LIST_DIR}/KPim@KF_MAJOR_VERSION@AkonadiSearchTargets.cmake")
 @PACKAGE_INCLUDE_QCHTARGETS@

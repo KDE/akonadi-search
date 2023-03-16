@@ -115,7 +115,6 @@ include_directories(
 )
 # Config files
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim${KF_MAJOR_VERSION}AkonadiSearch")
-set(AKONADISEARCH_KF5_COMPAT FALSE)
 # Targets
 add_subdirectory(xapian)
 add_subdirectory(core)
@@ -160,34 +159,6 @@ ecm_qt_install_logging_categories(
         )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
-
-##
-# TODO: Backwards compatiblity. Remove in next major version
-##
-set(CMAKECONFIG_INSTALL_DIR_KF5 "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5AkonadiSearch")
-set(AKONADISEARCH_KF5_COMPAT TRUE)
-configure_package_config_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/KPimAkonadiSearchConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfig.cmake"
-    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR_KF5}
-)
-
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KF5AkonadiSearchConfig.cmake"
-    DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
-    COMPONENT Devel
-)
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchConfigVersion.cmake"
-    RENAME "KF5AkonadiSearchConfigVersion.cmake"
-    DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
-    COMPONENT Devel
-)
-install(EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets
-    DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
-    FILE KPim${KF_MAJOR_VERSION}AkonadiSearchTargets.cmake
-    NAMESPACE KF5::
-)
 
 ki18n_install(po)
 feature_summary(WHAT ALL
