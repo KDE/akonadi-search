@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-04 00:47+0000\n"
+"POT-Creation-Date: 2023-03-18 00:59+0000\n"
 "PO-Revision-Date: 2023-01-07 03:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -75,7 +75,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "已從收到與寄出的郵件自動完成"
 
-#: runner/pimcontactsrunnerconfig.cpp:20
+#: runner/pimcontactsrunnerconfig.cpp:20 runner/pimcontactsrunnerconfig.cpp:24
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "也搜尋從寄出與收到郵件中索引出的聯絡人"

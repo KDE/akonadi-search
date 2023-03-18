@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-04 00:47+0000\n"
+"POT-Creation-Date: 2023-03-18 00:59+0000\n"
 "PO-Revision-Date: 2017-04-26 21:17+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -72,7 +72,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Automaticky dokončené z prijatých a poslaných e-mailov"
 
-#: runner/pimcontactsrunnerconfig.cpp:20
+#: runner/pimcontactsrunnerconfig.cpp:20 runner/pimcontactsrunnerconfig.cpp:24
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "Hľadať v kontaktoch indexovaných z odoslaných a prijatých e-mailov"

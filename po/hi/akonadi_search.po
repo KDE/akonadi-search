@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-04 00:47+0000\n"
+"POT-Creation-Date: 2023-03-18 00:59+0000\n"
 "PO-Revision-Date: 2021-06-15 12:57+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -75,7 +75,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "भेजे और पाए गए ईमेल्स से स्वचलित भर दिया गया"
 
-#: runner/pimcontactsrunnerconfig.cpp:20
+#: runner/pimcontactsrunnerconfig.cpp:20 runner/pimcontactsrunnerconfig.cpp:24
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "भेजे और पाए गए ईमेल्स से अनुक्रमित सम्पर्कों में भी ढूढ़े"

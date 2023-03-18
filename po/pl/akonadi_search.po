@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-04 00:47+0000\n"
+"POT-Creation-Date: 2023-03-18 00:59+0000\n"
 "PO-Revision-Date: 2017-04-22 06:33+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -75,7 +75,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Uzupełnione z odebranych i wysłanych wiadomości"
 
-#: runner/pimcontactsrunnerconfig.cpp:20
+#: runner/pimcontactsrunnerconfig.cpp:20 runner/pimcontactsrunnerconfig.cpp:24
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr ""
