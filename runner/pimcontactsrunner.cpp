@@ -30,6 +30,8 @@
 #include "lib/contactquery.h"
 #include "lib/resultiterator.h"
 
+#include <array>
+
 Q_DECLARE_METATYPE(KContacts::Addressee *)
 
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
@@ -186,6 +188,26 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
     const QStringList completerResults = completer.complete();
     qCDebug(AKONADI_KRUNNER_LOG) << "Autocompleter returned" << completerResults.count() << "results";
     for (const QString &result : completerResults) {
+        // Filter out results where writing a mail wouldn't make sense,
+        // e.g. anything with noreply or various automatic emails from git forges
+        static const std::array filters = {
+            QRegularExpression(QStringLiteral("no[-]?reply@")),
+            QRegularExpression(QStringLiteral("incoming\\+.+@invent\\.kde\\.org")),
+            QRegularExpression(QStringLiteral("reply\\+.+@reply\\.github\\.com")),
+            QRegularExpression(QStringLiteral("@noreply\\.github\\.com")),
+            QRegularExpression(QStringLiteral("notifications@github\\.com")),
+            QRegularExpression(QStringLiteral("incoming\\+.+@gitlab\\.com")),
+            QRegularExpression(QStringLiteral("gitlab@gitlab\\.freedesktop\\.org")),
+        };
+
+        const bool skip = std::any_of(filters.cbegin(), filters.cend(), [result](const QRegularExpression &filter) {
+            return result.contains(filter);
+        });
+
+        if (skip) {
+            continue;
+        }
+
         QueryMatch match(this);
         match.setRelevance(0.7); // slightly lower relevance than real addressbook contacts
         match.setMatchCategory(i18n("Contacts"));
