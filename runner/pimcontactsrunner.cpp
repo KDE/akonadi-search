@@ -231,6 +231,7 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
             if (mListEmails.contains(email)) {
                 continue;
             }
+            mListEmails.append(email);
             if (name.isEmpty()) {
                 match.setText(email);
                 match.setData(QStringLiteral("mailto:%1").arg(email));
@@ -239,6 +240,10 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
                 match.setData(QStringLiteral("mailto:%1<%2>").arg(name, email));
             }
         } else {
+            if (mListEmails.contains(result)) {
+                continue;
+            }
+            mListEmails.append(result);
             match.setText(result);
             match.setData(QStringLiteral("mailto:%1").arg(result));
         }
