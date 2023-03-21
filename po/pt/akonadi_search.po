@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 00:59+0000\n"
+"POT-Creation-Date: 2023-03-21 00:48+0000\n"
 "PO-Revision-Date: 2017-04-22 11:34+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -53,19 +53,19 @@ msgstr ""
 msgid "Save File Error"
 msgstr "Erro de Gravação do Ficheiro"
 
-#: runner/pimcontactsrunner.cpp:125 runner/pimcontactsrunner.cpp:191
+#: runner/pimcontactsrunner.cpp:127 runner/pimcontactsrunner.cpp:213
 #, kde-format
 msgid "Contacts"
 msgstr "Contactos"
 
-#: runner/pimcontactsrunner.cpp:169 runner/pimcontactsrunner.cpp:175
-#: runner/pimcontactsrunner.cpp:207
+#: runner/pimcontactsrunner.cpp:171 runner/pimcontactsrunner.cpp:177
+#: runner/pimcontactsrunner.cpp:229
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:192
+#: runner/pimcontactsrunner.cpp:214
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "Completação automática dos e-mails recebidos e enviados"
