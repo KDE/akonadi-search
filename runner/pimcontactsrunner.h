@@ -34,4 +34,5 @@ private:
 
 private:
     bool mQueryAutocompleter = true;
+    QStringList mListEmails;
 };

@@ -54,6 +54,7 @@ void PIMContactsRunner::match(RunnerContext &context)
     if (queryString.size() < 3) {
         return;
     }
+    mListEmails.clear();
 
     queryContacts(context, queryString);
 
@@ -164,19 +165,24 @@ void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &que
                 }
             }
         }
-
         // If we had an email match, then use it, otherwise assume name-based
         // match and explode the contact to all available email addresses
         if (!matchedEmail.isEmpty()) {
-            match.setText(i18nc("Name (email)", "%1 (%2)", name, matchedEmail));
-            match.setData(QStringLiteral("mailto:%1<%2>").arg(name, matchedEmail));
-            context.addMatch(match);
+            if (!mListEmails.contains(matchedEmail)) {
+                mListEmails.append(matchedEmail);
+                match.setText(i18nc("Name (email)", "%1 (%2)", name, matchedEmail));
+                match.setData(QStringLiteral("mailto:%1<%2>").arg(name, matchedEmail));
+                context.addMatch(match);
+            }
         } else {
             for (const QString &email : emails) {
-                QueryMatch alternativeMatch = match;
-                alternativeMatch.setText(i18nc("Name (email)", "%1 (%2)", name, email));
-                alternativeMatch.setData(QStringLiteral("mailto:%1<%2>").arg(name, email));
-                context.addMatch(alternativeMatch);
+                if (!mListEmails.contains(email)) {
+                    mListEmails.append(email);
+                    QueryMatch alternativeMatch = match;
+                    alternativeMatch.setText(i18nc("Name (email)", "%1 (%2)", name, email));
+                    alternativeMatch.setData(QStringLiteral("mailto:%1<%2>").arg(name, email));
+                    context.addMatch(alternativeMatch);
+                }
             }
         }
     }
@@ -222,6 +228,9 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
         QString name;
         QString email;
         if (KEmailAddress::extractEmailAddressAndName(result, email, name)) {
+            if (mListEmails.contains(email)) {
+                continue;
+            }
             if (name.isEmpty()) {
                 match.setText(email);
                 match.setData(QStringLiteral("mailto:%1").arg(email));
