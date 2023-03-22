@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-21 00:48+0000\n"
+"POT-Creation-Date: 2023-03-22 00:48+0000\n"
 "PO-Revision-Date: 2022-05-20 10:40+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -57,19 +57,19 @@ msgstr ""
 msgid "Save File Error"
 msgstr "Грешка при запазване на файл"
 
-#: runner/pimcontactsrunner.cpp:127 runner/pimcontactsrunner.cpp:213
+#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
 #, kde-format
 msgid "Contacts"
 msgstr "Контакти"
 
-#: runner/pimcontactsrunner.cpp:171 runner/pimcontactsrunner.cpp:177
-#: runner/pimcontactsrunner.cpp:229
+#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
+#: runner/pimcontactsrunner.cpp:239
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:214
+#: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "Автоматично попълване от получени и изпратени имейли"

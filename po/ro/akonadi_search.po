@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-21 00:48+0000\n"
+"POT-Creation-Date: 2023-03-22 00:48+0000\n"
 "PO-Revision-Date: 2015-04-26 12:41+0300\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -55,19 +55,19 @@ msgstr ""
 msgid "Save File Error"
 msgstr ""
 
-#: runner/pimcontactsrunner.cpp:127 runner/pimcontactsrunner.cpp:213
+#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
 #, kde-format
 msgid "Contacts"
 msgstr ""
 
-#: runner/pimcontactsrunner.cpp:171 runner/pimcontactsrunner.cpp:177
-#: runner/pimcontactsrunner.cpp:229
+#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
+#: runner/pimcontactsrunner.cpp:239
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr ""
 
-#: runner/pimcontactsrunner.cpp:214
+#: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr ""
