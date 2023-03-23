@@ -128,6 +128,15 @@ if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     add_subdirectory(runner)
 endif()
 
+if (BUILD_QCH)
+    ecm_install_qch_export(
+        TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchPIM_QCH
+        FILE KPim${KF_MAJOR_VERSION}AkonadiSearchPIMQchTargets.cmake
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchPIMQchTargets.cmake\")")
+endif()
 
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KPimAkonadiSearchConfig.cmake.in"
@@ -188,6 +197,14 @@ install(EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets
     FILE KPim${KF_MAJOR_VERSION}AkonadiSearchTargets.cmake
     NAMESPACE KF5::
 )
+
+if (BUILD_QCH)
+    install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchPIMQchTargets.cmake"
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
+        COMPONENT Devel
+    )
+endif()
 
 ki18n_install(po)
 feature_summary(WHAT ALL
