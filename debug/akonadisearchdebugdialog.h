@@ -31,12 +31,12 @@ public:
     void setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type);
     void doSearch();
 private Q_SLOTS:
-    void slotSaveAs();
+    AKONADI_SEARCH_DEBUG_NO_EXPORT void slotSaveAs();
 
 private:
-    void readConfig();
-    void writeConfig();
-    void saveTextAs(const QString &text, const QString &filter);
+    AKONADI_SEARCH_DEBUG_NO_EXPORT void readConfig();
+    AKONADI_SEARCH_DEBUG_NO_EXPORT void writeConfig();
+    AKONADI_SEARCH_DEBUG_NO_EXPORT void saveTextAs(const QString &text, const QString &filter);
     Q_REQUIRED_RESULT bool saveToFile(const QString &filename, const QString &text);
     AkonadiSearchDebugDialogPrivate *const d;
 };

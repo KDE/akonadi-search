@@ -36,8 +36,8 @@ public:
     void setSearchType(SearchType type);
 
 private:
-    const QString defaultLocations(const QString &dbname) const;
-    void initialize();
+    AKONADI_SEARCH_DEBUG_NO_EXPORT const QString defaultLocations(const QString &dbname) const;
+    AKONADI_SEARCH_DEBUG_NO_EXPORT void initialize();
 };
 }
 }
