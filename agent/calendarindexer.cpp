@@ -7,7 +7,7 @@
  */
 
 #include "calendarindexer.h"
-#include "akonadi_indexer_agent_debug.h"
+#include "akonadi_indexer_agent_calendar_debug.h"
 #include "xapiandocument.h"
 
 #include <KCalendarCore/Attendee>
@@ -19,11 +19,11 @@ CalendarIndexer::CalendarIndexer(const QString &path)
     try {
         m_db = std::make_unique<Akonadi::Search::XapianDatabase>(path, true);
     } catch (const Xapian::DatabaseCorruptError &err) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+        qCWarning(AKONADI_INDEXER_AGENT_CALENDAR_LOG) << "Database Corrupted - What did you do?";
+        qCWarning(AKONADI_INDEXER_AGENT_CALENDAR_LOG) << err.get_error_string();
         m_db = nullptr;
     } catch (const Xapian::Error &e) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
+        qCWarning(AKONADI_INDEXER_AGENT_CALENDAR_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = nullptr;
     }
 }
@@ -65,9 +65,9 @@ void CalendarIndexer::commit()
     try {
         m_db->commit();
     } catch (const Xapian::Error &err) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+        qCWarning(AKONADI_INDEXER_AGENT_CALENDAR_LOG) << err.get_error_string();
     }
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
+    qCDebug(AKONADI_INDEXER_AGENT_CALENDAR_LOG) << "Xapian Committed";
 }
 
 void CalendarIndexer::remove(const Akonadi::Item &item)
@@ -125,6 +125,8 @@ void CalendarIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id fro
 
 void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarCore::Event::Ptr &event)
 {
+    qCDebug(AKONADI_INDEXER_AGENT_CALENDAR_LOG) << "Indexing calendar event:" << normalizeString(event->summary()) << event->organizer().email();
+
     Akonadi::Search::XapianDocument doc;
 
     doc.indexText(event->organizer().email(), QStringLiteral("O"));

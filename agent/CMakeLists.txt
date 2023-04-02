@@ -45,6 +45,11 @@ ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_ag
         EXPORT AKONADISEARCH
     )
 
+ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_agent_calendar_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_CALENDAR_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent.calendar
+        DESCRIPTION "akonadisearch (akonadi indexer agent calendar)"
+        EXPORT AKONADISEARCH
+    )
+
 qt_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
 target_sources(akonadi_indexing_agent PRIVATE ${akonadi_indexing_agent_SRCS})
 

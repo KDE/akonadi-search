@@ -3,7 +3,6 @@ include_directories(
 )
 
 add_executable(emailindexer emailtest.cpp ../emailindexer.cpp ../abstractindexer.cpp ../akonadi_indexer_agent_debug.cpp ../stringutil.cpp)
-
 target_link_libraries(emailindexer
   Qt::Test
   KPim${KF_MAJOR_VERSION}::AkonadiCore
