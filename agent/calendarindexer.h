@@ -16,6 +16,7 @@
 #include <KCalendarCore/Event>
 #include <KCalendarCore/Journal>
 #include <KCalendarCore/Todo>
+#include <memory>
 
 class CalendarIndexer : public AbstractIndexer
 {
@@ -42,5 +43,5 @@ private:
     void indexTodoItem(const Akonadi::Item &item, const KCalendarCore::Todo::Ptr &todo);
     void updateIncidenceItem(const KCalendarCore::Incidence::Ptr &calInc);
 
-    Akonadi::Search::XapianDatabase *m_db = nullptr;
+    std::unique_ptr<Akonadi::Search::XapianDatabase> m_db = nullptr;
 };

@@ -11,12 +11,13 @@
 #include "xapiandocument.h"
 
 #include <KCalendarCore/Attendee>
+#include <KCalendarCore/FreeBusy>
 
 CalendarIndexer::CalendarIndexer(const QString &path)
     : AbstractIndexer()
 {
     try {
-        m_db = new Akonadi::Search::XapianDatabase(path, true);
+        m_db = std::make_unique<Akonadi::Search::XapianDatabase>(path, true);
     } catch (const Xapian::DatabaseCorruptError &err) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
@@ -30,13 +31,16 @@ CalendarIndexer::CalendarIndexer(const QString &path)
 CalendarIndexer::~CalendarIndexer()
 {
     commit();
-    delete m_db;
 }
 
 QStringList CalendarIndexer::mimeTypes() const
 {
-    return QStringList() << QStringLiteral("application/x-vnd.akonadi.calendar.event") << QStringLiteral("application/x-vnd.akonadi.calendar.todo")
-                         << QStringLiteral("application/x-vnd.akonadi.calendar.journal") << QStringLiteral("application/x-vnd.akonadi.calendar.freebusy");
+    return {
+        KCalendarCore::Event::eventMimeType(),
+        KCalendarCore::Todo::todoMimeType(),
+        KCalendarCore::Journal::journalMimeType(),
+        KCalendarCore::FreeBusy::freeBusyMimeType(),
+    };
 }
 
 void CalendarIndexer::index(const Akonadi::Item &item)
@@ -127,10 +131,8 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarC
     doc.indexText(normalizeString(event->summary()), QStringLiteral("S"));
     doc.indexText(normalizeString(event->location()), QStringLiteral("L"));
     const KCalendarCore::Attendee::List attendees = event->attendees();
-    KCalendarCore::Attendee::List::ConstIterator it;
-    KCalendarCore::Attendee::List::ConstIterator end(attendees.constEnd());
-    for (it = attendees.constBegin(); it != end; ++it) {
-        doc.addBoolTerm((*it).email() + QString::number((*it).status()), QStringLiteral("PS"));
+    for (const KCalendarCore::Attendee &attendee : attendees) {
+        doc.addBoolTerm(attendee.email() + QString::number(attendee.status()), QStringLiteral("PS"));
     }
 
     // Parent collection
