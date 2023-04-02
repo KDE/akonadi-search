@@ -10,8 +10,10 @@
 #include <QDir>
 #include <QTest>
 
+#include "calendarindexer.h"
 #include "contactindexer.h"
 #include "emailindexer.h"
+#include <../search/calendar/calendarsearchstore.h>
 #include <../search/contact/contactsearchstore.h>
 #include <../search/email/emailsearchstore.h>
 #include <query.h>
@@ -26,6 +28,7 @@ private:
     QString emailDir;
     QString emailContactsDir;
     QString contactsDir;
+    QString calendarsDir;
     QString notesDir;
 
     bool removeDir(const QString &dirName)
@@ -58,6 +61,7 @@ private Q_SLOTS:
         emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
         contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/contacts/");
         notesDir = QDir::tempPath() + QStringLiteral("/searchplugintest/notes/");
+        calendarsDir = QDir::tempPath() + QStringLiteral("/searchplugintest/calendars/");
 
         QDir dir;
         removeDir(emailDir);
@@ -68,11 +72,14 @@ private Q_SLOTS:
         QVERIFY(dir.mkpath(contactsDir));
         removeDir(notesDir);
         QVERIFY(dir.mkpath(notesDir));
+        removeDir(calendarsDir);
+        QVERIFY(dir.mkpath(calendarsDir));
 
         qDebug() << "indexing sample data";
         qDebug() << emailDir;
         qDebug() << emailContactsDir;
         qDebug() << notesDir;
+        qDebug() << calendarsDir;
 
         //         EmailIndexer emailIndexer(emailDir, emailContactsDir);
         //         ContactIndexer contactIndexer(contactsDir);
@@ -84,7 +91,7 @@ private Q_SLOTS:
         //         Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore*>() << emailSearchStore << contactSearchStore);
     }
 
-    QSet<qint64> getAllItems()
+    QSet<qint64> getAllEmailItems()
     {
         QSet<qint64> resultSet;
 
@@ -106,6 +113,28 @@ private Q_SLOTS:
         return resultSet;
     }
 
+    QSet<qint64> getAllCalendarItems()
+    {
+        QSet<qint64> resultSet;
+
+        Akonadi::Search::Term term(Akonadi::Search::Term::Or);
+        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("1"), Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("2"), Akonadi::Search::Term::Equal));
+        Akonadi::Search::Query query(term);
+        query.setType(QStringLiteral("Calendar"));
+
+        auto calendarSearchStore = new Akonadi::Search::CalendarSearchStore(this);
+        calendarSearchStore->setDbPath(calendarsDir);
+        int res = calendarSearchStore->exec(query);
+        qDebug() << res;
+        while (calendarSearchStore->next(res)) {
+            const int fid = Akonadi::Search::deserialize("akonadi", calendarSearchStore->id(res));
+            resultSet << fid;
+        }
+        qDebug() << resultSet;
+        return resultSet;
+    }
+
     void testEmailRemoveByCollection()
     {
         EmailIndexer emailIndexer(emailDir, emailContactsDir);
@@ -114,7 +143,7 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject1");
             msg->assemble();
 
-            Akonadi::Item item(QStringLiteral("message/rfc822"));
+            Akonadi::Item item(KMime::Message::mimeType());
             item.setId(1);
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(1));
@@ -125,17 +154,90 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject2");
             msg->assemble();
 
-            Akonadi::Item item(QStringLiteral("message/rfc822"));
+            Akonadi::Item item(KMime::Message::mimeType());
             item.setId(2);
             item.setPayload(msg);
             item.setParentCollection(Akonadi::Collection(2));
             emailIndexer.index(item);
         }
         emailIndexer.commit();
-        QCOMPARE(getAllItems(), QSet<qint64>() << 1 << 2);
+        QCOMPARE(getAllEmailItems(), QSet<qint64>() << 1 << 2);
         emailIndexer.remove(Akonadi::Collection(2));
         emailIndexer.commit();
-        QCOMPARE(getAllItems(), QSet<qint64>() << 1);
+        QCOMPARE(getAllEmailItems(), QSet<qint64>() << 1);
+    }
+
+    void testCalendarRemoveByCollection()
+    {
+        CalendarIndexer calendarIndexer(calendarsDir);
+        {
+            KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
+            event->setSummary(QStringLiteral("My Event 1"));
+
+            Akonadi::Item item(KCalendarCore::Event::eventMimeType());
+            item.setId(3);
+            item.setPayload(event);
+            item.setParentCollection(Akonadi::Collection(1));
+            calendarIndexer.index(item);
+        }
+
+        {
+            KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
+            event->setSummary(QStringLiteral("My Event 2"));
+
+            Akonadi::Item item(KCalendarCore::Event::eventMimeType());
+            item.setId(4);
+            item.setPayload(event);
+            item.setParentCollection(Akonadi::Collection(2));
+            calendarIndexer.index(item);
+        }
+
+        calendarIndexer.commit();
+        QCOMPARE(getAllCalendarItems(), QSet<qint64>() << 3 << 4);
+
+        calendarIndexer.remove(Akonadi::Collection(2));
+        calendarIndexer.commit();
+        QCOMPARE(getAllCalendarItems(), QSet<qint64>() << 3);
+    }
+
+    void testAddCalendarWithAttendee()
+    {
+        CalendarIndexer calendarIndexer(calendarsDir);
+        {
+            KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
+            event->setSummary(QStringLiteral("My Event 1"));
+            event->addAttendee(KCalendarCore::Attendee(QStringLiteral("John Doe"), QStringLiteral("john.doe@kmail.com")));
+
+            Akonadi::Item item(KCalendarCore::Event::eventMimeType());
+            item.setId(5);
+            item.setPayload(event);
+            item.setParentCollection(Akonadi::Collection(1));
+            calendarIndexer.index(item);
+        }
+        calendarIndexer.commit();
+
+        QSet<qint64> resultSet;
+
+        const auto status = KCalendarCore::Attendee::PartStat::NeedsAction;
+        Akonadi::Search::Term term(Akonadi::Search::Term::Or);
+
+        Akonadi::Search::Term partStatusTerm(QStringLiteral("partstatus"),
+                                             QString(QStringLiteral("john.doe@kmail.com") + QString::number(status)),
+                                             Akonadi::Search::Term::Equal);
+
+        term.addSubTerm(partStatusTerm);
+
+        Akonadi::Search::Query query(term);
+        query.setType(QStringLiteral("Calendar"));
+
+        auto calendarSearchStore = new Akonadi::Search::CalendarSearchStore(this);
+        calendarSearchStore->setDbPath(calendarsDir);
+        int res = calendarSearchStore->exec(query);
+        qDebug() << res;
+        while (calendarSearchStore->next(res)) {
+            const int fid = Akonadi::Search::deserialize("akonadi", calendarSearchStore->id(res));
+            QCOMPARE(fid, 5);
+        }
     }
 };
 

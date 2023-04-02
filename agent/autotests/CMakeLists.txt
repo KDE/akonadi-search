@@ -13,6 +13,7 @@ set(indexer_SRCS
     ../../search/email/emailsearchstore.cpp
     ../../search/email/agepostingsource.cpp
     ../../search/contact/contactsearchstore.cpp
+    ../../search/calendar/calendarsearchstore.cpp
     ../akonadi_indexer_agent_debug.cpp
     ../akonadi_indexer_agent_calendar_debug.cpp
     ../stringutil.cpp
