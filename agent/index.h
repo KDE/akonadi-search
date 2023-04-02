@@ -60,14 +60,14 @@ public Q_SLOTS:
     virtual void commit();
 
 private:
-    void addIndexer(AbstractIndexer *indexer);
-    AbstractIndexer *indexerForItem(const Akonadi::Item &item) const;
-    QList<AbstractIndexer *> indexersForMimetypes(const QStringList &mimeTypes) const;
+    void addIndexer(std::shared_ptr<AbstractIndexer> indexer);
+    std::shared_ptr<AbstractIndexer> indexerForItem(const Akonadi::Item &item) const;
+    QList<std::shared_ptr<AbstractIndexer>> indexersForMimetypes(const QStringList &mimeTypes) const;
 
-    QList<AbstractIndexer *> m_listIndexer;
-    QHash<QString, AbstractIndexer *> m_indexer;
+    QList<std::shared_ptr<AbstractIndexer>> m_listIndexer;
+    QHash<QString, std::shared_ptr<AbstractIndexer>> m_indexer;
     Akonadi::Search::PIM::IndexedItems *m_indexedItems = nullptr;
     QTimer m_commitTimer;
-    CollectionIndexer *m_collectionIndexer = nullptr;
+    std::unique_ptr<CollectionIndexer> m_collectionIndexer = nullptr;
     bool mRespectDiacriticAndAccents = true;
 };

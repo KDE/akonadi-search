@@ -34,9 +34,6 @@ Index::Index(QObject *parent)
 
 Index::~Index()
 {
-    delete m_collectionIndexer;
-    m_collectionIndexer = nullptr;
-    qDeleteAll(m_listIndexer);
 }
 
 static void removeDir(const QString &dirName)
@@ -57,9 +54,7 @@ static void removeDir(const QString &dirName)
 
 void Index::removeDatabase()
 {
-    delete m_collectionIndexer;
-    m_collectionIndexer = nullptr;
-    qDeleteAll(m_listIndexer);
+    m_collectionIndexer.reset();
     m_listIndexer.clear();
     m_indexer.clear();
 
@@ -72,16 +67,16 @@ void Index::removeDatabase()
     removeDir(m_indexedItems->collectionIndexingPath());
 }
 
-AbstractIndexer *Index::indexerForItem(const Akonadi::Item &item) const
+std::shared_ptr<AbstractIndexer> Index::indexerForItem(const Akonadi::Item &item) const
 {
     return m_indexer.value(item.mimeType());
 }
 
-QList<AbstractIndexer *> Index::indexersForMimetypes(const QStringList &mimeTypes) const
+QList<std::shared_ptr<AbstractIndexer>> Index::indexersForMimetypes(const QStringList &mimeTypes) const
 {
-    QList<AbstractIndexer *> indexers;
+    QList<std::shared_ptr<AbstractIndexer>> indexers;
     for (const QString &mimeType : mimeTypes) {
-        AbstractIndexer *i = m_indexer.value(mimeType);
+        auto i = m_indexer.value(mimeType);
         if (i) {
             indexers.append(i);
         }
@@ -96,7 +91,7 @@ bool Index::haveIndexerForMimeTypes(const QStringList &mimeTypes)
 
 void Index::index(const Akonadi::Item &item)
 {
-    AbstractIndexer *indexer = indexerForItem(item);
+    auto indexer = indexerForItem(item);
     if (!indexer) {
         qCWarning(AKONADI_INDEXER_AGENT_LOG) << " No indexer found for item";
         return;
@@ -105,14 +100,14 @@ void Index::index(const Akonadi::Item &item)
     try {
         indexer->index(item);
     } catch (const Xapian::Error &e) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer.get() << ":" << e.get_msg().c_str();
     }
 }
 
 void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &from, const Akonadi::Collection &to)
 {
     // We always get items of the same type
-    AbstractIndexer *indexer = indexerForItem(items.first());
+    auto indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
     }
@@ -120,7 +115,7 @@ void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &fr
         try {
             indexer->move(item.id(), from.id(), to.id());
         } catch (const Xapian::Error &e) {
-            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer.get() << ":" << e.get_msg().c_str();
         }
     }
 }
@@ -128,7 +123,7 @@ void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &fr
 void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removedFlags)
 {
     // We always get items of the same type
-    AbstractIndexer *indexer = indexerForItem(items.first());
+    auto indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
     }
@@ -136,20 +131,20 @@ void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray>
         try {
             indexer->updateFlags(item, addedFlags, removedFlags);
         } catch (const Xapian::Error &e) {
-            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer.get() << ":" << e.get_msg().c_str();
         }
     }
 }
 
 void Index::remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTypes)
 {
-    const QList<AbstractIndexer *> indexers = indexersForMimetypes(mimeTypes);
+    const auto indexers = indexersForMimetypes(mimeTypes);
     for (Akonadi::Item::Id id : ids) {
-        for (AbstractIndexer *indexer : indexers) {
+        for (const auto &indexer : indexers) {
             try {
                 indexer->remove(Akonadi::Item(id));
             } catch (const Xapian::Error &e) {
-                qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+                qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer.get() << ":" << e.get_msg().c_str();
             }
         }
     }
@@ -157,7 +152,7 @@ void Index::remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTy
 
 void Index::remove(const Akonadi::Item::List &items)
 {
-    AbstractIndexer *indexer = indexerForItem(items.first());
+    auto indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
     }
@@ -165,7 +160,7 @@ void Index::remove(const Akonadi::Item::List &items)
         try {
             indexer->remove(item);
         } catch (const Xapian::Error &e) {
-            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer.get() << ":" << e.get_msg().c_str();
         }
     }
 }
@@ -191,11 +186,11 @@ void Index::remove(const Akonadi::Collection &col)
 {
     // Remove items
     const auto indexers = indexersForMimetypes(col.contentMimeTypes());
-    for (AbstractIndexer *indexer : indexers) {
+    for (const auto &indexer : indexers) {
         try {
             indexer->remove(col);
         } catch (const Xapian::Error &e) {
-            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer.get() << ":" << e.get_msg().c_str();
         }
     }
 
@@ -213,7 +208,7 @@ void Index::move(const Akonadi::Collection &collection, const Akonadi::Collectio
     }
 }
 
-void Index::addIndexer(AbstractIndexer *indexer)
+void Index::addIndexer(std::shared_ptr<AbstractIndexer> indexer)
 {
     m_listIndexer.append(indexer);
     const QStringList indexerMimetypes = indexer->mimeTypes();
@@ -224,69 +219,61 @@ void Index::addIndexer(AbstractIndexer *indexer)
 
 bool Index::createIndexers()
 {
-    AbstractIndexer *indexer = nullptr;
+    std::unique_ptr<AbstractIndexer> indexer;
     try {
         QDir().mkpath(m_indexedItems->emailIndexingPath());
         QDir().mkpath(m_indexedItems->emailContactsIndexingPath());
-        indexer = new EmailIndexer(m_indexedItems->emailIndexingPath(), m_indexedItems->emailContactsIndexingPath());
+        indexer = std::make_unique<EmailIndexer>(m_indexedItems->emailIndexingPath(), m_indexedItems->emailContactsIndexingPath());
         indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
-        addIndexer(indexer);
+        addIndexer(std::move(indexer));
     } catch (const Xapian::DatabaseError &e) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create email indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
         QDir().mkpath(m_indexedItems->contactIndexingPath());
-        indexer = new ContactIndexer(m_indexedItems->contactIndexingPath());
+        indexer = std::make_unique<ContactIndexer>(m_indexedItems->contactIndexingPath());
         indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
-        addIndexer(indexer);
+        addIndexer(std::move(indexer));
     } catch (const Xapian::DatabaseError &e) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create contact indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
         QDir().mkpath(m_indexedItems->akonotesIndexingPath());
-        indexer = new AkonotesIndexer(m_indexedItems->akonotesIndexingPath());
+        indexer = std::make_unique<AkonotesIndexer>(m_indexedItems->akonotesIndexingPath());
         indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
-        addIndexer(indexer);
+        addIndexer(std::move(indexer));
     } catch (const Xapian::DatabaseError &e) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
         QDir().mkpath(m_indexedItems->calendarIndexingPath());
-        indexer = new CalendarIndexer(m_indexedItems->calendarIndexingPath());
+        indexer = std::make_unique<CalendarIndexer>(m_indexedItems->calendarIndexingPath());
         indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
-        addIndexer(indexer);
+        addIndexer(std::move(indexer));
     } catch (const Xapian::DatabaseError &e) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
-        delete indexer;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
     try {
         QDir().mkpath(m_indexedItems->collectionIndexingPath());
-        m_collectionIndexer = new CollectionIndexer(m_indexedItems->collectionIndexingPath());
+        m_collectionIndexer = std::make_unique<CollectionIndexer>(m_indexedItems->collectionIndexingPath());
     } catch (const Xapian::DatabaseError &e) {
-        delete m_collectionIndexer;
+        m_collectionIndexer.reset();
         m_collectionIndexer = nullptr;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
-        delete m_collectionIndexer;
+        m_collectionIndexer.reset();
         m_collectionIndexer = nullptr;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
@@ -304,11 +291,11 @@ void Index::scheduleCommit()
 void Index::commit()
 {
     m_commitTimer.stop();
-    for (AbstractIndexer *indexer : std::as_const(m_listIndexer)) {
+    for (const std::shared_ptr<AbstractIndexer> &indexer : std::as_const(m_listIndexer)) {
         try {
             indexer->commit();
         } catch (const Xapian::Error &e) {
-            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer << ":" << e.get_msg().c_str();
+            qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Xapian error in indexer" << indexer.get() << ":" << e.get_msg().c_str();
         }
     }
 }
