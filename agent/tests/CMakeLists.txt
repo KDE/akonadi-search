@@ -2,7 +2,8 @@ include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/..
 )
 
-add_executable(emailindexer emailtest.cpp ../emailindexer.cpp ../abstractindexer.cpp ../akonadi_indexer_agent_debug.cpp ../stringutil.cpp)
+add_executable(emailindexer emailtest.cpp ../emailindexer.cpp ../abstractindexer.cpp ../akonadi_indexer_agent_debug.cpp ../stringutil.cpp
+${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_email_debug.cpp)
 target_link_libraries(emailindexer
   Qt::Test
   KPim${KF_MAJOR_VERSION}::AkonadiCore

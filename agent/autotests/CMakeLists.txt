@@ -17,6 +17,7 @@ set(indexer_SRCS
     ../akonadi_indexer_agent_debug.cpp
     ../akonadi_indexer_agent_calendar_debug.cpp
     ../stringutil.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_email_debug.cpp
 )
 
 set(indexer_LIBS

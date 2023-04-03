@@ -24,6 +24,7 @@ target_sources(searchplugintest PRIVATE
     ../../agent/stringutil.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_debug.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_calendar_debug.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_email_debug.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../akonadiplugin_indexer_debug.cpp
 )
 

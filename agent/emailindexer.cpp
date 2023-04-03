@@ -7,7 +7,7 @@
  */
 
 #include "emailindexer.h"
-#include "akonadi_indexer_agent_debug.h"
+#include "akonadi_indexer_agent_email_debug.h"
 #include "stringutil.h"
 #include <Akonadi/Collection>
 #include <Akonadi/MessageFlags>
@@ -21,22 +21,22 @@ EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
     try {
         m_db = new Xapian::WritableDatabase(path.toStdString(), Xapian::DB_CREATE_OR_OPEN);
     } catch (const Xapian::DatabaseCorruptError &err) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+        qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "Database Corrupted - What did you do?";
+        qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << err.get_error_string();
         m_db = nullptr;
     } catch (const Xapian::Error &e) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
+        qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_db = nullptr;
     }
 
     try {
         m_contactDb = new Xapian::WritableDatabase(contactDbPath.toStdString(), Xapian::DB_CREATE_OR_OPEN);
     } catch (const Xapian::DatabaseCorruptError &err) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Database Corrupted - What did you do?";
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+        qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "Database Corrupted - What did you do?";
+        qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << err.get_error_string();
         m_contactDb = nullptr;
     } catch (const Xapian::Error &e) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
+        qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());
         m_contactDb = nullptr;
     }
 }
@@ -55,7 +55,7 @@ QStringList EmailIndexer::mimeTypes() const
 
 void EmailIndexer::index(const Akonadi::Item &item)
 {
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing item" << item.id();
+    qCDebug(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "Indexing item" << item.id();
     if (!m_db) {
         return;
     }
@@ -97,7 +97,7 @@ void EmailIndexer::index(const Akonadi::Item &item)
 
     m_doc = nullptr;
     m_termGen = nullptr;
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "DONE Indexing item" << item.id();
+    qCDebug(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "DONE Indexing item" << item.id();
 }
 
 void EmailIndexer::insert(const QByteArray &key, KMime::Headers::Base *unstructured)
@@ -184,7 +184,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
     KMime::Headers::Subject *subject = msg->subject(false);
     if (subject) {
         const std::string str{normalizeString(subject->asUnicodeString()).toStdString()};
-        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << str.c_str();
+        qCDebug(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "Indexing" << str.c_str();
         m_termGen->index_text_without_positions(str, 1, "SU");
         m_termGen->index_text_without_positions(str, 100);
         m_doc->set_data(str);
@@ -396,17 +396,17 @@ void EmailIndexer::commit()
         try {
             m_db->commit();
         } catch (const Xapian::Error &err) {
-            qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+            qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << err.get_error_string();
         }
-        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
+        qCDebug(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "Xapian Committed";
     }
 
     if (m_contactDb) {
         try {
             m_contactDb->commit();
         } catch (const Xapian::Error &err) {
-            qCWarning(AKONADI_INDEXER_AGENT_LOG) << err.get_error_string();
+            qCWarning(AKONADI_INDEXER_AGENT_EMAIL_LOG) << err.get_error_string();
         }
-        qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
+        qCDebug(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "Xapian Committed";
     }
 }
