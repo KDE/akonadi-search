@@ -8,4 +8,4 @@ target_link_libraries(calendarsearchstore
     KPim6AkonadiSearchXapian
 )
 
-install(TARGETS calendarsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim${QT_MAJOR_VERSION}/akonadi)
+install(TARGETS calendarsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi)

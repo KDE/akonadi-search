@@ -8,4 +8,4 @@ target_link_libraries(notesearchstore
     KPim6AkonadiSearchXapian
 )
 
-install(TARGETS notesearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim${QT_MAJOR_VERSION}/akonadi)
+install(TARGETS notesearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi)

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: none
 configure_file(plasma-krunner-pimcontacts.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/plasma-krunner-pimcontacts.json @ONLY)
-kcoreaddons_add_plugin(krunner_pimcontacts INSTALL_NAMESPACE "kf${QT_MAJOR_VERSION}/krunner")
+kcoreaddons_add_plugin(krunner_pimcontacts INSTALL_NAMESPACE "kf6/krunner")
 
 ecm_qt_declare_logging_category(krunner_pimcontacts HEADER akonadi_runner_debug.h
     IDENTIFIER AKONADI_KRUNNER_LOG
@@ -25,7 +25,7 @@ target_link_libraries(krunner_pimcontacts
     KF6::Codecs
 )
 
-kcoreaddons_add_plugin(kcm_krunner_pimcontacts INSTALL_NAMESPACE "kf${QT_MAJOR_VERSION}/krunner/kcms")
+kcoreaddons_add_plugin(kcm_krunner_pimcontacts INSTALL_NAMESPACE "kf6/krunner/kcms")
 
 target_sources(kcm_krunner_pimcontacts PRIVATE
     pimcontactsrunnerconfig.cpp
