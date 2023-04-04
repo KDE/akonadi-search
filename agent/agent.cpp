@@ -87,7 +87,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
 
     new IndexerAdaptor(this);
 
-    // Cleanup agentsrc after migration to 4.13/KF5
+    // Cleanup agentsrc after migration to 4.13/KF6
     Akonadi::AgentManager *agentManager = Akonadi::AgentManager::self();
     const Akonadi::AgentInstance::List allAgents = agentManager->instances();
     // Cannot use agentManager->instance(oldInstanceName) here, it wouldn't find broken instances.

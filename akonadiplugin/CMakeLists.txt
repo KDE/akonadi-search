@@ -15,10 +15,10 @@ ecm_qt_declare_logging_category(akonadi_search_plugin HEADER akonadiplugin_index
 
 
 target_link_libraries(akonadi_search_plugin
-    KPim${KF_MAJOR_VERSION}::AkonadiCore
-    KPim${KF_MAJOR_VERSION}::AkonadiMime
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchCore
-    KF${KF_MAJOR_VERSION}::Contacts
+    KPim6::AkonadiCore
+    KPim6::AkonadiMime
+    KPim6::AkonadiSearchCore
+    KF6::Contacts
 )
 
 install(TARGETS akonadi_search_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim${QT_MAJOR_VERSION}/akonadi)

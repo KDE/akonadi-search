@@ -35,13 +35,13 @@ ecm_mark_as_test(searchplugintest)
 
 target_link_libraries(searchplugintest
     Qt::Test
-    KPim${KF_MAJOR_VERSION}::AkonadiCore
-    KPim${KF_MAJOR_VERSION}::AkonadiMime
-    KPim${KF_MAJOR_VERSION}::Mime
-    KF${KF_MAJOR_VERSION}::Contacts
+    KPim6::AkonadiCore
+    KPim6::AkonadiMime
+    KPim6::Mime
+    KF6::Contacts
     ${XAPIAN_LIBRARIES}
-    KF${KF_MAJOR_VERSION}::CalendarCore
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchXapian
-    KF${KF_MAJOR_VERSION}::Codecs
+    KF6::CalendarCore
+    KPim6::AkonadiSearchPIM
+    KPim6::AkonadiSearchXapian
+    KF6::Codecs
 )

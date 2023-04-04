@@ -10,9 +10,9 @@ portingAid: false
 deprecated: false
 release: false
 libraries:
-  - cmake: "KF5::AkonadiSearchXapian"
-  - cmake: "KF5::AkonadiSearchCore"
-cmakename: KF5AkonadiSearch
+  - cmake: "KPim6::AkonadiSearchXapian"
+  - cmake: "KPim6::AkonadiSearchCore"
+cmakename: KPim6AkonadiSearch
 
 public_lib: true
 group: kdepim

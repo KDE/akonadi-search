@@ -22,17 +22,17 @@ set(indexer_SRCS
 
 set(indexer_LIBS
     Qt::Test
-    KPim${KF_MAJOR_VERSION}::AkonadiCore
-    KPim${KF_MAJOR_VERSION}::AkonadiMime
-    KPim${KF_MAJOR_VERSION}::AkonadiAgentBase
-    KPim${KF_MAJOR_VERSION}::Mime
-    KF${KF_MAJOR_VERSION}::Contacts
-    KF${KF_MAJOR_VERSION}::CalendarCore
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchXapian
-    KF${KF_MAJOR_VERSION}::I18n
-    KF${KF_MAJOR_VERSION}::Codecs
-    KF${KF_MAJOR_VERSION}::ConfigCore
+    KPim6::AkonadiCore
+    KPim6::AkonadiMime
+    KPim6::AkonadiAgentBase
+    KPim6::Mime
+    KF6::Contacts
+    KF6::CalendarCore
+    KPim6::AkonadiSearchPIM
+    KPim6::AkonadiSearchXapian
+    KF6::I18n
+    KF6::Codecs
+    KF6::ConfigCore
 )
 
 set(indexertest_SRCS
@@ -72,9 +72,9 @@ ecm_mark_as_test(collectionquerytest)
 target_link_libraries(collectionquerytest
     ${indexer_LIBS}
     ${QJSON_LIBRARIES}
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
-    KPim${KF_MAJOR_VERSION}::AkonadiAgentBase
-    KF${KF_MAJOR_VERSION}::ConfigCore
+    KPim6::AkonadiSearchPIM
+    KPim6::AkonadiAgentBase
+    KF6::ConfigCore
     Qt::Widgets
     Qt::DBus
 )

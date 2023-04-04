@@ -6,7 +6,7 @@ set(PIM_VERSION "5.23.40")
 project(AkonadiSearch VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF_MIN_VERSION "5.105.0")
+set(KF_MIN_VERSION "5.240.0")
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -46,24 +46,16 @@ set(AKONADISEARCH_VERSION ${PIM_VERSION})
 set(AKONADI_VERSION "5.23.40")
 set(AKONADI_MIMELIB_VERSION "5.23.40")
 set(KMIME_LIB_VERSION "5.23.40")
-set(QT_REQUIRED_VERSION "5.15.2")
-if (QT_MAJOR_VERSION STREQUAL "6")
-    set(QT_MIN_VERSION "6.4.0")
-    set(KF_MIN_VERSION "5.240.0")
-    set(KF_MAJOR_VERSION "6")
-else()
-    set(KF_MAJOR_VERSION "5")
-endif()
+set(QT_REQUIRED_VERSION "6.4.0")
+set(KF_MAJOR_VERSION "6")
 set(KPIM_MIME_VERSION "5.23.40")
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
-find_package(KF${KF_MAJOR_VERSION} ${KF_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAddons KCMUtils KIO)
+find_package(Qt6 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
+find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAddons KCMUtils KIO)
 if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
-    find_package(KF${KF_MAJOR_VERSION}Runner ${KF_MIN_VERSION} REQUIRED)
+    find_package(KF6Runner ${KF_MIN_VERSION} REQUIRED)
 endif()
-if (QT_MAJOR_VERSION STREQUAL "6")
-    find_package(Qt6Core5Compat)
-endif()
+find_package(Qt6Core5Compat)
 
 
 find_package(Xapian CONFIG)
@@ -73,17 +65,17 @@ set_package_properties(Xapian PROPERTIES
     TYPE REQUIRED
 )
 
-find_package(KPim${KF_MAJOR_VERSION}Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
-find_package(KF${KF_MAJOR_VERSION}Contacts ${KF_MIN_VERSION} CONFIG REQUIRED)
-find_package(KPim${KF_MAJOR_VERSION}Mime ${KPIM_MIME_VERSION} CONFIG REQUIRED)
-find_package(KPim${KF_MAJOR_VERSION}AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
-find_package(KF${KF_MAJOR_VERSION}CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KPim6Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
+find_package(KF6Contacts ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KPim6Mime ${KPIM_MIME_VERSION} CONFIG REQUIRED)
+find_package(KPim6AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
+find_package(KF6CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
 
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX AKONADISEARCH
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
-    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchConfigVersion.cmake"
-    SOVERSION 5
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiSearchConfigVersion.cmake"
+    SOVERSION 6
 )
 option(KDEPIM_RUN_AKONADI_TEST "Enable autotest based on Akonadi." TRUE)
 
@@ -114,7 +106,7 @@ include_directories(
   ${CMAKE_BINARY_DIR}/xapian
 )
 # Config files
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim${KF_MAJOR_VERSION}AkonadiSearch")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6AkonadiSearch")
 # Targets
 add_subdirectory(xapian)
 add_subdirectory(core)
@@ -129,35 +121,35 @@ endif()
 
 if (BUILD_QCH)
     ecm_install_qch_export(
-        TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchPIM_QCH
-        FILE KPim${KF_MAJOR_VERSION}AkonadiSearchPIMQchTargets.cmake
+        TARGETS KPim6AkonadiSearchPIM_QCH
+        FILE KPim6AkonadiSearchPIMQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchPIMQchTargets.cmake\")")
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6AkonadiSearchPIMQchTargets.cmake\")")
 endif()
 
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KPimAkonadiSearchConfig.cmake.in"
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiSearchConfig.cmake"
     INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
 install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}AkonadiSearchConfigVersion.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiSearchConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KPim6AkonadiSearchConfigVersion.cmake"
     DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     COMPONENT devel
 )
 
-install(EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets
-        NAMESPACE KPim${KF_MAJOR_VERSION}::
+install(EXPORT KPim6AkonadiSearchTargets
+        NAMESPACE KPim6::
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        FILE KPim${KF_MAJOR_VERSION}AkonadiSearchTargets.cmake)
+        FILE KPim6AkonadiSearchTargets.cmake)
 
 install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch
     COMPONENT Devel
 )
 

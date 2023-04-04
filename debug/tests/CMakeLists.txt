@@ -8,8 +8,8 @@ target_link_libraries(akonadisearchdebug_dialog_gui
   Qt::Core
   Qt::Gui
   Qt::Widgets
-  KPim${KF_MAJOR_VERSION}::AkonadiCore
-  KF${KF_MAJOR_VERSION}::I18n
-  KPim${KF_MAJOR_VERSION}::AkonadiSearchDebug
+  KPim6::AkonadiCore
+  KF6::I18n
+  KPim6::AkonadiSearchDebug
 )
 

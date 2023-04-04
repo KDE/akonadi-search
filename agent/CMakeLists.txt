@@ -64,17 +64,17 @@ endif()
 
 target_link_libraries(akonadi_indexing_agent
     Qt::Core
-    KPim${KF_MAJOR_VERSION}::AkonadiCore
-    KPim${KF_MAJOR_VERSION}::AkonadiMime
-    KPim${KF_MAJOR_VERSION}::Mime
-    KF${KF_MAJOR_VERSION}::Contacts
-    KPim${KF_MAJOR_VERSION}::AkonadiAgentBase
-    KF${KF_MAJOR_VERSION}::CalendarCore
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchXapian
-    KPim${KF_MAJOR_VERSION}::AkonadiSearchPIM
-    KF${KF_MAJOR_VERSION}::Codecs
-    KF${KF_MAJOR_VERSION}::I18n
-    KF${KF_MAJOR_VERSION}::ConfigCore
+    KPim6::AkonadiCore
+    KPim6::AkonadiMime
+    KPim6::Mime
+    KF6::Contacts
+    KPim6::AkonadiAgentBase
+    KF6::CalendarCore
+    KPim6::AkonadiSearchXapian
+    KPim6::AkonadiSearchPIM
+    KF6::Codecs
+    KF6::I18n
+    KF6::ConfigCore
     Qt::Widgets
 )
 
