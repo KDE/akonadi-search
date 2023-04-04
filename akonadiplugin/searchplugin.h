@@ -26,5 +26,5 @@ class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
     Q_INTERFACES(Akonadi::AbstractSearchPlugin)
     Q_PLUGIN_METADATA(IID "org.kde.akonadi.SearchPlugin" FILE "akonadi_search_plugin.json")
 public:
-    Q_REQUIRED_RESULT QSet<qint64> search(const QString &query, const QVector<qint64> &collections, const QStringList &mimeTypes) override;
+    Q_REQUIRED_RESULT QSet<qint64> search(const QString &query, const QList<qint64> &collections, const QStringList &mimeTypes) override;
 };

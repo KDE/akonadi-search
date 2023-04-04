@@ -10,9 +10,9 @@
 #include "search_xapian_export.h"
 #include <xapian.h>
 
+#include <QList>
 #include <QPair>
 #include <QString>
-#include <QVector>
 
 namespace Akonadi
 {
@@ -68,8 +68,8 @@ private:
     Xapian::WritableDatabase m_wDb;
 
     using DocIdPair = QPair<Xapian::docid, Xapian::Document>;
-    QVector<DocIdPair> m_docsToAdd;
-    QVector<uint> m_docsToRemove;
+    QList<DocIdPair> m_docsToAdd;
+    QList<uint> m_docsToRemove;
 
     std::string m_path;
     const bool m_writeOnly = false;

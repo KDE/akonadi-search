@@ -67,7 +67,7 @@ Xapian::Query makeQuery(const QString &string, int position, Xapian::Database *d
         }
     }
 
-    QVector<Xapian::Query> queries;
+    QList<Xapian::Query> queries;
     queries.reserve(topTerms.size());
 
     for (const Term &term : std::as_const(topTerms)) {

@@ -13,6 +13,7 @@
 #include <QElapsedTimer>
 #include <QFile>
 #include <QTimer>
+#include <QVector>
 
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionFetchJob>

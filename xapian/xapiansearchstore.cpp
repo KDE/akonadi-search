@@ -11,7 +11,7 @@
 #include "xapianqueryparser.h"
 
 #include "akonadi_search_xapian_debug.h"
-#include <QVector>
+#include <QList>
 
 #include <algorithm>
 
@@ -55,7 +55,7 @@ Xapian::Query XapianSearchStore::toXapianQuery(Xapian::Query::op op, const QList
 {
     Q_ASSERT_X(op == Xapian::Query::OP_AND || op == Xapian::Query::OP_OR, "XapianSearchStore::toXapianQuery", "The op must be AND / OR");
 
-    QVector<Xapian::Query> queries;
+    QList<Xapian::Query> queries;
     queries.reserve(terms.size());
 
     for (const Term &term : terms) {

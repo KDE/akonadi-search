@@ -35,7 +35,7 @@ public:
 
 protected:
     void init();
-    QVector<Rule> m_rules;
+    QList<Rule> m_rules;
 };
 }
 }

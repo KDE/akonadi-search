@@ -285,7 +285,7 @@ Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
     return {};
 }
 
-QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QVector<qint64> &collections, const QStringList &mimeTypes)
+QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint64> &collections, const QStringList &mimeTypes)
 {
     if (akonadiQuery.isEmpty() && collections.isEmpty() && mimeTypes.isEmpty()) {
         qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "empty query";
