@@ -50,16 +50,6 @@ Term::Term(const QString &property, const QVariant &value, Term::Comparator c)
     d->m_value = value;
 
     if (c == Auto) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        auto valueType = value.type();
-        if (valueType == QVariant::String) {
-            d->m_comp = Contains;
-        } else if (valueType == QVariant::String) {
-            d->m_comp = Contains;
-        } else {
-            d->m_comp = Equal;
-        }
-#else
         auto valueType = value.metaType().id();
         if (valueType == QMetaType::QString) {
             d->m_comp = Contains;
@@ -68,7 +58,6 @@ Term::Term(const QString &property, const QVariant &value, Term::Comparator c)
         } else {
             d->m_comp = Equal;
         }
-#endif
     } else {
         d->m_comp = c;
     }
@@ -289,11 +278,7 @@ namespace
 // and see if they can be converted into date/datetime.
 QVariant tryConvert(const QVariant &var)
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    if (var.canConvert(QVariant::DateTime)) {
-#else
     if (var.canConvert<QDateTime>()) {
-#endif
         QDateTime dt = var.toDateTime();
         if (!dt.isValid()) {
             return var;
@@ -342,11 +327,7 @@ Term Term::fromVariantMap(const QVariantMap &map)
     term.setProperty(prop);
 
     QVariant value = map.value(prop);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    if (value.type() == QVariant::Map) {
-#else
     if (value.userType() == QMetaType::QVariantMap) {
-#endif
         QVariantMap map = value.toMap();
         if (map.size() != 1) {
             return term;

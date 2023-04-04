@@ -17,17 +17,6 @@ AkonadiSearchSyntaxHighlighter::~AkonadiSearchSyntaxHighlighter() = default;
 
 void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    for (const Rule &rule : std::as_const(m_rules)) {
-        const QRegExp expression(rule.pattern);
-        int index = expression.indexIn(text);
-        int length = 0;
-        while (index >= 0 && (length = expression.matchedLength()) > 0) {
-            setFormat(index, length, rule.format);
-            index = expression.indexIn(text, index + length);
-        }
-    }
-#else
     for (const Rule &rule : std::as_const(m_rules)) {
         QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
         while (matchIterator.hasNext()) {
@@ -35,8 +24,6 @@ void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
             setFormat(match.capturedStart(), match.capturedLength(), rule.format);
         }
     }
-
-#endif
 }
 
 void AkonadiSearchSyntaxHighlighter::init()
@@ -86,11 +73,7 @@ void AkonadiSearchSyntaxHighlighter::init()
     testType << QStringLiteral("\\bS");
     testType << QStringLiteral("\\bL");
     for (const QString &s : std::as_const(testType)) {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const QRegExp regex(s, Qt::CaseSensitive);
-#else
         const QRegularExpression regex(s);
-#endif
         m_rules.append(Rule(regex, testFormat));
     }
 }

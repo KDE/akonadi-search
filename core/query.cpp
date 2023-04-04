@@ -317,17 +317,9 @@ Query Query::fromJSON(const QByteArray &arr)
 
     if (map.contains(QStringLiteral("customOptions"))) {
         QVariant var = map[QStringLiteral("customOptions")];
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        if (var.type() == QVariant::Map) {
-#else
         if (var.userType() == QMetaType::QVariantMap) {
-#endif
             query.d->m_customOptions = map[QStringLiteral("customOptions")].toMap();
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        } else if (var.type() == QVariant::Hash) {
-#else
         } else if (var.userType() == QMetaType::QVariantHash) {
-#endif
             QVariantHash hash = var.toHash();
 
             QHash<QString, QVariant>::const_iterator it = hash.constBegin();
