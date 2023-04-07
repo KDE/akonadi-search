@@ -71,7 +71,6 @@
         "Description[zh_TW]": "搜尋您的聯絡人用的 runner",
         "EnabledByDefault": true,
         "Icon": "view-pim-contacts",
-        "Id": "PIM Contacts Search Runner",
         "License": "LGPL",
         "Name": "PIM Contacts Search",
         "Name[ar]": "البحث في متراسلي PIM",
