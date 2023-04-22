@@ -50,7 +50,7 @@ ecm_generate_headers(KPim${KF_MAJOR_VERSION}AkonadiSearchCore_CamelCasecore_HEAD
     PREFIX Core
     )
 
-install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchCore EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchCore EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     ${KPim${KF_MAJOR_VERSION}AkonadiSearchCore_CamelCasecore_HEADERS}

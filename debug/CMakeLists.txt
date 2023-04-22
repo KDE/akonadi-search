@@ -48,7 +48,7 @@ set_target_properties(KPim${KF_MAJOR_VERSION}AkonadiSearchDebug PROPERTIES
 
 target_include_directories(KPim${KF_MAJOR_VERSION}AkonadiSearchDebug INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/AkonadiSearch>")
 
-install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchDebug EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchDebug EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     akonadisearchdebugdialog.h

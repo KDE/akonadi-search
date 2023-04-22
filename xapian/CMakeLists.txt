@@ -44,7 +44,7 @@ set_target_properties(KPim${KF_MAJOR_VERSION}AkonadiSearchXapian PROPERTIES
 
 generate_export_header(KPim${KF_MAJOR_VERSION}AkonadiSearchXapian BASE_NAME AKONADI_SEARCH_XAPIAN EXPORT_FILE_NAME search_xapian_export.h)
 
-install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchXapian EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim${KF_MAJOR_VERSION}AkonadiSearchXapian EXPORT KPim${KF_MAJOR_VERSION}AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     xapiandatabase.h
