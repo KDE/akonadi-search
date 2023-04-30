@@ -13,7 +13,6 @@
 #include <QElapsedTimer>
 #include <QFile>
 #include <QTimer>
-#include <QVector>
 
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionFetchJob>
@@ -82,7 +81,7 @@ void App::slotRootCollectionsFetched(KJob *kjob)
     auto job = qobject_cast<Akonadi::CollectionFetchJob *>(kjob);
     m_collections = job->collections();
 
-    QMutableVectorIterator<Akonadi::Collection> it(m_collections);
+    QMutableListIterator<Akonadi::Collection> it(m_collections);
     while (it.hasNext()) {
         const Akonadi::Collection &c = it.next();
         const QStringList mimeTypes = c.contentMimeTypes();
