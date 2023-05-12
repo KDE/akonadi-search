@@ -12,3 +12,6 @@ Dependencies:
     'pim/akonadi' : '@same'
     'pim/akonadi-mime' : '@same'
     'pim/kmime' : '@same'
+
+Options:
+  require-passing-tests-on: ['Linux/Qt5', 'FreeBSD/Qt5']
