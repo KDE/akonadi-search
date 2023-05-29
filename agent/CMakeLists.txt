@@ -6,7 +6,18 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+
 add_executable(akonadi_indexing_agent)
+
+if (Corrosion_FOUND)
+    corrosion_import_crate(MANIFEST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml)
+    target_link_libraries(akonadi_indexing_agent PUBLIC htmlparser -Wl,--gc-sections)
+
+    target_include_directories(akonadi_indexing_agent PRIVATE
+        ${CMAKE_BINARY_DIR}/cargo/build/${Rust_CARGO_TARGET}/cxxbridge/htmlparser/src/)
+
+    target_compile_definitions(akonadi_indexing_agent PRIVATE -DHAS_HTMLPARSER)
+endif()
 
 target_sources(akonadi_indexing_agent PRIVATE
     abstractindexer.cpp
@@ -63,6 +74,7 @@ if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
 endif()
 
 target_link_libraries(akonadi_indexing_agent
+PRIVATE
     Qt::Core
     KPim6::AkonadiCore
     KPim6::AkonadiMime

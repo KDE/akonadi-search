@@ -70,6 +70,13 @@ find_package(KPim6Mime ${KPIM_MIME_VERSION} CONFIG REQUIRED)
 find_package(KPim6AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
 find_package(KF6CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
 
+find_package(Corrosion)
+set_package_properties(Corrosion PROPERTIES
+    PURPOSE "Required for safe parsing of html emails"
+    DESCRIPTION "CMake scripts to seamlessly build and link to targets using cargo"
+    URL https://github.com/corrosion-rs/corrosion
+)
+
 ecm_setup_version(PROJECT
     VARIABLE_PREFIX AKONADISEARCH
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/akonadi_search_version.h"
