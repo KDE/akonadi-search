@@ -8,7 +8,11 @@
 
 #include "akonotesindexer.h"
 #include "akonadi_indexer_agent_debug.h"
+#ifdef HAS_HTMLPARSER
+#include <lib.rs.h>
+#else
 #include <QTextDocument>
+#endif
 
 AkonotesIndexer::AkonotesIndexer(const QString &path)
     : AbstractIndexer()
@@ -112,10 +116,14 @@ void AkonotesIndexer::processPart(KMime::Content *content, KMime::Content *mainC
 
         // Only get HTML content, if no plain text content
         if (!mainContent && type->isHTMLText()) {
+#ifdef HAS_HTMLPARSER
+            const auto html = content->decodedText().toStdString();
+            const auto text = std::string(convert_to_text(rust::String(html)));
+#else
             QTextDocument doc;
             doc.setHtml(content->decodedText());
-
             const std::string text(normalizeString(doc.toPlainText()).toStdString());
+#endif
             m_termGen->index_text_without_positions(text);
         }
     }
