@@ -14,8 +14,8 @@
 #include <QVBoxLayout>
 
 K_PLUGIN_FACTORY(PIMContactsRunnerConfigFactory, registerPlugin<PIMContactsRunnerConfig>();)
-PIMContactsRunnerConfig::PIMContactsRunnerConfig(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
-    : KCModule(parent, data, args)
+PIMContactsRunnerConfig::PIMContactsRunnerConfig(QObject *parent, const KPluginMetaData &data)
+    : KCModule(parent, data)
     , mQueryCompletionCheckBox(new QCheckBox(i18n("Search in contacts indexed from sent and received emails too"), widget()))
 {
     auto vbox = new QVBoxLayout(widget());

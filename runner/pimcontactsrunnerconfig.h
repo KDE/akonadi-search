@@ -14,7 +14,7 @@ class PIMContactsRunnerConfig : public KCModule
 {
     Q_OBJECT
 public:
-    explicit PIMContactsRunnerConfig(QObject *parent, const KPluginMetaData &data, const QVariantList &args = QVariantList());
+    explicit PIMContactsRunnerConfig(QObject *parent, const KPluginMetaData &data);
 
 public Q_SLOTS:
     void save() override;
