@@ -105,3 +105,5 @@ Xapian::Query EmailSearchStore::finalizeQuery(const Xapian::Query &query)
 {
     return Xapian::Query(Xapian::Query::OP_AND_MAYBE, query, Xapian::Query(new AgePostingSource(0)));
 }
+
+#include "moc_emailsearchstore.cpp"

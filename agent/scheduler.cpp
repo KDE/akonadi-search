@@ -247,3 +247,5 @@ void Scheduler::slotIndexingFinished(KJob *job)
     m_currentJob = nullptr;
     m_processTimer.start();
 }
+
+#include "moc_scheduler.cpp"

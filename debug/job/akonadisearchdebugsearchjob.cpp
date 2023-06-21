@@ -76,3 +76,5 @@ void AkonadiSearchDebugSearchJob::setSearchPath(const QString &path)
 {
     mPath = path;
 }
+
+#include "moc_akonadisearchdebugsearchjob.cpp"

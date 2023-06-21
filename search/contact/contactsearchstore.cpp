@@ -29,3 +29,5 @@ QStringList ContactSearchStore::types()
 {
     return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Contact");
 }
+
+#include "moc_contactsearchstore.cpp"

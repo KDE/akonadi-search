@@ -234,3 +234,5 @@ QString IndexedItems::contactIndexingPath() const
 {
     return d->contactIndexingPath();
 }
+
+#include "moc_indexeditems.cpp"

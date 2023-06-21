@@ -333,3 +333,5 @@ bool AkonadiIndexingAgent::shouldIndex(const Akonadi::Item &item) const
 }
 
 AKONADI_AGENT_MAIN(AkonadiIndexingAgent)
+
+#include "moc_agent.cpp"

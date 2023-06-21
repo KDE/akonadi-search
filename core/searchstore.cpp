@@ -125,3 +125,5 @@ SearchStore::List SearchStore::searchStores()
     }
     return stores;
 }
+
+#include "moc_searchstore.cpp"

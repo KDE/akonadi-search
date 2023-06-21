@@ -68,3 +68,5 @@ void PIMContactsRunnerConfig::defaults()
 }
 
 #include "pimcontactsrunnerconfig.moc"
+
+#include "moc_pimcontactsrunnerconfig.cpp"

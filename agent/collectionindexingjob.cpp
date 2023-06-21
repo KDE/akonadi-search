@@ -217,3 +217,5 @@ void CollectionIndexingJob::slotFoundUnindexed(KJob *job)
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing complete. Total time: " << m_time.elapsed();
     emitResult();
 }
+
+#include "moc_collectionindexingjob.cpp"

@@ -154,3 +154,5 @@ void TermGeneratorTest::testWordPositions()
 }
 
 QTEST_MAIN(TermGeneratorTest)
+
+#include "moc_termgeneratortest.cpp"

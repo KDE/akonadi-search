@@ -90,3 +90,5 @@ const QString AkonadiSearchDebugSearchPathComboBox::defaultLocations(const QStri
     QDir().mkpath(dbPath);
     return dbPath;
 }
+
+#include "moc_akonadisearchdebugsearchpathcombobox.cpp"

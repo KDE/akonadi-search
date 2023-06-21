@@ -77,3 +77,5 @@ void AkonadiSearchSyntaxHighlighter::init()
         m_rules.append(Rule(regex, testFormat));
     }
 }
+
+#include "moc_akonadisearchsyntaxhighlighter.cpp"

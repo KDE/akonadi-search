@@ -139,3 +139,5 @@ QUrl PIMSearchStore::constructUrl(const Xapian::docid &docid)
 
     return url;
 }
+
+#include "moc_pimsearchstore.cpp"

@@ -159,3 +159,5 @@ void CollectionIndexer::commit()
     }
     qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Xapian Committed";
 }
+
+#include "moc_collectionindexer.cpp"

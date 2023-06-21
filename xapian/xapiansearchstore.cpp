@@ -274,3 +274,5 @@ Xapian::Query XapianSearchStore::applyCustomOptions(const Xapian::Query &q, cons
     Q_UNUSED(options)
     return q;
 }
+
+#include "moc_xapiansearchstore.cpp"

@@ -76,3 +76,5 @@ void AkonadiSearchDebugWidgetTest::shouldChangeSearchType()
 }
 
 QTEST_MAIN(AkonadiSearchDebugWidgetTest)
+
+#include "moc_akonadisearchdebugwidgettest.cpp"

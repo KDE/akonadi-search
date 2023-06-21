@@ -264,3 +264,5 @@ void PIMContactsRunner::run(const RunnerContext &context, const QueryMatch &matc
 K_PLUGIN_CLASS_WITH_JSON(PIMContactsRunner, "plasma-krunner-pimcontacts.json")
 
 #include "pimcontactsrunner.moc"
+
+#include "moc_pimcontactsrunner.cpp"

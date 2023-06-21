@@ -57,3 +57,5 @@ bool CollectionUpdateJob::shouldIndex(const Akonadi::Collection &col) const
 {
     return !col.isVirtual() && (!mCol.hasAttribute<Akonadi::IndexPolicyAttribute>() || mCol.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
 }
+
+#include "moc_collectionupdatejob.cpp"

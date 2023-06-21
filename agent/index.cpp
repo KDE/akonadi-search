@@ -319,3 +319,5 @@ void Index::setRespectDiacriticAndAccents(bool b)
 {
     mRespectDiacriticAndAccents = b;
 }
+
+#include "moc_index.cpp"

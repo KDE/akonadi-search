@@ -46,3 +46,5 @@ void AkonadiSearchDebugSearchPathComboBoxTest::shouldSelectCorrectType()
 }
 
 QTEST_MAIN(AkonadiSearchDebugSearchPathComboBoxTest)
+
+#include "moc_akonadisearchdebugsearchpathcomboboxtest.cpp"

@@ -102,3 +102,5 @@ void AkonadiSearchDebugWidget::slotError(const QString &errorStr)
 {
     mPlainTextEditor->setPlainText(QStringLiteral("Error found:\n") + errorStr);
 }
+
+#include "moc_akonadisearchdebugwidget.cpp"

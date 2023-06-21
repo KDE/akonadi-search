@@ -364,3 +364,5 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
     qCDebug(AKONADIPLUGIN_INDEXER_LOG) << "Got" << resultSet.count() << "results";
     return resultSet;
 }
+
+#include "moc_searchplugin.cpp"

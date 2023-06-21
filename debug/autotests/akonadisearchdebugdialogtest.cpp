@@ -50,3 +50,5 @@ void AkonadiSearchDebugDialogTest::shouldFillLineEditWhenWeWantToSearchItem()
 }
 
 QTEST_MAIN(AkonadiSearchDebugDialogTest)
+
+#include "moc_akonadisearchdebugdialogtest.cpp"

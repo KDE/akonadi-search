@@ -127,3 +127,5 @@ bool AkonadiSearchDebugDialog::saveToFile(const QString &filename, const QString
     file.close();
     return true;
 }
+
+#include "moc_akonadisearchdebugdialog.cpp"

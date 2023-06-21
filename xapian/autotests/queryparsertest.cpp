@@ -217,3 +217,5 @@ void QueryParserTest::testWordExpansion()
 }
 
 QTEST_MAIN(QueryParserTest)
+
+#include "moc_queryparsertest.cpp"
