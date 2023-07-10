@@ -15,7 +15,7 @@ class PIMContactsRunner : public KRunner::AbstractRunner
     Q_OBJECT
 
 public:
-    explicit PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    explicit PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData);
     ~PIMContactsRunner() override;
 
     void reloadConfiguration() override;
