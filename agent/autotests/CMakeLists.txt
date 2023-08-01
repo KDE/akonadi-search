@@ -71,7 +71,6 @@ add_test(NAME collectionquerytest COMMAND collectionquerytest)
 ecm_mark_as_test(collectionquerytest)
 target_link_libraries(collectionquerytest
     ${indexer_LIBS}
-    ${QJSON_LIBRARIES}
     KPim6::AkonadiSearchPIM
     KPim6::AkonadiAgentBase
     KF6::ConfigCore
