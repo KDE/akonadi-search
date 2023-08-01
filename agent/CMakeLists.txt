@@ -45,9 +45,6 @@ target_sources(akonadi_indexing_agent PRIVATE
     collectionindexingjob.h
     index.h
     collectionupdatejob.h
-
-    stringutil.h
-    stringutil.cpp
 )
 
 ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_agent_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent
@@ -88,6 +85,7 @@ PRIVATE
     KF6::I18n
     KF6::ConfigCore
     Qt::Widgets
+    KF6::TextUtils
 )
 
 install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

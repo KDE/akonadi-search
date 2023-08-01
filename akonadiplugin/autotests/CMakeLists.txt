@@ -21,7 +21,6 @@ target_sources(searchplugintest PRIVATE
     ../../search/contact/contactsearchstore.cpp
     ../../search/calendar/calendarsearchstore.cpp
     ../../search/note/notesearchstore.cpp
-    ../../agent/stringutil.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_debug.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_calendar_debug.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_email_debug.cpp
@@ -44,4 +43,5 @@ target_link_libraries(searchplugintest
     KPim6::AkonadiSearchPIM
     KPim6::AkonadiSearchXapian
     KF6::Codecs
+    KF6::TextUtils
 )

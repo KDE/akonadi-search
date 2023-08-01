@@ -6,7 +6,7 @@
  */
 
 #include "abstractindexer.h"
-#include "stringutil.h"
+#include <TextUtils/ConvertText>
 
 AbstractIndexer::AbstractIndexer() = default;
 
@@ -41,6 +41,6 @@ QString AbstractIndexer::normalizeString(const QString &str)
     if (mRespectDiacriticAndAccents) {
         return str;
     } else {
-        return StringUtil::normalize(str);
+        return TextUtils::ConvertText::normalize(str);
     }
 }

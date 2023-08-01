@@ -8,7 +8,6 @@
 
 #include "emailindexer.h"
 #include "akonadi_indexer_agent_email_debug.h"
-#include "stringutil.h"
 #include <Akonadi/Collection>
 #include <Akonadi/MessageFlags>
 

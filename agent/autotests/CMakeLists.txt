@@ -16,7 +16,6 @@ set(indexer_SRCS
     ../../search/calendar/calendarsearchstore.cpp
     ../akonadi_indexer_agent_debug.cpp
     ../akonadi_indexer_agent_calendar_debug.cpp
-    ../stringutil.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_email_debug.cpp
 )
 
@@ -33,6 +32,7 @@ set(indexer_LIBS
     KF6::I18n
     KF6::Codecs
     KF6::ConfigCore
+    KF6::TextUtils
 )
 
 set(indexertest_SRCS
@@ -77,6 +77,7 @@ target_link_libraries(collectionquerytest
     KF6::ConfigCore
     Qt::Widgets
     Qt::DBus
+    KF6::TextUtils
 )
 endif()
 endif()

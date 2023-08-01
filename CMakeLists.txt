@@ -48,6 +48,7 @@ set(AKONADI_MIMELIB_VERSION "5.240.40")
 set(KMIME_LIB_VERSION "5.240.40")
 set(QT_REQUIRED_VERSION "6.5.0")
 set(KPIM_MIME_VERSION "5.240.40")
+set(KTEXTADDONS_MIN_VERSION "1.3.50")
 
 find_package(Qt6 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAddons KCMUtils KIO)
@@ -69,6 +70,7 @@ find_package(KF6Contacts ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KPim6Mime ${KPIM_MIME_VERSION} CONFIG REQUIRED)
 find_package(KPim6AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
 find_package(KF6CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF6TextUtils ${KTEXTADDONS_MIN_VERSION} CONFIG REQUIRED)
 
 find_package(Corrosion)
 set_package_properties(Corrosion PROPERTIES
