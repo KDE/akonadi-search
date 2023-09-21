@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-22 00:48+0000\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2020-11-07 13:29+0100\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -74,7 +74,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Automatikusan kiegészítve a fogadott és küldött e-mailekből"
 
-#: runner/pimcontactsrunnerconfig.cpp:20 runner/pimcontactsrunnerconfig.cpp:24
+#: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "Keresés a küldött és fogadott e-mailekben indexelt névjegyek között is"
