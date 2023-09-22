@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-04-09 03:31+0200\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2017-05-07 21:01+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,34 +18,34 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: agent/agent.cpp:81
+#: agent/agent.cpp:62
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
 msgstr "Нема доступних индексара"
 
-#: agent/collectionindexingjob.cpp:80
+#: agent/collectionindexingjob.cpp:62
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "Индексирам збирку: %1"
 
-#: agent/scheduler.cpp:205 agent/scheduler.cpp:237 agent/scheduler.cpp:248
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
 msgstr "Спреман."
 
-#: agent/scheduler.cpp:281
+#: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "Збирка „%1“ индексирана."
 
 # >> @item
-#: debug/akonadisearchdebugdialog.cpp:107
+#: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "текстуални фајлови (*.txt);;сви фајлови (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:119
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -54,29 +54,29 @@ msgstr ""
 "Не могу да упишем фајл %1:\n"
 "Детаљан опис грешке: %2"
 
-#: debug/akonadisearchdebugdialog.cpp:123
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgid "Save File Error"
 msgstr "Грешка уписивања фајла"
 
-#: runner/pimcontactsrunner.cpp:44
+#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
 #, kde-format
 msgid "Contacts"
 msgstr "Контакти"
 
-#: runner/pimcontactsrunner.cpp:206 runner/pimcontactsrunner.cpp:212
-#: runner/pimcontactsrunner.cpp:244
+#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
+#: runner/pimcontactsrunner.cpp:239
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:230
+#: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "Аутоматски допуњено из примљене и послате поште."
 
-#: runner/pimcontactsrunnerconfig.cpp:38
+#: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "Тражи и у контактима индексираним из послате и примљене поште"
