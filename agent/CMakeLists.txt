@@ -1,23 +1,39 @@
 # SPDX-License-Identifier: CC0-1.0
 # SPDX-FileCopyrightText: none
+
+## Html to text converter target
+
+add_executable(akonadi_html_to_text htmltotext.cpp)
+
+if (Corrosion_FOUND)
+    corrosion_import_crate(MANIFEST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml)
+    target_link_libraries(akonadi_html_to_text PUBLIC htmlparser -Wl,--gc-sections)
+
+    target_include_directories(akonadi_html_to_text PRIVATE
+        ${CMAKE_BINARY_DIR}/cargo/build/${Rust_CARGO_TARGET}/cxxbridge/htmlparser/src/)
+
+    target_compile_definitions(akonadi_html_to_text PRIVATE -DHAS_HTMLPARSER)
+endif()
+
+target_link_libraries(akonadi_html_to_text
+PRIVATE
+    Qt5::Core
+    Qt5::Gui
+    KF5::CoreAddons
+    KF5::I18n
+)
+
+install(TARGETS akonadi_html_to_text ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+
+## Indexing agent target
+
 kde_enable_exceptions()
 include_directories(
     ${XAPIAN_INCLUDE_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
 )
 
-
 add_executable(akonadi_indexing_agent)
-
-if (Corrosion_FOUND)
-    corrosion_import_crate(MANIFEST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml)
-    target_link_libraries(akonadi_indexing_agent PUBLIC htmlparser -Wl,--gc-sections)
-
-    target_include_directories(akonadi_indexing_agent PRIVATE
-        ${CMAKE_BINARY_DIR}/cargo/build/${Rust_CARGO_TARGET}/cxxbridge/htmlparser/src/)
-
-    target_compile_definitions(akonadi_indexing_agent PRIVATE -DHAS_HTMLPARSER)
-endif()
 
 target_sources(akonadi_indexing_agent PRIVATE
     abstractindexer.cpp
