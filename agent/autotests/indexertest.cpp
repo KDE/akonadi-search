@@ -21,6 +21,18 @@
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)
 
+KMime::Message::Ptr readMailFromFile(const QString &mailFile)
+{
+    QFile file(QLatin1String(MAIL_DATA_DIR) + QLatin1Char('/') + mailFile);
+    file.open(QIODevice::ReadOnly);
+    Q_ASSERT(file.isOpen());
+    auto mailData = KMime::CRLFtoLF(file.readAll());
+    KMime::Message::Ptr message(new KMime::Message);
+    message->setContent(mailData);
+    message->parse();
+    return message;
+}
+
 class IndexerTest : public QObject
 {
     Q_OBJECT
@@ -163,6 +175,21 @@ private Q_SLOTS:
         emailIndexer.commit();
         QCOMPARE(getAllEmailItems(), QSet<qint64>() << 1 << 2);
         emailIndexer.remove(Akonadi::Collection(2));
+        emailIndexer.commit();
+        QCOMPARE(getAllEmailItems(), QSet<qint64>() << 1);
+    }
+
+    void testHtmlOnly()
+    {
+        auto msg = readMailFromFile(QStringLiteral("htmlonly.mbox"));
+
+        Akonadi::Item item(KMime::Message::mimeType());
+        item.setId(1);
+        item.setPayload(msg);
+        item.setParentCollection(Akonadi::Collection(1));
+
+        EmailIndexer emailIndexer(emailDir, emailContactsDir);
+        emailIndexer.index(item);
         emailIndexer.commit();
         QCOMPARE(getAllEmailItems(), QSet<qint64>() << 1);
     }
