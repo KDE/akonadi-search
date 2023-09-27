@@ -47,18 +47,9 @@ add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 add_executable(indexertest ${indexertest_SRCS})
 add_test(NAME indexertest COMMAND indexertest)
 ecm_mark_as_test(indexertest)
-target_link_libraries(indexertest PRIVATE
+target_link_libraries(indexertest
     ${indexer_LIBS}
 )
-
-if (Corrosion_FOUND)
-    target_link_libraries(indexertest PUBLIC htmlparser -Wl,--gc-sections)
-
-    target_include_directories(indexertest PRIVATE
-        ${CMAKE_BINARY_DIR}/cargo/build/${Rust_CARGO_TARGET}/cxxbridge/htmlparser/src/)
-
-    target_compile_definitions(indexertest PRIVATE -DHAS_HTMLPARSER)
-endif()
 
 set( EXECUTABLE_OUTPUT_PATH ${CMAKE_CURRENT_BINARY_DIR} )
 if (KDEPIM_RUN_AKONADI_TEST)

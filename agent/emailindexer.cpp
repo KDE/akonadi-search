@@ -8,16 +8,12 @@
 
 #include "emailindexer.h"
 #include "akonadi_indexer_agent_email_debug.h"
+
 #include <Akonadi/Collection>
 #include <Akonadi/MessageFlags>
-
 #include <KEmailAddress>
 
-#ifdef HAS_HTMLPARSER
-#include <lib.rs.h>
-#else
-#include <QTextDocument>
-#endif
+#include <QProcess>
 
 EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
     : AbstractIndexer()
@@ -251,14 +247,20 @@ void EmailIndexer::processPart(KMime::Content *content, KMime::Content *mainCont
 
         // Only get HTML content, if no plain text content
         if (!mainContent && type->isHTMLText()) {
-#ifdef HAS_HTMLPARSER
-            const auto html = content->decodedText().toStdString();
-            const auto text = std::string(convert_to_text(rust::String(html)));
-#else
-            QTextDocument doc;
-            doc.setHtml(content->decodedText());
-            const std::string text(normalizeString(doc.toPlainText()).toStdString());
-#endif
+            QProcess converter;
+            converter.start(QStringLiteral("akonadi_html_to_text"));
+            if (!converter.waitForStarted()) {
+                return;
+            }
+
+            converter.write(content->decodedText().toUtf8());
+            converter.closeWriteChannel();
+
+            if (!converter.waitForFinished()) {
+                return;
+            }
+
+            const auto text = converter.readAll().toStdString();
 
             m_termGen->index_text_without_positions(text);
         }
