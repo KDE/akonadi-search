@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2023 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-26 01:46+0000\n"
-"PO-Revision-Date: 2022-04-12 12:26+0300\n"
+"PO-Revision-Date: 2023-09-26 06:13+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,18 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: agent/agent.cpp:62
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
-msgstr "Hiçbir indeksleyici mevcut değil"
+msgstr "Kullanılabilir indeksleyici yok"
 
 #: agent/collectionindexingjob.cpp:62
 #, kde-format
 msgid "Indexing collection: %1"
-msgstr "Koleksyon indeksleme: %1"
+msgstr "Koleksiyon indeksleniyor: %1"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
@@ -49,12 +49,11 @@ msgid ""
 "Could not write the file %1:\n"
 "\"%2\" is the detailed error description."
 msgstr ""
-"%1 dosyasına yazılamıyor:\n"
-"detaylı hata açıklaması, \"%2\"."
+"%1 dosyası yazılamadı:\n"
+"\"%2\", ayrıntılı hata açıklamasıdır."
 
 #: debug/akonadisearchdebugdialog.cpp:113
-#, fuzzy, kde-format
-#| msgid "Save File Error"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "Dosya Kaydetme Hatası"
@@ -74,9 +73,9 @@ msgstr "%1 (%2)"
 #: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
-msgstr "Gelen ve gönderilen e-postalardan otomatik tamamlandı"
+msgstr "Alınan ve gönderilen e-postalardan kendiliğinden tamamlandı"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
-msgstr "İndekslenmiş gelen ve gönderilen e-postalarda da ara"
+msgstr "Alınan ve gönderilen e-postalardan indekslenen kişilerde de ara"
