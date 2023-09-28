@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2014, 2016, 2017.
+# Luigi Toscano <luigi.toscano@tiscali.it>, 2014, 2016, 2017, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 01:46+0000\n"
-"PO-Revision-Date: 2017-04-22 22:19+0100\n"
+"POT-Creation-Date: 2023-09-28 01:40+0000\n"
+"PO-Revision-Date: 2023-09-27 01:13+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr ""
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr ""
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -27,6 +37,31 @@ msgstr "Nessun indicizzatore disponibile"
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "Indicizzazione raccolta: %1"
+
+#: agent/htmltotext.cpp:30
+#, kde-format
+msgid "Akonadi Html To Test"
+msgstr ""
+
+#: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
+#, kde-format
+msgid "Akonadi Html To Test Converter"
+msgstr ""
+
+#: agent/htmltotext.cpp:34
+#, kde-format
+msgid "© 2023 KDE Community"
+msgstr ""
+
+#: agent/htmltotext.cpp:36
+#, kde-format
+msgid "Carl Schwan"
+msgstr ""
+
+#: agent/htmltotext.cpp:36
+#, kde-format
+msgid "Maintainer"
+msgstr ""
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
@@ -53,8 +88,7 @@ msgstr ""
 "«%2» è la descrizione dettagliata del messaggio di errore."
 
 #: debug/akonadisearchdebugdialog.cpp:113
-#, fuzzy, kde-format
-#| msgid "Save File Error"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "Errore nel salvataggio del file"
