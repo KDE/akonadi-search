@@ -27,9 +27,9 @@ int main(int argc, char *argv[])
     KLocalizedString::setApplicationDomain("akonadi_search");
 
     KAboutData about(QStringLiteral("akonadi_html_to_text"),
-                     i18n("Akonadi Html To Text"),
+                     i18n("Akonadi HTML To Text"),
                      QStringLiteral("1.0"),
-                     i18n("Akonadi Html To Text Converter"),
+                     i18n("Akonadi HTML To Text Converter"),
                      KAboutLicense::LGPL_V2,
                      i18n("© 2023 KDE Community"));
 
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     KAboutData::setApplicationData(about);
 
     QCommandLineParser parser;
-    parser.setApplicationDescription(i18n("Akonadi Html To Text Converter"));
+    parser.setApplicationDescription(i18n("Akonadi HTML To Text Converter"));
 
     about.setupCommandLine(&parser);
     parser.process(app);
