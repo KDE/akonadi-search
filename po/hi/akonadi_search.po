@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 01:40+0000\n"
+"POT-Creation-Date: 2023-09-29 01:39+0000\n"
 "PO-Revision-Date: 2021-06-15 12:57+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -41,12 +41,12 @@ msgstr "%1 संग्रह, अनुक्रमित हो रहा ह�
 
 #: agent/htmltotext.cpp:30
 #, kde-format
-msgid "Akonadi Html To Test"
+msgid "Akonadi HTML To Text"
 msgstr ""
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
-msgid "Akonadi Html To Test Converter"
+msgid "Akonadi HTML To Text Converter"
 msgstr ""
 
 #: agent/htmltotext.cpp:34

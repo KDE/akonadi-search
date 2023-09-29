@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 01:40+0000\n"
-"PO-Revision-Date: 2023-09-26 06:13+0300\n"
+"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"PO-Revision-Date: 2023-09-28 10:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20,12 +20,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Emir SARI"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "emir_sari@icloud.com"
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -39,29 +39,31 @@ msgid "Indexing collection: %1"
 msgstr "Koleksiyon indeksleniyor: %1"
 
 #: agent/htmltotext.cpp:30
-#, kde-format
-msgid "Akonadi Html To Test"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Akonadi Html To Test"
+msgid "Akonadi HTML To Text"
+msgstr "Akonadi HTML/Düz Metin"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
-#, kde-format
-msgid "Akonadi Html To Test Converter"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Akonadi Html To Test Converter"
+msgid "Akonadi HTML To Text Converter"
+msgstr "Akonadi HTML/Düz Metin Dönüştürücüsü"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© 2023 KDE Topluluğu"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "Bakımcı"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format

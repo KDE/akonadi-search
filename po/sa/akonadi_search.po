@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 01:40+0000\n"
-"PO-Revision-Date: 2023-09-27 20:01+0530\n"
+"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"PO-Revision-Date: 2023-09-28 20:58+0530\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -20,12 +20,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "श्रीकान्त् कलवार्"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "skkalwar999@gmail.com"
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -39,29 +39,31 @@ msgid "Indexing collection: %1"
 msgstr "अनुक्रमणिका संग्रहः: %1"
 
 #: agent/htmltotext.cpp:30
-#, kde-format
-msgid "Akonadi Html To Test"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Akonadi Html To Test"
+msgid "Akonadi HTML To Text"
+msgstr "अकोनाडी Html To Test"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
-#, kde-format
-msgid "Akonadi Html To Test Converter"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Akonadi Html To Test Converter"
+msgid "Akonadi HTML To Text Converter"
+msgstr "अकोनाडी Html To Test परिवर्तक"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© २०२३ KDE समुदाय"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "कार्ल श्वान्"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "परिपालकः"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
@@ -88,8 +90,7 @@ msgstr ""
 "\"%2\" इति विस्तृतदोषविवरणम् ।."
 
 #: debug/akonadisearchdebugdialog.cpp:113
-#, fuzzy, kde-format
-#| msgid "Save File Error"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "सञ्चिका-रक्षणं त्रुटिः"
@@ -97,7 +98,7 @@ msgstr "सञ्चिका-रक्षणं त्रुटिः"
 #: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
 #, kde-format
 msgid "Contacts"
-msgstr "Contacts"
+msgstr "सम्पर्कसूची"
 
 #: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
 #: runner/pimcontactsrunner.cpp:239

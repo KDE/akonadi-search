@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 01:40+0000\n"
-"PO-Revision-Date: 2023-09-26 12:16+0200\n"
+"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"PO-Revision-Date: 2023-09-28 12:25+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -24,12 +24,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Antoni Bella"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "antonibella5@yahoo.com"
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -43,29 +43,31 @@ msgid "Indexing collection: %1"
 msgstr "S'està indexant la col·lecció: %1"
 
 #: agent/htmltotext.cpp:30
-#, kde-format
-msgid "Akonadi Html To Test"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Akonadi Html To Test"
+msgid "Akonadi HTML To Text"
+msgstr "Convertidor d'HTML a text"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
-#, kde-format
-msgid "Akonadi Html To Test Converter"
-msgstr ""
+#, fuzzy, kde-format
+#| msgid "Akonadi Html To Test Converter"
+msgid "Akonadi HTML To Text Converter"
+msgstr "Convertidor d'HTML a text d'Akonadi"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© 2023 Comunitat KDE"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "Mantenidor"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
