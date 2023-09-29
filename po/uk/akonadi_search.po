@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2016, 2017.
+# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2016, 2017, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-28 02:28+0000\n"
-"PO-Revision-Date: 2017-04-22 10:24+0300\n"
+"PO-Revision-Date: 2023-09-28 09:06+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -18,17 +18,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 1.5\n"
+"X-Generator: Lokalize 20.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Юрій Чорноіван"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "yurchor@ukr.net"
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -44,27 +44,27 @@ msgstr "Індексуємо збірку %1"
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi Html To Test"
-msgstr ""
+msgstr "HTML у текст Akonadi"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi Html To Test Converter"
-msgstr ""
+msgstr "Засіб перетворення даних HTML у текст"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© Спільнота KDE, 2023"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "Супровідник"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
