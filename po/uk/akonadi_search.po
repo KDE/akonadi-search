@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2023-09-28 09:06+0300\n"
+"PO-Revision-Date: 2023-09-29 08:51+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -42,14 +42,12 @@ msgid "Indexing collection: %1"
 msgstr "Індексуємо збірку %1"
 
 #: agent/htmltotext.cpp:30
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test"
+#, kde-format
 msgid "Akonadi HTML To Text"
 msgstr "HTML у текст Akonadi"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test Converter"
+#, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Засіб перетворення даних HTML у текст"
 

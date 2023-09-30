@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2023-09-28 12:56+0200\n"
+"PO-Revision-Date: 2023-09-29 10:01+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -39,16 +39,14 @@ msgid "Indexing collection: %1"
 msgstr "Verzameling indexeren: %1"
 
 #: agent/htmltotext.cpp:30
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test"
+#, kde-format
 msgid "Akonadi HTML To Text"
-msgstr "Akonadi te testen Html"
+msgstr "Akonadi HTML naar tekst"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test Converter"
+#, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr "Akonadi Html te testen convertor"
+msgstr "Akonadi-convertor HTML naar tekst"
 
 #: agent/htmltotext.cpp:34
 #, kde-format

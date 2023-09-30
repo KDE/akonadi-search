@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2023-09-28 12:25+0200\n"
+"PO-Revision-Date: 2023-09-29 12:50+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -43,14 +43,12 @@ msgid "Indexing collection: %1"
 msgstr "S'està indexant la col·lecció: %1"
 
 #: agent/htmltotext.cpp:30
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test"
+#, kde-format
 msgid "Akonadi HTML To Text"
-msgstr "Convertidor d'HTML a text"
+msgstr "HTML a text de l'Akonadi"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test Converter"
+#, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Convertidor d'HTML a text de l'Akonadi"
 

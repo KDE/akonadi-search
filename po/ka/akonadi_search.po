@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2023-09-27 05:28+0200\n"
+"PO-Revision-Date: 2023-09-29 05:25+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -21,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Temuri Doghonadze"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "Temuri.doghonadze@gmail.com"
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -42,27 +42,27 @@ msgstr "ინდექსის კოლექცია: %1"
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi HTML To Text"
-msgstr ""
+msgstr "Akonadi HTML-დან Text-ში"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr ""
+msgstr "Akonadi-ის გადამყვანი HTML-დან ტექსტში"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© 2023 KDE-ის საზოგადოება"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "წამყვანი პროგრამისტი"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format

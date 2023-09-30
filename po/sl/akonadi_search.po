@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2023-09-28 12:28+0200\n"
+"PO-Revision-Date: 2023-09-29 07:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -40,16 +40,14 @@ msgid "Indexing collection: %1"
 msgstr "Izgrajevanje kazala zbirke: %1"
 
 #: agent/htmltotext.cpp:30
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test"
+#, kde-format
 msgid "Akonadi HTML To Text"
-msgstr "Akonadi Html za preizkus"
+msgstr "Akonadi Html v besedilo"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
-#, fuzzy, kde-format
-#| msgid "Akonadi Html To Test Converter"
+#, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr "Pretvornik Akonadi Html v preizkus"
+msgstr "Akonadi pretvornik Html v besedilo"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
