@@ -3,32 +3,32 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Automatically generated, 2014.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2014.
+# SPDX-FileCopyrightText: 2014, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 # Javier Vinal <fjvinal@gmail.com>, 2016, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-28 02:28+0000\n"
-"PO-Revision-Date: 2017-04-29 22:48+0100\n"
-"Last-Translator: Javier Vinal <fjvinal@gmail.com>\n"
-"Language-Team: Spanish <l10n-kde-es@kde.org>\n"
+"PO-Revision-Date: 2023-09-29 02:08+0200\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Eloy Cuadra"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "ecuadra@eloihr.net"
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -44,27 +44,27 @@ msgstr "Indexando colección: %1"
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi Html To Test"
-msgstr ""
+msgstr "HTML a texto de Akonadi"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi Html To Test Converter"
-msgstr ""
+msgstr "Conversor de HTML a texto de Akonadi"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© 2023 La comunidad KDE"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "Responsable"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
@@ -110,10 +110,10 @@ msgstr "%1 (%2)"
 #: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
-msgstr "Autocompletado desde correos recibidos y enviados"
+msgstr "Completado automáticamente desde mensajes recibidos y enviados"
 
 #: runner/pimcontactsrunnerconfig.cpp:20 runner/pimcontactsrunnerconfig.cpp:24
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr ""
-"Búsqueda en contactos indexada también desde correos enviados y recibidos"
+"Búsqueda en contactos indexada también desde mensajes enviados y recibidos"
