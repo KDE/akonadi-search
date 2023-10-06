@@ -28,7 +28,7 @@ public:
     explicit CalendarIndexer(const QString &path);
     ~CalendarIndexer() override;
 
-    Q_REQUIRED_RESULT QStringList mimeTypes() const override;
+    [[nodiscard]] QStringList mimeTypes() const override;
 
     void index(const Akonadi::Item &item) override;
     void commit() override;

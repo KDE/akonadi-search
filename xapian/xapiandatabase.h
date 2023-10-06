@@ -61,7 +61,7 @@ public:
      * Returns true if the XapianDatabase has changes which need to
      * be committed
      */
-    Q_REQUIRED_RESULT bool haveChanges() const;
+    [[nodiscard]] bool haveChanges() const;
 
 private:
     Xapian::Database *m_db = nullptr;

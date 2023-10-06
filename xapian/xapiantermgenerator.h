@@ -26,7 +26,7 @@ public:
     void indexText(const QString &text, const QString &prefix, int wdfInc = 1);
 
     void setPosition(int position);
-    Q_REQUIRED_RESULT int position() const;
+    [[nodiscard]] int position() const;
 
     void setDocument(Xapian::Document *doc);
 

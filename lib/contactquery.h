@@ -44,11 +44,11 @@ public:
     };
 
     void setMatchCriteria(MatchCriteria m);
-    Q_REQUIRED_RESULT MatchCriteria matchCriteria() const;
+    [[nodiscard]] MatchCriteria matchCriteria() const;
 
     ResultIterator exec() override;
 
-    Q_REQUIRED_RESULT int limit() const;
+    [[nodiscard]] int limit() const;
     void setLimit(int limit);
 
 private:

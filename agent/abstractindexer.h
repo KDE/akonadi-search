@@ -30,10 +30,10 @@ public:
     virtual void move(Akonadi::Item::Id item, Akonadi::Collection::Id from, Akonadi::Collection::Id to);
     virtual void updateFlags(const Akonadi::Item &item, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removed);
 
-    Q_REQUIRED_RESULT bool respectDiacriticAndAccents() const;
+    [[nodiscard]] bool respectDiacriticAndAccents() const;
     void setRespectDiacriticAndAccents(bool newRespectDiacriticAndAccents);
 
 protected:
     bool mRespectDiacriticAndAccents = true;
-    Q_REQUIRED_RESULT QString normalizeString(const QString &str);
+    [[nodiscard]] QString normalizeString(const QString &str);
 };

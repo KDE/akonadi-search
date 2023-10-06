@@ -31,17 +31,17 @@ public:
 
     void setOverrideDbPrefixPath(const QString &path);
 
-    Q_REQUIRED_RESULT qlonglong indexedItems(const qlonglong id);
+    [[nodiscard]] qlonglong indexedItems(const qlonglong id);
 
     void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
     void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId);
 
-    Q_REQUIRED_RESULT QString emailIndexingPath() const;
-    Q_REQUIRED_RESULT QString collectionIndexingPath() const;
-    Q_REQUIRED_RESULT QString calendarIndexingPath() const;
-    Q_REQUIRED_RESULT QString akonotesIndexingPath() const;
-    Q_REQUIRED_RESULT QString emailContactsIndexingPath() const;
-    Q_REQUIRED_RESULT QString contactIndexingPath() const;
+    [[nodiscard]] QString emailIndexingPath() const;
+    [[nodiscard]] QString collectionIndexingPath() const;
+    [[nodiscard]] QString calendarIndexingPath() const;
+    [[nodiscard]] QString akonotesIndexingPath() const;
+    [[nodiscard]] QString emailContactsIndexingPath() const;
+    [[nodiscard]] QString contactIndexingPath() const;
 
 private:
     std::unique_ptr<IndexedItemsPrivate> const d;

@@ -34,8 +34,8 @@ public:
     void close(int queryId) override;
     bool next(int queryId) override;
 
-    Q_REQUIRED_RESULT QByteArray id(int queryId) override;
-    Q_REQUIRED_RESULT QUrl url(int queryId) override;
+    [[nodiscard]] QByteArray id(int queryId) override;
+    [[nodiscard]] QUrl url(int queryId) override;
 
     /**
      * Set the path of the xapian database

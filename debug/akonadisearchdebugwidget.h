@@ -31,7 +31,7 @@ public:
     void setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type);
     void doSearch();
 
-    Q_REQUIRED_RESULT QString plainText() const;
+    [[nodiscard]] QString plainText() const;
 
 private Q_SLOTS:
     AKONADI_SEARCH_DEBUG_NO_EXPORT void slotSearchLineTextChanged(const QString &text);

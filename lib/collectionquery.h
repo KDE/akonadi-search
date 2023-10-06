@@ -44,13 +44,13 @@ public:
     void pathMatches(const QString &match);
 
     void setLimit(int limit);
-    Q_REQUIRED_RESULT int limit() const;
+    [[nodiscard]] int limit() const;
 
     /**
      * Execute the query and return an iterator to fetch
      * the results
      */
-    Q_REQUIRED_RESULT ResultIterator exec() override;
+    [[nodiscard]] ResultIterator exec() override;
 
     /**
      * For testing

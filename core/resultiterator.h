@@ -53,11 +53,11 @@ public:
 
     bool next();
 
-    Q_REQUIRED_RESULT QByteArray id() const;
-    Q_REQUIRED_RESULT QUrl url() const;
+    [[nodiscard]] QByteArray id() const;
+    [[nodiscard]] QUrl url() const;
 
-    Q_REQUIRED_RESULT QString text() const;
-    Q_REQUIRED_RESULT QString icon() const;
+    [[nodiscard]] QString text() const;
+    [[nodiscard]] QString icon() const;
 
 private:
     QExplicitlySharedDataPointer<ResultIteratorPrivate> d;

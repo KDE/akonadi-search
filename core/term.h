@@ -58,7 +58,7 @@ public:
     Term(const Term &lhs, Operation op, const Term &rhs);
     ~Term();
 
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /**
      * Negate this term. Negation only applies for Equal or Contains
@@ -66,8 +66,8 @@ public:
      */
     void setNegation(bool isNegated);
 
-    Q_REQUIRED_RESULT bool negated() const;
-    Q_REQUIRED_RESULT bool isNegated() const;
+    [[nodiscard]] bool negated() const;
+    [[nodiscard]] bool isNegated() const;
 
     void addSubTerm(const Term &term);
     void setSubTerms(const QList<Term> &terms);
@@ -75,31 +75,31 @@ public:
     /**
      * Returns the first subTerm in the list of subTerms
      */
-    Q_REQUIRED_RESULT Term subTerm() const;
-    Q_REQUIRED_RESULT QList<Term> subTerms() const;
+    [[nodiscard]] Term subTerm() const;
+    [[nodiscard]] QList<Term> subTerms() const;
 
     void setOperation(Operation op);
-    Q_REQUIRED_RESULT Operation operation() const;
+    [[nodiscard]] Operation operation() const;
 
-    Q_REQUIRED_RESULT bool isEmpty() const;
-    Q_REQUIRED_RESULT bool empty() const;
+    [[nodiscard]] bool isEmpty() const;
+    [[nodiscard]] bool empty() const;
 
     /**
      * Return the property this term is targeting
      */
-    Q_REQUIRED_RESULT QString property() const;
+    [[nodiscard]] QString property() const;
     void setProperty(const QString &property);
 
-    Q_REQUIRED_RESULT QVariant value() const;
+    [[nodiscard]] QVariant value() const;
     void setValue(const QVariant &value);
 
-    Q_REQUIRED_RESULT Comparator comparator() const;
+    [[nodiscard]] Comparator comparator() const;
     void setComparator(Comparator c);
 
     void setUserData(const QString &name, const QVariant &value);
-    Q_REQUIRED_RESULT QVariant userData(const QString &name) const;
+    [[nodiscard]] QVariant userData(const QString &name) const;
 
-    Q_REQUIRED_RESULT QVariantMap toVariantMap() const;
+    [[nodiscard]] QVariantMap toVariantMap() const;
     static Term fromVariantMap(const QVariantMap &map);
 
     bool operator==(const Term &rhs) const;

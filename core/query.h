@@ -32,7 +32,7 @@ public:
     ~Query();
 
     void setTerm(const Term &t);
-    Q_REQUIRED_RESULT Term term() const;
+    [[nodiscard]] Term term() const;
 
     /**
      * Add a type to the results of the query.
@@ -52,7 +52,7 @@ public:
     void setType(const QString &type);
     void setTypes(const QStringList &types);
 
-    Q_REQUIRED_RESULT QStringList types() const;
+    [[nodiscard]] QStringList types() const;
 
     /**
      * Set some text which should be used to search for Items. This
@@ -62,17 +62,17 @@ public:
      * to give the best possible results.
      */
     void setSearchString(const QString &str);
-    Q_REQUIRED_RESULT QString searchString() const;
+    [[nodiscard]] QString searchString() const;
 
     /**
      * Only a maximum of \p limit results will be returned.
      * By default the limit is 100000.
      */
     void setLimit(uint limit);
-    Q_REQUIRED_RESULT uint limit() const;
+    [[nodiscard]] uint limit() const;
 
     void setOffset(uint offset);
-    Q_REQUIRED_RESULT uint offset() const;
+    [[nodiscard]] uint offset() const;
 
     /**
      * Filter the results in the specified date range.
@@ -81,9 +81,9 @@ public:
      */
     void setDateFilter(int year, int month = -1, int day = -1);
 
-    Q_REQUIRED_RESULT int yearFilter() const;
-    Q_REQUIRED_RESULT int monthFilter() const;
-    Q_REQUIRED_RESULT int dayFilter() const;
+    [[nodiscard]] int yearFilter() const;
+    [[nodiscard]] int monthFilter() const;
+    [[nodiscard]] int dayFilter() const;
 
     enum SortingOption {
         /**
@@ -107,14 +107,14 @@ public:
     };
 
     void setSortingOption(SortingOption option);
-    Q_REQUIRED_RESULT SortingOption sortingOption() const;
+    [[nodiscard]] SortingOption sortingOption() const;
 
     /**
      * Sets the property that should be used for sorting. This automatically
      * set the sorting mechanism to SortProperty
      */
     void setSortingProperty(const QString &property);
-    Q_REQUIRED_RESULT QString sortingProperty() const;
+    [[nodiscard]] QString sortingProperty() const;
 
     /**
      * Adds a custom option which any search backend could use
@@ -126,14 +126,14 @@ public:
     void addCustomOption(const QString &option, const QVariant &value);
     void removeCustomOption(const QString &option);
     QVariant customOption(const QString &option) const;
-    Q_REQUIRED_RESULT QVariantMap customOptions() const;
+    [[nodiscard]] QVariantMap customOptions() const;
 
-    Q_REQUIRED_RESULT ResultIterator exec();
+    [[nodiscard]] ResultIterator exec();
 
-    Q_REQUIRED_RESULT QByteArray toJSON() const;
+    [[nodiscard]] QByteArray toJSON() const;
     static Query fromJSON(const QByteArray &arr);
 
-    Q_REQUIRED_RESULT QUrl toSearchUrl(const QString &title = QString());
+    [[nodiscard]] QUrl toSearchUrl(const QString &title = QString());
     static Query fromSearchUrl(const QUrl &url);
     static QString titleFromQueryUrl(const QUrl &url);
 

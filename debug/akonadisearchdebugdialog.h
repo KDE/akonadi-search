@@ -37,7 +37,7 @@ private:
     AKONADI_SEARCH_DEBUG_NO_EXPORT void readConfig();
     AKONADI_SEARCH_DEBUG_NO_EXPORT void writeConfig();
     AKONADI_SEARCH_DEBUG_NO_EXPORT void saveTextAs(const QString &text, const QString &filter);
-    Q_REQUIRED_RESULT bool saveToFile(const QString &filename, const QString &text);
+    [[nodiscard]] bool saveToFile(const QString &filename, const QString &text);
     AkonadiSearchDebugDialogPrivate *const d;
 };
 }

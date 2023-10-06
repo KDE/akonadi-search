@@ -16,7 +16,7 @@ public:
     explicit ContactIndexer(const QString &path);
     ~ContactIndexer() override;
 
-    Q_REQUIRED_RESULT QStringList mimeTypes() const override;
+    [[nodiscard]] QStringList mimeTypes() const override;
 
     void index(const Akonadi::Item &item) override;
     void remove(const Akonadi::Item &item) override;
@@ -27,7 +27,7 @@ public:
     void move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from, Akonadi::Collection::Id to) override;
 
 private:
-    Q_REQUIRED_RESULT bool indexContact(const Akonadi::Item &item);
+    [[nodiscard]] bool indexContact(const Akonadi::Item &item);
     void indexContactGroup(const Akonadi::Item &item);
 
     Akonadi::Search::XapianDatabase *m_db = nullptr;

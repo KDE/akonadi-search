@@ -30,9 +30,9 @@ public:
     };
     ~AkonadiSearchDebugSearchPathComboBox() override;
 
-    Q_REQUIRED_RESULT QString searchPath() const;
+    [[nodiscard]] QString searchPath() const;
 
-    Q_REQUIRED_RESULT QString pathFromEnum(SearchType type) const;
+    [[nodiscard]] QString pathFromEnum(SearchType type) const;
     void setSearchType(SearchType type);
 
 private:

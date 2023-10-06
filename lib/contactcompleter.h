@@ -24,7 +24,7 @@ class AKONADI_SEARCH_PIM_EXPORT ContactCompleter
 public:
     explicit ContactCompleter(const QString &prefix, int limit = 10);
 
-    Q_REQUIRED_RESULT QStringList complete();
+    [[nodiscard]] QStringList complete();
 
 private:
     const QString m_prefix;

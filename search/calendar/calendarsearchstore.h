@@ -24,7 +24,7 @@ class CalendarSearchStore : public PIMSearchStore
 public:
     explicit CalendarSearchStore(QObject *parent = nullptr);
 
-    Q_REQUIRED_RESULT QStringList types() override;
+    [[nodiscard]] QStringList types() override;
 };
 }
 }

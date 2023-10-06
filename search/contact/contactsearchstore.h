@@ -24,7 +24,7 @@ class ContactSearchStore : public PIMSearchStore
 public:
     explicit ContactSearchStore(QObject *parent = nullptr);
 
-    Q_REQUIRED_RESULT QStringList types() override;
+    [[nodiscard]] QStringList types() override;
 };
 }
 }

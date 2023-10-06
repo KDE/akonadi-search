@@ -23,18 +23,18 @@ class Akonadi::Search::PIM::IndexedItemsPrivate
 public:
     IndexedItemsPrivate() = default;
 
-    Q_REQUIRED_RESULT QString dbPath(const QString &dbName) const;
-    Q_REQUIRED_RESULT QString emailIndexingPath() const;
-    Q_REQUIRED_RESULT QString collectionIndexingPath() const;
-    Q_REQUIRED_RESULT QString calendarIndexingPath() const;
-    Q_REQUIRED_RESULT QString akonotesIndexingPath() const;
-    Q_REQUIRED_RESULT QString emailContactsIndexingPath() const;
-    Q_REQUIRED_RESULT QString contactIndexingPath() const;
+    [[nodiscard]] QString dbPath(const QString &dbName) const;
+    [[nodiscard]] QString emailIndexingPath() const;
+    [[nodiscard]] QString collectionIndexingPath() const;
+    [[nodiscard]] QString calendarIndexingPath() const;
+    [[nodiscard]] QString akonotesIndexingPath() const;
+    [[nodiscard]] QString emailContactsIndexingPath() const;
+    [[nodiscard]] QString contactIndexingPath() const;
 
     mutable QHash<QString, QString> m_cachePath;
     QString m_overridePrefixPath;
-    Q_REQUIRED_RESULT qlonglong indexedItems(const qlonglong id);
-    Q_REQUIRED_RESULT qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
+    [[nodiscard]] qlonglong indexedItems(const qlonglong id);
+    [[nodiscard]] qlonglong indexedItemsInDatabase(const std::string &term, const QString &dbPath) const;
     void findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId, const QString &dbPath);
     void findIndexed(QSet<Akonadi::Item::Id> &indexed, Akonadi::Collection::Id collectionId);
 };
