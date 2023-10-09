@@ -1,57 +1,57 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2014, 2017, 2023.
+# translation of akonadi_search.pot to esperanto
+# Copyright (C) 2022 Free Software Foundation, Inc.
+# This file is distributed under the same license as the akonadi-search package.
+# Oliver Kellogg <okellogg@users.sourceforge.net, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2023-10-08 22:22+0200\n"
-"Last-Translator: Shinjo Park <kde@peremen.name>\n"
-"Language-Team: Korean <kde-kr@kde.org>\n"
-"Language: ko\n"
+"PO-Revision-Date: 2023-10-08 22:39+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "박신조"
+msgstr "Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "kde@peremen.name"
+msgstr "okellogg@users.sourceforge.net"
 
 #: agent/agent.cpp:62
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
-msgstr "색인 도구를 찾을 수 없음"
+msgstr "Neniuj indeksiloj disponeblaj"
 
 #: agent/collectionindexingjob.cpp:62
 #, kde-format
 msgid "Indexing collection: %1"
-msgstr "모음집 색인 중: %1"
+msgstr "Indeksante kolekton: %1"
 
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi HTML To Text"
-msgstr "Akonadi HTML To Text"
+msgstr "Akonadi HTML Al Teksto"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr "Akonadi HTML To Text 변환기"
+msgstr "Akonadi HTML-al-Teksta Konvertilo"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr "© 2023 KDE Community"
+msgstr "© 2023 KDE-Komunumo"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
@@ -61,22 +61,22 @@ msgstr "Carl Schwan"
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr "관리자"
+msgstr "Prizorganto"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
-msgstr "준비"
+msgstr "Preta"
 
 #: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
-msgstr "모음집 \"%1\"을(를) 색인에 추가함"
+msgstr "Indeksis kolekton \"%1\""
 
 #: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
-msgstr "텍스트 파일 (*.txt);;모든 파일 (*)"
+msgstr "Tekstdosieroj (*.txt);;Ĉiuj Dosieroj (*)"
 
 #: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
@@ -84,33 +84,34 @@ msgid ""
 "Could not write the file %1:\n"
 "\"%2\" is the detailed error description."
 msgstr ""
-"파일 %1에 쓸 수 없습니다:\n"
-"자세한 오류 설명은 \"%2\"입니다."
+"Ne eblis skribi al la dosiero%1:\n"
+"\"%2\" estas la detala erarpriskribo."
 
 #: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
-msgstr "파일 저장 오류"
+msgstr "Dosierkonservada Eraro"
 
 #: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
 #, kde-format
 msgid "Contacts"
-msgstr "연락처"
+msgstr "Kontaktoj"
 
 #: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
 #: runner/pimcontactsrunner.cpp:239
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
-msgstr "%1(%2)"
+msgstr "%1 (%2)"
 
 #: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
-msgstr "보내고 받은 메일에서 자동으로 완성됨"
+msgstr "Aŭtomate kompletigita el ricevitaj kaj senditaj retpoŝtoj"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
-msgstr "보내고 받은 메일에서 색인에 추가한 연락처에서도 검색"
+msgstr ""
+"Serĉi ankaŭ en kontaktoj indeksitaj el ricevitaj kaj senditaj retpoŝtoj"
