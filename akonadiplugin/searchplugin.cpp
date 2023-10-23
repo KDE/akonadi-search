@@ -110,49 +110,49 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             return getTerm(term, QStringLiteral("bcc"));
         case Akonadi::EmailSearchTerm::MessageStatus: {
             const QString value = term.value().toString();
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Flagged)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Flagged)) {
                 return Term(QStringLiteral("isimportant"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::ToAct)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::ToAct)) {
                 return Term(QStringLiteral("istoact"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Watched)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Watched)) {
                 return Term(QStringLiteral("iswatched"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Deleted)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Deleted)) {
                 return Term(QStringLiteral("isdeleted"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Spam)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Spam)) {
                 return Term(QStringLiteral("isspam"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Replied)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Replied)) {
                 return Term(QStringLiteral("isreplied"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Ignored)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Ignored)) {
                 return Term(QStringLiteral("isignored"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Forwarded)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Forwarded)) {
                 return Term(QStringLiteral("isforwarded"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Sent)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Sent)) {
                 return Term(QStringLiteral("issent"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Queued)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Queued)) {
                 return Term(QStringLiteral("isqueued"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Ham)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Ham)) {
                 return Term(QStringLiteral("isham"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Seen)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Seen)) {
                 return Term(QStringLiteral("isread"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::HasAttachment)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::HasAttachment)) {
                 return Term(QStringLiteral("hasattachment"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::Encrypted)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::Encrypted)) {
                 return Term(QStringLiteral("isencrypted"), !term.isNegated());
             }
-            if (value == QString::fromLatin1(Akonadi::MessageFlags::HasInvitation)) {
+            if (value == QLatin1StringView(Akonadi::MessageFlags::HasInvitation)) {
                 return Term(QStringLiteral("hasinvitation"), !term.isNegated());
             }
             break;
