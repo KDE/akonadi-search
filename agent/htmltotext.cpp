@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 {
     QCoreApplication app(argc, argv);
 
-    KLocalizedString::setApplicationDomain("akonadi_search");
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("akonadi_search"));
 
     KAboutData about(QStringLiteral("akonadi_html_to_text"),
                      i18n("Akonadi HTML To Text"),
