@@ -2,7 +2,7 @@
 // SPDX-Contributor: Carl Schwan <carl.schwan@gnupg.com>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-#include <QCoreApplication>
+#include <QGuiApplication>
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -22,7 +22,7 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
     KLocalizedString::setApplicationDomain("akonadi_search");
 
