@@ -2,7 +2,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Andrej Mernik <andrejm@ubuntu.si>, 2015, 2016, 2017.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"

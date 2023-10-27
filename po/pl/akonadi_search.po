@@ -114,4 +114,5 @@ msgstr "Uzupełnione z odebranych i wysłanych wiadomości"
 #: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
-msgstr "Wyszukuj w kontaktach spisanych z wysłanych i odebranych wiadomości"
+msgstr ""
+"Wyszukuj w kontaktach zainteksowanych z wysłanych i odebranych wiadomości"

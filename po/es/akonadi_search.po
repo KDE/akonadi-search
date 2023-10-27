@@ -111,10 +111,10 @@ msgstr "%1 (%2)"
 #: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
-msgstr "Completado automáticamente desde mensajes recibidos y enviados"
+msgstr "Autocompletado desde correos recibidos y enviados"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr ""
-"Búsqueda en contactos indexada también desde mensajes enviados y recibidos"
+"Búsqueda en contactos indexada también desde correos enviados y recibidos"
