@@ -48,7 +48,7 @@ Scheduler::Scheduler(Index &index, const KSharedConfigPtr &config, const QShared
     m_processTimer.setInterval(100ms);
     connect(&m_processTimer, &QTimer::timeout, this, &Scheduler::processNext);
 
-    KConfigGroup cfg = m_config->group(QLatin1String("General"));
+    KConfigGroup cfg = m_config->group(QStringLiteral("General"));
     const auto dirtyCollectionsResult2 = cfg.readEntry("dirtyCollections", QList<Akonadi::Collection::Id>());
     m_dirtyCollections = QSet<Akonadi::Collection::Id>(dirtyCollectionsResult2.begin(), dirtyCollectionsResult2.end());
 
@@ -84,7 +84,7 @@ int Scheduler::numberOfCollectionQueued() const
 
 void Scheduler::collectDirtyCollections()
 {
-    KConfigGroup cfg = m_config->group(QLatin1String("General"));
+    KConfigGroup cfg = m_config->group(QStringLiteral("General"));
     // Store collections where we did not manage to index all, we'll need to do a full sync for them the next time
     QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>>::ConstIterator it = m_queues.constBegin();
     QHash<Akonadi::Collection::Id, QQueue<Akonadi::Item::Id>>::ConstIterator end = m_queues.constEnd();

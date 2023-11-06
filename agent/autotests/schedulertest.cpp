@@ -103,7 +103,7 @@ private Q_SLOTS:
     void testIndexCollections()
     {
         auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
-        KConfigGroup group = config->group(QLatin1String("General"));
+        KConfigGroup group = config->group(QStringLiteral("General"));
         group.writeEntry("initialIndexingComplete", true);
 
         Index index;
@@ -132,7 +132,7 @@ private Q_SLOTS:
     void testIndexItems()
     {
         auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
-        KConfigGroup group = config->group(QLatin1String("General"));
+        KConfigGroup group = config->group(QStringLiteral("General"));
         group.writeEntry("initialIndexingComplete", true);
 
         Index index;
@@ -171,7 +171,7 @@ private Q_SLOTS:
     void testDirtyCollections()
     {
         auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
-        KConfigGroup group = config->group(QLatin1String("General"));
+        KConfigGroup group = config->group(QStringLiteral("General"));
         group.writeEntry("initialIndexingComplete", true);
         Akonadi::Collection col1(1);
 
