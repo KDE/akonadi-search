@@ -65,14 +65,14 @@ void AkonadiSearchDebugDialog::readConfig()
 {
     create(); // ensure a window is created
     windowHandle()->resize(QSize(800, 600));
-    KConfigGroup group(KSharedConfig::openStateConfig(), myAkonadiSearchDebugDialogConfigGroupName);
+    KConfigGroup group(KSharedConfig::openStateConfig(), QLatin1String(myAkonadiSearchDebugDialogConfigGroupName));
     KWindowConfig::restoreWindowSize(windowHandle(), group);
     resize(windowHandle()->size()); // workaround for QTBUG-40584
 }
 
 void AkonadiSearchDebugDialog::writeConfig()
 {
-    KConfigGroup group(KSharedConfig::openStateConfig(), myAkonadiSearchDebugDialogConfigGroupName);
+    KConfigGroup group(KSharedConfig::openStateConfig(), QLatin1String(myAkonadiSearchDebugDialogConfigGroupName));
     KWindowConfig::saveWindowSize(windowHandle(), group);
     group.sync();
 }
