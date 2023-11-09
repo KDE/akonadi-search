@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-28 02:28+0000\n"
-"PO-Revision-Date: 2023-10-05 18:07-0300\n"
+"PO-Revision-Date: 2023-11-08 15:33-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -43,12 +43,12 @@ msgstr "Indexando a coleção: %1"
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi Html To Test"
-msgstr ""
+msgstr "Akonadi HTML para teste"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi Html To Test Converter"
-msgstr ""
+msgstr "Akonadi conversor HTML para teste"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
