@@ -146,16 +146,16 @@ void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &que
 
         // We got perfect match by name
         if (name == queryString) {
-            match.setType(QueryMatch::ExactMatch);
+            match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
 
             // We got perfect match by one of the email addresses
         } else if (emails.contains(queryString)) {
-            match.setType(QueryMatch::ExactMatch);
+            match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
             matchedEmail = queryString;
 
             // We got partial match either by name, or email
         } else {
-            match.setType(QueryMatch::PossibleMatch);
+            match.setCategoryRelevance(QueryMatch::CategoryRelevance::Low);
 
             // See if the match was by one of the email addresses
             for (const QString &email : emails) {
@@ -220,9 +220,9 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
         match.setSubtext(i18n("Autocompleted from received and sent emails"));
         match.setIcon(QIcon::fromTheme(QStringLiteral("user-identity")));
         if (result == queryString) {
-            match.setType(QueryMatch::ExactMatch);
+            match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
         } else {
-            match.setType(QueryMatch::PossibleMatch);
+            match.setCategoryRelevance(QueryMatch::CategoryRelevance::Low);
         }
 
         QString name;
