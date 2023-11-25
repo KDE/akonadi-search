@@ -37,7 +37,7 @@ Q_DECLARE_METATYPE(KContacts::Addressee *)
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    setObjectName(QStringLiteral("PIMContactsRunner"));
+    setObjectName(QLatin1StringView("PIMContactsRunner"));
     // reloadConfiguration() called by default init() implementation
 }
 

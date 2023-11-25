@@ -49,7 +49,7 @@ AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
     connect(user1Button, &QPushButton::clicked, this, &AkonadiSearchDebugDialog::slotSaveAs);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &AkonadiSearchDebugDialog::reject);
     d->mAkonadiSearchDebugWidget = new AkonadiSearchDebugWidget(this);
-    d->mAkonadiSearchDebugWidget->setObjectName(QStringLiteral("akonadisearchdebugwidget"));
+    d->mAkonadiSearchDebugWidget->setObjectName(QLatin1StringView("akonadisearchdebugwidget"));
     mainLayout->addWidget(d->mAkonadiSearchDebugWidget);
     mainLayout->addWidget(buttonBox);
     readConfig();
