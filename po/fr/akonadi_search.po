@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Geoffray Levasseur <geoffray.levasseurbrandin@numericable.fr>, 2014.
 # Vincent Pinon <vpinon@kde.org>, 2017.
-# SPDX-FileCopyrightText: 2023 Xavier BESNARD <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2023 Xavier Besnard <xavier.besnard@kde.org>
 #
 msgid ""
 msgstr ""
