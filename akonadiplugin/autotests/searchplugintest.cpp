@@ -112,7 +112,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body2");
-            msg->addContent(b, true);
+            msg->prependContent(b);
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -136,7 +136,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body3");
-            msg->addContent(b, true);
+            msg->prependContent(b);
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -160,7 +160,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body4");
-            msg->addContent(b, true);
+            msg->prependContent(b);
 
             msg->from()->addAddress("john_blue@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -193,7 +193,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("tags");
-            msg->addContent(b, true);
+            msg->prependContent(b);
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -227,7 +227,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body5");
-            msg->addContent(b, true);
+            msg->prependContent(b);
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -325,7 +325,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body note");
-            msg->addContent(b, true);
+            msg->prependContent(b);
             msg->assemble();
 
             Akonadi::Item item(QStringLiteral("text/x-vnd.akonadi.note"));
@@ -344,7 +344,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("note");
-            msg->addContent(b, true);
+            msg->prependContent(b);
             msg->assemble();
 
             Akonadi::Item item(QStringLiteral("text/x-vnd.akonadi.note"));
@@ -363,7 +363,7 @@ private Q_SLOTS:
             auto b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("note3");
-            msg->addContent(b, true);
+            msg->prependContent(b);
             msg->assemble();
 
             Akonadi::Item item(QStringLiteral("text/x-vnd.akonadi.note"));
