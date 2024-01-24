@@ -106,6 +106,7 @@ private Q_SLOTS:
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
+            msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("subject2");
 
             // Multipart message
@@ -130,6 +131,7 @@ private Q_SLOTS:
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
+            msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("subject3");
 
             // Multipart message
@@ -154,6 +156,7 @@ private Q_SLOTS:
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
+            msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("subject4");
 
             // Multipart message
@@ -187,6 +190,7 @@ private Q_SLOTS:
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
+            msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("all tags");
 
             // Multipart message
@@ -222,6 +226,7 @@ private Q_SLOTS:
         {
             KMime::Message::Ptr msg(new KMime::Message);
             msg->subject()->from7BitString("Change in qt/qtx11extras[stable]: remove QtWidgets dependency");
+            msg->contentType()->setMimeType("multipart/mixed");
 
             // Multipart message
             auto b = new KMime::Content;
@@ -319,6 +324,7 @@ private Q_SLOTS:
         // Note item
         {
             KMime::Message::Ptr msg(new KMime::Message);
+            msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("note");
 
             // Multipart message
@@ -338,6 +344,7 @@ private Q_SLOTS:
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
+            msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("note2");
 
             // Multipart message
@@ -357,6 +364,7 @@ private Q_SLOTS:
         }
         {
             KMime::Message::Ptr msg(new KMime::Message);
+            msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("note3");
 
             // Multipart message
