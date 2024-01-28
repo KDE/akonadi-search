@@ -29,6 +29,7 @@ include(ECMInstallIcons)
 include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
+include(ECMFeatureSummary)
 include(ECMAddQch)
 
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
@@ -169,7 +170,7 @@ ecm_qt_install_logging_categories(
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 ki18n_install(po)
-feature_summary(WHAT ALL
+ecm_feature_summary(WHAT ALL
     INCLUDE_QUIET_PACKAGES
     FATAL_ON_MISSING_REQUIRED_PACKAGES
 )
