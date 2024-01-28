@@ -90,7 +90,7 @@ void App::slotRootCollectionsFetched(KJob *kjob)
         }
     }
 
-    if (m_collections.size()) {
+    if (!m_collections.isEmpty()) {
         indexNextCollection();
     } else {
         qDebug() << "No collections to index";
