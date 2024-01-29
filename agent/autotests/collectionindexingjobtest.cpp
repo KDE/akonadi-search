@@ -94,7 +94,7 @@ private Q_SLOTS:
         fetchJob->exec();
         const Akonadi::Collection::List lstCols = fetchJob->collections();
         for (const Akonadi::Collection &col : lstCols) {
-            if (col.name() == QLatin1String("foo")) {
+            if (col.name() == QLatin1StringView("foo")) {
                 itemCollection = col;
             }
         }

@@ -60,11 +60,11 @@ private:
 private Q_SLOTS:
     void initTestCase()
     {
-        emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/email/");
-        emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
-        contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/contacts/");
-        noteDir = QDir::tempPath() + QLatin1String("/searchplugintest/notes/");
-        calendarDir = QDir::tempPath() + QLatin1String("/searchplugintest/calendar/");
+        emailDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/email/");
+        emailContactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/emailcontacts/");
+        contactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/contacts/");
+        noteDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/notes/");
+        calendarDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/calendar/");
 
         QDir dir;
         QVERIFY(QDir(QDir::tempPath() + QStringLiteral("/searchplugintest")).removeRecursively());

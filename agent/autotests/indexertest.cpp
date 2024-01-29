@@ -23,7 +23,7 @@ Q_DECLARE_METATYPE(QList<qint64>)
 
 KMime::Message::Ptr readMailFromFile(const QString &mailFile)
 {
-    QFile file(QLatin1String(MAIL_DATA_DIR) + QLatin1Char('/') + mailFile);
+    QFile file(QLatin1StringView(MAIL_DATA_DIR) + QLatin1Char('/') + mailFile);
     file.open(QIODevice::ReadOnly);
     Q_ASSERT(file.isOpen());
     auto mailData = KMime::CRLFtoLF(file.readAll());
@@ -69,9 +69,9 @@ private:
 private Q_SLOTS:
     void init()
     {
-        emailDir = QDir::tempPath() + QLatin1String("/searchplugintest/email/");
-        emailContactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/emailcontacts/");
-        contactsDir = QDir::tempPath() + QLatin1String("/searchplugintest/contacts/");
+        emailDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/email/");
+        emailContactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/emailcontacts/");
+        contactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/contacts/");
         notesDir = QDir::tempPath() + QStringLiteral("/searchplugintest/notes/");
         calendarsDir = QDir::tempPath() + QStringLiteral("/searchplugintest/calendars/");
 

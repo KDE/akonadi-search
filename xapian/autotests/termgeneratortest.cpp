@@ -84,7 +84,7 @@ void TermGeneratorTest::testUnicodeCompatibleComposition()
 {
     // The 0xfb00 corresponds to U+FB00 which is a 'ff'
     QString str = QStringLiteral("maffab");
-    QString str2 = QLatin1String("ma") + QChar(0xfb00) + QStringLiteral("ab");
+    QString str2 = QLatin1StringView("ma") + QChar(0xfb00) + QStringLiteral("ab");
 
     Xapian::Document doc;
     XapianTermGenerator termGen(&doc);

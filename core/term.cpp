@@ -335,15 +335,15 @@ Term Term::fromVariantMap(const QVariantMap &map)
 
         QString op = map.cbegin().key();
         Term::Comparator com;
-        if (op == QLatin1String("$ct")) {
+        if (op == QLatin1StringView("$ct")) {
             com = Contains;
-        } else if (op == QLatin1String("$gt")) {
+        } else if (op == QLatin1StringView("$gt")) {
             com = Greater;
-        } else if (op == QLatin1String("$gte")) {
+        } else if (op == QLatin1StringView("$gte")) {
             com = GreaterEqual;
-        } else if (op == QLatin1String("$lt")) {
+        } else if (op == QLatin1StringView("$lt")) {
             com = Less;
-        } else if (op == QLatin1String("$lte")) {
+        } else if (op == QLatin1StringView("$lte")) {
             com = LessEqual;
         } else {
             return term;

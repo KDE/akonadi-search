@@ -34,7 +34,7 @@ Query *Query::fromJSON(const QByteArray &json)
 
     const QVariantMap result = doc.toVariant().toMap();
     const QString type = result[QStringLiteral("type")].toString().toLower();
-    if (type != QLatin1String("contact")) {
+    if (type != QLatin1StringView("contact")) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Can only handle contact queries";
         return nullptr;
     }
@@ -47,9 +47,9 @@ Query *Query::fromJSON(const QByteArray &json)
     cq->match(result[QStringLiteral("$")].toString());
 
     const QString criteria = result[QStringLiteral("matchCriteria")].toString().toLower();
-    if (criteria == QLatin1String("exact")) {
+    if (criteria == QLatin1StringView("exact")) {
         cq->setMatchCriteria(ContactQuery::ExactMatch);
-    } else if (criteria == QLatin1String("startswith")) {
+    } else if (criteria == QLatin1StringView("startswith")) {
         cq->setMatchCriteria(ContactQuery::StartsWithMatch);
     }
 

@@ -351,7 +351,7 @@ QUrl Query::toSearchUrl(const QString &title)
 
 Query Query::fromSearchUrl(const QUrl &url)
 {
-    if (url.scheme() != QLatin1String("akonadisearch")) {
+    if (url.scheme() != QLatin1StringView("akonadisearch")) {
         return {};
     }
 

@@ -102,7 +102,7 @@ SearchStore::List SearchStore::searchStores()
         QPluginLoader loader(pluginPath);
 
         const QVariantMap metadata = loader.metaData().toVariantMap()[QStringLiteral("MetaData")].toMap();
-        if (metadata[QStringLiteral("X-Akonadi-PluginType")].toString() != QLatin1String("SearchStore")) {
+        if (metadata[QStringLiteral("X-Akonadi-PluginType")].toString() != QLatin1StringView("SearchStore")) {
             continue;
         }
         if (!loader.load()) {
