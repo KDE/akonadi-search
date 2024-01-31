@@ -10,13 +10,13 @@
 #include <QDir>
 #include <QTest>
 
+#include "../search/calendar/calendarsearchstore.h"
+#include "../search/contact/contactsearchstore.h"
+#include "../search/email/emailsearchstore.h"
 #include "calendarindexer.h"
 #include "contactindexer.h"
 #include "emailindexer.h"
-#include <../search/calendar/calendarsearchstore.h>
-#include <../search/contact/contactsearchstore.h>
-#include <../search/email/emailsearchstore.h>
-#include <query.h>
+#include "query.h"
 
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)

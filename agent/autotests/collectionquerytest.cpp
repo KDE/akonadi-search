@@ -10,11 +10,11 @@
 #include <QDir>
 #include <QTest>
 
-#include <../lib/collectionquery.h>
-#include <../lib/resultiterator.h>
+#include "../lib/collectionquery.h"
+#include "../lib/resultiterator.h"
+#include "index.h"
+#include "query.h"
 #include <QDebug>
-#include <index.h>
-#include <query.h>
 
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)

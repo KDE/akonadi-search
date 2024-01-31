@@ -5,8 +5,8 @@
  * SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
  *
  */
-#include <collectionindexingjob.h>
-#include <scheduler.h>
+#include "scheduler.h"
+#include "collectionindexingjob.h"
 
 #include <Akonadi/Collection>
 #include <Akonadi/ServerManager>

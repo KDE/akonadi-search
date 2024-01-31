@@ -12,15 +12,15 @@
 #include <QDir>
 #include <QTest>
 
+#include "../agent/akonotesindexer.h"
+#include "../agent/calendarindexer.h"
+#include "../agent/contactindexer.h"
+#include "../agent/emailindexer.h"
+#include "../search/calendar/calendarsearchstore.h"
+#include "../search/contact/contactsearchstore.h"
+#include "../search/email/emailsearchstore.h"
+#include "../search/note/notesearchstore.h"
 #include "searchplugin.h"
-#include <../agent/akonotesindexer.h>
-#include <../agent/calendarindexer.h>
-#include <../agent/contactindexer.h>
-#include <../agent/emailindexer.h>
-#include <../search/calendar/calendarsearchstore.h>
-#include <../search/contact/contactsearchstore.h>
-#include <../search/email/emailsearchstore.h>
-#include <../search/note/notesearchstore.h>
 #include <Akonadi/MessageFlags>
 #include <Akonadi/SearchQuery>
 
