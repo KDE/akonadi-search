@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2015-08-30 15:56+0200\n"
+"PO-Revision-Date: 2024-02-07 01:04+0200\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Moo"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "<>"
 
 #: agent/agent.cpp:62
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
-msgstr "Nėra pasiekiamų indeksavimo programų"
+msgstr "Nėra pasiekiamų indeksatorių"
 
 #: agent/collectionindexingjob.cpp:62
 #, kde-format
@@ -44,42 +44,42 @@ msgstr "Indeksuojamas rinkinys: %1"
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi HTML To Text"
-msgstr ""
+msgstr "Akonadi HTML į tekstą"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr ""
+msgstr "Akonadi HTML į tekstą keitiklis"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© 2023 KDE bendruomenė"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "Prižiūrėtojas"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
-msgstr "Pasiruošęs"
+msgstr "Pasiruošę"
 
 #: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
-msgstr ""
+msgstr "Rinkinys „%1“ indeksuotas"
 
 #: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
-msgstr ""
+msgstr "Tekstiniai failai (*.txt);;Visi failai (*)"
 
 #: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
@@ -87,31 +87,35 @@ msgid ""
 "Could not write the file %1:\n"
 "\"%2\" is the detailed error description."
 msgstr ""
+"Nepavyko rašyti į failą %1:\n"
+"„%2“ yra išsamus klaidos aprašas."
 
 #: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
-msgstr ""
+msgstr "Failo įrašymo klaida"
 
 #: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
 #, kde-format
 msgid "Contacts"
-msgstr ""
+msgstr "Adresatai"
 
 #: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
 #: runner/pimcontactsrunner.cpp:239
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
-msgstr ""
+msgstr "Automatiškai užbaigiama iš gautų ir išsiųstų el. laiškų"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr ""
+"Ieškoti taip pat ir adresatuose, kurie indeksuoti išsiųstuose ir gautuose "
+"el. laiškuose"
