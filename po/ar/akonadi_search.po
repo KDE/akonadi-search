@@ -2,31 +2,32 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2016, 2018.
+# SPDX-FileCopyrightText: 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-29 01:39+0000\n"
-"PO-Revision-Date: 2018-01-23 16:00+0300\n"
-"Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
-"Language-Team: Arabic <doc@arabeyes.org>\n"
+"PO-Revision-Date: 2024-02-10 22:06+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "زايد السعيدي"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "zayed.alsaidi@gmail.com"
 
 #: agent/agent.cpp:62
 #, kde-format
@@ -42,27 +43,27 @@ msgstr "يفهرس التّجميعة: %1"
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi HTML To Text"
-msgstr ""
+msgstr "أكوندا HTML إلى نص"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr ""
+msgstr "محول أكوندا HTML إلى نص"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr ""
+msgstr "© 2023 مجتمع كِيدِي"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr ""
+msgstr "كارل شوان"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "المصين"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
@@ -89,8 +90,7 @@ msgstr ""
 "وصف الخطأ المفصّل هو ”%2“."
 
 #: debug/akonadisearchdebugdialog.cpp:113
-#, fuzzy, kde-format
-#| msgid "Save File Error"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "خطأ في حفظ الملفّ"
