@@ -17,8 +17,8 @@ endif()
 
 target_link_libraries(akonadi_html_to_text
 PRIVATE
-    Qt6::Core
-    Qt6::Gui
+    Qt::Core
+    Qt::Gui
     KF6::CoreAddons
     KF6::I18n
 )
