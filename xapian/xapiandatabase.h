@@ -43,7 +43,7 @@ public:
      */
     void commit();
 
-    XapianDocument document(uint id);
+    [[nodiscard]] XapianDocument document(uint id);
 
     /**
      * A pointer to the actual db. Only use this when doing queries
@@ -74,7 +74,7 @@ private:
     std::string m_path;
     const bool m_writeOnly = false;
 
-    Xapian::WritableDatabase createWritableDb();
+    AKONADI_SEARCH_XAPIAN_NO_EXPORT Xapian::WritableDatabase createWritableDb();
 };
 }
 }

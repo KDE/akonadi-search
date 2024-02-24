@@ -41,7 +41,7 @@ public:
      * Set the path of the xapian database
      */
     virtual void setDbPath(const QString &path);
-    virtual QString dbPath();
+    [[nodiscard]] virtual QString dbPath();
 
 protected:
     /**
@@ -93,10 +93,10 @@ protected:
     QRecursiveMutex m_mutex;
 
 private:
-    Xapian::Query toXapianQuery(const Term &term);
-    Xapian::Query toXapianQuery(Xapian::Query::op op, const QList<Term> &terms);
+    [[nodiscard]] AKONADI_SEARCH_XAPIAN_NO_EXPORT Xapian::Query toXapianQuery(const Term &term);
+    [[nodiscard]] AKONADI_SEARCH_XAPIAN_NO_EXPORT Xapian::Query toXapianQuery(Xapian::Query::op op, const QList<Term> &terms);
 
-    Xapian::Query constructSearchQuery(const QString &str);
+    [[nodiscard]] AKONADI_SEARCH_XAPIAN_NO_EXPORT Xapian::Query constructSearchQuery(const QString &str);
 
     struct Result {
         Xapian::MSet mset;

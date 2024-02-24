@@ -46,7 +46,7 @@ public:
     void setMatchCriteria(MatchCriteria m);
     [[nodiscard]] MatchCriteria matchCriteria() const;
 
-    ResultIterator exec() override;
+    [[nodiscard]] ResultIterator exec() override;
 
     [[nodiscard]] int limit() const;
     void setLimit(int limit);

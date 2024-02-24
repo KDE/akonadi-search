@@ -31,14 +31,12 @@ Q_SIGNALS:
     void status(int, const QString &);
     void percent(int);
 
-private Q_SLOTS:
+private:
     void slotOnCollectionFetched(KJob *);
     void slotPendingItemsReceived(const Akonadi::Item::List &items);
     void slotPendingIndexed(KJob *);
     void slotUnindexedItemsReceived(const Akonadi::Item::List &items);
     void slotFoundUnindexed(KJob *);
-
-private:
     void findUnindexed();
     void indexItems(const QList<Akonadi::Item::Id> &itemIds);
 

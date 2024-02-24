@@ -22,11 +22,9 @@ public:
 
     void start() override;
 
-private Q_SLOTS:
+private:
     void onCollectionsReceived(const Akonadi::Collection::List &);
     void onCollectionsFetched(KJob *);
-
-private:
     [[nodiscard]] bool shouldIndex(const Akonadi::Collection &col) const;
 
     const Akonadi::Collection mCol;

@@ -125,7 +125,7 @@ public:
      */
     void addCustomOption(const QString &option, const QVariant &value);
     void removeCustomOption(const QString &option);
-    QVariant customOption(const QString &option) const;
+    [[nodiscard]] QVariant customOption(const QString &option) const;
     [[nodiscard]] QVariantMap customOptions() const;
 
     [[nodiscard]] ResultIterator exec();

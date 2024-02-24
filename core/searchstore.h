@@ -57,12 +57,12 @@ public:
     virtual bool next(int queryId) = 0;
     virtual void close(int queryId) = 0;
 
-    virtual QByteArray id(int queryId) = 0;
+    [[nodiscard]] virtual QByteArray id(int queryId) = 0;
 
-    virtual QUrl url(int queryId);
-    virtual QString text(int queryId);
-    virtual QString icon(int queryId);
-    virtual QString property(int queryId, const QString &propName);
+    [[nodiscard]] virtual QUrl url(int queryId);
+    [[nodiscard]] virtual QString text(int queryId);
+    [[nodiscard]] virtual QString icon(int queryId);
+    [[nodiscard]] virtual QString property(int queryId, const QString &propName);
 };
 
 //

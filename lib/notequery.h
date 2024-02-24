@@ -37,7 +37,7 @@ public:
     void setLimit(int limit);
     [[nodiscard]] int limit() const;
 
-    ResultIterator exec() override;
+    [[nodiscard]] ResultIterator exec() override;
 
 private:
     std::unique_ptr<NoteQueryPrivate> const d;

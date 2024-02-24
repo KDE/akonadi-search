@@ -97,7 +97,7 @@ public:
      * Execute the query and return an iterator to fetch
      * the results
      */
-    ResultIterator exec() override;
+    [[nodiscard]] ResultIterator exec() override;
 
 private:
     //@cond PRIVATE

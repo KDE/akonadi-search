@@ -33,13 +33,11 @@ public:
 
     [[nodiscard]] QString plainText() const;
 
-private Q_SLOTS:
+private:
     AKONADI_SEARCH_DEBUG_NO_EXPORT void slotSearchLineTextChanged(const QString &text);
     AKONADI_SEARCH_DEBUG_NO_EXPORT void slotSearch();
     AKONADI_SEARCH_DEBUG_NO_EXPORT void slotResult(const QString &result);
     AKONADI_SEARCH_DEBUG_NO_EXPORT void slotError(const QString &errorStr);
-
-private:
     QPlainTextEdit *const mPlainTextEditor;
     AkonadiSearchDebugSearchPathComboBox *const mSearchPathComboBox;
     KLineEdit *const mLineEdit;

@@ -65,13 +65,11 @@ Q_SIGNALS:
 public Q_SLOTS:
     void scheduleCompleteSync();
 
-private Q_SLOTS:
+private:
     void processNext();
     void slotIndexingFinished(KJob *);
     void slotRootCollectionsFetched(KJob *);
     void slotCollectionsToIndexFetched(KJob *);
-
-private:
     void collectDirtyCollections();
 
     KSharedConfigPtr m_config;

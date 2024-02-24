@@ -23,12 +23,12 @@ public:
     XapianQueryParser();
 
     void setDatabase(Xapian::Database *db);
-    Xapian::Query parseQuery(const QString &str, const QString &prefix = QString());
+    [[nodiscard]] Xapian::Query parseQuery(const QString &str, const QString &prefix = QString());
 
     /**
      * Expands word to every possible option which it can be expanded to.
      */
-    Xapian::Query expandWord(const QString &word, const QString &prefix = QString());
+    [[nodiscard]] Xapian::Query expandWord(const QString &word, const QString &prefix = QString());
 
     /**
      * Set if each word in the string should be treated as a partial word

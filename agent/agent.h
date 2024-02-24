@@ -46,14 +46,12 @@ public:
     // Remove the entire db
     void cleanup() override;
 
-private Q_SLOTS:
-    void onAbortRequested();
-    void onOnlineChanged(bool online);
-
 Q_SIGNALS:
     void collectionIndexingFinished(const qlonglong id);
 
 private:
+    void onAbortRequested();
+    void onOnlineChanged(bool online);
     [[nodiscard]] bool shouldIndex(const Akonadi::Item &item) const;
     [[nodiscard]] bool shouldIndex(const Akonadi::Collection &collection) const;
 

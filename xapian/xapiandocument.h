@@ -36,16 +36,16 @@ public:
 
     void addValue(int pos, const QString &value);
 
-    Xapian::Document doc() const;
+    [[nodiscard]] Xapian::Document doc() const;
 
-    QString fetchTermStartsWith(const QByteArray &term);
+    [[nodiscard]] QString fetchTermStartsWith(const QByteArray &term);
 
     /**
      * Remove all the terms which start with the prefix \p prefix
      *
      * \return true if the document was modified
      */
-    bool removeTermStartsWith(const QByteArray &prefix);
+    [[nodiscard]] bool removeTermStartsWith(const QByteArray &prefix);
 
 private:
     Xapian::Document m_doc;

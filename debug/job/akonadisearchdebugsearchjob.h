@@ -30,11 +30,9 @@ Q_SIGNALS:
     void error(const QString &errorString);
     void result(const QString &text);
 
-private Q_SLOTS:
+private:
     void slotReadStandard();
     void slotReadError();
-
-private:
     QStringList mArguments;
     QString mAkonadiId;
     QString mPath;

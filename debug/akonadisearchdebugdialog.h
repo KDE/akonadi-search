@@ -30,10 +30,9 @@ public:
     void setAkonadiId(Akonadi::Item::Id akonadiId);
     void setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type);
     void doSearch();
-private Q_SLOTS:
-    AKONADI_SEARCH_DEBUG_NO_EXPORT void slotSaveAs();
 
 private:
+    AKONADI_SEARCH_DEBUG_NO_EXPORT void slotSaveAs();
     AKONADI_SEARCH_DEBUG_NO_EXPORT void readConfig();
     AKONADI_SEARCH_DEBUG_NO_EXPORT void writeConfig();
     AKONADI_SEARCH_DEBUG_NO_EXPORT void saveTextAs(const QString &text, const QString &filter);
