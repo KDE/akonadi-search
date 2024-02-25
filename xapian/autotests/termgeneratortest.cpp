@@ -30,7 +30,7 @@ QStringList allWords(const Xapian::Document &doc)
 }
 void TermGeneratorTest::testWordBoundaries()
 {
-    QString str = QStringLiteral("The quick (\"brown\") 'fox' can't jump 32.3 feet, right? No-Wrong;xx.txt");
+    const QString str = QStringLiteral("The quick (\"brown\") 'fox' can't jump 32.3 feet, right? No-Wrong;xx.txt");
 
     Xapian::Document doc;
     XapianTermGenerator termGen(&doc);
