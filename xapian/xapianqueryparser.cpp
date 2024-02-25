@@ -180,8 +180,8 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
             }
 
             str = cleanString.normalized(QString::NormalizationForm_KC);
-            const QStringList lst = str.split(QLatin1Char('_'), Qt::SkipEmptyParts);
-            for (const QString &t : lst) {
+            const QList<QStringView> lst = QStringView(str).split(QLatin1Char('_'), Qt::SkipEmptyParts);
+            for (const QStringView t : lst) {
                 const QString term = prefix + t;
 
                 position++;
