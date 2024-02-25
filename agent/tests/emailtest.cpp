@@ -84,7 +84,6 @@ void App::slotRootCollectionsFetched(KJob *kjob)
     QMutableListIterator<Akonadi::Collection> it(m_collections);
     while (it.hasNext()) {
         const Akonadi::Collection &c = it.next();
-        const QStringList mimeTypes = c.contentMimeTypes();
         if (!c.contentMimeTypes().contains(QLatin1StringView("message/rfc822"))) {
             it.remove();
         }
