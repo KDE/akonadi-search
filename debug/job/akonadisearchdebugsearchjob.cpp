@@ -38,7 +38,7 @@ void AkonadiSearchDebugSearchJob::start()
         QStringList arguments;
         arguments << QStringLiteral("-r") << mAkonadiId;
         arguments << mPath;
-        mProcess->start(delvePath, QStringList() << arguments);
+        mProcess->start(delvePath, arguments);
     }
 }
 
