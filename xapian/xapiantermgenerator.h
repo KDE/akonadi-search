@@ -30,7 +30,7 @@ public:
 
     void setDocument(Xapian::Document *doc);
 
-    static QStringList termList(const QString &text);
+    [[nodiscard]] static QStringList termList(const QString &text);
 
 private:
     Xapian::Document *m_doc = nullptr;

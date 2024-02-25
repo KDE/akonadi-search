@@ -30,7 +30,7 @@ public:
     explicit XapianSearchStore(QObject *parent = nullptr);
     ~XapianSearchStore() override;
 
-    int exec(const Query &query) override;
+    [[nodiscard]] int exec(const Query &query) override;
     void close(int queryId) override;
     bool next(int queryId) override;
 
