@@ -25,8 +25,8 @@ using namespace std::chrono_literals;
 using namespace Akonadi::Search::PIM;
 Index::Index(QObject *parent)
     : QObject(parent)
+    , m_indexedItems(new IndexedItems(this))
 {
-    m_indexedItems = new IndexedItems(this);
     m_commitTimer.setInterval(1s);
     m_commitTimer.setSingleShot(true);
     connect(&m_commitTimer, &QTimer::timeout, this, &Index::commit);

@@ -66,7 +66,7 @@ private:
 
     QList<std::shared_ptr<AbstractIndexer>> m_listIndexer;
     QHash<QString, std::shared_ptr<AbstractIndexer>> m_indexer;
-    Akonadi::Search::PIM::IndexedItems *m_indexedItems = nullptr;
+    Akonadi::Search::PIM::IndexedItems *const m_indexedItems;
     QTimer m_commitTimer;
     std::unique_ptr<CollectionIndexer> m_collectionIndexer = nullptr;
     bool mRespectDiacriticAndAccents = true;
