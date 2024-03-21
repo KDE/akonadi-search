@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
                      QStringLiteral("1.0"),
                      i18n("Akonadi HTML To Text Converter"),
                      KAboutLicense::LGPL_V2,
-                     i18n("© 2023 KDE Community"));
+                     i18n("© 2023-2024 KDE Community"));
 
     about.addAuthor(i18n("Carl Schwan"), i18n("Maintainer"), QStringLiteral("carl@carlschwan.eu"), QStringLiteral("https://carlschwan.eu"));
 
