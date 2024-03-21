@@ -31,5 +31,5 @@ public:
     void commit();
 
 private:
-    Xapian::WritableDatabase *m_db;
+    Xapian::WritableDatabase *m_db = nullptr;
 };
