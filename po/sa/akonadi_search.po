@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"POT-Creation-Date: 2024-03-22 00:37+0000\n"
 "PO-Revision-Date: 2023-09-29 20:27+0530\n"
 "Last-Translator: \n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -50,8 +50,9 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "अकोनाडी Html To Text परिवर्तक"
 
 #: agent/htmltotext.cpp:34
-#, kde-format
-msgid "© 2023 KDE Community"
+#, fuzzy, kde-format
+#| msgid "© 2023 KDE Community"
+msgid "© 2023-2024 KDE Community"
 msgstr "© २०२३ KDE समुदाय"
 
 #: agent/htmltotext.cpp:36

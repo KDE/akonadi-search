@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"POT-Creation-Date: 2024-03-22 00:37+0000\n"
 "PO-Revision-Date: 2024-03-13 19:57+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -49,8 +49,9 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "Akonadi HTML/Düz Metin Dönüştürücüsü"
 
 #: agent/htmltotext.cpp:34
-#, kde-format
-msgid "© 2023 KDE Community"
+#, fuzzy, kde-format
+#| msgid "© 2023 KDE Community"
+msgid "© 2023-2024 KDE Community"
 msgstr "© 2023 KDE Topluluğu"
 
 #: agent/htmltotext.cpp:36

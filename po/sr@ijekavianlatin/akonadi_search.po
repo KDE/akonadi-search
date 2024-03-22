@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"POT-Creation-Date: 2024-03-22 00:37+0000\n"
 "PO-Revision-Date: 2017-05-07 21:01+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -51,7 +51,7 @@ msgstr ""
 
 #: agent/htmltotext.cpp:34
 #, kde-format
-msgid "© 2023 KDE Community"
+msgid "© 2023-2024 KDE Community"
 msgstr ""
 
 #: agent/htmltotext.cpp:36

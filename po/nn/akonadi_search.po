@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"POT-Creation-Date: 2024-03-22 00:37+0000\n"
 "PO-Revision-Date: 2020-05-27 21:46+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -52,7 +52,7 @@ msgstr ""
 
 #: agent/htmltotext.cpp:34
 #, kde-format
-msgid "© 2023 KDE Community"
+msgid "© 2023-2024 KDE Community"
 msgstr ""
 
 #: agent/htmltotext.cpp:36

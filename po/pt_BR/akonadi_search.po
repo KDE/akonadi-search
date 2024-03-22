@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:39+0000\n"
+"POT-Creation-Date: 2024-03-22 00:37+0000\n"
 "PO-Revision-Date: 2023-11-08 15:52-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -51,8 +51,9 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "Akonadi conversor HTML para teste"
 
 #: agent/htmltotext.cpp:34
-#, kde-format
-msgid "© 2023 KDE Community"
+#, fuzzy, kde-format
+#| msgid "© 2023 KDE Community"
+msgid "© 2023-2024 KDE Community"
 msgstr "© 2023 Comunidade KDE"
 
 #: agent/htmltotext.cpp:36
