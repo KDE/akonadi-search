@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # SPDX-FileCopyrightText: 2017, 2020, 2023 giovanni <g.sora@tiscali.it>
-# giovanni <g.sora@tiscali.it>, 2023.
+# giovanni <g.sora@tiscali.it>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:37+0000\n"
-"PO-Revision-Date: 2023-09-29 08:51+0200\n"
+"PO-Revision-Date: 2024-03-22 11:54+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -50,10 +50,9 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "Akonadi Convertitor de Html a texto"
 
 #: agent/htmltotext.cpp:34
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© 2023 Communitate de KDE"
+msgstr "© 2023-2024 Communitate de KDE"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
