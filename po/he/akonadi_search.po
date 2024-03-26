@@ -1,82 +1,82 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2014, 2016, 2017, 2023, 2024.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the akonadi-search package.
 #
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-22 00:37+0000\n"
-"PO-Revision-Date: 2024-03-24 22:51+0100\n"
-"Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
-"Language-Team: Italian <kde-i18n-it@kde.org>\n"
-"Language: it\n"
+"PO-Revision-Date: 2024-03-25 09:55+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Luigi Toscano"
+msgstr "צוות התרגום של KDE ישראל"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "luigi.toscano@tiscali.it"
+msgstr "kde-l10n-he@kde.org"
 
 #: agent/agent.cpp:62
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
-msgstr "Nessun indicizzatore disponibile"
+msgstr "אין מסדרים במפתח זמינים"
 
 #: agent/collectionindexingjob.cpp:62
 #, kde-format
 msgid "Indexing collection: %1"
-msgstr "Indicizzazione raccolta: %1"
+msgstr "האוסף מסודר במפתח: %1"
 
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi HTML To Text"
-msgstr "Akonadi - HTML in testo"
+msgstr "HTML לטקסט של Akonadi"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr "Convertitore Akonadi da HTML a testo"
+msgstr "ממיר HTML לטקסט של Akonadi"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© 2023-2024 Comunità KDE"
+msgstr "© 2023‏-2024 קהילת KDE"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Carl Schwan"
-msgstr "Carl Schwan"
+msgstr "קארל שוואן"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr "Responsabile"
+msgstr "מתחזק"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
-msgstr "Pronto"
+msgstr "מוכן"
 
 #: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
-msgstr "Raccolta «%1» indicizzata"
+msgstr "האוסף „%1” סודר במפתח"
 
 #: debug/akonadisearchdebugdialog.cpp:97
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
-msgstr "File di testo (*.txt);;Tutti i file (*)"
+msgstr "קובצי טקסט (‎*.txt);;כל הקבצים (*)"
 
 #: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
@@ -84,19 +84,19 @@ msgid ""
 "Could not write the file %1:\n"
 "\"%2\" is the detailed error description."
 msgstr ""
-"Impossibile scrivere il file %1:\n"
-"«%2» è la descrizione dettagliata del messaggio di errore."
+"לא ניתן לכתוב לקובץ %1:\n"
+"„%2” הוא תיאור השגיאה במפורט."
 
 #: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
-msgstr "Errore nel salvataggio del file"
+msgstr "שגיאת שמירת קובץ"
 
 #: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
 #, kde-format
 msgid "Contacts"
-msgstr "Contatti"
+msgstr "אנשי קשר"
 
 #: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
 #: runner/pimcontactsrunner.cpp:239
@@ -108,9 +108,9 @@ msgstr "%1 (%2)"
 #: runner/pimcontactsrunner.cpp:220
 #, kde-format
 msgid "Autocompleted from received and sent emails"
-msgstr "Completato automaticamente dai messaggi ricevuti ed inviati"
+msgstr "הושלם אוטומטית מהודעות שהתקבלו ונשלחו"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
 #, kde-format
 msgid "Search in contacts indexed from sent and received emails too"
-msgstr "Cerca anche nei contatti indicizzati dai messaggi inviati e ricevuti"
+msgstr "חיפוש גם באנשי הקשר שסודרו במפתח מהודעות שנשלחו והתקבלו"
