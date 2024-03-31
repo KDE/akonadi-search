@@ -107,6 +107,7 @@ PRIVATE
 install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES akonadiindexingagent.desktop
         DESTINATION "${KDE_INSTALL_DATAROOTDIR}/akonadi/agents")
+akonadi_install_systemd_unit(AGENT TARGET akonadi_indexing_agent DESCRIPTION "Akonadi Indexing Agent")
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
