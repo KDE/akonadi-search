@@ -50,10 +50,9 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "Převodník Akonadi HTML na text"
 
 #: agent/htmltotext.cpp:34
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© 2023 Komunita KDE"
+msgstr ""
 
 #: agent/htmltotext.cpp:36
 #, kde-format
