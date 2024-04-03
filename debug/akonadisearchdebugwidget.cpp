@@ -5,6 +5,8 @@
 */
 
 #include "akonadisearchdebugwidget.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadisearchsyntaxhighlighter.h"
 #include "job/akonadisearchdebugsearchjob.h"
 #include <KLineEdit>
@@ -32,14 +34,14 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     hbox->addWidget(lab);
     mLineEdit->setTrapReturnKey(true);
     mLineEdit->setClearButtonEnabled(true);
-    mLineEdit->setObjectName(QLatin1StringView("lineedit"));
+    mLineEdit->setObjectName("lineedit"_L1);
     connect(mLineEdit, &KLineEdit::textChanged, this, &AkonadiSearchDebugWidget::slotSearchLineTextChanged);
     hbox->addWidget(mLineEdit);
 
     hbox->addWidget(mSearchPathComboBox);
-    mSearchPathComboBox->setObjectName(QLatin1StringView("searchpathcombo"));
+    mSearchPathComboBox->setObjectName("searchpathcombo"_L1);
 
-    mSearchButton->setObjectName(QLatin1StringView("searchbutton"));
+    mSearchButton->setObjectName("searchbutton"_L1);
     connect(mSearchButton, &QPushButton::clicked, this, &AkonadiSearchDebugWidget::slotSearch);
     hbox->addWidget(mSearchButton);
     mSearchButton->setEnabled(false);
@@ -47,7 +49,7 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     new AkonadiSearchSyntaxHighlighter(mPlainTextEditor->document());
     mPlainTextEditor->setReadOnly(true);
     mainLayout->addWidget(mPlainTextEditor);
-    mPlainTextEditor->setObjectName(QLatin1StringView("plaintexteditor"));
+    mPlainTextEditor->setObjectName("plaintexteditor"_L1);
 
     connect(mLineEdit, &KLineEdit::returnPressed, this, &AkonadiSearchDebugWidget::slotSearch);
 }

@@ -7,6 +7,7 @@
  */
 
 #include "contactsearchstore.h"
+using namespace Qt::Literals::StringLiterals;
 
 using namespace Akonadi::Search;
 
@@ -15,7 +16,7 @@ ContactSearchStore::ContactSearchStore(QObject *parent)
 {
     m_prefix.insert(QStringLiteral("name"), QStringLiteral("NA"));
     m_prefix.insert(QStringLiteral("nick"), QStringLiteral("NI"));
-    m_prefix.insert(QStringLiteral("email"), QLatin1StringView("")); // Email currently doesn't map to anything
+    m_prefix.insert(QStringLiteral("email"), ""_L1); // Email currently doesn't map to anything
     m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
     m_prefix.insert(QStringLiteral("uid"), QStringLiteral("UID"));
 

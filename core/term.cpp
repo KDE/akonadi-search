@@ -7,6 +7,7 @@
  */
 
 #include "term.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include <QDateTime>
 
@@ -335,15 +336,15 @@ Term Term::fromVariantMap(const QVariantMap &map)
 
         QString op = map.cbegin().key();
         Term::Comparator com;
-        if (op == QLatin1StringView("$ct")) {
+        if (op == "$ct"_L1) {
             com = Contains;
-        } else if (op == QLatin1StringView("$gt")) {
+        } else if (op == "$gt"_L1) {
             com = Greater;
-        } else if (op == QLatin1StringView("$gte")) {
+        } else if (op == "$gte"_L1) {
             com = GreaterEqual;
-        } else if (op == QLatin1StringView("$lt")) {
+        } else if (op == "$lt"_L1) {
             com = Less;
-        } else if (op == QLatin1StringView("$lte")) {
+        } else if (op == "$lte"_L1) {
             com = LessEqual;
         } else {
             return term;

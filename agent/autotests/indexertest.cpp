@@ -7,6 +7,8 @@
  */
 
 #include <Akonadi/Collection>
+using namespace Qt::Literals::StringLiterals;
+
 #include <QDir>
 #include <QTest>
 
@@ -69,9 +71,9 @@ private:
 private Q_SLOTS:
     void init()
     {
-        emailDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/email/");
-        emailContactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/emailcontacts/");
-        contactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/contacts/");
+        emailDir = QDir::tempPath() + "/searchplugintest/email/"_L1;
+        emailContactsDir = QDir::tempPath() + "/searchplugintest/emailcontacts/"_L1;
+        contactsDir = QDir::tempPath() + "/searchplugintest/contacts/"_L1;
         notesDir = QDir::tempPath() + QStringLiteral("/searchplugintest/notes/");
         calendarsDir = QDir::tempPath() + QStringLiteral("/searchplugintest/calendars/");
 

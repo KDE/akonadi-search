@@ -7,6 +7,8 @@
  */
 
 #include "query.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadi_search_pim_debug.h"
 #include "contactquery.h"
 
@@ -34,7 +36,7 @@ Query *Query::fromJSON(const QByteArray &json)
 
     const QVariantMap result = doc.toVariant().toMap();
     const QString type = result[QStringLiteral("type")].toString().toLower();
-    if (type != QLatin1StringView("contact")) {
+    if (type != "contact"_L1) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Can only handle contact queries";
         return nullptr;
     }
@@ -47,9 +49,9 @@ Query *Query::fromJSON(const QByteArray &json)
     cq->match(result[QStringLiteral("$")].toString());
 
     const QString criteria = result[QStringLiteral("matchCriteria")].toString().toLower();
-    if (criteria == QLatin1StringView("exact")) {
+    if (criteria == "exact"_L1) {
         cq->setMatchCriteria(ContactQuery::ExactMatch);
-    } else if (criteria == QLatin1StringView("startswith")) {
+    } else if (criteria == "startswith"_L1) {
         cq->setMatchCriteria(ContactQuery::StartsWithMatch);
     }
 

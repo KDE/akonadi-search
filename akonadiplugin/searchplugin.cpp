@@ -7,6 +7,7 @@
  */
 
 #include "searchplugin.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include "query.h"
 #include "resultiterator.h"
@@ -305,20 +306,18 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
     Query query;
     Term t;
 
-    if (mimeTypes.contains(QLatin1StringView("message/rfc822"))) {
+    if (mimeTypes.contains("message/rfc822"_L1)) {
         // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << "mail query";
         query.setType(QStringLiteral("Email"));
         t = recursiveEmailTermMapping(term);
     } else if (mimeTypes.contains(KContacts::Addressee::mimeType()) || mimeTypes.contains(KContacts::ContactGroup::mimeType())) {
         query.setType(QStringLiteral("Contact"));
         t = recursiveContactTermMapping(term);
-    } else if (mimeTypes.contains(QLatin1StringView("text/x-vnd.akonadi.note"))) {
+    } else if (mimeTypes.contains("text/x-vnd.akonadi.note"_L1)) {
         query.setType(QStringLiteral("Note"));
         t = recursiveNoteTermMapping(term);
-    } else if (mimeTypes.contains(QLatin1StringView("application/x-vnd.akonadi.calendar.event"))
-               || mimeTypes.contains(QLatin1StringView("application/x-vnd.akonadi.calendar.todo"))
-               || mimeTypes.contains(QLatin1StringView("application/x-vnd.akonadi.calendar.journal"))
-               || mimeTypes.contains(QLatin1StringView("application/x-vnd.akonadi.calendar.freebusy"))) {
+    } else if (mimeTypes.contains("application/x-vnd.akonadi.calendar.event"_L1) || mimeTypes.contains("application/x-vnd.akonadi.calendar.todo"_L1)
+               || mimeTypes.contains("application/x-vnd.akonadi.calendar.journal"_L1) || mimeTypes.contains("application/x-vnd.akonadi.calendar.freebusy"_L1)) {
         query.setType(QStringLiteral("Calendar"));
         t = recursiveCalendarTermMapping(term);
     } else {

@@ -7,6 +7,8 @@
  */
 
 #include "../resultiterator.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "contactquery.h"
 
 #include <QApplication>
@@ -57,7 +59,7 @@ void App::main()
 #endif
 
     ContactQuery q;
-    q.matchEmail(QLatin1StringView("t"));
+    q.matchEmail("t"_L1);
     q.setMatchCriteria(ContactQuery::StartsWithMatch);
 
     ResultIterator iter = q.exec();

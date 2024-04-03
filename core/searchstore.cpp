@@ -7,6 +7,8 @@
  */
 
 #include "searchstore.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadi_search_core_debug.h"
 
 #include <QCoreApplication>
@@ -102,7 +104,7 @@ SearchStore::List SearchStore::searchStores()
         QPluginLoader loader(pluginPath);
 
         const QVariantMap metadata = loader.metaData().toVariantMap()[QStringLiteral("MetaData")].toMap();
-        if (metadata[QStringLiteral("X-Akonadi-PluginType")].toString() != QLatin1StringView("SearchStore")) {
+        if (metadata[QStringLiteral("X-Akonadi-PluginType")].toString() != "SearchStore"_L1) {
             continue;
         }
         if (!loader.load()) {

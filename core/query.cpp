@@ -7,6 +7,8 @@
  */
 
 #include "query.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "searchstore.h"
 #include "term.h"
 
@@ -351,7 +353,7 @@ QUrl Query::toSearchUrl(const QString &title)
 
 Query Query::fromSearchUrl(const QUrl &url)
 {
-    if (url.scheme() != QLatin1StringView("akonadisearch")) {
+    if (url.scheme() != "akonadisearch"_L1) {
         return {};
     }
 

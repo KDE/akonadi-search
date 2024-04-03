@@ -7,6 +7,8 @@
  */
 
 #include <Akonadi/Collection>
+using namespace Qt::Literals::StringLiterals;
+
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 #include <QDir>
@@ -60,11 +62,11 @@ private:
 private Q_SLOTS:
     void initTestCase()
     {
-        emailDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/email/");
-        emailContactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/emailcontacts/");
-        contactsDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/contacts/");
-        noteDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/notes/");
-        calendarDir = QDir::tempPath() + QLatin1StringView("/searchplugintest/calendar/");
+        emailDir = QDir::tempPath() + "/searchplugintest/email/"_L1;
+        emailContactsDir = QDir::tempPath() + "/searchplugintest/emailcontacts/"_L1;
+        contactsDir = QDir::tempPath() + "/searchplugintest/contacts/"_L1;
+        noteDir = QDir::tempPath() + "/searchplugintest/notes/"_L1;
+        calendarDir = QDir::tempPath() + "/searchplugintest/calendar/"_L1;
 
         QDir dir;
         QVERIFY(QDir(QDir::tempPath() + QStringLiteral("/searchplugintest")).removeRecursively());

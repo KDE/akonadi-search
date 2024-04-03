@@ -6,6 +6,7 @@
  *
  */
 #include "collectionindexingjob.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionFetchJob>
@@ -94,7 +95,7 @@ private Q_SLOTS:
         fetchJob->exec();
         const Akonadi::Collection::List lstCols = fetchJob->collections();
         for (const Akonadi::Collection &col : lstCols) {
-            if (col.name() == QLatin1StringView("foo")) {
+            if (col.name() == "foo"_L1) {
                 itemCollection = col;
             }
         }

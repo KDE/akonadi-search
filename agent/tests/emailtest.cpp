@@ -7,6 +7,7 @@
  */
 
 #include "emailindexer.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include <QApplication>
 #include <QDebug>
@@ -84,7 +85,7 @@ void App::slotRootCollectionsFetched(KJob *kjob)
     QMutableListIterator<Akonadi::Collection> it(m_collections);
     while (it.hasNext()) {
         const Akonadi::Collection &c = it.next();
-        if (!c.contentMimeTypes().contains(QLatin1StringView("message/rfc822"))) {
+        if (!c.contentMimeTypes().contains("message/rfc822"_L1)) {
             it.remove();
         }
     }

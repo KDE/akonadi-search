@@ -6,6 +6,8 @@
  */
 
 #include "pimcontactsrunner.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadi_runner_debug.h"
 
 #include <KConfigGroup>
@@ -37,7 +39,7 @@ Q_DECLARE_METATYPE(KContacts::Addressee *)
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    setObjectName(QLatin1StringView("PIMContactsRunner"));
+    setObjectName("PIMContactsRunner"_L1);
     // reloadConfiguration() called by default init() implementation
 }
 

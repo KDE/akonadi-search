@@ -8,6 +8,7 @@
  */
 
 #include "agent.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
@@ -92,10 +93,10 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     const Akonadi::AgentInstance::List allAgents = agentManager->instances();
     // Cannot use agentManager->instance(oldInstanceName) here, it wouldn't find broken instances.
     for (const Akonadi::AgentInstance &inst : allAgents) {
-        if (inst.identifier() == QLatin1StringView("akonadi_nepomuk_feeder")) {
+        if (inst.identifier() == "akonadi_nepomuk_feeder"_L1) {
             qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing old nepomuk feeder" << inst.identifier();
             agentManager->removeInstance(inst);
-        } else if (inst.identifier() == QLatin1StringView("akonadi_baloo_indexer")) {
+        } else if (inst.identifier() == "akonadi_baloo_indexer"_L1) {
             qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Removing old Baloo indexer" << inst.identifier();
             agentManager->removeInstance(inst);
         }
