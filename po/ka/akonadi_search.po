@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:37+0000\n"
+"POT-Creation-Date: 2024-04-04 00:38+0000\n"
 "PO-Revision-Date: 2024-03-22 02:14+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Temuri.doghonadze@gmail.com"
 
-#: agent/agent.cpp:62
+#: agent/agent.cpp:63
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
@@ -74,12 +74,12 @@ msgstr "მზადაა"
 msgid "Collection \"%1\" indexed"
 msgstr "კოლექცია \"%1\" დაინდექსებულია"
 
-#: debug/akonadisearchdebugdialog.cpp:97
+#: debug/akonadisearchdebugdialog.cpp:98
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "ტექსტური ფაილები (*.txt);;ყველა ფაილი (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:109
+#: debug/akonadisearchdebugdialog.cpp:110
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -88,25 +88,25 @@ msgstr ""
 "ფაილის ჩაწერა შეიძლებელია %1:\n"
 "\"%2\" შეცდომის დეტალურ აღწერას წარმოადგენს."
 
-#: debug/akonadisearchdebugdialog.cpp:113
+#: debug/akonadisearchdebugdialog.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "ფაილის შენახვის შეცდომა"
 
-#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
+#: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
 msgid "Contacts"
 msgstr "კონტაქტები"
 
-#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
-#: runner/pimcontactsrunner.cpp:239
+#: runner/pimcontactsrunner.cpp:175 runner/pimcontactsrunner.cpp:184
+#: runner/pimcontactsrunner.cpp:241
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:220
+#: runner/pimcontactsrunner.cpp:222
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "ავტომატურად დასრულდა შემოსული და გაგზავნილი ელფოსტებიდან"

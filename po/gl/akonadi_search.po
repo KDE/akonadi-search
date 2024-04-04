@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:37+0000\n"
+"POT-Creation-Date: 2024-04-04 00:38+0000\n"
 "PO-Revision-Date: 2024-03-23 20:55+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "adrian@chaves.io"
 
-#: agent/agent.cpp:62
+#: agent/agent.cpp:63
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
@@ -74,12 +74,12 @@ msgstr "Listo"
 msgid "Collection \"%1\" indexed"
 msgstr "Indexouse a colección «%1»."
 
-#: debug/akonadisearchdebugdialog.cpp:97
+#: debug/akonadisearchdebugdialog.cpp:98
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Ficheiros de texto (*.txt);;Todos os ficheiros (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:109
+#: debug/akonadisearchdebugdialog.cpp:110
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -88,25 +88,25 @@ msgstr ""
 "Non foi posíbel escribir no ficheiro %1:\n"
 "«%2» é a descrición detallada do erro."
 
-#: debug/akonadisearchdebugdialog.cpp:113
+#: debug/akonadisearchdebugdialog.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "Erro ao gardar o ficheiro"
 
-#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
+#: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
 msgid "Contacts"
 msgstr "Contactos"
 
-#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
-#: runner/pimcontactsrunner.cpp:239
+#: runner/pimcontactsrunner.cpp:175 runner/pimcontactsrunner.cpp:184
+#: runner/pimcontactsrunner.cpp:241
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:220
+#: runner/pimcontactsrunner.cpp:222
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "Completado automaticamente a partir de mensaxes recibidas e enviadas."

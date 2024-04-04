@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:37+0000\n"
+"POT-Creation-Date: 2024-04-04 00:38+0000\n"
 "PO-Revision-Date: 2023-09-29 20:27+0530\n"
 "Last-Translator: \n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "skkalwar999@gmail.com"
 
-#: agent/agent.cpp:62
+#: agent/agent.cpp:63
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
@@ -75,12 +75,12 @@ msgstr "सज्जः"
 msgid "Collection \"%1\" indexed"
 msgstr "सङ्ग्रहः \"%1\" अनुक्रमितः"
 
-#: debug/akonadisearchdebugdialog.cpp:97
+#: debug/akonadisearchdebugdialog.cpp:98
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "पाठ्यसञ्चिकाः (*.txt);;सर्वाणि सञ्चिकाः (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:109
+#: debug/akonadisearchdebugdialog.cpp:110
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -89,25 +89,25 @@ msgstr ""
 "%1 इति सञ्चिकां लिखितुं न शक्यते:\n"
 "\"%2\" इति विस्तृतदोषविवरणम् ।."
 
-#: debug/akonadisearchdebugdialog.cpp:113
+#: debug/akonadisearchdebugdialog.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "सञ्चिका-रक्षणं त्रुटिः"
 
-#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
+#: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
 msgid "Contacts"
 msgstr "सम्पर्कसूची"
 
-#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
-#: runner/pimcontactsrunner.cpp:239
+#: runner/pimcontactsrunner.cpp:175 runner/pimcontactsrunner.cpp:184
+#: runner/pimcontactsrunner.cpp:241
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:220
+#: runner/pimcontactsrunner.cpp:222
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "प्राप्तेभ्यः प्रेषितेभ्यः च ईमेलभ्यः स्वयमेव सम्पन्नम्"

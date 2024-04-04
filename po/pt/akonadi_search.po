@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:37+0000\n"
+"POT-Creation-Date: 2024-04-04 00:38+0000\n"
 "PO-Revision-Date: 2017-04-22 11:34+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -23,7 +23,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr ""
 
-#: agent/agent.cpp:62
+#: agent/agent.cpp:63
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
@@ -69,12 +69,12 @@ msgstr "Pronto"
 msgid "Collection \"%1\" indexed"
 msgstr "A colecção \"%1\" foi indexada"
 
-#: debug/akonadisearchdebugdialog.cpp:97
+#: debug/akonadisearchdebugdialog.cpp:98
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Ficheiros de Texto (*.txt);;Todos os Ficheiros (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:109
+#: debug/akonadisearchdebugdialog.cpp:110
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -83,26 +83,26 @@ msgstr ""
 "Não foi possível gravar o ficheiro %1:\n"
 "A \"%2\" é a descrição detalhada do erro."
 
-#: debug/akonadisearchdebugdialog.cpp:113
+#: debug/akonadisearchdebugdialog.cpp:114
 #, fuzzy, kde-format
 #| msgid "Save File Error"
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "Erro de Gravação do Ficheiro"
 
-#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
+#: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
 msgid "Contacts"
 msgstr "Contactos"
 
-#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
-#: runner/pimcontactsrunner.cpp:239
+#: runner/pimcontactsrunner.cpp:175 runner/pimcontactsrunner.cpp:184
+#: runner/pimcontactsrunner.cpp:241
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:220
+#: runner/pimcontactsrunner.cpp:222
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "Completação automática dos e-mails recebidos e enviados"

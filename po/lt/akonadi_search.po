@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-22 00:37+0000\n"
+"POT-Creation-Date: 2024-04-04 00:38+0000\n"
 "PO-Revision-Date: 2024-02-07 01:04+0200\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "<>"
 
-#: agent/agent.cpp:62
+#: agent/agent.cpp:63
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
@@ -77,12 +77,12 @@ msgstr "Pasiruošę"
 msgid "Collection \"%1\" indexed"
 msgstr "Rinkinys „%1“ indeksuotas"
 
-#: debug/akonadisearchdebugdialog.cpp:97
+#: debug/akonadisearchdebugdialog.cpp:98
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Tekstiniai failai (*.txt);;Visi failai (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:109
+#: debug/akonadisearchdebugdialog.cpp:110
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -91,25 +91,25 @@ msgstr ""
 "Nepavyko rašyti į failą %1:\n"
 "„%2“ yra išsamus klaidos aprašas."
 
-#: debug/akonadisearchdebugdialog.cpp:113
+#: debug/akonadisearchdebugdialog.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "Failo įrašymo klaida"
 
-#: runner/pimcontactsrunner.cpp:128 runner/pimcontactsrunner.cpp:219
+#: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
 msgid "Contacts"
 msgstr "Adresatai"
 
-#: runner/pimcontactsrunner.cpp:173 runner/pimcontactsrunner.cpp:182
-#: runner/pimcontactsrunner.cpp:239
+#: runner/pimcontactsrunner.cpp:175 runner/pimcontactsrunner.cpp:184
+#: runner/pimcontactsrunner.cpp:241
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:220
+#: runner/pimcontactsrunner.cpp:222
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr "Automatiškai užbaigiama iš gautų ir išsiųstų el. laiškų"
