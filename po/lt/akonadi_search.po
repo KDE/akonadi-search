@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-04 00:38+0000\n"
-"PO-Revision-Date: 2024-02-07 01:04+0200\n"
+"PO-Revision-Date: 2024-04-08 02:00+0300\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -52,10 +52,9 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "Akonadi HTML į tekstą keitiklis"
 
 #: agent/htmltotext.cpp:34
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© 2023 KDE bendruomenė"
+msgstr "© 2023–2024 KDE bendruomenė"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
