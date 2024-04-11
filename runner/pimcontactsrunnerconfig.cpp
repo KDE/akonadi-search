@@ -20,8 +20,11 @@ PIMContactsRunnerConfig::PIMContactsRunnerConfig(QObject *parent, const KPluginM
 {
     auto vbox = new QVBoxLayout(widget());
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
     connect(mQueryCompletionCheckBox, &QCheckBox::stateChanged, this, &PIMContactsRunnerConfig::configChanged);
-
+#else
+    connect(mQueryCompletionCheckBox, &QCheckBox::checkStateChanged, this, &PIMContactsRunnerConfig::configChanged);
+#endif
     vbox->addWidget(mQueryCompletionCheckBox);
 
     load();
