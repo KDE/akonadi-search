@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-04 00:38+0000\n"
-"PO-Revision-Date: 2024-01-11 10:22+0300\n"
+"PO-Revision-Date: 2024-05-12 16:13+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -51,10 +51,9 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "Средство преобразования HTML в текст Akonadi"
 
 #: agent/htmltotext.cpp:34
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© Сообщество KDE, 2023"
+msgstr "© Сообщество KDE, 2023—2024"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
