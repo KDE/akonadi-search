@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
                      KAboutLicense::LGPL_V2,
                      i18n("© 2023-2024 KDE Community"));
 
-    about.addAuthor(i18n("Carl Schwan"), i18n("Maintainer"), QStringLiteral("carl@carlschwan.eu"), QStringLiteral("https://carlschwan.eu"));
+    about.addAuthor(i18nc("@info:credit", "Carl Schwan"), i18n("Maintainer"), QStringLiteral("carl@carlschwan.eu"), QStringLiteral("https://carlschwan.eu"));
 
     KAboutData::setApplicationData(about);
 
