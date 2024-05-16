@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-04 00:38+0000\n"
+"POT-Creation-Date: 2024-05-16 00:38+0000\n"
 "PO-Revision-Date: 2023-09-29 20:27+0530\n"
 "Last-Translator: \n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -56,7 +56,9 @@ msgid "© 2023-2024 KDE Community"
 msgstr "© २०२३ KDE समुदाय"
 
 #: agent/htmltotext.cpp:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Carl Schwan"
+msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "कार्ल श्वान्"
 

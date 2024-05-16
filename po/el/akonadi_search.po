@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-04 00:38+0000\n"
+"POT-Creation-Date: 2024-05-16 00:38+0000\n"
 "PO-Revision-Date: 2023-10-26 22:25+0300\n"
 "Last-Translator: George Stefanakis <george.stefanakis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -56,7 +56,9 @@ msgid "© 2023-2024 KDE Community"
 msgstr "© 2023 Κοινότητα του KDE"
 
 #: agent/htmltotext.cpp:36
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Carl Schwan"
+msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
