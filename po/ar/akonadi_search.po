@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 00:38+0000\n"
-"PO-Revision-Date: 2024-03-31 12:01+0400\n"
+"PO-Revision-Date: 2024-05-16 12:15+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -56,8 +56,7 @@ msgid "© 2023-2024 KDE Community"
 msgstr "© 2023-2024 مجتمع كِيدِي"
 
 #: agent/htmltotext.cpp:36
-#, fuzzy, kde-format
-#| msgid "Carl Schwan"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "كارل شوان"

@@ -55,8 +55,7 @@ msgid "© 2023-2024 KDE Community"
 msgstr "© 2023-2024 Komunita KDE"
 
 #: agent/htmltotext.cpp:36
-#, fuzzy, kde-format
-#| msgid "Carl Schwan"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
