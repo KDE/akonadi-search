@@ -129,9 +129,6 @@
         "Name[x-test]": "xxPIM Contacts Searchxx",
         "Name[zh_CN]": "PIM 联系人搜索",
         "Name[zh_TW]": "PIM 聯絡人搜尋",
-        "ServiceTypes": [
-            "Plasma/Runner"
-        ],
         "Version": "1.0"
     },
     "X-KDE-ConfigModule": "kf6/krunner/kcms/kcm_krunner_pimcontacts"
