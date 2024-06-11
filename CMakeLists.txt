@@ -39,7 +39,7 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 cmake_dependent_option(
     AKONADISEARCH_ENABLE_KRUNNER_RUNNER
     "Build KRunner runner to search contacts" ON
-    "NOT WIN32" OFF
+    "NOT WIN32;NOT APPLE" OFF
 )
 
 set(AKONADISEARCH_VERSION ${PIM_VERSION})

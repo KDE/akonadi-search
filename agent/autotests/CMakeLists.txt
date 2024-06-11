@@ -67,7 +67,7 @@ if (KDEPIM_RUN_AKONADI_TEST)
 	add_akonadi_isolated_test_advanced(collectionindexingjobtest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
 
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT APPLE)
 add_executable(collectionquerytest collectionquerytest.cpp ${query_SRCS} ${indexer_SRCS} ${scheduler_SRCS})
 add_test(NAME collectionquerytest COMMAND collectionquerytest)
 ecm_mark_as_test(collectionquerytest)
