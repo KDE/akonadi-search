@@ -31,7 +31,7 @@ msgstr "您的电子邮箱"
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
-msgstr "无可用索引器"
+msgstr "没有可用的索引器"
 
 #: agent/collectionindexingjob.cpp:62
 #, kde-format
