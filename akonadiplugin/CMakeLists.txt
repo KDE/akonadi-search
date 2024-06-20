@@ -10,7 +10,7 @@ ecm_qt_declare_logging_category(akonadi_search_plugin HEADER akonadiplugin_index
         DESCRIPTION "akonadisearch (akonadi plugin indexer)"
         OLD_CATEGORY_NAMES log_akonadiplugin_indexer
         EXPORT AKONADISEARCH
-    )
+   )
 
 
 

@@ -16,16 +16,16 @@ target_sources(KPim6AkonadiSearchXapian PRIVATE
     xapiandatabase.h
     xapiantermgenerator.h
     xapianqueryparser.h
-    )
+   )
 
 ecm_qt_declare_logging_category(KPim6AkonadiSearchXapian HEADER akonadi_search_xapian_debug.h IDENTIFIER AKONADI_SEARCH_XAPIAN_LOG CATEGORY_NAME org.kde.pim.akonadi_search_xapian
         DESCRIPTION "akonadisearch (akonadi indexer xapian)"
         OLD_CATEGORY_NAMES log_akonadi_search_xapian
         EXPORT AKONADISEARCH
-    )
+   )
 
 
-if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPim6AkonadiSearchXapian PROPERTIES UNITY_BUILD ON)
 endif()
 

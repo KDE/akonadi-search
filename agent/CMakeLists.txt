@@ -5,7 +5,7 @@
 
 add_executable(akonadi_html_to_text htmltotext.cpp)
 
-if (Corrosion_FOUND)
+if(Corrosion_FOUND)
     corrosion_import_crate(MANIFEST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml)
     target_link_libraries(akonadi_html_to_text PUBLIC htmlparser -Wl,--gc-sections)
 
@@ -67,22 +67,22 @@ ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_ag
         DESCRIPTION "akonadisearch (akonadi indexer agent)"
         OLD_CATEGORY_NAMES log_akonadi_indexer_agent
         EXPORT AKONADISEARCH
-    )
+   )
 
 ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_agent_calendar_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_CALENDAR_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent.calendar
         DESCRIPTION "akonadisearch (akonadi indexer agent calendar)"
         EXPORT AKONADISEARCH
-    )
+   )
 
 ecm_qt_declare_logging_category(akonadi_indexing_agent HEADER akonadi_indexer_agent_email_debug.h IDENTIFIER AKONADI_INDEXER_AGENT_EMAIL_LOG CATEGORY_NAME org.kde.pim.akonadi_indexer_agent.email
         DESCRIPTION "akonadisearch (akonadi indexer agent email)"
         EXPORT AKONADISEARCH
-    )
+   )
 
 qt_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.xml agent.h AkonadiIndexingAgent)
 target_sources(akonadi_indexing_agent PRIVATE ${akonadi_indexing_agent_SRCS})
 
-if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(akonadi_indexing_agent PROPERTIES UNITY_BUILD ON)
 endif()
 

@@ -53,7 +53,7 @@ set(KTEXTADDONS_MIN_VERSION "1.5.4")
 
 find_package(Qt6 ${QT_REQUIRED_VERSION} CONFIG REQUIRED Core Test)
 find_package(KF6 ${KF_MIN_VERSION} REQUIRED COMPONENTS I18n Config Crash DBusAddons KCMUtils KIO)
-if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
+if(AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     find_package(KF6Runner ${KF_MIN_VERSION} REQUIRED)
 endif()
 
@@ -96,7 +96,7 @@ ecm_set_disabled_deprecation_versions(QT 6.7.0 KF 6.4.0)
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
 set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
-if (USE_UNITY_CMAKE_SUPPORT)
+if(USE_UNITY_CMAKE_SUPPORT)
     set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
     add_definitions(-DCOMPILE_WITH_UNITY_CMAKE_SUPPORT)
 endif()
@@ -123,17 +123,17 @@ add_subdirectory(lib)
 add_subdirectory(akonadiplugin)
 add_subdirectory(search)
 add_subdirectory(debug)
-if (AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
+if(AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     add_subdirectory(runner)
 endif()
 
-if (BUILD_QCH)
+if(BUILD_QCH)
     ecm_install_qch_export(
         TARGETS KPim6AkonadiSearchPIM_QCH
         FILE KPim6AkonadiSearchPIMQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
-    )
+   )
     set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6AkonadiSearchPIMQchTargets.cmake\")")
 endif()
 
@@ -165,7 +165,7 @@ ecm_qt_install_logging_categories(
         EXPORT AKONADISEARCH
         FILE akonadi-search.categories
         DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
-        )
+       )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 

@@ -17,7 +17,7 @@ target_sources(KPim6AkonadiSearchDebug PRIVATE
   akonadisearchsyntaxhighlighter.h
 )
 
-if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPim6AkonadiSearchDebug PROPERTIES UNITY_BUILD ON)
 endif()
 

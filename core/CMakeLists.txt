@@ -13,14 +13,14 @@ target_sources(KPim6AkonadiSearchCore PRIVATE
     term.h
     query.h
     resultiterator.h
-    )
+   )
 
 ecm_qt_declare_logging_category(KPim6AkonadiSearchCore HEADER akonadi_search_core_debug.h IDENTIFIER AKONADI_SEARCH_CORE_LOG CATEGORY_NAME org.kde.pim.akonadi_search_core
         DESCRIPTION "akonadisearch (akonadi core lib)"
         EXPORT AKONADISEARCH
-    )
+   )
 
-if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPim6AkonadiSearchCore PROPERTIES UNITY_BUILD ON)
 endif()
 
@@ -48,7 +48,7 @@ ecm_generate_headers(KPim6AkonadiSearchCore_CamelCasecore_HEADERS
     SearchStore
     REQUIRED_HEADERS KPim6AkonadiSearchCore_core_HEADERS
     PREFIX Core
-    )
+   )
 
 install(TARGETS KPim6AkonadiSearchCore EXPORT KPim6AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 

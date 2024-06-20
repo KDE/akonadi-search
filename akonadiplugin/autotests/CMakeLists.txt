@@ -5,7 +5,7 @@ include_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/../../agent/
   ${CMAKE_CURRENT_BINARY_DIR}/..
 )
-add_executable( searchplugintest)
+add_executable(searchplugintest)
 
 target_sources(searchplugintest PRIVATE
     searchplugintest.cpp
@@ -29,7 +29,7 @@ target_sources(searchplugintest PRIVATE
 
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 
-add_test( NAME searchplugintest COMMAND searchplugintest )
+add_test( NAME searchplugintest COMMAND searchplugintest)
 ecm_mark_as_test(searchplugintest)
 
 target_link_libraries(searchplugintest

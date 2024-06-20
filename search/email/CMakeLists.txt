@@ -1,4 +1,4 @@
-add_library(emailsearchstore MODULE )
+add_library(emailsearchstore MODULE)
 target_sources(emailsearchstore PRIVATE agepostingsource.cpp emailsearchstore.cpp ../pimsearchstore.cpp agepostingsource.h emailsearchstore.h ../pimsearchstore.h)
 target_link_libraries(emailsearchstore
     Qt::Core

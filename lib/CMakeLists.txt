@@ -32,15 +32,15 @@ target_sources(KPim6AkonadiSearchPIM PRIVATE
     indexeditems.h
 
     ../search/email/agepostingsource.h
-    )
+   )
 
 ecm_qt_declare_logging_category(KPim6AkonadiSearchPIM HEADER akonadi_search_pim_debug.h IDENTIFIER AKONADI_SEARCH_PIM_LOG CATEGORY_NAME org.kde.pim.akonadi_search_pim
         DESCRIPTION "akonadisearch(akonadi pim lib)"
         OLD_CATEGORY_NAMES log_akonadi_search_pim
         EXPORT AKONADISEARCH
-    )
+   )
 
-if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPim6AkonadiSearchPIM PROPERTIES UNITY_BUILD ON)
 endif()
 
@@ -76,7 +76,7 @@ set(AKONADISEARCH_INCLUDES
     indexeditems.h
 
     resultiterator.h
-    )
+   )
 
 install(FILES
     ${AKONADISEARCH_INCLUDES}
@@ -90,7 +90,7 @@ if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
-if (BUILD_QCH)
+if(BUILD_QCH)
     ecm_add_qch(
         KPim6AkonadiSearchPIM_QCH
         NAME KPim6AkonadiSearchPIM
@@ -112,5 +112,5 @@ if (BUILD_QCH)
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         COMPONENT Devel
-    )
+   )
 endif()
