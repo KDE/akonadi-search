@@ -174,10 +174,10 @@ private Q_SLOTS:
             msg->date()->setDateTime(QDateTime(QDate(2014, 11, 11), QTime(13, 0, 0)));
             msg->replyTo()->from7BitString("test@kde.org");
             auto header = new KMime::Headers::Generic("Resent-From");
-            header->fromUnicodeString(QStringLiteral("resent@kde.org"), "utf-8");
+            header->fromUnicodeString(QStringLiteral("resent@kde.org"));
             msg->setHeader(header);
             header = new KMime::Headers::Generic("List-Id");
-            header->fromUnicodeString(QStringLiteral("KDE PIM <kde-pim.kde.org>"), "utf-8");
+            header->fromUnicodeString(QStringLiteral("KDE PIM <kde-pim.kde.org>"));
             msg->setHeader(header);
 
             msg->assemble();
