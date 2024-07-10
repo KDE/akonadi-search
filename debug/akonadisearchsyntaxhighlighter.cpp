@@ -18,7 +18,7 @@ AkonadiSearchSyntaxHighlighter::~AkonadiSearchSyntaxHighlighter() = default;
 void AkonadiSearchSyntaxHighlighter::highlightBlock(const QString &text)
 {
     for (const Rule &rule : std::as_const(m_rules)) {
-        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatchView(text);
         while (matchIterator.hasNext()) {
             QRegularExpressionMatch match = matchIterator.next();
             setFormat(match.capturedStart(), match.capturedLength(), rule.format);
