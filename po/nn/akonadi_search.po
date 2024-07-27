@@ -1,12 +1,11 @@
 # Translation of akonadi_search to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 00:38+0000\n"
-"PO-Revision-Date: 2020-05-27 21:46+0200\n"
+"PO-Revision-Date: 2024-07-26 15:02+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.04.0\n"
+"X-Generator: Lokalize 24.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -22,12 +21,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Karl Ove Hufthammer"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "karl@huftis.org"
 
 #: agent/agent.cpp:63
 #, kde-format
@@ -43,28 +42,28 @@ msgstr "Indekserer samling: %1"
 #: agent/htmltotext.cpp:30
 #, kde-format
 msgid "Akonadi HTML To Text"
-msgstr ""
+msgstr "Akonadi HTML til tekst"
 
 #: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr ""
+msgstr "Akonadi HTML til tekst-konvertering"
 
 #: agent/htmltotext.cpp:34
 #, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr ""
+msgstr "© 2020–2024 KDE-fellesskapet"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:36
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "Vedlikehaldar"
 
 #: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
@@ -91,11 +90,10 @@ msgstr ""
 "Detaljert feilmelding: «%2»."
 
 #: debug/akonadisearchdebugdialog.cpp:114
-#, fuzzy, kde-format
-#| msgid "Save File Error"
+#, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
-msgstr "Feil ved lagring"
+msgstr "Feil ved fillagring"
 
 #: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
