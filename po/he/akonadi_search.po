@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 00:38+0000\n"
+"POT-Creation-Date: 2024-07-30 00:41+0000\n"
 "PO-Revision-Date: 2024-05-16 06:35+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -113,6 +113,8 @@ msgid "Autocompleted from received and sent emails"
 msgstr "הושלם אוטומטית מהודעות שהתקבלו ונשלחו"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Search in contacts indexed from sent and received emails too"
+msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "חיפוש גם באנשי הקשר שסודרו במפתח מהודעות שנשלחו והתקבלו"
