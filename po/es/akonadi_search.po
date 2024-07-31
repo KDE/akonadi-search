@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
-"PO-Revision-Date: 2024-05-16 12:16+0200\n"
+"PO-Revision-Date: 2024-07-30 16:28+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -115,8 +115,7 @@ msgid "Autocompleted from received and sent emails"
 msgstr "Autocompletado desde correos recibidos y enviados"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr ""

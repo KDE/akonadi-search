@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
-"PO-Revision-Date: 2024-05-17 20:58+0200\n"
+"PO-Revision-Date: 2024-07-30 17:29+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -113,8 +113,7 @@ msgid "Autocompleted from received and sent emails"
 msgstr "Completado automaticamente a partir de mensaxes recibidas e enviadas."
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "Buscar tamén en contactos indexados de mensaxes enviadas e recibidas."

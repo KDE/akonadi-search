@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
-"PO-Revision-Date: 2024-07-26 15:02+0200\n"
+"PO-Revision-Date: 2024-07-30 22:39+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -113,8 +113,7 @@ msgid "Autocompleted from received and sent emails"
 msgstr "Autofullført frå mottekne og sende e-postar"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "Søk òg i kontaktar indekserte frå sende og mottekne e-postar"
