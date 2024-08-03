@@ -112,8 +112,7 @@ msgid "Autocompleted from received and sent emails"
 msgstr "已从接受和发送的邮件中自动完成"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "搜索联系人并以发送和接收的邮件索引"
