@@ -90,7 +90,6 @@ msgstr ""
 
 #: debug/akonadisearchdebugdialog.cpp:114
 #, fuzzy, kde-format
-#| msgid "Save File Error"
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "Feil ved fil-lagring"
