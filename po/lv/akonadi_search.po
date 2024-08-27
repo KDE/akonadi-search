@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
-"PO-Revision-Date: 2024-05-28 09:55+0300\n"
+"PO-Revision-Date: 2024-08-20 18:30+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -113,10 +113,9 @@ msgid "Autocompleted from received and sent emails"
 msgstr "Automātiska pabeigšana no saņemtajiem un nosūtītajiem e-pastiem"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr ""
-"Meklēt kontaktos, kas ir indeksēti arī no nosūtītajiem un saņemtajiem e-"
-"pastiem"
+"Meklēt arī kontaktos, kas ir indeksēti arī no nosūtītajām un saņemtajām e-"
+"pasta vēstulēm"
