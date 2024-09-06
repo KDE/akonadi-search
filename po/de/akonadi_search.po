@@ -3,7 +3,7 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2016.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
 "PO-Revision-Date: 2024-08-20 19:36+0200\n"
