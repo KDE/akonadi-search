@@ -56,8 +56,7 @@ msgid "© 2023-2024 KDE Community"
 msgstr "© 2023 Κοινότητα του KDE"
 
 #: agent/htmltotext.cpp:36
-#, fuzzy, kde-format
-#| msgid "Carl Schwan"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
@@ -116,8 +115,7 @@ msgstr ""
 "Αυτόματη συμπλήρωση από ληφθέντα και απεσταλμένα μηνύματα αλληλογραφίας"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr ""
