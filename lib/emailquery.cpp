@@ -8,10 +8,10 @@
 
 #include <xapian.h>
 
-#include "../search/email/agepostingsource.h"
 #include "akonadi_search_pim_debug.h"
 #include "emailquery.h"
 #include "resultiterator_p.h"
+#include "search/email/agepostingsource.h"
 
 #include <QFile>
 #include <QRegularExpression>
