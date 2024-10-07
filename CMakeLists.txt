@@ -19,7 +19,33 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
-file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h *.c)
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES
+agent/*.cpp
+agent/*.h
+agent/*.c
+akonadiplugin/*.cpp
+akonadiplugin/*.h
+akonadiplugin/*.c
+core/*.cpp
+core/*.h
+core/*.c
+debug/*.cpp
+debug/*.h
+debug/*.c
+lib/*.cpp
+lib/*.h
+lib/*.c
+runner/*.cpp
+runner/*.h
+runner/*.c
+search/*.cpp
+search/*.h
+search/*.c
+xapian/*.cpp
+xapian/*.h
+xapian/*.c
+
+)
 kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 include(KDEInstallDirs)
