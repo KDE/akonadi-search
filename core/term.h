@@ -26,9 +26,21 @@ class TermPrivate;
 class AKONADI_SEARCH_CORE_EXPORT Term
 {
 public:
-    enum Comparator { Auto, Equal, Contains, Greater, GreaterEqual, Less, LessEqual };
+    enum Comparator {
+        Auto,
+        Equal,
+        Contains,
+        Greater,
+        GreaterEqual,
+        Less,
+        LessEqual
+    };
 
-    enum Operation { None, And, Or };
+    enum Operation {
+        None,
+        And,
+        Or
+    };
 
     Term();
     Term(const Term &t);
