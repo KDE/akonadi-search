@@ -8,11 +8,15 @@ Dependencies:
     'frameworks/kcmutils': '@latest-kf6'
     'frameworks/kcontacts' : '@latest-kf6'
     'frameworks/kcalendarcore' : '@latest-kf6'
-    'frameworks/krunner' : '@latest-kf6'
     'pim/akonadi' : '@same'
     'pim/akonadi-mime' : '@same'
     'pim/kmime' : '@same'
     'libraries/ktextaddons': '@latest-kf6'
+    'frameworks/kdbusaddons': '@latest-kf6'
+
+- 'on': ['Linux', 'FreeBSD']
+  'require':
+    'frameworks/krunner' : '@latest-kf6'
 
 Options:
   require-passing-tests-on: ['Linux', 'FreeBSD']
