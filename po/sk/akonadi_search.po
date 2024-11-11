@@ -1,19 +1,19 @@
 # translation of akonadi_baloo_indexer.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2014, 2016, 2017.
+# SPDX-FileCopyrightText: 2014, 2016, 2017, 2024 Roman Paholik <wizzardsk@gmail.com>
 # Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
-"PO-Revision-Date: 2023-10-16 18:22+0200\n"
-"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
-"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
+"PO-Revision-Date: 2024-11-10 19:42+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -48,14 +48,12 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "Konvertor Akonadi HTML na text"
 
 #: agent/htmltotext.cpp:34
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© 2023 KDE komunita"
+msgstr "© 2023-2024 KDE komunita"
 
 #: agent/htmltotext.cpp:36
-#, fuzzy, kde-format
-#| msgid "Carl Schwan"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
@@ -113,8 +111,7 @@ msgid "Autocompleted from received and sent emails"
 msgstr "Automaticky dokončené z prijatých a poslaných e-mailov"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "Hľadať v kontaktoch indexovaných z odoslaných a prijatých e-mailov"
