@@ -31,7 +31,7 @@ public:
     EmailQuery();
     ~EmailQuery() override;
 
-    enum OpType {
+    enum OpType : uint8_t {
         OpAnd = 0,
         OpOr,
     };

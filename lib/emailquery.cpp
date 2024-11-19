@@ -313,10 +313,10 @@ ResultIterator EmailQuery::exec()
     }
     Xapian::Query query;
     switch (d->opType) {
-    case OpAnd:
+    case OpType::OpAnd:
         query = Xapian::Query(Xapian::Query::OP_AND, m_queries.begin(), m_queries.end());
         break;
-    case OpOr:
+    case OpType::OpOr:
         query = Xapian::Query(Xapian::Query::OP_OR, m_queries.begin(), m_queries.end());
         break;
     }
