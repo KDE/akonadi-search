@@ -38,7 +38,7 @@ public:
     void matchUID(const QString &uid);
     void match(const QString &str);
 
-    enum MatchCriteria {
+    enum MatchCriteria : uint8_t {
         ExactMatch,
         StartsWithMatch,
     };

@@ -85,7 +85,7 @@ public:
     [[nodiscard]] int monthFilter() const;
     [[nodiscard]] int dayFilter() const;
 
-    enum SortingOption {
+    enum SortingOption : uint8_t {
         /**
          * The results are returned in the most efficient order. They can
          * be returned in any order.

@@ -26,7 +26,7 @@ class TermPrivate;
 class AKONADI_SEARCH_CORE_EXPORT Term
 {
 public:
-    enum Comparator {
+    enum Comparator : uint8_t {
         Auto,
         Equal,
         Contains,
@@ -36,7 +36,7 @@ public:
         LessEqual
     };
 
-    enum Operation {
+    enum Operation : uint8_t {
         None,
         And,
         Or
