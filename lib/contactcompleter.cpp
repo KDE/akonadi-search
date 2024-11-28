@@ -69,7 +69,7 @@ static QStringList processEnquire(Xapian::Enquire &enq, int limit)
     return list;
 }
 
-QStringList ContactCompleter::complete()
+QStringList ContactCompleter::complete() const
 {
     const QString dir = Query::defaultLocation(QStringLiteral("emailContacts"));
     Xapian::Database db;
