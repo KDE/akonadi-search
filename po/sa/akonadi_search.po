@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
-"PO-Revision-Date: 2023-09-29 20:27+0530\n"
+"PO-Revision-Date: 2024-12-15 22:16+0530\n"
 "Last-Translator: \n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Poedit 3.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -50,14 +50,12 @@ msgid "Akonadi HTML To Text Converter"
 msgstr "अकोनाडी Html To Text परिवर्तक"
 
 #: agent/htmltotext.cpp:34
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© २०२३ KDE समुदाय"
+msgstr "© २०२३-२०२४ KDE समुदाय"
 
 #: agent/htmltotext.cpp:36
-#, fuzzy, kde-format
-#| msgid "Carl Schwan"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "कार्ल श्वान्"
@@ -115,8 +113,7 @@ msgid "Autocompleted from received and sent emails"
 msgstr "प्राप्तेभ्यः प्रेषितेभ्यः च ईमेलभ्यः स्वयमेव सम्पन्नम्"
 
 #: runner/pimcontactsrunnerconfig.cpp:19
-#, fuzzy, kde-format
-#| msgid "Search in contacts indexed from sent and received emails too"
+#, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
 msgstr "प्रेषितानां प्राप्तानां च ईमेल-पत्राणां अनुक्रमित-सम्पर्कसूचौ अपि अन्वेषणं कुर्वन्तु"
