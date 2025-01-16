@@ -96,7 +96,7 @@ find_package(KPim6AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
 find_package(KF6CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6TextUtils ${KTEXTADDONS_MIN_VERSION} CONFIG REQUIRED)
 
-find_package(Corrosion)
+find_package(Corrosion CONFIG)
 set_package_properties(Corrosion PROPERTIES
     PURPOSE "Required for safe parsing of html emails"
     DESCRIPTION "CMake scripts to seamlessly build and link to targets using cargo"
