@@ -2,17 +2,17 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['Linux', 'FreeBSD', 'Windows']
-  'require':
+ - 'on': ['Linux', 'FreeBSD', 'Windows']
+   'require':
     'frameworks/extra-cmake-modules': '@latest-kf6'
     'frameworks/kcmutils': '@latest-kf6'
-    'frameworks/kcontacts' : '@latest-kf6'
-    'frameworks/kcalendarcore' : '@latest-kf6'
-    'frameworks/krunner' : '@latest-kf6'
-    'pim/akonadi' : '@same'
-    'pim/akonadi-mime' : '@same'
-    'pim/kmime' : '@same'
+    'frameworks/kcontacts': '@latest-kf6'
+    'frameworks/kcalendarcore': '@latest-kf6'
+    'frameworks/krunner': '@latest-kf6'
+    'pim/akonadi': '@same'
+    'pim/akonadi-mime': '@same'
+    'pim/kmime': '@same'
     'libraries/ktextaddons': '@latest-kf6'
 
 Options:
-  require-passing-tests-on: ['Linux', 'FreeBSD']
+ require-passing-tests-on: ['Linux', 'FreeBSD']
