@@ -20,12 +20,12 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "您的名字"
+msgstr "KDE China, Li Zi, Eric Zhao"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "您的电子邮箱"
+msgstr "kde-china@kde.org, , zxybbb7892020@outlook.com"
 
 #: agent/agent.cpp:63
 #, kde-format
