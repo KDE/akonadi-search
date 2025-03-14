@@ -100,7 +100,6 @@ PRIVATE
     KF6::Codecs
     KF6::I18n
     KF6::ConfigCore
-    Qt::Widgets
     KF6::TextUtils
 )
 
