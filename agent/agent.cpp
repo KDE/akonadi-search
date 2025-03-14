@@ -37,7 +37,7 @@ using namespace Qt::Literals::StringLiterals;
 #define INDEXING_AGENT_VERSION 5
 
 AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
-    : AgentWidgetBase(id)
+    : AgentBase(id)
     , m_scheduler(m_index, config(), QSharedPointer<JobFactory>(new JobFactory))
 {
     lowerIOPriority();
@@ -333,6 +333,6 @@ bool AkonadiIndexingAgent::shouldIndex(const Akonadi::Item &item) const
     return shouldIndex(item.parentCollection());
 }
 
-AKONADI_AGENT_MAIN(AkonadiIndexingAgent)
+AKONADI_AGENT_CORE_MAIN(AkonadiIndexingAgent)
 
 #include "moc_agent.cpp"
