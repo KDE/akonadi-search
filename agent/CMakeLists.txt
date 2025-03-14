@@ -93,7 +93,7 @@ PRIVATE
     KPim6::AkonadiMime
     KPim6::Mime
     KF6::Contacts
-    KPim6::AkonadiAgentBase
+    KPim6::AkonadiAgentWidgetBase
     KF6::CalendarCore
     KPim6::AkonadiSearchXapian
     KPim6::AkonadiSearchPIM

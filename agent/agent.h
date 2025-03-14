@@ -9,14 +9,14 @@
 
 #pragma once
 
-#include <Akonadi/AgentBase>
+#include <Akonadi/AgentWidgetBase>
 #include <Akonadi/Collection>
 
 #include "index.h"
 #include "scheduler.h"
 #include <QList>
 
-class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
+class AkonadiIndexingAgent : public Akonadi::AgentWidgetBase, public Akonadi::AgentBase::ObserverV3
 {
     Q_OBJECT
 public:

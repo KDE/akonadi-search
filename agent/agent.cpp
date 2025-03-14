@@ -37,7 +37,7 @@ using namespace Qt::Literals::StringLiterals;
 #define INDEXING_AGENT_VERSION 5
 
 AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
-    : AgentBase(id)
+    : AgentWidgetBase(id)
     , m_scheduler(m_index, config(), QSharedPointer<JobFactory>(new JobFactory))
 {
     lowerIOPriority();
