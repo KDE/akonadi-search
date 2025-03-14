@@ -5,7 +5,6 @@
 */
 
 #include "akonadisearchdebugwidget.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadisearchsyntaxhighlighter.h"
 #include "job/akonadisearchdebugsearchjob.h"
@@ -17,6 +16,7 @@ using namespace Qt::Literals::StringLiterals;
 
 #include <QPlainTextEdit>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)

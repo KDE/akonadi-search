@@ -20,8 +20,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWindow>
-using namespace Qt::Literals::StringLiterals;
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 class Akonadi::Search::AkonadiSearchDebugDialogPrivate

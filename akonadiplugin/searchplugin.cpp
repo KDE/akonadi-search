@@ -7,7 +7,6 @@
  */
 
 #include "searchplugin.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "query.h"
 #include "resultiterator.h"
@@ -20,6 +19,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 static Term::Operation mapRelation(Akonadi::SearchTerm::Relation relation)

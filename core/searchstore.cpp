@@ -7,7 +7,6 @@
  */
 
 #include "searchstore.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_search_core_debug.h"
 
@@ -19,6 +18,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <QThreadStorage>
 
 using namespace Akonadi::Search;
+using namespace Qt::Literals::StringLiterals;
 
 SearchStore::SearchStore(QObject *parent)
     : QObject(parent)

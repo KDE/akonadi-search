@@ -8,7 +8,6 @@
  */
 
 #include "agent.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonotesindexer.h"
 #include "calendarindexer.h"
@@ -36,6 +35,7 @@ using namespace Qt::Literals::StringLiterals;
 
 #define INDEXING_AGENT_VERSION 5
 
+using namespace Qt::Literals::StringLiterals;
 AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
     : AgentBase(id)
     , m_scheduler(m_index, config(), QSharedPointer<JobFactory>(new JobFactory))

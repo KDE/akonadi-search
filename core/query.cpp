@@ -7,7 +7,6 @@
  */
 
 #include "query.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "searchstore.h"
 #include "term.h"
@@ -21,6 +20,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <QJsonDocument>
 #include <QJsonObject>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 const int defaultLimit = 100000;

@@ -6,7 +6,6 @@
  */
 
 #include "pimcontactsrunner.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_runner_debug.h"
 
@@ -36,6 +35,7 @@ using namespace Qt::Literals::StringLiterals;
 
 Q_DECLARE_METATYPE(KContacts::Addressee *)
 
+using namespace Qt::Literals::StringLiterals;
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {

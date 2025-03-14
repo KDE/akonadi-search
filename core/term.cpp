@@ -7,10 +7,10 @@
  */
 
 #include "term.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <QDateTime>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 class Akonadi::Search::TermPrivate

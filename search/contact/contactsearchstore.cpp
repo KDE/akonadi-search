@@ -7,8 +7,8 @@
  */
 
 #include "contactsearchstore.h"
-using namespace Qt::Literals::StringLiterals;
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 ContactSearchStore::ContactSearchStore(QObject *parent)

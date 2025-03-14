@@ -7,7 +7,6 @@
  */
 
 #include "query.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_search_pim_debug.h"
 #include "contactquery.h"
@@ -19,6 +18,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <QJsonDocument>
 #include <QStandardPaths>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search::PIM;
 
 Query::Query() = default;
