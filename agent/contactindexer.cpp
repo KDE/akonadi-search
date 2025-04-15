@@ -15,7 +15,7 @@
 #include <KContacts/ContactGroup>
 
 ContactIndexer::ContactIndexer(const QString &path)
-    : AbstractIndexer()
+
 {
     try {
         m_db = new Akonadi::Search::XapianDatabase(path, true);

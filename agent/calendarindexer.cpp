@@ -14,7 +14,7 @@
 #include <KCalendarCore/FreeBusy>
 
 CalendarIndexer::CalendarIndexer(const QString &path)
-    : AbstractIndexer()
+
 {
     try {
         m_db = std::make_unique<Akonadi::Search::XapianDatabase>(path, true);

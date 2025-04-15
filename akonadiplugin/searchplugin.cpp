@@ -60,7 +60,7 @@ static Term getTerm(const Akonadi::SearchTerm &term, const QString &property)
     return t;
 }
 
-Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
+static Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
 {
     const auto subTermsResult = term.subTerms();
     if (!subTermsResult.isEmpty()) {
@@ -187,7 +187,7 @@ Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
     return {};
 }
 
-Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
+static Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
 {
     const auto subTerms{term.subTerms()};
     if (!subTerms.isEmpty()) {
@@ -223,7 +223,7 @@ Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
     return {};
 }
 
-Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
+static Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
 {
     const auto subTerms{term.subTerms()};
     if (!subTerms.isEmpty()) {
@@ -252,7 +252,7 @@ Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
     return {};
 }
 
-Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
+static Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
 {
     const auto subTerms{term.subTerms()};
     if (!subTerms.isEmpty()) {

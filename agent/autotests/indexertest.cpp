@@ -23,7 +23,7 @@ using namespace Qt::Literals::StringLiterals;
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)
 
-KMime::Message::Ptr readMailFromFile(const QString &mailFile)
+static KMime::Message::Ptr readMailFromFile(const QString &mailFile)
 {
     QFile file(QLatin1StringView(MAIL_DATA_DIR) + QLatin1Char('/') + mailFile);
     file.open(QIODevice::ReadOnly);

@@ -32,8 +32,7 @@ public:
 };
 
 ContactQuery::ContactQuery()
-    : Query()
-    , d(new ContactQueryPrivate)
+    : d(new ContactQueryPrivate)
 {
     d->criteria = StartsWithMatch;
 }

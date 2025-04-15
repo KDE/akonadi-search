@@ -31,8 +31,7 @@ public:
 };
 
 CollectionQuery::CollectionQuery()
-    : Query()
-    , d(new CollectionQueryPrivate)
+    : d(new CollectionQueryPrivate)
 {
     d->databaseDir = defaultLocation(QStringLiteral("collections"));
     d->limit = 0;

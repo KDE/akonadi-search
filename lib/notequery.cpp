@@ -30,8 +30,7 @@ public:
 };
 
 NoteQuery::NoteQuery()
-    : Query()
-    , d(new NoteQueryPrivate)
+    : d(new NoteQueryPrivate)
 {
 }
 

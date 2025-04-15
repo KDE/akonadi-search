@@ -32,9 +32,9 @@ public:
 
     QList<Akonadi::Collection::Id> collections;
 
-    char important;
-    char read;
-    char attachment;
+    char important{'0'};
+    char read{'0'};
+    char attachment{'0'};
 
     QString matchString;
     QString subjectMatchString;
@@ -46,15 +46,12 @@ public:
 };
 
 EmailQueryPrivate::EmailQueryPrivate()
-    : important('0')
-    , read('0')
-    , attachment('0')
+
 {
 }
 
 EmailQuery::EmailQuery()
-    : Query()
-    , d(new EmailQueryPrivate)
+    : d(new EmailQueryPrivate)
 {
 }
 

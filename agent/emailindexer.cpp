@@ -16,7 +16,7 @@
 #include <QProcess>
 
 EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
-    : AbstractIndexer()
+
 {
     try {
         m_db = new Xapian::WritableDatabase(path.toStdString(), Xapian::DB_CREATE_OR_OPEN);
