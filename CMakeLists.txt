@@ -6,7 +6,7 @@ set(PIM_VERSION "6.4.40")
 project(AkonadiSearch VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF_MIN_VERSION "6.12.0")
+set(KF_MIN_VERSION "6.13.0")
 
 set(CMAKE_CXX_STANDARD 20)
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
