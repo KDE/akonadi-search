@@ -93,7 +93,7 @@ void Index::index(const Akonadi::Item &item)
 {
     auto indexer = indexerForItem(item);
     if (!indexer) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << " No indexer found for item";
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "No indexer found for item";
         return;
     }
 

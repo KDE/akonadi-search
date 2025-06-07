@@ -221,7 +221,7 @@ void Scheduler::processNext()
     }
 
     const Akonadi::Collection col(m_collectionQueue.takeFirst());
-    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Processing collection: " << col.id();
+    qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Processing collection:" << col.id();
     QQueue<Akonadi::Item::Id> &itemQueue = m_queues[col.id()];
     const bool fullSync = m_dirtyCollections.contains(col.id());
     CollectionIndexingJob *job = m_jobFactory->createCollectionIndexingJob(m_index, col, itemQueue, fullSync, this);
@@ -237,7 +237,7 @@ void Scheduler::processNext()
 void Scheduler::slotIndexingFinished(KJob *job)
 {
     if (job->error()) {
-        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Indexing failed: " << job->errorString();
+        qCWarning(AKONADI_INDEXER_AGENT_LOG) << "Indexing failed:" << job->errorString();
     } else {
         const auto collectionId = job->property("collection").value<Akonadi::Collection::Id>();
         m_dirtyCollections.remove(collectionId);

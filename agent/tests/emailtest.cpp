@@ -132,8 +132,8 @@ void App::slotCommitTimerElapsed()
     m_indexTime += timer.elapsed();
 
     qDebug() << "Emails:" << m_numEmails;
-    qDebug() << "Total Time:" << m_totalTime.elapsed() / 1000.0 << " seconds";
-    qDebug() << "Index Time:" << m_indexTime / 1000.0 << " seconds";
+    qDebug() << "Total Time:" << m_totalTime.elapsed() / 1000.0 << "seconds";
+    qDebug() << "Index Time:" << m_indexTime / 1000.0 << "seconds";
 }
 
 void App::slotIndexed()
@@ -146,8 +146,8 @@ void App::slotIndexed()
     m_indexer.commit();
 
     qDebug() << "Emails:" << m_numEmails;
-    qDebug() << "Total Time:" << m_totalTime.elapsed() / 1000.0 << " seconds";
-    qDebug() << "Index Time:" << m_indexTime / 1000.0 << " seconds";
+    qDebug() << "Total Time:" << m_totalTime.elapsed() / 1000.0 << "seconds";
+    qDebug() << "Index Time:" << m_indexTime / 1000.0 << "seconds";
 
     // Print the io usage
     QFile file(QStringLiteral("/proc/self/io"));

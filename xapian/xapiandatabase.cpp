@@ -31,7 +31,7 @@ XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)
             createWritableDb();
             m_db = new Xapian::Database(m_path);
         } catch (const Xapian::DatabaseError &err) {
-            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Serious Error: " << err.get_error_string();
+            qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << "Serious Error:" << err.get_error_string();
             qCWarning(AKONADI_SEARCH_XAPIAN_LOG) << err.get_msg().c_str() << err.get_context().c_str() << err.get_description().c_str();
         }
 
