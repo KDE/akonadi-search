@@ -7,4 +7,3 @@ extern crate cxx_build;
 fn main() {
     cxx_build::bridge("src/lib.rs").compile("htmlparser")
 }
-

@@ -1,6 +1,14 @@
 add_library(notesearchstore MODULE)
-target_sources(notesearchstore PRIVATE notesearchstore.cpp ../pimsearchstore.cpp notesearchstore.h ../pimsearchstore.h)
-target_link_libraries(notesearchstore
+target_sources(
+    notesearchstore
+    PRIVATE
+        notesearchstore.cpp
+        ../pimsearchstore.cpp
+        notesearchstore.h
+        ../pimsearchstore.h
+)
+target_link_libraries(
+    notesearchstore
     Qt::Core
     KPim6::AkonadiCore
     ${XAPIAN_LIBRARIES}
@@ -8,4 +16,7 @@ target_link_libraries(notesearchstore
     KPim6AkonadiSearchXapian
 )
 
-install(TARGETS notesearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi)
+install(
+    TARGETS notesearchstore
+    DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi
+)

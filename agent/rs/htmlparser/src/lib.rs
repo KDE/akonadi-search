@@ -16,4 +16,3 @@ mod ffi {
         fn convert_to_text(html: String) -> String;
     }
 }
-

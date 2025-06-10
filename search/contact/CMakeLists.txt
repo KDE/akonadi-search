@@ -1,6 +1,14 @@
 add_library(contactsearchstore MODULE)
-target_sources(contactsearchstore PRIVATE contactsearchstore.cpp ../pimsearchstore.cpp contactsearchstore.h ../pimsearchstore.h)
-target_link_libraries(contactsearchstore
+target_sources(
+    contactsearchstore
+    PRIVATE
+        contactsearchstore.cpp
+        ../pimsearchstore.cpp
+        contactsearchstore.h
+        ../pimsearchstore.h
+)
+target_link_libraries(
+    contactsearchstore
     Qt::Core
     KPim6::AkonadiCore
     ${XAPIAN_LIBRARIES}
@@ -8,4 +16,7 @@ target_link_libraries(contactsearchstore
     KPim6AkonadiSearchXapian
 )
 
-install(TARGETS contactsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi)
+install(
+    TARGETS contactsearchstore
+    DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi
+)

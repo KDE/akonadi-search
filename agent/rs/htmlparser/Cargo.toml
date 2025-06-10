@@ -13,4 +13,3 @@ cxx-build = "1.0.106"
 [dependencies]
 cxx = "1.0.106"
 html2text = "0.6"
-

@@ -126,7 +126,7 @@ namespace
 // Does some extra stuff such as lower casing the email, removing all quotes
 // and removing extra spaces
 // TODO: Move this into KMime?
-// TODO: If name is all upper/lower then try to captialize it?
+// TODO: If name is all upper/lower then try to capitalize it?
 QString prettyAddress(const KMime::Types::Mailbox &mbox)
 {
     const QString name = mbox.name().simplified();
