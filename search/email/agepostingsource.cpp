@@ -11,7 +11,7 @@
 #include <QDateTime>
 #include <QString>
 
-#include <cmath>
+#include <chrono>
 
 using namespace Akonadi::Search;
 
@@ -23,6 +23,9 @@ AgePostingSource::AgePostingSource(Xapian::valueno slot_)
 
 double AgePostingSource::get_weight() const
 {
+    using namespace std::chrono;
+    constexpr auto secondsInDay = duration_cast<seconds>(hours(24)).count();
+
     const QString str = QString::fromStdString(get_value());
 
     bool ok = false;
@@ -35,7 +38,8 @@ double AgePostingSource::get_weight() const
     const uint diff = m_currentTime_t - time;
 
     // Each day is given a penalty of penalty of 1.0
-    const double penalty = 1.0 / (24 * 60 * 60);
+
+    const double penalty = 1.0 / secondsInDay;
     const double result = 1000.0 - (diff * penalty);
 
     if (result < 0.0) {
