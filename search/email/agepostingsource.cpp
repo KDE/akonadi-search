@@ -21,9 +21,9 @@ AgePostingSource::AgePostingSource(Xapian::valueno slot_)
 {
 }
 
-Xapian::weight AgePostingSource::get_weight() const
+double AgePostingSource::get_weight() const
 {
-    const std::string s = *value_it;
+    const std::string s = get_value();
     const QString str = QString::fromUtf8(s.c_str(), s.length());
 
     bool ok = false;
@@ -48,7 +48,7 @@ Xapian::weight AgePostingSource::get_weight() const
 
 Xapian::PostingSource *AgePostingSource::clone() const
 {
-    return new AgePostingSource(slot);
+    return new AgePostingSource(get_slot());
 }
 
 void AgePostingSource::init(const Xapian::Database &db_)

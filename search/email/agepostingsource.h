@@ -19,7 +19,7 @@ class AgePostingSource : public Xapian::ValuePostingSource
 public:
     explicit AgePostingSource(Xapian::valueno slot_);
 
-    Xapian::weight get_weight() const override;
+    double get_weight() const override;
     Xapian::PostingSource *clone() const override;
 
     std::string name() const override
