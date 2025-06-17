@@ -23,8 +23,7 @@ AgePostingSource::AgePostingSource(Xapian::valueno slot_)
 
 double AgePostingSource::get_weight() const
 {
-    const std::string s = get_value();
-    const QString str = QString::fromUtf8(s.c_str(), s.length());
+    const QString str = QString::fromStdString(get_value());
 
     bool ok = false;
     const uint time = str.toUInt(&ok);
