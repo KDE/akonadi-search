@@ -151,7 +151,8 @@ void App::slotIndexed()
 
     // Print the io usage
     QFile file(QStringLiteral("/proc/self/io"));
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    const auto ok = file.open(QIODevice::ReadOnly | QIODevice::Text);
+    Q_ASSERT(ok);
 
     QTextStream fs(&file);
     QString str = fs.readAll();

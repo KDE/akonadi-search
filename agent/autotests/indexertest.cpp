@@ -26,8 +26,8 @@ Q_DECLARE_METATYPE(QList<qint64>)
 static KMime::Message::Ptr readMailFromFile(const QString &mailFile)
 {
     QFile file(QLatin1StringView(MAIL_DATA_DIR) + QLatin1Char('/') + mailFile);
-    file.open(QIODevice::ReadOnly);
-    Q_ASSERT(file.isOpen());
+    const auto ok = file.open(QIODevice::ReadOnly);
+    Q_ASSERT(ok && file.isOpen());
     auto mailData = KMime::CRLFtoLF(file.readAll());
     KMime::Message::Ptr message(new KMime::Message);
     message->setContent(mailData);

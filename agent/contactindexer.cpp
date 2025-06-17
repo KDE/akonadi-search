@@ -186,7 +186,7 @@ void ContactIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id from
     const QByteArray ft = 'C' + QByteArray::number(from);
     const QByteArray tt = 'C' + QByteArray::number(to);
 
-    doc.removeTermStartsWith(ft.data());
+    std::ignore = doc.removeTermStartsWith(ft.data());
     doc.addBoolTerm(QString::fromLatin1(tt.data()));
     m_db->replaceDocument(doc.doc().get_docid(), doc);
 }
