@@ -1,16 +1,16 @@
-# Spanish translations for akonadi_baloo_indexer.po package.
-# Copyright (C) 2014 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Spanish translations for akonadi_search.po package.
+# Copyright (C) 2014-2025 This file is copyright:
+# This file is distributed under the same license as the akonadi-search package.
 # Automatically generated, 2014.
-# SPDX-FileCopyrightText: 2014, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
-# Javier Vinal <fjvinal@gmail.com>, 2016, 2017.
+#
+# SPDX-FileCopyrightText: 2014, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2016, 2017 Javier Vinal <fjvinal@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: akonadi_baloo_indexer\n"
+"Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-30 00:41+0000\n"
-"PO-Revision-Date: 2024-07-30 16:28+0200\n"
+"PO-Revision-Date: 2025-06-29 13:58+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
