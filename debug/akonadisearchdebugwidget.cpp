@@ -24,13 +24,13 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     , mPlainTextEditor(new QPlainTextEdit(this))
     , mSearchPathComboBox(new Akonadi::Search::AkonadiSearchDebugSearchPathComboBox(this))
     , mLineEdit(new KLineEdit(this))
-    , mSearchButton(new QPushButton(QStringLiteral("Search"), this))
+    , mSearchButton(new QPushButton(u"Search"_s, this))
 {
     auto mainLayout = new QVBoxLayout(this);
 
     auto hbox = new QHBoxLayout;
     mainLayout->addLayout(hbox);
-    auto lab = new QLabel(QStringLiteral("Item identifier:"), this);
+    auto lab = new QLabel(u"Item identifier:"_s, this);
     hbox->addWidget(lab);
     mLineEdit->setTrapReturnKey(true);
     mLineEdit->setClearButtonEnabled(true);
@@ -78,7 +78,7 @@ void AkonadiSearchDebugWidget::doSearch()
 
 QString AkonadiSearchDebugWidget::plainText() const
 {
-    return QStringLiteral("Item: %1\n").arg(mLineEdit->text()) + mPlainTextEditor->toPlainText();
+    return u"Item: %1\n"_s.arg(mLineEdit->text()) + mPlainTextEditor->toPlainText();
 }
 
 void AkonadiSearchDebugWidget::slotSearch()
@@ -102,7 +102,7 @@ void AkonadiSearchDebugWidget::slotResult(const QString &result)
 
 void AkonadiSearchDebugWidget::slotError(const QString &errorStr)
 {
-    mPlainTextEditor->setPlainText(QStringLiteral("Error found:\n") + errorStr);
+    mPlainTextEditor->setPlainText(u"Error found:\n"_s + errorStr);
 }
 
 #include "moc_akonadisearchdebugwidget.cpp"

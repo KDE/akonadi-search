@@ -79,82 +79,82 @@ static Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
         case Akonadi::EmailSearchTerm::Message: {
             Term s(Term::Or);
             s.setNegation(term.isNegated());
-            s.addSubTerm(Term(QStringLiteral("body"), term.value(), mapComparator(term.condition())));
-            s.addSubTerm(Term(QStringLiteral("headers"), term.value(), mapComparator(term.condition())));
+            s.addSubTerm(Term(u"body"_s, term.value(), mapComparator(term.condition())));
+            s.addSubTerm(Term(u"headers"_s, term.value(), mapComparator(term.condition())));
             return s;
         }
         case Akonadi::EmailSearchTerm::Body:
-            return getTerm(term, QStringLiteral("body"));
+            return getTerm(term, u"body"_s);
         case Akonadi::EmailSearchTerm::Headers:
-            return getTerm(term, QStringLiteral("headers"));
+            return getTerm(term, u"headers"_s);
         case Akonadi::EmailSearchTerm::ByteSize:
-            return getTerm(term, QStringLiteral("size"));
+            return getTerm(term, u"size"_s);
         case Akonadi::EmailSearchTerm::HeaderDate: {
-            Term s(QStringLiteral("date"), QString::number(term.value().toDateTime().toSecsSinceEpoch()), mapComparator(term.condition()));
+            Term s(u"date"_s, QString::number(term.value().toDateTime().toSecsSinceEpoch()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
         }
         case Akonadi::EmailSearchTerm::HeaderOnlyDate: {
-            Term s(QStringLiteral("onlydate"), QString::number(term.value().toDate().toJulianDay()), mapComparator(term.condition()));
+            Term s(u"onlydate"_s, QString::number(term.value().toDate().toJulianDay()), mapComparator(term.condition()));
             s.setNegation(term.isNegated());
             return s;
         }
         case Akonadi::EmailSearchTerm::Subject:
-            return getTerm(term, QStringLiteral("subject"));
+            return getTerm(term, u"subject"_s);
         case Akonadi::EmailSearchTerm::HeaderFrom:
-            return getTerm(term, QStringLiteral("from"));
+            return getTerm(term, u"from"_s);
         case Akonadi::EmailSearchTerm::HeaderTo:
-            return getTerm(term, QStringLiteral("to"));
+            return getTerm(term, u"to"_s);
         case Akonadi::EmailSearchTerm::HeaderCC:
-            return getTerm(term, QStringLiteral("cc"));
+            return getTerm(term, u"cc"_s);
         case Akonadi::EmailSearchTerm::HeaderBCC:
-            return getTerm(term, QStringLiteral("bcc"));
+            return getTerm(term, u"bcc"_s);
         case Akonadi::EmailSearchTerm::MessageStatus: {
             const QString value = term.value().toString();
             if (value == QLatin1StringView(Akonadi::MessageFlags::Flagged)) {
-                return Term(QStringLiteral("isimportant"), !term.isNegated());
+                return Term(u"isimportant"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::ToAct)) {
-                return Term(QStringLiteral("istoact"), !term.isNegated());
+                return Term(u"istoact"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Watched)) {
-                return Term(QStringLiteral("iswatched"), !term.isNegated());
+                return Term(u"iswatched"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Deleted)) {
-                return Term(QStringLiteral("isdeleted"), !term.isNegated());
+                return Term(u"isdeleted"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Spam)) {
-                return Term(QStringLiteral("isspam"), !term.isNegated());
+                return Term(u"isspam"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Replied)) {
-                return Term(QStringLiteral("isreplied"), !term.isNegated());
+                return Term(u"isreplied"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Ignored)) {
-                return Term(QStringLiteral("isignored"), !term.isNegated());
+                return Term(u"isignored"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Forwarded)) {
-                return Term(QStringLiteral("isforwarded"), !term.isNegated());
+                return Term(u"isforwarded"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Sent)) {
-                return Term(QStringLiteral("issent"), !term.isNegated());
+                return Term(u"issent"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Queued)) {
-                return Term(QStringLiteral("isqueued"), !term.isNegated());
+                return Term(u"isqueued"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Ham)) {
-                return Term(QStringLiteral("isham"), !term.isNegated());
+                return Term(u"isham"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Seen)) {
-                return Term(QStringLiteral("isread"), !term.isNegated());
+                return Term(u"isread"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::HasAttachment)) {
-                return Term(QStringLiteral("hasattachment"), !term.isNegated());
+                return Term(u"hasattachment"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::Encrypted)) {
-                return Term(QStringLiteral("isencrypted"), !term.isNegated());
+                return Term(u"isencrypted"_s, !term.isNegated());
             }
             if (value == QLatin1StringView(Akonadi::MessageFlags::HasInvitation)) {
-                return Term(QStringLiteral("hasinvitation"), !term.isNegated());
+                return Term(u"hasinvitation"_s, !term.isNegated());
             }
             break;
         }
@@ -162,21 +162,21 @@ static Term recursiveEmailTermMapping(const Akonadi::SearchTerm &term)
             // search directly in akonadi? or index tags.
             break;
         case Akonadi::EmailSearchTerm::HeaderReplyTo:
-            return getTerm(term, QStringLiteral("replyto"));
+            return getTerm(term, u"replyto"_s);
         case Akonadi::EmailSearchTerm::HeaderOrganization:
-            return getTerm(term, QStringLiteral("organization"));
+            return getTerm(term, u"organization"_s);
         case Akonadi::EmailSearchTerm::HeaderListId:
-            return getTerm(term, QStringLiteral("listid"));
+            return getTerm(term, u"listid"_s);
         case Akonadi::EmailSearchTerm::HeaderResentFrom:
-            return getTerm(term, QStringLiteral("resentfrom"));
+            return getTerm(term, u"resentfrom"_s);
         case Akonadi::EmailSearchTerm::HeaderXLoop:
-            return getTerm(term, QStringLiteral("xloop"));
+            return getTerm(term, u"xloop"_s);
         case Akonadi::EmailSearchTerm::HeaderXMailingList:
-            return getTerm(term, QStringLiteral("xmailinglist"));
+            return getTerm(term, u"xmailinglist"_s);
         case Akonadi::EmailSearchTerm::HeaderXSpamFlag:
-            return getTerm(term, QStringLiteral("xspamflag"));
+            return getTerm(term, u"xspamflag"_s);
         case Akonadi::EmailSearchTerm::Attachment:
-            return Term(QStringLiteral("hasattachment"), !term.isNegated());
+            return Term(u"hasattachment"_s, !term.isNegated());
         case Akonadi::EmailSearchTerm::Unknown:
         default:
             if (!term.key().isEmpty()) {
@@ -204,13 +204,13 @@ static Term recursiveCalendarTermMapping(const Akonadi::SearchTerm &term)
         const Akonadi::IncidenceSearchTerm::IncidenceSearchField field = Akonadi::IncidenceSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::IncidenceSearchTerm::Organizer:
-            return getTerm(term, QStringLiteral("organizer"));
+            return getTerm(term, u"organizer"_s);
         case Akonadi::IncidenceSearchTerm::Summary:
-            return getTerm(term, QStringLiteral("summary"));
+            return getTerm(term, u"summary"_s);
         case Akonadi::IncidenceSearchTerm::Location:
-            return getTerm(term, QStringLiteral("location"));
+            return getTerm(term, u"location"_s);
         case Akonadi::IncidenceSearchTerm::PartStatus: {
-            Term t(QStringLiteral("partstatus"), term.value().toString(), Term::Equal);
+            Term t(u"partstatus"_s, term.value().toString(), Term::Equal);
             t.setNegation(term.isNegated());
             return t;
         }
@@ -240,9 +240,9 @@ static Term recursiveNoteTermMapping(const Akonadi::SearchTerm &term)
         const Akonadi::EmailSearchTerm::EmailSearchField field = Akonadi::EmailSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::EmailSearchTerm::Subject:
-            return getTerm(term, QStringLiteral("subject"));
+            return getTerm(term, u"subject"_s);
         case Akonadi::EmailSearchTerm::Body:
-            return getTerm(term, QStringLiteral("body"));
+            return getTerm(term, u"body"_s);
         default:
             if (!term.key().isEmpty()) {
                 qCWarning(AKONADIPLUGIN_INDEXER_LOG) << "unknown term " << term.key();
@@ -269,13 +269,13 @@ static Term recursiveContactTermMapping(const Akonadi::SearchTerm &term)
         const Akonadi::ContactSearchTerm::ContactSearchField field = Akonadi::ContactSearchTerm::fromKey(term.key());
         switch (field) {
         case Akonadi::ContactSearchTerm::Name:
-            return getTerm(term, QStringLiteral("name"));
+            return getTerm(term, u"name"_s);
         case Akonadi::ContactSearchTerm::Email:
-            return getTerm(term, QStringLiteral("email"));
+            return getTerm(term, u"email"_s);
         case Akonadi::ContactSearchTerm::Nickname:
-            return getTerm(term, QStringLiteral("nick"));
+            return getTerm(term, u"nick"_s);
         case Akonadi::ContactSearchTerm::Uid:
-            return getTerm(term, QStringLiteral("uid"));
+            return getTerm(term, u"uid"_s);
         case Akonadi::ContactSearchTerm::Unknown:
         default:
             if (!term.key().isEmpty()) {
@@ -308,17 +308,17 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
 
     if (mimeTypes.contains("message/rfc822"_L1)) {
         // qCDebug(AKONADIPLUGIN_INDEXER_LOG) << "mail query";
-        query.setType(QStringLiteral("Email"));
+        query.setType(u"Email"_s);
         t = recursiveEmailTermMapping(term);
     } else if (mimeTypes.contains(KContacts::Addressee::mimeType()) || mimeTypes.contains(KContacts::ContactGroup::mimeType())) {
-        query.setType(QStringLiteral("Contact"));
+        query.setType(u"Contact"_s);
         t = recursiveContactTermMapping(term);
     } else if (mimeTypes.contains("text/x-vnd.akonadi.note"_L1)) {
-        query.setType(QStringLiteral("Note"));
+        query.setType(u"Note"_s);
         t = recursiveNoteTermMapping(term);
     } else if (mimeTypes.contains("application/x-vnd.akonadi.calendar.event"_L1) || mimeTypes.contains("application/x-vnd.akonadi.calendar.todo"_L1)
                || mimeTypes.contains("application/x-vnd.akonadi.calendar.journal"_L1) || mimeTypes.contains("application/x-vnd.akonadi.calendar.freebusy"_L1)) {
-        query.setType(QStringLiteral("Calendar"));
+        query.setType(u"Calendar"_s);
         t = recursiveCalendarTermMapping(term);
     } else {
         // Unknown type
@@ -334,7 +334,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
         Term parentTerm(Term::And);
         Term collectionTerm(Term::Or);
         for (const qint64 col : collections) {
-            collectionTerm.addSubTerm(Term(QStringLiteral("collection"), QString::number(col), Term::Equal));
+            collectionTerm.addSubTerm(Term(u"collection"_s, QString::number(col), Term::Equal));
         }
         if (t.isEmpty()) {
             query.setTerm(collectionTerm);

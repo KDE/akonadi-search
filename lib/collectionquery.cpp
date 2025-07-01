@@ -15,7 +15,7 @@
 #include <QList>
 
 #include <QStandardPaths>
-
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search::PIM;
 
 class Akonadi::Search::PIM::CollectionQueryPrivate
@@ -33,7 +33,7 @@ public:
 CollectionQuery::CollectionQuery()
     : d(new CollectionQueryPrivate)
 {
-    d->databaseDir = defaultLocation(QStringLiteral("collections"));
+    d->databaseDir = defaultLocation(u"collections"_s);
     d->limit = 0;
 }
 

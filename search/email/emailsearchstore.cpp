@@ -7,6 +7,8 @@
  */
 
 #include "emailsearchstore.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "agepostingsource.h"
 #include "query.h"
 #include "term.h"
@@ -16,58 +18,57 @@ using namespace Akonadi::Search;
 EmailSearchStore::EmailSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
-    m_prefix.insert(QStringLiteral("from"), QStringLiteral("F"));
-    m_prefix.insert(QStringLiteral("to"), QStringLiteral("T"));
-    m_prefix.insert(QStringLiteral("cc"), QStringLiteral("CC"));
-    m_prefix.insert(QStringLiteral("bcc"), QStringLiteral("BC"));
-    m_prefix.insert(QStringLiteral("subject"), QStringLiteral("SU"));
-    m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
-    m_prefix.insert(QStringLiteral("replyto"), QStringLiteral("RT"));
-    m_prefix.insert(QStringLiteral("organization"), QStringLiteral("O"));
-    m_prefix.insert(QStringLiteral("listid"), QStringLiteral("LI"));
-    m_prefix.insert(QStringLiteral("resentfrom"), QStringLiteral("RF"));
-    m_prefix.insert(QStringLiteral("xloop"), QStringLiteral("XL"));
-    m_prefix.insert(QStringLiteral("xmailinglist"), QStringLiteral("XML"));
-    m_prefix.insert(QStringLiteral("xspamflag"), QStringLiteral("XSF"));
+    m_prefix.insert(u"from"_s, u"F"_s);
+    m_prefix.insert(u"to"_s, u"T"_s);
+    m_prefix.insert(u"cc"_s, u"CC"_s);
+    m_prefix.insert(u"bcc"_s, u"BC"_s);
+    m_prefix.insert(u"subject"_s, u"SU"_s);
+    m_prefix.insert(u"collection"_s, u"C"_s);
+    m_prefix.insert(u"replyto"_s, u"RT"_s);
+    m_prefix.insert(u"organization"_s, u"O"_s);
+    m_prefix.insert(u"listid"_s, u"LI"_s);
+    m_prefix.insert(u"resentfrom"_s, u"RF"_s);
+    m_prefix.insert(u"xloop"_s, u"XL"_s);
+    m_prefix.insert(u"xmailinglist"_s, u"XML"_s);
+    m_prefix.insert(u"xspamflag"_s, u"XSF"_s);
 
-    m_prefix.insert(QStringLiteral("body"), QStringLiteral("BO"));
-    m_prefix.insert(QStringLiteral("headers"), QStringLiteral("HE"));
+    m_prefix.insert(u"body"_s, u"BO"_s);
+    m_prefix.insert(u"headers"_s, u"HE"_s);
 
     // TODO: Add body flag?
     // TODO: Add tags?
 
     // Boolean Flags
-    m_prefix.insert(QStringLiteral("isimportant"), QStringLiteral("I"));
-    m_prefix.insert(QStringLiteral("istoact"), QStringLiteral("T"));
-    m_prefix.insert(QStringLiteral("iswatched"), QStringLiteral("W"));
-    m_prefix.insert(QStringLiteral("isdeleted"), QStringLiteral("D"));
-    m_prefix.insert(QStringLiteral("isspam"), QStringLiteral("S"));
-    m_prefix.insert(QStringLiteral("isreplied"), QStringLiteral("E"));
-    m_prefix.insert(QStringLiteral("isignored"), QStringLiteral("G"));
-    m_prefix.insert(QStringLiteral("isforwarded"), QStringLiteral("F"));
-    m_prefix.insert(QStringLiteral("issent"), QStringLiteral("N"));
-    m_prefix.insert(QStringLiteral("isqueued"), QStringLiteral("Q"));
-    m_prefix.insert(QStringLiteral("isham"), QStringLiteral("H"));
-    m_prefix.insert(QStringLiteral("isread"), QStringLiteral("R"));
-    m_prefix.insert(QStringLiteral("hasattachment"), QStringLiteral("A"));
-    m_prefix.insert(QStringLiteral("isencrypted"), QStringLiteral("C"));
-    m_prefix.insert(QStringLiteral("hasinvitation"), QStringLiteral("V"));
+    m_prefix.insert(u"isimportant"_s, u"I"_s);
+    m_prefix.insert(u"istoact"_s, u"T"_s);
+    m_prefix.insert(u"iswatched"_s, u"W"_s);
+    m_prefix.insert(u"isdeleted"_s, u"D"_s);
+    m_prefix.insert(u"isspam"_s, u"S"_s);
+    m_prefix.insert(u"isreplied"_s, u"E"_s);
+    m_prefix.insert(u"isignored"_s, u"G"_s);
+    m_prefix.insert(u"isforwarded"_s, u"F"_s);
+    m_prefix.insert(u"issent"_s, u"N"_s);
+    m_prefix.insert(u"isqueued"_s, u"Q"_s);
+    m_prefix.insert(u"isham"_s, u"H"_s);
+    m_prefix.insert(u"isread"_s, u"R"_s);
+    m_prefix.insert(u"hasattachment"_s, u"A"_s);
+    m_prefix.insert(u"isencrypted"_s, u"C"_s);
+    m_prefix.insert(u"hasinvitation"_s, u"V"_s);
 
-    m_boolProperties << QStringLiteral("isimportant") << QStringLiteral("istoact") << QStringLiteral("iswatched") << QStringLiteral("isdeleted")
-                     << QStringLiteral("isspam") << QStringLiteral("isreplied") << QStringLiteral("isignored") << QStringLiteral("isforwarded")
-                     << QStringLiteral("issent") << QStringLiteral("isqueued") << QStringLiteral("isham") << QStringLiteral("isread")
-                     << QStringLiteral("hasattachment") << QStringLiteral("isencrypted") << QStringLiteral("hasinvitation");
+    m_boolProperties << u"isimportant"_s << u"istoact"_s << QStringLiteral("iswatched") << QStringLiteral("isdeleted") << u"isspam"_s << u"isreplied"_s
+                     << QStringLiteral("isignored") << QStringLiteral("isforwarded") << u"issent"_s << u"isqueued"_s << QStringLiteral("isham")
+                     << QStringLiteral("isread") << u"hasattachment"_s << u"isencrypted"_s << QStringLiteral("hasinvitation");
 
-    m_valueProperties.insert(QStringLiteral("date"), 0);
-    m_valueProperties.insert(QStringLiteral("size"), 1);
-    m_valueProperties.insert(QStringLiteral("onlydate"), 2);
+    m_valueProperties.insert(u"date"_s, 0);
+    m_valueProperties.insert(u"size"_s, 1);
+    m_valueProperties.insert(u"onlydate"_s, 2);
 
-    setDbPath(findDatabase(QStringLiteral("email")));
+    setDbPath(findDatabase(u"email"_s));
 }
 
 QStringList EmailSearchStore::types()
 {
-    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Email");
+    return QStringList() << u"Akonadi"_s << u"Email"_s;
 }
 
 Xapian::Query EmailSearchStore::constructQuery(const QString &property, const QVariant &value, Term::Comparator com)
@@ -95,7 +96,7 @@ QString EmailSearchStore::text(int queryId)
 
     const QString subject = QString::fromUtf8(data.c_str(), data.length());
     if (subject.isEmpty()) {
-        return QStringLiteral("No Subject");
+        return u"No Subject"_s;
     }
 
     return subject;

@@ -17,6 +17,7 @@
 #include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
+using namespace Qt::Literals::StringLiterals;
 
 class Akonadi::Search::PIM::IndexedItemsPrivate
 {
@@ -46,7 +47,7 @@ QString IndexedItemsPrivate::dbPath(const QString &dbName) const
         return cachedPath;
     }
     if (!m_overridePrefixPath.isEmpty()) {
-        const QString path = QStringLiteral("%1/%2/").arg(m_overridePrefixPath, dbName);
+        const QString path = u"%1/%2/"_s.arg(m_overridePrefixPath, dbName);
         m_cachePath.insert(dbName, path);
         return path;
     }
@@ -56,11 +57,11 @@ QString IndexedItemsPrivate::dbPath(const QString &dbName) const
     QString basePath;
     bool hasInstanceIdentifier = Akonadi::ServerManager::hasInstanceIdentifier();
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"baloo/instances/%1"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("baloo");
+        basePath = u"baloo"_s;
     }
-    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     if (QDir(dbPath).exists()) {
         m_cachePath.insert(dbName, dbPath);
         return dbPath;
@@ -69,11 +70,11 @@ QString IndexedItemsPrivate::dbPath(const QString &dbName) const
     // If the database does not exist in old Baloo folders, than use the new
     // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"akonadi/instance/%1/search_db"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("akonadi/search_db");
+        basePath = u"akonadi/search_db"_s;
     }
-    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     QDir().mkpath(dbPath);
     m_cachePath.insert(dbName, dbPath);
     return dbPath;
@@ -81,32 +82,32 @@ QString IndexedItemsPrivate::dbPath(const QString &dbName) const
 
 QString IndexedItemsPrivate::emailIndexingPath() const
 {
-    return dbPath(QStringLiteral("email"));
+    return dbPath(u"email"_s);
 }
 
 QString IndexedItemsPrivate::contactIndexingPath() const
 {
-    return dbPath(QStringLiteral("contacts"));
+    return dbPath(u"contacts"_s);
 }
 
 QString IndexedItemsPrivate::emailContactsIndexingPath() const
 {
-    return dbPath(QStringLiteral("emailContacts"));
+    return dbPath(u"emailContacts"_s);
 }
 
 QString IndexedItemsPrivate::akonotesIndexingPath() const
 {
-    return dbPath(QStringLiteral("notes"));
+    return dbPath(u"notes"_s);
 }
 
 QString IndexedItemsPrivate::calendarIndexingPath() const
 {
-    return dbPath(QStringLiteral("calendars"));
+    return dbPath(u"calendars"_s);
 }
 
 QString IndexedItemsPrivate::collectionIndexingPath() const
 {
-    return dbPath(QStringLiteral("collections"));
+    return dbPath(u"collections"_s);
 }
 
 qlonglong IndexedItemsPrivate::indexedItemsInDatabase(const std::string &term, const QString &dbPath) const
@@ -123,7 +124,7 @@ qlonglong IndexedItemsPrivate::indexedItemsInDatabase(const std::string &term, c
 
 qlonglong IndexedItemsPrivate::indexedItems(const qlonglong id)
 {
-    const std::string term = QStringLiteral("C%1").arg(id).toStdString();
+    const std::string term = u"C%1"_s.arg(id).toStdString();
     return indexedItemsInDatabase(term, emailIndexingPath()) + indexedItemsInDatabase(term, contactIndexingPath())
         + indexedItemsInDatabase(term, akonotesIndexingPath()) + indexedItemsInDatabase(term, calendarIndexingPath());
 }
@@ -137,7 +138,7 @@ void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed
         qCCritical(AKONADI_SEARCH_PIM_LOG) << "Failed to open database" << dbPath << ":" << QString::fromStdString(e.get_msg());
         return;
     }
-    const std::string term = QStringLiteral("C%1").arg(collectionId).toStdString();
+    const std::string term = u"C%1"_s.arg(collectionId).toStdString();
     const Xapian::Query query(term);
     Xapian::Enquire enquire(db);
     enquire.set_query(query);

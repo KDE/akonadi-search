@@ -17,6 +17,7 @@
 #include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
+using namespace Qt::Literals::StringLiterals;
 
 ContactCompleter::ContactCompleter(const QString &prefix, int limit)
     : m_prefix(prefix.toLower())
@@ -71,7 +72,7 @@ static QStringList processEnquire(Xapian::Enquire &enq, int limit)
 
 QStringList ContactCompleter::complete() const
 {
-    const QString dir = Query::defaultLocation(QStringLiteral("emailContacts"));
+    const QString dir = Query::defaultLocation(u"emailContacts"_s);
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dir).toStdString());

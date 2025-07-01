@@ -6,6 +6,8 @@
  */
 
 #include "xapiandatabase.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "xapiandocument.h"
 
 #include "akonadi_search_xapian_debug.h"

@@ -14,21 +14,21 @@ using namespace Akonadi::Search;
 ContactSearchStore::ContactSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
-    m_prefix.insert(QStringLiteral("name"), QStringLiteral("NA"));
-    m_prefix.insert(QStringLiteral("nick"), QStringLiteral("NI"));
-    m_prefix.insert(QStringLiteral("email"), ""_L1); // Email currently doesn't map to anything
-    m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
-    m_prefix.insert(QStringLiteral("uid"), QStringLiteral("UID"));
+    m_prefix.insert(u"name"_s, u"NA"_s);
+    m_prefix.insert(u"nick"_s, u"NI"_s);
+    m_prefix.insert(u"email"_s, ""_L1); // Email currently doesn't map to anything
+    m_prefix.insert(u"collection"_s, u"C"_s);
+    m_prefix.insert(u"uid"_s, u"UID"_s);
 
-    m_valueProperties.insert(QStringLiteral("birthday"), 0);
-    m_valueProperties.insert(QStringLiteral("anniversary"), 1);
+    m_valueProperties.insert(u"birthday"_s, 0);
+    m_valueProperties.insert(u"anniversary"_s, 1);
 
-    setDbPath(findDatabase(QStringLiteral("contacts")));
+    setDbPath(findDatabase(u"contacts"_s));
 }
 
 QStringList ContactSearchStore::types()
 {
-    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Contact");
+    return QStringList() << u"Akonadi"_s << u"Contact"_s;
 }
 
 #include "moc_contactsearchstore.cpp"

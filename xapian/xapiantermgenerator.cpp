@@ -6,6 +6,7 @@
  */
 
 #include "xapiantermgenerator.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_search_xapian_debug.h"
 #include <QTextBoundaryFinder>
@@ -62,7 +63,7 @@ QStringList XapianTermGenerator::termList(const QString &text)
             }
 
             str = cleanString.normalized(QString::NormalizationForm_KC);
-            list << str.split(QLatin1Char('_'), Qt::SkipEmptyParts);
+            list << str.split(u'_', Qt::SkipEmptyParts);
         }
     }
 

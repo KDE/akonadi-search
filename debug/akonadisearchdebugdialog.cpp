@@ -39,14 +39,14 @@ AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
     , d(new Akonadi::Search::AkonadiSearchDebugDialogPrivate)
 {
     // Don't translate it's just a dialog to debug
-    setWindowTitle(QStringLiteral("Debug Akonadi Search"));
+    setWindowTitle(u"Debug Akonadi Search"_s);
 
     auto mainLayout = new QVBoxLayout(this);
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Close, this);
     auto user1Button = new QPushButton;
     buttonBox->addButton(user1Button, QDialogButtonBox::ActionRole);
     // Don't translate it.
-    user1Button->setText(QStringLiteral("Save As..."));
+    user1Button->setText(u"Save As..."_s);
     connect(user1Button, &QPushButton::clicked, this, &AkonadiSearchDebugDialog::slotSaveAs);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &AkonadiSearchDebugDialog::reject);
     d->mAkonadiSearchDebugWidget = new AkonadiSearchDebugWidget(this);

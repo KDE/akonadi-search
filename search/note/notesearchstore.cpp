@@ -7,22 +7,23 @@
  */
 
 #include "notesearchstore.h"
+using namespace Qt::Literals::StringLiterals;
 
 using namespace Akonadi::Search;
 
 NoteSearchStore::NoteSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
-    m_prefix.insert(QStringLiteral("subject"), QStringLiteral("SU"));
-    m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
-    m_prefix.insert(QStringLiteral("body"), QStringLiteral("BO"));
+    m_prefix.insert(u"subject"_s, u"SU"_s);
+    m_prefix.insert(u"collection"_s, u"C"_s);
+    m_prefix.insert(u"body"_s, u"BO"_s);
 
-    setDbPath(findDatabase(QStringLiteral("notes")));
+    setDbPath(findDatabase(u"notes"_s));
 }
 
 QStringList NoteSearchStore::types()
 {
-    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Note");
+    return QStringList() << u"Akonadi"_s << u"Note"_s;
 }
 
 #include "moc_notesearchstore.cpp"

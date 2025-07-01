@@ -7,6 +7,8 @@
  */
 
 #include "xapiansearchstore.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "query.h"
 #include "xapianqueryparser.h"
 

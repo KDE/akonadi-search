@@ -7,6 +7,8 @@
  */
 
 #include "calendarindexer.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadi_indexer_agent_calendar_debug.h"
 #include "xapiandocument.h"
 
@@ -129,19 +131,19 @@ void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarC
 
     Akonadi::Search::XapianDocument doc;
 
-    doc.indexText(event->organizer().email(), QStringLiteral("O"));
-    doc.indexText(normalizeString(event->summary()), QStringLiteral("S"));
-    doc.indexText(normalizeString(event->location()), QStringLiteral("L"));
+    doc.indexText(event->organizer().email(), u"O"_s);
+    doc.indexText(normalizeString(event->summary()), u"S"_s);
+    doc.indexText(normalizeString(event->location()), u"L"_s);
     const KCalendarCore::Attendee::List attendees = event->attendees();
     for (const KCalendarCore::Attendee &attendee : attendees) {
-        doc.addBoolTerm(attendee.email() + QString::number(attendee.status()), QStringLiteral("PS"));
+        doc.addBoolTerm(attendee.email() + QString::number(attendee.status()), u"PS"_s);
     }
 
     // Parent collection
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::CalenderIndexer::index", "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addBoolTerm(colId, QStringLiteral("C"));
+    doc.addBoolTerm(colId, u"C"_s);
 
     m_db->replaceDocument(item.id(), doc);
 }

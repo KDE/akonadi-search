@@ -25,7 +25,7 @@ Q_DECLARE_METATYPE(QList<qint64>)
 
 static KMime::Message::Ptr readMailFromFile(const QString &mailFile)
 {
-    QFile file(QLatin1StringView(MAIL_DATA_DIR) + QLatin1Char('/') + mailFile);
+    QFile file(QLatin1StringView(MAIL_DATA_DIR) + u'/' + mailFile);
     const auto ok = file.open(QIODevice::ReadOnly);
     Q_ASSERT(ok && file.isOpen());
     auto mailData = KMime::CRLFtoLF(file.readAll());
@@ -74,8 +74,8 @@ private Q_SLOTS:
         emailDir = QDir::tempPath() + "/searchplugintest/email/"_L1;
         emailContactsDir = QDir::tempPath() + "/searchplugintest/emailcontacts/"_L1;
         contactsDir = QDir::tempPath() + "/searchplugintest/contacts/"_L1;
-        notesDir = QDir::tempPath() + QStringLiteral("/searchplugintest/notes/");
-        calendarsDir = QDir::tempPath() + QStringLiteral("/searchplugintest/calendars/");
+        notesDir = QDir::tempPath() + u"/searchplugintest/notes/"_s;
+        calendarsDir = QDir::tempPath() + u"/searchplugintest/calendars/"_s;
 
         QDir dir;
         removeDir(emailDir);
@@ -110,10 +110,10 @@ private Q_SLOTS:
         QSet<qint64> resultSet;
 
         Akonadi::Search::Term term(Akonadi::Search::Term::Or);
-        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("1"), Akonadi::Search::Term::Equal));
-        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("2"), Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(u"collection"_s, u"1"_s, Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(u"collection"_s, u"2"_s, Akonadi::Search::Term::Equal));
         Akonadi::Search::Query query(term);
-        query.setType(QStringLiteral("Email"));
+        query.setType(u"Email"_s);
 
         auto emailSearchStore = new Akonadi::Search::EmailSearchStore(this);
         emailSearchStore->setDbPath(emailDir);
@@ -132,10 +132,10 @@ private Q_SLOTS:
         QSet<qint64> resultSet;
 
         Akonadi::Search::Term term(Akonadi::Search::Term::Or);
-        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("1"), Akonadi::Search::Term::Equal));
-        term.addSubTerm(Akonadi::Search::Term(QStringLiteral("collection"), QStringLiteral("2"), Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(u"collection"_s, u"1"_s, Akonadi::Search::Term::Equal));
+        term.addSubTerm(Akonadi::Search::Term(u"collection"_s, u"2"_s, Akonadi::Search::Term::Equal));
         Akonadi::Search::Query query(term);
-        query.setType(QStringLiteral("Calendar"));
+        query.setType(u"Calendar"_s);
 
         auto calendarSearchStore = new Akonadi::Search::CalendarSearchStore(this);
         calendarSearchStore->setDbPath(calendarsDir);
@@ -183,7 +183,7 @@ private Q_SLOTS:
 
     void testHtmlOnly()
     {
-        auto msg = readMailFromFile(QStringLiteral("htmlonly.mbox"));
+        auto msg = readMailFromFile(u"htmlonly.mbox"_s);
 
         Akonadi::Item item(KMime::Message::mimeType());
         item.setId(1);
@@ -201,7 +201,7 @@ private Q_SLOTS:
         CalendarIndexer calendarIndexer(calendarsDir);
         {
             KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
-            event->setSummary(QStringLiteral("My Event 1"));
+            event->setSummary(u"My Event 1"_s);
 
             Akonadi::Item item(KCalendarCore::Event::eventMimeType());
             item.setId(3);
@@ -212,7 +212,7 @@ private Q_SLOTS:
 
         {
             KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
-            event->setSummary(QStringLiteral("My Event 2"));
+            event->setSummary(u"My Event 2"_s);
 
             Akonadi::Item item(KCalendarCore::Event::eventMimeType());
             item.setId(4);
@@ -234,8 +234,8 @@ private Q_SLOTS:
         CalendarIndexer calendarIndexer(calendarsDir);
         {
             KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
-            event->setSummary(QStringLiteral("My Event 1"));
-            event->addAttendee(KCalendarCore::Attendee(QStringLiteral("John Doe"), QStringLiteral("john.doe@kmail.com")));
+            event->setSummary(u"My Event 1"_s);
+            event->addAttendee(KCalendarCore::Attendee(u"John Doe"_s, u"john.doe@kmail.com"_s));
 
             Akonadi::Item item(KCalendarCore::Event::eventMimeType());
             item.setId(5);
@@ -250,14 +250,12 @@ private Q_SLOTS:
         const auto status = KCalendarCore::Attendee::PartStat::NeedsAction;
         Akonadi::Search::Term term(Akonadi::Search::Term::Or);
 
-        Akonadi::Search::Term partStatusTerm(QStringLiteral("partstatus"),
-                                             QString(QStringLiteral("john.doe@kmail.com") + QString::number(status)),
-                                             Akonadi::Search::Term::Equal);
+        Akonadi::Search::Term partStatusTerm(u"partstatus"_s, QString(u"john.doe@kmail.com"_s + QString::number(status)), Akonadi::Search::Term::Equal);
 
         term.addSubTerm(partStatusTerm);
 
         Akonadi::Search::Query query(term);
-        query.setType(QStringLiteral("Calendar"));
+        query.setType(u"Calendar"_s);
 
         auto calendarSearchStore = new Akonadi::Search::CalendarSearchStore(this);
         calendarSearchStore->setDbPath(calendarsDir);

@@ -69,16 +69,16 @@ private Q_SLOTS:
     void searchByName()
     {
         Akonadi::Collection col1(3);
-        col1.setName(QStringLiteral("col3"));
+        col1.setName(u"col3"_s);
         index.index(col1);
 
         Akonadi::Collection col2(4);
-        col2.setName(QStringLiteral("col4"));
+        col2.setName(u"col4"_s);
         col2.setParentCollection(col1);
         index.index(col2);
 
         Akonadi::Search::PIM::CollectionQuery query;
-        query.setDatabaseDir(dbPrefix + QStringLiteral("/collections/"));
+        query.setDatabaseDir(dbPrefix + u"/collections/"_s);
         query.nameMatches(col1.name());
         Akonadi::Search::PIM::ResultIterator it = query.exec();
         QList<qint64> results;
@@ -93,11 +93,11 @@ private Q_SLOTS:
     void searchHierarchy()
     {
         Akonadi::Collection col1(1);
-        col1.setName(QStringLiteral("col1"));
+        col1.setName(u"col1"_s);
         index.index(col1);
 
         Akonadi::Collection col2(2);
-        col2.setName(QStringLiteral("col2"));
+        col2.setName(u"col2"_s);
         col2.setParentCollection(col1);
         index.index(col2);
 
@@ -119,7 +119,7 @@ private Q_SLOTS:
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + "/collections/"_L1);
-            query.pathMatches(QStringLiteral("/col1/col2"));
+            query.pathMatches(u"/col1/col2"_s);
             Akonadi::Search::PIM::ResultIterator it = query.exec();
             QList<qint64> results;
             while (it.next()) {
@@ -145,20 +145,20 @@ private Q_SLOTS:
     void collectionChanged()
     {
         Akonadi::Collection col1(1);
-        col1.setName(QStringLiteral("col1"));
+        col1.setName(u"col1"_s);
         index.index(col1);
 
         Akonadi::Collection col2(2);
-        col2.setName(QStringLiteral("col2"));
+        col2.setName(u"col2"_s);
         col2.setParentCollection(col1);
         index.index(col2);
 
         Akonadi::Collection col3(3);
-        col3.setName(QStringLiteral("col3"));
+        col3.setName(u"col3"_s);
         col3.setParentCollection(col2);
         index.index(col3);
 
-        col1.setName(QStringLiteral("colX"));
+        col1.setName(u"colX"_s);
         index.change(col1);
         col2.setParentCollection(col1);
         index.change(col2);
@@ -169,7 +169,7 @@ private Q_SLOTS:
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + "/collections/"_L1);
-            query.nameMatches(QStringLiteral("col1"));
+            query.nameMatches(u"col1"_s);
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 0);
         }
@@ -177,7 +177,7 @@ private Q_SLOTS:
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + "/collections/"_L1);
-            query.nameMatches(QStringLiteral("colX"));
+            query.nameMatches(u"colX"_s);
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 1);
             QCOMPARE(results.at(0), col1.id());
@@ -186,7 +186,7 @@ private Q_SLOTS:
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + "/collections/"_L1);
-            query.pathMatches(QStringLiteral("/col1/col2"));
+            query.pathMatches(u"/col1/col2"_s);
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 0);
         }
@@ -194,7 +194,7 @@ private Q_SLOTS:
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + "/collections/"_L1);
-            query.pathMatches(QStringLiteral("/colX/col2"));
+            query.pathMatches(u"/colX/col2"_s);
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 2);
             QCOMPARE(results.at(0), col2.id());
@@ -203,7 +203,7 @@ private Q_SLOTS:
         {
             Akonadi::Search::PIM::CollectionQuery query;
             query.setDatabaseDir(dbPrefix + "/collections/"_L1);
-            query.pathMatches(QStringLiteral("/colX/col2/col3"));
+            query.pathMatches(u"/colX/col2/col3"_s);
             QList<qint64> results = getResults(query.exec());
             QCOMPARE(results.size(), 1);
             QCOMPARE(results.at(0), col3.id());

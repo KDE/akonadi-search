@@ -6,6 +6,8 @@
  */
 
 #include "queryparsertest.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "../xapiandatabase.h"
 #include "../xapianqueryparser.h"
 
@@ -19,7 +21,7 @@ void QueryParserTest::testSinglePrefixWord()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("The"), QStringLiteral("F"));
+    Xapian::Query query = parser.parseQuery(u"The"_s, u"F"_s);
     Xapian::Query q("Fthe", 1, 1);
     QCOMPARE(query.serialise(), q.serialise());
 }
@@ -28,7 +30,7 @@ void QueryParserTest::testSimpleQuery()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("The song of Ice and Fire"));
+    Xapian::Query query = parser.parseQuery(u"The song of Ice and Fire"_s);
 
     QList<Xapian::Query> queries;
     queries << Xapian::Query("the", 1, 1);
@@ -47,7 +49,7 @@ void QueryParserTest::testPhraseSearch()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("The \"song of Ice\" Fire"));
+    Xapian::Query query = parser.parseQuery(u"The \"song of Ice\" Fire"_s);
     // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> phraseQueries;
@@ -69,7 +71,7 @@ void QueryParserTest::testPhraseSearchOnly()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("/opt/pro"));
+    Xapian::Query query = parser.parseQuery(u"/opt/pro"_s);
     // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> queries;
@@ -85,7 +87,7 @@ void QueryParserTest::testPhraseSearch_sameLimiter()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("The \"song of Ice' and Fire"));
+    Xapian::Query query = parser.parseQuery(u"The \"song of Ice' and Fire"_s);
     // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> queries;
@@ -106,7 +108,7 @@ void QueryParserTest::testPhraseSearchEmail()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("The song@ice.com Fire"));
+    Xapian::Query query = parser.parseQuery(u"The song@ice.com Fire"_s);
 
     QList<Xapian::Query> phraseQueries;
     phraseQueries << Xapian::Query("song", 1, 2);
@@ -136,7 +138,7 @@ void QueryParserTest::testUnderscoreSplitting()
 {
     XapianQueryParser parser;
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("The_Fire"));
+    Xapian::Query query = parser.parseQuery(u"The_Fire"_s);
 
     QList<Xapian::Query> queries;
     queries << Xapian::Query("the", 1, 1);
@@ -165,7 +167,7 @@ void QueryParserTest::testWordExpansion()
     XapianQueryParser parser;
     parser.setDatabase(xap);
 
-    Xapian::Query query = parser.parseQuery(QStringLiteral("hell"));
+    Xapian::Query query = parser.parseQuery(u"hell"_s);
     // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     QList<Xapian::Query> synQueries;
@@ -181,7 +183,7 @@ void QueryParserTest::testWordExpansion()
     //
     // Try expanding everything
     //
-    query = parser.parseQuery(QStringLiteral("hel hi"));
+    query = parser.parseQuery(u"hel hi"_s);
     // qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.get_description().c_str();
 
     {
@@ -209,7 +211,7 @@ void QueryParserTest::testWordExpansion()
     }
 
     {
-        Xapian::Query query = parser.parseQuery(QStringLiteral("rubbish"));
+        Xapian::Query query = parser.parseQuery(u"rubbish"_s);
         Xapian::Query q = Xapian::Query("rubbish", 1, 1);
 
         QCOMPARE(query.serialise(), q.serialise());

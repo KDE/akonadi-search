@@ -80,7 +80,7 @@ SearchStore::List SearchStore::searchStores()
 
     const QStringList paths = QCoreApplication::libraryPaths();
     for (const QString &libraryPath : paths) {
-        const QString path(libraryPath + QStringLiteral("/pim6/akonadi"));
+        const QString path(libraryPath + u"/pim6/akonadi"_s);
         QDir dir(path);
 
         if (!dir.exists()) {
@@ -103,8 +103,8 @@ SearchStore::List SearchStore::searchStores()
     for (const QString &pluginPath : std::as_const(pluginPaths)) {
         QPluginLoader loader(pluginPath);
 
-        const QVariantMap metadata = loader.metaData().toVariantMap()[QStringLiteral("MetaData")].toMap();
-        if (metadata[QStringLiteral("X-Akonadi-PluginType")].toString() != "SearchStore"_L1) {
+        const QVariantMap metadata = loader.metaData().toVariantMap()[u"MetaData"_s].toMap();
+        if (metadata[u"X-Akonadi-PluginType"_s].toString() != "SearchStore"_L1) {
             continue;
         }
         if (!loader.load()) {

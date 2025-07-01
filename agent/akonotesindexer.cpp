@@ -7,6 +7,8 @@
  */
 
 #include "akonotesindexer.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadi_indexer_agent_debug.h"
 #ifdef HAS_HTMLPARSER
 #include <lib.rs.h>
@@ -37,7 +39,7 @@ AkonotesIndexer::~AkonotesIndexer()
 
 QStringList AkonotesIndexer::mimeTypes() const
 {
-    return {QStringLiteral("text/x-vnd.akonadi.note")};
+    return {u"text/x-vnd.akonadi.note"_s};
 }
 
 void AkonotesIndexer::index(const Akonadi::Item &item)

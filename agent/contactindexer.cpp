@@ -7,6 +7,8 @@
  */
 
 #include "contactindexer.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadi_indexer_agent_debug.h"
 #include "xapiandocument.h"
 
@@ -67,10 +69,10 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
 
     doc.indexText(name);
     doc.indexText(addressee.nickName());
-    doc.indexText(addressee.uid(), QStringLiteral("UID"));
+    doc.indexText(addressee.uid(), u"UID"_s);
 
-    doc.indexText(name, QStringLiteral("NA"));
-    doc.indexText(addressee.nickName(), QStringLiteral("NI"));
+    doc.indexText(name, u"NA"_s);
+    doc.indexText(addressee.nickName(), u"NI"_s);
 
     const QStringList lstEmails = addressee.emails();
     for (const QString &email : lstEmails) {
@@ -82,7 +84,7 @@ bool ContactIndexer::indexContact(const Akonadi::Item &item)
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index", "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addBoolTerm(colId, QStringLiteral("C"));
+    doc.addBoolTerm(colId, u"C"_s);
 
     if (addressee.birthday().isValid()) {
         const QString julianDay = QString::number(addressee.birthday().date().toJulianDay());
@@ -110,13 +112,13 @@ void ContactIndexer::indexContactGroup(const Akonadi::Item &item)
 
     const QString name = group.name();
     doc.indexText(name);
-    doc.indexText(name, QStringLiteral("NA"));
+    doc.indexText(name, u"NA"_s);
 
     // Parent collection
     Q_ASSERT_X(item.parentCollection().isValid(), "Akonadi::Search::ContactIndexer::index", "Item does not have a valid parent collection");
 
     const Akonadi::Collection::Id colId = item.parentCollection().id();
-    doc.addBoolTerm(colId, QStringLiteral("C"));
+    doc.addBoolTerm(colId, u"C"_s);
     m_db->replaceDocument(item.id(), doc);
 }
 

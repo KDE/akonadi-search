@@ -6,6 +6,7 @@
  */
 
 #include "xapianqueryparser.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_search_xapian_debug.h"
 #include <QStringList>
@@ -131,7 +132,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
             int pos = bf.position();
             if (pos != end) {
                 QString delim = text.mid(end, pos - end);
-                if (delim.contains(QLatin1Char('"'))) {
+                if (delim.contains(u'"')) {
                     if (inDoubleQuotes) {
                         queries << Xapian::Query(Xapian::Query::OP_PHRASE, phraseQueries.begin(), phraseQueries.end());
                         phraseQueries.clear();
@@ -139,7 +140,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
                     } else {
                         inDoubleQuotes = true;
                     }
-                } else if (delim.contains(QLatin1Char('\''))) {
+                } else if (delim.contains(u'\'')) {
                     if (inSingleQuotes) {
                         queries << Xapian::Query(Xapian::Query::OP_PHRASE, phraseQueries.begin(), phraseQueries.end());
                         phraseQueries.clear();
@@ -180,7 +181,7 @@ Xapian::Query XapianQueryParser::parseQuery(const QString &text, const QString &
             }
 
             str = cleanString.normalized(QString::NormalizationForm_KC);
-            const QList<QStringView> lst = QStringView(str).split(QLatin1Char('_'), Qt::SkipEmptyParts);
+            const QList<QStringView> lst = QStringView(str).split(u'_', Qt::SkipEmptyParts);
             for (const QStringView t : lst) {
                 const QString term = prefix + t;
 

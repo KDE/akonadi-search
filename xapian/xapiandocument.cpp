@@ -6,6 +6,7 @@
  */
 
 #include "xapiandocument.h"
+using namespace Qt::Literals::StringLiterals;
 
 using namespace Akonadi::Search;
 

@@ -7,6 +7,8 @@
  */
 
 #include "emailindexer.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "akonadi_indexer_agent_email_debug.h"
 
 #include <Akonadi/Collection>
@@ -248,7 +250,7 @@ void EmailIndexer::processPart(KMime::Content *content, KMime::Content *mainCont
         // Only get HTML content, if no plain text content
         if (!mainContent && type->isHTMLText()) {
             QProcess converter;
-            converter.start(QStringLiteral("akonadi_html_to_text"));
+            converter.start(u"akonadi_html_to_text"_s);
             if (!converter.waitForStarted()) {
                 return;
             }

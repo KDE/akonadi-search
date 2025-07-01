@@ -228,9 +228,9 @@ QVariantMap Term::toVariantMap() const
         }
 
         if (d->m_op == And) {
-            map[QStringLiteral("$and")] = variantList;
+            map[u"$and"_s] = variantList;
         } else {
-            map[QStringLiteral("$or")] = variantList;
+            map[u"$or"_s] = variantList;
         }
 
         return map;
@@ -243,23 +243,23 @@ QVariantMap Term::toVariantMap() const
         return map;
 
     case Contains:
-        op = QStringLiteral("$ct");
+        op = u"$ct"_s;
         break;
 
     case Greater:
-        op = QStringLiteral("$gt");
+        op = u"$gt"_s;
         break;
 
     case GreaterEqual:
-        op = QStringLiteral("$gte");
+        op = u"$gte"_s;
         break;
 
     case Less:
-        op = QStringLiteral("$lt");
+        op = u"$lt"_s;
         break;
 
     case LessEqual:
-        op = QStringLiteral("$lte");
+        op = u"$lte"_s;
         break;
 
     default:
@@ -285,7 +285,7 @@ QVariant tryConvert(const QVariant &var)
             return var;
         }
 
-        if (!var.toString().contains(QLatin1Char('T'))) {
+        if (!var.toString().contains(u'T')) {
             return QVariant(var.toDate());
         }
         return dt;
@@ -303,11 +303,11 @@ Term Term::fromVariantMap(const QVariantMap &map)
     Term term;
 
     QString andOrString;
-    if (map.contains(QStringLiteral("$and"))) {
-        andOrString = QStringLiteral("$and");
+    if (map.contains(u"$and"_s)) {
+        andOrString = u"$and"_s;
         term.setOperation(And);
-    } else if (map.contains(QStringLiteral("$or"))) {
-        andOrString = QStringLiteral("$or");
+    } else if (map.contains(u"$or"_s)) {
+        andOrString = u"$or"_s;
         term.setOperation(Or);
     }
 
@@ -398,19 +398,19 @@ QString comparatorToString(Term::Comparator c)
 {
     switch (c) {
     case Term::Auto:
-        return QStringLiteral("Auto");
+        return u"Auto"_s;
     case Term::Equal:
-        return QStringLiteral("=");
+        return u"="_s;
     case Term::Contains:
-        return QStringLiteral(":");
+        return u":"_s;
     case Term::Less:
-        return QStringLiteral("<");
+        return u"<"_s;
     case Term::LessEqual:
-        return QStringLiteral("<=");
+        return u"<="_s;
     case Term::Greater:
-        return QStringLiteral(">");
+        return u">"_s;
     case Term::GreaterEqual:
-        return QStringLiteral(">=");
+        return u">="_s;
     }
 
     return {};
@@ -420,11 +420,11 @@ QString operationToString(Term::Operation op)
 {
     switch (op) {
     case Term::None:
-        return QStringLiteral("NONE");
+        return u"NONE"_s;
     case Term::And:
-        return QStringLiteral("AND");
+        return u"AND"_s;
     case Term::Or:
-        return QStringLiteral("OR");
+        return u"OR"_s;
     }
 
     return {};
@@ -434,8 +434,7 @@ QString operationToString(Term::Operation op)
 QDebug operator<<(QDebug d, const Term &t)
 {
     if (t.subTerms().isEmpty()) {
-        d << QStringLiteral("(%1 %2 %3 (%4))")
-                 .arg(t.property(), comparatorToString(t.comparator()), t.value().toString(), QString::fromLatin1(t.value().typeName()))
+        d << u"(%1 %2 %3 (%4))"_s.arg(t.property(), comparatorToString(t.comparator()), t.value().toString(), QString::fromLatin1(t.value().typeName()))
                  .toUtf8()
                  .constData();
     } else {

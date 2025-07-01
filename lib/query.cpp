@@ -35,27 +35,27 @@ Query *Query::fromJSON(const QByteArray &json)
     }
 
     const QVariantMap result = doc.toVariant().toMap();
-    const QString type = result[QStringLiteral("type")].toString().toLower();
+    const QString type = result[u"type"_s].toString().toLower();
     if (type != "contact"_L1) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << "Can only handle contact queries";
         return nullptr;
     }
 
     auto cq = new ContactQuery();
-    cq->matchName(result[QStringLiteral("name")].toString());
-    cq->matchNickname(result[QStringLiteral("nick")].toString());
-    cq->matchEmail(result[QStringLiteral("email")].toString());
-    cq->matchUID(result[QStringLiteral("uid")].toString());
-    cq->match(result[QStringLiteral("$")].toString());
+    cq->matchName(result[u"name"_s].toString());
+    cq->matchNickname(result[u"nick"_s].toString());
+    cq->matchEmail(result[u"email"_s].toString());
+    cq->matchUID(result[u"uid"_s].toString());
+    cq->match(result[u"$"_s].toString());
 
-    const QString criteria = result[QStringLiteral("matchCriteria")].toString().toLower();
+    const QString criteria = result[u"matchCriteria"_s].toString().toLower();
     if (criteria == "exact"_L1) {
         cq->setMatchCriteria(ContactQuery::ExactMatch);
     } else if (criteria == "startswith"_L1) {
         cq->setMatchCriteria(ContactQuery::StartsWithMatch);
     }
 
-    cq->setLimit(result[QStringLiteral("limit")].toInt());
+    cq->setLimit(result[u"limit"_s].toInt());
 
     return cq;
 }
@@ -67,11 +67,11 @@ QString Query::defaultLocation(const QString &dbName)
     QString basePath;
     bool hasInstanceIdentifier = Akonadi::ServerManager::hasInstanceIdentifier();
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"baloo/instances/%1"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("baloo");
+        basePath = u"baloo"_s;
     }
-    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     if (QDir(dbPath).exists()) {
         return dbPath;
     }
@@ -79,11 +79,11 @@ QString Query::defaultLocation(const QString &dbName)
     // If the database does not exist in old Baloo folders, than use the new
     // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"akonadi/instance/%1/search_db"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("akonadi/search_db");
+        basePath = u"akonadi/search_db"_s;
     }
-    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     QDir().mkpath(dbPath);
     return dbPath;
 }

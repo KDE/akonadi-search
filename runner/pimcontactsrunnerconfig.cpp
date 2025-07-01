@@ -6,6 +6,8 @@
  */
 
 #include "pimcontactsrunnerconfig.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KPluginFactory>
@@ -35,11 +37,11 @@ void PIMContactsRunnerConfig::load()
 {
     KCModule::load();
 
-    const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    KConfigGroup grp = cfg->group(QStringLiteral("Runners"));
-    grp = KConfigGroup(&grp, QStringLiteral("PIM Contacts Search Runner"));
+    const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(u"krunnerrc"_s);
+    KConfigGroup grp = cfg->group(u"Runners"_s);
+    grp = KConfigGroup(&grp, u"PIM Contacts Search Runner"_s);
 
-    mQueryCompletionCheckBox->setChecked(grp.readEntry(QStringLiteral("queryAutocompleter"), true));
+    mQueryCompletionCheckBox->setChecked(grp.readEntry(u"queryAutocompleter"_s, true));
 
     setNeedsSave(false);
 }
@@ -48,11 +50,11 @@ void PIMContactsRunnerConfig::save()
 {
     KCModule::save();
 
-    const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    KConfigGroup grp = cfg->group(QStringLiteral("Runners"));
-    grp = KConfigGroup(&grp, QStringLiteral("PIM Contacts Search Runner"));
+    const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(u"krunnerrc"_s);
+    KConfigGroup grp = cfg->group(u"Runners"_s);
+    grp = KConfigGroup(&grp, u"PIM Contacts Search Runner"_s);
 
-    grp.writeEntry(QStringLiteral("queryAutocompleter"), mQueryCompletionCheckBox->isChecked());
+    grp.writeEntry(u"queryAutocompleter"_s, mQueryCompletionCheckBox->isChecked());
 
     cfg->sync();
     setNeedsSave(false);

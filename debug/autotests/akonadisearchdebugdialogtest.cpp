@@ -5,6 +5,8 @@
 */
 
 #include "akonadisearchdebugdialogtest.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "../akonadisearchdebugdialog.h"
 #include "../akonadisearchdebugwidget.h"
 #include <KLineEdit>
@@ -27,11 +29,11 @@ void AkonadiSearchDebugDialogTest::initTestCase()
 void AkonadiSearchDebugDialogTest::shouldHaveDefaultValue()
 {
     Akonadi::Search::AkonadiSearchDebugDialog dlg;
-    auto debugWidget = dlg.findChild<Akonadi::Search::AkonadiSearchDebugWidget *>(QStringLiteral("akonadisearchdebugwidget"));
+    auto debugWidget = dlg.findChild<Akonadi::Search::AkonadiSearchDebugWidget *>(u"akonadisearchdebugwidget"_s);
     QVERIFY(debugWidget);
-    auto editorWidget = debugWidget->findChild<QPlainTextEdit *>(QStringLiteral("plaintexteditor"));
+    auto editorWidget = debugWidget->findChild<QPlainTextEdit *>(u"plaintexteditor"_s);
     QVERIFY(editorWidget);
-    auto lineEdit = debugWidget->findChild<KLineEdit *>(QStringLiteral("lineedit"));
+    auto lineEdit = debugWidget->findChild<KLineEdit *>(u"lineedit"_s);
     QVERIFY(lineEdit);
     QVERIFY(lineEdit->text().isEmpty());
 }
@@ -39,9 +41,9 @@ void AkonadiSearchDebugDialogTest::shouldHaveDefaultValue()
 void AkonadiSearchDebugDialogTest::shouldFillLineEditWhenWeWantToSearchItem()
 {
     Akonadi::Search::AkonadiSearchDebugDialog dlg;
-    auto debugWidget = dlg.findChild<Akonadi::Search::AkonadiSearchDebugWidget *>(QStringLiteral("akonadisearchdebugwidget"));
+    auto debugWidget = dlg.findChild<Akonadi::Search::AkonadiSearchDebugWidget *>(u"akonadisearchdebugwidget"_s);
     QVERIFY(debugWidget);
-    auto lineEdit = debugWidget->findChild<KLineEdit *>(QStringLiteral("lineedit"));
+    auto lineEdit = debugWidget->findChild<KLineEdit *>(u"lineedit"_s);
     QVERIFY(lineEdit);
     const int value = 42;
     const QString akonadiItem = QString::number(value);

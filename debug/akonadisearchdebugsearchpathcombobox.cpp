@@ -5,6 +5,8 @@
 */
 
 #include "akonadisearchdebugsearchpathcombobox.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include <Akonadi/ServerManager>
 #include <QDir>
 #include <QStandardPaths>
@@ -31,26 +33,26 @@ QString AkonadiSearchDebugSearchPathComboBox::searchPath() const
 
 void AkonadiSearchDebugSearchPathComboBox::initialize()
 {
-    addItem(QStringLiteral("Contacts"), Contacts);
-    addItem(QStringLiteral("ContactCompleter"), ContactCompleter);
-    addItem(QStringLiteral("Email"), Emails);
-    addItem(QStringLiteral("Notes"), Notes);
-    addItem(QStringLiteral("Calendars"), Calendars);
+    addItem(u"Contacts"_s, Contacts);
+    addItem(u"ContactCompleter"_s, ContactCompleter);
+    addItem(u"Email"_s, Emails);
+    addItem(u"Notes"_s, Notes);
+    addItem(u"Calendars"_s, Calendars);
 }
 
 QString AkonadiSearchDebugSearchPathComboBox::pathFromEnum(SearchType type) const
 {
     switch (type) {
     case Contacts:
-        return defaultLocations(QStringLiteral("contacts"));
+        return defaultLocations(u"contacts"_s);
     case ContactCompleter:
-        return defaultLocations(QStringLiteral("emailContacts"));
+        return defaultLocations(u"emailContacts"_s);
     case Emails:
-        return defaultLocations(QStringLiteral("email"));
+        return defaultLocations(u"email"_s);
     case Notes:
-        return defaultLocations(QStringLiteral("notes"));
+        return defaultLocations(u"notes"_s);
     case Calendars:
-        return defaultLocations(QStringLiteral("calendars"));
+        return defaultLocations(u"calendars"_s);
     }
     return {};
 }
@@ -70,11 +72,11 @@ const QString AkonadiSearchDebugSearchPathComboBox::defaultLocations(const QStri
     QString basePath;
     bool hasInstanceIdentifier = Akonadi::ServerManager::hasInstanceIdentifier();
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"baloo/instances/%1"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("baloo");
+        basePath = u"baloo"_s;
     }
-    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     if (QDir(dbPath).exists()) {
         return dbPath;
     }
@@ -82,11 +84,11 @@ const QString AkonadiSearchDebugSearchPathComboBox::defaultLocations(const QStri
     // If the database does not exist in old Baloo folders, than use the new
     // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"akonadi/instance/%1/search_db"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("akonadi/search_db");
+        basePath = u"akonadi/search_db"_s;
     }
-    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     QDir().mkpath(dbPath);
     return dbPath;
 }

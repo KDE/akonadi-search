@@ -8,6 +8,7 @@
 #pragma once
 
 #include <QObject>
+using namespace Qt::Literals::StringLiterals;
 
 class QueryParserTest : public QObject
 {

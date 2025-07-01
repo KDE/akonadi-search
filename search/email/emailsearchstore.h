@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../pimsearchstore.h"
+using namespace Qt::Literals::StringLiterals;
 
 namespace Akonadi
 {
@@ -28,7 +29,7 @@ public:
     [[nodiscard]] QString text(int queryId) override;
     [[nodiscard]] QString icon(int) override
     {
-        return QStringLiteral("internet-mail");
+        return u"internet-mail"_s;
     }
 
 protected:

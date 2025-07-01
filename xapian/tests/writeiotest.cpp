@@ -7,6 +7,8 @@
  */
 
 #include <QCommandLineOption>
+using namespace Qt::Literals::StringLiterals;
+
 #include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QDebug>
@@ -23,8 +25,8 @@ int main(int argc, char **argv)
     QCoreApplication app(argc, argv);
 
     QCommandLineParser parser;
-    parser.addPositionalArgument(QStringLiteral("num"), QStringLiteral("The number of terms. Each term is of length 10"));
-    parser.addOption(QCommandLineOption(QStringList() << QStringLiteral("p") << QStringLiteral("position"), QStringLiteral("Add positional information")));
+    parser.addPositionalArgument(u"num"_s, QStringLiteral("The number of terms. Each term is of length 10"));
+    parser.addOption(QCommandLineOption(QStringList() << u"p"_s << QStringLiteral("position"), QStringLiteral("Add positional information")));
     parser.addHelpOption();
     parser.process(app);
 
@@ -47,7 +49,7 @@ int main(int argc, char **argv)
     for (int i = 0; i < size; i++) {
         const QByteArray term = QUuid::createUuid().toByteArray().mid(1, 10);
 
-        if (parser.isSet(QStringLiteral("p"))) {
+        if (parser.isSet(u"p"_s)) {
             const std::string stdString(term.constData(), term.length());
             doc.doc().add_posting(stdString, i);
         } else {

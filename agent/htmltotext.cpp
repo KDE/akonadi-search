@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include <QGuiApplication>
+using namespace Qt::Literals::StringLiterals;
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -26,14 +27,14 @@ int main(int argc, char *argv[])
 
     KLocalizedString::setApplicationDomain(QByteArrayLiteral("akonadi_search"));
 
-    KAboutData about(QStringLiteral("akonadi_html_to_text"),
+    KAboutData about(u"akonadi_html_to_text"_s,
                      i18n("Akonadi HTML To Text"),
-                     QStringLiteral("1.0"),
+                     u"1.0"_s,
                      i18n("Akonadi HTML To Text Converter"),
                      KAboutLicense::LGPL_V2,
                      i18n("© 2023-2024 KDE Community"));
 
-    about.addAuthor(i18nc("@info:credit", "Carl Schwan"), i18n("Maintainer"), QStringLiteral("carl@carlschwan.eu"), QStringLiteral("https://carlschwan.eu"));
+    about.addAuthor(i18nc("@info:credit", "Carl Schwan"), i18n("Maintainer"), u"carl@carlschwan.eu"_s, u"https://carlschwan.eu"_s);
 
     KAboutData::setApplicationData(about);
 

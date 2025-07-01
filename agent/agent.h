@@ -10,6 +10,8 @@
 #pragma once
 
 #include <Akonadi/AgentBase>
+using namespace Qt::Literals::StringLiterals;
+
 #include <Akonadi/Collection>
 
 #include "index.h"

@@ -15,6 +15,7 @@
 #include <QStringList>
 
 #include "akonadi_indexer_agent_debug.h"
+using namespace Qt::Literals::StringLiterals;
 
 CollectionIndexer::CollectionIndexer(const QString &path)
 {
@@ -46,7 +47,7 @@ static QByteArray getPath(const Akonadi::Collection &collection)
         col = col.parentCollection();
         pathParts.prepend(col.displayName());
     }
-    return "/" + pathParts.join(QLatin1Char('/')).toUtf8();
+    return "/" + pathParts.join(u'/').toUtf8();
 }
 
 void CollectionIndexer::index(const Akonadi::Collection &collection)

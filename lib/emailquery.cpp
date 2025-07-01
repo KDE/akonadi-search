@@ -18,7 +18,7 @@
 #include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
-
+using namespace Qt::Literals::StringLiterals;
 class Akonadi::Search::PIM::EmailQueryPrivate
 {
 public:
@@ -169,7 +169,7 @@ void EmailQuery::setRead(bool read)
 
 ResultIterator EmailQuery::exec()
 {
-    const QString dir = defaultLocation(QStringLiteral("email"));
+    const QString dir = defaultLocation(u"email"_s);
     Xapian::Database db;
     try {
         db = Xapian::Database(QFile::encodeName(dir).toStdString());
@@ -298,7 +298,7 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.set_default_op(Xapian::Query::OP_AND);
         if (d->splitSearchMatchString) {
-            const QStringList list = d->matchString.split(QRegularExpression(QStringLiteral("\\s")), Qt::SkipEmptyParts);
+            const QStringList list = d->matchString.split(QRegularExpression(u"\\s"_s), Qt::SkipEmptyParts);
             for (const QString &s : list) {
                 const QByteArray ba = s.toUtf8();
                 m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);

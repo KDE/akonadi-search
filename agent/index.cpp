@@ -21,7 +21,7 @@
 #include <chrono>
 
 using namespace std::chrono_literals;
-
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search::PIM;
 Index::Index(QObject *parent)
     : QObject(parent)

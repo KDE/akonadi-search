@@ -7,6 +7,8 @@
  *
  */
 #include "pimsearchstore.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "query.h"
 #include "term.h"
 
@@ -25,7 +27,7 @@ PIMSearchStore::PIMSearchStore(QObject *parent)
 
 QStringList PIMSearchStore::types()
 {
-    return QStringList() << QStringLiteral("Akonadi");
+    return QStringList() << u"Akonadi"_s;
 }
 
 QString PIMSearchStore::findDatabase(const QString &dbName) const
@@ -35,11 +37,11 @@ QString PIMSearchStore::findDatabase(const QString &dbName) const
     QString basePath;
     bool hasInstanceIdentifier = Akonadi::ServerManager::hasInstanceIdentifier();
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("baloo/instances/%1").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"baloo/instances/%1"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("baloo");
+        basePath = u"baloo"_s;
     }
-    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    QString dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     if (QDir(dbPath).exists()) {
         return dbPath;
     }
@@ -47,11 +49,11 @@ QString PIMSearchStore::findDatabase(const QString &dbName) const
     // If the database does not exist in old Baloo folders, than use the new
     // location in Akonadi's datadir in ~/.local/share/akonadi/search_db.
     if (hasInstanceIdentifier) {
-        basePath = QStringLiteral("akonadi/instance/%1/search_db").arg(Akonadi::ServerManager::instanceIdentifier());
+        basePath = u"akonadi/instance/%1/search_db"_s.arg(Akonadi::ServerManager::instanceIdentifier());
     } else {
-        basePath = QStringLiteral("akonadi/search_db");
+        basePath = u"akonadi/search_db"_s;
     }
-    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/%1/%2/").arg(basePath, dbName);
+    dbPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + u"/%1/%2/"_s.arg(basePath, dbName);
     QDir().mkpath(dbPath);
     return dbPath;
 }
@@ -131,10 +133,10 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
 QUrl PIMSearchStore::constructUrl(const Xapian::docid &docid)
 {
     QUrl url;
-    url.setScheme(QStringLiteral("akonadi"));
+    url.setScheme(u"akonadi"_s);
 
     QUrlQuery query;
-    query.addQueryItem(QStringLiteral("item"), QString::number(docid));
+    query.addQueryItem(u"item"_s, QString::number(docid));
     url.setQuery(query);
 
     return url;

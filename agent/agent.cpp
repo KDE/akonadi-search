@@ -46,7 +46,7 @@ AkonadiIndexingAgent::AkonadiIndexingAgent(const QString &id)
 
     Akonadi::AttributeFactory::registerAttribute<Akonadi::IndexPolicyAttribute>();
 
-    KConfigGroup cfg = config()->group(QStringLiteral("General"));
+    KConfigGroup cfg = config()->group(u"General"_s);
     const int agentIndexingVersion = cfg.readEntry("agentIndexingVersion", 0);
     bool respectDiacriticAndAccents = cfg.readEntry("respectDiacriticAndAccents", true);
     if (agentIndexingVersion < INDEXING_AGENT_VERSION) {
@@ -296,7 +296,7 @@ int AkonadiIndexingAgent::numberOfCollectionQueued()
 
 void AkonadiIndexingAgent::onAbortRequested()
 {
-    KConfigGroup group = config()->group(QStringLiteral("General"));
+    KConfigGroup group = config()->group(u"General"_s);
     group.writeEntry("aborted", true);
     group.sync();
     m_scheduler.abort();
@@ -310,7 +310,7 @@ void AkonadiIndexingAgent::onOnlineChanged(bool online)
     // Index items that might have changed while we were offline
     if (online) {
         // We only reindex if this is not a regular start
-        KConfigGroup cfg = config()->group(QStringLiteral("General"));
+        KConfigGroup cfg = config()->group(u"General"_s);
         bool aborted = cfg.readEntry("aborted", false);
         if (aborted) {
             cfg.writeEntry("aborted", false);

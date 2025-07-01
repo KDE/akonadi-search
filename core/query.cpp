@@ -74,7 +74,7 @@ Term Query::term() const
 
 void Query::addType(const QString &type)
 {
-    d->m_types << type.split(QLatin1Char('/'), Qt::SkipEmptyParts);
+    d->m_types << type.split(u'/', Qt::SkipEmptyParts);
 }
 
 void Query::addTypes(const QStringList &typeList)
@@ -233,44 +233,44 @@ QByteArray Query::toJSON() const
     QVariantMap map;
 
     if (!d->m_types.isEmpty()) {
-        map[QStringLiteral("type")] = d->m_types;
+        map[u"type"_s] = d->m_types;
     }
 
     if (d->m_limit != defaultLimit) {
-        map[QStringLiteral("limit")] = d->m_limit;
+        map[u"limit"_s] = d->m_limit;
     }
 
     if (d->m_offset) {
-        map[QStringLiteral("offset")] = d->m_offset;
+        map[u"offset"_s] = d->m_offset;
     }
 
     if (!d->m_searchString.isEmpty()) {
-        map[QStringLiteral("searchString")] = d->m_searchString;
+        map[u"searchString"_s] = d->m_searchString;
     }
 
     if (d->m_term.isValid()) {
-        map[QStringLiteral("term")] = QVariant(d->m_term.toVariantMap());
+        map[u"term"_s] = QVariant(d->m_term.toVariantMap());
     }
 
     if (d->m_yearFilter >= 0) {
-        map[QStringLiteral("yearFilter")] = d->m_yearFilter;
+        map[u"yearFilter"_s] = d->m_yearFilter;
     }
     if (d->m_monthFilter >= 0) {
-        map[QStringLiteral("monthFilter")] = d->m_monthFilter;
+        map[u"monthFilter"_s] = d->m_monthFilter;
     }
     if (d->m_dayFilter >= 0) {
-        map[QStringLiteral("dayFilter")] = d->m_dayFilter;
+        map[u"dayFilter"_s] = d->m_dayFilter;
     }
 
     if (d->m_sortingOption != SortAuto) {
-        map[QStringLiteral("sortingOption")] = static_cast<int>(d->m_sortingOption);
+        map[u"sortingOption"_s] = static_cast<int>(d->m_sortingOption);
     }
     if (!d->m_sortingProperty.isEmpty()) {
-        map[QStringLiteral("sortingProperty")] = d->m_sortingProperty;
+        map[u"sortingProperty"_s] = d->m_sortingProperty;
     }
 
     if (!d->m_customOptions.isEmpty()) {
-        map[QStringLiteral("customOptions")] = d->m_customOptions;
+        map[u"customOptions"_s] = d->m_customOptions;
     }
 
     QJsonObject jo = QJsonObject::fromVariantMap(map);
@@ -286,41 +286,41 @@ Query Query::fromJSON(const QByteArray &arr)
     const QVariantMap map = jdoc.object().toVariantMap();
 
     Query query;
-    query.d->m_types = map[QStringLiteral("type")].toStringList();
+    query.d->m_types = map[u"type"_s].toStringList();
 
-    if (map.contains(QStringLiteral("limit"))) {
-        query.d->m_limit = map[QStringLiteral("limit")].toUInt();
+    if (map.contains(u"limit"_s)) {
+        query.d->m_limit = map[u"limit"_s].toUInt();
     } else {
         query.d->m_limit = defaultLimit;
     }
 
-    query.d->m_offset = map[QStringLiteral("offset")].toUInt();
-    query.d->m_searchString = map[QStringLiteral("searchString")].toString();
-    query.d->m_term = Term::fromVariantMap(map[QStringLiteral("term")].toMap());
+    query.d->m_offset = map[u"offset"_s].toUInt();
+    query.d->m_searchString = map[u"searchString"_s].toString();
+    query.d->m_term = Term::fromVariantMap(map[u"term"_s].toMap());
 
-    if (map.contains(QStringLiteral("yearFilter"))) {
-        query.d->m_yearFilter = map[QStringLiteral("yearFilter")].toInt();
+    if (map.contains(u"yearFilter"_s)) {
+        query.d->m_yearFilter = map[u"yearFilter"_s].toInt();
     }
-    if (map.contains(QStringLiteral("monthFilter"))) {
-        query.d->m_monthFilter = map[QStringLiteral("monthFilter")].toInt();
+    if (map.contains(u"monthFilter"_s)) {
+        query.d->m_monthFilter = map[u"monthFilter"_s].toInt();
     }
-    if (map.contains(QStringLiteral("dayFilter"))) {
-        query.d->m_dayFilter = map[QStringLiteral("dayFilter")].toInt();
+    if (map.contains(u"dayFilter"_s)) {
+        query.d->m_dayFilter = map[u"dayFilter"_s].toInt();
     }
 
-    if (map.contains(QStringLiteral("sortingOption"))) {
-        int option = map.value(QStringLiteral("sortingOption")).toInt();
+    if (map.contains(u"sortingOption"_s)) {
+        int option = map.value(u"sortingOption"_s).toInt();
         query.d->m_sortingOption = static_cast<SortingOption>(option);
     }
 
-    if (map.contains(QStringLiteral("sortingProperty"))) {
-        query.d->m_sortingProperty = map.value(QStringLiteral("sortingProperty")).toString();
+    if (map.contains(u"sortingProperty"_s)) {
+        query.d->m_sortingProperty = map.value(u"sortingProperty"_s).toString();
     }
 
-    if (map.contains(QStringLiteral("customOptions"))) {
-        QVariant var = map[QStringLiteral("customOptions")];
+    if (map.contains(u"customOptions"_s)) {
+        QVariant var = map[u"customOptions"_s];
         if (var.userType() == QMetaType::QVariantMap) {
-            query.d->m_customOptions = map[QStringLiteral("customOptions")].toMap();
+            query.d->m_customOptions = map[u"customOptions"_s].toMap();
         } else if (var.userType() == QMetaType::QVariantHash) {
             QVariantHash hash = var.toHash();
 
@@ -338,13 +338,13 @@ Query Query::fromJSON(const QByteArray &arr)
 QUrl Query::toSearchUrl(const QString &title)
 {
     QUrl url;
-    url.setScheme(QStringLiteral("akonadisearch"));
+    url.setScheme(u"akonadisearch"_s);
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem(QStringLiteral("json"), QString::fromUtf8(toJSON()));
+    urlQuery.addQueryItem(u"json"_s, QString::fromUtf8(toJSON()));
 
     if (!title.isEmpty()) {
-        urlQuery.addQueryItem(QStringLiteral("title"), title);
+        urlQuery.addQueryItem(u"title"_s, title);
     }
 
     url.setQuery(urlQuery);
@@ -358,14 +358,14 @@ Query Query::fromSearchUrl(const QUrl &url)
     }
 
     QUrlQuery urlQuery(url);
-    const QString jsonString = urlQuery.queryItemValue(QStringLiteral("json"), QUrl::FullyDecoded);
+    const QString jsonString = urlQuery.queryItemValue(u"json"_s, QUrl::FullyDecoded);
     return Query::fromJSON(jsonString.toUtf8());
 }
 
 QString Query::titleFromQueryUrl(const QUrl &url)
 {
     QUrlQuery urlQuery(url);
-    return urlQuery.queryItemValue(QStringLiteral("title"), QUrl::FullyDecoded);
+    return urlQuery.queryItemValue(u"title"_s, QUrl::FullyDecoded);
 }
 
 bool Query::operator==(const Query &rhs) const

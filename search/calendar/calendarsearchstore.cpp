@@ -7,26 +7,27 @@
  */
 
 #include "calendarsearchstore.h"
+using namespace Qt::Literals::StringLiterals;
 
 using namespace Akonadi::Search;
 
 CalendarSearchStore::CalendarSearchStore(QObject *parent)
     : PIMSearchStore(parent)
 {
-    m_prefix.insert(QStringLiteral("collection"), QStringLiteral("C"));
-    m_prefix.insert(QStringLiteral("organizer"), QStringLiteral("O"));
-    m_prefix.insert(QStringLiteral("partstatus"), QStringLiteral("PS"));
-    m_prefix.insert(QStringLiteral("summary"), QStringLiteral("S"));
-    m_prefix.insert(QStringLiteral("location"), QStringLiteral("L"));
+    m_prefix.insert(u"collection"_s, u"C"_s);
+    m_prefix.insert(u"organizer"_s, u"O"_s);
+    m_prefix.insert(u"partstatus"_s, u"PS"_s);
+    m_prefix.insert(u"summary"_s, u"S"_s);
+    m_prefix.insert(u"location"_s, u"L"_s);
 
-    m_boolWithValue << QStringLiteral("partstatus");
+    m_boolWithValue << u"partstatus"_s;
 
-    setDbPath(findDatabase(QStringLiteral("calendars")));
+    setDbPath(findDatabase(u"calendars"_s));
 }
 
 QStringList CalendarSearchStore::types()
 {
-    return QStringList() << QStringLiteral("Akonadi") << QStringLiteral("Calendar");
+    return QStringList() << u"Akonadi"_s << u"Calendar"_s;
 }
 
 #include "moc_calendarsearchstore.cpp"

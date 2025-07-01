@@ -5,6 +5,7 @@
 */
 
 #include "akonadisearchdebugsearchjob.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include <QProcess>
 #include <QStandardPaths>
@@ -21,13 +22,13 @@ void AkonadiSearchDebugSearchJob::start()
 {
     // "delve" is also a name of Go debugger, some distros prefer xapian-delve
     // for that reason, so try that first and fallback to "delve"
-    QString delvePath = QStandardPaths::findExecutable(QStringLiteral("xapian-delve"));
+    QString delvePath = QStandardPaths::findExecutable(u"xapian-delve"_s);
     if (delvePath.isEmpty()) {
-        delvePath = QStandardPaths::findExecutable(QStringLiteral("delve"));
+        delvePath = QStandardPaths::findExecutable(u"delve"_s);
     }
     if (delvePath.isEmpty()) {
         // Don't translate it. Just debug
-        Q_EMIT error(QStringLiteral("\"delve\" not installed on computer."));
+        Q_EMIT error(u"\"delve\" not installed on computer."_s);
         deleteLater();
         return;
     } else {
@@ -36,7 +37,7 @@ void AkonadiSearchDebugSearchJob::start()
         connect(mProcess, &QProcess::readyReadStandardError, this, &AkonadiSearchDebugSearchJob::slotReadError);
         mProcess->setWorkingDirectory(mPath);
         QStringList arguments;
-        arguments << QStringLiteral("-r") << mAkonadiId;
+        arguments << u"-r"_s << mAkonadiId;
         arguments << mPath;
         mProcess->start(delvePath, arguments);
     }

@@ -17,7 +17,7 @@
 #include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
-
+using namespace Qt::Literals::StringLiterals;
 class Akonadi::Search::PIM::ContactQueryPrivate
 {
 public:
@@ -86,7 +86,7 @@ void ContactQuery::setMatchCriteria(ContactQuery::MatchCriteria m)
 
 ResultIterator ContactQuery::exec()
 {
-    const QString dir = defaultLocation(QStringLiteral("contacts"));
+    const QString dir = defaultLocation(u"contacts"_s);
     Xapian::Database db;
 
     try {

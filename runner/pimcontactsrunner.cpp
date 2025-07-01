@@ -47,7 +47,7 @@ PIMContactsRunner::~PIMContactsRunner() = default;
 
 void PIMContactsRunner::reloadConfiguration()
 {
-    mQueryAutocompleter = config().readEntry(QStringLiteral("queryAutocompleter"), true);
+    mQueryAutocompleter = config().readEntry(u"queryAutocompleter"_s, true);
 }
 
 void PIMContactsRunner::match(RunnerContext &context)
@@ -136,7 +136,7 @@ void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &que
             match.setIcon(QIcon(QPixmap::fromImage(img)));
         } else {
             // The icon should be cached by Qt or FrameworkIntegration
-            match.setIcon(QIcon::fromTheme(QStringLiteral("user-identity")));
+            match.setIcon(QIcon::fromTheme(u"user-identity"_s));
         }
 
         QString matchedEmail;
@@ -173,7 +173,7 @@ void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &que
             if (!mListEmails.contains(matchedEmail)) {
                 mListEmails.append(matchedEmail);
                 match.setText(i18nc("Name (email)", "%1 (%2)", name, matchedEmail));
-                match.setData(QStringLiteral("mailto:%1<%2>").arg(name, matchedEmail));
+                match.setData(u"mailto:%1<%2>"_s.arg(name, matchedEmail));
                 context.addMatch(match);
             }
         } else {
@@ -182,7 +182,7 @@ void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &que
                     mListEmails.append(email);
                     QueryMatch alternativeMatch = match;
                     alternativeMatch.setText(i18nc("Name (email)", "%1 (%2)", name, email));
-                    alternativeMatch.setData(QStringLiteral("mailto:%1<%2>").arg(name, email));
+                    alternativeMatch.setData(u"mailto:%1<%2>"_s.arg(name, email));
                     context.addMatch(alternativeMatch);
                 }
             }
@@ -199,13 +199,13 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
         // Filter out results where writing a mail wouldn't make sense,
         // e.g. anything with noreply or various automatic emails from git forges
         static const std::array filters = {
-            QRegularExpression(QStringLiteral("no[-]?reply@")),
-            QRegularExpression(QStringLiteral("incoming\\+.+@invent\\.kde\\.org")),
-            QRegularExpression(QStringLiteral("reply\\+.+@reply\\.github\\.com")),
-            QRegularExpression(QStringLiteral("@noreply\\.github\\.com")),
-            QRegularExpression(QStringLiteral("notifications@github\\.com")),
-            QRegularExpression(QStringLiteral("incoming\\+.+@gitlab\\.com")),
-            QRegularExpression(QStringLiteral("gitlab@gitlab\\.freedesktop\\.org")),
+            QRegularExpression(u"no[-]?reply@"_s),
+            QRegularExpression(u"incoming\\+.+@invent\\.kde\\.org"_s),
+            QRegularExpression(u"reply\\+.+@reply\\.github\\.com"_s),
+            QRegularExpression(u"@noreply\\.github\\.com"_s),
+            QRegularExpression(u"notifications@github\\.com"_s),
+            QRegularExpression(u"incoming\\+.+@gitlab\\.com"_s),
+            QRegularExpression(u"gitlab@gitlab\\.freedesktop\\.org"_s),
         };
 
         const bool skip = std::any_of(filters.cbegin(), filters.cend(), [result](const QRegularExpression &filter) {
@@ -220,7 +220,7 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
         match.setRelevance(0.7); // slightly lower relevance than real addressbook contacts
         match.setMatchCategory(i18n("Contacts"));
         match.setSubtext(i18n("Autocompleted from received and sent emails"));
-        match.setIcon(QIcon::fromTheme(QStringLiteral("user-identity")));
+        match.setIcon(QIcon::fromTheme(u"user-identity"_s));
         if (result == queryString) {
             match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
         } else {
@@ -236,10 +236,10 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
             mListEmails.append(email);
             if (name.isEmpty()) {
                 match.setText(email);
-                match.setData(QStringLiteral("mailto:%1").arg(email));
+                match.setData(u"mailto:%1"_s.arg(email));
             } else {
                 match.setText(i18nc("Name (email)", "%1 (%2)", name, email));
-                match.setData(QStringLiteral("mailto:%1<%2>").arg(name, email));
+                match.setData(u"mailto:%1<%2>"_s.arg(name, email));
             }
         } else {
             if (mListEmails.contains(result)) {
@@ -247,7 +247,7 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
             }
             mListEmails.append(result);
             match.setText(result);
-            match.setData(QStringLiteral("mailto:%1").arg(result));
+            match.setData(u"mailto:%1"_s.arg(result));
         }
         context.addMatch(match);
     }

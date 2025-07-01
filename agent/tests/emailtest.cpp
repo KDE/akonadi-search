@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 
 App::App(int &argc, char **argv, int flags)
     : QApplication(argc, argv, flags)
-    , m_indexer(QStringLiteral("/tmp/xap"), QStringLiteral("/tmp/xapC"))
+    , m_indexer(u"/tmp/xap"_s, u"/tmp/xapC"_s)
 {
     QTimer::singleShot(0, this, &App::main);
 }
@@ -150,7 +150,7 @@ void App::slotIndexed()
     qDebug() << "Index Time:" << m_indexTime / 1000.0 << "seconds";
 
     // Print the io usage
-    QFile file(QStringLiteral("/proc/self/io"));
+    QFile file(u"/proc/self/io"_s);
     const auto ok = file.open(QIODevice::ReadOnly | QIODevice::Text);
     Q_ASSERT(ok);
 
@@ -162,25 +162,25 @@ void App::slotIndexed()
     while (!stream.atEnd()) {
         QString str = stream.readLine();
 
-        QString rchar(QStringLiteral("rchar: "));
+        QString rchar(u"rchar: "_s);
         if (str.startsWith(rchar)) {
             ulong amt = QStringView(str).mid(rchar.size()).toULong();
             qDebug() << "Read:" << amt / 1024 << "kb";
         }
 
-        QString wchar(QStringLiteral("wchar: "));
+        QString wchar(u"wchar: "_s);
         if (str.startsWith(wchar)) {
             ulong amt = QStringView(str).mid(wchar.size()).toULong();
             qDebug() << "Write:" << amt / 1024 << "kb";
         }
 
-        QString read(QStringLiteral("read_bytes: "));
+        QString read(u"read_bytes: "_s);
         if (str.startsWith(read)) {
             ulong amt = QStringView(str).mid(read.size()).toULong();
             qDebug() << "Actual Reads:" << amt / 1024 << "kb";
         }
 
-        QString write(QStringLiteral("write_bytes: "));
+        QString write(u"write_bytes: "_s);
         if (str.startsWith(write)) {
             ulong amt = QStringView(str).mid(write.size()).toULong();
             qDebug() << "Actual Writes:" << amt / 1024 << "kb";

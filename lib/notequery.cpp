@@ -18,7 +18,7 @@
 #include <QStandardPaths>
 
 using namespace Akonadi::Search::PIM;
-
+using namespace Qt::Literals::StringLiterals;
 class Akonadi::Search::PIM::NoteQueryPrivate
 {
 public:
@@ -58,7 +58,7 @@ int NoteQuery::limit() const
 
 ResultIterator NoteQuery::exec()
 {
-    const QString dir = defaultLocation(QStringLiteral("notes"));
+    const QString dir = defaultLocation(u"notes"_s);
 
     Xapian::Database db;
     try {

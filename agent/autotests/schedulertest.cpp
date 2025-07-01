@@ -6,6 +6,8 @@
  *
  */
 #include "scheduler.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "collectionindexingjob.h"
 
 #include <Akonadi/Collection>
@@ -76,7 +78,7 @@ private Q_SLOTS:
     {
         AkonadiTest::checkTestIsIsolated();
         AkonadiTest::setAllResourcesOffline();
-        Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(QStringLiteral("akonadi_knut_resource_0"));
+        Akonadi::AgentInstance agent = Akonadi::AgentManager::self()->instance(u"akonadi_knut_resource_0"_s);
         QVERIFY(agent.isValid());
         agent.setIsOnline(true);
         QTRY_VERIFY(agent.isOnline());
@@ -86,7 +88,7 @@ private Q_SLOTS:
     {
         QSKIP("Broken test");
 
-        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
+        auto config = KSharedConfig::openConfig(u"akonadi_indexing_agent"_s);
 
         Index index;
         QSharedPointer<DummyJobFactory> factory(new DummyJobFactory());
@@ -102,8 +104,8 @@ private Q_SLOTS:
 
     void testIndexCollections()
     {
-        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
-        KConfigGroup group = config->group(QStringLiteral("General"));
+        auto config = KSharedConfig::openConfig(u"akonadi_indexing_agent"_s);
+        KConfigGroup group = config->group(u"General"_s);
         group.writeEntry("initialIndexingComplete", true);
 
         Index index;
@@ -131,8 +133,8 @@ private Q_SLOTS:
 
     void testIndexItems()
     {
-        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
-        KConfigGroup group = config->group(QStringLiteral("General"));
+        auto config = KSharedConfig::openConfig(u"akonadi_indexing_agent"_s);
+        KConfigGroup group = config->group(u"General"_s);
         group.writeEntry("initialIndexingComplete", true);
 
         Index index;
@@ -170,8 +172,8 @@ private Q_SLOTS:
 
     void testDirtyCollections()
     {
-        auto config = KSharedConfig::openConfig(QStringLiteral("akonadi_indexing_agent"));
-        KConfigGroup group = config->group(QStringLiteral("General"));
+        auto config = KSharedConfig::openConfig(u"akonadi_indexing_agent"_s);
+        KConfigGroup group = config->group(u"General"_s);
         group.writeEntry("initialIndexingComplete", true);
         Akonadi::Collection col1(1);
 
