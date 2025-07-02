@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-30 00:41+0000\n"
+"POT-Creation-Date: 2025-07-02 07:06+0000\n"
 "PO-Revision-Date: 2024-03-25 22:39+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Asturian <alministradores@softastur.org>\n"
@@ -38,38 +38,38 @@ msgstr ""
 msgid "Indexing collection: %1"
 msgstr ""
 
-#: agent/htmltotext.cpp:30
+#: agent/htmltotext.cpp:31
 #, kde-format
 msgid "Akonadi HTML To Text"
 msgstr ""
 
-#: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
+#: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr ""
 
-#: agent/htmltotext.cpp:34
+#: agent/htmltotext.cpp:35
 #, kde-format
 msgid "© 2023-2024 KDE Community"
 msgstr "© 2023-2024, La comunidá KDE"
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr ""
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, kde-format
 msgid "Maintainer"
 msgstr ""
 
-#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
 #, kde-format
 msgid "Ready"
 msgstr ""
 
-#: agent/scheduler.cpp:244
+#: agent/scheduler.cpp:245
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr ""
@@ -109,7 +109,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr ""
 
-#: runner/pimcontactsrunnerconfig.cpp:19
+#: runner/pimcontactsrunnerconfig.cpp:21
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"

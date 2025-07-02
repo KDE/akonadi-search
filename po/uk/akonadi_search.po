@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-30 00:41+0000\n"
+"POT-Creation-Date: 2025-07-02 07:06+0000\n"
 "PO-Revision-Date: 2024-07-30 09:49+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -41,38 +41,38 @@ msgstr "Засоби індексування недоступні"
 msgid "Indexing collection: %1"
 msgstr "Індексуємо збірку %1"
 
-#: agent/htmltotext.cpp:30
+#: agent/htmltotext.cpp:31
 #, kde-format
 msgid "Akonadi HTML To Text"
 msgstr "HTML у текст Akonadi"
 
-#: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
+#: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Засіб перетворення даних HTML у текст"
 
-#: agent/htmltotext.cpp:34
+#: agent/htmltotext.cpp:35
 #, kde-format
 msgid "© 2023-2024 KDE Community"
 msgstr "© Спільнота KDE, 2023–2024"
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, kde-format
 msgid "Maintainer"
 msgstr "Супровідник"
 
-#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
 #, kde-format
 msgid "Ready"
 msgstr "Виконано"
 
-#: agent/scheduler.cpp:244
+#: agent/scheduler.cpp:245
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "Проіндексовано збірку «%1»"
@@ -114,7 +114,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Автодоповнення за адресами отриманих і надісланих повідомлень"
 
-#: runner/pimcontactsrunnerconfig.cpp:19
+#: runner/pimcontactsrunnerconfig.cpp:21
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"

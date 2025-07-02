@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-30 00:41+0000\n"
+"POT-Creation-Date: 2025-07-02 07:06+0000\n"
 "PO-Revision-Date: 2024-08-03 14:16+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -39,38 +39,38 @@ msgstr "沒有可用的索引器"
 msgid "Indexing collection: %1"
 msgstr "正在索引集合：%1"
 
-#: agent/htmltotext.cpp:30
+#: agent/htmltotext.cpp:31
 #, kde-format
 msgid "Akonadi HTML To Text"
 msgstr "Akonadi HTML 轉文字"
 
-#: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
+#: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Akonadi HTML 到文字轉換器"
 
-#: agent/htmltotext.cpp:34
+#: agent/htmltotext.cpp:35
 #, kde-format
 msgid "© 2023-2024 KDE Community"
 msgstr "© 2023-2024 KDE 社群"
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, kde-format
 msgid "Maintainer"
 msgstr "維護者"
 
-#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
 #, kde-format
 msgid "Ready"
 msgstr "已就緒"
 
-#: agent/scheduler.cpp:244
+#: agent/scheduler.cpp:245
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "已索引集合「%1」"
@@ -112,7 +112,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "已從收到與寄出的郵件自動完成"
 
-#: runner/pimcontactsrunnerconfig.cpp:19
+#: runner/pimcontactsrunnerconfig.cpp:21
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-30 00:41+0000\n"
+"POT-Creation-Date: 2025-07-02 07:06+0000\n"
 "PO-Revision-Date: 2023-10-16 18:22+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -37,40 +37,40 @@ msgstr "Indexery nie sú dostupné"
 msgid "Indexing collection: %1"
 msgstr "Indexujem kolekciu: %1"
 
-#: agent/htmltotext.cpp:30
+#: agent/htmltotext.cpp:31
 #, kde-format
 msgid "Akonadi HTML To Text"
 msgstr "Akonadi HTML na text"
 
-#: agent/htmltotext.cpp:32 agent/htmltotext.cpp:41
+#: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Konvertor Akonadi HTML na text"
 
-#: agent/htmltotext.cpp:34
+#: agent/htmltotext.cpp:35
 #, fuzzy, kde-format
 #| msgid "© 2023 KDE Community"
 msgid "© 2023-2024 KDE Community"
 msgstr "© 2023 KDE komunita"
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, fuzzy, kde-format
 #| msgid "Carl Schwan"
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: agent/htmltotext.cpp:36
+#: agent/htmltotext.cpp:37
 #, kde-format
 msgid "Maintainer"
 msgstr "Správca"
 
-#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
+#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
 #, kde-format
 msgid "Ready"
 msgstr "Pripravený"
 
-#: agent/scheduler.cpp:244
+#: agent/scheduler.cpp:245
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "Kolekcia \"%1\" preindexovaná"
@@ -112,7 +112,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Automaticky dokončené z prijatých a poslaných e-mailov"
 
-#: runner/pimcontactsrunnerconfig.cpp:19
+#: runner/pimcontactsrunnerconfig.cpp:21
 #, fuzzy, kde-format
 #| msgid "Search in contacts indexed from sent and received emails too"
 msgctxt "@option:check"
