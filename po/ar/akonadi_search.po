@@ -64,7 +64,7 @@ msgstr "كارل شوان"
 #: agent/htmltotext.cpp:37
 #, kde-format
 msgid "Maintainer"
-msgstr "المصين"
+msgstr "الصائن"
 
 #: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
 #, kde-format
