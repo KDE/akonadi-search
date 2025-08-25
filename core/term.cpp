@@ -112,7 +112,7 @@ bool Term::isValid() const
             return false;
         }
 
-        return d->m_property.isEmpty() && d->m_value.isNull();
+        return d->m_value.isNull();
     }
 
     return true;

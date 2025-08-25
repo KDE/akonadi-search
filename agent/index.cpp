@@ -32,9 +32,7 @@ Index::Index(QObject *parent)
     connect(&m_commitTimer, &QTimer::timeout, this, &Index::commit);
 }
 
-Index::~Index()
-{
-}
+Index::~Index() = default;
 
 static void removeDir(const QString &dirName)
 {

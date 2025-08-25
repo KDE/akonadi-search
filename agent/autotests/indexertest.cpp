@@ -245,8 +245,6 @@ private Q_SLOTS:
         }
         calendarIndexer.commit();
 
-        QSet<qint64> resultSet;
-
         const auto status = KCalendarCore::Attendee::PartStat::NeedsAction;
         Akonadi::Search::Term term(Akonadi::Search::Term::Or);
 

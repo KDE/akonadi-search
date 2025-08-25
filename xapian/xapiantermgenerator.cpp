@@ -8,7 +8,7 @@
 #include "xapiantermgenerator.h"
 using namespace Qt::Literals::StringLiterals;
 
-#include "akonadi_search_xapian_debug.h"
+#include <QStringList>
 #include <QTextBoundaryFinder>
 
 using namespace Akonadi::Search;

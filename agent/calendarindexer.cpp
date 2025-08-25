@@ -161,9 +161,3 @@ void CalendarIndexer::indexTodoItem(const Akonadi::Item &item, const KCalendarCo
     Q_UNUSED(item)
     Q_UNUSED(todo)
 }
-
-void CalendarIndexer::updateIncidenceItem(const KCalendarCore::Incidence::Ptr &calInc)
-{
-    // TODO
-    Q_UNUSED(calInc)
-}

@@ -41,7 +41,6 @@ private:
     void indexEventItem(const Akonadi::Item &item, const KCalendarCore::Event::Ptr &event);
     void indexJournalItem(const Akonadi::Item &item, const KCalendarCore::Journal::Ptr &journal);
     void indexTodoItem(const Akonadi::Item &item, const KCalendarCore::Todo::Ptr &todo);
-    void updateIncidenceItem(const KCalendarCore::Incidence::Ptr &calInc);
 
     std::unique_ptr<Akonadi::Search::XapianDatabase> m_db = nullptr;
 };

@@ -25,8 +25,6 @@ class CollectionQueryTest : public QObject
 {
     Q_OBJECT
 private:
-    QString collectionsDir;
-
     bool removeDir(const QString &dirName)
     {
         bool result = true;
