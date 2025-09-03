@@ -134,7 +134,7 @@ void TermGeneratorTest::testWordPositions()
     QVERIFY(it != end);
     QCOMPARE(*it, (uint)1);
     it++;
-    QVERIFY(it == end);
+    QCOMPARE(it, end);
 
     it = xap->positionlist_begin(1, "hi");
     end = xap->positionlist_end(1, "hi");
@@ -143,14 +143,14 @@ void TermGeneratorTest::testWordPositions()
     it++;
     QCOMPARE(*it, (uint)4);
     it++;
-    QVERIFY(it == end);
+    QCOMPARE(it, end);
 
     it = xap->positionlist_begin(1, "how");
     end = xap->positionlist_end(1, "how");
     QVERIFY(it != end);
     QCOMPARE(*it, (uint)3);
     it++;
-    QVERIFY(it == end);
+    QCOMPARE(it, end);
 }
 
 QTEST_MAIN(TermGeneratorTest)
