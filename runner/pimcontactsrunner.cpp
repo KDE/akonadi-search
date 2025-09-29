@@ -173,7 +173,7 @@ void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &que
             if (!mListEmails.contains(matchedEmail)) {
                 mListEmails.append(matchedEmail);
                 match.setText(i18nc("Name (email)", "%1 (%2)", name, matchedEmail));
-                match.setData(u"mailto:%1<%2>"_s.arg(name, matchedEmail));
+                match.setData(u"mailto:%1"_s.arg(matchedEmail));
                 context.addMatch(match);
             }
         } else {
@@ -182,7 +182,7 @@ void PIMContactsRunner::queryContacts(RunnerContext &context, const QString &que
                     mListEmails.append(email);
                     QueryMatch alternativeMatch = match;
                     alternativeMatch.setText(i18nc("Name (email)", "%1 (%2)", name, email));
-                    alternativeMatch.setData(u"mailto:%1<%2>"_s.arg(name, email));
+                    alternativeMatch.setData(u"mailto:%1"_s.arg(email));
                     context.addMatch(alternativeMatch);
                 }
             }
@@ -239,7 +239,7 @@ void PIMContactsRunner::queryAutocompleter(RunnerContext &context, const QString
                 match.setData(u"mailto:%1"_s.arg(email));
             } else {
                 match.setText(i18nc("Name (email)", "%1 (%2)", name, email));
-                match.setData(u"mailto:%1<%2>"_s.arg(name, email));
+                match.setData(u"mailto:%1"_s.arg(email));
             }
         } else {
             if (mListEmails.contains(result)) {
