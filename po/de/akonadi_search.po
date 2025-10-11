@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2023, 2024 Johannes Obermayr <johannesobermayr@gmx.de>
-# Burkhard Lück <lueck@hube-lueck.de>, 2014, 2017.
-# Frederik Schwarzer <schwarzer@kde.org>, 2016.
+# SPDX-FileCopyrightText: 2014, 2017 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2016 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
