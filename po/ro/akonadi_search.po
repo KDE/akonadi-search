@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
+# SPDX-FileCopyrightText: 2015, 2025 Sergiu Bivol <sergiu@cip.md>
 #
-# Sergiu Bivol <sergiu@cip.md>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-02 07:06+0000\n"
-"PO-Revision-Date: 2015-04-26 12:41+0300\n"
+"PO-Revision-Date: 2025-10-19 09:49+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -16,16 +16,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Sergiu Bivol"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr ""
+msgstr "sergiu@cip.md"
 
 #: agent/agent.cpp:63
 #, kde-format
@@ -41,43 +42,43 @@ msgstr "Se indexează colecția: %1"
 #: agent/htmltotext.cpp:31
 #, kde-format
 msgid "Akonadi HTML To Text"
-msgstr ""
+msgstr "Conversie HTML în text pentru Akonadi"
 
 #: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
-msgstr ""
+msgstr "Convertor HTML în text pentru Akonadi"
 
 #: agent/htmltotext.cpp:35
 #, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr ""
+msgstr "© 2023-2024 Comunitatea KDE"
 
 #: agent/htmltotext.cpp:37
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
-msgstr ""
+msgstr "Carl Schwan"
 
 #: agent/htmltotext.cpp:37
 #, kde-format
 msgid "Maintainer"
-msgstr ""
+msgstr "Responsabil"
 
 #: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
 #, kde-format
 msgid "Ready"
-msgstr "Gata"
+msgstr "Pregătit"
 
 #: agent/scheduler.cpp:245
 #, kde-format
 msgid "Collection \"%1\" indexed"
-msgstr ""
+msgstr "Colecția „%1” e indexată"
 
 #: debug/akonadisearchdebugdialog.cpp:98
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
-msgstr ""
+msgstr "Fișiere textuale (*.txt);;Toate fișierele (*)"
 
 #: debug/akonadisearchdebugdialog.cpp:110
 #, kde-format
@@ -85,32 +86,34 @@ msgid ""
 "Could not write the file %1:\n"
 "\"%2\" is the detailed error description."
 msgstr ""
+"Nu s-a putut scrie în fișierul %1:\n"
+"„%2” este descrierea detaliată a erorii."
 
 #: debug/akonadisearchdebugdialog.cpp:114
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
-msgstr ""
+msgstr "Eroare la salvarea fișierului"
 
 #: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
 msgid "Contacts"
-msgstr ""
+msgstr "Contacte"
 
 #: runner/pimcontactsrunner.cpp:175 runner/pimcontactsrunner.cpp:184
 #: runner/pimcontactsrunner.cpp:241
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: runner/pimcontactsrunner.cpp:222
 #, kde-format
 msgid "Autocompleted from received and sent emails"
-msgstr ""
+msgstr "Completat automat din scrisorile primite și trimise"
 
 #: runner/pimcontactsrunnerconfig.cpp:21
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
-msgstr ""
+msgstr "Caută și în contactele indexate din scrisori primite și trimise"
