@@ -11,7 +11,6 @@
 #include <xapian.h>
 
 #include <QList>
-#include <QPair>
 #include <QString>
 
 namespace Akonadi
