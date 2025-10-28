@@ -67,8 +67,12 @@ private:
     Xapian::Database *m_db = nullptr;
     Xapian::WritableDatabase m_wDb;
 
-    using DocIdPair = QPair<Xapian::docid, Xapian::Document>;
-    QList<DocIdPair> m_docsToAdd;
+    struct DocXapianInfo {
+        Xapian::docid docId;
+        Xapian::Document document;
+    };
+
+    QList<DocXapianInfo> m_docsToAdd;
     QList<uint> m_docsToRemove;
 
     std::string m_path;

@@ -63,7 +63,7 @@ void XapianDatabase::replaceDocument(uint id, const Xapian::Document &doc)
         }
         return;
     }
-    m_docsToAdd << qMakePair(id, doc);
+    m_docsToAdd << DocXapianInfo{.docId = id, .document = doc};
 }
 
 void XapianDatabase::deleteDocument(uint id)
@@ -105,9 +105,9 @@ void XapianDatabase::commit()
     Xapian::WritableDatabase wdb = createWritableDb();
 
     qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << "Adding:" << m_docsToAdd.size() << "docs";
-    for (const DocIdPair &doc : std::as_const(m_docsToAdd)) {
+    for (const DocXapianInfo &doc : std::as_const(m_docsToAdd)) {
         try {
-            wdb.replace_document(doc.first, doc.second);
+            wdb.replace_document(doc.docId, doc.document);
         } catch (const Xapian::Error &) {
         }
     }
