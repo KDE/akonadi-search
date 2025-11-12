@@ -5,15 +5,15 @@
 */
 
 #include "akonadisearchdebugwidgettest.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "../akonadisearchdebugsearchpathcombobox.h"
 #include "../akonadisearchdebugwidget.h"
-#include <KLineEdit>
+#include <QLineEdit>
 #include <QPlainTextEdit>
 #include <QPushButton>
 #include <QTest>
 
+using namespace Qt::Literals::StringLiterals;
 AkonadiSearchDebugWidgetTest::AkonadiSearchDebugWidgetTest(QObject *parent)
     : QObject(parent)
 {
@@ -27,10 +27,9 @@ void AkonadiSearchDebugWidgetTest::shouldHaveDefaultValue()
     auto button = widget.findChild<QPushButton *>(u"searchbutton"_s);
     QVERIFY(button);
     QVERIFY(!button->isEnabled());
-    auto lineEdit = widget.findChild<KLineEdit *>(u"lineedit"_s);
+    auto lineEdit = widget.findChild<QLineEdit *>(u"lineedit"_s);
     QVERIFY(lineEdit);
     QVERIFY(lineEdit->text().isEmpty());
-    QVERIFY(lineEdit->trapReturnKey());
     QVERIFY(lineEdit->isClearButtonEnabled());
     auto editorWidget = widget.findChild<QPlainTextEdit *>(u"plaintexteditor"_s);
     QVERIFY(editorWidget->isReadOnly());
@@ -43,7 +42,7 @@ void AkonadiSearchDebugWidgetTest::shouldHaveDefaultValue()
 void AkonadiSearchDebugWidgetTest::shouldFillLineEditWhenWeWantToSearchItem()
 {
     Akonadi::Search::AkonadiSearchDebugWidget widget;
-    auto lineEdit = widget.findChild<KLineEdit *>(u"lineedit"_s);
+    auto lineEdit = widget.findChild<QLineEdit *>(u"lineedit"_s);
     const int value = 42;
     const QString akonadiItem = QString::number(value);
     widget.setAkonadiId(value);
@@ -58,7 +57,7 @@ void AkonadiSearchDebugWidgetTest::shouldEnabledPushButtonWhenLineEditIsNotEmpty
     auto button = widget.findChild<QPushButton *>(u"searchbutton"_s);
     QVERIFY(button->isEnabled());
 
-    auto lineEdit = widget.findChild<KLineEdit *>(u"lineedit"_s);
+    auto lineEdit = widget.findChild<QLineEdit *>(u"lineedit"_s);
     lineEdit->setText(QString());
     QVERIFY(!button->isEnabled());
 

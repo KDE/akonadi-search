@@ -8,7 +8,8 @@
 
 #include "akonadisearchsyntaxhighlighter.h"
 #include "job/akonadisearchdebugsearchjob.h"
-#include <KLineEdit>
+#include <KLineEditEventHandler>
+#include <QLineEdit>
 #include <QPushButton>
 
 #include <QLabel>
@@ -23,7 +24,7 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     : QWidget(parent)
     , mPlainTextEditor(new QPlainTextEdit(this))
     , mSearchPathComboBox(new Akonadi::Search::AkonadiSearchDebugSearchPathComboBox(this))
-    , mLineEdit(new KLineEdit(this))
+    , mLineEdit(new QLineEdit(this))
     , mSearchButton(new QPushButton(u"Search"_s, this))
 {
     auto mainLayout = new QVBoxLayout(this);
@@ -32,10 +33,10 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     mainLayout->addLayout(hbox);
     auto lab = new QLabel(u"Item identifier:"_s, this);
     hbox->addWidget(lab);
-    mLineEdit->setTrapReturnKey(true);
+    KLineEditEventHandler::catchReturnKey(mLineEdit);
     mLineEdit->setClearButtonEnabled(true);
     mLineEdit->setObjectName("lineedit"_L1);
-    connect(mLineEdit, &KLineEdit::textChanged, this, &AkonadiSearchDebugWidget::slotSearchLineTextChanged);
+    connect(mLineEdit, &QLineEdit::textChanged, this, &AkonadiSearchDebugWidget::slotSearchLineTextChanged);
     hbox->addWidget(mLineEdit);
 
     hbox->addWidget(mSearchPathComboBox);
@@ -51,7 +52,7 @@ AkonadiSearchDebugWidget::AkonadiSearchDebugWidget(QWidget *parent)
     mainLayout->addWidget(mPlainTextEditor);
     mPlainTextEditor->setObjectName("plaintexteditor"_L1);
 
-    connect(mLineEdit, &KLineEdit::returnPressed, this, &AkonadiSearchDebugWidget::slotSearch);
+    connect(mLineEdit, &QLineEdit::returnPressed, this, &AkonadiSearchDebugWidget::slotSearch);
 }
 
 AkonadiSearchDebugWidget::~AkonadiSearchDebugWidget() = default;
