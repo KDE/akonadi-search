@@ -10,7 +10,7 @@
 #include "search_debug_export.h"
 #include <Akonadi/Item>
 #include <QWidget>
-class KLineEdit;
+class QLineEdit;
 class QPushButton;
 class QPlainTextEdit;
 namespace Akonadi
@@ -40,7 +40,7 @@ private:
     AKONADI_SEARCH_DEBUG_NO_EXPORT void slotError(const QString &errorStr);
     QPlainTextEdit *const mPlainTextEditor;
     AkonadiSearchDebugSearchPathComboBox *const mSearchPathComboBox;
-    KLineEdit *const mLineEdit;
+    QLineEdit *const mLineEdit;
     QPushButton *const mSearchButton;
 };
 }
