@@ -12,10 +12,18 @@ if(Corrosion_FOUND)
         PUBLIC htmlparser -Wl,--gc-sections
     )
 
+    if(Corrosion_VERSION VERSION_LESS 0.6.0)
+        set(corrosion_build_dir "build")
+    else()
+        string(SHA1 cargo_path_hash ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml)
+        string(SUBSTRING "${cargo_path_hash}" 0 5 cargo_path_hash)
+        set(corrosion_build_dir "htmlparser_${cargo_path_hash}")
+    endif()
+
     target_include_directories(
         akonadi_html_to_text
         PRIVATE
-            ${CMAKE_BINARY_DIR}/cargo/build/${Rust_CARGO_TARGET}/cxxbridge/htmlparser/src/
+            ${CMAKE_BINARY_DIR}/cargo/${corrosion_build_dir}/${Rust_CARGO_TARGET}/cxxbridge/htmlparser/src/
     )
 
     target_compile_definitions(akonadi_html_to_text PRIVATE -DHAS_HTMLPARSER)
