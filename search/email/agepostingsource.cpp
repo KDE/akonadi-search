@@ -17,7 +17,7 @@ using namespace Akonadi::Search;
 using namespace Qt::Literals::StringLiterals;
 AgePostingSource::AgePostingSource(Xapian::valueno slot_)
     : Xapian::ValuePostingSource(slot_)
-    , m_currentTime_t(QDateTime::currentDateTimeUtc().toSecsSinceEpoch())
+    , m_currentTime_t(QDateTime::currentSecsSinceEpoch())
 {
 }
 

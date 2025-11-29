@@ -311,7 +311,7 @@ Term Term::fromVariantMap(const QVariantMap &map)
         term.setOperation(Or);
     }
 
-    if (andOrString.size()) {
+    if (!andOrString.isEmpty()) {
         QList<Term> subTerms;
 
         const QVariantList list = map[andOrString].toList();
