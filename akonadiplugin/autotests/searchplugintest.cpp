@@ -112,10 +112,10 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject2");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("body2");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
 
             msg->from()->addAddress("john@test.com", u"John Doe"_s);
             msg->to()->addAddress("jane@test.com", u"Jane Doe"_s);
@@ -137,10 +137,10 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject3");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("body3");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
 
             msg->from()->addAddress("john@test.com", u"John Doe"_s);
             msg->to()->addAddress("jane@test.com", u"Jane Doe"_s);
@@ -162,10 +162,10 @@ private Q_SLOTS:
             msg->subject()->from7BitString("subject4");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("body4");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
 
             msg->from()->addAddress("john_blue@test.com", u"John Doe"_s);
             msg->to()->addAddress("jane@test.com", u"Jane Doe"_s);
@@ -173,12 +173,12 @@ private Q_SLOTS:
             msg->bcc()->addAddress("bcc@test.com", u"Jane Doe"_s);
             msg->date()->setDateTime(QDateTime(QDate(2014, 11, 11), QTime(13, 0, 0)));
             msg->replyTo()->from7BitString("test@kde.org");
-            auto header = new KMime::Headers::Generic("Resent-From");
+            auto header = std::unique_ptr<KMime::Headers::Generic>(new KMime::Headers::Generic("Resent-From"));
             header->fromUnicodeString(u"resent@kde.org"_s);
-            msg->setHeader(header);
-            header = new KMime::Headers::Generic("List-Id");
+            msg->setHeader(std::move(header));
+            header = std::unique_ptr<KMime::Headers::Generic>(new KMime::Headers::Generic("List-Id"));
             header->fromUnicodeString(u"KDE PIM <kde-pim.kde.org>"_s);
-            msg->setHeader(header);
+            msg->setHeader(std::move(header));
 
             msg->assemble();
 
@@ -196,10 +196,10 @@ private Q_SLOTS:
             msg->subject()->from7BitString("all tags");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("tags");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
 
             msg->from()->addAddress("john@test.com", u"John Doe"_s);
             msg->to()->addAddress("jane@test.com", u"Jane Doe"_s);
@@ -231,10 +231,10 @@ private Q_SLOTS:
             msg->contentType()->setMimeType("multipart/mixed");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("body5");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
 
             msg->from()->addAddress("john@test.com", u"John Doe"_s);
             msg->to()->addAddress("jane@test.com", u"Jane Doe"_s);
@@ -330,10 +330,10 @@ private Q_SLOTS:
             msg->subject()->from7BitString("note");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("body note");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
             msg->assemble();
 
             Akonadi::Item item(u"text/x-vnd.akonadi.note"_s);
@@ -350,10 +350,10 @@ private Q_SLOTS:
             msg->subject()->from7BitString("note2");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("note");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
             msg->assemble();
 
             Akonadi::Item item(u"text/x-vnd.akonadi.note"_s);
@@ -370,10 +370,10 @@ private Q_SLOTS:
             msg->subject()->from7BitString("note3");
 
             // Multipart message
-            auto b = new KMime::Content;
+            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
             b->contentType()->setMimeType("text/plain");
             b->setBody("note3");
-            msg->prependContent(b);
+            msg->prependContent(std::move(b));
             msg->assemble();
 
             Akonadi::Item item(u"text/x-vnd.akonadi.note"_s);
