@@ -10,12 +10,11 @@
 
 #include "search_core_export.h"
 
-#include <QDebug>
 #include <QString>
 #include <QVariant>
 
 #include <memory>
-
+class QDebug;
 namespace Akonadi
 {
 namespace Search

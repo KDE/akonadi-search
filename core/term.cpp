@@ -9,7 +9,7 @@
 #include "term.h"
 
 #include <QDateTime>
-
+#include <QDebug>
 using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
