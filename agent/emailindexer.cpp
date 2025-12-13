@@ -138,7 +138,7 @@ QString prettyAddress(const KMime::Types::Mailbox &mbox)
 }
 
 // Add once with a prefix and once without
-void EmailIndexer::insert(const QByteArray &key, const KMime::Types::Mailbox::List &list)
+void EmailIndexer::insert(const QByteArray &key, const QList<KMime::Types::Mailbox> &list)
 {
     if (!m_contactDb) {
         return;

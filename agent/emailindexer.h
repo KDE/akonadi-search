@@ -50,7 +50,7 @@ private:
     void insert(const QByteArray &key, KMime::Headers::Base *base);
     void insert(const QByteArray &key, KMime::Headers::Generics::MailboxList *mlist);
     void insert(const QByteArray &key, KMime::Headers::Generics::AddressList *alist);
-    void insert(const QByteArray &key, const KMime::Types::Mailbox::List &list);
+    void insert(const QByteArray &key, const QList<KMime::Types::Mailbox> &list);
 
     void insertBool(char key, bool value);
 };
