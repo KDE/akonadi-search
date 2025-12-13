@@ -37,7 +37,7 @@ public:
 
 private:
     void processPart(KMime::Content *content, KMime::Content *mainContent);
-    void process(const KMime::Message::Ptr &msg);
+    void process(const QSharedPointer<KMime::Message> &msg);
     Xapian::WritableDatabase *m_db = nullptr;
     Xapian::Document *m_doc = nullptr;
     Xapian::TermGenerator *m_termGen = nullptr;

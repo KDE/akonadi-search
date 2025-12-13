@@ -47,9 +47,9 @@ void AkonotesIndexer::index(const Akonadi::Item &item)
     if (!m_db) {
         return;
     }
-    KMime::Message::Ptr msg;
+    QSharedPointer<KMime::Message> msg;
     try {
-        msg = item.payload<KMime::Message::Ptr>();
+        msg = item.payload<QSharedPointer<KMime::Message>>();
     } catch (const Akonadi::PayloadException &) {
         return;
     }
@@ -73,12 +73,12 @@ void AkonotesIndexer::index(const Akonadi::Item &item)
     m_termGen = nullptr;
 }
 
-void AkonotesIndexer::process(const KMime::Message::Ptr &msg)
+void AkonotesIndexer::process(const QSharedPointer<KMime::Message> &msg)
 {
     //
     // Process Headers
     // (Give the subject a higher priority)
-    KMime::Headers::Subject *subject = msg->subject(false);
+    KMime::Headers::Subject *subject = msg->subject(KMime::DontCreate);
     if (subject) {
         const std::string str(normalizeString(subject->asUnicodeString()).toStdString());
         qCDebug(AKONADI_INDEXER_AGENT_LOG) << "Indexing" << str.c_str();
@@ -103,7 +103,7 @@ void AkonotesIndexer::processPart(KMime::Content *content, KMime::Content *mainC
         return;
     }
 
-    KMime::Headers::ContentType *type = content->contentType(false);
+    KMime::Headers::ContentType *type = content->contentType(KMime::DontCreate);
     if (type) {
         if (type->isMultipart()) {
             if (type->isSubtype("encrypted")) {

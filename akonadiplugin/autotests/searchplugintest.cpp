@@ -88,7 +88,7 @@ private Q_SLOTS:
         CalendarIndexer calendarIndexer(calendarDir);
 
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("subject1");
             msg->contentType()->setMimeType("text/plain");
             msg->contentType()->setCharset("utf-8");
@@ -107,7 +107,7 @@ private Q_SLOTS:
             emailIndexer.index(item);
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("subject2");
 
@@ -132,7 +132,7 @@ private Q_SLOTS:
             emailIndexer.index(item);
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("subject3");
 
@@ -157,7 +157,7 @@ private Q_SLOTS:
             emailIndexer.index(item);
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("subject4");
 
@@ -191,7 +191,7 @@ private Q_SLOTS:
             emailIndexer.index(item);
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("all tags");
 
@@ -226,7 +226,7 @@ private Q_SLOTS:
             emailIndexer.index(item);
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("Change in qt/qtx11extras[stable]: remove QtWidgets dependency");
             msg->contentType()->setMimeType("multipart/mixed");
 
@@ -325,7 +325,7 @@ private Q_SLOTS:
 
         // Note item
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("note");
 
@@ -345,7 +345,7 @@ private Q_SLOTS:
             noteIndexer.index(item);
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("note2");
 
@@ -365,7 +365,7 @@ private Q_SLOTS:
             noteIndexer.index(item);
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            QSharedPointer<KMime::Message> msg(new KMime::Message);
             msg->contentType()->setMimeType("multipart/mixed");
             msg->subject()->from7BitString("note3");
 

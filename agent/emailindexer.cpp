@@ -67,9 +67,9 @@ void EmailIndexer::index(const Akonadi::Item &item)
         return;
     }
 
-    KMime::Message::Ptr msg;
+    QSharedPointer<KMime::Message> msg;
     try {
-        msg = item.payload<KMime::Message::Ptr>();
+        msg = item.payload<QSharedPointer<KMime::Message>>();
     } catch (const Akonadi::PayloadException &) {
         return;
     }
@@ -178,12 +178,12 @@ void EmailIndexer::insert(const QByteArray &key, const QList<KMime::Types::Mailb
 }
 
 // FIXME: Only index properties that are actually searched!
-void EmailIndexer::process(const KMime::Message::Ptr &msg)
+void EmailIndexer::process(const QSharedPointer<KMime::Message> &msg)
 {
     //
     // Process Headers
     // (Give the subject a higher priority)
-    KMime::Headers::Subject *subject = msg->subject(false);
+    KMime::Headers::Subject *subject = msg->subject(KMime::DontCreate);
     if (subject) {
         const std::string str{normalizeString(subject->asUnicodeString()).toStdString()};
         qCDebug(AKONADI_INDEXER_AGENT_EMAIL_LOG) << "Indexing" << str.c_str();
@@ -192,7 +192,7 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
         m_doc->set_data(str);
     }
 
-    KMime::Headers::Date *date = msg->date(false);
+    KMime::Headers::Date *date = msg->date(KMime::DontCreate);
     if (date) {
         const QString str = QString::number(date->dateTime().toSecsSinceEpoch());
         m_doc->add_value(0, str.toStdString());
@@ -200,12 +200,12 @@ void EmailIndexer::process(const KMime::Message::Ptr &msg)
         m_doc->add_value(2, julianDay.toStdString());
     }
 
-    insert("F", msg->from(false));
-    insert("T", msg->to(false));
-    insert("CC", msg->cc(false));
-    insert("BC", msg->bcc(false));
-    insert("O", msg->organization(false));
-    insert("RT", msg->replyTo(false));
+    insert("F", msg->from(KMime::DontCreate));
+    insert("T", msg->to(KMime::DontCreate));
+    insert("CC", msg->cc(KMime::DontCreate));
+    insert("BC", msg->bcc(KMime::DontCreate));
+    insert("O", msg->organization(KMime::DontCreate));
+    insert("RT", msg->replyTo(KMime::DontCreate));
     insert("RF", msg->headerByType("Resent-From"));
     insert("LI", msg->headerByType("List-Id"));
     insert("XL", msg->headerByType("X-Loop"));
@@ -235,7 +235,7 @@ void EmailIndexer::processPart(KMime::Content *content, KMime::Content *mainCont
         return;
     }
 
-    KMime::Headers::ContentType *type = content->contentType(false);
+    KMime::Headers::ContentType *type = content->contentType(KMime::DontCreate);
     if (type) {
         if (type->isMultipart()) {
             if (type->isSubtype("encrypted")) {

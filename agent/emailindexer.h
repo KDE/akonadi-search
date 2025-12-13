@@ -43,7 +43,7 @@ private:
 
     void toggleFlag(Xapian::Document &doc, const char *remove, const char *add);
 
-    void process(const KMime::Message::Ptr &msg);
+    void process(const QSharedPointer<KMime::Message> &msg);
     void processPart(KMime::Content *content, KMime::Content *mainContent);
     void processMessageStatus(Akonadi::MessageStatus status);
 
