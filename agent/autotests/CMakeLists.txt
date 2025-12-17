@@ -5,7 +5,6 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(indexer_SRCS
     ../emailindexer.cpp
     ../contactindexer.cpp
-    ../akonotesindexer.cpp
     ../calendarindexer.cpp
     ../abstractindexer.cpp
     ../collectionindexer.cpp

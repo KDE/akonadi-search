@@ -14,14 +14,12 @@ using namespace Qt::Literals::StringLiterals;
 #include <QDir>
 #include <QTest>
 
-#include "../agent/akonotesindexer.h"
 #include "../agent/calendarindexer.h"
 #include "../agent/contactindexer.h"
 #include "../agent/emailindexer.h"
 #include "../search/calendar/calendarsearchstore.h"
 #include "../search/contact/contactsearchstore.h"
 #include "../search/email/emailsearchstore.h"
-#include "../search/note/notesearchstore.h"
 #include "searchplugin.h"
 #include <Akonadi/MessageFlags>
 #include <Akonadi/SearchQuery>
@@ -38,7 +36,6 @@ private:
     QString emailDir;
     QString emailContactsDir;
     QString contactsDir;
-    QString noteDir;
     QString calendarDir;
 
     void resultSearch()
@@ -65,7 +62,6 @@ private Q_SLOTS:
         emailDir = QDir::tempPath() + "/searchplugintest/email/"_L1;
         emailContactsDir = QDir::tempPath() + "/searchplugintest/emailcontacts/"_L1;
         contactsDir = QDir::tempPath() + "/searchplugintest/contacts/"_L1;
-        noteDir = QDir::tempPath() + "/searchplugintest/notes/"_L1;
         calendarDir = QDir::tempPath() + "/searchplugintest/calendar/"_L1;
 
         QDir dir;
@@ -73,18 +69,15 @@ private Q_SLOTS:
         QVERIFY(dir.mkpath(emailDir));
         QVERIFY(dir.mkpath(emailContactsDir));
         QVERIFY(dir.mkpath(contactsDir));
-        QVERIFY(dir.mkpath(noteDir));
         QVERIFY(dir.mkpath(calendarDir));
 
         qDebug() << "indexing sample data";
         qDebug() << emailDir;
         qDebug() << emailContactsDir;
-        qDebug() << noteDir;
         qDebug() << calendarDir;
 
         EmailIndexer emailIndexer(emailDir, emailContactsDir);
         ContactIndexer contactIndexer(contactsDir);
-        AkonotesIndexer noteIndexer(noteDir);
         CalendarIndexer calendarIndexer(calendarDir);
 
         {
@@ -323,68 +316,6 @@ private Q_SLOTS:
         }
         contactIndexer.commit();
 
-        // Note item
-        {
-            auto msg = std::make_shared<KMime::Message>();
-            msg->contentType()->setMimeType("multipart/mixed");
-            msg->subject()->from7BitString("note");
-
-            // Multipart message
-            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
-            b->contentType()->setMimeType("text/plain");
-            b->setBody("body note");
-            msg->prependContent(std::move(b));
-            msg->assemble();
-
-            Akonadi::Item item(u"text/x-vnd.akonadi.note"_s);
-            item.setId(1000);
-            item.setSize(1002);
-            item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(5));
-            item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            noteIndexer.index(item);
-        }
-        {
-            auto msg = std::make_shared<KMime::Message>();
-            msg->contentType()->setMimeType("multipart/mixed");
-            msg->subject()->from7BitString("note2");
-
-            // Multipart message
-            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
-            b->contentType()->setMimeType("text/plain");
-            b->setBody("note");
-            msg->prependContent(std::move(b));
-            msg->assemble();
-
-            Akonadi::Item item(u"text/x-vnd.akonadi.note"_s);
-            item.setId(1001);
-            item.setSize(1002);
-            item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(5));
-            item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            noteIndexer.index(item);
-        }
-        {
-            auto msg = std::make_shared<KMime::Message>();
-            msg->contentType()->setMimeType("multipart/mixed");
-            msg->subject()->from7BitString("note3");
-
-            // Multipart message
-            auto b = std::unique_ptr<KMime::Content>(new KMime::Content);
-            b->contentType()->setMimeType("text/plain");
-            b->setBody("note3");
-            msg->prependContent(std::move(b));
-            msg->assemble();
-
-            Akonadi::Item item(u"text/x-vnd.akonadi.note"_s);
-            item.setId(1002);
-            item.setSize(1002);
-            item.setPayload(msg);
-            item.setParentCollection(Akonadi::Collection(5));
-            item.setFlags(Akonadi::Item::Flags() << Akonadi::MessageFlags::Flagged << Akonadi::MessageFlags::Replied);
-            noteIndexer.index(item);
-        }
-
         // Calendar item
         {
             KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
@@ -415,13 +346,11 @@ private Q_SLOTS:
         emailSearchStore->setDbPath(emailDir);
         auto contactSearchStore = new Akonadi::Search::ContactSearchStore();
         contactSearchStore->setDbPath(contactsDir);
-        auto noteSearchStore = new Akonadi::Search::NoteSearchStore();
-        noteSearchStore->setDbPath(noteDir);
         auto calendarSearchStore = new Akonadi::Search::CalendarSearchStore();
         calendarSearchStore->setDbPath(calendarDir);
 
         Akonadi::Search::SearchStore::overrideSearchStores(QList<Akonadi::Search::SearchStore *>()
-                                                           << emailSearchStore << contactSearchStore << noteSearchStore << calendarSearchStore);
+                                                           << emailSearchStore << contactSearchStore << calendarSearchStore);
     }
 
     void cleanupTestCase()
@@ -511,63 +440,6 @@ private Q_SLOTS:
     }
 
     void testCalendarSearch()
-    {
-        resultSearch();
-    }
-
-    void testNoteSearch_data()
-    {
-        QTest::addColumn<QString>("query");
-        QTest::addColumn<QList<qint64>>("collections");
-        QTest::addColumn<QStringList>("mimeTypes");
-        QTest::addColumn<QSet<qint64>>("expectedResult");
-        const QStringList notesMimeTypes({u"text/x-vnd.akonadi.note"_s});
-        {
-            Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, u"note"_s, Akonadi::SearchTerm::CondEqual));
-
-            QList<qint64> collections({5});
-            QSet<qint64> result({1000});
-            QTest::newRow("find note subject equal") << QString::fromLatin1(query.toJSON()) << collections << notesMimeTypes << result;
-        }
-        {
-            Akonadi::SearchQuery query;
-            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, u"note1"_s, Akonadi::SearchTerm::CondEqual));
-
-            QList<qint64> collections({5});
-            QSet<qint64> result;
-            QTest::newRow("find note subject equal") << QString::fromLatin1(query.toJSON()) << collections << notesMimeTypes << result;
-        }
-        {
-            Akonadi::SearchQuery query(Akonadi::SearchTerm::RelOr);
-            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, u"note"_s, Akonadi::SearchTerm::CondEqual));
-            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Body, u"note"_s, Akonadi::SearchTerm::CondEqual));
-
-            QList<qint64> collections({5});
-            QSet<qint64> result({1000, 1001});
-            QTest::newRow("find note subject equal or body equal") << QString::fromLatin1(query.toJSON()) << collections << notesMimeTypes << result;
-        }
-        {
-            Akonadi::SearchQuery query(Akonadi::SearchTerm::RelAnd);
-            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Subject, u"note3"_s, Akonadi::SearchTerm::CondEqual));
-            query.addTerm(Akonadi::EmailSearchTerm(Akonadi::EmailSearchTerm::Body, u"note3"_s, Akonadi::SearchTerm::CondEqual));
-
-            QList<qint64> collections({5});
-            QSet<qint64> result({1002});
-            QTest::newRow("find note subject equal and body equal") << QString::fromLatin1(query.toJSON()) << collections << notesMimeTypes << result;
-        }
-        {
-            Akonadi::SearchQuery query;
-            Akonadi::EmailSearchTerm term(Akonadi::EmailSearchTerm::Subject, u"note3"_s, Akonadi::SearchTerm::CondEqual);
-            term.setIsNegated(true);
-            query.addTerm(term);
-            QList<qint64> collections({5});
-            QSet<qint64> result({1000, 1001});
-            QTest::newRow("find not subject equal note3") << QString::fromLatin1(query.toJSON()) << collections << notesMimeTypes << result;
-        }
-    }
-
-    void testNoteSearch()
     {
         resultSearch();
     }

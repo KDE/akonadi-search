@@ -16,13 +16,11 @@ target_sources(
         ../../agent/calendarindexer.cpp
         ../../agent/contactindexer.cpp
         ../../agent/abstractindexer.cpp
-        ../../agent/akonotesindexer.cpp
         ../../search/pimsearchstore.cpp
         ../../search/email/emailsearchstore.cpp
         ../../search/email/agepostingsource.cpp
         ../../search/contact/contactsearchstore.cpp
         ../../search/calendar/calendarsearchstore.cpp
-        ../../search/note/notesearchstore.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_debug.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_calendar_debug.cpp
         ${CMAKE_CURRENT_BINARY_DIR}/../../agent/akonadi_indexer_agent_email_debug.cpp

@@ -54,7 +54,6 @@ target_sources(
         agent.cpp
         emailindexer.cpp
         contactindexer.cpp
-        akonotesindexer.cpp
         calendarindexer.cpp
         collectionindexer.cpp
         priority.cpp
@@ -66,7 +65,6 @@ target_sources(
         agent.h
         emailindexer.h
         contactindexer.h
-        akonotesindexer.h
         calendarindexer.h
         collectionindexer.h
         priority.h

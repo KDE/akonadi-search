@@ -1,6 +1,0 @@
-{
-    "X-Akonadi-PluginType": "SearchStore",
-    "X-Akonadi-Library": "notesearchstore",
-
-    "X-Akonadi-PluginName": "Akonadi Notes Search Store"
-}

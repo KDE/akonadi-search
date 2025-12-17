@@ -9,7 +9,6 @@
 
 #include "agent.h"
 
-#include "akonotesindexer.h"
 #include "calendarindexer.h"
 #include "collectionupdatejob.h"
 #include "contactindexer.h"

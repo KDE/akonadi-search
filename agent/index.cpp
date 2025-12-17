@@ -8,7 +8,6 @@
 #include <xapian.h>
 
 #include "akonadi_indexer_agent_debug.h"
-#include "akonotesindexer.h"
 #include "calendarindexer.h"
 #include "contactindexer.h"
 #include "emailindexer.h"
@@ -60,7 +59,6 @@ void Index::removeDatabase()
     removeDir(m_indexedItems->emailIndexingPath());
     removeDir(m_indexedItems->contactIndexingPath());
     removeDir(m_indexedItems->emailContactsIndexingPath());
-    removeDir(m_indexedItems->akonotesIndexingPath());
     removeDir(m_indexedItems->calendarIndexingPath());
     removeDir(m_indexedItems->collectionIndexingPath());
 }
@@ -242,23 +240,12 @@ bool Index::createIndexers()
     }
 
     try {
-        QDir().mkpath(m_indexedItems->akonotesIndexingPath());
-        indexer = std::make_unique<AkonotesIndexer>(m_indexedItems->akonotesIndexingPath());
-        indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
-        addIndexer(std::move(indexer));
-    } catch (const Xapian::DatabaseError &e) {
-        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
-    } catch (...) {
-        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
-    }
-
-    try {
         QDir().mkpath(m_indexedItems->calendarIndexingPath());
         indexer = std::make_unique<CalendarIndexer>(m_indexedItems->calendarIndexingPath());
         indexer->setRespectDiacriticAndAccents(mRespectDiacriticAndAccents);
         addIndexer(std::move(indexer));
     } catch (const Xapian::DatabaseError &e) {
-        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create calendar indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
@@ -269,7 +256,7 @@ bool Index::createIndexers()
     } catch (const Xapian::DatabaseError &e) {
         m_collectionIndexer.reset();
         m_collectionIndexer = nullptr;
-        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create akonotes indexer:" << QString::fromStdString(e.get_msg());
+        qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create collection indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         m_collectionIndexer.reset();
         m_collectionIndexer = nullptr;
