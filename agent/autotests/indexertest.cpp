@@ -23,13 +23,13 @@ using namespace Qt::Literals::StringLiterals;
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)
 
-static QSharedPointer<KMime::Message> readMailFromFile(const QString &mailFile)
+static std::shared_ptr<KMime::Message> readMailFromFile(const QString &mailFile)
 {
     QFile file(QLatin1StringView(MAIL_DATA_DIR) + u'/' + mailFile);
     const auto ok = file.open(QIODevice::ReadOnly);
     Q_ASSERT(ok && file.isOpen());
     auto mailData = KMime::CRLFtoLF(file.readAll());
-    QSharedPointer<KMime::Message> message(new KMime::Message);
+    std::shared_ptr<KMime::Message> message(new KMime::Message);
     message->setContent(mailData);
     message->parse();
     return message;
@@ -153,7 +153,7 @@ private Q_SLOTS:
     {
         EmailIndexer emailIndexer(emailDir, emailContactsDir);
         {
-            QSharedPointer<KMime::Message> msg(new KMime::Message);
+            auto msg = std::make_shared<KMime::Message>();
             msg->subject()->from7BitString("subject1");
             msg->assemble();
 
@@ -164,7 +164,7 @@ private Q_SLOTS:
             emailIndexer.index(item);
         }
         {
-            QSharedPointer<KMime::Message> msg(new KMime::Message);
+            auto msg = std::make_shared<KMime::Message>();
             msg->subject()->from7BitString("subject2");
             msg->assemble();
 

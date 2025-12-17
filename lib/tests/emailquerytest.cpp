@@ -83,7 +83,7 @@ void App::main()
 void App::itemsReceived(const Akonadi::Item::List &itemList)
 {
     for (const Akonadi::Item &item : itemList) {
-        auto message = item.payload<QSharedPointer<KMime::Message>>();
+        auto message = item.payload<std::shared_ptr<KMime::Message>>();
         QDateTime date = message->date()->dateTime();
         qDebug() << date.toString(Qt::ISODate) << message->subject()->asUnicodeString();
     }

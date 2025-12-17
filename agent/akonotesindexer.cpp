@@ -47,9 +47,9 @@ void AkonotesIndexer::index(const Akonadi::Item &item)
     if (!m_db) {
         return;
     }
-    QSharedPointer<KMime::Message> msg;
+    std::shared_ptr<KMime::Message> msg;
     try {
-        msg = item.payload<QSharedPointer<KMime::Message>>();
+        msg = item.payload<std::shared_ptr<KMime::Message>>();
     } catch (const Akonadi::PayloadException &) {
         return;
     }
@@ -73,7 +73,7 @@ void AkonotesIndexer::index(const Akonadi::Item &item)
     m_termGen = nullptr;
 }
 
-void AkonotesIndexer::process(const QSharedPointer<KMime::Message> &msg)
+void AkonotesIndexer::process(const std::shared_ptr<KMime::Message> &msg)
 {
     //
     // Process Headers
@@ -93,7 +93,7 @@ void AkonotesIndexer::process(const QSharedPointer<KMime::Message> &msg)
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
-        processPart(msg.data(), nullptr);
+        processPart(msg.get(), nullptr);
     }
 }
 

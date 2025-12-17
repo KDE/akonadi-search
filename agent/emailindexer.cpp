@@ -67,9 +67,9 @@ void EmailIndexer::index(const Akonadi::Item &item)
         return;
     }
 
-    QSharedPointer<KMime::Message> msg;
+    std::shared_ptr<KMime::Message> msg;
     try {
-        msg = item.payload<QSharedPointer<KMime::Message>>();
+        msg = item.payload<std::shared_ptr<KMime::Message>>();
     } catch (const Akonadi::PayloadException &) {
         return;
     }
@@ -178,7 +178,7 @@ void EmailIndexer::insert(const QByteArray &key, const QList<KMime::Types::Mailb
 }
 
 // FIXME: Only index properties that are actually searched!
-void EmailIndexer::process(const QSharedPointer<KMime::Message> &msg)
+void EmailIndexer::process(const std::shared_ptr<KMime::Message> &msg)
 {
     //
     // Process Headers
@@ -225,7 +225,7 @@ void EmailIndexer::process(const QSharedPointer<KMime::Message> &msg)
         m_termGen->index_text_without_positions(text);
         m_termGen->index_text_without_positions(text, 1, "BO");
     } else {
-        processPart(msg.data(), nullptr);
+        processPart(msg.get(), nullptr);
     }
 }
 
