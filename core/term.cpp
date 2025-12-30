@@ -294,19 +294,19 @@ QVariant tryConvert(const QVariant &var)
 }
 }
 
-Term Term::fromVariantMap(const QVariantMap &map)
+Term Term::fromVariantMap(const QVariantMap &variantMap)
 {
-    if (map.size() != 1) {
+    if (variantMap.size() != 1) {
         return {};
     }
 
     Term term;
 
     QString andOrString;
-    if (map.contains(u"$and"_s)) {
+    if (variantMap.contains(u"$and"_s)) {
         andOrString = u"$and"_s;
         term.setOperation(And);
-    } else if (map.contains(u"$or"_s)) {
+    } else if (variantMap.contains(u"$or"_s)) {
         andOrString = u"$or"_s;
         term.setOperation(Or);
     }
@@ -314,7 +314,7 @@ Term Term::fromVariantMap(const QVariantMap &map)
     if (!andOrString.isEmpty()) {
         QList<Term> subTerms;
 
-        const QVariantList list = map[andOrString].toList();
+        const QVariantList list = variantMap[andOrString].toList();
         subTerms.reserve(list.count());
         for (const QVariant &var : list) {
             subTerms << Term::fromVariantMap(var.toMap());
@@ -324,17 +324,17 @@ Term Term::fromVariantMap(const QVariantMap &map)
         return term;
     }
 
-    QString prop = map.cbegin().key();
+    const QString prop = variantMap.cbegin().key();
     term.setProperty(prop);
 
-    QVariant value = map.value(prop);
+    const QVariant value = variantMap.value(prop);
     if (value.userType() == QMetaType::QVariantMap) {
         QVariantMap map = value.toMap();
         if (map.size() != 1) {
             return term;
         }
 
-        QString op = map.cbegin().key();
+        const QString op = map.cbegin().key();
         Term::Comparator com;
         if (op == "$ct"_L1) {
             com = Contains;

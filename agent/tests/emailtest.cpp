@@ -155,10 +155,10 @@ void App::slotIndexed()
     Q_ASSERT(ok);
 
     QTextStream fs(&file);
-    QString str = fs.readAll();
+    QString fsStr = fs.readAll();
 
     qDebug() << "------- IO ---------";
-    QTextStream stream(&str);
+    QTextStream stream(&fsStr);
     while (!stream.atEnd()) {
         QString str = stream.readLine();
 
