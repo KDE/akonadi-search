@@ -24,11 +24,21 @@ class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugDialog : public QDialog
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit AkonadiSearchDebugDialog(QWidget *parent = nullptr);
+    /*!
+     */
     ~AkonadiSearchDebugDialog() override;
 
+    /*!
+     */
     void setAkonadiId(Akonadi::Item::Id akonadiId);
+    /*!
+     */
     void setSearchType(AkonadiSearchDebugSearchPathComboBox::SearchType type);
+    /*!
+     */
     void doSearch();
 
 private:

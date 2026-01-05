@@ -20,6 +20,8 @@ class AKONADI_SEARCH_DEBUG_EXPORT AkonadiSearchDebugSearchPathComboBox : public 
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit AkonadiSearchDebugSearchPathComboBox(QWidget *parent = nullptr);
     enum SearchType {
         Contacts = 0,
@@ -28,11 +30,19 @@ public:
         Notes,
         Calendars,
     };
+    /*!
+     */
     ~AkonadiSearchDebugSearchPathComboBox() override;
 
+    /*!
+     */
     [[nodiscard]] QString searchPath() const;
 
+    /*!
+     */
     [[nodiscard]] QString pathFromEnum(SearchType type) const;
+    /*!
+     */
     void setSearchType(SearchType type);
 
 private:

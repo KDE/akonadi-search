@@ -28,7 +28,11 @@ class EmailQueryPrivate;
 class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
 public:
+    /*!
+     */
     EmailQuery();
+    /*!
+     */
     ~EmailQuery() override;
 
     enum OpType : uint8_t {
@@ -36,26 +40,54 @@ public:
         OpOr,
     };
 
+    /*!
+     */
     void setSplitSearchMatchString(bool split);
 
+    /*!
+     */
     void setSearchType(OpType op);
 
+    /*!
+     */
     void setInvolves(const QStringList &involves);
+    /*!
+     */
     void addInvolves(const QString &email);
 
+    /*!
+     */
     void setTo(const QStringList &to);
+    /*!
+     */
     void addTo(const QString &to);
 
+    /*!
+     */
     void setFrom(const QString &from);
+    /*!
+     */
     void addFrom(const QString &from);
 
+    /*!
+     */
     void setCc(const QStringList &cc);
+    /*!
+     */
     void addCc(const QString &cc);
 
+    /*!
+     */
     void setBcc(const QStringList &bcc);
+    /*!
+     */
     void addBcc(const QString &bcc);
 
+    /*!
+     */
     void setCollection(const QList<Akonadi::Collection::Id> &collections);
+    /*!
+     */
     void addCollection(Akonadi::Collection::Id id);
 
     /**
@@ -90,7 +122,11 @@ public:
      */
     void bodyMatches(const QString &bodyMatch);
 
+    /*!
+     */
     void setLimit(int limit);
+    /*!
+     */
     [[nodiscard]] int limit() const;
 
     /**

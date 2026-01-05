@@ -29,13 +29,27 @@ class ContactQueryPrivate;
 class AKONADI_SEARCH_PIM_EXPORT ContactQuery : public Query
 {
 public:
+    /*!
+     */
     ContactQuery();
+    /*!
+     */
     ~ContactQuery() override;
 
+    /*!
+     */
     void matchName(const QString &name);
+    /*!
+     */
     void matchNickname(const QString &nick);
+    /*!
+     */
     void matchEmail(const QString &email);
+    /*!
+     */
     void matchUID(const QString &uid);
+    /*!
+     */
     void match(const QString &str);
 
     enum MatchCriteria : uint8_t {
@@ -43,12 +57,22 @@ public:
         StartsWithMatch,
     };
 
+    /*!
+     */
     void setMatchCriteria(MatchCriteria m);
+    /*!
+     */
     [[nodiscard]] MatchCriteria matchCriteria() const;
 
+    /*!
+     */
     [[nodiscard]] ResultIterator exec() override;
 
+    /*!
+     */
     [[nodiscard]] int limit() const;
+    /*!
+     */
     void setLimit(int limit);
 
 private:

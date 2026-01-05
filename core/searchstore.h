@@ -26,7 +26,11 @@ class AKONADI_SEARCH_CORE_EXPORT SearchStore : public QObject
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit SearchStore(QObject *parent = nullptr);
+    /*!
+     */
     ~SearchStore() override;
 
     /**
@@ -54,14 +58,28 @@ public:
      * \return Returns a integer representing the integer
      */
     virtual int exec(const Query &query) = 0;
+    /*!
+     */
     virtual bool next(int queryId) = 0;
+    /*!
+     */
     virtual void close(int queryId) = 0;
 
+    /*!
+     */
     [[nodiscard]] virtual QByteArray id(int queryId) = 0;
 
+    /*!
+     */
     [[nodiscard]] virtual QUrl url(int queryId);
+    /*!
+     */
     [[nodiscard]] virtual QString text(int queryId);
+    /*!
+     */
     [[nodiscard]] virtual QString icon(int queryId);
+    /*!
+     */
     [[nodiscard]] virtual QString property(int queryId, const QString &propName);
 };
 

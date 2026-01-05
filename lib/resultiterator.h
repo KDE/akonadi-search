@@ -29,11 +29,21 @@ class ResultIteratorPrivate;
 class AKONADI_SEARCH_PIM_EXPORT ResultIterator
 {
 public:
+    /*!
+     */
     ResultIterator();
+    /*!
+     */
     ResultIterator(const ResultIterator &ri);
+    /*!
+     */
     ~ResultIterator();
 
+    /*!
+     */
     [[nodiscard]] Akonadi::Item::Id id();
+    /*!
+     */
     bool next();
 
 private:

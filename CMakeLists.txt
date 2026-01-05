@@ -98,18 +98,7 @@ include(ECMAddTests)
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
 include(ECMFeatureSummary)
-include(ECMAddQch)
-
-option(
-    BUILD_QCH
-    "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)"
-    OFF
-)
-add_feature_info(
-    QCH
-    ${BUILD_QCH}
-    "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)"
-)
+include(ECMGenerateQDoc)
 
 cmake_dependent_option(
     AKONADISEARCH_ENABLE_KRUNNER_RUNNER
@@ -218,18 +207,6 @@ add_subdirectory(search)
 add_subdirectory(debug)
 if(AKONADISEARCH_ENABLE_KRUNNER_RUNNER)
     add_subdirectory(runner)
-endif()
-
-if(BUILD_QCH)
-    ecm_install_qch_export(
-        TARGETS KPim6AkonadiSearchPIM_QCH
-        FILE KPim6AkonadiSearchPIMQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS
-        "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6AkonadiSearchPIMQchTargets.cmake\")"
-    )
 endif()
 
 configure_package_config_file(

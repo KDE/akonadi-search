@@ -41,7 +41,11 @@ public:
         Or
     };
 
+    /*!
+     */
     Term();
+    /*!
+     */
     Term(const Term &t);
 
     /**
@@ -64,11 +68,21 @@ public:
      * This term is a combination of other terms
      */
     Term(Operation op);
+    /*!
+     */
     Term(Operation op, const Term &t);
+    /*!
+     */
     Term(Operation op, const QList<Term> &t);
+    /*!
+     */
     Term(const Term &lhs, Operation op, const Term &rhs);
+    /*!
+     */
     ~Term();
 
+    /*!
+     */
     [[nodiscard]] bool isValid() const;
 
     /**
@@ -77,44 +91,84 @@ public:
      */
     void setNegation(bool isNegated);
 
+    /*!
+     */
     [[nodiscard]] bool negated() const;
+    /*!
+     */
     [[nodiscard]] bool isNegated() const;
 
+    /*!
+     */
     void addSubTerm(const Term &term);
+    /*!
+     */
     void setSubTerms(const QList<Term> &terms);
 
     /**
      * Returns the first subTerm in the list of subTerms
      */
     [[nodiscard]] Term subTerm() const;
+    /*!
+     */
     [[nodiscard]] QList<Term> subTerms() const;
 
+    /*!
+     */
     void setOperation(Operation op);
+    /*!
+     */
     [[nodiscard]] Operation operation() const;
 
+    /*!
+     */
     [[nodiscard]] bool isEmpty() const;
+    /*!
+     */
     [[nodiscard]] bool empty() const;
 
     /**
      * Return the property this term is targeting
      */
     [[nodiscard]] QString property() const;
+    /*!
+     */
     void setProperty(const QString &property);
 
+    /*!
+     */
     [[nodiscard]] QVariant value() const;
+    /*!
+     */
     void setValue(const QVariant &value);
 
+    /*!
+     */
     [[nodiscard]] Comparator comparator() const;
+    /*!
+     */
     void setComparator(Comparator c);
 
+    /*!
+     */
     void setUserData(const QString &name, const QVariant &value);
+    /*!
+     */
     [[nodiscard]] QVariant userData(const QString &name) const;
 
+    /*!
+     */
     [[nodiscard]] QVariantMap toVariantMap() const;
+    /*!
+     */
     static Term fromVariantMap(const QVariantMap &map);
 
+    /*!
+     */
     bool operator==(const Term &rhs) const;
 
+    /*!
+     */
     Term &operator=(const Term &rhs);
 
 private:
@@ -146,4 +200,6 @@ inline Term operator!(const Term &rhs)
 }
 }
 
+/*!
+ */
 AKONADI_SEARCH_CORE_EXPORT QDebug operator<<(QDebug d, const Akonadi::Search::Term &t);

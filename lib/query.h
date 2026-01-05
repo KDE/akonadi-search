@@ -23,11 +23,21 @@ class ResultIterator;
 class AKONADI_SEARCH_PIM_EXPORT Query
 {
 public:
+    /*!
+     */
     Query();
+    /*!
+     */
     virtual ~Query();
+    /*!
+     */
     virtual ResultIterator exec() = 0;
 
+    /*!
+     */
     static Query *fromJSON(const QByteArray &json);
+    /*!
+     */
     [[nodiscard]] static QString defaultLocation(const QString &dbName);
 };
 }

@@ -93,28 +93,3 @@ install(
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
-
-if(BUILD_QCH)
-    ecm_add_qch(
-        KPim6AkonadiSearchPIM_QCH
-        NAME KPim6AkonadiSearchPIM
-        BASE_NAME KPim6AkonadiSearchPIM
-        VERSION ${PIM_VERSION}
-        ORG_DOMAIN org.kde
-        SOURCES # using only public headers, to cover only public API
-        ${AKONADISEARCH_INCLUDES}
-        MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
-        #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
-        LINK_QCHS
-            Qt6Core_QCH
-            Qt6Gui_QCH
-            Qt6Widgets_QCH
-        INCLUDE_DIRS
-            ${CMAKE_CURRENT_BINARY_DIR}
-        BLANK_MACROS
-            AKONADI_SEARCH_PIM_EXPORT
-        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        COMPONENT Devel
-    )
-endif()

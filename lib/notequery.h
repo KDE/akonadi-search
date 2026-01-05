@@ -28,15 +28,29 @@ class NoteQueryPrivate;
 class AKONADI_SEARCH_PIM_EXPORT NoteQuery : public Query
 {
 public:
+    /*!
+     */
     NoteQuery();
+    /*!
+     */
     ~NoteQuery() override;
 
+    /*!
+     */
     void matchTitle(const QString &title);
+    /*!
+     */
     void matchNote(const QString &note);
 
+    /*!
+     */
     void setLimit(int limit);
+    /*!
+     */
     [[nodiscard]] int limit() const;
 
+    /*!
+     */
     [[nodiscard]] ResultIterator exec() override;
 
 private:

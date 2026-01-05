@@ -9,4 +9,3 @@ find_dependency(KPim6AkonadiMime "@AKONADI_MIMELIB_VERSION@")
 find_dependency(KF6CalendarCore "@KF_MIN_VERSION@")
 
 include("${CMAKE_CURRENT_LIST_DIR}/KPim6AkonadiSearchTargets.cmake")
-@PACKAGE_INCLUDE_QCHTARGETS@

@@ -30,20 +30,36 @@ class CollectionQueryPrivate;
 class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
 public:
+    /*!
+     */
     CollectionQuery();
+    /*!
+     */
     ~CollectionQuery() override;
 
+    /*!
+     */
     void setNamespace(const QStringList &ns);
+    /*!
+     */
     void setMimetype(const QStringList &mt);
 
     /**
      * Matches the string \p match in the name.
      */
     void nameMatches(const QString &match);
+    /*!
+     */
     void identifierMatches(const QString &match);
+    /*!
+     */
     void pathMatches(const QString &match);
 
+    /*!
+     */
     void setLimit(int limit);
+    /*!
+     */
     [[nodiscard]] int limit() const;
 
     /**

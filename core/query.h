@@ -26,12 +26,22 @@ class QueryPrivate;
 class AKONADI_SEARCH_CORE_EXPORT Query
 {
 public:
+    /*!
+     */
     Query();
+    /*!
+     */
     Query(const Term &t);
+    /*!
+     */
     Query(const Query &rhs);
     ~Query();
 
+    /*!
+     */
     void setTerm(const Term &t);
+    /*!
+     */
     [[nodiscard]] Term term() const;
 
     /**
@@ -48,10 +58,18 @@ public:
      * KFileMetaData::TypeInfo for a list of type names.
      */
     void addType(const QString &type);
+    /*!
+     */
     void addTypes(const QStringList &typeList);
+    /*!
+     */
     void setType(const QString &type);
+    /*!
+     */
     void setTypes(const QStringList &types);
 
+    /*!
+     */
     [[nodiscard]] QStringList types() const;
 
     /**
@@ -62,6 +80,8 @@ public:
      * to give the best possible results.
      */
     void setSearchString(const QString &str);
+    /*!
+     */
     [[nodiscard]] QString searchString() const;
 
     /**
@@ -69,9 +89,15 @@ public:
      * By default the limit is 100000.
      */
     void setLimit(uint limit);
+    /*!
+     */
     [[nodiscard]] uint limit() const;
 
+    /*!
+     */
     void setOffset(uint offset);
+    /*!
+     */
     [[nodiscard]] uint offset() const;
 
     /**
@@ -81,8 +107,14 @@ public:
      */
     void setDateFilter(int year, int month = -1, int day = -1);
 
+    /*!
+     */
     [[nodiscard]] int yearFilter() const;
+    /*!
+     */
     [[nodiscard]] int monthFilter() const;
+    /*!
+     */
     [[nodiscard]] int dayFilter() const;
 
     enum SortingOption : uint8_t {
@@ -106,7 +138,11 @@ public:
         SortProperty
     };
 
+    /*!
+     */
     void setSortingOption(SortingOption option);
+    /*!
+     */
     [[nodiscard]] SortingOption sortingOption() const;
 
     /**
@@ -114,6 +150,8 @@ public:
      * set the sorting mechanism to SortProperty
      */
     void setSortingProperty(const QString &property);
+    /*!
+     */
     [[nodiscard]] QString sortingProperty() const;
 
     /**
@@ -124,21 +162,43 @@ public:
      * looked up in their corresponding documentation
      */
     void addCustomOption(const QString &option, const QVariant &value);
+    /*!
+     */
     void removeCustomOption(const QString &option);
+    /*!
+     */
     [[nodiscard]] QVariant customOption(const QString &option) const;
+    /*!
+     */
     [[nodiscard]] QVariantMap customOptions() const;
 
+    /*!
+     */
     [[nodiscard]] ResultIterator exec();
 
+    /*!
+     */
     [[nodiscard]] QByteArray toJSON() const;
+    /*!
+     */
     static Query fromJSON(const QByteArray &arr);
 
+    /*!
+     */
     [[nodiscard]] QUrl toSearchUrl(const QString &title = QString());
+    /*!
+     */
     static Query fromSearchUrl(const QUrl &url);
+    /*!
+     */
     static QString titleFromQueryUrl(const QUrl &url);
 
+    /*!
+     */
     bool operator==(const Query &rhs) const;
 
+    /*!
+     */
     Query &operator=(const Query &rhs);
 
 private:
