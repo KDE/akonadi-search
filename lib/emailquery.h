@@ -24,7 +24,7 @@ namespace PIM
 {
 class EmailQueryPrivate;
 
-/** Email query. */
+/*! Email query. */
 class AKONADI_SEARCH_PIM_EXPORT EmailQuery : public Query
 {
 public:
@@ -90,35 +90,35 @@ public:
      */
     void addCollection(Akonadi::Collection::Id id);
 
-    /**
+    /*!
      * By default the importance is ignored
      */
     void setImportant(bool important = true);
 
-    /**
+    /*!
      * By default the read status is ignored
      */
     void setRead(bool read = true);
 
-    /**
+    /*!
      * By default the attachment status is ignored
      */
     void setAttachment(bool hasAttachment = true);
 
-    /**
-     * Matches the string \p match anywhere in the entire email
+    /*!
+     * Matches the string \a match anywhere in the entire email
      * body
      */
     void matches(const QString &match);
 
-    /**
-     * Matches the string \p subjectMatch specifically in the
+    /*!
+     * Matches the string \a subjectMatch specifically in the
      * email subject
      */
     void subjectMatches(const QString &subjectMatch);
 
-    /**
-     * Matches the string \p bodyMatch specifically in the body email
+    /*!
+     * Matches the string \a bodyMatch specifically in the body email
      */
     void bodyMatches(const QString &bodyMatch);
 
@@ -129,16 +129,14 @@ public:
      */
     [[nodiscard]] int limit() const;
 
-    /**
+    /*!
      * Execute the query and return an iterator to fetch
      * the results
      */
     [[nodiscard]] ResultIterator exec() override;
 
 private:
-    //@cond PRIVATE
     std::unique_ptr<EmailQueryPrivate> const d;
-    //@endcond
 };
 }
 }

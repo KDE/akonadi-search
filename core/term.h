@@ -21,7 +21,7 @@ namespace Search
 {
 class TermPrivate;
 
-/** Search term. */
+/*! Search term. */
 class AKONADI_SEARCH_CORE_EXPORT Term
 {
 public:
@@ -48,13 +48,13 @@ public:
      */
     Term(const Term &t);
 
-    /**
-     * The Item must contain the property \p property
+    /*!
+     * The Item must contain the property \a property
      */
     Term(const QString &property);
 
-    /**
-     * The Item must contain the property \p property with
+    /*!
+     * The Item must contain the property \a property with
      * value \value.
      *
      * The default comparator is Auto which has the following behavior
@@ -64,7 +64,7 @@ public:
      */
     Term(const QString &property, const QVariant &value, Comparator c = Auto);
 
-    /**
+    /*!
      * This term is a combination of other terms
      */
     Term(Operation op);
@@ -85,7 +85,7 @@ public:
      */
     [[nodiscard]] bool isValid() const;
 
-    /**
+    /*!
      * Negate this term. Negation only applies for Equal or Contains
      * For other Comparators you must invert it yourself
      */
@@ -105,7 +105,7 @@ public:
      */
     void setSubTerms(const QList<Term> &terms);
 
-    /**
+    /*!
      * Returns the first subTerm in the list of subTerms
      */
     [[nodiscard]] Term subTerm() const;
@@ -127,7 +127,7 @@ public:
      */
     [[nodiscard]] bool empty() const;
 
-    /**
+    /*!
      * Return the property this term is targeting
      */
     [[nodiscard]] QString property() const;

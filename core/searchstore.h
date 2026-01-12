@@ -16,12 +16,12 @@
 
 namespace Akonadi
 {
-/** Akonadi search infrastructure. */
+/*! Akonadi search infrastructure. */
 namespace Search
 {
 class Query;
 
-/** Search store. */
+/*! Search store. */
 class AKONADI_SEARCH_CORE_EXPORT SearchStore : public QObject
 {
     Q_OBJECT
@@ -33,26 +33,26 @@ public:
      */
     ~SearchStore() override;
 
-    /**
+    /*!
      * Override search stores for testing
      */
     static void overrideSearchStores(const QList<SearchStore *> &overrideSearchStores);
 
     using List = QList<QSharedPointer<SearchStore>>;
 
-    /**
+    /*!
      * Gives a list of available search stores. These stores must be managed and
      * deleted by the caller
      */
     static List searchStores();
 
-    /**
+    /*!
      * Returns a list of types which can be searched for
      * in this store
      */
     virtual QStringList types() = 0;
 
-    /**
+    /*!
      * Executes the particular query synchronously.
      *
      * \return Returns a integer representing the integer

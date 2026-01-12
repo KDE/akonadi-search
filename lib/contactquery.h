@@ -23,7 +23,7 @@ namespace PIM
 {
 class ContactQueryPrivate;
 
-/**
+/*!
  * Query for a list of contacts matching a criteria
  */
 class AKONADI_SEARCH_PIM_EXPORT ContactQuery : public Query

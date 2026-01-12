@@ -25,7 +25,7 @@ class EmailQuery;
 class NoteQuery;
 class ResultIteratorPrivate;
 
-/** Result iterator. */
+/*! Result iterator. */
 class AKONADI_SEARCH_PIM_EXPORT ResultIterator
 {
 public:

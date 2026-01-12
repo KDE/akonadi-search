@@ -21,12 +21,12 @@ namespace Akonadi
 {
 namespace Search
 {
-/** PIM specific search API. */
+/*! PIM specific search API. */
 namespace PIM
 {
 class CollectionQueryPrivate;
 
-/** Collection query. */
+/*! Collection query. */
 class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
 public:
@@ -44,8 +44,8 @@ public:
      */
     void setMimetype(const QStringList &mt);
 
-    /**
-     * Matches the string \p match in the name.
+    /*!
+     * Matches the string \a match in the name.
      */
     void nameMatches(const QString &match);
     /*!
@@ -62,21 +62,19 @@ public:
      */
     [[nodiscard]] int limit() const;
 
-    /**
+    /*!
      * Execute the query and return an iterator to fetch
      * the results
      */
     [[nodiscard]] ResultIterator exec() override;
 
-    /**
+    /*!
      * For testing
      */
     void setDatabaseDir(const QString &dir);
 
 private:
-    //@cond PRIVATE
     std::unique_ptr<CollectionQueryPrivate> const d;
-    //@endcond
 };
 }
 }

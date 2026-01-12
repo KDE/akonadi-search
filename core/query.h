@@ -22,7 +22,7 @@ namespace Search
 class Term;
 class QueryPrivate;
 
-/** Search query. */
+/*! Search query. */
 class AKONADI_SEARCH_CORE_EXPORT Query
 {
 public:
@@ -44,7 +44,7 @@ public:
      */
     [[nodiscard]] Term term() const;
 
-    /**
+    /*!
      * Add a type to the results of the query.
      *
      * Each Item in the result must contain one of the types.
@@ -72,7 +72,7 @@ public:
      */
     [[nodiscard]] QStringList types() const;
 
-    /**
+    /*!
      * Set some text which should be used to search for Items. This
      * contain a single word or an entire sentence.
      *
@@ -84,8 +84,8 @@ public:
      */
     [[nodiscard]] QString searchString() const;
 
-    /**
-     * Only a maximum of \p limit results will be returned.
+    /*!
+     * Only a maximum of \a limit results will be returned.
      * By default the limit is 100000.
      */
     void setLimit(uint limit);
@@ -100,7 +100,7 @@ public:
      */
     [[nodiscard]] uint offset() const;
 
-    /**
+    /*!
      * Filter the results in the specified date range.
      *
      * The year/month/day may be set to -1 in order to ignore it.
@@ -118,20 +118,20 @@ public:
     [[nodiscard]] int dayFilter() const;
 
     enum SortingOption : uint8_t {
-        /**
+        /*!
          * The results are returned in the most efficient order. They can
          * be returned in any order.
          */
         SortNone,
 
-        /**
+        /*!
          * The results are returned in the order the SearchStore decides
          * should be ideal. This criteria could be based on any factors.
          * Read the documentation for the corresponding search store.
          */
         SortAuto,
 
-        /**
+        /*!
          * The results are returned based on the explicit property specified.
          * The implementation of this depends on the search store.
          */
@@ -145,7 +145,7 @@ public:
      */
     [[nodiscard]] SortingOption sortingOption() const;
 
-    /**
+    /*!
      * Sets the property that should be used for sorting. This automatically
      * set the sorting mechanism to SortProperty
      */
@@ -154,7 +154,7 @@ public:
      */
     [[nodiscard]] QString sortingProperty() const;
 
-    /**
+    /*!
      * Adds a custom option which any search backend could use
      * to configure the query result.
      *

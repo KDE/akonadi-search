@@ -38,7 +38,7 @@ public:
     SearchStore *store = nullptr;
 };
 
-/** Result iterator. */
+/*! Result iterator. */
 class AKONADI_SEARCH_CORE_EXPORT ResultIterator
 {
 public:

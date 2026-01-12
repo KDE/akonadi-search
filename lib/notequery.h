@@ -22,7 +22,7 @@ namespace PIM
 {
 class NoteQueryPrivate;
 
-/**
+/*!
  * Query for a list of contacts matching a criteria
  */
 class AKONADI_SEARCH_PIM_EXPORT NoteQuery : public Query
