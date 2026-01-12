@@ -96,7 +96,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
-msgstr "S'ha produït un error en guardar el fitxer"
+msgstr "S'ha produït un error mentre es guardava el fitxer"
 
 #: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
 #, kde-format
