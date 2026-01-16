@@ -8,8 +8,8 @@ edition = "2021"
 crate-type = ["staticlib"]
 
 [build-dependencies]
-cxx-build = "1.0.106"
+cxx-build = "1.0.192"
 
 [dependencies]
-cxx = "1.0.106"
-html2text = "0.6"
+cxx = "1.0.192"
+html2text = "0.16"

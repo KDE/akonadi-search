@@ -7,7 +7,13 @@ extern crate html2text;
 use html2text::from_read;
 
 pub fn convert_to_text(html: String) -> String {
-    from_read(html.as_bytes(), html.len())
+    match from_read(html.as_bytes(), html.len()) {
+        Ok(str) => return str,
+        Err(error) => {
+            eprintln!("Error parsing html: {} ", error);
+            return String::new();
+        }
+    };
 }
 
 #[cxx::bridge]
