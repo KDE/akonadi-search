@@ -16,8 +16,7 @@ if(Corrosion_FOUND)
         set(corrosion_build_dir "build")
     else()
         string(
-            SHA1
-            cargo_path_hash
+            SHA1 cargo_path_hash
             ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml
         )
         string(SUBSTRING "${cargo_path_hash}" 0 5 cargo_path_hash)
