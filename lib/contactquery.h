@@ -24,36 +24,56 @@ namespace PIM
 class ContactQueryPrivate;
 
 /*!
- * \class Akonadi::Search::PIM::ContactQuery
- * \inheader AkonadiSearch/PIM/ContactQuery
- * \inmodule AkonadiSearchPIM
- * \brief Search query for contacts.
- *
- * ContactQuery allows searching for contacts by name, nickname, email,
- * UID, and other criteria with configurable match types.
- *
- * \sa Query, ResultIterator
+ * Query for a list of contacts matching a criteria
  */
 class AKONADI_SEARCH_PIM_EXPORT ContactQuery : public Query
 {
 public:
     /*!
-     * \enum ContactQuery::MatchCriteria
-     * \brief Defines how contact fields are matched.
-     */
-    enum MatchCriteria : uint8_t {
-        ExactMatch, /*!< Exact match. */
-        StartsWithMatch, /*!< Starts with match. */
-    };
-
-    /*!
-     * \brief Constructs an empty contact query.
      */
     ContactQuery();
     /*!
-     * \brief Destructs the contact query.
      */
     ~ContactQuery() override;
+
+    /*!
+     */
+    void matchName(const QString &name);
+    /*!
+     */
+    void matchNickname(const QString &nick);
+    /*!
+     */
+    void matchEmail(const QString &email);
+    /*!
+     */
+    void matchUID(const QString &uid);
+    /*!
+     */
+    void match(const QString &str);
+
+    enum MatchCriteria : uint8_t {
+        ExactMatch,
+        StartsWithMatch,
+    };
+
+    /*!
+     */
+    void setMatchCriteria(MatchCriteria m);
+    /*!
+     */
+    [[nodiscard]] MatchCriteria matchCriteria() const;
+
+    /*!
+     */
+    [[nodiscard]] ResultIterator exec() override;
+
+    /*!
+     */
+    [[nodiscard]] int limit() const;
+    /*!
+     */
+    void setLimit(int limit);
 
 private:
     std::unique_ptr<ContactQueryPrivate> const d;
