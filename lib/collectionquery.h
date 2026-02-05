@@ -26,45 +26,70 @@ namespace PIM
 {
 class CollectionQueryPrivate;
 
-/*! Collection query. */
+/*!
+ * \class Akonadi::Search::PIM::CollectionQuery
+ * \inheader AkonadiSearch/PIM/CollectionQuery
+ * \inmodule AkonadiSearchPIM
+ * \brief Search query for Akonadi collections.
+ *
+ * CollectionQuery allows searching for Akonadi collections by name,
+ * identifier, path, namespace, and MIME type filters.
+ *
+ * \sa Query, ResultIterator
+ */
 class AKONADI_SEARCH_PIM_EXPORT CollectionQuery : public Query
 {
 public:
     /*!
+     * \brief Constructs an empty collection query.
      */
     CollectionQuery();
     /*!
+     * \brief Destructs the collection query.
      */
     ~CollectionQuery() override;
 
     /*!
+     * \brief Sets the namespace filter for the query.
+     * \param ns The list of namespaces to search in.
      */
     void setNamespace(const QStringList &ns);
     /*!
+     * \brief Sets the MIME type filter for the query.
+     * \param mt The list of MIME types to search for.
      */
     void setMimetype(const QStringList &mt);
 
     /*!
-     * Matches the string \a match in the name.
+     * \brief Filters collections by name.
+     * \param match The string to match in the collection name.
      */
     void nameMatches(const QString &match);
     /*!
+     * \brief Filters collections by identifier.
+     * \param match The string to match in the identifier.
      */
     void identifierMatches(const QString &match);
     /*!
+     * \brief Filters collections by path.
+     * \param match The string to match in the path.
      */
     void pathMatches(const QString &match);
 
     /*!
+     * \brief Sets the maximum number of results to return.
+     * \param limit The result limit.
      */
     void setLimit(int limit);
     /*!
+     * \brief Returns the maximum number of results for this query.
+     * \return The result limit.
      */
     [[nodiscard]] int limit() const;
 
     /*!
-     * Execute the query and return an iterator to fetch
-     * the results
+     * \brief Executes the query and returns an iterator to fetch results.
+     * \return An iterator over the query results.
      */
     [[nodiscard]] ResultIterator exec() override;
 

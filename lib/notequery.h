@@ -23,33 +23,52 @@ namespace PIM
 class NoteQueryPrivate;
 
 /*!
- * Query for a list of contacts matching a criteria
+ * \class Akonadi::Search::PIM::NoteQuery
+ * \inheader AkonadiSearch/PIM/NoteQuery
+ * \inmodule AkonadiSearchPIM
+ * \brief Search query for notes.
+ *
+ * NoteQuery allows searching for notes by title and content.
+ *
+ * \sa Query, ResultIterator
  */
 class AKONADI_SEARCH_PIM_EXPORT NoteQuery : public Query
 {
 public:
     /*!
+     * \brief Constructs an empty note query.
      */
     NoteQuery();
     /*!
+     * \brief Destructs the note query.
      */
     ~NoteQuery() override;
 
     /*!
+     * \brief Filters notes by title.
+     * \param title The title to match.
      */
     void matchTitle(const QString &title);
     /*!
+     * \brief Filters notes by content.
+     * \param note The content to match.
      */
     void matchNote(const QString &note);
 
     /*!
+     * \brief Sets the maximum number of results to return.
+     * \param limit The result limit.
      */
     void setLimit(int limit);
     /*!
+     * \brief Returns the maximum number of results for this query.
+     * \return The result limit.
      */
     [[nodiscard]] int limit() const;
 
     /*!
+     * \brief Executes the query and returns an iterator to fetch results.
+     * \return An iterator over the search results.
      */
     [[nodiscard]] ResultIterator exec() override;
 

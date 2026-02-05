@@ -25,24 +25,42 @@ class EmailQuery;
 class NoteQuery;
 class ResultIteratorPrivate;
 
-/*! Result iterator. */
+/*!
+ * \class Akonadi::Search::PIM::ResultIterator
+ * \inheader AkonadiSearch/PIM/ResultIterator
+ * \inmodule AkonadiSearchPIM
+ * \brief Iterator for traversing search results.
+ *
+ * ResultIterator provides a way to iterate through results returned by
+ * PIM search queries (EmailQuery, ContactQuery, NoteQuery, CollectionQuery).
+ *
+ * \sa EmailQuery, ContactQuery, NoteQuery, CollectionQuery
+ */
 class AKONADI_SEARCH_PIM_EXPORT ResultIterator
 {
 public:
     /*!
+     * \brief Constructs an empty result iterator.
      */
     ResultIterator();
     /*!
+     * \brief Constructs a copy of the result iterator \a ri.
+     * \param ri The iterator to copy.
      */
     ResultIterator(const ResultIterator &ri);
     /*!
+     * \brief Destructs the result iterator.
      */
     ~ResultIterator();
 
     /*!
+     * \brief Returns the ID of the current result item.
+     * \return The item ID.
      */
     [[nodiscard]] Akonadi::Item::Id id();
     /*!
+     * \brief Advances to the next result.
+     * \return \c true if there is a next result, \c false if no more results.
      */
     bool next();
 
