@@ -19,14 +19,15 @@ target_sources(
 )
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim6AkonadiSearchDebug PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        KPim6AkonadiSearchDebug
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 
-generate_export_header(
-    KPim6AkonadiSearchDebug
-    BASE_NAME AKONADI_SEARCH_DEBUG
-    EXPORT_FILE_NAME search_debug_export.h
-)
+generate_export_header(KPim6AkonadiSearchDebug BASE_NAME AKONADI_SEARCH_DEBUG EXPORT_FILE_NAME search_debug_export.h)
 
 target_link_libraries(
     KPim6AkonadiSearchDebug
@@ -42,9 +43,12 @@ target_link_libraries(
 set_target_properties(
     KPim6AkonadiSearchDebug
     PROPERTIES
-        VERSION ${AKONADISEARCH_VERSION}
-        SOVERSION ${AKONADISEARCH_SOVERSION}
-        EXPORT_NAME AkonadiSearchDebug
+        VERSION
+            ${AKONADISEARCH_VERSION}
+        SOVERSION
+            ${AKONADISEARCH_SOVERSION}
+        EXPORT_NAME
+            AkonadiSearchDebug
 )
 
 target_include_directories(
@@ -53,11 +57,7 @@ target_include_directories(
         "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch>"
 )
 
-install(
-    TARGETS KPim6AkonadiSearchDebug
-    EXPORT KPim6AkonadiSearchTargets
-    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KPim6AkonadiSearchDebug EXPORT KPim6AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(
     FILES

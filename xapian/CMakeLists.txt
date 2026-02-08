@@ -26,33 +26,36 @@ ecm_qt_declare_logging_category(KPim6AkonadiSearchXapian HEADER akonadi_search_x
 )
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim6AkonadiSearchXapian PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        KPim6AkonadiSearchXapian
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 
 target_link_libraries(
     KPim6AkonadiSearchXapian
-    PUBLIC Qt::Core KPim6::AkonadiSearchCore ${XAPIAN_LIBRARIES}
+    PUBLIC
+        Qt::Core
+        KPim6::AkonadiSearchCore
+        ${XAPIAN_LIBRARIES}
 )
 
 set_target_properties(
     KPim6AkonadiSearchXapian
     PROPERTIES
-        VERSION ${AKONADISEARCH_VERSION}
-        SOVERSION ${AKONADISEARCH_SOVERSION}
-        EXPORT_NAME AkonadiSearchXapian
+        VERSION
+            ${AKONADISEARCH_VERSION}
+        SOVERSION
+            ${AKONADISEARCH_SOVERSION}
+        EXPORT_NAME
+            AkonadiSearchXapian
 )
 
-generate_export_header(
-    KPim6AkonadiSearchXapian
-    BASE_NAME AKONADI_SEARCH_XAPIAN
-    EXPORT_FILE_NAME search_xapian_export.h
-)
+generate_export_header(KPim6AkonadiSearchXapian BASE_NAME AKONADI_SEARCH_XAPIAN EXPORT_FILE_NAME search_xapian_export.h)
 
-install(
-    TARGETS KPim6AkonadiSearchXapian
-    EXPORT KPim6AkonadiSearchTargets
-    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KPim6AkonadiSearchXapian EXPORT KPim6AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(
     FILES

@@ -34,7 +34,10 @@ set(indexer_LIBS
     KF6::TextUtils
 )
 
-set(indexertest_SRCS indexertest.cpp ${indexer_SRCS})
+set(indexertest_SRCS
+    indexertest.cpp
+    ${indexer_SRCS}
+)
 
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 

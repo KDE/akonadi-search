@@ -9,17 +9,21 @@ if(Corrosion_FOUND)
     corrosion_import_crate(MANIFEST_PATH ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml)
     target_link_libraries(
         akonadi_html_to_text
-        PUBLIC htmlparser -Wl,--gc-sections
+        PUBLIC
+            htmlparser
+            -Wl,--gc-sections
     )
 
     if(Corrosion_VERSION VERSION_LESS 0.6.0)
         set(corrosion_build_dir "build")
     else()
+        string(SHA1 cargo_path_hash ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml)
         string(
-            SHA1 cargo_path_hash
-            ${CMAKE_CURRENT_SOURCE_DIR}/rs/htmlparser/Cargo.toml
+            SUBSTRING "${cargo_path_hash}"
+            0
+            5
+            cargo_path_hash
         )
-        string(SUBSTRING "${cargo_path_hash}" 0 5 cargo_path_hash)
         set(corrosion_build_dir "htmlparser_${cargo_path_hash}")
     endif()
 
@@ -34,15 +38,26 @@ endif()
 
 target_link_libraries(
     akonadi_html_to_text
-    PRIVATE Qt::Core Qt::Gui KF6::CoreAddons KF6::I18n
+    PRIVATE
+        Qt::Core
+        Qt::Gui
+        KF6::CoreAddons
+        KF6::I18n
 )
 
-install(TARGETS akonadi_html_to_text ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(
+    TARGETS
+        akonadi_html_to_text
+        ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+)
 
 ## Indexing agent target
 
 kde_enable_exceptions()
-include_directories(${XAPIAN_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+include_directories(
+    ${XAPIAN_INCLUDE_DIR}
+    ${CMAKE_CURRENT_BINARY_DIR}
+)
 
 add_executable(akonadi_indexing_agent)
 
@@ -93,7 +108,12 @@ qt_add_dbus_adaptor(akonadi_indexing_agent_SRCS org.freedesktop.Akonadi.Indexer.
 target_sources(akonadi_indexing_agent PRIVATE ${akonadi_indexing_agent_SRCS})
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(akonadi_indexing_agent PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        akonadi_indexing_agent
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 
 target_link_libraries(
@@ -114,11 +134,12 @@ target_link_libraries(
         KF6::TextUtils
 )
 
-install(TARGETS akonadi_indexing_agent ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(
-    FILES akonadiindexingagent.desktop
-    DESTINATION "${KDE_INSTALL_DATAROOTDIR}/akonadi/agents"
+    TARGETS
+        akonadi_indexing_agent
+        ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
 )
+install(FILES akonadiindexingagent.desktop DESTINATION "${KDE_INSTALL_DATAROOTDIR}/akonadi/agents")
 
 if(BUILD_TESTING)
     add_subdirectory(tests)

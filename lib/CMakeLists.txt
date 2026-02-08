@@ -36,27 +36,34 @@ ecm_qt_declare_logging_category(KPim6AkonadiSearchPIM HEADER akonadi_search_pim_
 )
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim6AkonadiSearchPIM PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        KPim6AkonadiSearchPIM
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 
-generate_export_header(
-    KPim6AkonadiSearchPIM
-    BASE_NAME AKONADI_SEARCH_PIM
-    EXPORT_FILE_NAME search_pim_export.h
-)
+generate_export_header(KPim6AkonadiSearchPIM BASE_NAME AKONADI_SEARCH_PIM EXPORT_FILE_NAME search_pim_export.h)
 
 target_link_libraries(
     KPim6AkonadiSearchPIM
-    PUBLIC Qt::Core
-    PRIVATE KPim6::AkonadiCore ${XAPIAN_LIBRARIES}
+    PUBLIC
+        Qt::Core
+    PRIVATE
+        KPim6::AkonadiCore
+        ${XAPIAN_LIBRARIES}
 )
 
 set_target_properties(
     KPim6AkonadiSearchPIM
     PROPERTIES
-        VERSION ${AKONADISEARCH_VERSION}
-        SOVERSION ${AKONADISEARCH_SOVERSION}
-        EXPORT_NAME AkonadiSearchPIM
+        VERSION
+            ${AKONADISEARCH_VERSION}
+        SOVERSION
+            ${AKONADISEARCH_SOVERSION}
+        EXPORT_NAME
+            AkonadiSearchPIM
 )
 
 target_include_directories(
@@ -65,11 +72,7 @@ target_include_directories(
         "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch>"
 )
 
-install(
-    TARGETS KPim6AkonadiSearchPIM
-    EXPORT KPim6AkonadiSearchTargets
-    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KPim6AkonadiSearchPIM EXPORT KPim6AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 set(AKONADISEARCH_INCLUDES
     query.h

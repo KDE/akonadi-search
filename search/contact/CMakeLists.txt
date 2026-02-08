@@ -16,7 +16,4 @@ target_link_libraries(
     KPim6AkonadiSearchXapian
 )
 
-install(
-    TARGETS contactsearchstore
-    DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi
-)
+install(TARGETS contactsearchstore DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi)

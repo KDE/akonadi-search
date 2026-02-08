@@ -22,7 +22,12 @@ ecm_qt_declare_logging_category(KPim6AkonadiSearchCore HEADER akonadi_search_cor
 )
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim6AkonadiSearchCore PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        KPim6AkonadiSearchCore
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 
 target_link_libraries(KPim6AkonadiSearchCore PUBLIC Qt::Core)
@@ -30,9 +35,12 @@ target_link_libraries(KPim6AkonadiSearchCore PUBLIC Qt::Core)
 set_target_properties(
     KPim6AkonadiSearchCore
     PROPERTIES
-        VERSION ${AKONADISEARCH_VERSION}
-        SOVERSION ${AKONADISEARCH_SOVERSION}
-        EXPORT_NAME AkonadiSearchCore
+        VERSION
+            ${AKONADISEARCH_VERSION}
+        SOVERSION
+            ${AKONADISEARCH_SOVERSION}
+        EXPORT_NAME
+            AkonadiSearchCore
 )
 target_include_directories(
     KPim6AkonadiSearchCore
@@ -40,11 +48,7 @@ target_include_directories(
         "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch>"
 )
 
-generate_export_header(
-    KPim6AkonadiSearchCore
-    BASE_NAME AKONADI_SEARCH_CORE
-    EXPORT_FILE_NAME search_core_export.h
-)
+generate_export_header(KPim6AkonadiSearchCore BASE_NAME AKONADI_SEARCH_CORE EXPORT_FILE_NAME search_core_export.h)
 
 ecm_generate_headers(KPim6AkonadiSearchCore_CamelCasecore_HEADERS
     HEADER_NAMES
@@ -56,25 +60,24 @@ ecm_generate_headers(KPim6AkonadiSearchCore_CamelCasecore_HEADERS
     PREFIX Core
 )
 
-install(
-    TARGETS KPim6AkonadiSearchCore
-    EXPORT KPim6AkonadiSearchTargets
-    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KPim6AkonadiSearchCore EXPORT KPim6AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(
-    FILES ${KPim6AkonadiSearchCore_CamelCasecore_HEADERS}
+    FILES
+        ${KPim6AkonadiSearchCore_CamelCasecore_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch/Core
     COMPONENT Devel
 )
 install(
-    FILES ${KPim6AkonadiSearchCore_core_HEADERS}
+    FILES
+        ${KPim6AkonadiSearchCore_core_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch/core
     COMPONENT Devel
 )
 
 install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/search_core_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch
     COMPONENT Devel
 )

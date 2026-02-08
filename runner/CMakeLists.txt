@@ -11,7 +11,9 @@ ecm_qt_declare_logging_category(krunner_pimcontacts HEADER akonadi_runner_debug.
 )
 target_sources(
     krunner_pimcontacts
-    PRIVATE pimcontactsrunner.cpp pimcontactsrunner.h
+    PRIVATE
+        pimcontactsrunner.cpp
+        pimcontactsrunner.h
 )
 
 target_link_libraries(
@@ -29,7 +31,14 @@ kcoreaddons_add_plugin(kcm_krunner_pimcontacts INSTALL_NAMESPACE "kf6/krunner/kc
 
 target_sources(
     kcm_krunner_pimcontacts
-    PRIVATE pimcontactsrunnerconfig.cpp pimcontactsrunnerconfig.h
+    PRIVATE
+        pimcontactsrunnerconfig.cpp
+        pimcontactsrunnerconfig.h
 )
 
-target_link_libraries(kcm_krunner_pimcontacts Qt::Gui KF6::KCMUtils KF6::I18n)
+target_link_libraries(
+    kcm_krunner_pimcontacts
+    Qt::Gui
+    KF6::KCMUtils
+    KF6::I18n
+)
