@@ -16,20 +16,34 @@ namespace Akonadi
 {
 namespace Search
 {
-/** Xapian term generator. */
+/*! Xapian term generator. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianTermGenerator
 {
 public:
+    /*!
+     */
     explicit XapianTermGenerator(Xapian::Document *doc);
 
+    /*!
+     */
     void indexText(const QString &text);
+    /*!
+     */
     void indexText(const QString &text, const QString &prefix, int wdfInc = 1);
 
+    /*!
+     */
     void setPosition(int position);
+    /*!
+     */
     [[nodiscard]] int position() const;
 
+    /*!
+     */
     void setDocument(Xapian::Document *doc);
 
+    /*!
+     */
     [[nodiscard]] static QStringList termList(const QString &text);
 
 private:

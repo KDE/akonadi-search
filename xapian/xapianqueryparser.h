@@ -16,21 +16,27 @@ namespace Akonadi
 {
 namespace Search
 {
-/** Xapian query parser. */
+/*! Xapian query parser. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianQueryParser
 {
 public:
+    /*!
+     */
     XapianQueryParser();
 
+    /*!
+     */
     void setDatabase(Xapian::Database *db);
+    /*!
+     */
     [[nodiscard]] Xapian::Query parseQuery(const QString &str, const QString &prefix = QString());
 
-    /**
+    /*!
      * Expands word to every possible option which it can be expanded to.
      */
     [[nodiscard]] Xapian::Query expandWord(const QString &word, const QString &prefix = QString());
 
-    /**
+    /*!
      * Set if each word in the string should be treated as a partial word
      * and should be expanded to every possible word.
      */

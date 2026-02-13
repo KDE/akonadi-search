@@ -20,31 +20,47 @@ namespace Akonadi
 {
 namespace Search
 {
-/**
+/*!
  * Implements a search store using Xapian
  */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianSearchStore : public SearchStore
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit XapianSearchStore(QObject *parent = nullptr);
+    /*!
+     */
     ~XapianSearchStore() override;
 
+    /*!
+     */
     [[nodiscard]] int exec(const Query &query) override;
+    /*!
+     */
     void close(int queryId) override;
+    /*!
+     */
     bool next(int queryId) override;
 
+    /*!
+     */
     [[nodiscard]] QByteArray id(int queryId) override;
+    /*!
+     */
     [[nodiscard]] QUrl url(int queryId) override;
 
-    /**
+    /*!
      * Set the path of the xapian database
      */
     virtual void setDbPath(const QString &path);
+    /*!
+     */
     [[nodiscard]] virtual QString dbPath();
 
 protected:
-    /**
+    /*!
      * The derived class should implement the logic for constructing the appropriate
      * Xapian::Query class from the given values.
      */
@@ -52,29 +68,29 @@ protected:
 
     virtual Xapian::Query constructFilterQuery(int year, int month, int day);
 
-    /**
+    /*!
      * Apply any final touches to the query
      */
     virtual Xapian::Query finalizeQuery(const Xapian::Query &query);
 
-    /**
+    /*!
      * Create a query for any custom options.
      */
     virtual Xapian::Query applyCustomOptions(const Xapian::Query &q, const QVariantMap &options);
 
-    /**
-     * Returns the url for the document with id \p docid.
+    /*!
+     * Returns the url for the document with id \a docid.
      */
     virtual QUrl constructUrl(const Xapian::docid &docid) = 0;
 
-    /**
+    /*!
      * Gives a list of types which have been provided with the query.
      * This must return the appropriate query which will be ANDed with
      * the final query
      */
     virtual Xapian::Query convertTypes(const QStringList &types) = 0;
 
-    /**
+    /*!
      * The prefix that should be used when converting an integer
      * id to a byte array
      */
@@ -82,7 +98,7 @@ protected:
 
     Xapian::Document docForQuery(int queryId);
 
-    /**
+    /*!
      * Convenience function to AND two Xapian queries together.
      */
     Xapian::Query andQuery(const Xapian::Query &a, const Xapian::Query &b);

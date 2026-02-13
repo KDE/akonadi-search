@@ -17,31 +17,54 @@ namespace Akonadi
 {
 namespace Search
 {
-/**
+/*!
  * This class is just a light wrapper over Xapian::Document
  * which provides nice Qt apis.
  */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianDocument
 {
 public:
+    /*!
+     * \brief XapianDocument
+     */
     XapianDocument();
+    /*!
+     * \brief XapianDocument
+     * \param doc
+     */
     XapianDocument(const Xapian::Document &doc);
 
+    /*!
+     */
     void addTerm(const QString &term, const QString &prefix = QString());
+    /*!
+     */
     void addBoolTerm(const QString &term, const QString &prefix = QString());
+    /*!
+     */
     void addBoolTerm(int term, const QString &prefix);
 
+    /*!
+     */
     void indexText(const QString &text, int wdfInc = 1);
+    /*!
+     */
     void indexText(const QString &text, const QString &prefix, int wdfInc = 1);
 
+    /*!
+     */
     void addValue(int pos, const QString &value);
 
+    /*!
+     */
     [[nodiscard]] Xapian::Document doc() const;
 
+    /*!
+     */
     [[nodiscard]] QString fetchTermStartsWith(const QByteArray &term);
 
-    /**
-     * Remove all the terms which start with the prefix \p prefix
+    /*!
+     * Remove all the terms which start with the prefix \a prefix
      *
      * \return true if the document was modified
      */

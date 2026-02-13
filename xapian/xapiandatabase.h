@@ -19,12 +19,12 @@ namespace Search
 {
 class XapianDocument;
 
-/** Xapian database. */
+/*! Xapian database. */
 class AKONADI_SEARCH_XAPIAN_EXPORT XapianDatabase
 {
 public:
-    /**
-     * Create the Xapian db at path \p path. The parameter \p
+    /*!
+     * Create the Xapian db at path \a path. The parameter \p
      * writeOnly locks the database as long as this object is
      * valid
      */
@@ -35,7 +35,7 @@ public:
     void replaceDocument(uint id, const XapianDocument &doc);
     void deleteDocument(uint id);
 
-    /**
+    /*!
      * Commit all the pending changes. This may not commit
      * at this instance as the db might be locked by another process
      * It emits the committed signal on completion
@@ -44,7 +44,7 @@ public:
 
     [[nodiscard]] XapianDocument document(uint id);
 
-    /**
+    /*!
      * A pointer to the actual db. Only use this when doing queries
      */
     Xapian::Database *db()
@@ -56,7 +56,7 @@ public:
         return &m_wDb;
     }
 
-    /**
+    /*!
      * Returns true if the XapianDatabase has changes which need to
      * be committed
      */
