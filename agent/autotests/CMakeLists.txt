@@ -65,7 +65,6 @@ if(KDEPIM_RUN_AKONADI_TEST)
         add_executable(
             collectionquerytest
             collectionquerytest.cpp
-            ${query_SRCS}
             ${indexer_SRCS}
             ${scheduler_SRCS}
         )
