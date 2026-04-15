@@ -122,7 +122,7 @@ target_link_libraries(
         Qt::Core
         KPim6::AkonadiCore
         KPim6::AkonadiMime
-        KPim6::Mime
+        KF6::Mime
         KF6::Contacts
         KPim6::AkonadiAgentBase
         KF6::CalendarCore

@@ -37,7 +37,7 @@ target_link_libraries(
     Qt::Test
     KPim6::AkonadiCore
     KPim6::AkonadiMime
-    KPim6::Mime
+    KF6::Mime
     KF6::Contacts
     ${XAPIAN_LIBRARIES}
     KF6::CalendarCore

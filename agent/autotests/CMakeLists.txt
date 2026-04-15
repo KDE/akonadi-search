@@ -23,7 +23,7 @@ set(indexer_LIBS
     KPim6::AkonadiCore
     KPim6::AkonadiMime
     KPim6::AkonadiAgentBase
-    KPim6::Mime
+    KF6::Mime
     KF6::Contacts
     KF6::CalendarCore
     KPim6::AkonadiSearchPIM

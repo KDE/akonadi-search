@@ -13,7 +13,7 @@ target_link_libraries(
     Qt::Test
     KPim6::AkonadiCore
     KPim6::AkonadiMime
-    KPim6::Mime
+    KF6::Mime
     KPim6::AkonadiSearchPIM
     KPim6::AkonadiSearchXapian
     KF6::Codecs
