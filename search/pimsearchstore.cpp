@@ -15,7 +15,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <Akonadi/ServerManager>
 #include <QDir>
 #include <QStandardPaths>
-#include <QUrl>
+
 #include <QUrlQuery>
 
 using namespace Akonadi::Search;
