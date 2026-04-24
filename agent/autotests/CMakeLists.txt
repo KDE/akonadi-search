@@ -58,8 +58,8 @@ if(KDEPIM_RUN_AKONADI_TEST)
         ${indexer_SRCS}
     )
 
-    add_akonadi_isolated_test_advanced(schedulertest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
-    add_akonadi_isolated_test_advanced(collectionindexingjobtest.cpp "${scheduler_SRCS}" "${indexer_LIBS}")
+    add_akonadi_isolated_test(SOURCE schedulertest.cpp ADDITIONAL_SOURCES ${scheduler_SRCS} LINK_LIBRARIES ${indexer_LIBS})
+    add_akonadi_isolated_test(SOURCE collectionindexingjobtest.cpp ADDITIONAL_SOURCES ${scheduler_SRCS} LINK_LIBRARIES ${indexer_LIBS})
 
     if(NOT WIN32 AND NOT APPLE)
         add_executable(
