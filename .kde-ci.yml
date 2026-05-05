@@ -11,7 +11,7 @@ Dependencies:
     'frameworks/krunner': '@latest-kf6'
     'pim/akonadi': '@same'
     'pim/akonadi-mime': '@same'
-    'pim/kmime': '@same'
+    'frameworks/kmime': '@same'
     'libraries/ktextaddons': '@latest-kf6'
 
 Options:
