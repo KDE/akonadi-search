@@ -31,10 +31,11 @@ generate_export_header(KPim6AkonadiSearchDebug BASE_NAME AKONADI_SEARCH_DEBUG EX
 
 target_link_libraries(
     KPim6AkonadiSearchDebug
-    PRIVATE
+    PUBLIC
         Qt::Widgets
-        KF6::I18n
         KPim6::AkonadiCore
+    PRIVATE
+        KF6::I18n
         KF6::WidgetsAddons
         KF6::ConfigCore
         KF6::Completion
