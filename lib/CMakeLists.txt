@@ -50,8 +50,8 @@ target_link_libraries(
     KPim6AkonadiSearchPIM
     PUBLIC
         Qt::Core
-    PRIVATE
         KPim6::AkonadiCore
+    PRIVATE
         ${XAPIAN_LIBRARIES}
 )
 
