@@ -53,17 +53,6 @@ private:
         qDebug() << "result:" << result << "(in" << t.elapsed() << "ms)";
         QEXPECT_FAIL("contact by name (oe)", "Does not work for the moment", Continue);
         QEXPECT_FAIL("search extras in subject", "Does not work for the moment", Continue);
-
-#ifdef Q_OS_FREEBSD
-        QEXPECT_FAIL("find by header cc (contains)", "Broken since CI image update around 2026-04-29", Continue);
-        QEXPECT_FAIL("find by reply to", "Broken since CI image update around 2026-04-29", Continue);
-        QEXPECT_FAIL("find by list id", "Broken since CI image update around 2026-04-29", Continue);
-        QEXPECT_FAIL("find by message by deleted status or headerListId", "Broken since CI image update around 2026-04-29", Continue);
-        QEXPECT_FAIL("find by message by deleted status or headerListId in all collections", "Broken since CI image update around 2026-04-29", Continue);
-        QEXPECT_FAIL("find by header cc (contains) with case", "Broken since CI image update around 2026-04-29", Continue);
-        QEXPECT_FAIL("search by from email part 1", "Broken since CI image update around 2026-04-29", Continue);
-        QEXPECT_FAIL("search by from email part 2", "Broken since CI image update around 2026-04-29", Continue);
-#endif
         QCOMPARE(result, expectedResult);
     }
 
