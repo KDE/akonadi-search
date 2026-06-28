@@ -124,6 +124,12 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
         int flags = Xapian::QueryParser::FLAG_DEFAULT;
         if (com == Term::Contains) {
             flags |= Xapian::QueryParser::FLAG_PARTIAL;
+            // Get same behaviour between Xapian 1.4 and 2.0 as index_without_position was ignored in 1.4 if db had no position by default.
+            // This is not anymore the case by default with Xapian 2.0.
+            // Note that toto@titi.com (both with versions 1.4 and 2.0) will match titi.com@toto for instance, as it's not positioned.
+            if (!xapianDb()->has_positions()) {
+                flags |= Xapian::QueryParser::FLAG_NO_POSITIONS;
+            }
         }
         return parser.parse_query(str, flags, p);
     }
