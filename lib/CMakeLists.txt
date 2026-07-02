@@ -96,3 +96,15 @@ install(
 if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
+
+ecm_add_installed_library_check(KPim6AkonadiSearchPIM
+    PACKAGE_NAME "KPim6AkonadiSearch"
+    PACKAGE_VERSION ${AKONADISEARCH_VERSION}
+    PACKAGE_TARGET_NAMESPACE "KPim6::"
+)
+
+ecm_installed_library_check_include_strings(KPim6AkonadiSearchPIM
+    HEADERS
+    ${AKONADISEARCH_INCLUDES}
+    PREFIX PIM
+)

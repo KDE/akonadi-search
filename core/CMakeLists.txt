@@ -81,3 +81,21 @@ install(
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch
     COMPONENT Devel
 )
+
+ecm_add_installed_library_check(KPim6AkonadiSearchCore
+    PACKAGE_NAME "KPim6AkonadiSearch"
+    PACKAGE_VERSION ${AKONADISEARCH_VERSION}
+    PACKAGE_TARGET_NAMESPACE "KPim6::"
+)
+
+ecm_installed_library_check_include_strings(KPim6AkonadiSearchCore
+    HEADERS
+    ${KPim6AkonadiSearchCore_core_HEADERS}
+    PREFIX core
+)
+
+ecm_installed_library_check_include_strings(KPim6AkonadiSearchCore
+   HEADERS
+   ${KPim6AkonadiSearchCore_CamelCasecore_HEADERS}
+    PREFIX Core
+)

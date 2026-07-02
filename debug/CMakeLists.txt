@@ -73,3 +73,16 @@ if(BUILD_TESTING)
     add_subdirectory(tests)
     add_subdirectory(autotests)
 endif()
+
+ecm_add_installed_library_check(KPim6AkonadiSearchDebug
+    PACKAGE_NAME "KPim6AkonadiSearch"
+    PACKAGE_VERSION ${AKONADISEARCH_VERSION}
+    PACKAGE_TARGET_NAMESPACE "KPim6::"
+)
+
+ecm_installed_library_check_include_strings(KPim6AkonadiSearchDebug
+    HEADERS
+    akonadisearchdebugdialog.h
+    akonadisearchdebugsearchpathcombobox.h
+    PREFIX Debug
+)
