@@ -2,7 +2,7 @@
 # SPDX-FileCopyrightText: none
 cmake_minimum_required(VERSION 3.29)
 
-set(PIM_VERSION "6.7.40")
+set(PIM_VERSION "6.8.40")
 project(AkonadiSearch VERSION ${PIM_VERSION})
 
 # ECM setup
@@ -129,7 +129,7 @@ set(AKONADI_VERSION "6.7.40")
 set(AKONADI_MIMELIB_VERSION "6.7.40")
 set(QT_REQUIRED_VERSION "6.9.0")
 set(KPIM_MIME_VERSION "6.7.40")
-set(KTEXTADDONS_MIN_VERSION "2.0.2")
+set(KTEXTADDONS_MIN_VERSION "2.1.0")
 
 find_package(
     Qt6
