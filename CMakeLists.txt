@@ -128,7 +128,6 @@ set(AKONADISEARCH_VERSION ${PIM_VERSION})
 set(AKONADI_VERSION "6.7.40")
 set(AKONADI_MIMELIB_VERSION "6.7.40")
 set(QT_REQUIRED_VERSION "6.9.0")
-set(KPIM_MIME_VERSION "6.7.40")
 set(KTEXTADDONS_MIN_VERSION "2.1.0")
 
 find_package(
@@ -170,10 +169,6 @@ set_package_properties(
 find_package(KPim6Akonadi ${AKONADI_VERSION} CONFIG REQUIRED)
 find_package(KF6Contacts ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6Mime ${KF_MIN_VERSION} CONFIG)
-if(NOT TARGET KF6::Mime)
-    find_package(KPim6Mime ${KPIM_MIME_VERSION} CONFIG REQUIRED)
-    add_library(KF6::Mime ALIAS KPim6::Mime)
-endif()
 find_package(KPim6AkonadiMime ${AKONADI_MIMELIB_VERSION} CONFIG REQUIRED)
 find_package(KF6CalendarCore ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6TextUtils ${KTEXTADDONS_MIN_VERSION} CONFIG REQUIRED)
