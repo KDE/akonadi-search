@@ -55,7 +55,7 @@ msgstr "Convertidor d'HTML a text d'Akonadi"
 #: agent/htmltotext.cpp:35
 #, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© 2023-2024 Comunitat KDE"
+msgstr "© 2023-2024 La comunitat KDE"
 
 #: agent/htmltotext.cpp:37
 #, kde-format
