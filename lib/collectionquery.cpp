@@ -100,7 +100,7 @@ ResultIterator CollectionQuery::exec()
     if (!d->identifierString.isEmpty()) {
         Xapian::QueryParser parser;
         parser.set_database(db);
-        parser.add_prefix("", "I");
+        parser.add_prefix("", "ID");
         parser.set_default_op(Xapian::Query::OP_AND);
         queries << parser.parse_query(d->identifierString.toStdString(), Xapian::QueryParser::FLAG_PARTIAL);
     }

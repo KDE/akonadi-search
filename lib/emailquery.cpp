@@ -197,7 +197,7 @@ ResultIterator EmailQuery::exec()
         parser.add_prefix("", "F");
         parser.add_prefix("", "T");
         parser.add_prefix("", "CC");
-        parser.add_prefix("", "BCC");
+        parser.add_prefix("", "BC");
 
         // vHanda: Do we really need the query parser over here?
         for (const QString &str : std::as_const(d->involves)) {
