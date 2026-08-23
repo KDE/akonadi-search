@@ -140,7 +140,6 @@ void Scheduler::scheduleCompleteSync()
         auto job = new Akonadi::CollectionFetchJob(Akonadi::Collection::root(), Akonadi::CollectionFetchJob::Recursive);
         job->fetchScope().setAncestorRetrieval(Akonadi::CollectionFetchScope::All);
         job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::NoFilter);
-        job->fetchScope().setListFilter(Akonadi::CollectionFetchScope::Index);
         connect(job, &KJob::finished, this, &Scheduler::slotCollectionsToIndexFetched);
         job->start();
     }
