@@ -55,7 +55,7 @@ void AkonadiSearchDebugSearchJob::slotReadStandard()
 
 void AkonadiSearchDebugSearchJob::slotReadError()
 {
-    const QByteArray errorStrg = mProcess->readAllStandardOutput();
+    const QByteArray errorStrg = mProcess->readAllStandardError();
     Q_EMIT error(QString::fromUtf8(errorStrg));
     mProcess->close();
     mProcess->deleteLater();
