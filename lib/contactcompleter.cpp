@@ -16,6 +16,8 @@
 #include <QFile>
 #include <QStandardPaths>
 
+#include <utility>
+
 using namespace Akonadi::Search::PIM;
 using namespace Qt::Literals::StringLiterals;
 
@@ -51,13 +53,13 @@ static QStringList processEnquire(Xapian::Enquire &enq, int limit)
         }
 
         for (auto it = mset.begin(), end = mset.end(); it != end && list.size() < limit; ++it) {
-            const auto entry = QString::fromStdString(it.get_document().get_data());
+            auto entry = QString::fromStdString(it.get_document().get_data());
             // TODO: Be smarter about the deduplication by fixing the indexing code:
             // If we store mailbox name and address as separate named terms then we could deduplicate
             // purely based on the email address.
             if (!list.contains(entry, Qt::CaseInsensitive)) {
                 qCDebug(AKONADI_SEARCH_PIM_LOG, "Match: \"%s\" (%d%%), docid %u", qUtf8Printable(entry), it.get_percent(), *it);
-                list.push_back(entry);
+                list.push_back(std::move(entry));
             } else {
                 ++duplicates;
                 qCDebug(AKONADI_SEARCH_PIM_LOG, "Skipped duplicate match \"%s\" (%d%%) docid %u", qUtf8Printable(entry), it.get_percent(), *it);

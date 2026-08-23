@@ -16,6 +16,8 @@
 #include <QList>
 #include <QStandardPaths>
 
+#include <utility>
+
 using namespace Akonadi::Search::PIM;
 using namespace Qt::Literals::StringLiterals;
 class Akonadi::Search::PIM::ContactQueryPrivate
@@ -186,7 +188,7 @@ ResultIterator ContactQuery::exec()
         Xapian::MSet matches = enquire.get_mset(0, d->limit);
 
         ResultIterator iter;
-        iter.d->init(matches);
+        iter.d->init(std::move(matches));
         return iter;
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());

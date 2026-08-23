@@ -15,6 +15,8 @@
 #include <QList>
 
 #include <QStandardPaths>
+
+#include <utility>
 using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search::PIM;
 
@@ -143,6 +145,6 @@ ResultIterator CollectionQuery::exec()
     Xapian::MSet mset = enquire.get_mset(0, d->limit);
 
     ResultIterator iter;
-    iter.d->init(mset);
+    iter.d->init(std::move(mset));
     return iter;
 }

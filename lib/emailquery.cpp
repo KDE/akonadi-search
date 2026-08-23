@@ -17,6 +17,8 @@
 #include <QRegularExpression>
 #include <QStandardPaths>
 
+#include <utility>
+
 using namespace Akonadi::Search::PIM;
 using namespace Qt::Literals::StringLiterals;
 class Akonadi::Search::PIM::EmailQueryPrivate
@@ -333,7 +335,7 @@ ResultIterator EmailQuery::exec()
         Xapian::MSet mset = enquire.get_mset(0, d->limit);
 
         ResultIterator iter;
-        iter.d->init(mset);
+        iter.d->init(std::move(mset));
         return iter;
     } catch (const Xapian::Error &e) {
         qCWarning(AKONADI_SEARCH_PIM_LOG) << QString::fromStdString(e.get_type()) << QString::fromStdString(e.get_description());

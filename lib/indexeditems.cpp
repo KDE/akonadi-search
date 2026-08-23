@@ -47,7 +47,7 @@ QString IndexedItemsPrivate::dbPath(const QString &dbName) const
         return cachedPath;
     }
     if (!m_overridePrefixPath.isEmpty()) {
-        const QString path = u"%1/%2/"_s.arg(m_overridePrefixPath, dbName);
+        QString path = u"%1/%2/"_s.arg(m_overridePrefixPath, dbName);
         m_cachePath.insert(dbName, path);
         return path;
     }

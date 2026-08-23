@@ -12,6 +12,8 @@
 
 #include "resultiterator.h"
 
+#include <utility>
+
 namespace Akonadi
 {
 namespace Search
@@ -21,9 +23,9 @@ namespace PIM
 class ResultIteratorPrivate
 {
 public:
-    void init(const Xapian::MSet &mset)
+    void init(Xapian::MSet mset)
     {
-        m_mset = mset;
+        m_mset = std::move(mset);
         m_end = m_mset.end();
         m_iter = m_mset.begin();
         m_firstElement = true;
