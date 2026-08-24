@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-18 00:44+0000\n"
+"POT-Creation-Date: 2026-08-24 00:45+0000\n"
 "PO-Revision-Date: 2017-04-22 11:34+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -60,12 +60,12 @@ msgstr ""
 msgid "Maintainer"
 msgstr ""
 
-#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
 msgstr "Pronto"
 
-#: agent/scheduler.cpp:245
+#: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "A colecção \"%1\" foi indexada"

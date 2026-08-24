@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-18 00:44+0000\n"
+"POT-Creation-Date: 2026-08-24 00:45+0000\n"
 "PO-Revision-Date: 2024-07-30 21:06+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -64,12 +64,12 @@ msgstr "Carl Schwan"
 msgid "Maintainer"
 msgstr "Prizorganto"
 
-#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
 msgstr "Preta"
 
-#: agent/scheduler.cpp:245
+#: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "Indeksis kolekton \"%1\""

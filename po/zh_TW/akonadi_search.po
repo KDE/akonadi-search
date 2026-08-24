@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-18 00:44+0000\n"
+"POT-Creation-Date: 2026-08-24 00:45+0000\n"
 "PO-Revision-Date: 2024-08-03 14:16+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -65,12 +65,12 @@ msgstr "Carl Schwan"
 msgid "Maintainer"
 msgstr "維護者"
 
-#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
 msgstr "已就緒"
 
-#: agent/scheduler.cpp:245
+#: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "已索引集合「%1」"

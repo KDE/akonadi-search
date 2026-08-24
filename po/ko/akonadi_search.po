@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-18 00:44+0000\n"
+"POT-Creation-Date: 2026-08-24 00:45+0000\n"
 "PO-Revision-Date: 2024-08-19 21:42+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -64,12 +64,12 @@ msgstr "Carl Schwan"
 msgid "Maintainer"
 msgstr "관리자"
 
-#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
 msgstr "준비"
 
-#: agent/scheduler.cpp:245
+#: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "모음집 \"%1\"을(를) 색인에 추가함"

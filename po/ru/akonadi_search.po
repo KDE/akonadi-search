@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-18 00:44+0000\n"
+"POT-Creation-Date: 2026-08-24 00:45+0000\n"
 "PO-Revision-Date: 2024-09-20 07:39+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -66,12 +66,12 @@ msgstr "Carl Schwan"
 msgid "Maintainer"
 msgstr "Сопровождающий"
 
-#: agent/scheduler.cpp:170 agent/scheduler.cpp:201 agent/scheduler.cpp:212
+#: agent/scheduler.cpp:169 agent/scheduler.cpp:200 agent/scheduler.cpp:211
 #, kde-format
 msgid "Ready"
 msgstr "Готово"
 
-#: agent/scheduler.cpp:245
+#: agent/scheduler.cpp:244
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "Коллекция «%1» проиндексирована."
