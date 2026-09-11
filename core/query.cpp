@@ -198,15 +198,15 @@ Q_GLOBAL_STATIC_WITH_ARGS(SearchStore::List, s_searchStores, (SearchStore::searc
 ResultIterator Query::exec()
 {
     // vHanda: Maybe this should default to allow searches on all search stores?
-    Q_ASSERT_X(!types().isEmpty(), "Akonadi::Search::Query::exec", "A query is being initialized without a type");
-    if (types().isEmpty()) {
+    const auto typeList{types()};
+    Q_ASSERT_X(!typeList.isEmpty(), "Akonadi::Search::Query::exec", "A query is being initialized without a type");
+    if (typeList.isEmpty()) {
         return {};
     }
 
     SearchStore *storeMatch = nullptr;
     for (const QSharedPointer<SearchStore> &store : std::as_const(*s_searchStores)) {
         bool matches = true;
-        const auto typeList{types()};
         for (const QString &type : typeList) {
             if (!store->types().contains(type)) {
                 matches = false;
