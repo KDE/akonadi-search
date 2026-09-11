@@ -9,7 +9,6 @@
 
 #include <KRunner/AbstractRunner>
 
-using namespace KRunner;
 class PIMContactsRunner : public KRunner::AbstractRunner
 {
     Q_OBJECT
@@ -20,12 +19,12 @@ public:
 
     void reloadConfiguration() override;
 
-    void match(RunnerContext &context) override;
-    void run(const RunnerContext &context, const QueryMatch &match) override;
+    void match(KRunner::RunnerContext &context) override;
+    void run(const KRunner::RunnerContext &context, const KRunner::QueryMatch &match) override;
 
 private:
-    void queryContacts(RunnerContext &context, const QString &queryString);
-    void queryAutocompleter(RunnerContext &context, const QString &queryString);
+    void queryContacts(KRunner::RunnerContext &context, const QString &queryString);
+    void queryAutocompleter(KRunner::RunnerContext &context, const QString &queryString);
 
 private:
     bool mQueryAutocompleter = true;

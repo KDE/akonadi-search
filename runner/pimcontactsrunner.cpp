@@ -14,7 +14,6 @@
 
 #include <QDesktopServices>
 #include <QIcon>
-#include <QSharedPointer>
 #include <QThread>
 
 #include <Akonadi/ItemFetchJob>
@@ -36,6 +35,7 @@
 Q_DECLARE_METATYPE(KContacts::Addressee *)
 
 using namespace Qt::Literals::StringLiterals;
+using namespace KRunner;
 PIMContactsRunner::PIMContactsRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {

@@ -17,8 +17,6 @@ namespace Akonadi
 {
 namespace Search
 {
-class SearchStore;
-class Result;
 
 class Q_DECL_HIDDEN ResultIteratorPrivate : public QSharedData
 {
