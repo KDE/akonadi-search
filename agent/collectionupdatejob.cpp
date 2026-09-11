@@ -55,7 +55,7 @@ void CollectionUpdateJob::onCollectionsFetched(KJob *job)
 
 bool CollectionUpdateJob::shouldIndex(const Akonadi::Collection &col) const
 {
-    return !col.isVirtual() && (!mCol.hasAttribute<Akonadi::IndexPolicyAttribute>() || mCol.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
+    return !col.isVirtual() && (!col.hasAttribute<Akonadi::IndexPolicyAttribute>() || col.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled());
 }
 
 #include "moc_collectionupdatejob.cpp"
