@@ -255,11 +255,9 @@ bool Index::createIndexers()
         m_collectionIndexer = std::make_unique<CollectionIndexer>(m_indexedItems->collectionIndexingPath());
     } catch (const Xapian::DatabaseError &e) {
         m_collectionIndexer.reset();
-        m_collectionIndexer = nullptr;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Failed to create collection indexer:" << QString::fromStdString(e.get_msg());
     } catch (...) {
         m_collectionIndexer.reset();
-        m_collectionIndexer = nullptr;
         qCCritical(AKONADI_INDEXER_AGENT_LOG) << "Random exception, but we do not want to crash";
     }
 
