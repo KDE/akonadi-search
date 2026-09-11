@@ -102,6 +102,9 @@ void Index::index(const Akonadi::Item &item)
 
 void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &from, const Akonadi::Collection &to)
 {
+    if (items.isEmpty()) {
+        return;
+    }
     // We always get items of the same type
     auto indexer = indexerForItem(items.first());
     if (!indexer) {
@@ -118,6 +121,9 @@ void Index::move(const Akonadi::Item::List &items, const Akonadi::Collection &fr
 
 void Index::updateFlags(const Akonadi::Item::List &items, const QSet<QByteArray> &addedFlags, const QSet<QByteArray> &removedFlags)
 {
+    if (items.isEmpty()) {
+        return;
+    }
     // We always get items of the same type
     auto indexer = indexerForItem(items.first());
     if (!indexer) {
@@ -148,6 +154,9 @@ void Index::remove(const QSet<Akonadi::Item::Id> &ids, const QStringList &mimeTy
 
 void Index::remove(const Akonadi::Item::List &items)
 {
+    if (items.isEmpty()) {
+        return;
+    }
     auto indexer = indexerForItem(items.first());
     if (!indexer) {
         return;
