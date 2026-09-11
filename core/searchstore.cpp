@@ -97,7 +97,6 @@ SearchStore::List SearchStore::searchStores()
             pluginPaths << dir.absoluteFilePath(fileName);
         }
     }
-    plugins.clear();
 
     SearchStore::List stores;
     for (const QString &pluginPath : std::as_const(pluginPaths)) {
