@@ -70,7 +70,6 @@ void AkonadiSearchSyntaxHighlighter::init()
     testType << u"\\bNI"_s;
 
     // Calendar
-    testType << u"\\bO"_s;
     testType << u"\\bPS"_s;
     testType << u"\\bS"_s;
     testType << u"\\bL"_s;
