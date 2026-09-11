@@ -52,7 +52,12 @@ void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
         emitResult();
         return;
     }
-    m_collection = static_cast<Akonadi::CollectionFetchJob *>(job)->collections().at(0);
+    const auto collections = static_cast<Akonadi::CollectionFetchJob *>(job)->collections();
+    if (collections.isEmpty()) {
+        emitResult();
+        return;
+    }
+    m_collection = collections.constFirst();
     if (m_collection.isVirtual()
         || (m_collection.hasAttribute<Akonadi::IndexPolicyAttribute>() && !m_collection.attribute<Akonadi::IndexPolicyAttribute>()->indexingEnabled())) {
         emitResult();
