@@ -146,7 +146,6 @@ void IndexedItemsPrivate::findIndexedInDatabase(QSet<Akonadi::Item::Id> &indexed
     auto getResults = [&enquire, &indexed]() {
         Xapian::MSet mset;
         mset = enquire.get_mset(0, UINT_MAX);
-        Xapian::MSetIterator it = mset.begin();
         for (auto result : mset) {
             indexed << result;
         }
