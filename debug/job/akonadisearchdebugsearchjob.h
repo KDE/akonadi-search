@@ -7,8 +7,8 @@
 #pragma once
 
 #include <QObject>
+#include <QProcess>
 #include <QStringList>
-class QProcess;
 namespace Akonadi
 {
 namespace Search
@@ -33,6 +33,11 @@ Q_SIGNALS:
 private:
     void slotReadStandard();
     void slotReadError();
+    void slotFinished();
+    void slotErrorOccurred(QProcess::ProcessError error);
+    void deleteProcessAndJob();
+    QByteArray mStandardOutput;
+    QByteArray mErrorOutput;
     QStringList mArguments;
     QString mAkonadiId;
     QString mPath;
