@@ -74,9 +74,6 @@ Xapian::Query PIMSearchStore::constructQuery(const QString &property, const QVar
         std::string term("B");
         bool isTrue = false;
 
-        if (value.isNull()) {
-            isTrue = true;
-        }
         if (value.userType() == QMetaType::Bool) {
             isTrue = value.toBool();
         }
