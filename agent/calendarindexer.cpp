@@ -127,6 +127,9 @@ void CalendarIndexer::move(Akonadi::Item::Id itemId, Akonadi::Collection::Id fro
 
 void CalendarIndexer::indexEventItem(const Akonadi::Item &item, const KCalendarCore::Event::Ptr &event)
 {
+    if (!m_db) {
+        return;
+    }
     qCDebug(AKONADI_INDEXER_AGENT_CALENDAR_LOG) << "Indexing calendar event:" << normalizeString(event->summary()) << event->organizer().email();
 
     Akonadi::Search::XapianDocument doc;
