@@ -300,7 +300,8 @@ ResultIterator EmailQuery::exec()
         parser.set_database(db);
         parser.set_default_op(Xapian::Query::OP_AND);
         if (d->splitSearchMatchString) {
-            const QStringList list = d->matchString.split(QRegularExpression(u"\\s"_s), Qt::SkipEmptyParts);
+            const static QRegularExpression reg(u"\\s"_s);
+            const QStringList list = d->matchString.split(reg, Qt::SkipEmptyParts);
             for (const QString &s : list) {
                 const QByteArray ba = s.toUtf8();
                 m_queries << parser.parse_query(ba.constData(), Xapian::QueryParser::FLAG_PARTIAL);
