@@ -4,8 +4,6 @@
   SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include <cerrno>
-
 #include "akonadisearchdebugdialog.h"
 #include "akonadisearchdebugwidget.h"
 
@@ -105,28 +103,21 @@ void AkonadiSearchDebugDialog::saveTextAs(const QString &text, const QString &fi
     fdlg->setAcceptMode(QFileDialog::AcceptSave);
     if (fdlg->exec() == QDialog::Accepted && fdlg) {
         const QString fileName = fdlg->selectedFiles().at(0);
-        if (!saveToFile(fileName, text)) {
+        QFile file(fileName);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
             KMessageBox::error(this,
                                i18n("Could not write the file %1:\n"
                                     "\"%2\" is the detailed error description.",
                                     fileName,
-                                    QString::fromLocal8Bit(strerror(errno))),
+                                    file.errorString()),
                                i18nc("@title:window", "Save File Error"));
+        } else {
+            QTextStream out(&file);
+            out << text;
+            file.close();
         }
     }
     delete fdlg;
-}
-
-bool AkonadiSearchDebugDialog::saveToFile(const QString &filename, const QString &text)
-{
-    QFile file(filename);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        return false;
-    }
-    QTextStream out(&file);
-    out << text;
-    file.close();
-    return true;
 }
 
 #include "moc_akonadisearchdebugdialog.cpp"
