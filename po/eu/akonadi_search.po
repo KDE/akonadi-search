@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-12 00:45+0000\n"
 "PO-Revision-Date: 2024-08-02 23:14+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -36,7 +36,7 @@ msgctxt "@info:status"
 msgid "No indexers available"
 msgstr "Ez dago indexatzaile erabilgarririk"
 
-#: agent/collectionindexingjob.cpp:62
+#: agent/collectionindexingjob.cpp:67
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "Bilduma indexatzen ari da: %1"
@@ -77,12 +77,12 @@ msgstr "Prest"
 msgid "Collection \"%1\" indexed"
 msgstr "«%1» bilduma indexatu da"
 
-#: debug/akonadisearchdebugdialog.cpp:98
+#: debug/akonadisearchdebugdialog.cpp:96
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Testu fitxategiak (*.txt);;Fitxategi guztiak (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:110
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -91,7 +91,7 @@ msgstr ""
 "Ezin izan da %1 fitxategia idatzi:\n"
 "«%2» da errore deskribapen xehatua."
 
-#: debug/akonadisearchdebugdialog.cpp:114
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"

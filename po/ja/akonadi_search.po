@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_feeder\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-12 00:45+0000\n"
 "PO-Revision-Date: 2013-12-24 01:19-0800\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -30,7 +30,7 @@ msgctxt "@info:status"
 msgid "No indexers available"
 msgstr ""
 
-#: agent/collectionindexingjob.cpp:62
+#: agent/collectionindexingjob.cpp:67
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr ""
@@ -71,19 +71,19 @@ msgstr ""
 msgid "Collection \"%1\" indexed"
 msgstr ""
 
-#: debug/akonadisearchdebugdialog.cpp:98
+#: debug/akonadisearchdebugdialog.cpp:96
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr ""
 
-#: debug/akonadisearchdebugdialog.cpp:110
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
 "\"%2\" is the detailed error description."
 msgstr ""
 
-#: debug/akonadisearchdebugdialog.cpp:114
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"

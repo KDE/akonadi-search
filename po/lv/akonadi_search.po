@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-12 00:45+0000\n"
 "PO-Revision-Date: 2024-08-20 18:30+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -34,7 +34,7 @@ msgctxt "@info:status"
 msgid "No indexers available"
 msgstr "Indeksētāji nav pieejami"
 
-#: agent/collectionindexingjob.cpp:62
+#: agent/collectionindexingjob.cpp:67
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "Indeksē kolekciju: %1"
@@ -75,12 +75,12 @@ msgstr "Gatavs"
 msgid "Collection \"%1\" indexed"
 msgstr "Kolekcija „%1“ ir indeksēta"
 
-#: debug/akonadisearchdebugdialog.cpp:98
+#: debug/akonadisearchdebugdialog.cpp:96
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Teksta datnes (*.txt);;Visas datnes (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:110
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -89,7 +89,7 @@ msgstr ""
 "Neizdevās rakstīt datnē „%1“:\n"
 "„%2“ ir sīkāks kļūdas apraksts."
 
-#: debug/akonadisearchdebugdialog.cpp:114
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"

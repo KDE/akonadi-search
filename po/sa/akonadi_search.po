@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-12 00:45+0000\n"
 "PO-Revision-Date: 2024-12-24 20:39+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -33,7 +33,7 @@ msgctxt "@info:status"
 msgid "No indexers available"
 msgstr "अनुक्रमणिकाकाराः उपलब्धाः न सन्ति"
 
-#: agent/collectionindexingjob.cpp:62
+#: agent/collectionindexingjob.cpp:67
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "अनुक्रमणिका संग्रहः: %1"
@@ -74,12 +74,12 @@ msgstr "सज्जः"
 msgid "Collection \"%1\" indexed"
 msgstr "सङ्ग्रहः \"%1\" अनुक्रमितः"
 
-#: debug/akonadisearchdebugdialog.cpp:98
+#: debug/akonadisearchdebugdialog.cpp:96
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "पाठ्यसञ्चिकाः (*.txt);;सर्वाणि सञ्चिकाः (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:110
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -88,7 +88,7 @@ msgstr ""
 "%1 इति सञ्चिकां लिखितुं न शक्यते:\n"
 "\"%2\" इति विस्तृतदोषविवरणम् ।."
 
-#: debug/akonadisearchdebugdialog.cpp:114
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"

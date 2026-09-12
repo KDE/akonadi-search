@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-12 00:45+0000\n"
 "PO-Revision-Date: 2024-09-09 20:31+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -34,7 +34,7 @@ msgctxt "@info:status"
 msgid "No indexers available"
 msgstr "Nem érhetők el indexelők"
 
-#: agent/collectionindexingjob.cpp:62
+#: agent/collectionindexingjob.cpp:67
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "Gyűjtemény indexelése: %1"
@@ -75,12 +75,12 @@ msgstr "Kész"
 msgid "Collection \"%1\" indexed"
 msgstr "A(z) „%1” gyűjtemény indexelve"
 
-#: debug/akonadisearchdebugdialog.cpp:98
+#: debug/akonadisearchdebugdialog.cpp:96
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Szövegfájlok (*.txt);;Minden fájl (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:110
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -89,7 +89,7 @@ msgstr ""
 "Nem lehet írni a(z) %1 fájlt:\n"
 "A hiba részletes leírása: „%2”."
 
-#: debug/akonadisearchdebugdialog.cpp:114
+#: debug/akonadisearchdebugdialog.cpp:113
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"

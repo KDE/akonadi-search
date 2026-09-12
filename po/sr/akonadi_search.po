@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-12 00:45+0000\n"
 "PO-Revision-Date: 2017-05-07 21:01+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -34,7 +34,7 @@ msgctxt "@info:status"
 msgid "No indexers available"
 msgstr "Нема доступних индексара"
 
-#: agent/collectionindexingjob.cpp:62
+#: agent/collectionindexingjob.cpp:67
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "Индексирам збирку: %1"
@@ -76,12 +76,12 @@ msgid "Collection \"%1\" indexed"
 msgstr "Збирка „%1“ индексирана."
 
 # >> @item
-#: debug/akonadisearchdebugdialog.cpp:98
+#: debug/akonadisearchdebugdialog.cpp:96
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "текстуални фајлови (*.txt);;сви фајлови (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:110
+#: debug/akonadisearchdebugdialog.cpp:109
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -90,7 +90,7 @@ msgstr ""
 "Не могу да упишем фајл %1:\n"
 "Детаљан опис грешке: %2"
 
-#: debug/akonadisearchdebugdialog.cpp:114
+#: debug/akonadisearchdebugdialog.cpp:113
 #, fuzzy, kde-format
 #| msgid "Save File Error"
 msgctxt "@title:window"
