@@ -38,7 +38,7 @@ msgstr "Нет доступных средств индексирования"
 #: agent/collectionindexingjob.cpp:67
 #, kde-format
 msgid "Indexing collection: %1"
-msgstr "Индексирование коллекции «%1»..."
+msgstr "Индексирование коллекции «%1»…"
 
 #: agent/htmltotext.cpp:31
 #, kde-format
@@ -53,7 +53,7 @@ msgstr "Средство преобразования HTML в текст Akonadi
 #: agent/htmltotext.cpp:35
 #, kde-format
 msgid "© 2023-2024 KDE Community"
-msgstr "© Сообщество KDE, 2023—2024"
+msgstr "© Сообщество KDE, 2023–2024"
 
 #: agent/htmltotext.cpp:37
 #, kde-format
@@ -117,4 +117,4 @@ msgstr "Автоматически заполнено из полученных 
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
-msgstr "Поиск в контактах из отправленных и полученных писем"
+msgstr "Искать также в контактах из отправленных и полученных писем"
