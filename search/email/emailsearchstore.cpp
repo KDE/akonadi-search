@@ -7,12 +7,12 @@
  */
 
 #include "emailsearchstore.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "agepostingsource.h"
 #include "query.h"
 #include "term.h"
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 EmailSearchStore::EmailSearchStore(QObject *parent)

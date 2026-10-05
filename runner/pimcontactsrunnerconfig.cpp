@@ -6,7 +6,6 @@
  */
 
 #include "pimcontactsrunnerconfig.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -14,6 +13,8 @@ using namespace Qt::Literals::StringLiterals;
 #include <KSharedConfig>
 #include <QCheckBox>
 #include <QVBoxLayout>
+
+using namespace Qt::Literals::StringLiterals;
 
 K_PLUGIN_FACTORY(PIMContactsRunnerConfigFactory, registerPlugin<PIMContactsRunnerConfig>();)
 PIMContactsRunnerConfig::PIMContactsRunnerConfig(QObject *parent, const KPluginMetaData &data)

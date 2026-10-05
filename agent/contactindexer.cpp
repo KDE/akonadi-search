@@ -7,7 +7,6 @@
  */
 
 #include "contactindexer.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_indexer_agent_debug.h"
 #include "xapiandocument.h"
@@ -15,6 +14,8 @@ using namespace Qt::Literals::StringLiterals;
 #include <Akonadi/Collection>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
+
+using namespace Qt::Literals::StringLiterals;
 
 ContactIndexer::ContactIndexer(const QString &path)
 

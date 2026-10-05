@@ -7,7 +7,6 @@
  */
 
 #include <QCommandLineOption>
-using namespace Qt::Literals::StringLiterals;
 
 #include <QCommandLineParser>
 #include <QCoreApplication>
@@ -19,6 +18,8 @@ using namespace Qt::Literals::StringLiterals;
 
 #include "xapiandatabase.h"
 #include "xapiandocument.h"
+
+using namespace Qt::Literals::StringLiterals;
 
 int main(int argc, char **argv)
 {

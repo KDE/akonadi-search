@@ -10,13 +10,14 @@
 #pragma once
 
 #include <Akonadi/AgentBase>
-using namespace Qt::Literals::StringLiterals;
 
 #include <Akonadi/Collection>
 
 #include "index.h"
 #include "scheduler.h"
 #include <QList>
+
+using namespace Qt::Literals::StringLiterals;
 
 class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
 {

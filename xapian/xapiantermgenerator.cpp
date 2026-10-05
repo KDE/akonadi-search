@@ -6,11 +6,11 @@
  */
 
 #include "xapiantermgenerator.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <QStringList>
 #include <QTextBoundaryFinder>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 XapianTermGenerator::XapianTermGenerator(Xapian::Document *doc)

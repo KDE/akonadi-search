@@ -5,12 +5,12 @@
 */
 
 #include "akonadisearchdebugsearchpathcombobox.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <Akonadi/ServerManager>
 #include <QDir>
 #include <QStandardPaths>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 AkonadiSearchDebugSearchPathComboBox::AkonadiSearchDebugSearchPathComboBox(QWidget *parent)
     : QComboBox(parent)

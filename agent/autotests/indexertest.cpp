@@ -7,7 +7,6 @@
  */
 
 #include <Akonadi/Collection>
-using namespace Qt::Literals::StringLiterals;
 
 #include <QDir>
 #include <QTest>
@@ -19,6 +18,8 @@ using namespace Qt::Literals::StringLiterals;
 #include "contactindexer.h"
 #include "emailindexer.h"
 #include "query.h"
+
+using namespace Qt::Literals::StringLiterals;
 
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)

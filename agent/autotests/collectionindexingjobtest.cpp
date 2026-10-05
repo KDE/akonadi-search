@@ -6,13 +6,14 @@
  *
  */
 #include "collectionindexingjob.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/ServerManager>
 #include <QTest>
 #include <akonadi/qtest_akonadi.h>
+
+using namespace Qt::Literals::StringLiterals;
 
 class TestIndex : public Index
 {

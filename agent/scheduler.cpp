@@ -6,7 +6,6 @@
  */
 
 #include "scheduler.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_indexer_agent_debug.h"
 #include "collectionindexingjob.h"
@@ -23,6 +22,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <QTimer>
 #include <chrono>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace std::chrono_literals;
 
 JobFactory::~JobFactory() = default;

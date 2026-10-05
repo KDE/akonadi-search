@@ -6,7 +6,6 @@
  */
 
 #include "xapiandatabase.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "xapiandocument.h"
 
@@ -20,6 +19,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <chrono>
 #include <thread>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)

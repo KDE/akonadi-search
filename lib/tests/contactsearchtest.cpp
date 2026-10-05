@@ -7,7 +7,6 @@
  */
 
 #include "../resultiterator.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "contactquery.h"
 
@@ -17,6 +16,7 @@ using namespace Qt::Literals::StringLiterals;
 
 #include <Akonadi/ContactSearchJob>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search::PIM;
 
 class App : public QApplication

@@ -6,7 +6,6 @@
  */
 
 #include "queryparsertest.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "../xapiandatabase.h"
 #include "../xapianqueryparser.h"
@@ -15,6 +14,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <QTemporaryDir>
 #include <QTest>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 void QueryParserTest::testSinglePrefixWord()

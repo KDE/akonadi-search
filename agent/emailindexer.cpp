@@ -7,7 +7,6 @@
  */
 
 #include "emailindexer.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_indexer_agent_email_debug.h"
 
@@ -16,6 +15,8 @@ using namespace Qt::Literals::StringLiterals;
 #include <KEmailAddress>
 
 #include <QProcess>
+
+using namespace Qt::Literals::StringLiterals;
 
 EmailIndexer::EmailIndexer(const QString &path, const QString &contactDbPath)
 

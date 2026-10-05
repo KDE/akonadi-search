@@ -7,7 +7,6 @@
  *
  */
 #include "pimsearchstore.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "query.h"
 #include "term.h"
@@ -18,6 +17,7 @@ using namespace Qt::Literals::StringLiterals;
 
 #include <QUrlQuery>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 PIMSearchStore::PIMSearchStore(QObject *parent)

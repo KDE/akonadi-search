@@ -6,12 +6,12 @@
  */
 
 #include "xapianqueryparser.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_search_xapian_debug.h"
 #include <QStringList>
 #include <QTextBoundaryFinder>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 XapianQueryParser::XapianQueryParser() = default;

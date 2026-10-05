@@ -3,7 +3,6 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 #include <QGuiApplication>
-using namespace Qt::Literals::StringLiterals;
 
 #include <KAboutData>
 #include <KLocalizedString>
@@ -20,6 +19,8 @@ using namespace Qt::Literals::StringLiterals;
 #else
 #include <QTextDocument>
 #endif
+
+using namespace Qt::Literals::StringLiterals;
 
 int main(int argc, char *argv[])
 {

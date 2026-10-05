@@ -5,11 +5,11 @@
 */
 
 #include "akonadisearchdebugsearchjob.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <QProcess>
 #include <QStandardPaths>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 AkonadiSearchDebugSearchJob::AkonadiSearchDebugSearchJob(QObject *parent)
     : QObject(parent)

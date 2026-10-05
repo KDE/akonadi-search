@@ -7,13 +7,14 @@
  */
 
 #include "calendarindexer.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "akonadi_indexer_agent_calendar_debug.h"
 #include "xapiandocument.h"
 
 #include <KCalendarCore/Attendee>
 #include <KCalendarCore/FreeBusy>
+
+using namespace Qt::Literals::StringLiterals;
 
 CalendarIndexer::CalendarIndexer(const QString &path)
 

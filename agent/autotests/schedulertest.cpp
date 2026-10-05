@@ -6,7 +6,6 @@
  *
  */
 #include "scheduler.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "collectionindexingjob.h"
 
@@ -19,6 +18,8 @@ using namespace Qt::Literals::StringLiterals;
 
 #include <QStandardPaths>
 #include <QTest>
+
+using namespace Qt::Literals::StringLiterals;
 
 class DummyIndexingJob : public CollectionIndexingJob
 {

@@ -7,7 +7,6 @@
  */
 
 #include <Akonadi/Collection>
-using namespace Qt::Literals::StringLiterals;
 
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
@@ -25,6 +24,8 @@ using namespace Qt::Literals::StringLiterals;
 #include <Akonadi/SearchQuery>
 
 #include <QElapsedTimer>
+
+using namespace Qt::Literals::StringLiterals;
 
 Q_DECLARE_METATYPE(QSet<qint64>)
 Q_DECLARE_METATYPE(QList<qint64>)

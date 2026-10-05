@@ -7,7 +7,6 @@
  */
 
 #include "xapiansearchstore.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "query.h"
 #include "xapianqueryparser.h"
@@ -17,6 +16,7 @@ using namespace Qt::Literals::StringLiterals;
 
 #include <algorithm>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 XapianSearchStore::XapianSearchStore(QObject *parent)

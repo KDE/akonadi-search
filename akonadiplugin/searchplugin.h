@@ -9,10 +9,11 @@
 #pragma once
 
 #include <QObject>
-using namespace Qt::Literals::StringLiterals;
 
 #include <QStringList>
 #include <akonadi/abstractsearchplugin.h>
+
+using namespace Qt::Literals::StringLiterals;
 
 namespace Akonadi
 {
