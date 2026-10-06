@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-12 00:45+0000\n"
+"POT-Creation-Date: 2026-10-06 00:47+0000\n"
 "PO-Revision-Date: 2024-08-14 00:01+0300\n"
 "Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -41,28 +41,28 @@ msgstr "Nėra pasiekiamų indeksatorių"
 msgid "Indexing collection: %1"
 msgstr "Indeksuojamas rinkinys: %1"
 
-#: agent/htmltotext.cpp:31
+#: agent/htmltotext.cpp:32
 #, kde-format
 msgid "Akonadi HTML To Text"
 msgstr "Akonadi HTML į tekstą"
 
-#: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
+#: agent/htmltotext.cpp:34 agent/htmltotext.cpp:43
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Akonadi HTML į tekstą keitiklis"
 
-#: agent/htmltotext.cpp:35
+#: agent/htmltotext.cpp:36
 #, kde-format
 msgid "© 2023-2024 KDE Community"
 msgstr "© 2023–2024 KDE bendruomenė"
 
-#: agent/htmltotext.cpp:37
+#: agent/htmltotext.cpp:38
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: agent/htmltotext.cpp:37
+#: agent/htmltotext.cpp:38
 #, kde-format
 msgid "Maintainer"
 msgstr "Prižiūrėtojas"
@@ -114,7 +114,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Automatiškai užbaigiama iš gautų ir išsiųstų el. laiškų"
 
-#: runner/pimcontactsrunnerconfig.cpp:21
+#: runner/pimcontactsrunnerconfig.cpp:22
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"

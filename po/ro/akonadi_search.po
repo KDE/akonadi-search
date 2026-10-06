@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-12 00:45+0000\n"
+"POT-Creation-Date: 2026-10-06 00:47+0000\n"
 "PO-Revision-Date: 2025-10-19 09:49+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -39,28 +39,28 @@ msgstr "Niciun indexator disponibil"
 msgid "Indexing collection: %1"
 msgstr "Se indexează colecția: %1"
 
-#: agent/htmltotext.cpp:31
+#: agent/htmltotext.cpp:32
 #, kde-format
 msgid "Akonadi HTML To Text"
 msgstr "Conversie HTML în text pentru Akonadi"
 
-#: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
+#: agent/htmltotext.cpp:34 agent/htmltotext.cpp:43
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Convertor HTML în text pentru Akonadi"
 
-#: agent/htmltotext.cpp:35
+#: agent/htmltotext.cpp:36
 #, kde-format
 msgid "© 2023-2024 KDE Community"
 msgstr "© 2023-2024 Comunitatea KDE"
 
-#: agent/htmltotext.cpp:37
+#: agent/htmltotext.cpp:38
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: agent/htmltotext.cpp:37
+#: agent/htmltotext.cpp:38
 #, kde-format
 msgid "Maintainer"
 msgstr "Responsabil"
@@ -112,7 +112,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Completat automat din scrisorile primite și trimise"
 
-#: runner/pimcontactsrunnerconfig.cpp:21
+#: runner/pimcontactsrunnerconfig.cpp:22
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"

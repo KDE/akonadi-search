@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi_baloo_indexer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-12 00:45+0000\n"
+"POT-Creation-Date: 2026-10-06 00:47+0000\n"
 "PO-Revision-Date: 2023-10-16 18:22+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -37,28 +37,28 @@ msgstr "Indexery nie sú dostupné"
 msgid "Indexing collection: %1"
 msgstr "Indexujem kolekciu: %1"
 
-#: agent/htmltotext.cpp:31
+#: agent/htmltotext.cpp:32
 #, kde-format
 msgid "Akonadi HTML To Text"
 msgstr "Akonadi HTML na text"
 
-#: agent/htmltotext.cpp:33 agent/htmltotext.cpp:42
+#: agent/htmltotext.cpp:34 agent/htmltotext.cpp:43
 #, kde-format
 msgid "Akonadi HTML To Text Converter"
 msgstr "Konvertor Akonadi HTML na text"
 
-#: agent/htmltotext.cpp:35
+#: agent/htmltotext.cpp:36
 #, kde-format
 msgid "© 2023-2024 KDE Community"
 msgstr "© 2023-2024 KDE komunita"
 
-#: agent/htmltotext.cpp:37
+#: agent/htmltotext.cpp:38
 #, kde-format
 msgctxt "@info:credit"
 msgid "Carl Schwan"
 msgstr "Carl Schwan"
 
-#: agent/htmltotext.cpp:37
+#: agent/htmltotext.cpp:38
 #, kde-format
 msgid "Maintainer"
 msgstr "Správca"
@@ -110,7 +110,7 @@ msgstr "%1 (%2)"
 msgid "Autocompleted from received and sent emails"
 msgstr "Automaticky dokončené z prijatých a poslaných e-mailov"
 
-#: runner/pimcontactsrunnerconfig.cpp:21
+#: runner/pimcontactsrunnerconfig.cpp:22
 #, kde-format
 msgctxt "@option:check"
 msgid "Search in contacts indexed from sent and received emails too"
