@@ -32,7 +32,9 @@
 #include "note/noteindexer.h"
 #include "collection/collectionindexer.h"
 
+#include <QDataStream>
 #include <QGlobalStatic>
+#include <QIODevice>
 #include <QHash>
 
 #include <functional>

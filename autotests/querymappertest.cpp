@@ -22,8 +22,8 @@
 #include "querymappertest.h"
 #include "../src/querymapper.h"
 
-#include <AkonadiCore/SearchQuery>
-#include <Akonadi/KMime/MessageFlags>
+#include <Akonadi/SearchQuery>
+#include <Akonadi/MessageFlags>
 
 #include <QTest>
 #include <QDebug>

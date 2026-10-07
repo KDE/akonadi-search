@@ -22,7 +22,7 @@
 
 #include "searchplugin.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 #include "akonadiplugin_search_debug.h"
 #include "store.h"
@@ -31,13 +31,14 @@
 
 #include <QStringList>
 #include <QSet>
+#include <QVariant>
 #include <QVector>
 
 using namespace Akonadi::Search;
 
 SearchPlugin::QueryMapperStorePair *SearchPlugin::QueryMapperStorePair::create(const QString &mimeType)
 {
-    QScopedPointer<QueryMapperStorePair> pair(new QueryMapperStorePair);
+    auto pair = std::make_unique<QueryMapperStorePair>();
     pair->queryMapper = QueryMapper::create(mimeType);
     if (!pair->queryMapper) {
         qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "No QueryMapper for type" << mimeType;
@@ -48,7 +49,7 @@ SearchPlugin::QueryMapperStorePair *SearchPlugin::QueryMapperStorePair::create(c
         qCWarning(AKONADIPLUGIN_SEARCH_LOG) << "No Store for type" << mimeType;
         return {};
     }
-    return pair.take();
+    return pair.release();
 }
 
 SearchPlugin::QueryMapperStorePair::~QueryMapperStorePair()

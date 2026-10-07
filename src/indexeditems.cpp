@@ -33,7 +33,7 @@
 #include "resultiterator.h"
 #include "querypropertymapper_p.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 #include <QtConcurrent>
 #include <QHash>
@@ -92,11 +92,11 @@ IndexedItems::~IndexedItems()
 qint64 IndexedItems::indexedItems(Akonadi::Collection::Id id)
 {
     std::vector<Store>stores{ EmailStore(), ContactStore(), IncidenceStore(), NoteStore() };
-    // Qt seems to struggle with deducing the return type of the Map lambda, hence the
-    // std::function wrapper.
-    return QtConcurrent::blockingMappedReduced<qint64>(stores.begin(), stores.end(),
-        std::function<qint64(Store&)>([id](Store &store) { return store.indexedItems(id); }),
-        [](qint64 &result, qint64 val) -> qint64 { return result += val; });
+    qint64 total = 0;
+    for (auto &store : stores) {
+        total += store.indexedItems(id);
+    }
+    return total;
 }
 
 QSet<Akonadi::Item::Id> IndexedItems::findIndexedForType(Akonadi::Collection::Id collectionId, const QString &mimeType)

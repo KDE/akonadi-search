@@ -23,7 +23,7 @@
 #ifndef AKONADISEARCH_QUERYMAPPER_P_H_
 #define AKONADISEARCH_QUERYMAPPER_P_H_
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 namespace Xapian {
 class Query;

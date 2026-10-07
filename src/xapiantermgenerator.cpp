@@ -89,7 +89,7 @@ QStringList XapianTermGenerator::termList(const QString &text)
 
             // Get the string ready for saving
             str = str.toLower();
-            list << str.split(QLatin1Char('_'), QString::SkipEmptyParts);
+            list << str.split(QLatin1Char('_'), Qt::SkipEmptyParts);
         }
     }
     list << QStringLiteral("$");

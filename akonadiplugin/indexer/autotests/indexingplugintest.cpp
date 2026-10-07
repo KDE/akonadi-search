@@ -24,9 +24,9 @@
 #include <QTest>
 #include <QStandardPaths>
 
-#include <AkonadiCore/Item>
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Item>
+#include <Akonadi/Collection>
+#include <Akonadi/SearchQuery>
 
 #include <KMime/Message>
 #include <KContacts/Addressee>
@@ -82,10 +82,10 @@ private Q_SLOTS:
         auto plugin = new IndexingPlugin;
         QScopedPointer<Indexer> mimeIndexer(Indexer::create(KMime::Message::mimeType()));
         {
-            auto msg = KMime::Message::Ptr::create();
-            msg->subject(true)->from7BitString("Subject1");
-            msg->from(true)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"), "UTF-8");
-            msg->to(true)->fromUnicodeString(QStringLiteral("Test Friend <friend@kde.test"), "UTF-8");
+            auto msg = std::make_shared<KMime::Message>();
+            msg->subject(KMime::Create)->from7BitString("Subject1");
+            msg->from(KMime::Create)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"));
+            msg->to(KMime::Create)->fromUnicodeString(QStringLiteral("Test Friend <friend@kde.test"));
             msg->setBody("Hello Friend, how are you?");
 
             Akonadi::Item item(KMime::Message::mimeType());
@@ -97,10 +97,10 @@ private Q_SLOTS:
         }
 
         {
-            auto msg = KMime::Message::Ptr::create();
-            msg->subject(true)->from7BitString("Re: Subject1");
-            msg->from(true)->fromUnicodeString(QStringLiteral("Test Friend <friend@kde.test"), "UTF-8");
-            msg->to(true)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"), "UTF-8");
+            auto msg = std::make_shared<KMime::Message>();
+            msg->subject(KMime::Create)->from7BitString("Re: Subject1");
+            msg->from(KMime::Create)->fromUnicodeString(QStringLiteral("Test Friend <friend@kde.test"));
+            msg->to(KMime::Create)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"));
             msg->setBody("Hello Dan, I'm fine. How are you?");
 
             Akonadi::Item item(KMime::Message::mimeType());

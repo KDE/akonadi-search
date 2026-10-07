@@ -28,16 +28,16 @@
 #include "xapiandocument.h"
 #include "utils.h"
 
-#include <AkonadiCore/Item>
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Item>
+#include <Akonadi/SearchQuery>
 
 using namespace Akonadi::Search;
 
 QStringList IncidenceIndexer::mimeTypes()
 {
-    return { KCalCore::Event::eventMimeType(),
-             KCalCore::Todo::todoMimeType(),
-             KCalCore::Journal::journalMimeType() };
+    return { KCalendarCore::Event::eventMimeType(),
+             KCalendarCore::Todo::todoMimeType(),
+             KCalendarCore::Journal::journalMimeType() };
 }
 
 bool IncidenceIndexer::doIndex(const Item &item, const Collection &parent, QDataStream &stream)
@@ -48,20 +48,20 @@ bool IncidenceIndexer::doIndex(const Item &item, const Collection &parent, QData
         return false;
     }
 
-    if (item.hasPayload<KCalCore::Event::Ptr>()) {
-        xapDoc = indexEvent(item.payload<KCalCore::Event::Ptr>());
-    } else if (item.hasPayload<KCalCore::Todo::Ptr>()) {
-        xapDoc = indexTodo(item.payload<KCalCore::Todo::Ptr>());
-    } else if (item.hasPayload<KCalCore::Journal::Ptr>()) {
-        xapDoc = indexJournal(item.payload<KCalCore::Journal::Ptr>());
+    if (item.hasPayload<KCalendarCore::Event::Ptr>()) {
+        xapDoc = indexEvent(item.payload<KCalendarCore::Event::Ptr>());
+    } else if (item.hasPayload<KCalendarCore::Todo::Ptr>()) {
+        xapDoc = indexTodo(item.payload<KCalendarCore::Todo::Ptr>());
+    } else if (item.hasPayload<KCalendarCore::Journal::Ptr>()) {
+        xapDoc = indexJournal(item.payload<KCalendarCore::Journal::Ptr>());
     } else {
         const auto mtids = item.availablePayloadMetaTypeIds();
         QStringList mts;
         for (const auto mtid : mtids) {
-            mts << QString::fromUtf8(QMetaType::typeName(mtid));
+            mts << QString::fromUtf8(QMetaType(mtid).name());
         }
         qCWarning(AKONADISEARCH_LOG) << "Item" << item.id() << "does not contain the requested payload: "
-                                     << "Requested: KCalCore::Event, Todo or Journal, present:" << mts;
+                                     << "Requested: KCalendarCore::Event, Todo or Journal, present:" << mts;
         return false;
     }
 
@@ -80,20 +80,20 @@ bool IncidenceIndexer::doIndex(const Item &item, const Collection &parent, QData
     return true;
 }
 
-Xapian::Document IncidenceIndexer::indexEvent(const KCalCore::Event::Ptr& event)
+Xapian::Document IncidenceIndexer::indexEvent(const KCalendarCore::Event::Ptr& event)
 {
     const auto &propMapper = IncidenceQueryPropertyMapper::instance();
 
     XapianDocument doc;
 
-    doc.indexText(event->organizer()->email(), propMapper.prefix(Akonadi::IncidenceSearchTerm::Organizer));
+    doc.indexText(event->organizer().email(), propMapper.prefix(Akonadi::IncidenceSearchTerm::Organizer));
     doc.indexText(event->summary(), propMapper.prefix(Akonadi::IncidenceSearchTerm::Summary));
     doc.indexText(event->location(), propMapper.prefix(Akonadi::IncidenceSearchTerm::Location));
-    KCalCore::Attendee::List attendees = event->attendees();
-    KCalCore::Attendee::List::ConstIterator it;
-    KCalCore::Attendee::List::ConstIterator end(attendees.constEnd());
+    KCalendarCore::Attendee::List attendees = event->attendees();
+    KCalendarCore::Attendee::List::ConstIterator it;
+    KCalendarCore::Attendee::List::ConstIterator end(attendees.constEnd());
     for (it = attendees.constBegin(); it != end; ++it) {
-        doc.addBoolTerm((*it)->email() + QString::number((*it)->status()),
+        doc.addBoolTerm(it->email() + QString::number(it->status()),
                         propMapper.prefix(Akonadi::IncidenceSearchTerm::PartStatus));
     }
 
@@ -101,13 +101,13 @@ Xapian::Document IncidenceIndexer::indexEvent(const KCalCore::Event::Ptr& event)
     return doc.xapianDocument();
 }
 
-Xapian::Document IncidenceIndexer::indexTodo(const KCalCore::Todo::Ptr &)
+Xapian::Document IncidenceIndexer::indexTodo(const KCalendarCore::Todo::Ptr &)
 {
     // TODO
     return {};
 }
 
-Xapian::Document IncidenceIndexer::indexJournal(const KCalCore::Journal::Ptr &)
+Xapian::Document IncidenceIndexer::indexJournal(const KCalendarCore::Journal::Ptr &)
 {
     // TODO
     return {};

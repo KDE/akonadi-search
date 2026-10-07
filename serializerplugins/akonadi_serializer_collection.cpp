@@ -19,7 +19,7 @@
 
 #include "akonadi_serializer_collection.h"
 
-#include <AkonadiCore/Collection>
+#include <Akonadi/Collection>
 #include "../src/indexer.h"
 
 using namespace Akonadi;

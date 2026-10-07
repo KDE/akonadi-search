@@ -20,7 +20,7 @@
  */
 
 #include "collectionquerypropertymapper.h"
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 using namespace Akonadi::Search;
 

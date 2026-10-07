@@ -66,36 +66,38 @@ ecm_qt_declare_logging_category(
     IDENTIFIER AKONADISEARCH_LOG
     CATEGORY_NAME org.kde.pim.akonadisearch_lib)
 
-add_library(KF5AkonadiSearch ${AKONADISEARCH_LIB_SRCS})
-add_library(KF5::AkonadiSearch ALIAS KF5AkonadiSearch)
+add_library(KPim6AkonadiSearch ${AKONADISEARCH_LIB_SRCS})
+add_library(KPim6::AkonadiSearch ALIAS KPim6AkonadiSearch)
 
 generate_export_header(
-    KF5AkonadiSearch BASE_NAME AKONADISEARCH EXPORT_FILE_NAME akonadisearch_export.h)
+    KPim6AkonadiSearch BASE_NAME AKONADISEARCH EXPORT_FILE_NAME akonadisearch_export.h)
 
-target_link_libraries(KF5AkonadiSearch
+target_link_libraries(KPim6AkonadiSearch
     PUBLIC
-        Qt5::Core
-        Qt5::Gui
-        KF5::AkonadiCore
+        Qt::Core
+        Qt::Gui
+        KPim6::AkonadiCore
     PRIVATE
-        KF5::Mime
-        KF5::AkonadiMime
-        KF5::Contacts
-        KF5::CalendarCore
-        KF5::Codecs
-        Qt5::Concurrent
+        KF6::Mime
+        KPim6::AkonadiMime
+        KF6::Contacts
+        KF6::CalendarCore
+        KF6::Codecs
+        Qt::Concurrent
         ${XAPIAN_LIBRARIES}
 )
 
-set_target_properties(KF5AkonadiSearch PROPERTIES
-    VERSION ${AKONADISEARCH_VERSION_STRING}
+target_include_directories(KPim6AkonadiSearch INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch>")
+
+set_target_properties(KPim6AkonadiSearch PROPERTIES
+    VERSION ${AKONADISEARCH_VERSION}
     SOVERSION ${AKONADISEARCH_SOVERSION}
     EXPORT_NAME AkonadiSearch
 )
 
-install(TARGETS KF5AkonadiSearch EXPORT KF5AkonadiSearchTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim6AkonadiSearch EXPORT KPim6AkonadiSearchTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/akonadisearch_export.h
     ${AkonadiSearch_LIB_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/AkonadiSearch COMPONENT Devel
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/AkonadiSearch COMPONENT Devel
 )

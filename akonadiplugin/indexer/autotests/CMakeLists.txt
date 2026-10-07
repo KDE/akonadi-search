@@ -1,7 +1,5 @@
 include(ECMMarkAsTest)
 
-set(QT_REQUIRED_VERSION "5.8.0")
-find_package(Qt5Test ${QT_REQUIRED_VERSION} CONFIG REQUIRED)
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}/..
@@ -16,16 +14,17 @@ set(indexingplugintest_SRCS
 
 add_executable( indexingplugintest ${indexingplugintest_SRCS} )
 add_test( NAME indexingplugintest COMMAND indexingplugintest )
+set_tests_properties(indexingplugintest PROPERTIES RESOURCE_LOCK akonadi_search_db)
 ecm_mark_as_test(indexingplugintest)
 
 target_link_libraries(indexingplugintest
-    Qt5::Test
-    KF5::AkonadiCore
-    KF5::AkonadiMime
-    KF5::Mime
-    KF5::Contacts
-    KF5::CalendarCore
-    KF5::AkonadiSearch
-    KF5::Codecs
+    Qt::Test
+    KPim6::AkonadiCore
+    KPim6::AkonadiMime
+    KF6::Mime
+    KF6::Contacts
+    KF6::CalendarCore
+    KPim6::AkonadiSearch
+    KF6::Codecs
 )
 

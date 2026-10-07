@@ -27,11 +27,11 @@
 #include "querymapper_p.h"
 #include "akonadisearch_debug.h"
 
-#include <KCalCore/Event>
-#include <KCalCore/Todo>
-#include <KCalCore/Journal>
+#include <KCalendarCore/Event>
+#include <KCalendarCore/Todo>
+#include <KCalendarCore/Journal>
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 #include <QVariant>
 
@@ -43,9 +43,9 @@ IncidenceQueryMapper::IncidenceQueryMapper()
 
 QStringList IncidenceQueryMapper::mimeTypes()
 {
-    return { KCalCore::Event::eventMimeType(),
-             KCalCore::Todo::todoMimeType(),
-             KCalCore::Journal::journalMimeType() };
+    return { KCalendarCore::Event::eventMimeType(),
+             KCalendarCore::Todo::todoMimeType(),
+             KCalendarCore::Journal::journalMimeType() };
 }
 
 const QueryPropertyMapper &IncidenceQueryMapper::propertyMapper()

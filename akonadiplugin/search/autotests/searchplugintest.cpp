@@ -21,15 +21,15 @@
  */
 
 #include <QTest>
-#include <AkonadiCore/Item>
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/SearchQuery>
-#include <Akonadi/KMime/MessageFlags>
+#include <Akonadi/Item>
+#include <Akonadi/Collection>
+#include <Akonadi/SearchQuery>
+#include <Akonadi/MessageFlags>
 
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
 #include <KMime/Message>
-#include <KCalCore/Event>
+#include <KCalendarCore/Event>
 
 #include <QDir>
 #include <QStandardPaths>
@@ -83,8 +83,8 @@ private Q_SLOTS:
 
         QScopedPointer<Indexer> contactGroupIndexer(Indexer::create(KContacts::ContactGroup::mimeType()));
 
-        QScopedPointer<Store> eventStore(Store::create(KCalCore::Event::eventMimeType()));
-        QScopedPointer<Indexer> eventIndexer(Indexer::create(KCalCore::Event::eventMimeType()));
+        QScopedPointer<Store> eventStore(Store::create(KCalendarCore::Event::eventMimeType()));
+        QScopedPointer<Indexer> eventIndexer(Indexer::create(KCalendarCore::Event::eventMimeType()));
         eventStore->setOpenMode(Store::WriteOnly);
 
         QScopedPointer<Store> noteStore(Store::create(QStringLiteral("text/x-vnd.akonadi.note")));
@@ -92,7 +92,7 @@ private Q_SLOTS:
         noteStore->setOpenMode(Store::WriteOnly);
 
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("subject1");
             msg->contentType()->setMimeType("text/plain");
             msg->contentType()->setCharset("utf-8");
@@ -110,14 +110,16 @@ private Q_SLOTS:
             QVERIFY(emailStore->index(1, emailIndexer->index(item, Akonadi::Collection(1))));
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("subject2");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body2");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -133,14 +135,16 @@ private Q_SLOTS:
             QVERIFY(emailStore->index(2, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("subject3");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body3");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -156,14 +160,16 @@ private Q_SLOTS:
             QVERIFY(emailStore->index(3, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("subject4");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body4");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -171,12 +177,12 @@ private Q_SLOTS:
             msg->bcc()->addAddress("bcc@test.com", QStringLiteral("Jane Doe"));
             msg->date()->setDateTime(QDateTime(QDate(2014, 11, 11), QTime(13, 0, 0)));
             msg->replyTo()->from7BitString("test@kde.org");
-            KMime::Headers::Generic *header = new KMime::Headers::Generic("Resent-From");
-            header->fromUnicodeString(QStringLiteral("resent@kde.org"), "utf-8");
-            msg->setHeader(header);
-            header = new KMime::Headers::Generic("List-Id");
-            header->fromUnicodeString(QStringLiteral("KDE PIM <kde-pim.kde.org>"), "utf-8");
-            msg->setHeader(header);
+            auto header = std::make_unique<KMime::Headers::Generic>("Resent-From");
+            header->fromUnicodeString(QStringLiteral("resent@kde.org"));
+            msg->setHeader(std::move(header));
+            header = std::make_unique<KMime::Headers::Generic>("List-Id");
+            header->fromUnicodeString(QStringLiteral("KDE PIM <kde-pim.kde.org>"));
+            msg->setHeader(std::move(header));
 
             msg->assemble();
 
@@ -188,14 +194,16 @@ private Q_SLOTS:
             QVERIFY(emailStore->index(4, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("all tags");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("tags");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -226,14 +234,16 @@ private Q_SLOTS:
             QVERIFY(emailStore->index(5, emailIndexer->index(item, Akonadi::Collection(2))));
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("Change in qt/qtx11extras[stable]: remove QtWidgets dependency");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body5");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
 
             msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
             msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
@@ -257,7 +267,7 @@ private Q_SLOTS:
             addressee.setFormattedName(QStringLiteral("John Doe"));
             addressee.setNickName(QStringLiteral("JD"));
             addressee.setEmails(QStringList() << QStringLiteral("john@test.com"));
-            addressee.setBirthday(QDateTime(QDate(2000, 01, 01)));
+            addressee.setBirthday(QDate(2000, 01, 01));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(100);
             item.setPayload(addressee);
@@ -268,7 +278,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("uid2"));
             addressee.setName(QStringLiteral("Jane Doe"));
             addressee.setEmails(QStringList() << QStringLiteral("jane@test.com"));
-            addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
+            addressee.setBirthday(QDate(2001, 01, 01));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(101);
             item.setPayload(addressee);
@@ -279,7 +289,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("uid2"));
             addressee.setName(QStringLiteral("Jane Doe"));
             addressee.setEmails(QStringList() << QStringLiteral("JANE@TEST.COM"));
-            addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
+            addressee.setBirthday(QDate(2001, 01, 01));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(102);
             item.setPayload(addressee);
@@ -290,7 +300,7 @@ private Q_SLOTS:
             addressee.setUid(QStringLiteral("abcd-efgh-1234-5678"));
             addressee.setName(QStringLiteral("Dan Vrátil"));
             addressee.setEmails({ QStringLiteral("dan@test.com") });
-            addressee.setBirthday(QDateTime(QDate(2001, 01, 01)));
+            addressee.setBirthday(QDate(2001, 01, 01));
             Akonadi::Item item(KContacts::Addressee::mimeType());
             item.setId(105);
             item.setPayload(addressee);
@@ -316,14 +326,16 @@ private Q_SLOTS:
 
         //Note item
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("note");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("body note");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
             msg->assemble();
 
             Akonadi::Item item(QStringLiteral("text/x-vnd.akonadi.note"));
@@ -334,14 +346,16 @@ private Q_SLOTS:
             QVERIFY(noteStore->index(1000, noteIndexer->index(item, Akonadi::Collection(5))));
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("note2");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("note");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
             msg->assemble();
 
             Akonadi::Item item(QStringLiteral("text/x-vnd.akonadi.note"));
@@ -352,14 +366,16 @@ private Q_SLOTS:
             QVERIFY(noteStore->index(1001, noteIndexer->index(item, Akonadi::Collection(5))));
         }
         {
-            KMime::Message::Ptr msg(new KMime::Message);
+            std::shared_ptr<KMime::Message> msg(new KMime::Message);
             msg->subject()->from7BitString("note3");
 
             //Multipart message
             KMime::Content *b = new KMime::Content;
             b->contentType()->setMimeType("text/plain");
             b->setBody("note3");
-            msg->addContent(b, true);
+            msg->contentType()->setMimeType("multipart/mixed");
+            msg->contentType()->setBoundary(KMime::multiPartBoundary());
+            msg->prependContent(std::unique_ptr<KMime::Content>(b));
             msg->assemble();
 
             Akonadi::Item item(QStringLiteral("text/x-vnd.akonadi.note"));
@@ -373,25 +389,25 @@ private Q_SLOTS:
 
         // Calendar item
         {
-            KCalCore::Event::Ptr event(new KCalCore::Event);
-            KCalCore::Attendee::Ptr attendee(new KCalCore::Attendee(QStringLiteral("attendee1"), QStringLiteral("attendee1@example.com"), false, KCalCore::Attendee::NeedsAction));
+            KCalendarCore::Event::Ptr event(new KCalendarCore::Event);
+            KCalendarCore::Attendee attendee(QStringLiteral("attendee1"), QStringLiteral("attendee1@example.com"), false, KCalendarCore::Attendee::NeedsAction);
             event->setOrganizer(QStringLiteral("organizer@example.com"));
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee2"), QStringLiteral("attendee2@example.com"), false, KCalCore::Attendee::Accepted));
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee2"), QStringLiteral("attendee2@example.com"), false, KCalendarCore::Attendee::Accepted);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee3"), QStringLiteral("attendee3@example.com"), false, KCalCore::Attendee::Declined));
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee3"), QStringLiteral("attendee3@example.com"), false, KCalendarCore::Attendee::Declined);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee4"), QStringLiteral("attendee4@example.com"), false, KCalCore::Attendee::Tentative));
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee4"), QStringLiteral("attendee4@example.com"), false, KCalendarCore::Attendee::Tentative);
             event->addAttendee(attendee);
-            attendee = KCalCore::Attendee::Ptr(new KCalCore::Attendee(QStringLiteral("attendee5"), QStringLiteral("attendee5@example.com"), false, KCalCore::Attendee::Delegated));
+            attendee = KCalendarCore::Attendee(QStringLiteral("attendee5"), QStringLiteral("attendee5@example.com"), false, KCalendarCore::Attendee::Delegated);
             event->addAttendee(attendee);
 
             event->setSummary(QStringLiteral("title"));
             event->setLocation(QStringLiteral("here"));
 
-            Akonadi::Item item(KCalCore::Event::eventMimeType());
+            Akonadi::Item item(KCalendarCore::Event::eventMimeType());
             item.setId(2001);
-            item.setPayload<KCalCore::Event::Ptr>(event);
+            item.setPayload<KCalendarCore::Event::Ptr>(event);
             QVERIFY(eventStore->index(2001, eventIndexer->index(item, Akonadi::Collection(6))));
         }
         eventStore->commit();
@@ -413,7 +429,7 @@ private Q_SLOTS:
         QTest::addColumn<QVector<qint64> >("collections");
         QTest::addColumn<QStringList>("mimeTypes");
         QTest::addColumn<QSet<qint64> >("expectedResult");
-        const QStringList calendarMimeTypes = QStringList() << KCalCore::Event::eventMimeType();
+        const QStringList calendarMimeTypes = QStringList() << KCalendarCore::Event::eventMimeType();
         {
             Akonadi::SearchQuery query;
             query.addTerm(Akonadi::IncidenceSearchTerm(Akonadi::IncidenceSearchTerm::Organizer, QStringLiteral("organizer@example.com"), Akonadi::SearchTerm::CondEqual));

@@ -39,8 +39,8 @@
 #include "note/notestore.h"
 #include "collection/collectionstore.h"
 
-#include <AkonadiCore/SearchQuery>
-#include <AkonadiCore/ServerManager>
+#include <Akonadi/SearchQuery>
+#include <Akonadi/ServerManager>
 
 #include <QStandardPaths>
 #include <QDir>
@@ -62,8 +62,9 @@ StorePrivate::StorePrivate(Store *q)
 {
     commitTimer = new QTimer;
     commitTimer->setSingleShot(true);
-    QObject::connect(commitTimer, &QTimer::timeout,
-                     [=]() { q->commit(); });
+    QObject::connect(commitTimer, &QTimer::timeout, commitTimer, [q]() {
+        q->commit();
+    });
 }
 
 StorePrivate::~StorePrivate()

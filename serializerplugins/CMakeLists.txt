@@ -1,8 +1,8 @@
 set(akonadi_serializer_collection_SRCS akonadi_serializer_collection.cpp)
 add_library(akonadi_serializer_collection MODULE ${SERIALIZER_TYPE} ${akonadi_serializer_collection_SRCS})
 target_link_libraries(akonadi_serializer_collection
-    KF5::AkonadiCore
-    KF5::AkonadiSearch
+    KPim6::AkonadiCore
+    KPim6::AkonadiSearch
 )
 install(TARGETS akonadi_serializer_collection DESTINATION ${KDE_INSTALL_PLUGINDIR})
 

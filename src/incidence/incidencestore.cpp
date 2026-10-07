@@ -21,10 +21,10 @@
 
 #include "incidencestore.h"
 
-#include <KCalCore/Event>
-#include <KCalCore/Todo>
-#include <KCalCore/Journal>
-#include <KCalCore/FreeBusy>
+#include <KCalendarCore/Event>
+#include <KCalendarCore/Todo>
+#include <KCalendarCore/Journal>
+#include <KCalendarCore/FreeBusy>
 
 using namespace Akonadi::Search;
 
@@ -36,9 +36,9 @@ IncidenceStore::IncidenceStore()
 
 QStringList IncidenceStore::mimeTypes()
 {
-    return { KCalCore::Event::eventMimeType(),
-             KCalCore::Todo::todoMimeType(),
-             KCalCore::Journal::journalMimeType(),
-             KCalCore::FreeBusy::freeBusyMimeType() };
+    return { KCalendarCore::Event::eventMimeType(),
+             KCalendarCore::Todo::todoMimeType(),
+             KCalendarCore::Journal::journalMimeType(),
+             KCalendarCore::FreeBusy::freeBusyMimeType() };
 }
 

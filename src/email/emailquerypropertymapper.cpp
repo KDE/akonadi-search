@@ -21,7 +21,7 @@
 
 #include "emailquerypropertymapper.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 #include <QMutex>
 

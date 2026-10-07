@@ -25,8 +25,8 @@
 #include "collectionquerymapper.h"
 #include "collectionquerypropertymapper.h"
 
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Collection>
+#include <Akonadi/SearchQuery>
 
 using namespace Akonadi::Search;
 

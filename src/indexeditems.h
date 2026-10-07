@@ -24,7 +24,7 @@
 #define AKONADISEARCH_INDEXEDITEMS_H
 
 #include <QObject>
-#include <AkonadiCore/Item>
+#include <Akonadi/Item>
 
 #include "akonadisearch_export.h"
 

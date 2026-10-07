@@ -40,7 +40,7 @@ public:
     bool doIndex(const Item &item, const Collection &parent, QDataStream &stream) override;
 
 private:
-    void insert(const KMime::Types::Mailbox::List &list, QDataStream &stream);
+    void insert(const QList<KMime::Types::Mailbox> &list, QDataStream &stream);
 };
 
 }

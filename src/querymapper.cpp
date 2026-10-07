@@ -33,7 +33,7 @@
 #include "note/notequerymapper.h"
 #include "collection/collectionquerymapper.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 using namespace Akonadi::Search;
 

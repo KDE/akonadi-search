@@ -21,7 +21,7 @@
 
 #include "contactquerypropertymapper.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 #include <QMutex>
 

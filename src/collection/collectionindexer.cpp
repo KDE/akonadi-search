@@ -27,9 +27,9 @@
 #include "akonadisearch_debug.h"
 #include "utils.h"
 
-#include <AkonadiCore/Collection>
-#include <AkonadiCore/SearchQuery>
-#include <AkonadiCore/CollectionIdentificationAttribute>
+#include <Akonadi/Collection>
+#include <Akonadi/SearchQuery>
+#include <Akonadi/CollectionIdentificationAttribute>
 
 #include <QDataStream>
 

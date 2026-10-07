@@ -22,7 +22,7 @@
 
 #include <QObject>
 
-#include <AkonadiCore/IndexerInterface>
+#include <Akonadi/IndexerInterface>
 #include "../src/objectcache.h"
 
 namespace Akonadi {

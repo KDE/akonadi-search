@@ -23,7 +23,7 @@
 #include "querymapper.h"
 #include "store.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 #include <QFutureWatcher>
 #include <QtConcurrentRun>

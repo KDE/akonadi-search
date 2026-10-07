@@ -28,8 +28,8 @@
 #include "akonadisearch_debug.h"
 #include "utils.h"
 
-#include <AkonadiCore/Item>
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Item>
+#include <Akonadi/SearchQuery>
 
 #include <KMime/Headers>
 #include <KMime/Content>
@@ -57,9 +57,9 @@ bool EmailIndexer::doIndex(const Item &item, const Collection &parent, QDataStre
     XapianDocument doc;
     processMessageStatus(doc, status);
 
-    KMime::Message::Ptr msg;
+    std::shared_ptr<KMime::Message> msg;
     try {
-        msg = item.payload<KMime::Message::Ptr>();
+        msg = item.payload<std::shared_ptr<KMime::Message>>();
     } catch (const Akonadi::PayloadException &e) {
         // It's perfectly possible that we only have flags
         doc.addBoolTerm(QString::fromStdString(MergeFlagsTerm));
@@ -107,7 +107,7 @@ void EmailIndexer::processHeader(XapianDocument &doc, const std::string &key, KM
 
 
 // Add once with a prefix and once without
-void EmailIndexer::processMailboxes(XapianDocument &doc, const std::string &key, const KMime::Types::Mailbox::List &list)
+void EmailIndexer::processMailboxes(XapianDocument &doc, const std::string &key, const QList<KMime::Types::Mailbox> &list)
 {
     for (const auto &mbox : list) {
         const auto name = mbox.name();
@@ -122,13 +122,13 @@ void EmailIndexer::processMailboxes(XapianDocument &doc, const std::string &key,
     }
 }
 
-void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
+void EmailIndexer::process(XapianDocument &doc, const std::shared_ptr<KMime::Message> &msg)
 {
     const auto &propMapper = EmailQueryPropertyMapper::instance();
 
     // Process Headers
     // (Give the subject a higher priority)
-    KMime::Headers::Subject *subject = msg->subject(false);
+    KMime::Headers::Subject *subject = msg->subject(KMime::DontCreate);
     if (subject) {
         const QString str = subject->asUnicodeString();
         doc.indexText(str, propMapper.prefix(Akonadi::EmailSearchTerm::Subject), 1);
@@ -136,19 +136,19 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
         doc.setData(str);
     }
 
-    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderFrom), msg->from(false));
-    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderTo), msg->to(false));
-    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderCC), msg->cc(false));
-    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderBCC), msg->bcc(false));
-    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderOrganization), msg->organization(false));
-    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderReplyTo), msg->replyTo(false));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderFrom), msg->from(KMime::DontCreate));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderTo), msg->to(KMime::DontCreate));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderCC), msg->cc(KMime::DontCreate));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderBCC), msg->bcc(KMime::DontCreate));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderOrganization), msg->organization(KMime::DontCreate));
+    processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderReplyTo), msg->replyTo(KMime::DontCreate));
     processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderResentFrom), msg->headerByType("Resent-From"));
     processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderListId), msg->headerByType("List-Id"));
     processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderXLoop), msg->headerByType("X-Loop"));
     processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderXMailingList), msg->headerByType("X-Mailing-List"));
     processHeader(doc, propMapper.prefix(Akonadi::EmailSearchTerm::HeaderXSpamFlag), msg->headerByType("X-Spam-Flag"));
 
-    if (auto date = msg->date(false)) {
+    if (auto date = msg->date(KMime::DontCreate)) {
         doc.addValue(propMapper.valueProperty(Akonadi::EmailSearchTerm::HeaderDate),
                      date->dateTime().toSecsSinceEpoch());
         doc.addValue(propMapper.valueProperty(Akonadi::EmailSearchTerm::HeaderOnlyDate),
@@ -170,7 +170,7 @@ void EmailIndexer::process(XapianDocument &doc, const KMime::Message::Ptr &msg)
         doc.indexTextWithoutPositions(text, {}, 1);
         doc.indexText(text, propMapper.prefix(Akonadi::EmailSearchTerm::Body), 1);
     } else {
-        processPart(doc, msg.data(), nullptr);
+        processPart(doc, msg.get(), nullptr);
     }
 }
 
@@ -181,7 +181,7 @@ void EmailIndexer::processPart(XapianDocument &doc, KMime::Content *content, KMi
         return;
     }
 
-    KMime::Headers::ContentType *type = content->contentType(false);
+    KMime::Headers::ContentType *type = content->contentType(KMime::DontCreate);
     if (type) {
         if (type->isMultipart()) {
             if (type->isSubtype("encrypted")) {

@@ -27,8 +27,8 @@
 #include "xapiandocument.h"
 #include "utils.h"
 
-#include <AkonadiCore/Item>
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Item>
+#include <Akonadi/SearchQuery>
 
 #include <KMime/Message>
 
@@ -46,9 +46,9 @@ QStringList NoteIndexer::mimeTypes()
 
 bool NoteIndexer::doIndex(const Item &item, const Collection &parent, QDataStream &stream)
 {
-   KMime::Message::Ptr msg;
+   std::shared_ptr<KMime::Message> msg;
     try {
-        msg = item.payload<KMime::Message::Ptr>();
+        msg = item.payload<std::shared_ptr<KMime::Message>>();
     } catch (const Akonadi::PayloadException &) {
         return false;
     }
@@ -67,7 +67,7 @@ bool NoteIndexer::doIndex(const Item &item, const Collection &parent, QDataStrea
     return true;
 }
 
-Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
+Xapian::Document NoteIndexer::process(const std::shared_ptr<KMime::Message> &note)
 {
     const auto &propMapper = NoteQueryPropertyMapper::instance();
 
@@ -75,7 +75,7 @@ Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
 
     // Process Headers
     // (Give the subject a higher priority)
-    KMime::Headers::Subject *subject = note->subject(false);
+    KMime::Headers::Subject *subject = note->subject(KMime::DontCreate);
     if (subject) {
         const QString str = subject->asUnicodeString();
         doc.indexText(str, propMapper.prefix(Akonadi::EmailSearchTerm::Subject));
@@ -89,7 +89,7 @@ Xapian::Document NoteIndexer::process(const KMime::Message::Ptr &note)
         doc.indexTextWithoutPositions(str);
         doc.indexText(str, propMapper.prefix(Akonadi::EmailSearchTerm::Body));
     } else {
-        processPart(doc, note.data(), nullptr);
+        processPart(doc, note.get(), nullptr);
     }
 
     return doc.xapianDocument();
@@ -102,7 +102,7 @@ void NoteIndexer::processPart(XapianDocument &doc, KMime::Content *content, KMim
         return;
     }
 
-    KMime::Headers::ContentType *type = content->contentType(false);
+    KMime::Headers::ContentType *type = content->contentType(KMime::DontCreate);
     if (type) {
         if (type->isMultipart()) {
             if (type->isSubtype("encrypted")) {

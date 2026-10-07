@@ -31,7 +31,7 @@
 #include <QVariant>
 #include <QDateTime>
 
-#include <Akonadi/KMime/MessageFlags>
+#include <Akonadi/MessageFlags>
 #include <KMime/Message>
 
 using namespace Akonadi::Search;

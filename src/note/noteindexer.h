@@ -42,7 +42,7 @@ public:
     bool doIndex(const Item &item, const Collection &parent, QDataStream &stream) override;
 
 private:
-    Xapian::Document process(const KMime::Message::Ptr &note);
+    Xapian::Document process(const std::shared_ptr<KMime::Message> &note);
     void processPart(XapianDocument &doc, KMime::Content *part,
                      KMime::Content *mainContent);
 };

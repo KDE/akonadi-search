@@ -72,7 +72,7 @@ Xapian::Query constructQuery(const QueryPropertyMapper &mapper,
             isTrue = true;
         }
 
-        if (value.type() == QVariant::Bool) {
+        if (value.typeId() == QMetaType::Bool) {
             isTrue = value.toBool();
         }
 

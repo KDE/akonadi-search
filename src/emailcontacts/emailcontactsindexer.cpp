@@ -27,8 +27,8 @@
 #include "xapiandocument.h"
 #include "utils.h"
 
-#include <AkonadiCore/Item>
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Item>
+#include <Akonadi/SearchQuery>
 
 #include <KMime/Message>
 #include <KEmailAddress>
@@ -52,26 +52,26 @@ bool EmailContactsIndexer::doIndex(const Item &item, const Collection &parent, Q
         return false;
     }
 
-    KMime::Message::Ptr msg;
+    std::shared_ptr<KMime::Message> msg;
     try {
-        msg = item.payload<KMime::Message::Ptr>();
+        msg = item.payload<std::shared_ptr<KMime::Message>>();
     } catch (const Akonadi::PayloadException &e) {
         return false;
     }
 
-    if (const auto to = msg->to(false)) {
+    if (const auto to = msg->to(KMime::DontCreate)) {
         insert(to->mailboxes(), stream);
     }
-    if (const auto from = msg->from(false)) {
+    if (const auto from = msg->from(KMime::DontCreate)) {
         insert(from->mailboxes(), stream);
     }
-    if (const auto cc = msg->cc(false)) {
+    if (const auto cc = msg->cc(KMime::DontCreate)) {
         insert(cc->mailboxes(), stream);
     }
-    if (const auto bcc = msg->bcc(false)) {
+    if (const auto bcc = msg->bcc(KMime::DontCreate)) {
         insert(bcc->mailboxes(), stream);
     }
-    if (const auto replyTo = msg->replyTo(false)) {
+    if (const auto replyTo = msg->replyTo(KMime::DontCreate)) {
         insert(replyTo->mailboxes(), stream);
     }
 
@@ -93,7 +93,7 @@ QString prettyAddress(const KMime::Types::Mailbox &mbox)
 }
 }
 
-void EmailContactsIndexer::insert(const KMime::Types::Mailbox::List &list, QDataStream &stream)
+void EmailContactsIndexer::insert(const QList<KMime::Types::Mailbox> &list, QDataStream &stream)
 {
     for (const KMime::Types::Mailbox &mbox : list) {
         const QString pa = prettyAddress(mbox);

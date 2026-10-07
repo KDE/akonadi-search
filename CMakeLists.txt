@@ -138,7 +138,10 @@ find_package(
     CONFIG
     REQUIRED
         Core
+        Concurrent
+        Gui
         Test
+        Widgets
 )
 find_package(
     KF6

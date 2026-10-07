@@ -24,9 +24,9 @@
 
 #include "indexer.h"
 
-#include <KCalCore/Event>
-#include <KCalCore/Todo>
-#include <KCalCore/Journal>
+#include <KCalendarCore/Event>
+#include <KCalendarCore/Todo>
+#include <KCalendarCore/Journal>
 
 namespace Akonadi {
 namespace Search {
@@ -42,9 +42,9 @@ public:
     bool doIndex(const Item &item, const Collection &parent, QDataStream &stream) override;
 
 private:
-    Xapian::Document indexEvent(const KCalCore::Event::Ptr &event);
-    Xapian::Document indexTodo(const KCalCore::Todo::Ptr &todo);
-    Xapian::Document indexJournal(const KCalCore::Journal::Ptr &journal);
+    Xapian::Document indexEvent(const KCalendarCore::Event::Ptr &event);
+    Xapian::Document indexTodo(const KCalendarCore::Todo::Ptr &todo);
+    Xapian::Document indexJournal(const KCalendarCore::Journal::Ptr &journal);
 };
 
 }

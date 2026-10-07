@@ -28,7 +28,7 @@
 #include "querymapper_p.h"
 #include "akonadisearch_debug.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>

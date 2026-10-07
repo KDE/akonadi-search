@@ -17,6 +17,7 @@ target_sources(
 add_definitions(-DAKONADI_SEARCH_NO_PLUGINS=TRUE)
 
 add_test(NAME searchplugintest COMMAND searchplugintest)
+set_tests_properties(searchplugintest PROPERTIES RESOURCE_LOCK akonadi_search_db)
 ecm_mark_as_test(searchplugintest)
 
 target_link_libraries(
@@ -27,6 +28,6 @@ target_link_libraries(
     KF6::Mime
     KF6::Contacts
     KF6::CalendarCore
-    KF5::AkonadiSearch
+    KPim6::AkonadiSearch
     KF6::Codecs
 )

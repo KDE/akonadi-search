@@ -21,7 +21,7 @@
 
 #include "querypropertymapper_p.h"
 
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/SearchQuery>
 
 using namespace Akonadi::Search;
 

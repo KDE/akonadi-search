@@ -21,7 +21,7 @@
 
 #include "collectionstore.h"
 
-#include <AkonadiCore/Collection>
+#include <Akonadi/Collection>
 
 using namespace Akonadi::Search;
 

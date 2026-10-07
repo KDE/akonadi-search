@@ -28,8 +28,8 @@
 #include "akonadisearch_debug.h"
 #include "utils.h"
 
-#include <AkonadiCore/Item>
-#include <AkonadiCore/SearchQuery>
+#include <Akonadi/Item>
+#include <Akonadi/SearchQuery>
 
 #include <KContacts/ContactGroup>
 

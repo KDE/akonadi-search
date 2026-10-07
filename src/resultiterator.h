@@ -25,7 +25,7 @@
 
 #include "akonadisearch_export.h"
 
-#include <AkonadiCore/Item>
+#include <Akonadi/Item>
 
 #include <memory>
 

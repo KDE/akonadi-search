@@ -29,7 +29,7 @@
 
 #include <KMime/Message>
 
-#include <AkonadiCore/Item>
+#include <Akonadi/Item>
 
 #include <QStandardPaths>
 #include <QTest>
@@ -40,12 +40,12 @@ using namespace Akonadi::Search;
 namespace {
 
 template<typename T>
-Akonadi::Item toItem(const QSharedPointer<T> &i, qint64 id, qint64 colId)
+Akonadi::Item toItem(const std::shared_ptr<T> &i, qint64 id, qint64 colId)
 {
     Akonadi::Item item(T::mimeType());
     item.setId(id);
     item.setParentCollection(Akonadi::Collection(colId));
-    item.setPayload<QSharedPointer<T>>(i);
+    item.setPayload<std::shared_ptr<T>>(i);
     return item;
 }
 
@@ -58,34 +58,34 @@ void ContactCompleterTest::initTestCase()
     // Index a couple of addresses
     Akonadi::Item::List items;
     {
-        auto email = KMime::Message::Ptr::create();
-        email->from(true)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"), "UTF-8");
-        email->to(true)->from7BitString("Indexed Contact <indexed-contact@kde.test>");
+        auto email = std::make_shared<KMime::Message>();
+        email->from(KMime::Create)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"));
+        email->to(KMime::Create)->from7BitString("Indexed Contact <indexed-contact@kde.test>");
         email->assemble();
         auto item = toItem(email, 100, 3);
         items << item;
     }
 
     {
-        auto email = KMime::Message::Ptr::create();
-        email->from(true)->fromUnicodeString(QStringLiteral("Daniel Nevrátil <nevratil@kde.test>"), "UTF-8");
-        email->to(true)->from7BitString("Indexed Contact <indexed-contact@kde.test>");
-        email->cc(true)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"), "UTF-8");
+        auto email = std::make_shared<KMime::Message>();
+        email->from(KMime::Create)->fromUnicodeString(QStringLiteral("Daniel Nevrátil <nevratil@kde.test>"));
+        email->to(KMime::Create)->from7BitString("Indexed Contact <indexed-contact@kde.test>");
+        email->cc(KMime::Create)->fromUnicodeString(QStringLiteral("Daniel Vrátil <dvratil@kde.org>"));
         email->assemble();
         auto item = toItem(email, 101, 3);
         items << item;
     }
 
     {
-        auto email = KMime::Message::Ptr::create();
-        email->from(true)->fromUnicodeString(QStringLiteral("Rezervační systém <no-reply@moje.hospudka>"), "UTF-8");
-        email->to(true)->from7BitString("John Doe <john@doe.example>");
+        auto email = std::make_shared<KMime::Message>();
+        email->from(KMime::Create)->fromUnicodeString(QStringLiteral("Rezervační systém <no-reply@moje.hospudka>"));
+        email->to(KMime::Create)->from7BitString("John Doe <john@doe.example>");
         email->assemble();
         auto item = toItem(email, 102, 3);
         items << item;
     }
     {
-        KMime::Message::Ptr msg(new KMime::Message);
+        std::shared_ptr<KMime::Message> msg(new KMime::Message);
         msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
         msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
         msg->assemble();
@@ -93,7 +93,7 @@ void ContactCompleterTest::initTestCase()
         items << item;
     }
     {
-        KMime::Message::Ptr msg(new KMime::Message);
+        std::shared_ptr<KMime::Message> msg(new KMime::Message);
         msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
         msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
         msg->assemble();
@@ -102,7 +102,7 @@ void ContactCompleterTest::initTestCase()
         items << item;
     }
     {
-        KMime::Message::Ptr msg(new KMime::Message);
+        std::shared_ptr<KMime::Message> msg(new KMime::Message);
         msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
         msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
         msg->assemble();
@@ -111,7 +111,7 @@ void ContactCompleterTest::initTestCase()
         items << item;
     }
     {
-        KMime::Message::Ptr msg(new KMime::Message);
+        std::shared_ptr<KMime::Message> msg(new KMime::Message);
         msg->from()->addAddress("john@test.com", QStringLiteral("John Doe"));
         msg->to()->addAddress("jane@test.com", QStringLiteral("Jane Doe"));
         msg->cc()->addAddress("cc@test.com", QStringLiteral("Jane Doe"));
@@ -193,8 +193,8 @@ void ContactCompleterTest::testContactCompleter()
 
     QCOMPARE(spy.count(), 1);
     auto results = spy.first().first().toStringList();
-    qSort(results);
-    qSort(expectedResults);
+    std::sort(results.begin(), results.end());
+    std::sort(expectedResults.begin(), expectedResults.end());
     qDebug() << results;
     qDebug() << expectedResults;
     QCOMPARE(results, expectedResults);

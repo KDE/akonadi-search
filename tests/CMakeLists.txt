@@ -3,6 +3,6 @@ set(contactcompletiontest_SRCS
 )
 add_executable(contactcompletiontest ${contactcompletiontest_SRCS})
 target_link_libraries(contactcompletiontest
-    Qt5::Core
-    KF5::AkonadiSearch
+    Qt::Core
+    KPim6::AkonadiSearch
 )

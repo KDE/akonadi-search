@@ -12,11 +12,11 @@ add_library(akonadi_indexing_plugin
 )
 
 target_link_libraries(akonadi_indexing_plugin
-    KF5::AkonadiCore
-    KF5::AkonadiSearch
+    KPim6::AkonadiCore
+    KPim6::AkonadiSearch
 )
 
-install(TARGETS akonadi_indexing_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/akonadi)
+install(TARGETS akonadi_indexing_plugin DESTINATION ${KDE_INSTALL_PLUGINDIR}/pim6/akonadi)
 
 if(BUILD_TESTING)
     add_subdirectory(autotests)
