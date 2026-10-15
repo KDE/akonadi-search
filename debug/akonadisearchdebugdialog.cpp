@@ -30,7 +30,7 @@ public:
 
 namespace
 {
-static const char myAkonadiSearchDebugDialogConfigGroupName[] = "AkonadiSearchDebugDialog";
+const char myAkonadiSearchDebugDialogConfigGroupName[] = "AkonadiSearchDebugDialog";
 }
 AkonadiSearchDebugDialog::AkonadiSearchDebugDialog(QWidget *parent)
     : QDialog(parent)
