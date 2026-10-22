@@ -220,6 +220,17 @@ QVariant Term::userData(const QString &name) const
 QVariantMap Term::toVariantMap() const
 {
     QVariantMap map;
+    if (d->m_isNegated) {
+        Term term(*this);
+        term.setNegation(false);
+        const QVariantMap subMap = term.toVariantMap();
+        if (subMap.isEmpty()) {
+            return {};
+        }
+        map[u"$not"_s] = QVariant(subMap);
+        return map;
+    }
+
     if (d->m_op != None) {
         QVariantList variantList;
         variantList.reserve(d->m_subTerms.count());
@@ -298,6 +309,12 @@ Term Term::fromVariantMap(const QVariantMap &variantMap)
 {
     if (variantMap.size() != 1) {
         return {};
+    }
+
+    if (variantMap.contains(u"$not"_s)) {
+        Term term = Term::fromVariantMap(variantMap.value(u"$not"_s).toMap());
+        term.setNegation(!term.isNegated());
+        return term;
     }
 
     Term term;
