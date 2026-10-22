@@ -28,14 +28,13 @@ public:
     QString uid;
     QString any;
 
-    int limit;
-    ContactQuery::MatchCriteria criteria;
+    int limit = 0;
+    ContactQuery::MatchCriteria criteria = ContactQuery::StartsWithMatch;
 };
 
 ContactQuery::ContactQuery()
     : d(new ContactQueryPrivate)
 {
-    d->criteria = StartsWithMatch;
 }
 
 ContactQuery::~ContactQuery() = default;
