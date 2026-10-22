@@ -295,7 +295,7 @@ QSet<qint64> SearchPlugin::search(const QString &akonadiQuery, const QList<qint6
 
     Akonadi::SearchQuery searchQuery;
     if (!akonadiQuery.isEmpty()) {
-        searchQuery = Akonadi::SearchQuery::fromJSON(akonadiQuery.toLatin1());
+        searchQuery = Akonadi::SearchQuery::fromJSON(akonadiQuery.toUtf8());
         if (searchQuery.isNull() && collections.isEmpty() && mimeTypes.isEmpty()) {
             return {};
         }
