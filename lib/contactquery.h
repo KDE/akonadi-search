@@ -13,6 +13,7 @@
 
 #include <QString>
 
+#include <cstdint>
 #include <memory>
 
 namespace Akonadi

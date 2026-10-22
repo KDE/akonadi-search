@@ -8,7 +8,11 @@
 #pragma once
 
 #include "abstractindexer.h"
-#include "xapiandatabase.h"
+
+namespace Akonadi::Search
+{
+class XapianDatabase;
+}
 
 class ContactIndexer : public AbstractIndexer
 {

@@ -9,7 +9,6 @@
 #pragma once
 
 #include "../pimsearchstore.h"
-using namespace Qt::Literals::StringLiterals;
 
 namespace Akonadi
 {
@@ -27,10 +26,7 @@ public:
 
     [[nodiscard]] QStringList types() override;
     [[nodiscard]] QString text(int queryId) override;
-    [[nodiscard]] QString icon(int) override
-    {
-        return u"internet-mail"_s;
-    }
+    [[nodiscard]] QString icon(int) override;
 
 protected:
     Xapian::Query constructQuery(const QString &property, const QVariant &value, Term::Comparator com) override;

@@ -9,7 +9,6 @@
 #include "emailsearchstore.h"
 
 #include "agepostingsource.h"
-#include "query.h"
 #include "term.h"
 
 using namespace Qt::Literals::StringLiterals;
@@ -100,6 +99,11 @@ QString EmailSearchStore::text(int queryId)
     }
 
     return subject;
+}
+
+QString EmailSearchStore::icon(int)
+{
+    return u"internet-mail"_s;
 }
 
 Xapian::Query EmailSearchStore::finalizeQuery(const Xapian::Query &query)

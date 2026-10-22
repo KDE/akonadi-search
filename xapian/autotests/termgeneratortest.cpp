@@ -9,7 +9,6 @@
 #include "../xapiandatabase.h"
 #include "../xapiantermgenerator.h"
 
-#include "akonadi_search_xapian_debug.h"
 #include <QTemporaryDir>
 #include <QTest>
 

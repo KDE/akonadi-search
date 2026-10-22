@@ -14,7 +14,9 @@
 
 #include <QDesktopServices>
 #include <QIcon>
+#include <QRegularExpression>
 #include <QThread>
+#include <QUrl>
 
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
@@ -22,14 +24,13 @@
 
 #include <KContacts/Addressee>
 
-#include <KSharedConfig>
-
 #include <KEmailAddress>
 
 #include "lib/contactcompleter.h"
 #include "lib/contactquery.h"
 #include "lib/resultiterator.h"
 
+#include <algorithm>
 #include <array>
 
 Q_DECLARE_METATYPE(KContacts::Addressee *)

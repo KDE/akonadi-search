@@ -8,6 +8,8 @@
 
 #include "emailindexer.h"
 
+#include <xapian.h>
+
 #include "akonadi_indexer_agent_email_debug.h"
 
 #include <Akonadi/Collection>

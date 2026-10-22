@@ -5,7 +5,7 @@
  *
  */
 #include "collectionindexingjob.h"
-#include "abstractindexer.h"
+#include "index.h"
 #include <Akonadi/AgentBase>
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/CollectionFetchScope>
@@ -13,7 +13,6 @@
 #include <Akonadi/IndexPolicyAttribute>
 #include <Akonadi/ItemFetchJob>
 #include <Akonadi/ItemFetchScope>
-#include <Akonadi/ServerManager>
 #include <KLocalizedString>
 #include <akonadi_indexer_agent_debug.h>
 

@@ -10,7 +10,6 @@
 #include "../xapiandatabase.h"
 #include "../xapianqueryparser.h"
 
-#include "akonadi_search_xapian_debug.h"
 #include <QTemporaryDir>
 #include <QTest>
 

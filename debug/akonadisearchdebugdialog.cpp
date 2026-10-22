@@ -13,9 +13,11 @@
 #include <KSharedConfig>
 #include <KWindowConfig>
 #include <QDialogButtonBox>
+#include <QFile>
 #include <QFileDialog>
 #include <QPointer>
 #include <QPushButton>
+#include <QTextStream>
 #include <QVBoxLayout>
 #include <QWindow>
 

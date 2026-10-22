@@ -6,6 +6,7 @@
  */
 #include "collectionupdatejob.h"
 #include "akonadi_indexer_agent_debug.h"
+#include "index.h"
 
 #include <Akonadi/CollectionFetchJob>
 #include <Akonadi/CollectionFetchScope>

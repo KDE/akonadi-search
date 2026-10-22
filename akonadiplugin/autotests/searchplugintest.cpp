@@ -8,8 +8,11 @@
 
 #include <Akonadi/Collection>
 
+#include <KCalendarCore/Attendee>
+#include <KCalendarCore/Event>
 #include <KContacts/Addressee>
 #include <KContacts/ContactGroup>
+#include <KMime/Message>
 #include <QDir>
 #include <QTest>
 

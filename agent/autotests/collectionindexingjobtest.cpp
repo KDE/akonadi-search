@@ -6,6 +6,7 @@
  *
  */
 #include "collectionindexingjob.h"
+#include "index.h"
 
 #include <Akonadi/Collection>
 #include <Akonadi/CollectionFetchJob>

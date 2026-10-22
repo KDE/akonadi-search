@@ -6,7 +6,6 @@
  *
  */
 
-#include <qregularexpression.h>
 #include <xapian.h>
 
 #include "akonadi_search_pim_debug.h"
@@ -16,7 +15,6 @@
 
 #include <QFile>
 #include <QRegularExpression>
-#include <QStandardPaths>
 
 #include <utility>
 

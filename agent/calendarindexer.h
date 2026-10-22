@@ -9,7 +9,6 @@
 #pragma once
 
 #include "abstractindexer.h"
-#include "xapiandatabase.h"
 
 #include <Akonadi/Collection>
 #include <Akonadi/Item>
@@ -17,6 +16,11 @@
 #include <KCalendarCore/Journal>
 #include <KCalendarCore/Todo>
 #include <memory>
+
+namespace Akonadi::Search
+{
+class XapianDatabase;
+}
 
 class CalendarIndexer : public AbstractIndexer
 {
@@ -42,5 +46,5 @@ private:
     void indexJournalItem(const Akonadi::Item &item, const KCalendarCore::Journal::Ptr &journal);
     void indexTodoItem(const Akonadi::Item &item, const KCalendarCore::Todo::Ptr &todo);
 
-    std::unique_ptr<Akonadi::Search::XapianDatabase> m_db = nullptr;
+    std::unique_ptr<Akonadi::Search::XapianDatabase> m_db;
 };

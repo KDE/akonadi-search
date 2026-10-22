@@ -9,14 +9,13 @@
 
 #include "akonadi_indexer_agent_debug.h"
 #include "calendarindexer.h"
+#include "collectionindexer.h"
 #include "contactindexer.h"
 #include "emailindexer.h"
 #include "index.h"
 #include "indexeditems.h"
 
-#include <Akonadi/ServerManager>
 #include <QDir>
-#include <QStandardPaths>
 #include <chrono>
 
 using namespace std::chrono_literals;

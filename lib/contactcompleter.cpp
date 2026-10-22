@@ -14,8 +14,8 @@
 
 #include <QElapsedTimer>
 #include <QFile>
-#include <QStandardPaths>
 
+#include <algorithm>
 #include <utility>
 
 using namespace Akonadi::Search::PIM;

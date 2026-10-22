@@ -8,7 +8,6 @@
 #include <xapian.h>
 
 #include "collectionindexer.h"
-#include "xapiandocument.h"
 
 #include <Akonadi/AttributeFactory>
 #include <Akonadi/CollectionIdentificationAttribute>

@@ -15,7 +15,6 @@
 #include <QMutex>
 #include <QPluginLoader>
 #include <QSharedPointer>
-#include <QThreadStorage>
 
 using namespace Akonadi::Search;
 using namespace Qt::Literals::StringLiterals;

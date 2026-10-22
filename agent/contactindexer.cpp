@@ -9,6 +9,7 @@
 #include "contactindexer.h"
 
 #include "akonadi_indexer_agent_debug.h"
+#include "xapiandatabase.h"
 #include "xapiandocument.h"
 
 #include <Akonadi/Collection>

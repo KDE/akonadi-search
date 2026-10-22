@@ -9,6 +9,7 @@
 #include "calendarindexer.h"
 
 #include "akonadi_indexer_agent_calendar_debug.h"
+#include "xapiandatabase.h"
 #include "xapiandocument.h"
 
 #include <KCalendarCore/Attendee>

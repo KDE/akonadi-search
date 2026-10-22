@@ -14,6 +14,8 @@
 #include "core/term.h"
 #include "search_xapian_export.h"
 
+#include <QHash>
+#include <QMutex>
 #include <QMutexLocker>
 
 namespace Akonadi

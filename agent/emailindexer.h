@@ -7,12 +7,17 @@
 
 #pragma once
 
-#include <xapian.h>
-
 #include "abstractindexer.h"
 
 #include <Akonadi/MessageStatus>
 #include <KMime/Message>
+
+namespace Xapian
+{
+class Document;
+class TermGenerator;
+class WritableDatabase;
+}
 
 class EmailIndexer : public AbstractIndexer
 {

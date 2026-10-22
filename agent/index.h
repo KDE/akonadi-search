@@ -7,12 +7,15 @@
 
 #pragma once
 
-#include "abstractindexer.h"
-#include "collectionindexer.h"
 #include <Akonadi/Collection>
 #include <Akonadi/Item>
+#include <QHash>
 #include <QObject>
 #include <QTimer>
+#include <memory>
+
+class AbstractIndexer;
+class CollectionIndexer;
 namespace Akonadi
 {
 namespace Search
@@ -68,6 +71,6 @@ private:
     QHash<QString, std::shared_ptr<AbstractIndexer>> m_indexer;
     Akonadi::Search::PIM::IndexedItems *const m_indexedItems;
     QTimer m_commitTimer;
-    std::unique_ptr<CollectionIndexer> m_collectionIndexer = nullptr;
+    std::unique_ptr<CollectionIndexer> m_collectionIndexer;
     bool mRespectDiacriticAndAccents = true;
 };

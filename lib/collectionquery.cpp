@@ -14,8 +14,6 @@
 #include <QFile>
 #include <QList>
 
-#include <QStandardPaths>
-
 #include <utility>
 using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search::PIM;

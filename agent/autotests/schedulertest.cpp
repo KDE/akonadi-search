@@ -8,6 +8,7 @@
 #include "scheduler.h"
 
 #include "collectionindexingjob.h"
+#include "index.h"
 
 #include <Akonadi/Collection>
 #include <Akonadi/ServerManager>

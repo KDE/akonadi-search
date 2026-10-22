@@ -6,10 +6,10 @@
  */
 #pragma once
 
-#include "index.h"
 #include <Akonadi/Collection>
-#include <Akonadi/Item>
 #include <KJob>
+
+class Index;
 
 /**
  * A Job that indexes a collection and all it's children in order to correctly update the paths (for which we need to have the display attribute available).

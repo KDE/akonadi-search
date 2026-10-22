@@ -13,6 +13,7 @@
 
 #include <Akonadi/ServerManager>
 #include <QDir>
+#include <QFile>
 #include <QHash>
 #include <QStandardPaths>
 

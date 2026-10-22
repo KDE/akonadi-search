@@ -14,6 +14,7 @@
 #include <Akonadi/Collection>
 #include <QStringList>
 
+#include <cstdint>
 #include <memory>
 
 namespace Akonadi

@@ -14,9 +14,6 @@
 #include "akonadi_search_xapian_debug.h"
 #include <QList>
 
-#include <algorithm>
-
-using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 XapianSearchStore::XapianSearchStore(QObject *parent)

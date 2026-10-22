@@ -18,23 +18,7 @@ namespace Akonadi
 namespace Search
 {
 
-class Q_DECL_HIDDEN ResultIteratorPrivate : public QSharedData
-{
-public:
-    ResultIteratorPrivate()
-    {
-    }
-
-    ~ResultIteratorPrivate()
-    {
-        if (store) {
-            store->close(queryId);
-        }
-    }
-
-    int queryId = 0;
-    SearchStore *store = nullptr;
-};
+class ResultIteratorPrivate;
 
 /*! Result iterator. */
 class AKONADI_SEARCH_CORE_EXPORT ResultIterator

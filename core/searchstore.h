@@ -9,6 +9,7 @@
 #pragma once
 
 #include <QObject>
+#include <QSharedPointer>
 #include <QString>
 #include <QUrl>
 

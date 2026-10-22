@@ -8,7 +8,6 @@
  */
 #include "pimsearchstore.h"
 
-#include "query.h"
 #include "term.h"
 
 #include <Akonadi/ServerManager>

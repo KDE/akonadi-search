@@ -20,6 +20,7 @@ namespace Search
 {
 namespace PIM
 {
+class CollectionQuery;
 class ContactQuery;
 class EmailQuery;
 class NoteQuery;

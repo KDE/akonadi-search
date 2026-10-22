@@ -13,16 +13,6 @@
 #include <QStringList>
 #include <akonadi/abstractsearchplugin.h>
 
-using namespace Qt::Literals::StringLiterals;
-
-namespace Akonadi
-{
-namespace Search
-{
-class Query;
-}
-}
-
 class SearchPlugin : public QObject, public Akonadi::AbstractSearchPlugin
 {
     Q_OBJECT

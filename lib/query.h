@@ -10,6 +10,7 @@
 
 #include "search_pim_export.h"
 #include <QByteArray>
+#include <QString>
 
 namespace Akonadi
 {

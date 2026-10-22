@@ -25,10 +25,8 @@
 #include <Akonadi/ItemFetchScope>
 
 #include <Akonadi/AgentManager>
-#include <Akonadi/ServerManager>
 
 #include "akonadi_indexer_agent_debug.h"
-#include <KConfig>
 #include <KConfigGroup>
 #include <KLocalizedString>
 

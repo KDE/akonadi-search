@@ -7,14 +7,19 @@
 
 #pragma once
 
-#include "index.h"
 #include <Akonadi/Collection>
 #include <Akonadi/Item>
 #include <KSharedConfig>
+#include <QHash>
 #include <QObject>
 #include <QQueue>
+#include <QSet>
+#include <QSharedPointer>
+#include <QTimer>
 
 class CollectionIndexingJob;
+class Index;
+class KJob;
 
 class JobFactory
 {

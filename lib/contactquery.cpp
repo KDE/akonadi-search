@@ -14,7 +14,6 @@
 
 #include <QFile>
 #include <QList>
-#include <QStandardPaths>
 
 #include <utility>
 

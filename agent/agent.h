@@ -17,8 +17,6 @@
 #include "scheduler.h"
 #include <QList>
 
-using namespace Qt::Literals::StringLiterals;
-
 class AkonadiIndexingAgent : public Akonadi::AgentBase, public Akonadi::AgentBase::ObserverV3
 {
     Q_OBJECT

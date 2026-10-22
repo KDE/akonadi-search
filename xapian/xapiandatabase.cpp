@@ -19,7 +19,6 @@
 #include <chrono>
 #include <thread>
 
-using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 
 XapianDatabase::XapianDatabase(const QString &path, bool writeOnly)

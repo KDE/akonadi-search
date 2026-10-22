@@ -6,11 +6,12 @@
  */
 #pragma once
 
-#include "index.h"
 #include <Akonadi/Collection>
 #include <Akonadi/Item>
 #include <KJob>
 #include <QElapsedTimer>
+
+class Index;
 
 /**
  * Indexing Job that ensure a collections is fully indexed.

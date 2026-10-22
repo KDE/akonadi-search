@@ -13,6 +13,7 @@
 
 #include <memory>
 
+class QUrl;
 class QVariant;
 
 namespace Akonadi

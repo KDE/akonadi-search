@@ -7,13 +7,9 @@
 
 #pragma once
 
+#include <Akonadi/Collection>
 #include <Akonadi/Item>
 #include <QStringList>
-
-namespace Akonadi
-{
-class Collection;
-}
 
 class AbstractIndexer
 {

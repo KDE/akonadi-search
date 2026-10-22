@@ -18,6 +18,7 @@ target_sources(
 
 target_link_libraries(
     krunner_pimcontacts
+    Qt::Gui
     KF6::Runner
     KPim6::AkonadiCore
     KPim6::AkonadiSearchPIM
