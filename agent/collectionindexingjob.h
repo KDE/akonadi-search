@@ -27,7 +27,7 @@ public:
     explicit CollectionIndexingJob(Index &index, const Akonadi::Collection &col, const QList<Akonadi::Item::Id> &pending, QObject *parent = nullptr);
     void setFullSync(bool);
     void start() override;
-
+    [[nodiscard]] const Akonadi::Collection &collection() const;
 Q_SIGNALS:
     void status(int, const QString &);
     void percent(int);

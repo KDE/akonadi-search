@@ -43,6 +43,11 @@ void CollectionIndexingJob::start()
     job->start();
 }
 
+const Akonadi::Collection &CollectionIndexingJob::collection() const
+{
+    return m_collection;
+}
+
 void CollectionIndexingJob::slotOnCollectionFetched(KJob *job)
 {
     if (job->error()) {
