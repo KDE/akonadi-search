@@ -123,11 +123,12 @@ int XapianSearchStore::exec(const Query &query)
                 return 0;
             }
 
-            Xapian::Query xapQ = toXapianQuery(query.term());
+            const auto term = query.term();
+            Xapian::Query xapQ = toXapianQuery(term);
             // The term was not properly converted. Lets abort. The properties
             // must not exist
-            if (!query.term().empty() && xapQ.empty()) {
-                qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << query.term() << "could not be processed. Aborting";
+            if (!term.empty() && xapQ.empty()) {
+                qCDebug(AKONADI_SEARCH_XAPIAN_LOG) << term << "could not be processed. Aborting";
                 return 0;
             }
             if (!query.searchString().isEmpty()) {
