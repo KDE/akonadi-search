@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: akonadi-search\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:47+0000\n"
+"POT-Creation-Date: 2026-10-23 00:49+0000\n"
 "PO-Revision-Date: 2024-07-30 10:00+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -31,13 +31,13 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "antonibella5@yahoo.com"
 
-#: agent/agent.cpp:62
+#: agent/agent.cpp:60
 #, kde-format
 msgctxt "@info:status"
 msgid "No indexers available"
 msgstr "No hi ha cap indexador disponible"
 
-#: agent/collectionindexingjob.cpp:67
+#: agent/collectionindexingjob.cpp:71
 #, kde-format
 msgid "Indexing collection: %1"
 msgstr "S'està indexant la col·lecció: %1"
@@ -73,17 +73,17 @@ msgstr "Mantenidor"
 msgid "Ready"
 msgstr "Llest"
 
-#: agent/scheduler.cpp:244
+#: agent/scheduler.cpp:245
 #, kde-format
 msgid "Collection \"%1\" indexed"
 msgstr "S'ha indexat la col·lecció «%1»"
 
-#: debug/akonadisearchdebugdialog.cpp:96
+#: debug/akonadisearchdebugdialog.cpp:98
 #, kde-format
 msgid "Text Files (*.txt);;All Files (*)"
 msgstr "Fitxers de text (*.txt);;Tots els fitxers (*)"
 
-#: debug/akonadisearchdebugdialog.cpp:109
+#: debug/akonadisearchdebugdialog.cpp:111
 #, kde-format
 msgid ""
 "Could not write the file %1:\n"
@@ -92,25 +92,25 @@ msgstr ""
 "No s'ha pogut escriure el fitxer %1:\n"
 "«%2» és la descripció detallada de l'error."
 
-#: debug/akonadisearchdebugdialog.cpp:113
+#: debug/akonadisearchdebugdialog.cpp:115
 #, kde-format
 msgctxt "@title:window"
 msgid "Save File Error"
 msgstr "Error en desar el fitxer"
 
-#: runner/pimcontactsrunner.cpp:130 runner/pimcontactsrunner.cpp:221
+#: runner/pimcontactsrunner.cpp:131 runner/pimcontactsrunner.cpp:222
 #, kde-format
 msgid "Contacts"
 msgstr "Contactes"
 
-#: runner/pimcontactsrunner.cpp:175 runner/pimcontactsrunner.cpp:184
-#: runner/pimcontactsrunner.cpp:241
+#: runner/pimcontactsrunner.cpp:176 runner/pimcontactsrunner.cpp:185
+#: runner/pimcontactsrunner.cpp:242
 #, kde-format
 msgctxt "Name (email)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: runner/pimcontactsrunner.cpp:222
+#: runner/pimcontactsrunner.cpp:223
 #, kde-format
 msgid "Autocompleted from received and sent emails"
 msgstr ""
