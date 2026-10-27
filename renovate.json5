@@ -1,0 +1,15 @@
+// SPDX-FileCopyrightText: 2026 Carl Schwan <carl@carlschwan.eu>
+// SPDX-License-Identifier: CC0-1.0
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["cargo"],
+  "automerge": false,
+  "packageRules": [
+    {
+      "matchManagers": ["cargo"],
+      "matchPackageNames": ["cxx", "cxx-build"],
+      "groupName": "cxx bridge"
+    }
+  ]
+}
