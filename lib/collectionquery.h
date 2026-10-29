@@ -81,11 +81,6 @@ public:
      * \param limit The result limit.
      */
     void setLimit(int limit);
-    /*!
-     * \brief Returns the maximum number of results for this query.
-     * \return The result limit.
-     */
-    [[nodiscard]] int limit() const;
 
     /*!
      * \brief Executes the query and returns an iterator to fetch results.
