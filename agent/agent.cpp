@@ -147,13 +147,9 @@ void AkonadiIndexingAgent::itemChanged(const Akonadi::Item &item, const QSet<QBy
 
     // We don't index certain parts so we don't care when they change
     QSet<QByteArray> pi = partIdentifiers;
-    QMutableSetIterator<QByteArray> it(pi);
-    while (it.hasNext()) {
-        it.next();
-        if (!it.value().startsWith("PLD:")) {
-            it.remove();
-        }
-    }
+    pi.removeIf([](const QByteArray &part) {
+        return !part.startsWith("PLD:");
+    });
 
     if (pi.isEmpty()) {
         return;

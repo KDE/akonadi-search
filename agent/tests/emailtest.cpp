@@ -82,13 +82,9 @@ void App::slotRootCollectionsFetched(KJob *kjob)
     auto job = qobject_cast<Akonadi::CollectionFetchJob *>(kjob);
     m_collections = job->collections();
 
-    QMutableListIterator<Akonadi::Collection> it(m_collections);
-    while (it.hasNext()) {
-        const Akonadi::Collection &c = it.next();
-        if (!c.contentMimeTypes().contains("message/rfc822"_L1)) {
-            it.remove();
-        }
-    }
+    m_collections.removeIf([](const Akonadi::Collection &c) {
+        return !c.contentMimeTypes().contains("message/rfc822"_L1);
+    });
 
     if (!m_collections.isEmpty()) {
         indexNextCollection();
