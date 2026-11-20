@@ -10,6 +10,9 @@
 
 #include <QDateTime>
 #include <QDebug>
+#include <QHash>
+#include <QList>
+#include <QMap>
 using namespace Qt::Literals::StringLiterals;
 using namespace Akonadi::Search;
 

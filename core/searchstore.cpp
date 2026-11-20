@@ -12,6 +12,7 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QMap>
 #include <QMutex>
 #include <QPluginLoader>
 #include <QSharedPointer>

@@ -13,6 +13,7 @@
 
 #include "akonadi_search_xapian_debug.h"
 #include <QList>
+#include <QMap>
 
 using namespace Akonadi::Search;
 

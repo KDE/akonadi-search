@@ -9,6 +9,7 @@
 #include "../xapiandatabase.h"
 #include "../xapiantermgenerator.h"
 
+#include <QSet>
 #include <QTemporaryDir>
 #include <QTest>
 

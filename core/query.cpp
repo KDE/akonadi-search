@@ -11,6 +11,8 @@
 #include "searchstore.h"
 #include "term.h"
 
+#include <QHash>
+#include <QMap>
 #include <QSharedPointer>
 #include <QString>
 #include <QStringList>

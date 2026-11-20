@@ -11,6 +11,7 @@
 #include "akonadi_search_pim_debug.h"
 #include "contactquery.h"
 
+#include <QMap>
 #include <QVariant>
 
 #include <Akonadi/ServerManager>
