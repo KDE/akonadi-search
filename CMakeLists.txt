@@ -201,7 +201,9 @@ option(KDEPIM_RUN_AKONADI_TEST "Enable autotest based on Akonadi." TRUE)
 # Compiler flags
 add_definitions(-DTRANSLATION_DOMAIN=\"akonadi_search\")
 add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
-add_definitions(-DQT_LEAN_HEADERS=2)
+if(ECM_VERSION VERSION_GREATER_EQUAL "6.33.0")
+    add_definitions(-DQT_LEAN_HEADERS=2)
+endif()
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     # Not setting for GNU due to too many warnings related to private members of base classes or around lambdas
     # see e.g. https://gcc.gnu.org/bugzilla/show_bug.cgi?id=56556 or https://gcc.gnu.org/bugzilla/show_bug.cgi?id=79328
